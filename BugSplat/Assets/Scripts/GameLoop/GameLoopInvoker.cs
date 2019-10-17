@@ -9,8 +9,8 @@ public abstract class GameLoopInvoker : ScriptableObject
     protected float _deltaTime = 0f;
 
 
-    public abstract bool UpdateGameLoop(float time);
-    public abstract void LateUpdateGameLoop();
+    public abstract void UpdateGameLoop(float time);
+    public abstract void LateUpdateGameLoop(float time);
 
     public abstract void RegisterGameLoop(GameLoop gameLoop);
 

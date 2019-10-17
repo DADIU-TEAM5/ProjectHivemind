@@ -8,12 +8,6 @@ public class UpdateManager : MonoBehaviour
 
     private float _time;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -21,9 +15,14 @@ public class UpdateManager : MonoBehaviour
 
         for (var i = 0; i < GameLoopHandlers.Length; i++) {
             var handler = GameLoopHandlers[i];
-            if (handler.UpdateGameLoop(_time)) {
-                handler.LateUpdateGameLoop();
-            }
+            handler.UpdateGameLoop(_time);
+        }        
+    }
+
+    void LateUpdate() {
+        for (var i = 0; i < GameLoopHandlers.Length; i++) {
+            var handler = GameLoopHandlers[i];
+            handler.LateUpdateGameLoop(_time);
         }        
     }
 }
