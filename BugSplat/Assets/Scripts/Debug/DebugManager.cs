@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DebugManager : MonoBehaviour
+public class DebugManager : GameLoop
 {
+    private float _fps = 0f;
 
     private GUIStyle _overlayStyle = new GUIStyle();
 
@@ -11,17 +12,21 @@ public class DebugManager : MonoBehaviour
     void Start()
     {
         _overlayStyle.fontSize = 40;        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        _overlayStyle.normal.textColor = Color.yellow;
     }
 
     void OnGUI()
     {
         //GUILayout.Label($"FPS: ");
-        GUI.Label(new Rect(40, 40, 200, 80), $"FPS: {1f / Time.deltaTime}", _overlayStyle);
+        GUI.Label(new Rect(40, 40, 200, 80), $"FPS: {_fps}", _overlayStyle);
+    }
+
+    public override void LoopUpdate(float deltaTime)
+    {
+        _fps = 1f / Time.deltaTime;
+    }
+
+    public override void LoopLateUpdate(float deltaTime)
+    {
     }
 }
