@@ -37,6 +37,10 @@ public class PlayerDodgeScript : GameLoop
         }
     }
 
+    private void dashCurve()
+    {
+
+    }
 
     
     public override void LoopUpdate(float deltaTime)
@@ -46,11 +50,21 @@ public class PlayerDodgeScript : GameLoop
         
         if (IsDodging.Value == true)
         {
-            Vector3 newPosition = player.transform.position + _dashDirection*DashSpeed;
-            player.MovePosition(newPosition);
+            Vector3 newPosition = _dashDirection*DashSpeed;
+            InputVector.Value = newPosition;
+            
+            // Only for Testing !TEST
+            player.MovePosition(player.transform.position+ InputVector.Value);
+            
+
+            
             _dashFrameCount++;
 
             if (_dashFrameCount >= DashLength)
+
+                // Only for Testing !TEST
+                InputVector.Value = _dashDirection;
+
                 IsDodging.Value = false;
         }
        
