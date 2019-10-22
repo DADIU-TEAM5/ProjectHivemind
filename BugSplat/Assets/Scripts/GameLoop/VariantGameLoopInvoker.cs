@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(menuName="GameLoops/VariantHandler")]
-public class GameLoopVariant : SimpleGameLoopInvoker 
+public class VariantGameLoopInvoker : SimpleGameLoopInvoker 
 {
     [Min(1f)]
     [SerializeField]
