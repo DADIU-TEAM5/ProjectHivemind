@@ -20,12 +20,12 @@ public class AttackScript : GameLoop
     public override void LoopUpdate(float deltaTime)
     {
 
-        ChooseTarget();
+        
 
         Debug.DrawLine(transform.position, transform.position + transform.forward, Color.yellow);
         if (Input.GetButtonDown("Jump"))
         {
-            Attack();
+            ChooseTarget();
         }
        
 
@@ -62,13 +62,19 @@ public class AttackScript : GameLoop
                 
             }
         }
-        if(targetIndex != -1)
+        if (targetIndex != -1)
         {
             Vector3 temp = potentialTargets[targetIndex].transform.position;
             temp.y = transform.position.y;
 
             transform.LookAt(temp);
+            if (distance > AttackLength.Value)
+                transform.Translate(Vector3.forward * (distance - AttackLength.Value));
+
+            Attack();
         }
+        else
+            print("no targets");
 
 
     }
