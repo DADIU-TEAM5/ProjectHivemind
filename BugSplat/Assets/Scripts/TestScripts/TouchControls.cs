@@ -10,6 +10,7 @@ public class TouchControls : MonoBehaviour
     public FloatVariable PlayerAccelerationSO;
     public Vector3Variable PlayerVelocitySO;
     public Transform TouchUIDot;
+    public Transform MainCameraDirection;
 
     // Display sliders for altering the speed and acceleration of the Player - This could potentially be moved to an editor window for the designers
     [Tooltip("Maximum Speed in m/s")]
@@ -100,10 +101,30 @@ public class TouchControls : MonoBehaviour
                     direction = heading / distance;
 
                     // Export direction and speed to the PlayerSpeedDirectionSO
+                    /*if (_currentMousePosition.x < _recordedMousePosition.x)
+                    {
+                        PlayerSpeedDirectionSO.Value.x = -direction.x;
+                    } else
+                    {
+                        PlayerSpeedDirectionSO.Value.x = direction.x;
+                    }
+                    if (_currentMousePosition.y < _recordedMousePosition.y)
+                    {
+                        PlayerSpeedDirectionSO.Value.z = -direction.y;
+                    }
+                    else
+                    {
+                        PlayerSpeedDirectionSO.Value.z = direction.y;
+                    }*/
+
                     PlayerSpeedDirectionSO.Value.x = direction.x;
                     PlayerSpeedDirectionSO.Value.z = direction.y;
+<<<<<<< HEAD
 
                     //Debug.Log(direction);
+=======
+                    Debug.Log(direction);
+>>>>>>> c665c1c9d3e811ddabe050901ff63ca58d904a5f
                 }
             }
             if (Input.GetMouseButtonUp(0))
