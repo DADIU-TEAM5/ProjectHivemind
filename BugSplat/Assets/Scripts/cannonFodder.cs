@@ -12,9 +12,22 @@ public class cannonFodder : Enemy
 
     Renderer _renderer;
 
+
+    GameObject _cone;
+    LineRenderer _coneRenderer;
+
     public void Start()
     {
         _renderer = GetComponent<Renderer>();
+
+        _cone = new GameObject();
+
+        
+        _cone.AddComponent<LineRenderer>();
+        _coneRenderer = _cone.GetComponent<LineRenderer>();
+
+        _cone.SetActive(false);
+
     }
 
     public override void TakeDamage(float damage)
@@ -26,7 +39,7 @@ public class cannonFodder : Enemy
     public override void LoopUpdate(float deltaTime)
     {
 
-
+        
 
         if (!_playerDetected)
         {
@@ -52,8 +65,55 @@ public class cannonFodder : Enemy
 
     }
 
+
+    void drawCone(int points )
+    {
+        Vector3[] pointsForTheCone = new Vector3[points];
+        _coneRenderer.positionCount = points;
+
+        pointsForTheCone[0] = transform.position;
+
+        Vector3 vectorToRotate = transform.forward * stats.AttackRange;
+        Vector3 rotatedVector = Vector3.zero;
+
+        float stepSize = 1f/((float)points-1);
+        int step = 0;
+
+        for (int i = 1; i < points; i++)
+        {
+            float angle = Mathf.Lerp(-stats.AttackAngle, stats.AttackAngle, step*stepSize);
+
+            
+
+            angle = angle * Mathf.Deg2Rad;
+
+            float s = Mathf.Sin(angle);
+            float c = Mathf.Cos(angle);
+
+            rotatedVector.x = vectorToRotate.x * c - vectorToRotate.z * s;
+            rotatedVector.z = vectorToRotate.x * s + vectorToRotate.z * c;
+
+            pointsForTheCone[i] = transform.position + rotatedVector;
+            step++;
+        }
+
+        
+
+        
+
+        _coneRenderer.SetPositions(pointsForTheCone);
+        _coneRenderer.widthMultiplier = 0.1f;
+        
+        _coneRenderer.loop = true;
+    }
     void Attack()
     {
+        if (_attacking == false)
+        {
+            _cone.SetActive(true);
+            drawCone(10);
+        }
+
         _attacking = true;
         _attackCharge += Time.deltaTime;
 
@@ -91,6 +151,7 @@ public class cannonFodder : Enemy
             }
             _attacking = false;
             _attackCharge = 0;
+            _cone.SetActive(false);
         }
 
     }
