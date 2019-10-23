@@ -10,6 +10,13 @@ public class cannonFodder : Enemy
     bool _attacking;
     float _attackCharge;
 
+    Renderer _renderer;
+
+    public void Start()
+    {
+        _renderer = GetComponent<Renderer>();
+    }
+
     public override void TakeDamage(float damage)
     {
         print(name + " took damage "+ damage);
@@ -18,16 +25,22 @@ public class cannonFodder : Enemy
 
     public override void LoopUpdate(float deltaTime)
     {
+
+
+
         if (!_playerDetected)
         {
+            _renderer.material.color = Color.blue;
             DetectThePlayer();
         }
         else if(playerInAttackRange() || _attacking)
         {
+            _renderer.material.color = Color.red;
             Attack();
         }
         else
         {
+            _renderer.material.color = Color.yellow;
             MoveTowardsThePlayer();
         }
 
@@ -114,4 +127,6 @@ public class cannonFodder : Enemy
             _playerTransform =  potentialTargets[0].gameObject.transform;
         } 
     }
+
+    
 }
