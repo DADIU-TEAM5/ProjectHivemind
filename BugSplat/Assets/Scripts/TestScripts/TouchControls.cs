@@ -4,30 +4,44 @@ using UnityEngine;
 
 public class TouchControls : MonoBehaviour
 {
-    public Vector3Variable PlayerSpeedDirection;
+    // Setup ScriptableObjects for holding the PlayerMovementInfo
+    public Vector3Variable PlayerSpeedDirectionSO;
+    public FloatVariable PlayerMaxSpeedSO;
+    public FloatVariable PlayerAccelerationSO;
+    public Vector3Variable PlayerVelocitySO;
     public Transform TouchUIDot;
 
+    // Display sliders for altering the speed and acceleration of the Player - This could potentially be moved to an editor window for the designers
+    [Tooltip("Maximum Speed in m/s")]
+    public float PlayerMaxSpeed = 1f;
+    [Tooltip("Acceleration time in seconds")]
+    public float PlayerAcceleration = 1f;
+
+    // Setup the private variables needed for the calculations in the current script
     private Vector3 _inputTouch;
     private Touch _touch;
     private bool _touching = false;
     private bool _recordMouse = true;
-    private Vector2 _recordedMousePosition;
-    private Vector2 _currentMousePosition;
-    private float _TouchMoveMaxThreshold = 400f;
+    private Vector3 _recordedMousePosition;
+    private Vector3 _currentMousePosition;
+    //private float _TouchMoveMaxThreshold = 0.75f;
     private float _TouchMoveMinThreshold = 100f;
-
 
     
     // Start is called before the first frame update
     void Start()
     {
         _inputTouch = new Vector3();
+
+        PlayerMaxSpeedSO.Value = PlayerMaxSpeed;
+        PlayerAccelerationSO.Value = PlayerAcceleration;
     }
 
     // Update is called once per frame
     void Update()
     {
 
+        /*
         // Detect Touch
         if(Input.touchCount > 0)
         {
@@ -39,9 +53,27 @@ public class TouchControls : MonoBehaviour
                 Vector2 touchPosition = _touch.deltaPosition;
             }
         }
+        */
+
+        // Allow for usage of the keyboard as controls as well
+        if (Input.anyKey)
+        {
+            if (Input.GetAxisRaw("Horizontal") != 0)
+            {
+                PlayerSpeedDirectionSO.Value.x = Input.GetAxisRaw("Horizontal");
+            }
+            if (Input.GetAxisRaw("Vertical") != 0)
+            {
+                PlayerSpeedDirectionSO.Value.z = Input.GetAxisRaw("Vertical");
+            }
+        }
+        else
+        {
+            PlayerSpeedDirectionSO.Value = Vector3.zero;
+        }
 
         // Simulate touch with mouse, if mouse present
-        if(Input.mousePresent)
+        if (Input.mousePresent)
         {
             _currentMousePosition = Input.mousePosition;
 
@@ -59,27 +91,29 @@ public class TouchControls : MonoBehaviour
                 // Check if mouse have moved more than the threshold
                 if (Vector2.Distance(_recordedMousePosition, _currentMousePosition) > _TouchMoveMinThreshold) 
                 {
-                    float x = _currentMousePosition.x - _recordedMousePosition.x;
+                    Vector3 heading;
+                    float distance;
+                    Vector3 direction;
 
-                    PlayerSpeedDirection.Value.x = x;
+                    heading = _currentMousePosition - _recordedMousePosition;
+                    distance = heading.magnitude;
+                    direction = heading / distance;
 
-                    Debug.Log(PlayerSpeedDirection.Value.x);
+                    // Export direction and speed to the PlayerSpeedDirectionSO
+                    PlayerSpeedDirectionSO.Value.x = direction.x;
+                    PlayerSpeedDirectionSO.Value.z = direction.y;
 
+                    Debug.Log(direction);
                 }
             }
             if (Input.GetMouseButtonUp(0))
             {
-                Debug.Log("MOUSEUP DISTANCE: " + Vector2.Distance(_recordedMousePosition, _currentMousePosition));
                 _touching = false;
                 _recordMouse = true;
+
+                PlayerSpeedDirectionSO.Value = Vector3.zero;
             }
-
         }
-
-
-
-
-
     }
 
     private void TRASH()

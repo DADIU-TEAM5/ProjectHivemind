@@ -6,15 +6,11 @@ public class PlayerMovement : MonoBehaviour
 {
 
     public Transform Player;
-    public Vector3Variable PlayerDirectionSO;
+    public Vector3Variable PlayerSpeedDirectionSO;
+    public FloatVariable PlayerMaxSpeedSO;
+    public Vector3Variable PlayerVelocitySO;
+    public FloatVariable PlayerAccelerationSO;
 
-    [Tooltip("Maximum Speed in m/s")]
-    public float MoveSpeed = 1f;
-    [Tooltip("Acceleration time in seconds")]
-    public float RampupTime = 1f;
-
-
-    private Vector3 _input;
     private float _lerpTime = 0f;
     private Vector3 _velocity;
 
@@ -22,8 +18,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _input = new Vector3();
-        _velocity = new Vector3();
+
     }
 
 
@@ -31,22 +26,20 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
-        // Assign controller input to _input vector
-        _input.x = Input.GetAxisRaw("Horizontal");
-        _input.y = 0;
-        _input.z = Input.GetAxisRaw("Vertical");
-
-        // SmoothDamp from 0 to 1 on movement
-        if(_input.sqrMagnitude != 0)
+        // SmoothDamp from 0 to 1 on Normal movement
+        if(PlayerSpeedDirectionSO.Value.sqrMagnitude != 0)
         {
-            Vector3.SmoothDamp(Vector3.zero, _input, ref _velocity, RampupTime);
+            Vector3.SmoothDamp(Vector3.zero, PlayerSpeedDirectionSO.Value , ref PlayerVelocitySO.Value, PlayerAccelerationSO.Value);
         } else
         {
-            _velocity = Vector3.zero;
+            PlayerVelocitySO.Value = Vector3.zero;
         }
 
         // Move player using translate
-        Player.Translate(_velocity * MoveSpeed * Time.deltaTime);
+        Player.Translate(PlayerVelocitySO.Value * PlayerMaxSpeedSO.Value * Time.deltaTime);
+
+        // Rotate player based on PlayerSpeedDirection
+        Player.rotation = Quaternion.LookRotation(PlayerSpeedDirectionSO.Value, Vector3.up);
 
     }
 }
