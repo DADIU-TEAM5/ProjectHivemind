@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TouchControls : MonoBehaviour
 {
@@ -11,6 +12,33 @@ public class TouchControls : MonoBehaviour
     public Vector3Variable PlayerVelocitySO;
     public Transform MainCameraDirection; // Not used yet, but should be used for rotating the coordinate system of the touch input to  match the direction of the player
 
+    // Display sli  rs for altering the speed and acceleration of the Player - This could potentially be moved to an editor window for the designers
+    [Header("Player Variables")]
+    [Tooltip("Maximum Speed in m/s")]
+    public float PlayerMaxSpeed = 2f;
+    [Tooltip("Acceleration time in seconds, from 0 to max speed")]
+    public float PlayerAcceleration = 1f;
+
+    //Display Sliders for tweaking the amount of touch
+    [Header ("Touch Variables")]
+    [Tooltip("A percentage of the total screen width for setting the extent of the player's touch on the screen")]
+    public float _inputMoveMaxThreshold = 25f;
+
+    [Tooltip("A percentage of the total screen width for setting how far the player must move the finger to make it react as a move and not e.g. a tap")]
+    public float _inputMoveMinThreshold = 5f;
+
+    [Tooltip("Time in miliseconds before it is registered as a swipe or tap")]
+    public float _inputSwipeTapTime = 200f;
+
+    // Setup the private variables needed for the calculations in the current script
+    private Vector3 _inputTouch;
+    private Touch _touch;
+    private bool _recordPosition = true;
+    private Vector3 _recordedInputPosition;
+    private Vector3 _currentInputPosition;
+    private bool _inputMoved;
+    private float _inputTime;
+
     // Debug UI stuff
     public GameObject TouchUIDotCurrent;
     public GameObject TouchUIDotRecorded;
@@ -18,21 +46,8 @@ public class TouchControls : MonoBehaviour
     private GameObject _uiRecord;
     private GameObject _uiCurrent;
 
-    // Display sliders for altering the speed and acceleration of the Player - This could potentially be moved to an editor window for the designers
-    [Tooltip("Maximum Speed in m/s")]
-    public float PlayerMaxSpeed = 1f;
-    [Tooltip("Acceleration time in seconds")]
-    public float PlayerAcceleration = 1f;
-
-    // Setup the private variables needed for the calculations in the current script
-    private Vector3 _inputTouch;
-    private Touch _touch;
-    private bool _touching = false;
-    private bool _recordMouse = true;
-    private Vector3 _recordedMousePosition;
-    private Vector3 _currentMousePosition;
-    private float _touchMoveMaxThreshold = 0.25f;
-    private float _touchMoveMinThreshold = 100f;
+    [Header("Debug stuff")]
+    public Text DebugText;
 
 
     // Start is called before the first frame update
@@ -40,7 +55,10 @@ public class TouchControls : MonoBehaviour
     {
         _inputTouch = new Vector3();
 
-        _touchMoveMaxThreshold *= Screen.width;
+        _inputMoveMaxThreshold = Screen.width * (_inputMoveMaxThreshold / 100);
+        _inputMoveMinThreshold = Screen.width * (_inputMoveMinThreshold / 100);
+
+        _inputSwipeTapTime /= 1000;
 
         PlayerMaxSpeedSO.Value = PlayerMaxSpeed;
         PlayerAccelerationSO.Value = PlayerAcceleration;
@@ -49,20 +67,25 @@ public class TouchControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        /*
+        
         // Detect Touch
         if(Input.touchCount > 0)
         {
             _touch = Input.GetTouch(0);
-            _touching = true;
-
+            
+            if(_touch.phase == TouchPhase.Began)
+            {
+                ReturnInputPosition(_touch.position);
+            }
             if (_touch.phase == TouchPhase.Moved)
             {
-                Vector2 touchPosition = _touch.deltaPosition;
+                BeginMove();
+            }
+            if(_touch.phase == TouchPhase.Ended)
+            {
+                EndMove();
             }
         }
-        */
 
         // Allow for usage of the keyboard as controls as well
         if (Input.anyKey)
@@ -84,76 +107,124 @@ public class TouchControls : MonoBehaviour
         // Simulate touch with mouse, if mouse present
         if (Input.mousePresent)
         {
-            _currentMousePosition = Input.mousePosition;
-
             if (Input.GetMouseButton(0))
             {
-                _touching = true;
-
-                if (_recordMouse)
-                {
-                    _recordedMousePosition = Input.mousePosition;
-                    _recordMouse = false;
-
-                    // UI Debug Stuff
-                    _uiRecord = Instantiate(TouchUIDotRecorded, TouchCanvas);
-                    _uiRecord.transform.position = _recordedMousePosition;
-
-                    // UI Debug Stuff
-                    if (_uiCurrent == null)
-                    {
-                        _uiCurrent = Instantiate(TouchUIDotCurrent, _uiRecord.transform);
-                    }
-                }
-
-                // Check if mouse have moved more than the threshold
-                if (Vector2.Distance(_recordedMousePosition, _currentMousePosition) > _touchMoveMinThreshold)
-                {
-                    Vector3 heading;
-                    float distance;
-                    Vector3 direction;
-
-                    heading = _currentMousePosition - _recordedMousePosition;
-                    distance = heading.magnitude;
-                    direction = heading / distance;
-
-                    // Export direction and speed to the PlayerSpeedDirectionSO
-                    PlayerSpeedDirectionSO.Value.x = direction.x;
-                    PlayerSpeedDirectionSO.Value.z = direction.y;
-
-                    // UI Debug Stuff
-                    float x = 0f;
-                    float y = 0f;
-                    float a = Mathf.Atan2(heading.y, heading.x);
-
-                    float circleCalc = (heading.x * heading.x) + (heading.y * heading.y);
-
-                    if (circleCalc > (_touchMoveMaxThreshold * _touchMoveMaxThreshold))
-                    {
-                        x = _touchMoveMaxThreshold * Mathf.Cos(a);
-                        y = _touchMoveMaxThreshold * Mathf.Sin(a);
-                    } else
-                    {
-                        x = heading.x;
-                        y = heading.y;
-                    }
-
-                    _uiCurrent.transform.localPosition = new Vector3(x, y);
-                }
+                BeginMove();
             }
             if (Input.GetMouseButtonUp(0))
             {
-                _touching = false;
-                _recordMouse = true;
-
-                // UI Debug Stuff
-                Object.Destroy(_uiRecord);
-                Object.Destroy(_uiCurrent);
-
-                PlayerSpeedDirectionSO.Value = Vector3.zero;
+                EndMove();
             }
         }
     }
+
+
+    private void BeginMove()
+    {
+        ReturnInputPosition(Input.mousePosition);
+
+        // Check if mouse have moved more than the threshold
+        if (Vector3.Distance(_recordedInputPosition, _currentInputPosition) > _inputMoveMinThreshold)
+        {
+            _inputMoved = true;
+
+            Vector3 heading;
+            float distance;
+            Vector3 direction;
+
+            heading = _currentInputPosition - _recordedInputPosition;
+
+            // Calculates the outer rim position of the "joystick" if the player moves the finger beyond the borders of the designated joystick space
+            float x = 0f;
+            float y = 0f;
+            float a = Mathf.Atan2(heading.y, heading.x);
+
+            float circleCalc = (heading.x * heading.x) + (heading.y * heading.y);
+
+            if (circleCalc > (_inputMoveMaxThreshold * _inputMoveMaxThreshold))
+            {
+                x = _inputMoveMaxThreshold * Mathf.Cos(a);
+                heading.x = x;
+                y = _inputMoveMaxThreshold * Mathf.Sin(a);
+                heading.y = y;
+            }
+            else
+            {
+                x = heading.x;
+                y = heading.y;
+            }
+
+            // Normalize the direction and speed vector
+            distance = heading.magnitude;
+            direction = heading / distance;
+
+            // Export direction and speed vector to the PlayerSpeedDirectionSO
+            PlayerSpeedDirectionSO.Value.x = direction.x;
+            PlayerSpeedDirectionSO.Value.z = direction.y;
+
+            // UI debug stuff
+            _uiCurrent.transform.localPosition = new Vector3(x, y);
+        }
+    }
+
+
+    private void ReturnInputPosition(Vector3 touchPos)
+    {
+        if(_recordPosition)
+        {
+            _recordedInputPosition = touchPos;
+            _inputTime = Time.time;
+            _recordPosition = false;
+
+            // UI Debug Stuff
+            _uiRecord = Instantiate(TouchUIDotRecorded, TouchCanvas);
+            _uiRecord.transform.position = touchPos;
+        } else
+        {
+            _currentInputPosition = touchPos;
+        }
+
+        // UI Debug Stuff
+        if (_uiCurrent == null)
+        {
+            _uiCurrent = Instantiate(TouchUIDotCurrent, _uiRecord.transform.position, Quaternion.identity, _uiRecord.transform);
+        } else
+        {
+            _uiCurrent.transform.position = _uiRecord.transform.position;
+        }
+    }
+
+
+    private void EndMove()
+    {
+        _recordPosition = true;
+
+        // UI Debug Stuff
+        Object.Destroy(_uiRecord);
+        Object.Destroy(_uiCurrent);
+
+        float endTime = Time.time - _inputTime;
+
+        if (endTime < _inputSwipeTapTime) 
+        {
+            if (_inputMoved)
+            {
+                DebugText.text = "SWIPED!";
+            }
+            else
+            {
+                DebugText.text = "TAPPED!";
+            }
+        }
+        else if(_inputMoved) 
+        {
+            DebugText.text = "MOVED!";
+        }
+
+        _inputMoved = false;
+        PlayerSpeedDirectionSO.Value = Vector3.zero;
+    }
+
 
     private void TRASH()
     {
