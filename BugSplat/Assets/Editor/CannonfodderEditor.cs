@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(cannonFodder))]
+[CustomEditor(typeof(Enemy))]
 public class CannonfodderEditor : Editor
 {
     cannonFodder _cannonFodder;

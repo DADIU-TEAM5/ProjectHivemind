@@ -119,12 +119,12 @@ public class TouchControls : MonoBehaviour
 
                     PlayerSpeedDirectionSO.Value.x = direction.x;
                     PlayerSpeedDirectionSO.Value.z = direction.y;
-<<<<<<< HEAD
+
 
                     //Debug.Log(direction);
-=======
+
                     Debug.Log(direction);
->>>>>>> c665c1c9d3e811ddabe050901ff63ca58d904a5f
+
                 }
             }
             if (Input.GetMouseButtonUp(0))
