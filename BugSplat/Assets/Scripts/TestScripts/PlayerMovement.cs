@@ -32,6 +32,9 @@ public class PlayerMovement : MonoBehaviour
         transform.Translate(PlayerVelocitySO.Value * PlayerMaxSpeedSO.Value * Time.deltaTime);
 
         // Rotate the graphics along the PlayerSpeedDirection
-        PlayerGraphics.localRotation = Quaternion.LookRotation(PlayerSpeedDirectionSO.Value, Vector3.up);
+        if (PlayerSpeedDirectionSO.Value != Vector3.zero)
+        {
+            PlayerGraphics.localRotation = Quaternion.LookRotation(PlayerSpeedDirectionSO.Value, Vector3.up);
+        }
     }
 }
