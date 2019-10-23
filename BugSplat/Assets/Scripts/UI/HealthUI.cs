@@ -13,10 +13,6 @@ public class HealthUI : GameLoop
 
     private float _healthRatio;
 
-    void Start() {
-        HealthBar.fillMethod = Image.FillMethod.Vertical;
-    }
-
     public override void LoopLateUpdate(float deltaTime)
     {
     }
