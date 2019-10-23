@@ -14,16 +14,34 @@ public class AttackScript : GameLoop
     bool _lockedOntoTarget;
     float _distanceToNearstTarget;
 
+    float _coneHideTimer;
+
+    GameObject _cone;
+    LineRenderer _coneRenderer;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
+        _cone = new GameObject();
+
+
+        _cone.AddComponent<LineRenderer>();
+        _coneRenderer = _cone.GetComponent<LineRenderer>();
+
+        _cone.SetActive(false);
+
+
     }
 
     public override void LoopUpdate(float deltaTime)
     {
-
+        _coneHideTimer += Time.deltaTime;
+        if(_coneHideTimer > 0.5f)
+        {
+            _cone.SetActive ( false);
+        }
         
 
         Debug.DrawLine(transform.position, transform.position + transform.forward, Color.yellow);
@@ -110,6 +128,10 @@ public class AttackScript : GameLoop
 
     private void Attack()
     {
+        drawCone(10);
+        _cone.SetActive(true);
+        _coneHideTimer = 0;
+
         Collider[] potentialTargets = Physics.OverlapSphere(transform.position, AttackLength.Value, LayerMask.GetMask("Enemy"));
 
         for (int i = 0; i < potentialTargets.Length; i++)
@@ -128,6 +150,47 @@ public class AttackScript : GameLoop
 
         }
 
+    }
+
+    void drawCone(int points)
+    {
+        Vector3[] pointsForTheCone = new Vector3[points];
+        _coneRenderer.positionCount = points;
+
+        pointsForTheCone[0] = transform.position;
+
+        Vector3 vectorToRotate = transform.forward * AttackLength.Value;
+        Vector3 rotatedVector = Vector3.zero;
+
+        float stepSize = 1f / ((float)points - 1);
+        int step = 0;
+
+        for (int i = 1; i < points; i++)
+        {
+            float angle = Mathf.Lerp(-AttackAngle.Value, AttackAngle.Value, step * stepSize);
+
+
+
+            angle = angle * Mathf.Deg2Rad;
+
+            float s = Mathf.Sin(angle);
+            float c = Mathf.Cos(angle);
+
+            rotatedVector.x = vectorToRotate.x * c - vectorToRotate.z * s;
+            rotatedVector.z = vectorToRotate.x * s + vectorToRotate.z * c;
+
+            pointsForTheCone[i] = transform.position + rotatedVector;
+            step++;
+        }
+
+
+
+
+
+        _coneRenderer.SetPositions(pointsForTheCone);
+        _coneRenderer.widthMultiplier = 0.1f;
+
+        _coneRenderer.loop = true;
     }
 
 }
