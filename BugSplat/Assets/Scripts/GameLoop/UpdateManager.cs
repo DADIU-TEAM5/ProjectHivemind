@@ -15,14 +15,14 @@ public class UpdateManager : MonoBehaviour
 
         for (var i = 0; i < GameLoopHandlers.Length; i++) {
             var handler = GameLoopHandlers[i];
-            handler.UpdateGameLoop(_time);
+            handler?.UpdateGameLoop(_time);
         }        
     }
 
     void LateUpdate() {
         for (var i = 0; i < GameLoopHandlers.Length; i++) {
             var handler = GameLoopHandlers[i];
-            handler.LateUpdateGameLoop(_time);
+            handler?.LateUpdateGameLoop(_time);
         }        
     }
 }
