@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-    public Transform PlayerGameObject;
     public Transform PlayerGraphics;
     public Vector3Variable PlayerSpeedDirectionSO;
     public FloatVariable PlayerMaxSpeedSO;
@@ -14,13 +13,6 @@ public class PlayerMovement : MonoBehaviour
 
     private float _lerpTime = 0f;
     private Vector3 _velocity;
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
 
     // Update is called once per frame
@@ -37,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Move player using translate
-        PlayerGameObject.Translate(PlayerVelocitySO.Value * PlayerMaxSpeedSO.Value * Time.deltaTime);
+        transform.Translate(PlayerVelocitySO.Value * PlayerMaxSpeedSO.Value * Time.deltaTime);
 
         // Rotate the graphics along the PlayerSpeedDirection
         PlayerGraphics.localRotation = Quaternion.LookRotation(PlayerSpeedDirectionSO.Value, Vector3.up);
