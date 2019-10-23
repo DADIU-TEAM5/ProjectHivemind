@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-    public Transform Player;
+    public Transform PlayerGameObject;
+    public Transform PlayerGraphics;
     public Vector3Variable PlayerSpeedDirectionSO;
     public FloatVariable PlayerMaxSpeedSO;
     public Vector3Variable PlayerVelocitySO;
@@ -36,10 +37,9 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Move player using translate
-        Player.Translate(PlayerVelocitySO.Value * PlayerMaxSpeedSO.Value * Time.deltaTime);
+        PlayerGameObject.Translate(PlayerVelocitySO.Value * PlayerMaxSpeedSO.Value * Time.deltaTime);
 
-        // Rotate player based on PlayerSpeedDirection
-        Player.rotation = Quaternion.LookRotation(PlayerSpeedDirectionSO.Value, Vector3.up);
-
+        // Rotate the graphics along the PlayerSpeedDirection
+        PlayerGraphics.localRotation = Quaternion.LookRotation(PlayerSpeedDirectionSO.Value, Vector3.up);
     }
 }
