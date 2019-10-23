@@ -34,7 +34,7 @@ public class TouchControls : MonoBehaviour
     private float _touchMoveMaxThreshold = 0.25f;
     private float _touchMoveMinThreshold = 100f;
 
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -105,9 +105,9 @@ public class TouchControls : MonoBehaviour
                         _uiCurrent = Instantiate(TouchUIDotCurrent, _uiRecord.transform);
                     }
                 }
-                
+
                 // Check if mouse have moved more than the threshold
-                if (Vector2.Distance(_recordedMousePosition, _currentMousePosition) > _touchMoveMinThreshold) 
+                if (Vector2.Distance(_recordedMousePosition, _currentMousePosition) > _touchMoveMinThreshold)
                 {
                     Vector3 heading;
                     float distance;
@@ -147,8 +147,8 @@ public class TouchControls : MonoBehaviour
                 _recordMouse = true;
 
                 // UI Debug Stuff
-                //Object.Destroy(_uiRecord);
-                //Object.Destroy(_uiCurrent);
+                Object.Destroy(_uiRecord);
+                Object.Destroy(_uiCurrent);
 
                 PlayerSpeedDirectionSO.Value = Vector3.zero;
             }
