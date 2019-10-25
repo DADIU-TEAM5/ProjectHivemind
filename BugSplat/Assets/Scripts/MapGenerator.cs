@@ -5,7 +5,9 @@ using UnityEngine;
 public class MapGenerator : MonoBehaviour
 {
 
-    
+
+
+    public int Seed;
 
     public int Rings = 1;
 
@@ -31,6 +33,8 @@ public class MapGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Random.InitState(Seed);
+
         Hexagon.mapGen = this;
 
         _hexagonsTiles = new List<GameObject>();
@@ -42,6 +46,10 @@ public class MapGenerator : MonoBehaviour
 
         _hexLength = Mathf.Abs(_vertices[2].z) + Mathf.Abs(_vertices[4].z);
         _hexHeight = Mathf.Abs(_vertices[0].x) + Mathf.Abs(_vertices[5].x);
+
+        _hexHeight *= BaseHexagon.transform.localScale.z;
+        _hexLength *= BaseHexagon.transform.localScale.x;
+
 
         GameObject hex = Instantiate(getRandomHexagon());
         Hexagon hexHex= hex.GetComponent<Hexagon>();
