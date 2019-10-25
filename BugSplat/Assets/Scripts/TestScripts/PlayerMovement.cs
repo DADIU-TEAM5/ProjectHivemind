@@ -50,7 +50,7 @@ public class PlayerMovement : GameLoop
         transform.Translate(PlayerVelocitySO.Value * PlayerMaxSpeedSO.Value * Time.deltaTime);
 
         // Rotate the graphics along the PlayerSpeedDirection
-        if (PlayerMaxSpeedSO.Value != 0)
+        if (PlayerSpeedDirectionSO.Value != Vector3.zero)
         {
             PlayerGraphics.localRotation = Quaternion.LookRotation(PlayerSpeedDirectionSO.Value, Vector3.up);
         }
