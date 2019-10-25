@@ -32,7 +32,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5788987755461925658}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.21296203, y: 0.47796214, z: -0.29923943}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5788987755592666204}
@@ -79,7 +79,7 @@ MonoBehaviour:
     type: 2}
   PlayerVelocitySO: {fileID: 11400000, guid: d1f4ccfac4a47fb4da89d998092775b8, type: 2}
   DashInitiatedSO: {fileID: 11400000, guid: a325fabc21f4650479d69a9c7bdd3d21, type: 2}
-  AttackInitiatedSO: {fileID: 0}
+  AttackInitiatedSO: {fileID: 11400000, guid: 4cf9a708d5633f04bbbc56776410d56d, type: 2}
   MainCameraDirection: {fileID: 0}
   PlayerMaxSpeed: 2
   PlayerAcceleration: 1
@@ -188,7 +188,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 0
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &8708014117340893829
@@ -208,6 +208,7 @@ MonoBehaviour:
   - {fileID: 5788987755461925632}
   - {fileID: 5788987755461925661}
   - {fileID: 5788987755461925659}
+  - {fileID: 5012523203288252738}
 --- !u!114 &5012523203288252738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,6 +226,10 @@ MonoBehaviour:
   AttackMoveDistance: {fileID: 11400000, guid: 578eb0f35d8186843938c718de1cac04, type: 2}
   AttackDamage: {fileID: 11400000, guid: 5721cf1e0bbca63448c7a97cf7a28acd, type: 2}
   AttackCooldown: {fileID: 11400000, guid: f3ffcd9c42f6213428f594699e3519bb, type: 2}
+  PlayerSpeedDirectionSO: {fileID: 11400000, guid: 857036471d8e63b46b304293dca2794e,
+    type: 2}
+  PlayerMaxSpeedSO: {fileID: 11400000, guid: dbd0aac2d5b26704bbdf49f8d6657a38, type: 2}
+  PlayerGraphics: {fileID: 5788987755592666204}
 --- !u!1 &5788987755592666200
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,7 +242,7 @@ GameObject:
   - component: {fileID: 5788987755592666203}
   - component: {fileID: 5788987755592666202}
   - component: {fileID: 5788987755592666201}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -252,7 +257,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5788987755592666200}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.21296203, y: 0.52203786, z: 0.29923943}
+  m_LocalPosition: {x: 0, y: 0.52203786, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5788987756183937296}
