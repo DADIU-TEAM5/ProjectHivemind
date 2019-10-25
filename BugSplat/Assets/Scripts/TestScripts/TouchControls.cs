@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TouchControls : MonoBehaviour
+public class TouchControls : GameLoop
 {
     // Setup ScriptableObjects for holding the PlayerMovementInfo
     public Vector3Variable PlayerSpeedDirectionSO;
     public FloatVariable PlayerMaxSpeedSO;
     public FloatVariable PlayerAccelerationSO;
     public Vector3Variable PlayerVelocitySO;
+    public GameEvent DashInitiatedSO;
+    public GameEvent AttackInitiatedSO;
     public Transform MainCameraDirection; // Not used yet, but should be used for rotating the coordinate system of the touch input to  match the direction of the player
 
     // Display sli  rs for altering the speed and acceleration of the Player - This could potentially be moved to an editor window for the designers
@@ -60,20 +62,18 @@ public class TouchControls : MonoBehaviour
 
         _inputSwipeTapTime /= 1000;
 
-        PlayerMaxSpeedSO.Value = PlayerMaxSpeed;
+        PlayerMaxSpeedSO.Value = 0;
         PlayerAccelerationSO.Value = PlayerAcceleration;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void LoopUpdate(float deltaTime)
     {
-        
         // Detect Touch
-        if(Input.touchCount > 0)
+        if (Input.touchCount > 0)
         {
             _touch = Input.GetTouch(0);
-            
-            if(_touch.phase == TouchPhase.Began)
+
+            if (_touch.phase == TouchPhase.Began)
             {
                 ReturnInputPosition(_touch.position);
             }
@@ -81,7 +81,7 @@ public class TouchControls : MonoBehaviour
             {
                 BeginMove();
             }
-            if(_touch.phase == TouchPhase.Ended)
+            if (_touch.phase == TouchPhase.Ended)
             {
                 EndMove();
             }
@@ -99,10 +99,10 @@ public class TouchControls : MonoBehaviour
                 PlayerSpeedDirectionSO.Value.z = Input.GetAxisRaw("Vertical");
             }
         }
-        else
+        /*else
         {
             PlayerSpeedDirectionSO.Value = Vector3.zero;
-        }
+        }*/
 
         // Simulate touch with mouse, if mouse present
         if (Input.mousePresent)
@@ -118,6 +118,11 @@ public class TouchControls : MonoBehaviour
         }
     }
 
+    public override void LoopLateUpdate(float deltaTime)
+    {
+ 
+    }
+
 
     private void BeginMove()
     {
@@ -127,6 +132,8 @@ public class TouchControls : MonoBehaviour
         if (Vector3.Distance(_recordedInputPosition, _currentInputPosition) > _inputMoveMinThreshold)
         {
             _inputMoved = true;
+
+            PlayerMaxSpeedSO.Value = PlayerMaxSpeed;
 
             Vector3 heading;
             float distance;
@@ -210,19 +217,22 @@ public class TouchControls : MonoBehaviour
             if (_inputMoved)
             {
                 DebugText.text = "SWIPED!";
+                DashInitiatedSO.Raise();
+                PlayerMaxSpeedSO.Value = 0;
             }
             else
             {
                 DebugText.text = "TAPPED!";
+                AttackInitiatedSO.Raise();
             }
         }
         else if(_inputMoved) 
         {
             DebugText.text = "MOVED!";
+            PlayerMaxSpeedSO.Value = 0;
         }
 
         _inputMoved = false;
-        PlayerSpeedDirectionSO.Value = Vector3.zero;
     }
 
 

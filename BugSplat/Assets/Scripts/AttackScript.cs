@@ -44,11 +44,11 @@ public class AttackScript : GameLoop
         }
         
 
-        Debug.DrawLine(transform.position, transform.position + transform.forward, Color.yellow);
+        /*Debug.DrawLine(transform.position, transform.position + transform.forward, Color.yellow);
         if (Input.GetButtonDown("Jump"))
         {
             AttackNearestTarget();
-        }
+        }*/
        
 
         
@@ -60,7 +60,7 @@ public class AttackScript : GameLoop
 
     }
 
-    private void AttackNearestTarget()
+    public void AttackNearestTarget()
     {
         
         

@@ -7,7 +7,7 @@ public class PlayerDodgeScript : GameLoop
     public Rigidbody player;
     public GameEvent DashInitiated;
     public BoolVariable IsDodging;
-    public Vector3Variable InputVector;
+    public Vector3Variable PlayerSpeedDirectionSO;
     public AnimationCurve DodgeAnimationCurve;
    
     // Initial speed of dash
@@ -31,7 +31,7 @@ public class PlayerDodgeScript : GameLoop
         
         if (IsDodging.Value == false)
         {
-            _dashDirection = InputVector.Value;
+            _dashDirection = PlayerSpeedDirectionSO.Value;
             _dashFrameCount = 0;
             IsDodging.Value = true;
         }
@@ -51,10 +51,10 @@ public class PlayerDodgeScript : GameLoop
         if (IsDodging.Value == true)
         {
             Vector3 newPosition = _dashDirection*DashSpeed;
-            InputVector.Value = newPosition;
+            PlayerSpeedDirectionSO.Value = newPosition;
             
             // Only for Testing !TEST
-            player.MovePosition(player.transform.position+ InputVector.Value);
+            player.MovePosition(player.transform.position + PlayerSpeedDirectionSO.Value);
             
 
             
@@ -63,7 +63,7 @@ public class PlayerDodgeScript : GameLoop
             if (_dashFrameCount >= DashLength)
 
                 // Only for Testing !TEST
-                InputVector.Value = _dashDirection;
+                PlayerSpeedDirectionSO.Value = _dashDirection;
 
                 IsDodging.Value = false;
         }
