@@ -22,7 +22,7 @@ public class TestToolMenu : MonoBehaviour
                 //Button newButton = GameObject.Instantiate(TB);
 
                 //ScrollView.AddComponent(newButton);
-                newGO.transform.SetParent(ScrollView.transform);
+                newGO.transform.SetParent(ScrollView.transform,false);
                 newGO.SetActive(true);
 
                 TestToggleButton toggleButton = newGO.GetComponent<TestToggleButton>();
