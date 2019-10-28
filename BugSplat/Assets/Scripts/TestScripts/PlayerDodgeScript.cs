@@ -50,11 +50,11 @@ public class PlayerDodgeScript : GameLoop
         
         if (IsDodging.Value == true)
         {
-            Vector3 newPosition = _dashDirection*DashSpeed;
+            Vector3 newPosition = _dashDirection;
             PlayerSpeedDirectionSO.Value = newPosition;
             
             // Only for Testing !TEST
-            player.MovePosition(player.transform.position + PlayerSpeedDirectionSO.Value);
+            player.MovePosition(player.transform.position + (PlayerSpeedDirectionSO.Value * DashSpeed));
             
 
             
