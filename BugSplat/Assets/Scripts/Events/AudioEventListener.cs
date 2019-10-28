@@ -5,17 +5,21 @@ using UnityEngine.Events;
 
 public class AudioEventListener : MonoBehaviour
 {
-    public EventListener[] EventListeners;
+    public List<EventListener> EventListeners;
 
     private void Awake()
     {
-        for (var i = 0; i < EventListeners.Length; i++) {
+        for (var i = 0; i < EventListeners.Count; i++) {
             var eventListener = EventListeners[i];
 
             var listener = gameObject.AddComponent<GameEventListener>();
            listener.Event = eventListener.Event;
            listener.Response = eventListener.Response;
         }        
+    }
+
+    private void Start() {
+        Destroy(this);
     }
 
     [System.Serializable]
