@@ -10,7 +10,18 @@ public class TestFloatSlider : MonoBehaviour
     public Text TextLabel;
     private string _textLabel;
     public Slider slider;
-    //public FloatVariable FloatVar;
+    
+    public float MaxValue;
+    public float MinValue;
+
+    public void Setup(FloatVariable floatVar, float min, float max)
+    {
+        FloatVar = floatVar;
+        slider.value = FloatVar.Value;
+        slider.maxValue = max;
+        slider.minValue = min;
+        SetText();
+    }
 
     public void Setup(FloatVariable floatVar)
     {
@@ -21,7 +32,7 @@ public class TestFloatSlider : MonoBehaviour
 
     public void ChangeSlider()
     {
-        FloatVar.Value = slider.value;
+        FloatVar.Value = Mathf.Round(slider.value* 100f)/100f;
         SetText();
     }
 
