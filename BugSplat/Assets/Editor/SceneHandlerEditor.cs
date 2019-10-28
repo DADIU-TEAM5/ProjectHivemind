@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEditor;
 
-[CustomEditor(typeof(SceneHandler))]
 public class SceneHandlerEditor : Editor
 {
     [SerializeField]
@@ -13,6 +12,7 @@ public class SceneHandlerEditor : Editor
     [SerializeField]
     private Object _selectedScene;
 
+    [SerializeField]
     private string[] _sceneList;
 
     private void OnEnable()
