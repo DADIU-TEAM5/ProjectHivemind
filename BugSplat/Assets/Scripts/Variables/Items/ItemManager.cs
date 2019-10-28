@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemManager : ScriptableObject
+public class ItemManager : GameLoop
 {
     public List<ItemObject> items;
     
@@ -10,11 +10,22 @@ public class ItemManager : ScriptableObject
     public List<FloatVariable> ModifiedStats;
     public AbilityManager AM;
 
+    public override void LoopLateUpdate(float deltaTime)
+    {
+    }
+
+    public override void LoopUpdate(float deltaTime)
+    {
+    }
+
+
+
     public void AddItem(ItemObject itemObj)
     {
         if (CanAddItem(itemObj))
-            items.Add(itemObj);       
+            items.Add(itemObj);
     }
+
 
     bool CanAddItem(ItemObject itemObj)
     {
