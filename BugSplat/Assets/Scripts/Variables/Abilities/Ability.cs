@@ -15,7 +15,7 @@ public abstract class Ability : ScriptableObject
     // Visual Stuff
 
     public abstract void OnTrigger();
-    public abstract void InitializeGameObject();
+    public abstract void Initialize(GameObject GameObj);
 
     //public void InitializeGameEventLListeners()
     //{

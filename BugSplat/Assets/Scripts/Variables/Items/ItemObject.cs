@@ -9,17 +9,17 @@ public class ItemObject : ScriptableObject
     public string DevelopmentNotes;
     
     [Header("Displayed In Game")]
-    public string Name;
     public int Tier;
     public int Price;
     public string Description;
 
 
-    //[Header("Triggers used")]
-    //public bool Attack_OnHit;
-    //public bool Attack_OnAttack;
-    //public bool Attack_OnHit_Debuff;
+    [Header("Tags")]
+    public bool IsStackable;
 
+    [Header("Abilities")]
+    public List<Ability> abilities;
+        ;
     // Add the rest
 
     [Header("Flat Stat Changes")]
