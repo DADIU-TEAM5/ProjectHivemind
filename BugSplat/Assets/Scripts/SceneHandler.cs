@@ -5,30 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class SceneHandler : MonoBehaviour
 {
-    [SerializeField]
-    private ObjectList _scene;
 
-    [SerializeField]
-    private int _selectedSceneIndex;
+    public string SelectedScene;
 
-    [SerializeField]
-    private string[] _sceneList;
+    [HideInInspector]
+    public string[] SceneList;
 
-    private void OnEnable()
+    public void ChangeScene(string sceneIndex)
     {
-        _sceneList = new string[_scene.Value.Count];
-
-        for (int i = 0; i < _scene.Value.Count; i++)
+        if(sceneIndex != "")
         {
-            _sceneList[i] = _scene.Value[i].name;
+            SceneManager.LoadScene(SceneList[int.Parse(sceneIndex)]);
         }
-    }
+        else
+        {
+            SceneManager.LoadScene(SelectedScene);
+        }
 
 
-    public void ChangeScene()
-    {
-        string sceneName = _scene.Value[_selectedSceneIndex].name;
-
-        SceneManager.LoadScene(sceneName);
     }
 }

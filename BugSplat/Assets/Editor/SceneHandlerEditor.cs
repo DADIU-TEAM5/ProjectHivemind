@@ -1,47 +1,105 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEditor;
 
-//[CustomEditor(typeof(SceneHandler))]
+
+//STILL NEEDS TO SERIALIZE THE CHOSEN VALUE FROM THE DROPDOWN LIST!!!
+
+[CustomEditor(typeof(SceneHandler))]
 public class SceneHandlerEditor : Editor
 {
-    /*[SerializeField]
-    private ObjectList _scene;
-    
-    [SerializeField]
-    private Object _selectedScene;
+    private List<SceneAsset> _sceneAssets = new List<SceneAsset>();
 
-    [SerializeField]
-    private string[] _sceneList;*/
+    private string[] _sceneList;
 
-    int windowID = 1234;
-    Rect windowRect;
+    private SceneHandler SceneHandlerVar;
+
+    private bool _loaded = false;
+
+    [Tooltip("Select scene to switch to.")]
+    [SerializeField]
+    private int _selectedSceneIndex;
+
+    private string _selectedScene;
+
 
     private void OnEnable()
     {
-       /* _sceneList = new string[_scene.Value.Count];
+        _sceneList = new string[EditorBuildSettings.scenes.Length];
 
-        for (int i = 0; i < _scene.Value.Count; i++)
-        {
-            _sceneList[i] = _scene.Value[i].name;
-        }*/
+        SceneHandlerVar = (SceneHandler)target;
+
+        SceneHandlerVar.SceneList = new string[EditorBuildSettings.scenes.Length];
+
+        LoadScenes();
     }
 
     // OnInspector GUI
-    public override void OnInspectorGUI() //2
+    public override void OnInspectorGUI()
     {
-        //EditorGUILayout.Popup(0, _sceneList);
 
-        GUILayout.Space(20f); //2
-        GUILayout.Label("Custom Editor Elements", EditorStyles.boldLabel);
-        //EditorGUILayout.
+        GUILayout.Space(20f);
+
+        _selectedSceneIndex = EditorGUILayout.Popup("Select scene:", _selectedSceneIndex, _sceneList, EditorStyles.popup);
+
+        _selectedScene = _sceneList[_selectedSceneIndex];
+
+        SceneHandlerVar.SelectedScene = _selectedScene;
+
+        GUILayout.Space(10f);
+
+        ShowScenes();
+
+        GUILayout.Space(10f);
 
 
-        EditorGUILayout.LabelField("Label");
+        /* STUFF IF I NEED TO MAKE OTHER FIELDS!
+        
+        //GUILayout.Label("Custom Editor Elements", EditorStyles.boldLabel);
+
+        EditorGUILayout.LabelField(_selectedSceneIndex.ToString());
+
+        EditorGUILayout.LabelField(_selectedScene);
+
+
         EditorGUILayout.ColorField(Color.cyan);
         EditorGUILayout.ToggleLeft("Toggle", false);
         GUILayout.Button("Button");
+        */
+    }
+
+
+    void ShowScenes()
+    {
+        GUILayout.Label("Else use index of scene in event listener:", EditorStyles.boldLabel);
+
+        for (int i = 0; i < _sceneList.Length-1; i++)
+        {
+            EditorGUILayout.LabelField(i + ": " + _sceneList[i]);
+        }
+    }
+
+
+    void LoadScenes()
+    {
+        int count = 0;
+
+        for (int i = 0; i < _sceneList.Length; i++)
+        {
+            if (EditorBuildSettings.scenes[i].enabled)
+            {
+                EditorBuildSettingsScene tempPath = EditorBuildSettings.scenes[i];
+                int lastFolderIndex = tempPath.path.LastIndexOf('/');
+                _sceneList[count] = tempPath.path.Remove(0, lastFolderIndex + 1).ToString();
+
+                int fileEndingIndex = _sceneList[count].LastIndexOf('.');
+                _sceneList[count] = _sceneList[count].Remove(fileEndingIndex, _sceneList[count].Length - fileEndingIndex);
+
+                SceneHandlerVar.SceneList[count] = _sceneList[count];
+
+                count++;
+            }
+        }
     }
 }
