@@ -9,7 +9,7 @@ public class ItemObject : ScriptableObject
     public string DevelopmentNotes;
     
     [Header("Displayed In Game")]
-    public int Tier;
+    public Tier Tier;
     public int Price;
     public string Description;
 
@@ -31,13 +31,13 @@ public class ItemObject : ScriptableObject
     public int Flat_Health;
     public int Flat_Damage_Reduction;
 
-    [Header("Percentage Stat Changes")]
+    //[Header("Percentage Stat Changes")]
 
-    public float Percentage_MovementSpeed;
-    public float Percentage_AttackSpeed;
-    public float Percentage_AttackDamage;
-    public float Percentage_DashSpeed;
-    public float Percentage_Dash_Length;
-    public float Percentage_Health;
-    public float Percentage_Damage_Reduction;
+    //public float Percentage_MovementSpeed;
+    //public float Percentage_AttackSpeed;
+    //public float Percentage_AttackDamage;
+    //public float Percentage_DashSpeed;
+    //public float Percentage_Dash_Length;
+    //public float Percentage_Health;
+    //public float Percentage_Damage_Reduction;
 }
