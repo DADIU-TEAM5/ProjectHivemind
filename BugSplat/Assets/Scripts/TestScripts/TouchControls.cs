@@ -185,7 +185,7 @@ public class TouchControls : GameLoop
 
             // Normalize the direction and speed vector
             distance = heading.magnitude;
-            direction = heading / distance;
+            direction = heading.normalized;
 
             // UI debug stuff
             _uiCurrent.transform.localPosition = new Vector3(x, y);
