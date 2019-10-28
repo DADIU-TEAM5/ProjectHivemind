@@ -7,6 +7,8 @@ public class cannonFodder : Enemy
 {
     public GameObject Graphics;
 
+    public GameObject bodyPart;
+
     bool _playerDetected;
     public SimpleEnemyStats stats;
     Transform _playerTransform;
@@ -41,11 +43,20 @@ public class cannonFodder : Enemy
 
     public override void TakeDamage(float damage)
     {
-        print(name + " took damage "+ damage);
+       // print(name + " took damage "+ damage);
         _currentHealth -= damage;
         if(_currentHealth<= 0)
         {
+            
+           // GameObject part = Instantiate(bodyPart);
+            //part.transform.position = transform.position+Vector3.up;
+
+
+
+            Destroy(_cone);
+
             Destroy(gameObject);
+
         }
     }
 

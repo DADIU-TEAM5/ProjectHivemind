@@ -22,7 +22,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        print("The player took " + damage);
+        //print("The player took " + damage);
         CurrentHealth.Value -= damage;
 
         if (TookDamageEvent != null)
