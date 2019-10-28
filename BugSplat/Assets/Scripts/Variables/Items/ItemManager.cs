@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemManager : GameLoop
 {
@@ -53,5 +54,19 @@ public class ItemManager : GameLoop
             // ModifiedStats are considered as flat
             ModifiedStats[i].Value = 0;
         }
+    }
+
+    void ChangeStats(ItemObject itemObj)
+    {
+        
+        //Very Nice and Clean
+        ModifiedStats[0].Value += itemObj.Flat_AttackDamage;
+        ModifiedStats[1].Value += itemObj.Flat_AttackSpeed;
+        ModifiedStats[2].Value += itemObj.Flat_Attack_Angle;
+        ModifiedStats[3].Value += itemObj.Flat_Damage_Reduction;
+        ModifiedStats[4].Value += itemObj.Flat_DashSpeed;
+        ModifiedStats[5].Value += itemObj.Flat_Dash_Length;
+        ModifiedStats[6].Value += itemObj.Flat_Health;
+        ModifiedStats[7].Value += itemObj.Flat_MovementSpeed;
     }
 }
