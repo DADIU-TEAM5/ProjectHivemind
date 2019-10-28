@@ -14,7 +14,7 @@ public class SceneHandler : MonoBehaviour
     [SerializeField]
     private string[] _sceneList;
 
-    /*private void OnEnable()
+    private void OnEnable()
     {
         _sceneList = new string[_scene.Value.Count];
 
@@ -22,7 +22,7 @@ public class SceneHandler : MonoBehaviour
         {
             _sceneList[i] = _scene.Value[i].name;
         }
-    }*/
+    }
 
 
     public void ChangeScene()
