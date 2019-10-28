@@ -48,8 +48,8 @@ public class cannonFodder : Enemy
         if(_currentHealth<= 0)
         {
             
-            GameObject part = Instantiate(bodyPart);
-            part.transform.position = transform.position+Vector3.up;
+           // GameObject part = Instantiate(bodyPart);
+            //part.transform.position = transform.position+Vector3.up;
 
 
 
