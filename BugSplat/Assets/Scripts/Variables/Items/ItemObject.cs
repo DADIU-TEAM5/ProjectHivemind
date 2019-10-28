@@ -19,7 +19,7 @@ public class ItemObject : ScriptableObject
 
     [Header("Abilities")]
     public List<Ability> abilities;
-        ;
+
     // Add the rest
 
     [Header("Flat Stat Changes")]
