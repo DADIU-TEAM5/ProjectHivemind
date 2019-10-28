@@ -7,7 +7,6 @@ public class AbilityManager : GameLoop
 
     public List<Ability> Abilities;
 
-
     public override void LoopLateUpdate(float deltaTime)
     {
        
@@ -18,5 +17,9 @@ public class AbilityManager : GameLoop
        
     }
 
+    public void Reset()
+    {
+        Abilities.Clear();
+    }
 
 }

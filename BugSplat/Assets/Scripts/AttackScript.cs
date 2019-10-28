@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AttackScript : GameLoop
 {
@@ -43,35 +41,41 @@ public class AttackScript : GameLoop
     public override void LoopUpdate(float deltaTime)
     {
 
-        Debug.DrawLine(PlayerGraphics.position,  (PlayerGraphics.position + PlayerGraphics.forward),Color.red);
+        //Debug.DrawLine(PlayerGraphics.position, (_nearstTarget - PlayerGraphics.position), Color.red);
         _coneHideTimer += Time.deltaTime;
-        if(_coneHideTimer > 0.5f)
+        if (_coneHideTimer > 0.5f)
         {
-            _cone.SetActive ( false);
+            _cone.SetActive(false);
         }
 
-        LockOnToNearestTarget();
+        //LockOnToNearestTarget();
     }
 
     public override void LoopLateUpdate(float deltaTime)
     {
-       
+
 
     }
 
     public void AttackNearestTarget()
     {
+        if (PlayerSpeedDirectionSO.Value == Vector3.zero)
+            PlayerSpeedDirectionSO.Value = transform.forward;
 
+
+        LockOnToNearestTarget();
         if (_lockedOntoTarget)
         {
-            if (_distanceToNearstTarget > (AttackLength.Value * 0.5f))
-            {
-                // Export direction and speed vector to the PlayerSpeedDirectionSO
-                PlayerSpeedDirectionSO.Value.x = _directionToNearstTarget.x;
-                PlayerSpeedDirectionSO.Value.z = _directionToNearstTarget.z;
+            _directionToNearstTarget *= 100;
+            _directionToNearstTarget = _directionToNearstTarget.normalized;
 
-                transform.Translate(PlayerSpeedDirectionSO.Value * (_distanceToNearstTarget - (AttackLength.Value*0.5f)));
-            }
+            //print(_directionToNearstTarget);
+            PlayerSpeedDirectionSO.Value.x = _directionToNearstTarget.x;
+            PlayerSpeedDirectionSO.Value.z = _directionToNearstTarget.z;
+
+            if (_distanceToNearstTarget > (AttackLength.Value * 0.5f))
+                transform.Translate(PlayerSpeedDirectionSO.Value * (_distanceToNearstTarget - (AttackLength.Value * 0.5f)));
+
 
             Attack();
         }
@@ -79,7 +83,7 @@ public class AttackScript : GameLoop
         {
             print("no targets");
 
-            transform.Translate(PlayerSpeedDirectionSO.Value * AttackLength.Value);
+            transform.Translate(PlayerSpeedDirectionSO.Value * AttackMoveDistance.Value);
 
             Attack();
 
@@ -101,7 +105,10 @@ public class AttackScript : GameLoop
             //Debug.Log(potentialTargets[i].name);
 
             Vector3 temp = potentialTargets[i].transform.position;
-            temp.y = PlayerSpeedDirectionSO.Value.y;
+            temp.y = PlayerGraphics.position.y;
+
+
+
             float newDistance = Vector3.Distance(PlayerGraphics.position, temp);
 
             if (newDistance < distance)
@@ -114,10 +121,12 @@ public class AttackScript : GameLoop
         {
             _lockedOntoTarget = true;
             _nearstTarget = potentialTargets[targetIndex].transform.position;
-            _distanceToNearstTarget = distance;
- 
 
-            _directionToNearstTarget = (_nearstTarget - PlayerGraphics.position) / _distanceToNearstTarget;
+            _nearstTarget.y = PlayerGraphics.position.y;
+            _distanceToNearstTarget = distance;
+
+
+            _directionToNearstTarget = _nearstTarget - PlayerGraphics.position;
         }
         else
         {
@@ -128,13 +137,16 @@ public class AttackScript : GameLoop
 
     private void Attack()
     {
+
+
+
         DrawCone(10);
         _cone.SetActive(true);
         _coneHideTimer = 0;
 
         Collider[] potentialTargets = Physics.OverlapSphere(PlayerGraphics.position, AttackLength.Value, LayerMask.GetMask("Enemy"));
 
-        print(potentialTargets.Length);
+        // print(potentialTargets.Length);
 
         for (int i = 0; i < potentialTargets.Length; i++)
         {
@@ -142,13 +154,16 @@ public class AttackScript : GameLoop
             //print(Vector3.Angle(PlayerGraphics.position + transform.forward, potentialTargets[i].transform.position - PlayerGraphics.position));
             //if()
             Vector3 temp = potentialTargets[i].transform.position;
-            temp.y = PlayerSpeedDirectionSO.Value.y;
+            temp.y = PlayerGraphics.position.y;
 
-            print(Vector3.Angle(transform.position - (transform.position + PlayerSpeedDirectionSO.Value), transform.position - temp));
-           // print("angle is "+ Vector3.Angle(PlayerGraphics.position - (PlayerGraphics.position + PlayerGraphics.forward), PlayerGraphics.position - temp)+ " "+ AttackAngle.Value);
-            if (Vector3.Angle(transform.position - (transform.position + PlayerSpeedDirectionSO.Value), transform.position - temp) < AttackAngle.Value)
+            //print(Vector3.Angle(transform.position - (transform.position + PlayerSpeedDirectionSO.Value), transform.position - temp));
+            // print("angle is "+ Vector3.Angle(PlayerGraphics.position - (PlayerGraphics.position + PlayerSpeedDirectionSO.Value), PlayerGraphics.position - temp) + " " + AttackAngle.Value);
+
+            //print(PlayerSpeedDirectionSO.Value);
+
+            if (Vector3.Angle(PlayerGraphics.position - (PlayerGraphics.position + PlayerSpeedDirectionSO.Value), PlayerGraphics.position - temp) < AttackAngle.Value)
                 potentialTargets[i].GetComponent<Enemy>().TakeDamage(AttackDamage.Value);
-            
+
         }
 
     }
