@@ -126,7 +126,7 @@ public class AttackScript : GameLoop
 
     private void Attack()
     {
-        drawCone(10);
+        DrawCone(10);
         _cone.SetActive(true);
         _coneHideTimer = 0;
 
@@ -148,7 +148,7 @@ public class AttackScript : GameLoop
 
     }
 
-    void drawCone(int points)
+    void DrawCone(int points)
     {
         Vector3[] pointsForTheCone = new Vector3[points];
         _coneRenderer.positionCount = points;
