@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class cannonFodder : Enemy
 {
@@ -12,6 +13,7 @@ public class cannonFodder : Enemy
 
     Renderer _renderer;
 
+    NavMeshAgent _navMeshAgent;
 
     GameObject _cone;
     LineRenderer _coneRenderer;
@@ -22,11 +24,13 @@ public class cannonFodder : Enemy
 
         _cone = new GameObject();
 
-        
+        _navMeshAgent = GetComponent<NavMeshAgent>();
         _cone.AddComponent<LineRenderer>();
         _coneRenderer = _cone.GetComponent<LineRenderer>();
 
         _cone.SetActive(false);
+
+        _navMeshAgent.speed = stats.MoveSpeed;
 
     }
 
@@ -39,15 +43,18 @@ public class cannonFodder : Enemy
     public override void LoopUpdate(float deltaTime)
     {
 
-        
+
 
         if (!_playerDetected)
         {
             _renderer.material.color = Color.blue;
             DetectThePlayer();
         }
-        else if(playerInAttackRange() || _attacking)
+        else if (playerInAttackRange() || _attacking)
         {
+            if(_navMeshAgent.destination != transform.position)
+            _navMeshAgent.destination = transform.position;
+
             _renderer.material.color = Color.red;
             Attack();
         }
@@ -60,6 +67,7 @@ public class cannonFodder : Enemy
 
 
     }
+
     public override void LoopLateUpdate(float deltaTime)
     {
 
@@ -108,10 +116,20 @@ public class cannonFodder : Enemy
     }
     void Attack()
     {
+        
+
+
         if (_attacking == false)
         {
+            Vector3 adjustedPlayerPos = _playerTransform.position;
+
+            adjustedPlayerPos.y = transform.position.y;
+
+            transform.LookAt(adjustedPlayerPos);
+
             _cone.SetActive(true);
             drawCone(10);
+
         }
 
         _attacking = true;
@@ -168,6 +186,7 @@ public class cannonFodder : Enemy
 
     void MoveTowardsThePlayer()
     {
+        /*
         Vector3 adjustedPlayerPos = _playerTransform.position;
 
         adjustedPlayerPos.y = transform.position.y;
@@ -175,6 +194,11 @@ public class cannonFodder : Enemy
         transform.LookAt(adjustedPlayerPos);
 
         transform.Translate(Vector3.forward * stats.MoveSpeed * Time.deltaTime);
+        */
+
+
+        if(_navMeshAgent.destination != _playerTransform.position)
+        _navMeshAgent.destination = _playerTransform.position;
 
     }
 

@@ -159,7 +159,7 @@ public class MapGenerator : MonoBehaviour
                 }
                 else
                 {
-                    GenrateWallsAroundTheTiles(_hexagonsTiles[j]);
+                   // GenrateWallsAroundTheTiles(_hexagonsTiles[j]);
                 }
             }
 
@@ -184,7 +184,7 @@ public class MapGenerator : MonoBehaviour
        // yield return null;
     }
 
-    void GenrateWallsAroundTheTiles(GameObject startHexagon)
+   /* void GenrateWallsAroundTheTiles(GameObject startHexagon)
     {
         GameObject hex;
         Hexagon hexagonEdge = startHexagon.GetComponent<Hexagon>();
@@ -262,6 +262,7 @@ public class MapGenerator : MonoBehaviour
 
         }
     }
+    */
 
     IEnumerator GenrateRingAroundHex(GameObject startHexagon)
     {
