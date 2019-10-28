@@ -26,6 +26,7 @@ public class ItemObject : ScriptableObject
     public int Flat_MovementSpeed;
     public int Flat_AttackSpeed;
     public int Flat_AttackDamage;
+    public int Flat_Attack_Angle;
     public int Flat_DashSpeed;
     public int Flat_Dash_Length;
     public int Flat_Health;
