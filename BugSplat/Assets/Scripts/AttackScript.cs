@@ -42,6 +42,8 @@ public class AttackScript : GameLoop
 
     public override void LoopUpdate(float deltaTime)
     {
+
+        Debug.DrawLine(PlayerGraphics.position,  (PlayerGraphics.position + PlayerGraphics.forward),Color.red);
         _coneHideTimer += Time.deltaTime;
         if(_coneHideTimer > 0.5f)
         {
@@ -62,13 +64,13 @@ public class AttackScript : GameLoop
 
         if (_lockedOntoTarget)
         {
-            if (_distanceToNearstTarget > AttackLength.Value)
+            if (_distanceToNearstTarget > (AttackLength.Value * 0.5f))
             {
                 // Export direction and speed vector to the PlayerSpeedDirectionSO
                 PlayerSpeedDirectionSO.Value.x = _directionToNearstTarget.x;
                 PlayerSpeedDirectionSO.Value.z = _directionToNearstTarget.z;
 
-                transform.Translate(PlayerSpeedDirectionSO.Value * (_distanceToNearstTarget - AttackLength.Value));
+                transform.Translate(PlayerSpeedDirectionSO.Value * (_distanceToNearstTarget - (AttackLength.Value*0.5f)));
             }
 
             Attack();
@@ -132,6 +134,8 @@ public class AttackScript : GameLoop
 
         Collider[] potentialTargets = Physics.OverlapSphere(PlayerGraphics.position, AttackLength.Value, LayerMask.GetMask("Enemy"));
 
+        print(potentialTargets.Length);
+
         for (int i = 0; i < potentialTargets.Length; i++)
         {
 
@@ -140,8 +144,9 @@ public class AttackScript : GameLoop
             Vector3 temp = potentialTargets[i].transform.position;
             temp.y = PlayerSpeedDirectionSO.Value.y;
 
-
-            if (Vector3.Angle(PlayerGraphics.position - (PlayerGraphics.position + transform.forward), PlayerGraphics.position - temp) < AttackAngle.Value)
+            print(Vector3.Angle(transform.position - (transform.position + PlayerSpeedDirectionSO.Value), transform.position - temp));
+           // print("angle is "+ Vector3.Angle(PlayerGraphics.position - (PlayerGraphics.position + PlayerGraphics.forward), PlayerGraphics.position - temp)+ " "+ AttackAngle.Value);
+            if (Vector3.Angle(transform.position - (transform.position + PlayerSpeedDirectionSO.Value), transform.position - temp) < AttackAngle.Value)
                 potentialTargets[i].GetComponent<Enemy>().TakeDamage(AttackDamage.Value);
             
         }

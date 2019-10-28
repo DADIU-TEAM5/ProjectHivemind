@@ -11,6 +11,8 @@ public class cannonFodder : Enemy
     bool _attacking;
     float _attackCharge;
 
+    float _currentHealth;
+
     Renderer _renderer;
 
     NavMeshAgent _navMeshAgent;
@@ -20,6 +22,7 @@ public class cannonFodder : Enemy
 
     public void Start()
     {
+        _currentHealth = stats.HitPoints;
         _renderer = GetComponent<Renderer>();
 
         _cone = new GameObject();
@@ -37,13 +40,18 @@ public class cannonFodder : Enemy
     public override void TakeDamage(float damage)
     {
         print(name + " took damage "+ damage);
+        _currentHealth -= damage;
+        if(_currentHealth<= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
 
     public override void LoopUpdate(float deltaTime)
     {
 
-
+        Debug.DrawLine(transform.position, (transform.position + transform.forward), Color.red);
 
         if (!_playerDetected)
         {
@@ -149,6 +157,7 @@ public class cannonFodder : Enemy
                 temp.y = transform.position.y;
 
 
+                //print( Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp));
                 if (Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp) < stats.AttackAngle)
                 {
                     //apply damage to the player
