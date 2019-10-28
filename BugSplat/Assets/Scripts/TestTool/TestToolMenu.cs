@@ -7,6 +7,7 @@ public class TestToolMenu : MonoBehaviour
 {
     //List or Array?
     public List<BoolVariable> Boolvariables = new List<BoolVariable>();
+    public List<FloatVariable> Floatvariables = new List<FloatVariable>();
     public GameObject ScrollView;
 
 
