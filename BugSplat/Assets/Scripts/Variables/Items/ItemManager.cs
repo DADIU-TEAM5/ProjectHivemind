@@ -6,7 +6,7 @@ public class ItemManager : GameLoop
 {
     public List<ItemObject> items;
     
-    // ModifiedStats are considered as multipliers atm
+    // ModifiedStats are considered as flat atm
     public List<FloatVariable> ModifiedStats;
     public AbilityManager AM;
 
@@ -50,8 +50,8 @@ public class ItemManager : GameLoop
         items.Clear();
         for (int i = 0; i < ModifiedStats.Count; i++)
         {
-            // ModifiedStats are considered as multipliers
-            ModifiedStats[i].Value = 1;
+            // ModifiedStats are considered as flat
+            ModifiedStats[i].Value = 0;
         }
     }
 }
