@@ -98,7 +98,7 @@ public class AttackScript : GameLoop
 
         for (int i = 0; i < potentialTargets.Length; i++)
         {
-            Debug.Log(potentialTargets[i].name);
+            //Debug.Log(potentialTargets[i].name);
 
             Vector3 temp = potentialTargets[i].transform.position;
             temp.y = PlayerSpeedDirectionSO.Value.y;

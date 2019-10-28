@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class cannonFodder : Enemy
 {
+    public GameObject Graphics;
+
     bool _playerDetected;
     public SimpleEnemyStats stats;
     Transform _playerTransform;
@@ -23,7 +25,7 @@ public class cannonFodder : Enemy
     public void Start()
     {
         _currentHealth = stats.HitPoints;
-        _renderer = GetComponent<Renderer>();
+        _renderer = Graphics.GetComponent<Renderer>();
 
         _cone = new GameObject();
 
