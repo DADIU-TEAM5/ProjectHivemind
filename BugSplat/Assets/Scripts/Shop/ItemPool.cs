@@ -12,40 +12,35 @@ public class ItemPool : ScriptableObject
 
     // Takes an item out of the pool
     public Item GetItem(Tier tier) {
-        var filteredItems = Items.Where(x => x.Tier == tier && x.Amount > 0);
+        var filteredItems = Items.Where(x => x.ItemObject.Tier == tier && !x.Bought);
 
         var rngResult = Random.Range(0f, 1f);
         var rngInt = (int) (rngResult * filteredItems.Count());
 
         var item = filteredItems.ElementAt(rngInt);
-        item.Amount = 0;
+        item.Bought = true;
 
         return item;
     }
 
-    // Adds an item to the pool
+    // Replenish an item in the pool if it had previously been bought 
     public void AddItem(Item item) {
-        item.Amount = 1;
-
-        Items.Add(item); 
-    }
-
-    void OnEnable() {
-        Reset();
+        var poolItem = Items.Find(x => x.ItemObject == item.ItemObject && x.Bought == true);
+        poolItem.Bought = false;
     }
 
     private void Reset() {
         _random = new Random();
 
         for (int i = 0; i < Items.Count; i++) {
-            Items[i].Amount = 1;
+            Items[i].Bought = true;
         }
 
     }
 
     public class Item {
-        public Tier Tier;
+        public ItemObject ItemObject;
 
-        internal int Amount = 1;
+        internal bool Bought = false;
     }
 }
