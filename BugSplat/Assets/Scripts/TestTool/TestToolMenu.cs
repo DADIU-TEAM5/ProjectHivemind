@@ -12,6 +12,7 @@ public class TestToolMenu : MonoBehaviour
 
 
     public GameObject Togglebutton;
+    public GameObject FloatSlider;
     public Button TB;
 
     public void CreateUIElements()
@@ -20,18 +21,27 @@ public class TestToolMenu : MonoBehaviour
             for (int i = 0; i < Boolvariables.Count; i++)
             {
                 GameObject newGO = (GameObject)GameObject.Instantiate(Togglebutton);
-                //Button newButton = GameObject.Instantiate(TB);
-
-                //ScrollView.AddComponent(newButton);
                 newGO.transform.SetParent(ScrollView.transform,false);
                 newGO.SetActive(true);
 
                 TestToggleButton toggleButton = newGO.GetComponent<TestToggleButton>();
                 toggleButton.Setup(Boolvariables[i]);
-
-                //newButton.SetParent(ScrollView);
-                //newButton.SetActive(true);
+                            
             }
+
+        if (Floatvariables.Count > 0)
+        {
+            for (int i = 0; i < Floatvariables.Count; i++)
+            {
+                GameObject newGO = (GameObject)GameObject.Instantiate(FloatSlider);
+                newGO.transform.SetParent(ScrollView.transform, false);
+                newGO.SetActive(true);
+
+                TestFloatSlider floatSlider = newGO.GetComponent<TestFloatSlider>();
+                floatSlider.Setup(Floatvariables[i]);
+
+            }
+        }
     }
 
     private void Awake()
