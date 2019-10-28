@@ -1,53 +1,70 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class cannonFodder : Enemy
 {
+    public GameObject Graphics;
+
     bool _playerDetected;
     public SimpleEnemyStats stats;
     Transform _playerTransform;
     bool _attacking;
     float _attackCharge;
 
+    float _currentHealth;
+
     Renderer _renderer;
 
+    NavMeshAgent _navMeshAgent;
 
     GameObject _cone;
     LineRenderer _coneRenderer;
 
     public void Start()
     {
-        _renderer = GetComponent<Renderer>();
+        _currentHealth = stats.HitPoints;
+        _renderer = Graphics.GetComponent<Renderer>();
 
         _cone = new GameObject();
 
-        
+        _navMeshAgent = GetComponent<NavMeshAgent>();
         _cone.AddComponent<LineRenderer>();
         _coneRenderer = _cone.GetComponent<LineRenderer>();
 
         _cone.SetActive(false);
+
+        _navMeshAgent.speed = stats.MoveSpeed;
 
     }
 
     public override void TakeDamage(float damage)
     {
         print(name + " took damage "+ damage);
+        _currentHealth -= damage;
+        if(_currentHealth<= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
 
     public override void LoopUpdate(float deltaTime)
     {
 
-        
+        Debug.DrawLine(transform.position, (transform.position + transform.forward), Color.red);
 
         if (!_playerDetected)
         {
             _renderer.material.color = Color.blue;
             DetectThePlayer();
         }
-        else if(playerInAttackRange() || _attacking)
+        else if (playerInAttackRange() || _attacking)
         {
+            if(_navMeshAgent.destination != transform.position)
+            _navMeshAgent.destination = transform.position;
+
             _renderer.material.color = Color.red;
             Attack();
         }
@@ -60,6 +77,7 @@ public class cannonFodder : Enemy
 
 
     }
+
     public override void LoopLateUpdate(float deltaTime)
     {
 
@@ -108,10 +126,20 @@ public class cannonFodder : Enemy
     }
     void Attack()
     {
+        
+
+
         if (_attacking == false)
         {
+            Vector3 adjustedPlayerPos = _playerTransform.position;
+
+            adjustedPlayerPos.y = transform.position.y;
+
+            transform.LookAt(adjustedPlayerPos);
+
             _cone.SetActive(true);
             drawCone(10);
+
         }
 
         _attacking = true;
@@ -131,6 +159,7 @@ public class cannonFodder : Enemy
                 temp.y = transform.position.y;
 
 
+                //print( Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp));
                 if (Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp) < stats.AttackAngle)
                 {
                     //apply damage to the player
@@ -168,6 +197,7 @@ public class cannonFodder : Enemy
 
     void MoveTowardsThePlayer()
     {
+        /*
         Vector3 adjustedPlayerPos = _playerTransform.position;
 
         adjustedPlayerPos.y = transform.position.y;
@@ -175,6 +205,13 @@ public class cannonFodder : Enemy
         transform.LookAt(adjustedPlayerPos);
 
         transform.Translate(Vector3.forward * stats.MoveSpeed * Time.deltaTime);
+        */
+
+        float jitter = 2;
+        _navMeshAgent.Move(new Vector3(Random.Range(-jitter, jitter), 0, Random.Range(-jitter, jitter))*Time.deltaTime);
+
+        if(_navMeshAgent.destination != _playerTransform.position)
+        _navMeshAgent.destination = _playerTransform.position;
 
     }
 

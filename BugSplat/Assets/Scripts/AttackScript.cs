@@ -10,9 +10,15 @@ public class AttackScript : GameLoop
     public FloatVariable AttackDamage;
     public FloatVariable AttackCooldown;
 
+    public Vector3Variable PlayerSpeedDirectionSO;
+    public FloatVariable PlayerMaxSpeedSO;
+
+    public Transform PlayerGraphics;
+
     Vector3 _nearstTarget;
     bool _lockedOntoTarget;
     float _distanceToNearstTarget;
+    Vector3 _directionToNearstTarget;
 
     float _coneHideTimer;
 
@@ -32,26 +38,19 @@ public class AttackScript : GameLoop
 
         _cone.SetActive(false);
 
-
     }
 
     public override void LoopUpdate(float deltaTime)
     {
+
+        Debug.DrawLine(PlayerGraphics.position,  (PlayerGraphics.position + PlayerGraphics.forward),Color.red);
         _coneHideTimer += Time.deltaTime;
         if(_coneHideTimer > 0.5f)
         {
             _cone.SetActive ( false);
         }
-        
 
-        Debug.DrawLine(transform.position, transform.position + transform.forward, Color.yellow);
-        if (Input.GetButtonDown("Jump"))
-        {
-            AttackNearestTarget();
-        }
-       
-
-        
+        LockOnToNearestTarget();
     }
 
     public override void LoopLateUpdate(float deltaTime)
@@ -60,18 +59,19 @@ public class AttackScript : GameLoop
 
     }
 
-    private void AttackNearestTarget()
+    public void AttackNearestTarget()
     {
-        
-        
+
         if (_lockedOntoTarget)
         {
+            if (_distanceToNearstTarget > (AttackLength.Value * 0.5f))
+            {
+                // Export direction and speed vector to the PlayerSpeedDirectionSO
+                PlayerSpeedDirectionSO.Value.x = _directionToNearstTarget.x;
+                PlayerSpeedDirectionSO.Value.z = _directionToNearstTarget.z;
 
-
-            transform.LookAt(_nearstTarget);
-
-            if (_distanceToNearstTarget > AttackLength.Value)
-                transform.Translate(Vector3.forward * (_distanceToNearstTarget - AttackLength.Value));
+                transform.Translate(PlayerSpeedDirectionSO.Value * (_distanceToNearstTarget - (AttackLength.Value*0.5f)));
+            }
 
             Attack();
         }
@@ -79,7 +79,8 @@ public class AttackScript : GameLoop
         {
             print("no targets");
 
-            transform.Translate(Vector3.forward * AttackLength.Value);
+            transform.Translate(PlayerSpeedDirectionSO.Value * AttackLength.Value);
+
             Attack();
 
         }
@@ -90,76 +91,76 @@ public class AttackScript : GameLoop
 
     private void LockOnToNearestTarget()
     {
-        Collider[] potentialTargets = Physics.OverlapSphere(transform.position, AttackLength.Value + AttackMoveDistance.Value, LayerMask.GetMask("Enemy"));
+        Collider[] potentialTargets = Physics.OverlapSphere(PlayerGraphics.position, AttackLength.Value + AttackMoveDistance.Value, LayerMask.GetMask("Enemy"));
 
         int targetIndex = -1;
         float distance = float.MaxValue;
 
-
-
         for (int i = 0; i < potentialTargets.Length; i++)
         {
-            Vector3 temp = potentialTargets[i].transform.position;
-            temp.y = transform.position.y;
-            float newDistance = Vector3.Distance(transform.position, temp);
+            //Debug.Log(potentialTargets[i].name);
 
-            
+            Vector3 temp = potentialTargets[i].transform.position;
+            temp.y = PlayerSpeedDirectionSO.Value.y;
+            float newDistance = Vector3.Distance(PlayerGraphics.position, temp);
 
             if (newDistance < distance)
             {
                 distance = newDistance;
                 targetIndex = i;
-
             }
         }
-        if (potentialTargets.Length >0)
+        if (potentialTargets.Length > 0)
         {
             _lockedOntoTarget = true;
             _nearstTarget = potentialTargets[targetIndex].transform.position;
-            transform.LookAt(_nearstTarget);
             _distanceToNearstTarget = distance;
+ 
+
+            _directionToNearstTarget = (_nearstTarget - PlayerGraphics.position) / _distanceToNearstTarget;
         }
         else
         {
             _lockedOntoTarget = false;
+            _nearstTarget = Vector3.zero;
         }
-        
     }
 
     private void Attack()
     {
-        drawCone(10);
+        DrawCone(10);
         _cone.SetActive(true);
         _coneHideTimer = 0;
 
-        Collider[] potentialTargets = Physics.OverlapSphere(transform.position, AttackLength.Value, LayerMask.GetMask("Enemy"));
+        Collider[] potentialTargets = Physics.OverlapSphere(PlayerGraphics.position, AttackLength.Value, LayerMask.GetMask("Enemy"));
+
+        print(potentialTargets.Length);
 
         for (int i = 0; i < potentialTargets.Length; i++)
         {
 
-            //print(Vector3.Angle(transform.position + transform.forward, potentialTargets[i].transform.position - transform.position));
+            //print(Vector3.Angle(PlayerGraphics.position + transform.forward, potentialTargets[i].transform.position - PlayerGraphics.position));
             //if()
             Vector3 temp = potentialTargets[i].transform.position;
-            temp.y = transform.position.y;
+            temp.y = PlayerSpeedDirectionSO.Value.y;
 
-            
-            if (Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp) < AttackAngle.Value)
+            print(Vector3.Angle(transform.position - (transform.position + PlayerSpeedDirectionSO.Value), transform.position - temp));
+           // print("angle is "+ Vector3.Angle(PlayerGraphics.position - (PlayerGraphics.position + PlayerGraphics.forward), PlayerGraphics.position - temp)+ " "+ AttackAngle.Value);
+            if (Vector3.Angle(transform.position - (transform.position + PlayerSpeedDirectionSO.Value), transform.position - temp) < AttackAngle.Value)
                 potentialTargets[i].GetComponent<Enemy>().TakeDamage(AttackDamage.Value);
             
-
-
         }
 
     }
 
-    void drawCone(int points)
+    void DrawCone(int points)
     {
         Vector3[] pointsForTheCone = new Vector3[points];
         _coneRenderer.positionCount = points;
 
-        pointsForTheCone[0] = transform.position;
+        pointsForTheCone[0] = PlayerGraphics.position;
 
-        Vector3 vectorToRotate = transform.forward * AttackLength.Value;
+        Vector3 vectorToRotate = PlayerSpeedDirectionSO.Value * AttackLength.Value;
         Vector3 rotatedVector = Vector3.zero;
 
         float stepSize = 1f / ((float)points - 1);
@@ -169,8 +170,6 @@ public class AttackScript : GameLoop
         {
             float angle = Mathf.Lerp(-AttackAngle.Value, AttackAngle.Value, step * stepSize);
 
-
-
             angle = angle * Mathf.Deg2Rad;
 
             float s = Mathf.Sin(angle);
@@ -179,7 +178,7 @@ public class AttackScript : GameLoop
             rotatedVector.x = vectorToRotate.x * c - vectorToRotate.z * s;
             rotatedVector.z = vectorToRotate.x * s + vectorToRotate.z * c;
 
-            pointsForTheCone[i] = transform.position + rotatedVector;
+            pointsForTheCone[i] = PlayerGraphics.position + rotatedVector;
             step++;
         }
 

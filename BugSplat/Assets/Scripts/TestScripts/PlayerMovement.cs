@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : GameLoop
 {
 
     public Transform PlayerGraphics;
@@ -10,22 +10,40 @@ public class PlayerMovement : MonoBehaviour
     public FloatVariable PlayerMaxSpeedSO;
     public Vector3Variable PlayerVelocitySO;
     public FloatVariable PlayerAccelerationSO;
+    public BoolVariable isDodging;
 
     private float _lerpTime = 0f;
     private Vector3 _velocity;
+    private bool _isMoving;
+    private float _currentTime;
 
-
-    // Update is called once per frame
-    void Update()
+    public override void LoopUpdate(float deltaTime)
     {
-
-        // SmoothDamp from 0 to 1 on Normal movement
-        if(PlayerSpeedDirectionSO.Value.sqrMagnitude != 0)
+        // Lerp from 0 to 1 on Normal movement
+        if (PlayerMaxSpeedSO.Value != 0)
         {
-            Vector3.SmoothDamp(Vector3.zero, PlayerSpeedDirectionSO.Value , ref PlayerVelocitySO.Value, PlayerAccelerationSO.Value);
-        } else
+            if (_isMoving == false)
+            {
+                _currentTime = Time.time;
+                _lerpTime = 0;
+                _isMoving = true;
+            }
+
+            if (_lerpTime - _currentTime < PlayerAccelerationSO.Value)
+            {
+                _lerpTime = Time.time;
+                float _diffTime = _lerpTime - _currentTime;
+                PlayerVelocitySO.Value = Vector3.Lerp(Vector3.zero, PlayerSpeedDirectionSO.Value, _diffTime / PlayerAccelerationSO.Value);
+            }
+            else
+            {
+                PlayerVelocitySO.Value = Vector3.Lerp(Vector3.zero, PlayerSpeedDirectionSO.Value, 1);
+            }
+        }
+        else
         {
             PlayerVelocitySO.Value = Vector3.zero;
+            _isMoving = false;
         }
 
         // Move player using translate
@@ -36,5 +54,11 @@ public class PlayerMovement : MonoBehaviour
         {
             PlayerGraphics.localRotation = Quaternion.LookRotation(PlayerSpeedDirectionSO.Value, Vector3.up);
         }
+        
+    }
+
+        public override void LoopLateUpdate(float deltaTime)
+    {
+
     }
 }
