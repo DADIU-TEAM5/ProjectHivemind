@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -24,8 +25,17 @@ public class PlayerHealth : MonoBehaviour
         print("The player took " + damage);
         CurrentHealth.Value -= damage;
 
-        if (damage > 0f) {
-            TookDamageEvent.Raise();
+        if (TookDamageEvent != null)
+        {
+            if (damage > 0f)
+            {
+                TookDamageEvent.Raise();
+            }
+        }
+
+        if(CurrentHealth.Value <= 0)
+        {
+            SceneManager.LoadScene("Death Scene");
         }
     }
 }

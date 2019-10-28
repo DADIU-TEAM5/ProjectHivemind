@@ -54,6 +54,7 @@ public class PlayerMovement : GameLoop
         {
             PlayerGraphics.localRotation = Quaternion.LookRotation(PlayerSpeedDirectionSO.Value, Vector3.up);
         }
+        
     }
 
         public override void LoopLateUpdate(float deltaTime)
