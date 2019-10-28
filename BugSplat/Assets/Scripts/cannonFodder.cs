@@ -196,6 +196,8 @@ public class cannonFodder : Enemy
         transform.Translate(Vector3.forward * stats.MoveSpeed * Time.deltaTime);
         */
 
+        float jitter = 2;
+        _navMeshAgent.Move(new Vector3(Random.Range(-jitter, jitter), 0, Random.Range(-jitter, jitter))*Time.deltaTime);
 
         if(_navMeshAgent.destination != _playerTransform.position)
         _navMeshAgent.destination = _playerTransform.position;
