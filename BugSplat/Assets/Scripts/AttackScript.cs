@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class AttackScript : GameLoop
 {
@@ -22,6 +24,8 @@ public class AttackScript : GameLoop
 
     GameObject _cone;
     LineRenderer _coneRenderer;
+
+    private bool _canAttack = true;
 
 
     // Start is called before the first frame update
@@ -59,6 +63,9 @@ public class AttackScript : GameLoop
 
     public void AttackNearestTarget()
     {
+        if (!_canAttack) return;
+        StartCoroutine(StartAttackCooldown());
+
         if (PlayerSpeedDirectionSO.Value == Vector3.zero)
             PlayerSpeedDirectionSO.Value = transform.forward;
 
@@ -135,11 +142,16 @@ public class AttackScript : GameLoop
         }
     }
 
+    private IEnumerator StartAttackCooldown() {
+        _canAttack = false;
+
+        yield return new WaitForSeconds(AttackCooldown.Value);
+
+        _canAttack = true;
+    }
+
     private void Attack()
     {
-
-
-
         DrawCone(10);
         _cone.SetActive(true);
         _coneHideTimer = 0;

@@ -13,7 +13,8 @@ public class AmbienceManagerScript : MonoBehaviour
 
     void Start()
     {
-        
+        //Placeholder
+        ArenaAmbience.Post(this.gameObject);
     }
 
 
