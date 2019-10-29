@@ -46,13 +46,19 @@ public class ShopItemSlot : ShopSlot
     public ItemObject GetItem() => Item;
 
     void OnEnable() {
-        GetItemFromItemPool();
+        if (Item == null)
+            GetItemFromItemPool();
+        else {
+            Pool.AddItem(Item);
+            GetItemFromItemPool();
+        }
     } 
 
 
     void OnDisable() {
         if (Item != null) {
             Pool.AddItem(Item);
+            Item = null;
         }
     }
 }
