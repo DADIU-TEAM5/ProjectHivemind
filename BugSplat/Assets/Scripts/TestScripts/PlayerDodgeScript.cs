@@ -85,7 +85,7 @@ public class PlayerDodgeScript : GameLoop
                 _lerpTime = Time.time;
 
                 float _diffTime = _lerpTime - _currentTime;
-                Debug.Log(_diffTime);
+               // Debug.Log(_diffTime);
                 PlayerVelocitySO.Value = Vector3.Lerp(PlayerDirectionSO.Value, newPosition * moveDistance, _diffTime / DashSpeed);
             }
             else

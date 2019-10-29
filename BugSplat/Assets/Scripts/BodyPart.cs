@@ -14,6 +14,8 @@ public class BodyPart : GameLoop
     public float ExplosionDistance;
     public float ExplosionHeight;
 
+    public SphereCollider Collider;
+
     float _time = 0;
 
     bool _pickedUp = false;
@@ -43,8 +45,10 @@ public class BodyPart : GameLoop
                 _pickedUp = true;
                 if (Body != null)
                     Destroy(Body);
+                if(Collider != null)
+                Destroy(Collider);
 
-                
+
 
             }
         }
@@ -55,10 +59,12 @@ public class BodyPart : GameLoop
             transform.LookAt(PlayerPosition.Value);
             transform.Translate(Vector3.forward * Time.deltaTime * PickUpSpeed);
 
-            if (distanceToPlayer < 0.1f)
+            if (distanceToPlayer < 0.2f)
             {
                 BodyParts.Value++;
                 Destroy(gameObject);
+                
+                
             }
         }
     }
