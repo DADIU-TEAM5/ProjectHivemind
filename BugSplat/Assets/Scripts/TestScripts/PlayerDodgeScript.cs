@@ -8,38 +8,27 @@ public class PlayerDodgeScript : GameLoop
     public GameEvent DashInitiated;
     public BoolVariable IsDodging;
     public Vector3Variable PlayerDirectionSO;
+    public Vector3Variable PlayerVelocitySO;
+    public FloatVariable DashSpeedSO;
+    public FloatVariable DashLengthSO;
     public AnimationCurve DodgeAnimationCurve;
+
+    private float _currentTime;
+    private float _lerpTime = 0f;
    
     // Initial speed of dash
-    public float DashSpeed;
-
-    // Number of frames the dash lasts
     public float DashLength;
 
+    // Number of frames the dash lasts
+    public float DashSpeed;
+
     private Vector3 _dashDirection;
-    private int _dashFrameCount;
 
-    // Called from inputmanager
-    public void StartDash()
+    private void Start()
     {
-        DashInitiated.Raise();
-    }
-
-    // Called from PlayerController
-    public void PlayerDash()
-    {
-        
-        if (IsDodging.Value == false)
-        {
-            _dashDirection = PlayerDirectionSO.Value;
-            _dashFrameCount = 0;
-            IsDodging.Value = true;
-        }
-    }
-
-    private void dashCurve()
-    {
-
+        IsDodging.Value = false;
+        DashSpeedSO.Value = DashSpeed; // REMOVE THESE ONCE THE SETTINGS WINDOW IS DONE
+        DashLengthSO.Value = DashLength; // REMOVE THESE ONCE THE SETTINGS WINDOW IS DONE
     }
 
     
@@ -51,31 +40,54 @@ public class PlayerDodgeScript : GameLoop
         if (IsDodging.Value == true)
         {
             Vector3 newPosition = _dashDirection;
-            PlayerDirectionSO.Value = newPosition;
 
-            // Only for Testing !TEST
-            //player.MovePosition(player.transform.position + (PlayerDirectionSO.Value * DashSpeed));
-            player.transform.Translate(PlayerDirectionSO.Value * DashSpeed);
-
-            
-            _dashFrameCount++;
-
-            if (_dashFrameCount >= DashLength)
-
-                // Only for Testing !TEST
-                PlayerDirectionSO.Value = _dashDirection;
-
+            if (_lerpTime - _currentTime < DashSpeed)
+            {
+                _lerpTime = Time.time;
+                
+                float _diffTime = _lerpTime - _currentTime;
+                Debug.Log(_diffTime);
+                PlayerVelocitySO.Value = Vector3.Lerp(PlayerDirectionSO.Value, newPosition * DashLength, _diffTime / DashSpeed);
+            }
+            else
+            {
                 IsDodging.Value = false;
-        }
-       
+                _lerpTime = 0f;
+            }
+
+            player.transform.Translate(PlayerVelocitySO.Value * DashLength * Time.deltaTime);
+
+            PlayerDirectionSO.Value = newPosition;
+        } 
     }
+
 
     public override void LoopLateUpdate(float deltaTime)
     {
        
     }
 
-    
+
+    // Called from PlayerController
+    public void PlayerDash()
+    {
+        if (IsDodging.Value == false)
+        {
+            _dashDirection = PlayerDirectionSO.Value;
+            _currentTime = Time.time;
+            _lerpTime = 0f;
+            IsDodging.Value = true;
+        }
+    }
+
+
+    private void DashCurve()
+    {
+
+
+    }
+
+
 
 
 }
