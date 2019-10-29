@@ -6,7 +6,13 @@ public class UpdateManager : MonoBehaviour
 {
     public GameLoopInvoker[] GameLoopHandlers;
 
+    public int TargetFramerate = -1;
+
     private float _time;
+
+    void Awake() {
+        Application.targetFrameRate = TargetFramerate;
+    }
 
     // Update is called once per frame
     void Update()
