@@ -45,17 +45,17 @@ public class PlayerDodgeScript : GameLoop
     
     public override void LoopUpdate(float deltaTime)
     {
-        Debug.Log("Dodging : " + IsDodging.Value);
+        //Debug.Log("Dodging : " + IsDodging.Value);
 
         
         if (IsDodging.Value == true)
         {
             Vector3 newPosition = _dashDirection;
             PlayerDirectionSO.Value = newPosition;
-            
+
             // Only for Testing !TEST
-            player.MovePosition(player.transform.position + (PlayerDirectionSO.Value * DashSpeed));
-            
+            //player.MovePosition(player.transform.position + (PlayerDirectionSO.Value * DashSpeed));
+            player.transform.Translate(PlayerDirectionSO.Value * DashSpeed);
 
             
             _dashFrameCount++;

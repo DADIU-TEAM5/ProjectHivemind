@@ -69,7 +69,7 @@ public class PlayerMovement : GameLoop
     private void FixedUpdate()
     {
 
-        _rigidbody.MovePosition(transform.position+(PlayerVelocitySO.Value * PlayerMaxSpeedSO.Value * Time.deltaTime));
+        _rigidbody.MovePosition(transform.position+(PlayerVelocitySO.Value * PlayerCurrentSpeedSO.Value * Time.deltaTime));
         _rigidbody.velocity = Vector3.zero;
     }
     public override void LoopLateUpdate(float deltaTime)
