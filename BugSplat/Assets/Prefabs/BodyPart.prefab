@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3095870865057406483}
   - component: {fileID: 7366903985135959604}
   - component: {fileID: 569886304060221626}
-  - component: {fileID: 8746318428798270147}
   - component: {fileID: -3948914544015640265}
+  - component: {fileID: 8746318428798270147}
   - component: {fileID: 4135644582172192431}
   - component: {fileID: 4011872371982004201}
   m_Layer: 0
@@ -81,19 +81,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &8746318428798270147
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7324468612011702487}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &-3948914544015640265
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -110,6 +97,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!135 &8746318428798270147
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7324468612011702487}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4135644582172192431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,6 +130,7 @@ MonoBehaviour:
   PickUpSpeed: 7
   ExplosionDistance: 300
   ExplosionHeight: 400
+  Collider: {fileID: 8746318428798270147}
 --- !u!114 &4011872371982004201
 MonoBehaviour:
   m_ObjectHideFlags: 0
