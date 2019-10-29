@@ -118,7 +118,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5243257111839762914}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 430425135192320395}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &5379408802621144289
@@ -494,7 +505,7 @@ PrefabInstance:
     - target: {fileID: 9129281873806243452, guid: 9593bdd5d0a3f93438a8643bdffafe99,
         type: 3}
       propertyPath: m_Name
-      value: ItemSlot (1)
+      value: Slot1
       objectReference: {fileID: 0}
     - target: {fileID: 9206214346489868701, guid: 9593bdd5d0a3f93438a8643bdffafe99,
         type: 3}
@@ -626,6 +637,12 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8146160259424104850, guid: 9593bdd5d0a3f93438a8643bdffafe99,
+        type: 3}
+      propertyPath: Slot
+      value: 
+      objectReference: {fileID: 11400000, guid: 7c031c1b804fdbe40b1d4cec5445c024,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9593bdd5d0a3f93438a8643bdffafe99, type: 3}
 --- !u!224 &8271922364792381048 stripped
@@ -644,7 +661,7 @@ PrefabInstance:
     - target: {fileID: 9129281873806243452, guid: 9593bdd5d0a3f93438a8643bdffafe99,
         type: 3}
       propertyPath: m_Name
-      value: ItemSlot (1)
+      value: Slot3
       objectReference: {fileID: 0}
     - target: {fileID: 9206214346489868701, guid: 9593bdd5d0a3f93438a8643bdffafe99,
         type: 3}
@@ -776,6 +793,12 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8146160259424104850, guid: 9593bdd5d0a3f93438a8643bdffafe99,
+        type: 3}
+      propertyPath: Slot
+      value: 
+      objectReference: {fileID: 11400000, guid: e24a673f3dd7acb41894797d3485dcfd,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9593bdd5d0a3f93438a8643bdffafe99, type: 3}
 --- !u!224 &5151981169306033651 stripped
@@ -901,6 +924,12 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8146160259424104850, guid: 9593bdd5d0a3f93438a8643bdffafe99,
+        type: 3}
+      propertyPath: Slot
+      value: 
+      objectReference: {fileID: 11400000, guid: 0063cf5d2422f274c984c1acf0af399a,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9593bdd5d0a3f93438a8643bdffafe99, type: 3}
 --- !u!224 &4864791780623735776 stripped
@@ -919,7 +948,7 @@ PrefabInstance:
     - target: {fileID: 9129281873806243452, guid: 9593bdd5d0a3f93438a8643bdffafe99,
         type: 3}
       propertyPath: m_Name
-      value: ItemSlot
+      value: Slot2
       objectReference: {fileID: 0}
     - target: {fileID: 9206214346489868701, guid: 9593bdd5d0a3f93438a8643bdffafe99,
         type: 3}
@@ -1026,31 +1055,12 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 9206214346489868701, guid: 9593bdd5d0a3f93438a8643bdffafe99,
+    - target: {fileID: 8146160259424104850, guid: 9593bdd5d0a3f93438a8643bdffafe99,
         type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5805793643805830508, guid: 9593bdd5d0a3f93438a8643bdffafe99,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5805793643805830508, guid: 9593bdd5d0a3f93438a8643bdffafe99,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5805793643805830508, guid: 9593bdd5d0a3f93438a8643bdffafe99,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5805793643805830508, guid: 9593bdd5d0a3f93438a8643bdffafe99,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: Slot
+      value: 
+      objectReference: {fileID: 11400000, guid: 64e146e0eca87d84ea0233136a8f4d90,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9593bdd5d0a3f93438a8643bdffafe99, type: 3}
 --- !u!224 &3228149325668408047 stripped
