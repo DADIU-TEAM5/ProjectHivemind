@@ -14,12 +14,21 @@ namespace AK
     namespace EVENTS
     {
         static const AkUniqueID INTRO = 1125500713U;
+        static const AkUniqueID PH = 1635194325U;
+        static const AkUniqueID PLAYER_FOLEY_ATTACKEVENT = 2390168611U;
+        static const AkUniqueID PLAYER_FOLEY_DASHEVENT = 1643920063U;
+        static const AkUniqueID PLAYER_FOLEY_FOOTSTEPEVENT = 954324369U;
+        static const AkUniqueID PLAYER_FOLEYPHFOOTSTEPEVENT = 586291076U;
     } // namespace EVENTS
 
     namespace BANKS
     {
         static const AkUniqueID INIT = 1355168291U;
-        static const AkUniqueID MUSIC = 3991942870U;
+        static const AkUniqueID SB_ARENA = 450264466U;
+        static const AkUniqueID SB_HUB = 1262967946U;
+        static const AkUniqueID SB_MUSIC = 779753582U;
+        static const AkUniqueID SB_PLAYERCHARACTER = 2688509691U;
+        static const AkUniqueID SB_UI = 289583631U;
     } // namespace BANKS
 
     namespace BUSSES

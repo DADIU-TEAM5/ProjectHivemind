@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BankLoaderScript : MonoBehaviour
 {
-
+    [Header("Wwise banks")]
     public AK.Wwise.Bank Arena;
     public AK.Wwise.Bank Hub;
     public AK.Wwise.Bank Music;
@@ -13,26 +13,29 @@ public class BankLoaderScript : MonoBehaviour
 
     void Awake()
     {
-        Music.Load(true, false);
-        UI.Load(true, false);
+        Music.Load(false, false);
+        UI.Load(false, false);
+        //This section, "start", is only a placeholder for the playable
+        Player.Load(false, false);
+        Arena.Load(false, false);
     }
 
     public void OnEnterGame()
     {
-        Hub.Load(true, false);
-        Player.Load(true, false);
+       // Hub.Load(false, false);
+        //Player.Load(false, false);
     }
 
     public void OnEnterArena()
     {
         Hub.Unload();
-        Arena.Load(true, false);
+        Arena.Load(false, false);
     }
 
     public void OnEnterHub()
     {
         Arena.Unload();
-        Hub.Load(true, false);
+        Hub.Load(false, false);
     }
 
 
