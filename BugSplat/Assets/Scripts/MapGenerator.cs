@@ -12,6 +12,7 @@ public class MapGenerator : MonoBehaviour
     public int Rings = 1;
 
     public GameObject[] Hexagons;
+    public GameObject[] CenterHexagons;
 
     public GameObject BaseHexagon;
     public GameObject EdgeWall;
@@ -56,7 +57,7 @@ public class MapGenerator : MonoBehaviour
         _hexLength *= BaseHexagon.transform.localScale.x;
 
 
-        GameObject hex = Instantiate(getRandomHexagon());
+        GameObject hex = Instantiate(getRandomCenterHexagon());
         Hexagon hexHex= hex.GetComponent<Hexagon>();
         hexHex.RotateTile(Random.Range(0, 5));
         hexHex.IsaccesibleFromMiddle = true;
@@ -129,6 +130,10 @@ public class MapGenerator : MonoBehaviour
     GameObject getRandomHexagon()
     {
         return Hexagons[Random.Range(0, Hexagons.Length)];
+    }
+    GameObject getRandomCenterHexagon()
+    {
+        return CenterHexagons[Random.Range(0, CenterHexagons.Length)];
     }
 
 
