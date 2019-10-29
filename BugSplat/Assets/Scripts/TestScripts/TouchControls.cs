@@ -6,8 +6,9 @@ using UnityEngine.UI;
 public class TouchControls : GameLoop
 {
     // Setup ScriptableObjects for holding the PlayerMovementInfo
-    public Vector3Variable PlayerSpeedDirectionSO;
+    public Vector3Variable PlayerDirectionSO;
     public FloatVariable PlayerMaxSpeedSO;
+    public FloatVariable PlayerCurrentSpeedSO;
     public FloatVariable PlayerAccelerationSO;
     public Vector3Variable PlayerVelocitySO;
     public GameEvent DashInitiatedSO;
@@ -17,7 +18,7 @@ public class TouchControls : GameLoop
     // Display sli  rs for altering the speed and acceleration of the Player - This could potentially be moved to an editor window for the designers
     [Header("Player Variables")]
     [Tooltip("Maximum Speed in m/s")]
-    public float PlayerMaxSpeed = 2f;
+    public float PlayerMaxSpeed;
     [Tooltip("Acceleration time in seconds, from 0 to max speed")]
     public float PlayerAcceleration = 1f;
 
@@ -62,9 +63,11 @@ public class TouchControls : GameLoop
 
         _inputSwipeTapTime /= 1000;
 
-        PlayerMaxSpeedSO.Value = 0;
+        PlayerMaxSpeedSO.Value = PlayerMaxSpeed;
+
+        PlayerCurrentSpeedSO.Value = 0;
         PlayerAccelerationSO.Value = PlayerAcceleration;
-        PlayerSpeedDirectionSO.Value = Vector3.zero;
+        PlayerDirectionSO.Value = Vector3.zero;
     }
 
     public override void LoopUpdate(float deltaTime)
@@ -110,11 +113,11 @@ public class TouchControls : GameLoop
         {
             if (Input.GetAxisRaw("Horizontal") != 0)
             {
-                PlayerSpeedDirectionSO.Value.x = Input.GetAxisRaw("Horizontal");
+                PlayerDirectionSO.Value.x = Input.GetAxisRaw("Horizontal");
             }
             if (Input.GetAxisRaw("Vertical") != 0)
             {
-                PlayerSpeedDirectionSO.Value.z = Input.GetAxisRaw("Vertical");
+                PlayerDirectionSO.Value.z = Input.GetAxisRaw("Vertical");
             }
         }
 
@@ -154,7 +157,7 @@ public class TouchControls : GameLoop
 
             _inputMoved = true;
 
-            PlayerMaxSpeedSO.Value = PlayerMaxSpeed;
+            PlayerCurrentSpeedSO.Value = PlayerMaxSpeedSO.Value;
 
             Vector3 heading;
             float distance;
@@ -191,8 +194,8 @@ public class TouchControls : GameLoop
             _uiCurrent.transform.localPosition = new Vector3(x, y);
 
             // Export direction and speed vector to the PlayerSpeedDirectionSO
-            PlayerSpeedDirectionSO.Value.x = direction.x;
-            PlayerSpeedDirectionSO.Value.z = direction.y;
+            PlayerDirectionSO.Value.x = direction.x;
+            PlayerDirectionSO.Value.z = direction.y;
         }
     }
 
@@ -238,19 +241,19 @@ public class TouchControls : GameLoop
             {
                 DebugText.text = "DODGED!";
                 DashInitiatedSO.Raise();
-                PlayerMaxSpeedSO.Value = 0;
+                PlayerCurrentSpeedSO.Value = 0;
             }
             else
             {
                 DebugText.text = "ATTACKED!";
                 AttackInitiatedSO.Raise();
-                PlayerMaxSpeedSO.Value = 0;
+                PlayerCurrentSpeedSO.Value = 0;
             }
         }
         else if(_inputMoved) 
         {
             DebugText.text = "MOVED!";
-            PlayerMaxSpeedSO.Value = 0;
+            PlayerCurrentSpeedSO.Value = 0;
         }
 
         _inputMoved = false;

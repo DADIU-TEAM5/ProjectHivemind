@@ -10,8 +10,8 @@ public class AttackScript : GameLoop
     public FloatVariable AttackDamage;
     public FloatVariable AttackCooldown;
 
-    public Vector3Variable PlayerSpeedDirectionSO;
-    public FloatVariable PlayerMaxSpeedSO;
+    public Vector3Variable PlayerDirectionSO;
+    public FloatVariable PlayerCurrentSpeedSO;
 
     public Transform PlayerGraphics;
 
@@ -66,8 +66,8 @@ public class AttackScript : GameLoop
         if (!_canAttack) return;
         StartCoroutine(StartAttackCooldown());
 
-        if (PlayerSpeedDirectionSO.Value == Vector3.zero)
-            PlayerSpeedDirectionSO.Value = transform.forward;
+        if (PlayerDirectionSO.Value == Vector3.zero)
+            PlayerDirectionSO.Value = transform.forward;
 
 
         LockOnToNearestTarget();
@@ -77,11 +77,11 @@ public class AttackScript : GameLoop
             _directionToNearstTarget = _directionToNearstTarget.normalized;
 
             //print(_directionToNearstTarget);
-            PlayerSpeedDirectionSO.Value.x = _directionToNearstTarget.x;
-            PlayerSpeedDirectionSO.Value.z = _directionToNearstTarget.z;
+            PlayerDirectionSO.Value.x = _directionToNearstTarget.x;
+            PlayerDirectionSO.Value.z = _directionToNearstTarget.z;
 
             if (_distanceToNearstTarget > (AttackLength.Value * 0.5f))
-                transform.Translate(PlayerSpeedDirectionSO.Value * (_distanceToNearstTarget - (AttackLength.Value * 0.5f)));
+                transform.Translate(PlayerDirectionSO.Value * (_distanceToNearstTarget - (AttackLength.Value * 0.5f)));
 
 
             Attack();
@@ -90,7 +90,7 @@ public class AttackScript : GameLoop
         {
             print("no targets");
 
-            transform.Translate(PlayerSpeedDirectionSO.Value * AttackMoveDistance.Value);
+            transform.Translate(PlayerDirectionSO.Value * AttackMoveDistance.Value);
 
             Attack();
 
@@ -173,7 +173,7 @@ public class AttackScript : GameLoop
 
             //print(PlayerSpeedDirectionSO.Value);
 
-            if (Vector3.Angle(PlayerGraphics.position - (PlayerGraphics.position + PlayerSpeedDirectionSO.Value), PlayerGraphics.position - temp) < AttackAngle.Value)
+            if (Vector3.Angle(PlayerGraphics.position - (PlayerGraphics.position + PlayerDirectionSO.Value), PlayerGraphics.position - temp) < AttackAngle.Value)
                 potentialTargets[i].GetComponent<Enemy>().TakeDamage(AttackDamage.Value);
 
         }
@@ -187,7 +187,7 @@ public class AttackScript : GameLoop
 
         pointsForTheCone[0] = PlayerGraphics.position;
 
-        Vector3 vectorToRotate = PlayerSpeedDirectionSO.Value * AttackLength.Value;
+        Vector3 vectorToRotate = PlayerDirectionSO.Value * AttackLength.Value;
         Vector3 rotatedVector = Vector3.zero;
 
         float stepSize = 1f / ((float)points - 1);
