@@ -56,6 +56,7 @@ public class TouchControls : GameLoop
     // Start is called before the first frame update
     void Start()
     {
+        
         _inputTouch = new Vector3();
 
         _inputMoveMaxThreshold = Screen.width * (_inputMoveMaxThreshold / 100);
@@ -70,8 +71,11 @@ public class TouchControls : GameLoop
         PlayerDirectionSO.Value = Vector3.zero;
     }
 
-    public override void LoopUpdate(float deltaTime)
-    {
+    
+   
+public override void LoopUpdate(float deltaTime)
+    
+{
         // Detect Touch
         if (Input.touchCount > 0)
         {
