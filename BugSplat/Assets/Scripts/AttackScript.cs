@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class AttackScript : GameLoop
 {
+
+    public Animator Anim;
+
     public FloatVariable AttackLength;
     public FloatVariable AttackAngle;
     public FloatVariable AttackMoveDistance;
@@ -201,6 +204,9 @@ public class AttackScript : GameLoop
 
     private void Attack()
     {
+
+        Anim.SetTrigger("Attack");
+
         DrawCone(10);
         _cone.SetActive(true);
         _coneHideTimer = 0;

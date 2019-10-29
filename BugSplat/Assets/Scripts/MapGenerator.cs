@@ -14,6 +14,8 @@ public class MapGenerator : MonoBehaviour
     public GameObject[] Hexagons;
     public GameObject[] CenterHexagons;
 
+    public GameObjectVariable hexmapParent;
+
     public GameObject BaseHexagon;
     public GameObject EdgeWall;
 
@@ -36,6 +38,11 @@ public class MapGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(hexmapParent.Value != null)
+        {
+            Destroy(hexmapParent.Value);
+        }
+
         Random.InitState(Seed);
 
         Hexagon.mapGen = this;
@@ -75,7 +82,7 @@ public class MapGenerator : MonoBehaviour
 
         StartCoroutine(RotateTilesToMakeMostPossibleConnections());
 
-
+        hexmapParent.Value = _Parent;
     }
 
     IEnumerator RotateTilesToMakeMostPossibleConnections()
