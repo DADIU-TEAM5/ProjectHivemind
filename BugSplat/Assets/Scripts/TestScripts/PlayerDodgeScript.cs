@@ -7,7 +7,7 @@ public class PlayerDodgeScript : GameLoop
     public Rigidbody player;
     public GameEvent DashInitiated;
     public BoolVariable IsDodging;
-    public Vector3Variable PlayerSpeedDirectionSO;
+    public Vector3Variable PlayerDirectionSO;
     public AnimationCurve DodgeAnimationCurve;
    
     // Initial speed of dash
@@ -31,7 +31,7 @@ public class PlayerDodgeScript : GameLoop
         
         if (IsDodging.Value == false)
         {
-            _dashDirection = PlayerSpeedDirectionSO.Value;
+            _dashDirection = PlayerDirectionSO.Value;
             _dashFrameCount = 0;
             IsDodging.Value = true;
         }
@@ -45,17 +45,38 @@ public class PlayerDodgeScript : GameLoop
     
     public override void LoopUpdate(float deltaTime)
     {
-        Debug.Log("Dodging : " + IsDodging.Value);
+        //Debug.Log("Dodging : " + IsDodging.Value);
 
         
         if (IsDodging.Value == true)
         {
             Vector3 newPosition = _dashDirection;
-            PlayerSpeedDirectionSO.Value = newPosition;
-            
+            PlayerDirectionSO.Value = newPosition;
+
             // Only for Testing !TEST
-            player.MovePosition(player.transform.position + (PlayerSpeedDirectionSO.Value * DashSpeed));
-            
+            //player.MovePosition(player.transform.position + (PlayerDirectionSO.Value * DashSpeed));
+
+            RaycastHit hit;
+            if (Physics.CapsuleCast(transform.position - (Vector3.up * 0.5f), transform.position + (Vector3.up * 0.5f), .1f, PlayerDirectionSO.Value, out hit))
+            {
+                float ditanceToObject = Vector3.Distance(hit.point, transform.position);
+                print(hit.collider.gameObject.name);
+                if (ditanceToObject > DashSpeed)
+                {
+                    transform.Translate(PlayerDirectionSO.Value * DashSpeed);
+                }
+                else
+                {
+                    transform.Translate(PlayerDirectionSO.Value * ditanceToObject);
+                }
+            }
+            else
+            {
+                transform.Translate(PlayerDirectionSO.Value * DashSpeed);
+            }
+
+
+            //player.transform.Translate(PlayerDirectionSO.Value * DashSpeed);
 
             
             _dashFrameCount++;
@@ -63,7 +84,7 @@ public class PlayerDodgeScript : GameLoop
             if (_dashFrameCount >= DashLength)
 
                 // Only for Testing !TEST
-                PlayerSpeedDirectionSO.Value = _dashDirection;
+                PlayerDirectionSO.Value = _dashDirection;
 
                 IsDodging.Value = false;
         }
