@@ -2,12 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BodyPart : MonoBehaviour
+public class BodyPart : GameLoop
 {
     public Rigidbody Body;
+    public Vector3Variable PlayerPosition;
+    public float PickUpRange;
+    public IntVariable BodyParts;
 
     public float enableTime = 1;
+    public float PickUpSpeed;
+    public float ExplosionDistance;
+    public float ExplosionHeight;
+
     float _time = 0;
+
+    bool _pickedUp = false;
     
     // Start is called before the first frame update
   
@@ -15,16 +24,47 @@ public class BodyPart : MonoBehaviour
     {
         //print("BODY PART!");
 
-        Body.AddForce(new Vector3(Random.Range(-15, 15), Random.Range(300,400), Random.Range(-15, 15)));
+        Body.AddForce(new Vector3(Random.Range(-ExplosionDistance, ExplosionDistance), Random.Range(ExplosionHeight + Random.Range(-ExplosionHeight, ExplosionHeight), ExplosionHeight + Random.Range(-ExplosionHeight, ExplosionHeight)), Random.Range(-ExplosionDistance, ExplosionDistance)));
     }
 
-    private void Update()
+    public override void LoopUpdate(float deltaTime)
     {
-        _time += Time.deltaTime;
-        if(_time >= enableTime)
-        {
+        //print("useing loop");
+        
 
+        _time += Time.deltaTime;
+        if (_time >= enableTime)
+        {
+            float distanceToPlayer = Vector3.Distance(transform.position, PlayerPosition.Value);
+            //print(distanceToPlayer);
+
+            if (distanceToPlayer < PickUpRange)
+            {
+                _pickedUp = true;
+                if (Body != null)
+                    Destroy(Body);
+
+                
+
+            }
         }
+
+        if (_pickedUp)
+        {
+            float distanceToPlayer = Vector3.Distance(transform.position, PlayerPosition.Value);
+            transform.LookAt(PlayerPosition.Value);
+            transform.Translate(Vector3.forward * Time.deltaTime * PickUpSpeed);
+
+            if (distanceToPlayer < 0.1f)
+            {
+                BodyParts.Value++;
+                Destroy(gameObject);
+            }
+        }
+    }
+    public override void LoopLateUpdate(float deltaTime)
+    {
+        
     }
 
 }
