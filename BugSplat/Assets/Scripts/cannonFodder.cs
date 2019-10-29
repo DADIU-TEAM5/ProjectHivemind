@@ -10,6 +10,7 @@ public class cannonFodder : Enemy
     public GameObject bodyPart;
 
     bool _playerDetected;
+    bool _isAlly;
     public SimpleEnemyStats stats;
     Transform _playerTransform;
     bool _attacking;
@@ -230,11 +231,35 @@ public class cannonFodder : Enemy
     {
         Collider[] potentialTargets = Physics.OverlapSphere(transform.position, stats.SpotDistance, LayerMask.GetMask("Player"));
 
-        if(potentialTargets.Length > 0)
+        if (potentialTargets.Length > 0)
         {
             _playerDetected = true;
-            _playerTransform =  potentialTargets[0].gameObject.transform;
-        } 
+            _playerTransform = potentialTargets[0].gameObject.transform;
+
+            _isAlly = true;
+
+            DetectAllies();
+        }
+    }
+
+    void DetectAllies()
+    {
+        Collider[] potentialAllies = Physics.OverlapSphere(transform.position, stats.SpotDistance, LayerMask.GetMask("Enemy"));
+
+        if(potentialAllies.Length > 0)
+        {
+            for (int i = 0; i < potentialAllies.Length; i++)
+            {
+                cannonFodder allyTransform = potentialAllies[i].gameObject.transform.GetComponent<cannonFodder>();
+                if (!allyTransform._isAlly)
+                {
+                    allyTransform._playerDetected = true;
+                    allyTransform._playerTransform = _playerTransform;
+                    allyTransform._isAlly = true;
+                    allyTransform.DetectAllies();
+                }
+            }
+        }
     }
 
     

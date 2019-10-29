@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class FodderAudioScript : MonoBehaviour
 {
-    public AK.Wwise.Event FootStep;
+    [Header("Wwise events")]
+    public AK.Wwise.Event Footstep;
     public AK.Wwise.Event Attack;
     public AK.Wwise.Event Hit;
     public AK.Wwise.Event ScaredScream;
@@ -13,7 +14,7 @@ public class FodderAudioScript : MonoBehaviour
 
     public void FootStepEvent()
     {
-        FootStep.Post(this.gameObject);
+        Footstep.Post(this.gameObject);
     }
 
     public void AttackEvent()
