@@ -45,7 +45,7 @@ public class PlayerDodgeScript : GameLoop
     
     public override void LoopUpdate(float deltaTime)
     {
-        Debug.Log("Dodging : " + IsDodging.Value);
+     //   Debug.Log("Dodging : " + IsDodging.Value);
 
         
         if (IsDodging.Value == true)

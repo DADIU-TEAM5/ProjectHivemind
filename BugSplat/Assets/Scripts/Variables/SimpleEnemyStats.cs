@@ -14,4 +14,7 @@ public class SimpleEnemyStats : ScriptableObject
     public float AttackChargeUpTime;
     public float AttackDamage;
 
+    public int minPartsToDrop;
+    public int maxPartsToDrop;
+
 }

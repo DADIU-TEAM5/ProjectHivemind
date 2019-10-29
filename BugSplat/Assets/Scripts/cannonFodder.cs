@@ -47,13 +47,13 @@ public class cannonFodder : Enemy
         _currentHealth -= damage;
         if(_currentHealth<= 0)
         {
-            int partsToDrop = Random.Range(0, 4);
+            int partsToDrop = Random.Range(stats.minPartsToDrop, stats.maxPartsToDrop);
             for (int i = 0; i < partsToDrop; i++)
             {
                 GameObject part = Instantiate(bodyPart);
 
                 
-                part.transform.position = transform.position + (Vector3.up/(partsToDrop*i+1));
+                part.transform.position = transform.position +(( Vector3.up*i)*0.5f);
             }
             
 
