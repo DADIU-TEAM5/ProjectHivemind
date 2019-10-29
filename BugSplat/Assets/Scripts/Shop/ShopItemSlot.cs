@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(menuName="Shop/ItemSlot")]
 public class ShopItemSlot : ShopSlot
@@ -11,31 +12,20 @@ public class ShopItemSlot : ShopSlot
 
     private ItemObject Item = null;
 
-    [SerializeField]
-    private GameEvent NotEnoughMoney;
-    
-    [SerializeField]
-    private GameEvent PurchasedItem;
-    
+   
     // TODO: NEED REFERENCE TO PLAYER ITEMS INVENTORY THING
 
     public override void OnPurchase()
     {
         if (Item == null) return;
 
-        // If player does not have enough money, raise NotEnoughMoney event, and return; 
-
         // Add item to player's inventory
-
-        // Subtract the price of the from the player currency total
 
         // Remove item    
         Item = null;
-
-        PurchasedItem.Raise();
     }
 
-    private void GetItemFromItemPool() {
+    public void GetItemFromItemPool() {
         var shopLevel = ShopLevels.LevelTierPicker[CurrentLevel.Value];
         var decidedTier = shopLevel.ChooseTier();
         var decidedItem = Pool.GetItem(decidedTier);
@@ -49,7 +39,7 @@ public class ShopItemSlot : ShopSlot
         if (Item == null)
             GetItemFromItemPool();
         else {
-            Pool.AddItem(Item);
+            Pool.ReplenishOnce(Item);
             GetItemFromItemPool();
         }
     } 
@@ -57,8 +47,16 @@ public class ShopItemSlot : ShopSlot
 
     void OnDisable() {
         if (Item != null) {
-            Pool.AddItem(Item);
+            Pool.ReplenishOnce(Item);
             Item = null;
         }
     }
+
+    public override Sprite GetSprite()
+    {
+        // Return the item's sprite
+        throw new System.NotImplementedException();
+    }
+
+    public override int GetPrice() => Item.Price;
 }
