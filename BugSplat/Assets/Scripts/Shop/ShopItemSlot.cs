@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName="Shop/ItemSlot")]
 public class ShopItemSlot : ShopSlot
 {
     public ItemPool Pool;
@@ -30,6 +31,8 @@ public class ShopItemSlot : ShopSlot
 
         // Remove item    
         Item = null;
+
+        PurchasedItem.Raise();
     }
 
     private void GetItemFromItemPool() {
@@ -43,6 +46,7 @@ public class ShopItemSlot : ShopSlot
     public ItemObject GetItem() => Item;
 
     void OnEnable() {
+        GetItemFromItemPool();
     } 
 
 
