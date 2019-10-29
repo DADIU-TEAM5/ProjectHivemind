@@ -18,6 +18,9 @@ public class cannonFodder : Enemy
 
     float _currentHealth;
 
+    float _attackCooldown = 0;
+
+
     Renderer _renderer;
 
     NavMeshAgent _navMeshAgent;
@@ -64,6 +67,8 @@ public class cannonFodder : Enemy
 
     public override void LoopUpdate(float deltaTime)
     {
+        if (_attackCooldown > 0)
+            _attackCooldown -= Time.deltaTime;
 
         Debug.DrawLine(transform.position, (transform.position + transform.forward), Color.red);
 
@@ -72,13 +77,25 @@ public class cannonFodder : Enemy
             _renderer.material.color = Color.blue;
             DetectThePlayer();
         }
-        else if (playerInAttackRange() || _attacking)
+        else if ( playerInAttackRange() || _attacking)
         {
-            if(_navMeshAgent.destination != transform.position)
-            _navMeshAgent.destination = transform.position;
+            
 
-            _renderer.material.color = Color.red;
-            Attack();
+            
+
+            if (_attackCooldown <= 0)
+            {
+                if (_navMeshAgent.destination != transform.position)
+                    _navMeshAgent.destination = transform.position;
+
+                _renderer.material.color = Color.red;
+                Attack();
+            }
+            else
+            {
+                _renderer.material.color = Color.yellow;
+                MoveTowardsThePlayer();
+            }
         }
         else
         {
@@ -190,6 +207,7 @@ public class cannonFodder : Enemy
 
 
             }
+            _attackCooldown = stats.AttackSpeed;
             _attacking = false;
             _attackCharge = 0;
             _cone.SetActive(false);
