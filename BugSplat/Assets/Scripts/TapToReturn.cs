@@ -8,7 +8,7 @@ public class TapToReturn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        SceneManager.UnloadScene("ArenaGeneration");
     }
 
     // Update is called once per frame
