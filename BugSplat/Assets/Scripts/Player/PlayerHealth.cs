@@ -8,6 +8,8 @@ public class PlayerHealth : MonoBehaviour
 
     public FloatVariable MaxHealth;
 
+    public GameObjectVariable HexMapParent;
+
     [SerializeField]
     private FloatVariable CurrentHealth;
 
@@ -35,7 +37,11 @@ public class PlayerHealth : MonoBehaviour
 
         if(CurrentHealth.Value <= 0)
         {
-            SceneManager.LoadScene("Death Scene");
+            Destroy(HexMapParent.Value);
+
+            OverallSceneWorker.LoadScene("Death Scene");
+            
+
         }
     }
 }
