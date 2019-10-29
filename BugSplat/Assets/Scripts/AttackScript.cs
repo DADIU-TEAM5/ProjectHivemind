@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AttackScript : GameLoop
@@ -24,6 +23,7 @@ public class AttackScript : GameLoop
 
     GameObject _cone;
     LineRenderer _coneRenderer;
+    Rigidbody _rigidbody;
 
     private bool _canAttack = true;
 
@@ -34,7 +34,7 @@ public class AttackScript : GameLoop
 
         _cone = new GameObject();
 
-
+        _rigidbody= GetComponent<Rigidbody>();
         _cone.AddComponent<LineRenderer>();
         _coneRenderer = _cone.GetComponent<LineRenderer>();
 
@@ -44,6 +44,8 @@ public class AttackScript : GameLoop
 
     public override void LoopUpdate(float deltaTime)
     {
+
+        
 
         //Debug.DrawLine(PlayerGraphics.position, (_nearstTarget - PlayerGraphics.position), Color.red);
         _coneHideTimer += Time.deltaTime;
@@ -81,7 +83,30 @@ public class AttackScript : GameLoop
             PlayerSpeedDirectionSO.Value.z = _directionToNearstTarget.z;
 
             if (_distanceToNearstTarget > (AttackLength.Value * 0.5f))
-                transform.Translate(PlayerSpeedDirectionSO.Value * (_distanceToNearstTarget - (AttackLength.Value * 0.5f)));
+            {
+                RaycastHit hit;
+                if (Physics.CapsuleCast(transform.position - (Vector3.up * 0.5f), transform.position + (Vector3.up * 0.5f), .1f, PlayerSpeedDirectionSO.Value, out hit))
+                {
+                    float ditanceToObject = Vector3.Distance(hit.point, transform.position);
+                    print(hit.collider.gameObject.name);
+                    if (ditanceToObject > AttackMoveDistance.Value)
+                    {
+                        transform.Translate(PlayerSpeedDirectionSO.Value * (_distanceToNearstTarget - (AttackLength.Value * 0.5f)));
+                    }
+                    else
+                    {
+                        transform.Translate(PlayerSpeedDirectionSO.Value * (ditanceToObject- (AttackLength.Value * 0.5f)));
+                    }
+                }
+                else
+                {
+                    transform.Translate(PlayerSpeedDirectionSO.Value * (_distanceToNearstTarget - (AttackLength.Value * 0.5f)));
+                }
+
+
+                //transform.Translate(PlayerSpeedDirectionSO.Value * (_distanceToNearstTarget - (AttackLength.Value * 0.5f)));
+                //_rigidbody.MovePosition(transform.position + (PlayerSpeedDirectionSO.Value * (_distanceToNearstTarget - (AttackLength.Value * 0.5f))));
+            }
 
 
             Attack();
@@ -90,7 +115,30 @@ public class AttackScript : GameLoop
         {
             print("no targets");
 
-            transform.Translate(PlayerSpeedDirectionSO.Value * AttackMoveDistance.Value);
+            RaycastHit hit;
+            if(Physics.CapsuleCast(transform.position - (Vector3.up * 0.5f), transform.position + (Vector3.up * 0.5f), .1f, PlayerSpeedDirectionSO.Value, out hit)) 
+            {
+                float ditanceToObject = Vector3.Distance(hit.point, transform.position);
+                print(hit.collider.gameObject.name);
+                if (ditanceToObject > AttackMoveDistance.Value)
+                {
+                    transform.Translate(PlayerSpeedDirectionSO.Value * AttackMoveDistance.Value);
+                }
+                else
+                {
+                    transform.Translate(PlayerSpeedDirectionSO.Value * ditanceToObject);
+                }
+            }
+            else
+            {
+                transform.Translate(PlayerSpeedDirectionSO.Value * AttackMoveDistance.Value);
+            }
+            
+            
+                
+            //_rigidbody.AddForce((PlayerSpeedDirectionSO.Value * AttackMoveDistance.Value)*_rigidbody.mass);
+             //_rigidbody.MovePosition(transform.position + (PlayerSpeedDirectionSO.Value * AttackMoveDistance.Value));
+            //_rigidbody.MovePosition(Vector3.zero);
 
             Attack();
 
@@ -142,7 +190,8 @@ public class AttackScript : GameLoop
         }
     }
 
-    private IEnumerator StartAttackCooldown() {
+    private IEnumerator StartAttackCooldown()
+    {
         _canAttack = false;
 
         yield return new WaitForSeconds(AttackCooldown.Value);
