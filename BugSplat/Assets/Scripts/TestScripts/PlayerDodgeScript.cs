@@ -42,7 +42,7 @@ public class PlayerDodgeScript : GameLoop
             Vector3 newPosition = _dashDirection;
             float moveDistance = DashLengthSO.Value;
 
-            RaycastHit[] hits = Physics.CapsuleCastAll(transform.position - (Vector3.up * 0.5f), transform.position + (Vector3.up * 0.5f), .1f, PlayerDirectionSO.Value, DashSpeed);
+            /*RaycastHit[] hits = Physics.CapsuleCastAll(transform.position - (Vector3.up * 0.5f), transform.position + (Vector3.up * 0.5f), .1f, PlayerDirectionSO.Value, DashLengthSO.Value);
             //RaycastHit hit;
             //if (Physics.CapsuleCast(transform.position - (Vector3.up * 0.5f), transform.position + (Vector3.up * 0.5f), .1f, PlayerDirectionSO.Value, out hit))
             if (hits.Length > 0)
@@ -80,13 +80,13 @@ public class PlayerDodgeScript : GameLoop
                 transform.Translate(PlayerDirectionSO.Value * DashSpeed);
             }*/
 
-            if (_lerpTime - _currentTime < moveDistance)
+            if (_lerpTime - _currentTime < DashSpeedSO.Value)
             {
                 _lerpTime = Time.time;
 
                 float _diffTime = _lerpTime - _currentTime;
                 Debug.Log(_diffTime);
-                PlayerVelocitySO.Value = Vector3.Lerp(PlayerDirectionSO.Value, newPosition * moveDistance, _diffTime / DashSpeed);
+                PlayerVelocitySO.Value = Vector3.Lerp(PlayerDirectionSO.Value, newPosition * moveDistance, _diffTime / DashSpeedSO.Value);
             }
             else
             {
