@@ -11,7 +11,7 @@ public class ItemPool : ScriptableObject
     private Random _random;
 
     // Takes an item out of the pool
-    public Item GetItem(Tier tier) {
+    public ItemObject GetItem(Tier tier) {
         var filteredItems = Items.Where(x => x.ItemObject.Tier == tier && !x.Bought);
 
         var rngResult = Random.Range(0f, 1f);
@@ -20,12 +20,12 @@ public class ItemPool : ScriptableObject
         var item = filteredItems.ElementAt(rngInt);
         item.Bought = true;
 
-        return item;
+        return item.ItemObject;
     }
 
     // Replenish an item in the pool if it had previously been bought 
-    public void AddItem(Item item) {
-        var poolItem = Items.Find(x => x.ItemObject == item.ItemObject && x.Bought == true);
+    public void AddItem(ItemObject item) {
+        var poolItem = Items.Find(x => x.ItemObject == item && x.Bought == true);
         poolItem.Bought = false;
     }
 
