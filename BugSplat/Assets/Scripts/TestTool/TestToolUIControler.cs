@@ -11,6 +11,10 @@ public class TestToolUIControler : MonoBehaviour
     public void Awake()
     {
         TestMenu.SetActive(false);
+        if(UM == null)
+        {
+            UM = GameObject.Find("UpdateManager");
+        }
     }
     public void MenuButton()
     {
