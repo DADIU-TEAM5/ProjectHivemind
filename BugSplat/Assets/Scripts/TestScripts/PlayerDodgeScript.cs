@@ -15,7 +15,7 @@ public class PlayerDodgeScript : GameLoop
 
     private float _currentTime;
     private float _lerpTime = 0f;
-   
+
     // Initial speed of dash
     public float DashLength;
 
@@ -31,23 +31,64 @@ public class PlayerDodgeScript : GameLoop
         DashLengthSO.Value = DashLength; // REMOVE THESE ONCE THE SETTINGS WINDOW IS DONE
     }
 
-    
+
     public override void LoopUpdate(float deltaTime)
     {
         //Debug.Log("Dodging : " + IsDodging.Value);
 
-        
+
         if (IsDodging.Value == true)
         {
             Vector3 newPosition = _dashDirection;
+            float moveDistance;
+
+            RaycastHit[] hits = Physics.CapsuleCastAll(transform.position - (Vector3.up * 0.5f), transform.position + (Vector3.up * 0.5f), .1f, PlayerDirectionSO.Value,DashSpeed);
+            //RaycastHit hit;
+            //if (Physics.CapsuleCast(transform.position - (Vector3.up * 0.5f), transform.position + (Vector3.up * 0.5f), .1f, PlayerDirectionSO.Value, out hit))
+            if(hits.Length >0)
+            {
+                float ditanceToObject = float.MaxValue;
+                for (int i = 0; i < hits.Length; i++)
+                {
+                    if (hits[i].collider.gameObject.layer != 8)
+                    {
+
+                        float newDist = Vector3.Distance(hits[i].point, transform.position);
+                        if (newDist < ditanceToObject)
+                        {
+                            ditanceToObject = newDist;
+                        }
+
+                    }
+                }
+
+
+                //print(hit.collider.gameObject.name);
+                if (ditanceToObject > DashSpeed)
+                {
+                    moveDistance = DashSpeed;
+
+                    transform.Translate(PlayerDirectionSO.Value * DashSpeed);
+                }
+                else
+                {
+                    moveDistance = ditanceToObject;
+                    transform.Translate(PlayerDirectionSO.Value * ditanceToObject);
+                }
+            }
+            /*else
+            {
+
+                transform.Translate(PlayerDirectionSO.Value * DashSpeed);
+            }*/
 
             if (_lerpTime - _currentTime < DashSpeed)
             {
                 _lerpTime = Time.time;
-                
+
                 float _diffTime = _lerpTime - _currentTime;
                 Debug.Log(_diffTime);
-                PlayerVelocitySO.Value = Vector3.Lerp(PlayerDirectionSO.Value, newPosition * DashLength, _diffTime / DashSpeed);
+                PlayerVelocitySO.Value = Vector3.Lerp(PlayerDirectionSO.Value, newPosition * moveDistance, _diffTime / DashSpeed);
             }
             else
             {
@@ -55,16 +96,17 @@ public class PlayerDodgeScript : GameLoop
                 _lerpTime = 0f;
             }
 
-            player.transform.Translate(PlayerVelocitySO.Value * DashLength * Time.deltaTime);
+            player.transform.Translate(PlayerVelocitySO.Value * moveDistance * Time.deltaTime);
 
             PlayerDirectionSO.Value = newPosition;
-        } 
-    }
+
+
+            //player.transform.Translate(PlayerDirectionSO.Value * DashSpeed);
 
 
     public override void LoopLateUpdate(float deltaTime)
     {
-       
+
     }
 
 
