@@ -17,6 +17,13 @@ public class PlayerMovement : GameLoop
     private bool _isMoving;
     private float _currentTime;
 
+    Rigidbody _rigidbody;
+    private void Start()
+    {
+        _rigidbody = GetComponent<Rigidbody>();
+    }
+
+
     public override void LoopUpdate(float deltaTime)
     {
         // Lerp from 0 to 1 on Normal movement
@@ -47,7 +54,8 @@ public class PlayerMovement : GameLoop
         }
 
         // Move player using translate
-        transform.Translate(PlayerVelocitySO.Value * PlayerMaxSpeedSO.Value * Time.deltaTime);
+        //transform.Translate(PlayerVelocitySO.Value * PlayerMaxSpeedSO.Value * Time.deltaTime);
+        
 
         // Rotate the graphics along the PlayerSpeedDirection
         if (PlayerSpeedDirectionSO.Value != Vector3.zero)
@@ -57,7 +65,14 @@ public class PlayerMovement : GameLoop
         
     }
 
-        public override void LoopLateUpdate(float deltaTime)
+
+    private void FixedUpdate()
+    {
+
+        _rigidbody.MovePosition(transform.position+(PlayerVelocitySO.Value * PlayerMaxSpeedSO.Value * Time.deltaTime));
+        _rigidbody.velocity = Vector3.zero;
+    }
+    public override void LoopLateUpdate(float deltaTime)
     {
 
     }
