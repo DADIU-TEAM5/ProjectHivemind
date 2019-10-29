@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerAudioScript : MonoBehaviour
 {
+    [Header("Placeholder events")]
+    public AK.Wwise.Event PhFootsteps;
+
     [Header("Wwise events")]
     public AK.Wwise.Event Footstep;
     public AK.Wwise.Event Attack;
@@ -15,13 +18,20 @@ public class PlayerAudioScript : MonoBehaviour
     [Header("Wwise RTPCs")]
     public AK.Wwise.RTPC PlayerSpeedRTPC;
 
-
     [Header("Variables")]
     public Vector3Variable PlayerSpeedVector3;
 
     /*[Header("GameEvents")]
     public UnityEngine.Events.UnityEvent[] Event;
     */
+
+
+    void Start()
+    {
+        //PH
+        PhFootsteps.Post(this.gameObject);    
+    }
+
 
     void Update()
     {

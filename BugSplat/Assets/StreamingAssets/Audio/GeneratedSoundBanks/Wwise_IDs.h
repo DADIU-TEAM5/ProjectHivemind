@@ -21,6 +21,11 @@ namespace AK
         static const AkUniqueID PLAYER_FOLEYPHFOOTSTEPEVENT = 586291076U;
     } // namespace EVENTS
 
+    namespace GAME_PARAMETERS
+    {
+        static const AkUniqueID PLAYERSPEED = 1493153371U;
+    } // namespace GAME_PARAMETERS
+
     namespace BANKS
     {
         static const AkUniqueID INIT = 1355168291U;
