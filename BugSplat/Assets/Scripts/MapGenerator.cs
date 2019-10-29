@@ -25,6 +25,8 @@ public class MapGenerator : MonoBehaviour
 
     bool _finishedGenerating = false;
 
+    GameObject _Parent;
+
     List<GameObject> _hexagonsTiles;
 
 
@@ -36,6 +38,9 @@ public class MapGenerator : MonoBehaviour
         Random.InitState(Seed);
 
         Hexagon.mapGen = this;
+
+        _Parent = new GameObject();
+        _Parent.name = "Hex Map";
 
         _hexagonsTiles = new List<GameObject>();
 
@@ -58,8 +63,8 @@ public class MapGenerator : MonoBehaviour
 
         hex.name = "middle";
         hex.transform.position = Vector3.zero;
-        
 
+        hex.transform.parent = _Parent.transform;
 
         _hexagonsTiles.Add(hex);
 
@@ -88,6 +93,7 @@ public class MapGenerator : MonoBehaviour
 
         }
 
+        _Parent.transform.Rotate(0, 90, 0);
         
         print("Finished rotatin tiles");
 
@@ -343,7 +349,7 @@ public class MapGenerator : MonoBehaviour
             hex.name = "edge " + i;
             hex.transform.position = positionToPlaceHex;
 
-            
+            hex.transform.parent = _Parent.transform;
         }
         _finishedGenerating = true;
         yield return null;
