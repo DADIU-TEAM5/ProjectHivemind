@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerMovement : GameLoop
 {
 
+    public Animator Anim;
+
     public Transform PlayerGraphics;
     public Vector3Variable PlayerDirectionSO;
     public FloatVariable PlayerCurrentSpeedSO;
@@ -68,7 +70,7 @@ public class PlayerMovement : GameLoop
 
     private void FixedUpdate()
     {
-
+        Anim.SetBool("Running", PlayerCurrentSpeedSO.Value != 0);
         _rigidbody.MovePosition(transform.position+(PlayerVelocitySO.Value * PlayerCurrentSpeedSO.Value * Time.deltaTime));
         _rigidbody.velocity = Vector3.zero;
     }
