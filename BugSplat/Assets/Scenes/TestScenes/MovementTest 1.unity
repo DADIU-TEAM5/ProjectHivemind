@@ -454,6 +454,41 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29a40903233920342810d2e5a7be0d4b, type: 3}
+--- !u!1 &237679443 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5788987755461925658, guid: ce93dae90c32b234eb5aa37ebcaa5582,
+    type: 3}
+  m_PrefabInstance: {fileID: 5788987755224092144}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &237679444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 237679443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d915697d1e1ac764eb9278a5eadb4310, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Second: 0.5
+  SaveInSecond: 8
+  PredictSpeed: 10
+  MoMaUpdateTime: 0.329
+  BlendDegree: 0.5
+  BlendLength: 7
+  DifferentClipLength: 8
+  Direction: {fileID: 11400000, guid: 857036471d8e63b46b304293dca2794e, type: 2}
+  Velocity: {fileID: 11400000, guid: d1f4ccfac4a47fb4da89d998092775b8, type: 2}
+  AnimationTrajectories: {fileID: 11400000, guid: 487e33fb24044fb43999146b25174f14,
+    type: 2}
+  AnimationClips: {fileID: 11400000, guid: 3f61c8a48e6d5d44f915d135a8a219cd, type: 2}
+  Results: {fileID: 11400000, guid: e3c08b4cc70fce74f86c2b90d67fc221, type: 2}
+  Blend: 1
+  PlayerTrajectoryCapusule: {fileID: 11400000, guid: 338b6842abe87f74a8f87f95380567b8,
+    type: 2}
+  AttackMotions: {fileID: 11400000, guid: b53464879ae065d459ce99b330a4fb7d, type: 2}
 --- !u!1001 &254633180
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -535,6 +570,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ybot
       objectReference: {fileID: 0}
+    - target: {fileID: 1409501619948147474, guid: eda22e9340e37844ea2327497a572d79,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2726040728891171073, guid: eda22e9340e37844ea2327497a572d79,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -548,7 +588,7 @@ PrefabInstance:
     - target: {fileID: 2726040728891171073, guid: eda22e9340e37844ea2327497a572d79,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.72
+      value: 7.93
       objectReference: {fileID: 0}
     - target: {fileID: 2726040728891171073, guid: eda22e9340e37844ea2327497a572d79,
         type: 3}
@@ -985,8 +1025,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d915697d1e1ac764eb9278a5eadb4310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 3
-  RotationSpeed: 5
   Second: 0.5
   SaveInSecond: 10
   PredictSpeed: 20
@@ -994,6 +1032,8 @@ MonoBehaviour:
   BlendDegree: 0.5
   BlendLength: 1
   DifferentClipLength: 10
+  Direction: {fileID: 0}
+  Velocity: {fileID: 0}
   AnimationTrajectories: {fileID: 11400000, guid: 487e33fb24044fb43999146b25174f14,
     type: 2}
   AnimationClips: {fileID: 11400000, guid: 3f61c8a48e6d5d44f915d135a8a219cd, type: 2}
@@ -1871,7 +1911,7 @@ PrefabInstance:
     - target: {fileID: 5788987755461925658, guid: ce93dae90c32b234eb5aa37ebcaa5582,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5788987755461925660, guid: ce93dae90c32b234eb5aa37ebcaa5582,
         type: 3}
@@ -1881,12 +1921,12 @@ PrefabInstance:
     - target: {fileID: 5788987755461925660, guid: ce93dae90c32b234eb5aa37ebcaa5582,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.47796214
+      value: -1.28
       objectReference: {fileID: 0}
     - target: {fileID: 5788987755461925660, guid: ce93dae90c32b234eb5aa37ebcaa5582,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.29923943
+      value: 5.14
       objectReference: {fileID: 0}
     - target: {fileID: 5788987755461925660, guid: ce93dae90c32b234eb5aa37ebcaa5582,
         type: 3}
@@ -1938,6 +1978,11 @@ PrefabInstance:
       propertyPath: DebugText
       value: 
       objectReference: {fileID: 2088386835}
+    - target: {fileID: 5788987755592666200, guid: ce93dae90c32b234eb5aa37ebcaa5582,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 797386514566739541, guid: ce93dae90c32b234eb5aa37ebcaa5582, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ce93dae90c32b234eb5aa37ebcaa5582, type: 3}

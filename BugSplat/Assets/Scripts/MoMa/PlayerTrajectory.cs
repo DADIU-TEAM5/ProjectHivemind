@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class PlayerTrajectory : MonoBehaviour
+public class PlayerTrajectory : GameLoop
 {
-    public float Speed = 5;
-    public float RotationSpeed = 5;
+    //public float Speed = 5;
+    //public float RotationSpeed = 5;
     public float Second = 1f;
     public int SaveInSecond = 10;
     public int PredictSpeed = 20;
@@ -18,6 +18,9 @@ public class PlayerTrajectory : MonoBehaviour
     public int BlendLength = 1;
     [Range(3, 40)]
     public int DifferentClipLength = 10;
+    public Vector3Variable Direction;
+    public Vector3Variable Velocity;
+
 
 
     public AnimationCapsules AnimationTrajectories;
@@ -63,20 +66,20 @@ public class PlayerTrajectory : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public override void LoopUpdate(float deltaTime)
     {
-        _timer += Time.deltaTime;
-        _tempMoMaTime += Time.deltaTime;
-        var inputs = Vector3.zero;
+        _timer += deltaTime;
+        _tempMoMaTime += deltaTime;
+
 
         int thisClip = Results.AnimClipIndex;
         int thisClipNum = Results.FrameNum;
 
 
-        var rotationPlayer = Vector3.up * Input.GetAxis("Horizontal") * RotationSpeed;
+        var rotationPlayer = Direction.Value;
 
-        Vector3 inputVel = UpdatePlayerState(inputs);
-        GetRelativeTrajectory(inputVel);
+        //UpdatePlayerState();
+        GetRelativeTrajectory(Velocity.Value);
         if (Input.GetKeyDown(KeyCode.Space))
             _attack = "Attack";
 
@@ -135,7 +138,7 @@ public class PlayerTrajectory : MonoBehaviour
 
         PlayAnimationJoints(rotationPlayer, PlayerTrajectoryCapusule,
                                                 Results, AnimationClips, _skeletonJoints);
-        transform.Rotate(rotationPlayer);
+        //transform.Rotate(rotationPlayer);
     }
 
 
@@ -270,13 +273,12 @@ public class PlayerTrajectory : MonoBehaviour
         }
     }
 
-    private Vector3 UpdatePlayerState(Vector3 inputs)
+    private Vector3 UpdatePlayerState(float deltaTime)
     {
-        inputs.z = Input.GetAxis("Vertical");
 
         //get input velocity to move
-        var inputVel = inputs * Speed;
-        transform.Translate(inputVel * Time.deltaTime);
+        var inputVel = Velocity.Value;
+        transform.Translate(inputVel * deltaTime);
 
         return inputVel;
     }
@@ -296,7 +298,7 @@ public class PlayerTrajectory : MonoBehaviour
     {
         _future[0] = currentPos;
 
-        var rotation = Quaternion.Euler(Vector3.up * Input.GetAxis("Horizontal") * RotationSpeed * PredictSpeed);
+        var rotation = Quaternion.Euler(Direction.Value * PredictSpeed);
 
         for (int i = 0; i < SaveInSecond; i++)
         {
@@ -440,5 +442,8 @@ public class PlayerTrajectory : MonoBehaviour
     }
 
 
+     public override void LoopLateUpdate(float deltaTime)
+    {
 
+    }
 }
