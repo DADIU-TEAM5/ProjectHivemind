@@ -56,11 +56,28 @@ public class PlayerDodgeScript : GameLoop
             // Only for Testing !TEST
             //player.MovePosition(player.transform.position + (PlayerDirectionSO.Value * DashSpeed));
 
-            RaycastHit hit;
-            if (Physics.CapsuleCast(transform.position - (Vector3.up * 0.5f), transform.position + (Vector3.up * 0.5f), .1f, PlayerDirectionSO.Value, out hit))
+            RaycastHit[] hits = Physics.CapsuleCastAll(transform.position - (Vector3.up * 0.5f), transform.position + (Vector3.up * 0.5f), .1f, PlayerDirectionSO.Value,DashSpeed);
+            //RaycastHit hit;
+            //if (Physics.CapsuleCast(transform.position - (Vector3.up * 0.5f), transform.position + (Vector3.up * 0.5f), .1f, PlayerDirectionSO.Value, out hit))
+            if(hits.Length >0)
             {
-                float ditanceToObject = Vector3.Distance(hit.point, transform.position);
-                print(hit.collider.gameObject.name);
+                float ditanceToObject = float.MaxValue;
+                for (int i = 0; i < hits.Length; i++)
+                {
+                    if (hits[i].collider.gameObject.layer != 8)
+                    {
+
+                        float newDist = Vector3.Distance(hits[i].point, transform.position);
+                        if (newDist < ditanceToObject)
+                        {
+                            ditanceToObject = newDist;
+                        }
+
+                    }
+                }
+
+                
+                //print(hit.collider.gameObject.name);
                 if (ditanceToObject > DashSpeed)
                 {
                     transform.Translate(PlayerDirectionSO.Value * DashSpeed);
