@@ -12,6 +12,9 @@ public class MapGenerator : MonoBehaviour
     public int Rings = 1;
 
     public GameObject[] Hexagons;
+    public GameObject[] CenterHexagons;
+
+    public GameObjectVariable hexmapParent;
 
     public GameObject BaseHexagon;
     public GameObject EdgeWall;
@@ -25,6 +28,8 @@ public class MapGenerator : MonoBehaviour
 
     bool _finishedGenerating = false;
 
+    GameObject _Parent;
+
     List<GameObject> _hexagonsTiles;
 
 
@@ -33,9 +38,17 @@ public class MapGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(hexmapParent.Value != null)
+        {
+            Destroy(hexmapParent.Value);
+        }
+
         Random.InitState(Seed);
 
         Hexagon.mapGen = this;
+
+        _Parent = new GameObject();
+        _Parent.name = "Hex Map";
 
         _hexagonsTiles = new List<GameObject>();
 
@@ -51,15 +64,15 @@ public class MapGenerator : MonoBehaviour
         _hexLength *= BaseHexagon.transform.localScale.x;
 
 
-        GameObject hex = Instantiate(getRandomHexagon());
+        GameObject hex = Instantiate(getRandomCenterHexagon());
         Hexagon hexHex= hex.GetComponent<Hexagon>();
         hexHex.RotateTile(Random.Range(0, 5));
         hexHex.IsaccesibleFromMiddle = true;
 
         hex.name = "middle";
         hex.transform.position = Vector3.zero;
-        
 
+        hex.transform.parent = _Parent.transform;
 
         _hexagonsTiles.Add(hex);
 
@@ -69,7 +82,7 @@ public class MapGenerator : MonoBehaviour
 
         StartCoroutine(RotateTilesToMakeMostPossibleConnections());
 
-
+        hexmapParent.Value = _Parent;
     }
 
     IEnumerator RotateTilesToMakeMostPossibleConnections()
@@ -88,6 +101,7 @@ public class MapGenerator : MonoBehaviour
 
         }
 
+        _Parent.transform.Rotate(0, 90, 0);
         
         print("Finished rotatin tiles");
 
@@ -123,6 +137,10 @@ public class MapGenerator : MonoBehaviour
     GameObject getRandomHexagon()
     {
         return Hexagons[Random.Range(0, Hexagons.Length)];
+    }
+    GameObject getRandomCenterHexagon()
+    {
+        return CenterHexagons[Random.Range(0, CenterHexagons.Length)];
     }
 
 
@@ -343,7 +361,7 @@ public class MapGenerator : MonoBehaviour
             hex.name = "edge " + i;
             hex.transform.position = positionToPlaceHex;
 
-            
+            hex.transform.parent = _Parent.transform;
         }
         _finishedGenerating = true;
         yield return null;

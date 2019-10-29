@@ -10,12 +10,16 @@ public class cannonFodder : Enemy
     public GameObject bodyPart;
 
     bool _playerDetected;
+    bool _isAlly;
     public SimpleEnemyStats stats;
     Transform _playerTransform;
     bool _attacking;
     float _attackCharge;
 
     float _currentHealth;
+
+    float _attackCooldown = 0;
+
 
     Renderer _renderer;
 
@@ -55,9 +59,6 @@ public class cannonFodder : Enemy
                 
                 part.transform.position = transform.position +(( Vector3.up*i)*0.5f);
             }
-            
-
-
 
             Destroy(_cone);
 
@@ -69,6 +70,8 @@ public class cannonFodder : Enemy
 
     public override void LoopUpdate(float deltaTime)
     {
+        if (_attackCooldown > 0)
+            _attackCooldown -= Time.deltaTime;
 
         Debug.DrawLine(transform.position, (transform.position + transform.forward), Color.red);
 
@@ -77,13 +80,25 @@ public class cannonFodder : Enemy
             _renderer.material.color = Color.blue;
             DetectThePlayer();
         }
-        else if (playerInAttackRange() || _attacking)
+        else if ( playerInAttackRange() || _attacking)
         {
-            if(_navMeshAgent.destination != transform.position)
-            _navMeshAgent.destination = transform.position;
+            
 
-            _renderer.material.color = Color.red;
-            Attack();
+            
+
+            if (_attackCooldown <= 0)
+            {
+                if (_navMeshAgent.destination != transform.position)
+                    _navMeshAgent.destination = transform.position;
+
+                _renderer.material.color = Color.red;
+                Attack();
+            }
+            else
+            {
+                _renderer.material.color = Color.yellow;
+                MoveTowardsThePlayer();
+            }
         }
         else
         {
@@ -195,6 +210,7 @@ public class cannonFodder : Enemy
 
 
             }
+            _attackCooldown = stats.AttackSpeed;
             _attacking = false;
             _attackCharge = 0;
             _cone.SetActive(false);
@@ -236,11 +252,35 @@ public class cannonFodder : Enemy
     {
         Collider[] potentialTargets = Physics.OverlapSphere(transform.position, stats.SpotDistance, LayerMask.GetMask("Player"));
 
-        if(potentialTargets.Length > 0)
+        if (potentialTargets.Length > 0)
         {
             _playerDetected = true;
-            _playerTransform =  potentialTargets[0].gameObject.transform;
-        } 
+            _playerTransform = potentialTargets[0].gameObject.transform;
+
+            _isAlly = true;
+
+            DetectAllies();
+        }
+    }
+
+    void DetectAllies()
+    {
+        Collider[] potentialAllies = Physics.OverlapSphere(transform.position, stats.SpotDistance, LayerMask.GetMask("Enemy"));
+
+        if(potentialAllies.Length > 0)
+        {
+            for (int i = 0; i < potentialAllies.Length; i++)
+            {
+                cannonFodder allyTransform = potentialAllies[i].gameObject.transform.GetComponent<cannonFodder>();
+                if (!allyTransform._isAlly)
+                {
+                    allyTransform._playerDetected = true;
+                    allyTransform._playerTransform = _playerTransform;
+                    allyTransform._isAlly = true;
+                    allyTransform.DetectAllies();
+                }
+            }
+        }
     }
 
     

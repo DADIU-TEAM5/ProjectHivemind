@@ -2,33 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
+[System.Serializable]
 public class SceneHandler : MonoBehaviour
 {
-    [SerializeField]
-    private ObjectList _scene;
+    public StringList SceneListSO;
 
     [SerializeField]
-    private int _selectedSceneIndex;
+    public int SelectedSceneIndex;
 
-    [SerializeField]
-    private string[] _sceneList;
+    public string[] Guid;
+    public string[] SceneList;
 
-    private void OnEnable()
+    public string SelectedScene;
+    public string SelectedSceneGuid;
+
+    public void ChangeScene(string sceneGuid)
     {
-        _sceneList = new string[_scene.Value.Count];
-
-        for (int i = 0; i < _scene.Value.Count; i++)
+        if(sceneGuid != "")
         {
-            _sceneList[i] = _scene.Value[i].name;
+            string sceneName = "";
+
+            for (int i = 0; i < Guid.Length; i++)
+            {
+                if (Guid[i] == sceneGuid)
+                {
+                    sceneName = SceneList[i];
+                }
+            }
+            
+            SceneManager.LoadScene(sceneName);
         }
-    }
+        else
+        {
+            SceneManager.LoadScene(SelectedScene);
+        }
 
 
-    public void ChangeScene()
-    {
-        string sceneName = _scene.Value[_selectedSceneIndex].name;
-
-        SceneManager.LoadScene(sceneName);
     }
 }
