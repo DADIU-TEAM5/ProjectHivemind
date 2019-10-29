@@ -12,6 +12,7 @@ public class ItemObject : ScriptableObject
     public Tier Tier;
     public int Price;
     public string Description;
+    public Sprite Icon;
 
 
     [Header("Tags")]
