@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8746318428798270147}
   - component: {fileID: -3948914544015640265}
   - component: {fileID: 4135644582172192431}
+  - component: {fileID: 4011872371982004201}
   m_Layer: 0
   m_Name: BodyPart
   m_TagString: Untagged
@@ -122,3 +123,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Body: {fileID: -3948914544015640265}
+  PlayerPosition: {fileID: 11400000, guid: 0119b5f64c03ff94091694f4b88d57e6, type: 2}
+  PickUpRange: 4
+  BodyParts: {fileID: 11400000, guid: edbd17e7b39a2ca48a156317085c1551, type: 2}
+  enableTime: 2
+  PickUpSpeed: 7
+  ExplosionDistance: 300
+  ExplosionHeight: 400
+--- !u!114 &4011872371982004201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7324468612011702487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8cd77b9a3fb574486a4a4a4ef4a938, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameLoopHandler: {fileID: 11400000, guid: b20923f160198a245bcdd80c8342f9ac, type: 2}
+  GameLoops:
+  - {fileID: 4135644582172192431}

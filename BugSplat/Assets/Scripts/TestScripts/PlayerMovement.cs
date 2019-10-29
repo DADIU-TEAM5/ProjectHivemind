@@ -13,6 +13,8 @@ public class PlayerMovement : GameLoop
     public Vector3Variable PlayerVelocitySO;
     public FloatVariable PlayerAccelerationSO;
     public BoolVariable isDodging;
+    public Vector3Variable PlayerPosition;
+
 
     private float _lerpTime = 0f;
     private Vector3 _velocity;
@@ -76,6 +78,6 @@ public class PlayerMovement : GameLoop
     }
     public override void LoopLateUpdate(float deltaTime)
     {
-
+        PlayerPosition.Value = transform.position;
     }
 }
