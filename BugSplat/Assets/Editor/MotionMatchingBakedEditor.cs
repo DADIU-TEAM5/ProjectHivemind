@@ -26,7 +26,7 @@ public class MotionMatchingBakedEditor : EditorWindow
     Transform[] joints = null;
 
     public static string RootBoneName = "mixamorig:Hips";
-    const string MotionMatcherSettingsPath = "Assets/Resources/MotionMatchingSetting.asset";
+    const string MotionMatcherSettingsPath = "Assets/ScriptableObjects/MoMa/MoMaSetting.asset";
 
     [SerializeField]
     private Vector2 scroll;
