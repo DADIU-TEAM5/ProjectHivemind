@@ -40,40 +40,38 @@ public class PlayerDodgeScript : GameLoop
         if (IsDodging.Value == true)
         {
             Vector3 newPosition = _dashDirection;
-            float moveDistance;
+            float moveDistance = DashLengthSO.Value;
 
-            RaycastHit[] hits = Physics.CapsuleCastAll(transform.position - (Vector3.up * 0.5f), transform.position + (Vector3.up * 0.5f), .1f, PlayerDirectionSO.Value,DashSpeed);
+            RaycastHit[] hits = Physics.CapsuleCastAll(transform.position - (Vector3.up * 0.5f), transform.position + (Vector3.up * 0.5f), .1f, PlayerDirectionSO.Value, DashSpeed);
             //RaycastHit hit;
             //if (Physics.CapsuleCast(transform.position - (Vector3.up * 0.5f), transform.position + (Vector3.up * 0.5f), .1f, PlayerDirectionSO.Value, out hit))
-            if(hits.Length >0)
+            if (hits.Length > 0)
             {
-                float ditanceToObject = float.MaxValue;
+                float distanceToObject = float.MaxValue;
                 for (int i = 0; i < hits.Length; i++)
                 {
                     if (hits[i].collider.gameObject.layer != 8)
                     {
-
                         float newDist = Vector3.Distance(hits[i].point, transform.position);
-                        if (newDist < ditanceToObject)
+                        if (newDist < distanceToObject)
                         {
-                            ditanceToObject = newDist;
+                            distanceToObject = newDist;
                         }
-
                     }
                 }
 
 
                 //print(hit.collider.gameObject.name);
-                if (ditanceToObject > DashSpeed)
+                if (distanceToObject > DashLengthSO.Value)
                 {
-                    moveDistance = DashSpeed;
+                    moveDistance = DashLengthSO.Value;
 
-                    transform.Translate(PlayerDirectionSO.Value * DashSpeed);
+                    //transform.Translate(PlayerDirectionSO.Value * DashSpeed);
                 }
                 else
                 {
-                    moveDistance = ditanceToObject;
-                    transform.Translate(PlayerDirectionSO.Value * ditanceToObject);
+                    moveDistance = distanceToObject;
+                    //transform.Translate(PlayerDirectionSO.Value * distanceToObject);
                 }
             }
             /*else
@@ -82,7 +80,7 @@ public class PlayerDodgeScript : GameLoop
                 transform.Translate(PlayerDirectionSO.Value * DashSpeed);
             }*/
 
-            if (_lerpTime - _currentTime < DashSpeed)
+            if (_lerpTime - _currentTime < moveDistance)
             {
                 _lerpTime = Time.time;
 
@@ -99,9 +97,8 @@ public class PlayerDodgeScript : GameLoop
             player.transform.Translate(PlayerVelocitySO.Value * moveDistance * Time.deltaTime);
 
             PlayerDirectionSO.Value = newPosition;
-
-
-            //player.transform.Translate(PlayerDirectionSO.Value * DashSpeed);
+        }
+    }
 
 
     public override void LoopLateUpdate(float deltaTime)
