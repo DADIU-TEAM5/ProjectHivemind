@@ -14,44 +14,43 @@ public class SpitterAudioScript : MonoBehaviour
     public AK.Wwise.Event HideUnderground;
 
 
-
-    public void FootStepEvent()
+    public void FootStepEvent(GameObject source)
     {
-        Footstep.Post(this.gameObject);
+        Footstep.Post(source);
     }
 
-    public void AttackEvent()
+    public void AttackEvent(GameObject source)
     {
-        Attack.Post(this.gameObject);
+        Attack.Post(source);
     }
 
-    public void HitEvent()
+    public void HitEvent(GameObject source)
     {
-        Hit.Post(this.gameObject);
+        Hit.Post(source);
     }
 
-    public void Scared()
+    public void Scared(GameObject source)
     {
-        ScaredScream.Post(this.gameObject);
+        ScaredScream.Post(source);
     }
 
-    public void Death()
+    public void Death(GameObject source)
     {
-        DeathSplat.Post(this.gameObject);
+        DeathSplat.Post(source);
     }
 
-    public void RangedAttackEvent()
+    public void RangedAttackEvent(GameObject source)
     {
-        RangedAttack.Post(this.gameObject);
+        RangedAttack.Post(source);
     }
 
-    public void EmergeEvent()
+    public void EmergeEvent(GameObject source)
     {
-        EmergeFromGround.Post(this.gameObject);
+        EmergeFromGround.Post(source);
     }
 
-    public void HideEvent()
+    public void HideEvent(GameObject source)
     {
-        HideUnderground.Post(this.gameObject);
+        HideUnderground.Post(source);
     }
 }
