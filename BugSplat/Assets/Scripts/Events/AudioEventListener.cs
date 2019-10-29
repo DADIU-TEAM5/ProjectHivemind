@@ -25,6 +25,6 @@ public class AudioEventListener : MonoBehaviour
     [System.Serializable]
     public class EventListener {
         public GameEvent Event;
-        public UnityEvent Response;
+        public GameUnityEvent Response;
     }
 }
