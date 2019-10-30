@@ -80,8 +80,7 @@ public class PlayerTrajectory : GameLoop
 
         //UpdatePlayerState();
         GetRelativeTrajectory(Velocity.Value);
-        if (Input.GetKeyDown(KeyCode.Space))
-            _attack = "Attack";
+
 
 
         if (Blend)
@@ -91,6 +90,11 @@ public class PlayerTrajectory : GameLoop
 
     }
 
+
+    public void GetAttack1()
+    {
+        _attack = "Attack";
+    }
 
     //todo add attack motion
     private void GetRelativeTrajectory(Vector3 inputVel)
