@@ -29,13 +29,13 @@ public class ItemManager : GameLoop
             ChangeStats(itemObj);
             PlayerInventory.Items.Add(itemObj);
         }
-
+           
     }
 
 
     bool CanAddItem(ItemObject itemObj)
     {
-        if (itemObj.IsStackable || PlayerInventory.Items.Count == 0)
+        if (itemObj.IsStackable || Items.Count == 0)
         {
             return true;
         }
@@ -43,12 +43,9 @@ public class ItemManager : GameLoop
         {
             for (int i = 0; i < PlayerInventory.Items.Count; i++)
             {
-                if (PlayerInventory.Items[i] != null && PlayerInventory.Items[i].name == itemObj.name)
-                {
+                if (PlayerInventory.Items[i].name == itemObj.name)
                     Debug.Log("Player already has the item: " + itemObj.name);
-                    return false;
-
-                }
+                return false;
             }
         }
         return true;
@@ -61,7 +58,7 @@ public class ItemManager : GameLoop
         for (int i = 0; i < ModifiedStats.Count; i++)
         {
             // ModifiedStats are considered as flat
-            if (ModifiedStats[i] != null)
+            if (ModifiedStats[i] != null)               
                 ModifiedStats[i].Value = 0;
         }
     }
