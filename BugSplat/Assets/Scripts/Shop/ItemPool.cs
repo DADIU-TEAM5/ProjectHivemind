@@ -22,7 +22,7 @@ public class ItemPool : ScriptableObject
 
         // Pick a random
         var rngResult = Random.Range(0f, 1f);
-        var rngInt = (int) (rngResult * filteredItems.Count());
+        var rngInt = (int) (rngResult * (filteredItems.Count() - 1));
         var index = filteredItems.ElementAt(rngInt);
 
         Bought[index] = true;
@@ -30,16 +30,19 @@ public class ItemPool : ScriptableObject
     }
     
     // Returns all items within the specified tier, that also haven't previously been bought
-    private IEnumerable<int> GetItemsFromTier(Tier tier) {
+    private List<int> GetItemsFromTier(Tier tier) {
+        var result = new List<int>();
         for (var i = 0; i < Items.Count; i++) {
             if (!Bought[i]) {
                 var item = Items[i];
 
                 if (item.Tier == tier) {
-                    yield return i;
+                    result.Add(i);
                 }
             }
         }
+
+        return result;
     }
 
     // If the item exists in the pool and has been bought. Set it to not bought.
@@ -63,6 +66,6 @@ public class ItemPool : ScriptableObject
 
     public void OnEnable() {
         if (Items == null) Items = new List<ItemObject>();
-        Bought = new List<bool>(Items.Count);
+        Bought = new List<bool>(new bool[Items.Count]);
     }
 }
