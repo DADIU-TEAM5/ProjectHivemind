@@ -5,12 +5,13 @@ using UnityEngine.UI;
 
 public class ItemManager : GameLoop
 {
-    public List<ItemObject> items;
-    
+    public List<ItemObject> Items;
+    public Inventory PlayerInventory;
+
     // ModifiedStats are considered as flat atm
     public List<FloatVariable> ModifiedStats;
     public AbilityManager AM;
-
+    public List<ItemObject> AllItems;
     public override void LoopLateUpdate(float deltaTime)
     {
     }
@@ -20,50 +21,56 @@ public class ItemManager : GameLoop
     }
 
 
-
     public void AddItem(ItemObject itemObj)
     {
         if (CanAddItem(itemObj))
-            items.Add(itemObj);
+        {
+            Items.Add(itemObj);
+            ChangeStats(itemObj);
+            PlayerInventory.Items.Add(itemObj);
+        }
+           
     }
 
 
     bool CanAddItem(ItemObject itemObj)
     {
-        if (itemObj.IsStackable || items.Count == 0)
+        if (itemObj.IsStackable || Items.Count == 0)
         {
             return true;
         }
         else
         {
-            for (int i = 0; i < items.Count; i++)
+            for (int i = 0; i < PlayerInventory.Items.Count; i++)
             {
-                if (items[i].name == itemObj.name)
+                if (PlayerInventory.Items[i].name == itemObj.name)
                     Debug.Log("Player already has the item: " + itemObj.name);
                 return false;
-            } 
+            }
         }
         return true;
     }
 
-    void Reset()
+    public void ResetItems()
     {
-        items.Clear();
+        PlayerInventory.Items.Clear();
+        Items.Clear();
         for (int i = 0; i < ModifiedStats.Count; i++)
         {
             // ModifiedStats are considered as flat
-            ModifiedStats[i].Value = 0;
+            if (ModifiedStats[i] != null)               
+                ModifiedStats[i].Value = 0;
         }
     }
 
     void ChangeStats(ItemObject itemObj)
     {
-        
+
         //Very Nice and Clean
         ModifiedStats[0].Value += itemObj.Flat_AttackDamage;
         ModifiedStats[1].Value += itemObj.Flat_AttackSpeed;
         ModifiedStats[2].Value += itemObj.Flat_Attack_Angle;
-       
+
         ModifiedStats[3].Value += itemObj.Flat_DashSpeed;
         ModifiedStats[4].Value += itemObj.Flat_Dash_Length;
         ModifiedStats[5].Value += itemObj.Flat_MovementSpeed;
