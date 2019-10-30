@@ -23,6 +23,7 @@ namespace AK
         static const AkUniqueID NPC_BOOMER_SPECIALATTACK = 81359797U;
         static const AkUniqueID NPC_FODDER_ATTACK = 1529994500U;
         static const AkUniqueID NPC_FODDER_DEAD = 2985061994U;
+        static const AkUniqueID NPC_FODDER_DETECT = 1205968901U;
         static const AkUniqueID NPC_FODDER_FOOTSTEPS = 3043968597U;
         static const AkUniqueID NPC_FODDER_HIT = 1374986823U;
         static const AkUniqueID NPC_FODDER_IDLE = 2887557750U;
