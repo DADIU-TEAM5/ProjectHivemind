@@ -454,41 +454,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29a40903233920342810d2e5a7be0d4b, type: 3}
---- !u!1 &237679443 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5788987755461925658, guid: ce93dae90c32b234eb5aa37ebcaa5582,
-    type: 3}
-  m_PrefabInstance: {fileID: 5788987755224092144}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &237679444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 237679443}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d915697d1e1ac764eb9278a5eadb4310, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Second: 0.5
-  SaveInSecond: 8
-  PredictSpeed: 10
-  MoMaUpdateTime: 0.329
-  BlendDegree: 0.5
-  BlendLength: 7
-  DifferentClipLength: 8
-  Direction: {fileID: 11400000, guid: 857036471d8e63b46b304293dca2794e, type: 2}
-  Velocity: {fileID: 11400000, guid: d1f4ccfac4a47fb4da89d998092775b8, type: 2}
-  AnimationTrajectories: {fileID: 11400000, guid: 487e33fb24044fb43999146b25174f14,
-    type: 2}
-  AnimationClips: {fileID: 11400000, guid: 3f61c8a48e6d5d44f915d135a8a219cd, type: 2}
-  Results: {fileID: 11400000, guid: e3c08b4cc70fce74f86c2b90d67fc221, type: 2}
-  Blend: 1
-  PlayerTrajectoryCapusule: {fileID: 11400000, guid: 338b6842abe87f74a8f87f95380567b8,
-    type: 2}
-  AttackMotions: {fileID: 11400000, guid: b53464879ae065d459ce99b330a4fb7d, type: 2}
 --- !u!1001 &254633180
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -869,6 +834,68 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29a40903233920342810d2e5a7be0d4b, type: 3}
+--- !u!1 &753602685
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 753602688}
+  - component: {fileID: 753602687}
+  - component: {fileID: 753602686}
+  m_Layer: 0
+  m_Name: DebugMoMa
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &753602686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753602685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7f871ac56918cf4aa4a4f33a4eae07a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  capsuleScriptObject: {fileID: 11400000, guid: 338b6842abe87f74a8f87f95380567b8,
+    type: 2}
+  transformToShowFrom: {fileID: 1680622276}
+--- !u!114 &753602687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753602685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 366cbba58bae2a2438bdbb3bf75af73e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationCapsules: {fileID: 11400000, guid: 487e33fb24044fb43999146b25174f14, type: 2}
+  transformToShowFrom: {fileID: 1680622276}
+  result: {fileID: 11400000, guid: e3c08b4cc70fce74f86c2b90d67fc221, type: 2}
+--- !u!4 &753602688
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753602685}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.5446026, y: -1.3917612, z: 0.053395897}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 23
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &775024354
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1565,6 +1592,47 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1680622275 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3361042910226600318, guid: ce93dae90c32b234eb5aa37ebcaa5582,
+    type: 3}
+  m_PrefabInstance: {fileID: 5788987755224092144}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1680622276 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1801311623851287405, guid: ce93dae90c32b234eb5aa37ebcaa5582,
+    type: 3}
+  m_PrefabInstance: {fileID: 5788987755224092144}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1680622278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680622275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d915697d1e1ac764eb9278a5eadb4310, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Second: 0.5
+  SaveInSecond: 8
+  PredictSpeed: 10
+  MoMaUpdateTime: 0.329
+  BlendDegree: 0.5
+  BlendLength: 7
+  DifferentClipLength: 8
+  Direction: {fileID: 11400000, guid: 857036471d8e63b46b304293dca2794e, type: 2}
+  Velocity: {fileID: 11400000, guid: d1f4ccfac4a47fb4da89d998092775b8, type: 2}
+  AnimationTrajectories: {fileID: 11400000, guid: 487e33fb24044fb43999146b25174f14,
+    type: 2}
+  AnimationClips: {fileID: 11400000, guid: 3f61c8a48e6d5d44f915d135a8a219cd, type: 2}
+  Results: {fileID: 11400000, guid: e3c08b4cc70fce74f86c2b90d67fc221, type: 2}
+  Blend: 1
+  PlayerTrajectoryCapusule: {fileID: 11400000, guid: 338b6842abe87f74a8f87f95380567b8,
+    type: 2}
+  AttackMotions: {fileID: 11400000, guid: b53464879ae065d459ce99b330a4fb7d, type: 2}
 --- !u!1 &1715718476 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8824079940401298491, guid: 67d09e3328c45534e866e21a2885e600,
@@ -1913,6 +1981,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5012523203288252738, guid: ce93dae90c32b234eb5aa37ebcaa5582,
+        type: 3}
+      propertyPath: PlayerGraphics
+      value: 
+      objectReference: {fileID: 1807878026}
+    - target: {fileID: 5788987755461925659, guid: ce93dae90c32b234eb5aa37ebcaa5582,
+        type: 3}
+      propertyPath: PlayerGraphics
+      value: 
+      objectReference: {fileID: 1680622276}
     - target: {fileID: 5788987755461925660, guid: ce93dae90c32b234eb5aa37ebcaa5582,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1983,6 +2061,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8708014117340893829, guid: ce93dae90c32b234eb5aa37ebcaa5582,
+        type: 3}
+      propertyPath: GameLoops.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8708014117340893829, guid: ce93dae90c32b234eb5aa37ebcaa5582,
+        type: 3}
+      propertyPath: GameLoops.Array.data[4]
+      value: 
+      objectReference: {fileID: 1680622278}
     m_RemovedComponents:
     - {fileID: 797386514566739541, guid: ce93dae90c32b234eb5aa37ebcaa5582, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ce93dae90c32b234eb5aa37ebcaa5582, type: 3}

@@ -95,7 +95,7 @@ public class PlayerTrajectory : GameLoop
     //todo add attack motion
     private void GetRelativeTrajectory(Vector3 inputVel)
     {
-        var currentPos = transform.localPosition;
+        var currentPos = transform.position;
         var currentRot = transform.rotation;
 
 
@@ -103,7 +103,7 @@ public class PlayerTrajectory : GameLoop
         PlayerTrajectoryCapusule.Capsule.TrajectoryHistory = _history.ToArray();
 
 
-        FuturePredict(currentPos, inputVel, currentRot);
+        FuturePredict(transform.localPosition, inputVel, transform.localRotation);
         PlayerTrajectoryCapusule.Capsule.TrajectoryFuture = _future.ToArray();
 
         transToRelative(PlayerTrajectoryCapusule.Capsule.TrajectoryHistory, currentPos);
@@ -355,7 +355,7 @@ public class PlayerTrajectory : GameLoop
 
         FrameToJoints(skeletonJoints,
                        animationClips.AnimClips[result.AnimClipIndex].Frames[result.FrameNum]);
-        transform.Rotate(rotationPlayer);
+        //transform.Rotate(rotationPlayer);
     }
 
     public void FrameToJoints(
@@ -403,7 +403,7 @@ public class PlayerTrajectory : GameLoop
 
         BlendAnimation(beginFrameIndex, bestFrameIndex, skeletonJoints,
             areadlyBlendedTimes, animationClips.AnimClips[beginAnimIndex], animationClips.AnimClips[result.AnimClipIndex], blendDegree);
-        transform.Rotate(rotationEular);
+        //transform.Rotate(rotationEular);
     }
 
 
