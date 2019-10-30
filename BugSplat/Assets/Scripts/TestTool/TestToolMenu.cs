@@ -7,9 +7,11 @@ public class TestToolMenu : MonoBehaviour
 {
     //List or Array?
     public List<BoolVariable> Boolvariables = new List<BoolVariable>();
-    public List<FloatVariable> Floatvariables = new List<FloatVariable>();
-    public GameObject ScrollView;
 
+
+    public List<FloatVariable> Floatvariables = new List<FloatVariable>();
+
+    public GameObject ScrollView;
 
     public GameObject Togglebutton;
     public GameObject FloatSlider;
@@ -21,12 +23,12 @@ public class TestToolMenu : MonoBehaviour
             for (int i = 0; i < Boolvariables.Count; i++)
             {
                 GameObject newGO = (GameObject)GameObject.Instantiate(Togglebutton);
-                newGO.transform.SetParent(ScrollView.transform,false);
+                newGO.transform.SetParent(ScrollView.transform, false);
                 newGO.SetActive(true);
 
                 TestToggleButton toggleButton = newGO.GetComponent<TestToggleButton>();
                 toggleButton.Setup(Boolvariables[i]);
-                            
+
             }
 
         if (Floatvariables.Count > 0)
