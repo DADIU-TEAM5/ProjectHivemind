@@ -107,7 +107,7 @@ public class PlayerTrajectory : GameLoop
         PlayerTrajectoryCapusule.Capsule.TrajectoryHistory = _history.ToArray();
 
 
-        FuturePredict(transform.localPosition, inputVel, transform.localRotation);
+        FuturePredict(currentPos, inputVel, currentRot);
         PlayerTrajectoryCapusule.Capsule.TrajectoryFuture = _future.ToArray();
 
         transToRelative(PlayerTrajectoryCapusule.Capsule.TrajectoryHistory, currentPos);
@@ -300,17 +300,20 @@ public class PlayerTrajectory : GameLoop
 
     private void FuturePredict(Vector3 currentPos, Vector3 inputVel, Quaternion currentRot)
     {
-        _future[0] = currentPos;
+        _future[0] = currentPos ;
 
-        var rotation = Quaternion.Euler(Direction.Value * PredictSpeed);
+        //var rotation = Quaternion.Euler( Direction.Value * PredictSpeed);
 
         for (int i = 0; i < SaveInSecond; i++)
         {
             var increase = Second / SaveInSecond * i;
-            var gap_increase = Quaternion.ToEulerAngles(rotation) * increase;
+            //var gap_increase = Quaternion.ToEulerAngles(rotation) * increase;
+            //var angle_increase = Quaternion.EulerRotation(gap_increase);
+            var gap_increase = Direction.Value * increase;
             var angle_increase = Quaternion.EulerRotation(gap_increase);
-            var gap = (inputVel * increase);
-            var futureP = (currentPos + angle_increase * currentRot * gap);
+            var gap = (inputVel * PredictSpeed * increase);
+            var futureP = (currentPos + angle_increase  * gap);
+            futureP.y = 0;
             _future[i] = futureP;
         }
 
