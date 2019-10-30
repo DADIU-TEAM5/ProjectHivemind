@@ -40,7 +40,7 @@ public class TankBeetle : Enemy
         _cone.AddComponent<LineRenderer>();
         _coneRenderer = _cone.GetComponent<LineRenderer>();
 
-        
+        _cone.SetActive(false);
 
         _navMeshAgent.speed = stats.MoveSpeed;
 
@@ -81,6 +81,9 @@ public class TankBeetle : Enemy
         }
         else
         {
+            if (_cone.activeSelf == false)
+                _cone.SetActive(true);
+
             MoveTowardsThePlayer();
             _renderer.material.color = Color.red;
 
@@ -156,32 +159,52 @@ public class TankBeetle : Enemy
 
             Collider[] potentialTargets = Physics.OverlapSphere(transform.position, stats.AttackRange, LayerMask.GetMask("Player"));
 
+
+        
+
+
             for (int i = 0; i < potentialTargets.Length; i++)
             {
 
-                //print(Vector3.Angle(transform.position + transform.forward, potentialTargets[i].transform.position - transform.position));
-                //if()
-                Vector3 temp = potentialTargets[i].transform.position;
-                temp.y = transform.position.y;
+            //Debug.DrawRay(transform.position, potentialTargets[i].transform.position- transform.position ,Color.red);
 
-
-                //print( Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp));
-                if (Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp) < stats.AttackAngle)
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, potentialTargets[i].transform.position - transform.position, out hit))
+            {
+                if (hit.collider.gameObject.layer == 9)
                 {
-                    //apply damage to the player
-                    if (potentialTargets[i].GetComponent<PlayerHealth>() != null)
-                    {
 
-                        potentialTargets[i].GetComponent<PlayerHealth>().TakeDamage(stats.AttackDamage);
-                    }
-                    else
+                    //print(Vector3.Angle(transform.position + transform.forward, potentialTargets[i].transform.position - transform.position));
+                    //if()
+                    Vector3 temp = potentialTargets[i].transform.position;
+                    temp.y = transform.position.y;
+
+
+                    //print( Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp));
+                    if (Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp) < stats.AttackAngle)
                     {
-                        print("target got no health");
+                        PlayerHealth playerHealth = potentialTargets[i].GetComponent<PlayerHealth>();
+                        //apply damage to the player
+                        if (playerHealth != null)
+                        {
+                            Vector3 directionToPush = potentialTargets[i].gameObject.transform.position - transform.position;
+                            directionToPush.y = 0;
+                            directionToPush = Vector3.Normalize(directionToPush);
+
+                            playerHealth.KnockBackDamage(directionToPush, stats.PushLength, stats.AttackDamage);
+                        }
+                        else
+                        {
+                            Debug.LogError("target of " + gameObject.name + " attack got no health");
+                        }
                     }
                 }
+                else
+                print("attack blocked by terrain or something");
 
-
-
+            }
+            else
+            print("this should never show i guess");
 
             }
             
@@ -210,10 +233,40 @@ public class TankBeetle : Enemy
 
         transform.Translate(Vector3.forward * stats.MoveSpeed * Time.deltaTime);
         */
+        Vector3 temPlayerPos = _playerTransform.position;
+        temPlayerPos.y = transform.position.y;
 
+        NavMeshPath pathToPlayer = new NavMeshPath();
+        _navMeshAgent.CalculatePath(_playerTransform.position, pathToPlayer);
+
+        Vector3 tempPathPos;
+
+        if (pathToPlayer.corners.Length > 1)
+            tempPathPos = pathToPlayer.corners[1];
+        else
+            tempPathPos = temPlayerPos;
+
+        tempPathPos.y = transform.position.y;
+        /*
+        for (int i = 0; i < pathToPlayer.corners.Length; i++)
+        {
+            Debug.DrawLine(transform.position, pathToPlayer.corners[i], Color.red);
+        }
+        */
         
-        if (_navMeshAgent.destination != _playerTransform.position)
+
+        //print(tempPathPos);
+
+        Quaternion targetRotation = Quaternion.LookRotation(tempPathPos - transform.position );
+
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, stats.TurnSpeed * Time.deltaTime);
+
+        //_navMeshAgent.SetPath(pathToPlayer);
+        _navMeshAgent.Move(transform.forward * Time.deltaTime * stats.MoveSpeed);
+        
+        /*if (_navMeshAgent.destination != _playerTransform.position)
             _navMeshAgent.destination = _playerTransform.position;
+            */
 
     }
 
