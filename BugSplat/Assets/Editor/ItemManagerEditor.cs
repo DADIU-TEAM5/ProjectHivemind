@@ -26,7 +26,7 @@ public class ItemManagerEditor : Editor
 
         if (testWindowIsOpen)
         {
-            ItemObject testItem = itemManager.AllItems[0];
+            ItemObject testItem = new ItemObject();
             
             if (GUILayout.Button("Add Item"))
             {
