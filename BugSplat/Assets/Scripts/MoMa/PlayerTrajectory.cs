@@ -302,18 +302,15 @@ public class PlayerTrajectory : GameLoop
     {
         _future[0] = currentPos ;
 
-        //var rotation = Quaternion.Euler( Direction.Value * PredictSpeed);
+        var rotation = Quaternion.Euler( Direction.Value);
 
-        for (int i = 0; i < SaveInSecond; i++)
+        for (int i = 1; i < SaveInSecond; i++)
         {
             var increase = Second / SaveInSecond * i;
-            //var gap_increase = Quaternion.ToEulerAngles(rotation) * increase;
-            //var angle_increase = Quaternion.EulerRotation(gap_increase);
-            var gap_increase = Direction.Value * increase;
+            var gap_increase = Quaternion.ToEulerAngles(rotation) * increase;
             var angle_increase = Quaternion.EulerRotation(gap_increase);
-            var gap = (inputVel * PredictSpeed * increase);
+            var gap = (inputVel * increase);
             var futureP = (currentPos + angle_increase  * gap);
-            futureP.y = 0;
             _future[i] = futureP;
         }
 
