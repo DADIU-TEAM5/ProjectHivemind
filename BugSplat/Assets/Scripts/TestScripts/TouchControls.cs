@@ -248,13 +248,13 @@ public class TouchControls : GameLoop
             if (_inputMoved)
             {
                 DebugText.text = "DODGED!";
-                DashInitiatedSO.Raise();
+                DashInitiatedSO.Raise(this.gameObject);
                 PlayerCurrentSpeedSO.Value = 0;
             }
             else
             {
                 DebugText.text = "ATTACKED!";
-                AttackInitiatedSO.Raise();
+                AttackInitiatedSO.Raise(this.gameObject);
                 PlayerCurrentSpeedSO.Value = 0;
             }
         }

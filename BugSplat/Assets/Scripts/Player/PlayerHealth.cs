@@ -31,7 +31,7 @@ public class PlayerHealth : MonoBehaviour
         {
             if (damage > 0f)
             {
-                TookDamageEvent.Raise();
+                TookDamageEvent.Raise(this.gameObject);
             }
         }
 

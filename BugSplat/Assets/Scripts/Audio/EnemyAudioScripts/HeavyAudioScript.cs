@@ -11,34 +11,34 @@ public class HeavyAudioScript : MonoBehaviour
     public AK.Wwise.Event DeathSplat;
     public AK.Wwise.Event Charge;
 
-   // Skal bruges til voldsommere footsteps, måske skal det ske igennem events, eg. charge event sætter chargestate,
-   //og hit eller time run out sets state back
-   // private AK.Wwise.State ChargingState;
+    // Skal bruges til voldsommere footsteps, måske skal det ske igennem events, eg. charge event sætter chargestate,
+    //og hit eller time run out sets state back
+    // private AK.Wwise.State ChargingState;
 
 
-    public void FootStepEvent()
+    public void FootStepEvent(GameObject source)
     {
-        Footstep.Post(this.gameObject);
+        Footstep.Post(source);
     }
 
-    public void AttackEvent()
+    public void AttackEvent(GameObject source)
     {
-        Attack.Post(this.gameObject);
+        Attack.Post(source);
     }
 
-    public void HitStepEvent()
+    public void HitEvent(GameObject source)
     {
-        Hit.Post(this.gameObject);
+        Hit.Post(source);
     }
 
-    public void Scared()
+    public void Scared(GameObject source)
     {
-        ScaredScream.Post(this.gameObject);
+        ScaredScream.Post(source);
     }
 
-    public void Death()
+    public void Death(GameObject source)
     {
-        DeathSplat.Post(this.gameObject);
+        DeathSplat.Post(source);
     }
 
     public void ChargingEvent()

@@ -6,39 +6,39 @@ public class BoomerAudioScript : MonoBehaviour
 {
     public AK.Wwise.Event FootStep;
     public AK.Wwise.Event Attack;
-    public AK.Wwise.Event Hit;
+    public AK.Wwise.Event Hit; 
     public AK.Wwise.Event ScaredScream;
     public AK.Wwise.Event DeathSplat;
     public AK.Wwise.Event BoomerAttack;
 
 
-    public void FootStepEvent()
+    public void FootstepEvent(GameObject source)
     {
-        FootStep.Post(this.gameObject);
+        FootStep.Post(source);
     }
 
-    public void AttackEvent()
+    public void AttackEvent(GameObject source)
     {
-        Attack.Post(this.gameObject);
+        Attack.Post(source);
     }
 
-    public void HitEvent()
+    public void HitEvent(GameObject source)
     {
-        Hit.Post(this.gameObject);
+        Hit.Post(source);
     }
 
-    public void Scared()
+    public void Scared(GameObject source)
     {
-        ScaredScream.Post(this.gameObject);
+        ScaredScream.Post(source);
     }
 
-    public void Death()
+    public void Death(GameObject source)
     {
-        DeathSplat.Post(this.gameObject);
+        DeathSplat.Post(source);
     }
 
-    public void BoomerAttackEvent()
+    public void BoomerAttackEvent(GameObject source)
     {
-        BoomerAttack.Post(this.gameObject);
+        BoomerAttack.Post(source);
     }
 }
