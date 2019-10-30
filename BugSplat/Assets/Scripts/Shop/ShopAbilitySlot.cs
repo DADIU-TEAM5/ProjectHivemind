@@ -20,4 +20,12 @@ public class ShopAbilitySlot : ShopSlot
     {
         Ability.OnTrigger();
     }
+
+    public override void Init()
+    {
+    }
+
+    public override void Reset()
+    {
+    }
 }

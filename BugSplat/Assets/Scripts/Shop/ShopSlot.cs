@@ -28,6 +28,10 @@ public abstract class ShopSlot : ScriptableObject
         PurchasedItem.Raise();
     }
 
+    public abstract void Init();
+
+    public abstract void Reset();
+
     public abstract void OnPurchase(); 
 
     public abstract Sprite GetSprite(); 
