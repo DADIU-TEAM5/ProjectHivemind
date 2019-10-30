@@ -182,41 +182,54 @@ public class cannonFodder : Enemy
 
             Collider[] potentialTargets = Physics.OverlapSphere(transform.position, stats.AttackRange, LayerMask.GetMask("Player"));
 
-            for (int i = 0; i < potentialTargets.Length; i++)
+            RaycastHit hit;
+            if (potentialTargets.Length>0 && Physics.Raycast(transform.position, potentialTargets[0].transform.position - transform.position, out hit))
             {
-
-                //print(Vector3.Angle(transform.position + transform.forward, potentialTargets[i].transform.position - transform.position));
-                //if()
-                Vector3 temp = potentialTargets[i].transform.position;
-                temp.y = transform.position.y;
-
-
-                //print( Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp));
-                if (Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp) < stats.AttackAngle)
+                if (hit.collider.gameObject.layer == 9)
                 {
-                    //apply damage to the player
-                    if (potentialTargets[i].GetComponent<PlayerHealth>() != null)
-                    {
 
-                        potentialTargets[i].GetComponent<PlayerHealth>().TakeDamage(stats.AttackDamage);
-                    }
-                    else
+                    //print(Vector3.Angle(transform.position + transform.forward, potentialTargets[i].transform.position - transform.position));
+                    //if()
+                    Vector3 temp = potentialTargets[0].transform.position;
+                    temp.y = transform.position.y;
+
+
+                    //print( Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp));
+                    if (Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp) < stats.AttackAngle)
                     {
-                        print("target got no health");
+                        PlayerHealth playerHealth = potentialTargets[0].GetComponent<PlayerHealth>();
+                        //apply damage to the player
+                        if (playerHealth != null)
+                        {
+                            Vector3 directionToPush = potentialTargets[0].gameObject.transform.position - transform.position;
+                            directionToPush.y = 0;
+                            directionToPush = Vector3.Normalize(directionToPush);
+
+                            playerHealth.TakeDamage( stats.AttackDamage);
+                        }
+                        else
+                        {
+                            Debug.LogError("target of " + gameObject.name + " attack got no health");
+                        }
                     }
                 }
-
-
-
+                else
+                    print("attack blocked by terrain or something");
 
             }
+            else
+                print("this should never show i guess");
+
             _attackCooldown = stats.AttackSpeed;
             _attacking = false;
             _attackCharge = 0;
             _cone.SetActive(false);
+
+        }
+        
         }
 
-    }
+    
 
     bool playerInAttackRange()
     {

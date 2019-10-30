@@ -55,6 +55,7 @@ public class BodyPart : GameLoop
 
         if (_pickedUp)
         {
+            PickUpSpeed += Time.deltaTime*5;
             float distanceToPlayer = Vector3.Distance(transform.position, PlayerPosition.Value);
             transform.LookAt(PlayerPosition.Value);
             transform.Translate(Vector3.forward * Time.deltaTime * PickUpSpeed);
