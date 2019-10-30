@@ -46,6 +46,8 @@ public class TouchControls : GameLoop
     public Vector3 _currentInputPosition;
     private bool _inputMoved;
     private float _inputTime;
+    private float _runtimeInputMax;
+    private float _runtimeInputMin;
 
     // Debug UI stuff
     public GameObject TouchUIDotCurrent;
@@ -64,8 +66,8 @@ public class TouchControls : GameLoop
         
         _inputTouch = new Vector3();
 
-        InputMoveMaxThresholdSO.Value = Screen.width * (InputMoveMaxThresholdSO.Value / 100);
-        InputMoveMinThresholdSO.Value = Screen.width * (InputMoveMinThresholdSO.Value / 100);
+        _runtimeInputMax = Screen.width * (InputMoveMaxThresholdSO.Value / 100);
+        _runtimeInputMin = Screen.width * (InputMoveMinThresholdSO.Value / 100);
 
         PlayerCurrentSpeedSO.Value = 0;
         

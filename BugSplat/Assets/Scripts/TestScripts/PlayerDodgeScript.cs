@@ -94,9 +94,10 @@ public class PlayerDodgeScript : GameLoop
                     Debug.Log("No obstacles found!");
                     _moveDistance = DashLengthSO.Value;
                 }
+                player.transform.Translate(PlayerVelocitySO.Value * _moveDistance);
             }
 
-            if (_lerpTime - _currentTime < DashSpeedSO.Value)
+            /*if (_lerpTime - _currentTime < DashSpeedSO.Value)
             {
                 _lerpTime = Time.time;
                 float _diffTime = _lerpTime - _currentTime;
@@ -111,7 +112,7 @@ public class PlayerDodgeScript : GameLoop
                 IsDodging.Value = false;
                 _obstacleDetectionDone = false;
                 _lerpTime = 0f;
-            }
+            }*/
         }
     }
 
@@ -126,16 +127,13 @@ public class PlayerDodgeScript : GameLoop
     public void PlayerDash()
     {
         if (IsDodging.Value == false)
-            if(!_cannotDodge)
-            {
-                {
-                    _dashDirection = PlayerDirectionSO.Value;
-                    _currentTime = Time.time;
-                    _lerpTime = 0f;
-                    IsDodging.Value = true;
-                    _obstacleDetectionDone = false;
-                }
-            }
+        {
+            _dashDirection = PlayerDirectionSO.Value;
+            _currentTime = Time.time;
+            _lerpTime = 0f;
+            IsDodging.Value = true;
+            _obstacleDetectionDone = false;
+        }
     }
 
 
