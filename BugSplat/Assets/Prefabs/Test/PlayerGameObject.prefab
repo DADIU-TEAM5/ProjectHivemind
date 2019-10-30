@@ -83,12 +83,13 @@ MonoBehaviour:
   PlayerVelocitySO: {fileID: 11400000, guid: d1f4ccfac4a47fb4da89d998092775b8, type: 2}
   DashInitiatedSO: {fileID: 11400000, guid: a325fabc21f4650479d69a9c7bdd3d21, type: 2}
   AttackInitiatedSO: {fileID: 11400000, guid: 4cf9a708d5633f04bbbc56776410d56d, type: 2}
+  InputMoveMinThresholdSO: {fileID: 11400000, guid: 06f2711f3ca5c4d4eba7f5b9b751f4c3,
+    type: 2}
+  InputMoveMaxThresholdSO: {fileID: 11400000, guid: 3a574945138cf2f42a0ef6793136ece4,
+    type: 2}
+  InputSwipeTapTimeSO: {fileID: 11400000, guid: 8fd78ac881a3fb14fa099e45382b35e2,
+    type: 2}
   MainCameraDirection: {fileID: 0}
-  PlayerMaxSpeed: 8
-  PlayerAcceleration: 0.1
-  _inputMoveMaxThreshold: 25
-  _inputMoveMinThreshold: 5
-  _inputSwipeTapTime: 200
   _recordedInputPosition: {x: 0, y: 0, z: 0}
   _currentInputPosition: {x: 0, y: 0, z: 0}
   TouchUIDotCurrent: {fileID: 7809630874115842068, guid: 75abecfb32e189541b564be8a8db926a,
@@ -122,6 +123,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  TestCube: {fileID: 0}
+  TestCube2: {fileID: 0}
   DashLength: 10
   DashSpeed: 0.1
 --- !u!54 &5788987755461925663
@@ -267,7 +270,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5788987755592666200}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.52203786, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4125751275595353551}
@@ -414,7 +417,7 @@ PrefabInstance:
     - target: {fileID: 2349352552298288874, guid: 4fed1e57ebefa5240bd9ca286a55f6c7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.951
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2349352552298288874, guid: 4fed1e57ebefa5240bd9ca286a55f6c7,
         type: 3}
