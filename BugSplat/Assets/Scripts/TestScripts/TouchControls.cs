@@ -161,7 +161,7 @@ public class TouchControls : GameLoop
         ReturnInputPosition(inputPosition); // Begin recording Current Pos
 
         // Check if mouse have moved more than the threshold
-        if (Vector3.Distance(_recordedInputPosition, _currentInputPosition) > InputMoveMinThresholdSO.Value)
+        if (Vector3.Distance(_recordedInputPosition, _currentInputPosition) > _runtimeInputMin)
         {
             DebugText.text = "MOVING!";
 
@@ -182,12 +182,12 @@ public class TouchControls : GameLoop
 
             float circleCalc = (heading.x * heading.x) + (heading.y * heading.y);
 
-            if (circleCalc > (InputMoveMaxThresholdSO.Value * InputMoveMaxThresholdSO.Value))
+            if (circleCalc > (_runtimeInputMax * _runtimeInputMax))
             {
-                x = InputMoveMaxThresholdSO.Value * Mathf.Cos(a);
+                x = _runtimeInputMax * Mathf.Cos(a);
                 heading.x = x;
 
-                y = InputMoveMaxThresholdSO.Value * Mathf.Sin(a);
+                y = _runtimeInputMax * Mathf.Sin(a);
                 heading.y = y;
             }
             else
