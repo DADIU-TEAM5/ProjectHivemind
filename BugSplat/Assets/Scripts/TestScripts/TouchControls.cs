@@ -13,9 +13,13 @@ public class TouchControls : GameLoop
     public Vector3Variable PlayerVelocitySO;
     public GameEvent DashInitiatedSO;
     public GameEvent AttackInitiatedSO;
+    public FloatVariable InputMoveMinThresholdSO;
+    public FloatVariable InputMoveMaxThresholdSO;
+    public FloatVariable InputSwipeTapTimeSO;
     public Transform MainCameraDirection; // Not used yet, but should be used for rotating the coordinate system of the touch input to  match the direction of the player
 
-    // Display sli  rs for altering the speed and acceleration of the Player - This could potentially be moved to an editor window for the designers
+    /*
+    // Display sliders for altering the speed and acceleration of the Player - This could potentially be moved to an editor window for the designers
     [Header("Player Variables")]
     [Tooltip("Maximum Speed in m/s")]
     public float PlayerMaxSpeed;
@@ -30,8 +34,9 @@ public class TouchControls : GameLoop
     [Tooltip("A percentage of the total screen width for setting how far the player must move the finger to make it react as a move and not e.g. a tap")]
     public float _inputMoveMinThreshold = 5f;
 
-    [Tooltip("Time in miliseconds before it is registered as a swipe or tap")]
-    public float _inputSwipeTapTime = 200f;
+    [Tooltip("Time in seconds before it is registered as a swipe or tap")]
+    public float _inputSwipeTapTime = 0.200;
+    */
 
     // Setup the private variables needed for the calculations in the current script
     private Vector3 _inputTouch;
@@ -59,21 +64,20 @@ public class TouchControls : GameLoop
         
         _inputTouch = new Vector3();
 
-        _inputMoveMaxThreshold = Screen.width * (_inputMoveMaxThreshold / 100);
-        _inputMoveMinThreshold = Screen.width * (_inputMoveMinThreshold / 100);
-
-        _inputSwipeTapTime /= 1000;
-
-        PlayerMaxSpeedSO.Value = PlayerMaxSpeed;
+        InputMoveMaxThresholdSO.Value = Screen.width * (InputMoveMaxThresholdSO.Value / 100);
+        InputMoveMinThresholdSO.Value = Screen.width * (InputMoveMinThresholdSO.Value / 100);
 
         PlayerCurrentSpeedSO.Value = 0;
-        PlayerAccelerationSO.Value = PlayerAcceleration;
-        PlayerDirectionSO.Value = Vector3.zero;
+        
+        PlayerDirectionSO.Value = Vector3.forward;
+
+        //PlayerAccelerationSO.Value = PlayerAcceleration;
+        //PlayerMaxSpeedSO.Value = PlayerMaxSpeed;
     }
 
-    
-   
-public override void LoopUpdate(float deltaTime)
+
+
+    public override void LoopUpdate(float deltaTime)
     
 {
         // Detect Touch
@@ -155,7 +159,7 @@ public override void LoopUpdate(float deltaTime)
         ReturnInputPosition(inputPosition); // Begin recording Current Pos
 
         // Check if mouse have moved more than the threshold
-        if (Vector3.Distance(_recordedInputPosition, _currentInputPosition) > _inputMoveMinThreshold)
+        if (Vector3.Distance(_recordedInputPosition, _currentInputPosition) > InputMoveMinThresholdSO.Value)
         {
             DebugText.text = "MOVING!";
 
@@ -176,12 +180,12 @@ public override void LoopUpdate(float deltaTime)
 
             float circleCalc = (heading.x * heading.x) + (heading.y * heading.y);
 
-            if (circleCalc > (_inputMoveMaxThreshold * _inputMoveMaxThreshold))
+            if (circleCalc > (InputMoveMaxThresholdSO.Value * InputMoveMaxThresholdSO.Value))
             {
-                x = _inputMoveMaxThreshold * Mathf.Cos(a);
+                x = InputMoveMaxThresholdSO.Value * Mathf.Cos(a);
                 heading.x = x;
 
-                y = _inputMoveMaxThreshold * Mathf.Sin(a);
+                y = InputMoveMaxThresholdSO.Value * Mathf.Sin(a);
                 heading.y = y;
             }
             else
@@ -239,7 +243,7 @@ public override void LoopUpdate(float deltaTime)
         Object.Destroy(_uiCurrent);
         float endTime = Time.time - _inputTime;
 
-        if (endTime < _inputSwipeTapTime) 
+        if (endTime < InputSwipeTapTimeSO.Value) 
         {
             if (_inputMoved)
             {
