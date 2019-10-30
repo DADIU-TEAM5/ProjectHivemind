@@ -13,6 +13,10 @@ public class ShopSlotDisplay : GameLoop
     [SerializeField]
     private TMPro.TextMeshProUGUI PriceText;
 
+    public void Start() {
+        Slot.Init();
+    }
+
     public override void LoopUpdate(float deltaTime)
     {
         SlotImage.sprite = Slot.GetSprite();
