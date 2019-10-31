@@ -9,26 +9,29 @@ public class cannonFodder : Enemy
 
     public GameObject bodyPart;
 
-    bool _playerDetected;
-    bool _isAlly;
     public SimpleEnemyStats stats;
-    Transform _playerTransform;
-    bool _attacking;
-    float _attackCharge;
 
-   
+    private bool _playerDetected;
+    private bool _isAlly;
+    private Transform _playerTransform;
+    private bool _attacking;
+    private float _attackCharge;
+    private float _attackCooldown = 0;
 
-    float _currentHealth;
+    private float _currentHealth;
 
-    float _attackCooldown = 0;
+    private NavMeshAgent _navMeshAgent;
 
+    private Renderer _renderer;
+    private GameObject _cone;
+    private LineRenderer _coneRenderer;
 
-    Renderer _renderer;
-
-    NavMeshAgent _navMeshAgent;
-
-    GameObject _cone;
-    LineRenderer _coneRenderer;
+    [Header("Events")]
+    public GameEvent TakeDamageEvent;
+    public GameEvent AggroEvent;
+    public GameEvent AttackEvent;
+    public GameEvent DeathEvent;
+    public GameEvent AttackChargingEvent;
 
     public void Start()
     {
@@ -36,13 +39,11 @@ public class cannonFodder : Enemy
         _renderer = Graphics.GetComponent<Renderer>();
 
         _cone = new GameObject();
-
-        _navMeshAgent = GetComponent<NavMeshAgent>();
         _cone.AddComponent<LineRenderer>();
         _coneRenderer = _cone.GetComponent<LineRenderer>();
-
         _cone.SetActive(false);
 
+        _navMeshAgent = GetComponent<NavMeshAgent>();
         _navMeshAgent.speed = stats.MoveSpeed;
 
     }
@@ -56,26 +57,23 @@ public class cannonFodder : Enemy
     {
        // print(name + " took damage "+ damage);
         _currentHealth -= damage;
-        if(_currentHealth<= 0)
+        TakeDamageEvent.Raise(); 
+
+        if(_currentHealth <= 0)
         {
             int partsToDrop = Random.Range(stats.minPartsToDrop, stats.maxPartsToDrop);
             for (int i = 0; i < partsToDrop; i++)
             {
                 GameObject part = Instantiate(bodyPart);
-
                 
                 part.transform.position = transform.position +(( Vector3.up*i)*0.5f);
             }
-            
 
-
-
-
+            DeathEvent.Raise();
             EnemyList.Remove(gameObject);
+
             Destroy(_cone);
-
             Destroy(gameObject);
-
         }
     }
 
@@ -94,10 +92,6 @@ public class cannonFodder : Enemy
         }
         else if ( playerInAttackRange() || _attacking)
         {
-            
-
-            
-
             if (_attackCooldown <= 0)
             {
                 if (_navMeshAgent.destination != transform.position)
@@ -117,19 +111,11 @@ public class cannonFodder : Enemy
             _renderer.material.color = Color.yellow;
             MoveTowardsThePlayer();
         }
-
-
-
     }
 
-    public override void LoopLateUpdate(float deltaTime)
-    {
-        
+    public override void LoopLateUpdate(float deltaTime) {}
 
-    }
-
-
-    void drawCone(int points )
+    void drawCone(int points)
     {
         Vector3[] pointsForTheCone = new Vector3[points];
         _coneRenderer.positionCount = points;
@@ -160,10 +146,6 @@ public class cannonFodder : Enemy
             step++;
         }
 
-        
-
-        
-
         _coneRenderer.SetPositions(pointsForTheCone);
         _coneRenderer.widthMultiplier = 0.1f;
         
@@ -171,11 +153,10 @@ public class cannonFodder : Enemy
     }
     void Attack()
     {
-        
-
-
         if (_attacking == false)
         {
+            AttackChargingEvent.Raise();
+
             Vector3 adjustedPlayerPos = _playerTransform.position;
 
             adjustedPlayerPos.y = transform.position.y;
@@ -184,7 +165,6 @@ public class cannonFodder : Enemy
 
             _cone.SetActive(true);
             drawCone(10);
-
         }
 
         _attacking = true;
@@ -192,7 +172,7 @@ public class cannonFodder : Enemy
 
         if (_attackCharge >= stats.AttackChargeUpTime)
         {
-
+            AttackEvent.Raise();
             Collider[] potentialTargets = Physics.OverlapSphere(transform.position, stats.AttackRange, LayerMask.GetMask("Player"));
 
             RaycastHit hit;
@@ -240,13 +220,12 @@ public class cannonFodder : Enemy
 
         }
         
-        }
+    }
 
     
 
     bool playerInAttackRange()
     {
-        
         Vector3 adjustedPlayerPos = _playerTransform.position;
 
         adjustedPlayerPos.y = transform.position.y;
@@ -256,22 +235,11 @@ public class cannonFodder : Enemy
 
     void MoveTowardsThePlayer()
     {
-        /*
-        Vector3 adjustedPlayerPos = _playerTransform.position;
-
-        adjustedPlayerPos.y = transform.position.y;
-
-        transform.LookAt(adjustedPlayerPos);
-
-        transform.Translate(Vector3.forward * stats.MoveSpeed * Time.deltaTime);
-        */
-
         float jitter = 2;
         _navMeshAgent.Move(new Vector3(Random.Range(-jitter, jitter), 0, Random.Range(-jitter, jitter))*Time.deltaTime);
 
         if(_navMeshAgent.destination != _playerTransform.position)
         _navMeshAgent.destination = _playerTransform.position;
-
     }
 
     void DetectThePlayer()
@@ -280,6 +248,7 @@ public class cannonFodder : Enemy
 
         if (potentialTargets.Length > 0)
         {
+            AggroEvent.Raise();
             _playerDetected = true;
             _playerTransform = potentialTargets[0].gameObject.transform;
 
