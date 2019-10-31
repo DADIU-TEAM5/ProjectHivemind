@@ -27,7 +27,7 @@ public class ItemObject : ScriptableObject
 
     public void OnEnable()
     {
-        if(FlatStatChanges==null)
+        if(FlatStatChanges==null && PlayerStats != null)
             FlatStatChanges = new float[PlayerStats.Value.Count];
     }
 
