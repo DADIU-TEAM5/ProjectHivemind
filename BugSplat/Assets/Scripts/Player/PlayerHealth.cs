@@ -7,6 +7,8 @@ public class PlayerHealth : GameLoop
 {
     float _invulnerabilityTimer;
 
+    public GameObjectList EnemyList;
+
 
     public float InvulnerabilityTime = 0.3f;
 
@@ -43,6 +45,8 @@ public class PlayerHealth : GameLoop
             {
                 TookDamageEvent.Raise(this.gameObject);
             }
+
+            CheckIfDead();
         }
     }
 
@@ -54,6 +58,23 @@ public class PlayerHealth : GameLoop
     {
         if (_invulnerabilityTimer > 0)
             _invulnerabilityTimer -= Time.deltaTime;
+    }
+
+    void CheckIfDead()
+    {
+
+        if (CurrentHealth.Value <= 0)
+        {
+            Destroy(HexMapParent.Value);
+
+
+            EnemyList.Items = new List<GameObject>();
+            OverallSceneWorker.LoadScene("Death Scene");
+
+
+        }
+
+
     }
 
     public void KnockBackDamage(Vector3 direction, float length,float damage)
@@ -69,19 +90,11 @@ public class PlayerHealth : GameLoop
             {
                 if (damage > 0f)
                 {
-                    TookDamageEvent.Raise();
+                    TookDamageEvent.Raise(gameObject);
                 }
             }
 
-            if (CurrentHealth.Value <= 0)
-            {
-                Destroy(HexMapParent.Value);
-
-                OverallSceneWorker.LoadScene("Death Scene");
-
-
-            }
-
+            CheckIfDead();
 
 
 

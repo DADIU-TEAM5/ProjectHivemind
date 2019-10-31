@@ -29,6 +29,11 @@ public class TankBeetle : Enemy
     GameObject _cone;
     LineRenderer _coneRenderer;
 
+    public override bool IsVisible()
+    {
+        return _renderer.isVisible;
+    }
+
     public void Start()
     {
         _currentHealth = stats.HitPoints;

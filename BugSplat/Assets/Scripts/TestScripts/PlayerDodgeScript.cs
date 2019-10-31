@@ -36,6 +36,7 @@ public class PlayerDodgeScript : GameLoop
                 float _diffTime = _lerpTime - _currentTime;
                 PlayerVelocitySO.Value = Vector3.Lerp(Vector3.zero, _dashDirection * DashLengthSO.Value, _diffTime / DashSpeedSO.Value);
 
+                if(_navMeshAgent.isOnNavMesh)
                 _navMeshAgent.Move(PlayerVelocitySO.Value * DashLengthSO.Value * Time.deltaTime);
                 PlayerDirectionSO.Value = newPosition;
             }
