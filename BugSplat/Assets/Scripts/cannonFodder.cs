@@ -16,6 +16,8 @@ public class cannonFodder : Enemy
     bool _attacking;
     float _attackCharge;
 
+   
+
     float _currentHealth;
 
     float _attackCooldown = 0;
@@ -63,6 +65,8 @@ public class cannonFodder : Enemy
 
 
 
+
+            EnemyList.Remove(gameObject);
             Destroy(_cone);
 
             Destroy(gameObject);
@@ -115,6 +119,7 @@ public class cannonFodder : Enemy
 
     public override void LoopLateUpdate(float deltaTime)
     {
+        
 
     }
 

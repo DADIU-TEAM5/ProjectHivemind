@@ -61,6 +61,8 @@ public class TankBeetle : Enemy
                 part.transform.position = transform.position + ((Vector3.up * i) * 0.5f);
             }
 
+            EnemyList.Remove(gameObject);
+
             Destroy(_cone);
 
             Destroy(gameObject);
