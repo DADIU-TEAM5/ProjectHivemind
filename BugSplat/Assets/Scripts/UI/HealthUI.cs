@@ -19,7 +19,6 @@ public class HealthUI : GameLoop
 
     public override void LoopUpdate(float deltaTime) {
         CalculateHealthRatio();
-        Debug.Log($"Health ratio: {_healthRatio}");
         UpdateHealthBar();
     }
 
