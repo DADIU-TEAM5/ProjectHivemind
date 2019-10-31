@@ -53,6 +53,12 @@ MonoBehaviour:
   bodyPart: {fileID: 7324468612011702487, guid: 862620230bd5167459723c1fe51d3192,
     type: 3}
   stats: {fileID: 11400000, guid: cbaf78494567dd143a052ea9fd43de50, type: 2}
+  TakeDamageEvent: {fileID: 11400000, guid: 6ae505af1f79bc34c83fb79358858821, type: 2}
+  AggroEvent: {fileID: 11400000, guid: 0173fcf88f6a554429d152c2e0bf604d, type: 2}
+  AttackEvent: {fileID: 11400000, guid: d5e73850a04cfe546b2c81b73cc0f760, type: 2}
+  DeathEvent: {fileID: 11400000, guid: 3488db3170d2c2c4095d2fd49a373f47, type: 2}
+  AttackChargingEvent: {fileID: 11400000, guid: 967fe9cf4e62f5945b30869e11e13945,
+    type: 2}
 --- !u!114 &-5392400671335020184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,7 +87,7 @@ NavMeshAgent:
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 360
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -115,6 +121,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Projectile_worm
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: feebcbb68fd26454b96bc57e840331d5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: feebcbb68fd26454b96bc57e840331d5,
         type: 3}
@@ -170,6 +181,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: feebcbb68fd26454b96bc57e840331d5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: feebcbb68fd26454b96bc57e840331d5, type: 3}

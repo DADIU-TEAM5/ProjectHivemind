@@ -22,6 +22,8 @@ public class Spitter : Enemy
     float _attackCooldown = 0;
 
 
+    bool _underground;
+
     Renderer _renderer;
 
     NavMeshAgent _navMeshAgent;
@@ -48,6 +50,12 @@ public class Spitter : Enemy
 
     public override bool IsVisible()
     {
+        if (_underground)
+        {
+            return false;
+                
+        }
+
         return _renderer.isVisible;
     }
 
@@ -75,6 +83,13 @@ public class Spitter : Enemy
         }
     }
 
+
+    public void Burrow()
+    {
+        _underground = true;
+        Graphics.SetActive(false);
+       
+    }
 
     public override void LoopUpdate(float deltaTime)
     {
