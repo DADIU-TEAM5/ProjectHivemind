@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.AI;
 
 public class PlayerHealth : GameLoop
 {
@@ -10,6 +11,8 @@ public class PlayerHealth : GameLoop
 
     public FloatVariable MaxHealth;
     public float InvulnerabilityTime = 0.3f;
+
+    NavMeshAgent _navMeshAgent;
 
     Transform _playerParent;
     float _invulnerabilityTimer;
@@ -27,6 +30,9 @@ public class PlayerHealth : GameLoop
     {
         CurrentHealth.Value = MaxHealth.Value;
         _playerParent = transform.parent;
+
+        _navMeshAgent = transform.parent.GetComponent<NavMeshAgent>();
+
     }
 
     public void TakeDamage(float damage)
@@ -89,8 +95,8 @@ public class PlayerHealth : GameLoop
 
             CheckIfDead();
 
-
-
+            _navMeshAgent.Move(direction * length);
+            /*
             RaycastHit[] hits = Physics.CapsuleCastAll(_playerParent.position - (Vector3.up * 0.5f), _playerParent.position + (Vector3.up * 0.5f), .1f, direction, (direction * length).magnitude);
             if (hits.Length > 0)
             {
@@ -118,6 +124,7 @@ public class PlayerHealth : GameLoop
             {
                 _playerParent.Translate(direction * length);
             }
+            */
 
         }
 
