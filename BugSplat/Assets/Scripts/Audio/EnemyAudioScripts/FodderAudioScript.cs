@@ -10,6 +10,7 @@ public class FodderAudioScript : MonoBehaviour
     public AK.Wwise.Event Hit;
     public AK.Wwise.Event ScaredScream;
     public AK.Wwise.Event DeathSplat;
+    public AK.Wwise.Event PlayerDetected;
 
 
     public void FootStepEvent(GameObject source)
@@ -35,5 +36,10 @@ public class FodderAudioScript : MonoBehaviour
     public void Death(GameObject source)
     {
         DeathSplat.Post(source);
+    }
+
+    public void PlayerDetect(GameObject source)
+    {
+        PlayerDetected.Post(source);
     }
 }
