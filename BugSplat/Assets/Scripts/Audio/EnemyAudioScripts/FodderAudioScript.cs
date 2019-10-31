@@ -12,28 +12,28 @@ public class FodderAudioScript : MonoBehaviour
     public AK.Wwise.Event DeathSplat;
 
 
-    public void FootStepEvent(GameObject source)
+    public void FootStepEvent()
     {
-        Footstep.Post(source);
+        Footstep.Post(this.gameObject);
     }
 
-    public void AttackEvent(GameObject source)
+    public void AttackEvent()
     {
-        Attack.Post(source);
+        Attack.Post(this.gameObject);
     }
 
-    public void HitEvent(GameObject source)
+    public void HitStepEvent()
     {
-        Hit.Post(source);
+        Hit.Post(this.gameObject);
     }
 
-    public void Scared(GameObject source)
+    public void Scared()
     {
-        ScaredScream.Post(source);
+        ScaredScream.Post(this.gameObject);
     }
 
-    public void Death(GameObject source)
+    public void Death()
     {
-        DeathSplat.Post(source);
+        DeathSplat.Post(this.gameObject);
     }
 }

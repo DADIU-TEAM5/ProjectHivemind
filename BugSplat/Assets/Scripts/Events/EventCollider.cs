@@ -10,14 +10,14 @@ public class EventCollider : MonoBehaviour
     public GameEvent StayEvent;
 
     void OnTriggerEnter(Collider other) {
-        EnterEvent?.Raise(this.gameObject);
+        EnterEvent?.Raise();
     }
 
     void OnTriggerExit(Collider other) {
-        ExitEvent?.Raise(this.gameObject);
+        ExitEvent?.Raise();
     }
 
     void OnTriggerStay(Collider other) {
-        StayEvent?.Raise(this.gameObject);
+        StayEvent?.Raise();
     }
 }
