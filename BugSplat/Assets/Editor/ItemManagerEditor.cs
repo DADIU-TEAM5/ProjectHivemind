@@ -24,12 +24,12 @@ public class ItemManagerEditor : Editor
         EditorGUILayout.Space();
 
         playerStatsIsOpen = EditorGUILayout.BeginFoldoutHeaderGroup(playerStatsIsOpen, "Player Stats");
-        if (itemManager.ModifiedStats.Count > 0 && playerStatsIsOpen)
+        if (itemManager.PlayerStats.Value.Count > 0 && playerStatsIsOpen)
         {
             
-            for (int i = 0; i < itemManager.ModifiedStats.Count; i++)
+            for (int i = 0; i < itemManager.PlayerStats.Value.Count; i++)
             {
-                itemManager.ModifiedStats[i].Value = EditorGUILayout.FloatField(itemManager.ModifiedStats[i].name, itemManager.ModifiedStats[i].Value);
+                itemManager.PlayerStats.Value[i].Value = EditorGUILayout.FloatField(itemManager.PlayerStats.Value[i].name, itemManager.PlayerStats.Value[i].Value);
             }
         }
         EditorGUILayout.EndFoldoutHeaderGroup();
