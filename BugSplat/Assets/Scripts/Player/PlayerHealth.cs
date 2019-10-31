@@ -2,33 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.AI;
 
 public class PlayerHealth : GameLoop
 {
-    float _invulnerabilityTimer;
-
     public GameObjectList EnemyList;
-
-
-    public float InvulnerabilityTime = 0.3f;
+    public GameObjectVariable HexMapParent;
 
     public FloatVariable MaxHealth;
+    public float InvulnerabilityTime = 0.3f;
+
+    NavMeshAgent _navMeshAgent;
 
     Transform _playerParent;
-
-    public GameObjectVariable HexMapParent;
+    float _invulnerabilityTimer;
 
     [SerializeField]
     private FloatVariable CurrentHealth;
 
-
+    [Header("Events")]
     [SerializeField]
     private GameEvent TookDamageEvent;
+    [SerializeField]
+    private GameEvent PlayerDiedEvent;
 
     public void Start()
     {
         CurrentHealth.Value = MaxHealth.Value;
         _playerParent = transform.parent;
+
+        _navMeshAgent = transform.parent.GetComponent<NavMeshAgent>();
+
     }
 
     public void TakeDamage(float damage)
@@ -62,19 +66,14 @@ public class PlayerHealth : GameLoop
 
     void CheckIfDead()
     {
-
         if (CurrentHealth.Value <= 0)
         {
+            PlayerDiedEvent.Raise();
             Destroy(HexMapParent.Value);
-
 
             EnemyList.Items = new List<GameObject>();
             OverallSceneWorker.LoadScene("Death Scene");
-
-
         }
-
-
     }
 
     public void KnockBackDamage(Vector3 direction, float length,float damage)
@@ -96,8 +95,8 @@ public class PlayerHealth : GameLoop
 
             CheckIfDead();
 
-
-
+            _navMeshAgent.Move(direction * length);
+            /*
             RaycastHit[] hits = Physics.CapsuleCastAll(_playerParent.position - (Vector3.up * 0.5f), _playerParent.position + (Vector3.up * 0.5f), .1f, direction, (direction * length).magnitude);
             if (hits.Length > 0)
             {
@@ -125,6 +124,7 @@ public class PlayerHealth : GameLoop
             {
                 _playerParent.Translate(direction * length);
             }
+            */
 
         }
 
