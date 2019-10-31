@@ -10,6 +10,7 @@ public class ItemManagerEditor : Editor
 
     ItemManager itemManager;
     bool testWindowIsOpen = false;
+    bool playerStatsIsOpen = false;
 
     private void OnEnable()
     {
@@ -22,12 +23,23 @@ public class ItemManagerEditor : Editor
 
         EditorGUILayout.Space();
 
+        playerStatsIsOpen = EditorGUILayout.BeginFoldoutHeaderGroup(playerStatsIsOpen, "Player Stats");
+        if (playerStatsIsOpen)
+        {
+            for (int i = 0; i < itemManager.ModifiedStats.Count; i++)
+            {
+                itemManager.ModifiedStats[i].Value = EditorGUILayout.FloatField(itemManager.ModifiedStats[i].name, itemManager.ModifiedStats[i].Value);
+            }
+        }
+        EditorGUILayout.EndFoldoutHeaderGroup();
+
+        EditorGUILayout.Space();
         testWindowIsOpen = EditorGUILayout.BeginFoldoutHeaderGroup(testWindowIsOpen, "Item Tests");
 
         if (testWindowIsOpen)
         {
             ItemObject testItem = itemManager.AllItems[0];
-            
+
             if (GUILayout.Button("Add Item"))
             {
                 Debug.Log("Clicked Add Item");
@@ -41,7 +53,9 @@ public class ItemManagerEditor : Editor
             }
 
         }
+        EditorGUILayout.EndFoldoutHeaderGroup();
 
 
     }
 }
+
