@@ -2,45 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.AI;
 
 public class PlayerHealth : GameLoop
 {
+    float _invulnerabilityTimer;
+
     public GameObjectList EnemyList;
-    public GameObjectVariable HexMapParent;
 
-    public BoolVariable IsDodgeing;
 
-    public FloatVariable MaxHealth;
     public float InvulnerabilityTime = 0.3f;
 
-    NavMeshAgent _navMeshAgent;
+    public FloatVariable MaxHealth;
 
     Transform _playerParent;
-    float _invulnerabilityTimer;
+
+    public GameObjectVariable HexMapParent;
 
     [SerializeField]
     private FloatVariable CurrentHealth;
 
-    [Header("Events")]
+
     [SerializeField]
     private GameEvent TookDamageEvent;
-    [SerializeField]
-    private GameEvent PlayerDiedEvent;
 
     public void Start()
     {
         CurrentHealth.Value = MaxHealth.Value;
         _playerParent = transform.parent;
-
-        _navMeshAgent = transform.parent.GetComponent<NavMeshAgent>();
-
     }
 
     public void TakeDamage(float damage)
     {
 
-        if (_invulnerabilityTimer <= 0 && IsDodgeing.Value != true)
+        if (_invulnerabilityTimer <= 0)
 
         {
             _invulnerabilityTimer = InvulnerabilityTime;
@@ -68,19 +62,24 @@ public class PlayerHealth : GameLoop
 
     void CheckIfDead()
     {
+
         if (CurrentHealth.Value <= 0)
         {
-            PlayerDiedEvent.Raise();
             Destroy(HexMapParent.Value);
+
 
             EnemyList.Items = new List<GameObject>();
             OverallSceneWorker.LoadScene("Death Scene");
+
+
         }
+
+
     }
 
     public void KnockBackDamage(Vector3 direction, float length,float damage)
     {
-        if (_invulnerabilityTimer <= 0 && IsDodgeing.Value != true)
+        if (_invulnerabilityTimer <= 0)
         {
             _invulnerabilityTimer = InvulnerabilityTime;
 
@@ -97,8 +96,8 @@ public class PlayerHealth : GameLoop
 
             CheckIfDead();
 
-            _navMeshAgent.Move(direction * length);
-            /*
+
+
             RaycastHit[] hits = Physics.CapsuleCastAll(_playerParent.position - (Vector3.up * 0.5f), _playerParent.position + (Vector3.up * 0.5f), .1f, direction, (direction * length).magnitude);
             if (hits.Length > 0)
             {
@@ -126,7 +125,6 @@ public class PlayerHealth : GameLoop
             {
                 _playerParent.Translate(direction * length);
             }
-            */
 
         }
 
