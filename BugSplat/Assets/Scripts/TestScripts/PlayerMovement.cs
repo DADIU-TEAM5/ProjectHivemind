@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerMovement : GameLoop
 {
@@ -16,6 +17,8 @@ public class PlayerMovement : GameLoop
     public Vector3Variable PlayerPosition;
 
 
+    NavMeshAgent _navMeshAgent;
+
     private float _lerpTime = 0f;
     private Vector3 _velocity;
     private bool _isMoving;
@@ -24,6 +27,7 @@ public class PlayerMovement : GameLoop
     Rigidbody _rigidbody;
     private void Start()
     {
+        _navMeshAgent = GetComponent<NavMeshAgent>();
         _rigidbody = GetComponent<Rigidbody>();
     }
 
@@ -57,6 +61,10 @@ public class PlayerMovement : GameLoop
             _isMoving = false;
         }
 
+        Anim.SetBool("Running", PlayerCurrentSpeedSO.Value != 0);
+        _navMeshAgent.Move(PlayerVelocitySO.Value * PlayerCurrentSpeedSO.Value * Time.deltaTime);
+
+
         // Move player using translate
         //transform.Translate(PlayerVelocitySO.Value * PlayerMaxSpeedSO.Value * Time.deltaTime);
 
@@ -72,9 +80,12 @@ public class PlayerMovement : GameLoop
 
     private void FixedUpdate()
     {
+        /*
         Anim.SetBool("Running", PlayerCurrentSpeedSO.Value != 0);
         _rigidbody.MovePosition(transform.position+(PlayerVelocitySO.Value * PlayerCurrentSpeedSO.Value * Time.deltaTime));
+        */
         _rigidbody.velocity = Vector3.zero;
+        
     }
     public override void LoopLateUpdate(float deltaTime)
     {
