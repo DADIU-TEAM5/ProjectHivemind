@@ -3,20 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class cannonFodder : Enemy
+public class Spitter : Enemy
 {
+
     public GameObject Graphics;
 
     public GameObject bodyPart;
 
     bool _playerDetected;
     bool _isAlly;
-    public SimpleEnemyStats stats;
+    public SpitterStats stats;
     Transform _playerTransform;
     bool _attacking;
     float _attackCharge;
-
-   
 
     float _currentHealth;
 
@@ -27,22 +26,22 @@ public class cannonFodder : Enemy
 
     NavMeshAgent _navMeshAgent;
 
-    GameObject _cone;
-    LineRenderer _coneRenderer;
+
+
+    [Header("Events")]
+    public GameEvent TakeDamageEvent;
+    public GameEvent AggroEvent;
+    public GameEvent AttackEvent;
+    public GameEvent DeathEvent;
+    public GameEvent AttackChargingEvent;
 
     public void Start()
     {
         _currentHealth = stats.HitPoints;
         _renderer = Graphics.GetComponent<Renderer>();
 
-        _cone = new GameObject();
 
         _navMeshAgent = GetComponent<NavMeshAgent>();
-        _cone.AddComponent<LineRenderer>();
-        _coneRenderer = _cone.GetComponent<LineRenderer>();
-
-        _cone.SetActive(false);
-
         _navMeshAgent.speed = stats.MoveSpeed;
 
     }
@@ -54,28 +53,25 @@ public class cannonFodder : Enemy
 
     public override void TakeDamage(float damage)
     {
-       // print(name + " took damage "+ damage);
+        // print(name + " took damage "+ damage);
         _currentHealth -= damage;
-        if(_currentHealth<= 0)
+        TakeDamageEvent.Raise();
+
+        if (_currentHealth <= 0)
         {
             int partsToDrop = Random.Range(stats.minPartsToDrop, stats.maxPartsToDrop);
             for (int i = 0; i < partsToDrop; i++)
             {
                 GameObject part = Instantiate(bodyPart);
 
-                
-                part.transform.position = transform.position +(( Vector3.up*i)*0.5f);
+                part.transform.position = transform.position + ((Vector3.up * i) * 0.5f);
             }
-            
 
-
-
-
+            DeathEvent.Raise();
             EnemyList.Remove(gameObject);
-            Destroy(_cone);
 
+            
             Destroy(gameObject);
-
         }
     }
 
@@ -92,12 +88,8 @@ public class cannonFodder : Enemy
             _renderer.material.color = Color.blue;
             DetectThePlayer();
         }
-        else if ( playerInAttackRange() || _attacking)
+        else if (playerInAttackRange() || _attacking)
         {
-            
-
-            
-
             if (_attackCooldown <= 0)
             {
                 if (_navMeshAgent.destination != transform.position)
@@ -117,74 +109,24 @@ public class cannonFodder : Enemy
             _renderer.material.color = Color.yellow;
             MoveTowardsThePlayer();
         }
-
-
-
     }
 
-    public override void LoopLateUpdate(float deltaTime)
-    {
-        
+    public override void LoopLateUpdate(float deltaTime) { }
 
-    }
-
-
-    void drawCone(int points )
-    {
-        Vector3[] pointsForTheCone = new Vector3[points];
-        _coneRenderer.positionCount = points;
-
-        pointsForTheCone[0] = transform.position;
-
-        Vector3 vectorToRotate = transform.forward * stats.AttackRange;
-        Vector3 rotatedVector = Vector3.zero;
-
-        float stepSize = 1f/((float)points-1);
-        int step = 0;
-
-        for (int i = 1; i < points; i++)
-        {
-            float angle = Mathf.Lerp(-stats.AttackAngle, stats.AttackAngle, step*stepSize);
-
-            
-
-            angle = angle * Mathf.Deg2Rad;
-
-            float s = Mathf.Sin(angle);
-            float c = Mathf.Cos(angle);
-
-            rotatedVector.x = vectorToRotate.x * c - vectorToRotate.z * s;
-            rotatedVector.z = vectorToRotate.x * s + vectorToRotate.z * c;
-
-            pointsForTheCone[i] = transform.position + rotatedVector;
-            step++;
-        }
-
-        
-
-        
-
-        _coneRenderer.SetPositions(pointsForTheCone);
-        _coneRenderer.widthMultiplier = 0.1f;
-        
-        _coneRenderer.loop = true;
-    }
+    
     void Attack()
     {
-        
-
-
         if (_attacking == false)
         {
+            AttackChargingEvent.Raise();
+
             Vector3 adjustedPlayerPos = _playerTransform.position;
 
             adjustedPlayerPos.y = transform.position.y;
 
             transform.LookAt(adjustedPlayerPos);
 
-            _cone.SetActive(true);
-            drawCone(10);
-
+            
         }
 
         _attacking = true;
@@ -192,11 +134,11 @@ public class cannonFodder : Enemy
 
         if (_attackCharge >= stats.AttackChargeUpTime)
         {
-
+            AttackEvent.Raise();
             Collider[] potentialTargets = Physics.OverlapSphere(transform.position, stats.AttackRange, LayerMask.GetMask("Player"));
 
             RaycastHit hit;
-            if (potentialTargets.Length>0 && Physics.Raycast(transform.position, potentialTargets[0].transform.position - transform.position, out hit))
+            if (potentialTargets.Length > 0 && Physics.Raycast(transform.position, potentialTargets[0].transform.position - transform.position, out hit))
             {
                 if (hit.collider.gameObject.layer == 9)
                 {
@@ -208,7 +150,7 @@ public class cannonFodder : Enemy
 
 
                     //print( Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp));
-                    if (Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp) < stats.AttackAngle)
+                    if (Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp) < 10)
                     {
                         PlayerHealth playerHealth = potentialTargets[0].GetComponent<PlayerHealth>();
                         //apply damage to the player
@@ -218,7 +160,7 @@ public class cannonFodder : Enemy
                             directionToPush.y = 0;
                             directionToPush = Vector3.Normalize(directionToPush);
 
-                            playerHealth.TakeDamage( stats.AttackDamage);
+                            playerHealth.TakeDamage(stats.AttackDamage);
                         }
                         else
                         {
@@ -236,17 +178,16 @@ public class cannonFodder : Enemy
             _attackCooldown = stats.AttackSpeed;
             _attacking = false;
             _attackCharge = 0;
-            _cone.SetActive(false);
+            
 
         }
-        
-        }
 
-    
+    }
+
+
 
     bool playerInAttackRange()
     {
-        
         Vector3 adjustedPlayerPos = _playerTransform.position;
 
         adjustedPlayerPos.y = transform.position.y;
@@ -256,22 +197,11 @@ public class cannonFodder : Enemy
 
     void MoveTowardsThePlayer()
     {
-        /*
-        Vector3 adjustedPlayerPos = _playerTransform.position;
-
-        adjustedPlayerPos.y = transform.position.y;
-
-        transform.LookAt(adjustedPlayerPos);
-
-        transform.Translate(Vector3.forward * stats.MoveSpeed * Time.deltaTime);
-        */
-
         float jitter = 2;
-        _navMeshAgent.Move(new Vector3(Random.Range(-jitter, jitter), 0, Random.Range(-jitter, jitter))*Time.deltaTime);
+        _navMeshAgent.Move(new Vector3(Random.Range(-jitter, jitter), 0, Random.Range(-jitter, jitter)) * Time.deltaTime);
 
-        if(_navMeshAgent.destination != _playerTransform.position)
-        _navMeshAgent.destination = _playerTransform.position;
-
+        if (_navMeshAgent.destination != _playerTransform.position)
+            _navMeshAgent.destination = _playerTransform.position;
     }
 
     void DetectThePlayer()
@@ -280,34 +210,13 @@ public class cannonFodder : Enemy
 
         if (potentialTargets.Length > 0)
         {
+            AggroEvent.Raise();
             _playerDetected = true;
             _playerTransform = potentialTargets[0].gameObject.transform;
 
             _isAlly = true;
 
-            DetectAllies();
+           
         }
     }
-
-    void DetectAllies()
-    {
-        Collider[] potentialAllies = Physics.OverlapSphere(transform.position, stats.SpotDistance, LayerMask.GetMask("Enemy"));
-
-        if(potentialAllies.Length > 0)
-        {
-            for (int i = 0; i < potentialAllies.Length; i++)
-            {
-                cannonFodder allyTransform = potentialAllies[i].gameObject.transform.GetComponent<cannonFodder>();
-                if (!allyTransform._isAlly)
-                {
-                    allyTransform._playerDetected = true;
-                    allyTransform._playerTransform = _playerTransform;
-                    allyTransform._isAlly = true;
-                    allyTransform.DetectAllies();
-                }
-            }
-        }
-    }
-
-    
 }

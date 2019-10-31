@@ -14,6 +14,12 @@ public abstract class Enemy : GameLoop
     }
 
     public abstract bool IsVisible();
+    
+
 
     public abstract void TakeDamage(float damage);
+    
+
+    
+    
 }
