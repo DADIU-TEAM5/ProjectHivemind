@@ -9,6 +9,7 @@ public class ItemManager : GameLoop
     public Inventory PlayerInventory;
 
     // ModifiedStats are considered as flat atm
+    public FloatVariableList PlayerStats;
     public List<FloatVariable> ModifiedStats;
     public AbilityManager AM;
     public List<ItemObject> AllItems;
