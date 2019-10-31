@@ -23,6 +23,6 @@ public class FloatVariable : ScriptableObject
 
     public void ResetValue()
     {
-        Value = InitialValue;
+        Value = this.InitialValue;
     }
 }

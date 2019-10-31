@@ -20,6 +20,7 @@ public class TestFloatSlider : MonoBehaviour
         slider.value = FloatVar.Value;
         slider.maxValue = max;
         slider.minValue = min;
+        slider.value = FloatVar.InitialValue;
         SetText();
     }
 
