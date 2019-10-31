@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 
 [CreateAssetMenu(menuName = "Variables/Lists/GameObjectList")]
-public class GameObjectList : ScriptableObject
+public class GameObjectList : RuntimeSet<GameObject>
 {
-    public List<GameObject> List;
+    
 }
