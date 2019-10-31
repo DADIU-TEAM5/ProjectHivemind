@@ -6,5 +6,10 @@ using UnityEditor;
 [CreateAssetMenu(menuName = "Variables/Lists/GameObjectList")]
 public class GameObjectList : RuntimeSet<GameObject>
 {
-    
+
+    private void OnEnable()
+    {
+        Items = new List<GameObject>();
+    }
+
 }
