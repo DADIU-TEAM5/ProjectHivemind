@@ -9,6 +9,8 @@ public class PlayerHealth : GameLoop
     public GameObjectList EnemyList;
     public GameObjectVariable HexMapParent;
 
+    public BoolVariable IsDodgeing;
+
     public FloatVariable MaxHealth;
     public float InvulnerabilityTime = 0.3f;
 
@@ -38,7 +40,7 @@ public class PlayerHealth : GameLoop
     public void TakeDamage(float damage)
     {
 
-        if (_invulnerabilityTimer <= 0)
+        if (_invulnerabilityTimer <= 0 && IsDodgeing.Value != true)
 
         {
             _invulnerabilityTimer = InvulnerabilityTime;
@@ -78,7 +80,7 @@ public class PlayerHealth : GameLoop
 
     public void KnockBackDamage(Vector3 direction, float length,float damage)
     {
-        if (_invulnerabilityTimer <= 0)
+        if (_invulnerabilityTimer <= 0 && IsDodgeing.Value != true)
         {
             _invulnerabilityTimer = InvulnerabilityTime;
 
