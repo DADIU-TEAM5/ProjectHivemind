@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class TestToolMenu : MonoBehaviour
 {
     //List or Array?
+
+    public bool ResetValuesOnPlay = false; 
     public List<BoolVariable> Boolvariables = new List<BoolVariable>();
 
 
@@ -40,7 +42,7 @@ public class TestToolMenu : MonoBehaviour
                 newGO.SetActive(true);
 
                 TestFloatSlider floatSlider = newGO.GetComponent<TestFloatSlider>();
-                floatSlider.Setup(Floatvariables[i]);
+                floatSlider.Setup(Floatvariables[i], Floatvariables[i].Min, Floatvariables[i].Max);
 
             }
         }
@@ -48,6 +50,18 @@ public class TestToolMenu : MonoBehaviour
 
     private void Awake()
     {
+        if (ResetValuesOnPlay)
+            ResetFloatValues();
+
         CreateUIElements();
+       
+    }
+
+    private void ResetFloatValues()
+    {
+        for (int i = 0; i < Floatvariables.Count; i++)
+        {
+            Floatvariables[i].ResetValue();
+        }
     }
 }

@@ -70,15 +70,15 @@ public class ItemManager : GameLoop
     {
 
         //Very Nice and Clean
-        ModifiedStats[0].Value += itemObj.Flat_AttackDamage;
-        ModifiedStats[1].Value += itemObj.Flat_AttackSpeed;
-        ModifiedStats[2].Value += itemObj.Flat_Attack_Angle;
+        //ModifiedStats[0].Value += itemObj.Flat_AttackDamage;
+        //ModifiedStats[1].Value += itemObj.Flat_AttackSpeed;
+        //ModifiedStats[2].Value += itemObj.Flat_Attack_Angle;
 
-        ModifiedStats[3].Value += itemObj.Flat_DashSpeed;
-        ModifiedStats[4].Value += itemObj.Flat_Dash_Length;
-        ModifiedStats[5].Value += itemObj.Flat_MovementSpeed;
+        //ModifiedStats[3].Value += itemObj.Flat_DashSpeed;
+        //ModifiedStats[4].Value += itemObj.Flat_Dash_Length;
+        //ModifiedStats[5].Value += itemObj.Flat_MovementSpeed;
 
-        ModifiedStats[6].Value += itemObj.Flat_Health;
-        ModifiedStats[7].Value += itemObj.Flat_Damage_Reduction;
+        //ModifiedStats[6].Value += itemObj.Flat_Health;
+        //ModifiedStats[7].Value += itemObj.Flat_Damage_Reduction;
     }
 }
