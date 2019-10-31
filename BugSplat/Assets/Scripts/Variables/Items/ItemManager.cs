@@ -59,27 +59,21 @@ public class ItemManager : GameLoop
     {
         PlayerInventory.Items.Clear();
         Items.Clear();
-        for (int i = 0; i < ModifiedStats.Count; i++)
+        for (int i = 0; i < PlayerStats.Value.Count; i++)
         {
             // ModifiedStats are considered as flat
-            if (ModifiedStats[i] != null)
-                ModifiedStats[i].Value = 0;
+            if (PlayerStats.Value[i] != null)
+                PlayerStats.Value[i].ResetValue();
         }
     }
 
     void ChangeStats(ItemObject itemObj)
     {
 
-        //Very Nice and Clean
-        //ModifiedStats[0].Value += itemObj.Flat_AttackDamage;
-        //ModifiedStats[1].Value += itemObj.Flat_AttackSpeed;
-        //ModifiedStats[2].Value += itemObj.Flat_Attack_Angle;
+        for (int i = 0; i < PlayerStats.Value.Count; i++)
+        {
+            PlayerStats.Value[i].Value += itemObj.FlatStatChanges[i];
 
-        //ModifiedStats[3].Value += itemObj.Flat_DashSpeed;
-        //ModifiedStats[4].Value += itemObj.Flat_Dash_Length;
-        //ModifiedStats[5].Value += itemObj.Flat_MovementSpeed;
-
-        //ModifiedStats[6].Value += itemObj.Flat_Health;
-        //ModifiedStats[7].Value += itemObj.Flat_Damage_Reduction;
+        }
     }
 }
