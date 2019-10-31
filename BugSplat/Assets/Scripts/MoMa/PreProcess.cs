@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEditor;
 
-//using UnityEditor.Animations;
+using UnityEditor.Animations;
 
 public class PreProcess : MonoBehaviour
 {
@@ -20,15 +20,15 @@ public class PreProcess : MonoBehaviour
     public int Speed = 5;
     //Assume we know the frame rate is 30;
     public int FrameRate = 30;
-
+    private float _maxSpeedInAnim = 0.001f;
 
     public void PreProcessTrajectory()
     {
         int count = 0;
         InitializeAnimation();
-        for(int i = 0; i < AllAnimations.AnimClips.Count; i++)
+        for (int i = 0; i < AllAnimations.AnimClips.Count; i++)
         {
-            if(AllAnimations.AnimClips[i].Name.Contains("InPlace"))
+            if (AllAnimations.AnimClips[i].Name.Contains("InPlace"))
             {
                 AnimationsPlay.AnimClips.Add(AllAnimations.AnimClips[i]);
                 GetCorrespondingAnimations(AllAnimations.AnimClips[i].Name, count);
@@ -43,13 +43,15 @@ public class PreProcess : MonoBehaviour
         var animclips = new List<AnimClip>();
         AnimationsPlay.AnimClips = animclips;
         AnimationsPreProcess.FrameCapsules = new List<Capsule>();
+        _maxSpeedInAnim = 1f / GetMaxSpeed();
+
     }
 
 
     private void GetAnimaitionTrajectory(AnimClip animClip, int animIndex)
     {
         AnimationTrajectory.ObtainRootFromAnim(Second, SaveInSecond, FrameRate,
-                      animClip, animIndex, Speed, AnimationsPreProcess.FrameCapsules);
+                      animClip, animIndex, Speed, AnimationsPreProcess.FrameCapsules, _maxSpeedInAnim);
     }
 
     private void GetCorrespondingAnimations(string inPlaceAnimationName, int animIndex)
@@ -60,7 +62,7 @@ public class PreProcess : MonoBehaviour
             if (AllAnimations.AnimClips[i].Name == name)
             {
                 GetAnimaitionTrajectory(AllAnimations.AnimClips[i], animIndex);
-                
+
                 break;
             }
         }
@@ -83,4 +85,25 @@ public class PreProcess : MonoBehaviour
             }
     }
 
+
+    private float GetMaxSpeed()
+    {
+        float maxSpeed = 0.01f;
+
+        for (int i = 0; i < AllAnimations.AnimClips.Count; i++)
+            if (!AllAnimations.AnimClips[i].Name.Contains("InPlace"))
+                for (int j = 1; j < AllAnimations.AnimClips[i].Frames.Count; j++)
+                {
+                    var joint = AllAnimations.AnimClips[i].Frames[j].JointPoints.Find(x => x.Name.Contains("Hips"));
+                    var jointBefore = AllAnimations.AnimClips[i].Frames[j - 1].JointPoints.Find(x => x.Name.Contains("Hips"));
+                    joint.Position.y = 0;
+                    jointBefore.Position.y = 0;
+                    //distance / time = speed
+                    var speed = ((joint.Position - jointBefore.Position) / (1f / FrameRate)).magnitude;
+                    if (speed > maxSpeed)
+                        maxSpeed = speed;
+                }
+
+        return maxSpeed;
+    }
 }

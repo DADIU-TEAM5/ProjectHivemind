@@ -298,6 +298,8 @@ public class PlayerTrajectory : GameLoop
         }
     }
 
+
+    /* if we do not use the root as the player, it seems we don't need currentRot*/
     private void FuturePredict(Vector3 currentPos, Vector3 inputVel, Quaternion currentRot)
     {
         _future[0] = currentPos ;
