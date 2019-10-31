@@ -47,6 +47,11 @@ public class cannonFodder : Enemy
 
     }
 
+    public override bool IsVisible()
+    {
+        return _renderer.isVisible;
+    }
+
     public override void TakeDamage(float damage)
     {
        // print(name + " took damage "+ damage);

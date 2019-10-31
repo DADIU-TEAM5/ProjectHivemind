@@ -13,6 +13,9 @@ public abstract class Enemy : GameLoop
         EnemyList.Add(gameObject);
     }
 
+    public abstract bool IsVisible();
+    
+
 
     public abstract void TakeDamage(float damage);
     
