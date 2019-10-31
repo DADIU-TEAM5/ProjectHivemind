@@ -5,25 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : GameLoop
 {
-    float _invulnerabilityTimer;
-
     public GameObjectList EnemyList;
-
-
-    public float InvulnerabilityTime = 0.3f;
+    public GameObjectVariable HexMapParent;
 
     public FloatVariable MaxHealth;
+    public float InvulnerabilityTime = 0.3f;
 
     Transform _playerParent;
-
-    public GameObjectVariable HexMapParent;
+    float _invulnerabilityTimer;
 
     [SerializeField]
     private FloatVariable CurrentHealth;
 
-
+    [Header("Events")]
     [SerializeField]
     private GameEvent TookDamageEvent;
+    [SerializeField]
+    private GameEvent PlayerDiedEvent;
 
     public void Start()
     {
@@ -62,19 +60,14 @@ public class PlayerHealth : GameLoop
 
     void CheckIfDead()
     {
-
         if (CurrentHealth.Value <= 0)
         {
+            PlayerDiedEvent.Raise();
             Destroy(HexMapParent.Value);
-
 
             EnemyList.Items = new List<GameObject>();
             OverallSceneWorker.LoadScene("Death Scene");
-
-
         }
-
-
     }
 
     public void KnockBackDamage(Vector3 direction, float length,float damage)
