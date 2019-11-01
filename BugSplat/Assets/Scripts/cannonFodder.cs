@@ -286,7 +286,7 @@ public class cannonFodder : Enemy
             _isAlly = true;
 
             DetectAllies();
-        }
+        } 
     }
 
     void DetectAllies()
