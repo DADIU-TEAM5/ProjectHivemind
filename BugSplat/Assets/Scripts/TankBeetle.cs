@@ -176,7 +176,7 @@ public class TankBeetle : Enemy
             //Debug.DrawRay(transform.position, potentialTargets[i].transform.position- transform.position ,Color.red);
 
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, potentialTargets[i].transform.position - transform.position, out hit))
+            if (Physics.Raycast(transform.position, potentialTargets[i].transform.position - transform.position, out hit, 10, LayerMask.GetMask("Player")))
             {
                 if (hit.collider.gameObject.layer == 9)
                 {
