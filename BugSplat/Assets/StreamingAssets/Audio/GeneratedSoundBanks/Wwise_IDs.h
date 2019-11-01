@@ -33,6 +33,7 @@ namespace AK
         static const AkUniqueID NPC_HEAVY_DEAD = 2658157895U;
         static const AkUniqueID NPC_HEAVY_FOOTSTEPS = 198238650U;
         static const AkUniqueID NPC_HEAVY_HIT = 78903020U;
+        static const AkUniqueID NPC_HEAVY_HIT_FRONT = 3339782068U;
         static const AkUniqueID NPC_HEAVY_IDLE = 4075444627U;
         static const AkUniqueID NPC_HEAVY_SCREAM = 1586397994U;
         static const AkUniqueID NPC_HEAVY_SPECIALATTACK = 575616738U;
@@ -47,6 +48,7 @@ namespace AK
         static const AkUniqueID PLAYER_FOLEY_ATTACKEVENT = 2390168611U;
         static const AkUniqueID PLAYER_FOLEY_DASHEVENT = 1643920063U;
         static const AkUniqueID PLAYER_FOLEY_FOOTSTEPEVENT = 954324369U;
+        static const AkUniqueID PLAYER_FOLEY_HIT = 830213708U;
         static const AkUniqueID PLAYER_FOLEYPHFOOTSTEPEVENT = 586291076U;
     } // namespace EVENTS
 
@@ -71,11 +73,8 @@ namespace AK
         static const AkUniqueID AMBIENCE_CHANNEL = 655445U;
         static const AkUniqueID CROWD_CHANNEL = 1944073392U;
         static const AkUniqueID DIALOGUE_BUS = 573466488U;
-        static const AkUniqueID FODDERBUS = 4060600017U;
         static const AkUniqueID HDR_MAGIC_BUS = 2239254138U;
         static const AkUniqueID HDR_REVERB_RTN = 228236773U;
-        static const AkUniqueID HDR_SFX_ENEMIES = 2470802084U;
-        static const AkUniqueID HEAVYBUS = 1882256892U;
         static const AkUniqueID MASTER_BUS = 1399649189U;
         static const AkUniqueID MASTER_OUT = 1330420139U;
         static const AkUniqueID MUSIC_BUS = 2680856269U;
