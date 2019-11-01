@@ -10,7 +10,7 @@ public class Attack_On_Hit : Ability
        
     }
 
-    public override void OnTrigger()
+    public override void OnTrigger(GameObject GO)
     {
        
     }
