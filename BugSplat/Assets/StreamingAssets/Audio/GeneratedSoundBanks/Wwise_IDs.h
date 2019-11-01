@@ -75,6 +75,7 @@ namespace AK
         static const AkUniqueID HDR_MAGIC_BUS = 2239254138U;
         static const AkUniqueID HDR_REVERB_RTN = 228236773U;
         static const AkUniqueID HDR_SFX_ENEMIES = 2470802084U;
+        static const AkUniqueID HEAVYBUS = 1882256892U;
         static const AkUniqueID MASTER_BUS = 1399649189U;
         static const AkUniqueID MASTER_OUT = 1330420139U;
         static const AkUniqueID MUSIC_BUS = 2680856269U;

@@ -21,6 +21,7 @@ public class FodderAudioScript : MonoBehaviour
     public void AttackEvent(GameObject source)
     {
         Attack.Post(source);
+        Debug.Log("Fodder attacked you so we played an audio file");
     }
 
     public void HitEvent(GameObject source)
