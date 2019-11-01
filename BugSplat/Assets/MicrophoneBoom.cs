@@ -11,7 +11,8 @@ public class MicrophoneBoom : MonoBehaviour
 
     void Update()
     {
-        //lige nu virker den ikke fordi den prøver at finde position på prefab, ikke den i scenen
+        //Right now it doesn't work because it's getting the position of the prefab (which will always be 0,0,0)
+        //It needs to get the gameobject in the scene
         gameObject.transform.position = micTarget.position + offset;
     }
 }

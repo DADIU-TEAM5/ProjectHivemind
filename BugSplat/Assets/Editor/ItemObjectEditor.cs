@@ -26,7 +26,10 @@ public class ItemObjectEditor : Editor
 
         if (playerStatsIsOpen)
         {
-            Debug.Log("I changed stuff");
+            if (_itemO.FlatStatChanges == null || _itemO.FlatStatChanges.Length == 0)
+                _itemO.FlatStatChanges = new float[_itemO.PlayerStats.Value.Count];
+
+
             for (int i = 0; i < _itemO.FlatStatChanges.Length; i++)
             {
                 _itemO.FlatStatChanges[i] = EditorGUILayout.FloatField(_itemO.PlayerStats.Value[i].name, _itemO.FlatStatChanges[i]);

@@ -19,8 +19,8 @@ public class ShopSlotDisplay : GameLoop
 
     public override void LoopUpdate(float deltaTime)
     {
-        SlotImage.sprite = Slot.GetSprite();
-        PriceText.text = Slot.GetPrice().ToString();
+        SlotImage.sprite = Slot?.GetSprite();
+        PriceText.text = Slot?.GetPrice().ToString();
     }
 
     public override void LoopLateUpdate(float deltaTime)
