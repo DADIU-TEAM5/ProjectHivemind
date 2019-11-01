@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-[CreateAssetMenu(menuName = "Variables/Ability")]
 public abstract class Ability : ScriptableObject
 {
     public List<GameEvent> Triggers;

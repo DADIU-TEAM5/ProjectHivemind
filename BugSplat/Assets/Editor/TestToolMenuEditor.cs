@@ -25,7 +25,7 @@ public class TestToolMenuEditor : Editor
         {
             for (int i = 0; i < TTM.Floatvariables.Count; i++)
             {
-                TTM.Floatvariables[i].Value = EditorGUILayout.FloatField(TTM.Floatvariables[i].name, TTM.Floatvariables[i].Value);
+                TTM.Floatvariables[i].InitialValue = EditorGUILayout.FloatField(TTM.Floatvariables[i].name, TTM.Floatvariables[i].InitialValue);
             }
             //player.movespeed = EditorGUILayout.Slider("Move Speed", player.movespeed, 1f, 50f);
             //EditorGUILayout.Space();
