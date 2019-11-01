@@ -20,6 +20,7 @@ public class PlayerTrajectory : GameLoop
     public int DifferentClipLength = 10;
     public Vector3Variable Direction;
     public Vector3Variable Velocity;
+    public FloatVariable PlayerCurrentSpeedSO;
 
 
 
@@ -311,7 +312,8 @@ public class PlayerTrajectory : GameLoop
             var increase = Second / SaveInSecond * i;
             var gap_increase = Quaternion.ToEulerAngles(rotation) * increase;
             var angle_increase = Quaternion.EulerRotation(gap_increase);
-            var gap = (inputVel * increase);
+            var gap = inputVel * increase* PlayerCurrentSpeedSO.Value;
+            gap.x = 0;
             var futureP = (currentPos + angle_increase  * gap);
             _future[i] = futureP;
         }
