@@ -41,6 +41,8 @@ public class PlayerHealth : GameLoop
             //print("The player took " + damage);
             CurrentHealth.Value -= damage;
 
+            print("player took " + damage + " current health: " + CurrentHealth.Value);
+
             if (TookDamageEvent != null)
             {
                 TookDamageEvent.Raise(this.gameObject);

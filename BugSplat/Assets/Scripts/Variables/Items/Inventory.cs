@@ -15,15 +15,16 @@ public class Inventory : ScriptableObject
         Items = new List<ItemObject>();
     }
 
-    public void AddItem(ItemObject itemObj)
+    public bool AddItem(ItemObject itemObj)
     {
         if (CanAddItem(itemObj))
         {
             Items.Add(itemObj);
             ChangeStats(itemObj);
-            
+            return true;
         }
 
+        return false;
     }
 
     public void ResetItems()
