@@ -9,7 +9,7 @@ public class ItemManagerEditor : Editor
 {
 
     ItemManager itemManager;
-    bool _testWindowIsOpen = true;
+    bool _shopWindowIsOpen = true;
     bool _playerStatsIsOpen = true;
     bool _inventoryIsOpen = true;
 
@@ -20,26 +20,29 @@ public class ItemManagerEditor : Editor
 
     public override void OnInspectorGUI()
     {
+        ItemObject testItem = null;
 
-        if (_testWindowIsOpen)
+        if (itemManager.AllItems != null && itemManager.AllItems.Count > 0)
+            testItem = itemManager.AllItems[0];
+
+        if (GUILayout.Button("Add Item"))
         {
-            ItemObject testItem = itemManager.AllItems[0];
-
-            if (GUILayout.Button("Add Item"))
-            {
-                Debug.Log("Clicked Add Item");
-                itemManager.PlayerInventory.AddItem(testItem);
-            }
-
-            if (GUILayout.Button("Reset Items"))
-            {
-                Debug.Log("Clicked Reset");
-                itemManager.PlayerInventory.ResetItems();
-            }
-
+            Debug.Log("Clicked Add Item");
+            itemManager.PlayerInventory.AddItem(testItem);
         }
-        EditorGUILayout.EndFoldoutHeaderGroup();
+
+        if (GUILayout.Button("Reset Items"))
+        {
+            Debug.Log("Clicked Reset");
+            itemManager.PlayerInventory.ResetItems();
+        }
+
+
+
         EditorGUILayout.Space();
+        if (itemManager.BodyParts != null)
+            itemManager.BodyParts.Value = EditorGUILayout.IntField("Body Parts", itemManager.BodyParts.Value);
+
         EditorGUILayout.Space();
         EditorGUILayout.Space();
 
@@ -73,7 +76,16 @@ public class ItemManagerEditor : Editor
         EditorGUILayout.EndFoldoutHeaderGroup();
         EditorGUILayout.Space();
 
-        _testWindowIsOpen = EditorGUILayout.BeginFoldoutHeaderGroup(_testWindowIsOpen, "Item Tests");
+        //_shopWindowIsOpen = EditorGUILayout.BeginFoldoutHeaderGroup(_shopWindowIsOpen, "Shop Slots");
+        //if (itemManager.PlayerInventory.Items.Count > 0 && _shopWindowIsOpen)
+        //{
+
+        //    for (int i = 0; i < itemManager.PlayerInventory.Items.Count; i++)
+        //    {
+        //        EditorGUILayout.TextField(itemManager.PlayerInventory.Items[i].name);
+        //    }
+        //}
+        //EditorGUILayout.EndFoldoutHeaderGroup();
 
 
 
