@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Variables/Item")]
-
 public class ItemObject : ScriptableObject
 {
     public string DevelopmentNotes;
