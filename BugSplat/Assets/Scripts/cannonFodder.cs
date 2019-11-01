@@ -176,7 +176,7 @@ public class cannonFodder : Enemy
             Collider[] potentialTargets = Physics.OverlapSphere(transform.position, stats.AttackRange, LayerMask.GetMask("Player"));
 
             RaycastHit hit;
-            if (potentialTargets.Length>0 && Physics.Raycast(transform.position, potentialTargets[0].transform.position - transform.position, out hit))
+            if (potentialTargets.Length>0 && Physics.Raycast(transform.position, potentialTargets[0].transform.position - transform.position, out hit, 10, LayerMask.GetMask("Player")))
             {
                 if (hit.collider.gameObject.layer == 9)
                 {
@@ -238,8 +238,19 @@ public class cannonFodder : Enemy
         float jitter = 2;
         _navMeshAgent.Move(new Vector3(Random.Range(-jitter, jitter), 0, Random.Range(-jitter, jitter))*Time.deltaTime);
 
-        if(_navMeshAgent.destination != _playerTransform.position)
-        _navMeshAgent.destination = _playerTransform.position;
+        float distanceToplayer = Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(_playerTransform.position.x, _playerTransform.position.z));
+
+        if (distanceToplayer > 2)
+        {
+
+            if (_navMeshAgent.destination != _playerTransform.position)
+                _navMeshAgent.destination = _playerTransform.position;
+        }
+        else
+        {
+            if (_navMeshAgent.destination != transform.position)
+                _navMeshAgent.destination = transform.position;
+        }
     }
 
     void DetectThePlayer()

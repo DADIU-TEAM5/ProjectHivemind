@@ -94,8 +94,7 @@ public class Boomer : Enemy
         {
             if (_attackCooldown <= 0)
             {
-                if (_navMeshAgent.destination != transform.position)
-                    _navMeshAgent.destination = transform.position;
+                
 
                 _renderer.material.color = Color.red;
                 Attack();
@@ -103,8 +102,9 @@ public class Boomer : Enemy
             else
             {
                 _renderer.material.color = Color.yellow;
-                MoveTowardsThePlayer();
             }
+                MoveTowardsThePlayer();
+            
         }
         else
         {
@@ -155,6 +155,7 @@ public class Boomer : Enemy
     {
         if (_attacking == false)
         {
+            _navMeshAgent.speed = stats.ChargeMoveSpeed;
             AttackChargingEvent.Raise();
 
             Vector3 adjustedPlayerPos = _playerTransform.position;
@@ -164,9 +165,9 @@ public class Boomer : Enemy
             transform.LookAt(adjustedPlayerPos);
 
             _cone.SetActive(true);
-            drawCone(20);
+            
         }
-
+        drawCone(20);
         _attacking = true;
         _attackCharge += Time.deltaTime;
 
@@ -176,8 +177,9 @@ public class Boomer : Enemy
             Collider[] potentialTargets = Physics.OverlapSphere(transform.position, stats.AttackRange, LayerMask.GetMask("Player"));
 
             RaycastHit hit;
-            if (potentialTargets.Length > 0 && Physics.Raycast(transform.position, potentialTargets[0].transform.position - transform.position, out hit))
+            if (potentialTargets.Length > 0 && Physics.Raycast(transform.position, potentialTargets[0].transform.position - transform.position, out hit,10, LayerMask.GetMask("Player")))
             {
+                
                 if (hit.collider.gameObject.layer == 9)
                 {
 
@@ -213,7 +215,7 @@ public class Boomer : Enemy
             _attacking = false;
             _attackCharge = 0;
             _cone.SetActive(false);
-
+            _navMeshAgent.speed = stats.MoveSpeed;
         }
 
     }
@@ -231,10 +233,19 @@ public class Boomer : Enemy
 
     void MoveTowardsThePlayer()
     {
-        
+        float distanceToplayer = Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(_playerTransform.position.x, _playerTransform.position.z));
 
-        if (_navMeshAgent.destination != _playerTransform.position)
-            _navMeshAgent.destination = _playerTransform.position;
+        if (distanceToplayer > 2)
+        {
+
+            if (_navMeshAgent.destination != _playerTransform.position)
+                _navMeshAgent.destination = _playerTransform.position;
+        }
+        else
+        {
+            if (_navMeshAgent.destination != transform.position)
+                _navMeshAgent.destination = transform.position;
+        }
     }
 
     void DetectThePlayer()

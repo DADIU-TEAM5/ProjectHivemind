@@ -6,6 +6,8 @@ using UnityEngine;
 public class BoomerStats : ScriptableObject
 {
     public float MoveSpeed;
+    public float ChargeMoveSpeed;
+
     public float HitPoints;
     public float AttackSpeed;
     public float AttackRange;
