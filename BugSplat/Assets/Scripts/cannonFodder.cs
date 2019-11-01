@@ -57,7 +57,7 @@ public class cannonFodder : Enemy
     {
        // print(name + " took damage "+ damage);
         _currentHealth -= damage;
-        TakeDamageEvent.Raise(); 
+        TakeDamageEvent.Raise(this.gameObject); 
 
         if(_currentHealth <= 0)
         {
@@ -69,7 +69,7 @@ public class cannonFodder : Enemy
                 part.transform.position = transform.position +(( Vector3.up*i)*0.5f);
             }
 
-            DeathEvent.Raise();
+            DeathEvent.Raise(this.gameObject);
             EnemyList.Remove(gameObject);
 
             Destroy(_cone);
@@ -155,7 +155,7 @@ public class cannonFodder : Enemy
     {
         if (_attacking == false)
         {
-            AttackChargingEvent.Raise();
+            AttackChargingEvent.Raise(this.gameObject);
 
             Vector3 adjustedPlayerPos = _playerTransform.position;
 
@@ -172,7 +172,7 @@ public class cannonFodder : Enemy
 
         if (_attackCharge >= stats.AttackChargeUpTime)
         {
-            AttackEvent.Raise();
+            AttackEvent.Raise(this.gameObject);
             Collider[] potentialTargets = Physics.OverlapSphere(transform.position, stats.AttackRange, LayerMask.GetMask("Player"));
 
             RaycastHit hit;
@@ -248,7 +248,7 @@ public class cannonFodder : Enemy
 
         if (potentialTargets.Length > 0)
         {
-            AggroEvent.Raise();
+            AggroEvent.Raise(this.gameObject);
             _playerDetected = true;
             _playerTransform = potentialTargets[0].gameObject.transform;
 
