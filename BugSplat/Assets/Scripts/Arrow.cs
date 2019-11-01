@@ -9,11 +9,15 @@ public class Arrow : GameLoop
 
     public BoolVariable NoVisibleEnemies;
 
+    public Enemy[] _enemyScripts;
+
     GameObject _arrow;
     LineRenderer _arrowRenderer;
 
     private void Start()
     {
+        _enemyScripts = new Enemy[0];
+
         _arrow = new GameObject();
         _arrow.transform.position = transform.position;
         _arrow.transform.rotation = transform.rotation;
@@ -33,6 +37,28 @@ public class Arrow : GameLoop
 
     public override void LoopUpdate(float deltaTime)
     {
+        if(EnemyList.Items.Count != _enemyScripts.Length)
+        {
+            _enemyScripts = new Enemy[EnemyList.Items.Count];
+            for (int i = 0; i < EnemyList.Items.Count; i++)
+            {
+                _enemyScripts[i] = EnemyList.Items[i].GetComponent<Enemy>();
+            }
+        }
+
+        NoVisibleEnemies.Value = true;
+        
+        for (int i = 0; i < _enemyScripts.Length; i++)
+        {
+            bool enemyIsVisible = _enemyScripts[i].IsVisible();
+            if (enemyIsVisible)
+            {
+                NoVisibleEnemies.Value = false;
+            }
+
+        }
+        
+
 
         if (NoVisibleEnemies.Value)
         {
