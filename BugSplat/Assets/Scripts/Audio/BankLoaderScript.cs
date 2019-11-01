@@ -10,6 +10,7 @@ public class BankLoaderScript : MonoBehaviour
     public AK.Wwise.Bank Music;
     public AK.Wwise.Bank UI;
     public AK.Wwise.Bank Player;
+    public AK.Wwise.Bank EnemyInsects;
 
     void Awake()
     {
@@ -18,6 +19,7 @@ public class BankLoaderScript : MonoBehaviour
         //This section, "start", is only a placeholder for the playable
         Player.Load(false, false);
         Arena.Load(false, false);
+        EnemyInsects.Load(false, false);
     }
 
     public void OnEnterGame()
