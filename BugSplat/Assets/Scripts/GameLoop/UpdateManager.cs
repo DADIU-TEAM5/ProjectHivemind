@@ -6,10 +6,11 @@ public class UpdateManager : MonoBehaviour
 {
     public GameLoopInvoker[] GameLoopHandlers;
 
+    public bool CappedFPS = true;
     private float _time;
 
     void Start() {
-        Application.targetFrameRate = 60;
+        if (CappedFPS) Application.targetFrameRate = 60;
     }
 
     // Update is called once per frame
