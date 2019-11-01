@@ -35,6 +35,7 @@ public class FodderAudioScript : MonoBehaviour
 
     public void Death(GameObject source)
     {
+        Debug.Log("play kill sound");
         DeathSplat.Post(source);
     }
 

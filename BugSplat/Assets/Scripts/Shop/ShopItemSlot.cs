@@ -3,33 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu(menuName="Shop/ItemSlot")]
+[CreateAssetMenu(menuName = "Shop/ItemSlot")]
 public class ShopItemSlot : ShopSlot
 {
     public ItemPool Pool;
     public ShopLevels ShopLevels;
     public IntVariable CurrentLevel;
+    public Inventory PlayerInventory;
 
     [SerializeField]
     private ItemObject Item;
 
-   
-    // TODO: NEED REFERENCE TO PLAYER ITEMS INVENTORY THING
 
     public override void OnPurchase()
     {
         if (Item == null) return;
+        if(PlayerInventory== null)
+        {
+            Debug.LogError("No Refference to player inventory!");
+        }
 
-        // Add item to player's inventory
+        if (PlayerInventory.AddItem(Item))
+            // Remove item   
+            Item = null;
+        else
+        {
+            Debug.LogError("Player did not add item from shop!");
+        }
+         
 
-        // Remove item    
-        Item = null;
     }
 
-    public void GetItemFromItemPool() {
-        if (Item != null) {
+    public void GetItemFromItemPool()
+    {
+        if (Item != null)
+        {
             return;
-        } 
+        }
 
         var shopLevel = ShopLevels.LevelTierPicker[CurrentLevel.Value];
         var decidedTier = shopLevel.ChooseTier();
@@ -40,18 +50,21 @@ public class ShopItemSlot : ShopSlot
 
     public ItemObject GetItem() => Item;
 
-    void OnDisable() {
-        if (Item != null) {
+    void OnDisable()
+    {
+        if (Item != null)
+        {
             Reset();
         }
     }
 
-    public override Sprite GetSprite() => Item.Icon;
+    public override Sprite GetSprite() => Item?.Icon;
 
-    public override int GetPrice() => Item.Price;
+    public override int GetPrice() => Item?.Price ?? 0;
 
     public override void Init()
     {
+        
         GetItemFromItemPool();
     }
 

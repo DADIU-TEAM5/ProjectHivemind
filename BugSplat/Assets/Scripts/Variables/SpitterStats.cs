@@ -8,11 +8,14 @@ public class SpitterStats : ScriptableObject
     public float MoveSpeed;
     
     public float HitPoints;
-    
+
+    public float ProjectileSpeed;
 
     public float AttackRange;
-    
 
+    public float FleeTime;
+
+    public float RetractionTime;
 
     public float SpotDistance;
     

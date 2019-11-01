@@ -176,7 +176,7 @@ public class TankBeetle : Enemy
             //Debug.DrawRay(transform.position, potentialTargets[i].transform.position- transform.position ,Color.red);
 
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, potentialTargets[i].transform.position - transform.position, out hit))
+            if (Physics.Raycast(transform.position, potentialTargets[i].transform.position - transform.position, out hit, 10, LayerMask.GetMask("Player")))
             {
                 if (hit.collider.gameObject.layer == 9)
                 {
@@ -207,11 +207,36 @@ public class TankBeetle : Enemy
                     }
                 }
                 else
-                print("attack blocked by terrain or something");
+                    print("attack blocked by terrain or something");
 
             }
             else
-            print("this should never show i guess");
+            {
+                Debug.LogError("this should never show i guess");
+                Vector3 temp = potentialTargets[i].transform.position;
+                temp.y = transform.position.y;
+
+
+                //print( Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp));
+                if (Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp) < stats.AttackAngle)
+                {
+                    PlayerHealth playerHealth = potentialTargets[i].GetComponent<PlayerHealth>();
+                    //apply damage to the player
+                    if (playerHealth != null)
+                    {
+                        Vector3 directionToPush = potentialTargets[i].gameObject.transform.position - transform.position;
+                        directionToPush.y = 0;
+                        directionToPush = Vector3.Normalize(directionToPush);
+
+                        playerHealth.KnockBackDamage(directionToPush, stats.PushLength, stats.AttackDamage);
+                    }
+                    else
+                    {
+                        Debug.LogError("target of " + gameObject.name + " attack got no health");
+                    }
+                }
+
+            }
 
             }
             
