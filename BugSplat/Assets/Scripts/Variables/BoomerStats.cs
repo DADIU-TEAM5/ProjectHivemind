@@ -3,28 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class SpitterStats : ScriptableObject
+public class BoomerStats : ScriptableObject
 {
     public float MoveSpeed;
-    
     public float HitPoints;
-
-    public float ProjectileSpeed;
-
-    public float AttackRange;
-
-    public float FleeTime;
-
-    public float RetractionTime;
-
-    public float SpotDistance;
-    
-
-    public float AttackDamage;
-    public float AttackChargeUpTime;
     public float AttackSpeed;
-
-
+    public float AttackRange;
+    
+    public float SpotDistance;
+    public float AttackChargeUpTime;
+    public float AttackDamage;
 
     public int minPartsToDrop;
     public int maxPartsToDrop;

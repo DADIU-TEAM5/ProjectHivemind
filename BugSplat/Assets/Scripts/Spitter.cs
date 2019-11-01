@@ -126,7 +126,7 @@ public class Spitter : Enemy
 
             if (_burrowLerp < 1)
             {
-                _burrowLerp += Time.deltaTime*2;
+                _burrowLerp += Time.deltaTime/stats.RetractionTime;
             }
 
 
@@ -135,7 +135,7 @@ public class Spitter : Enemy
 
             if (_burrowLerp > 0)
             {
-                _burrowLerp -= Time.deltaTime*2;
+                _burrowLerp -= Time.deltaTime/stats.RetractionTime;
             }
         }
         Vector3 tempPos = Graphics.transform.localPosition;

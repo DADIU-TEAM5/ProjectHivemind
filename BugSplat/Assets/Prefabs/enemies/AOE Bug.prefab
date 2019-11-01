@@ -9,6 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4206919734979861738}
+  - component: {fileID: 1412174991172126981}
+  - component: {fileID: -8575682374771308625}
+  - component: {fileID: 2864561453518583343}
+  - component: {fileID: 1095087460058340077}
   m_Layer: 0
   m_Name: AOE Bug
   m_TagString: Untagged
@@ -31,6 +35,79 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1412174991172126981
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4468826108936366453}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.86
+  m_Center: {x: 0, y: 0.94, z: 0}
+--- !u!195 &-8575682374771308625
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4468826108936366453}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &2864561453518583343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4468826108936366453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8cd77b9a3fb574486a4a4a4ef4a938, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameLoopHandler: {fileID: 11400000, guid: b20923f160198a245bcdd80c8342f9ac, type: 2}
+  GameLoops: []
+--- !u!114 &1095087460058340077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4468826108936366453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc33d9a81a0834849892a23ebcff3950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyList: {fileID: 11400000, guid: 73fb98983f89ab9418a547ca2aa08854, type: 2}
+  NoVisibleEnemies: {fileID: 11400000, guid: fab092924697b554a8c0751c87f04669, type: 2}
+  Graphics: {fileID: 3235572892860481181}
+  bodyPart: {fileID: 7324468612011702487, guid: 862620230bd5167459723c1fe51d3192,
+    type: 3}
+  stats: {fileID: 11400000, guid: 06abc0358653ba84ab33fb264c215c1d, type: 2}
+  TakeDamageEvent: {fileID: 11400000, guid: cbf2e11fe0927e4409ee5d4ea64352b8, type: 2}
+  AggroEvent: {fileID: 11400000, guid: 2ac9344028b671e42a2b359f76a68452, type: 2}
+  AttackEvent: {fileID: 11400000, guid: dcce94e6134ba804dab215078510648f, type: 2}
+  DeathEvent: {fileID: 11400000, guid: 7096ff615eb02b7429ef21bfb2b5a162, type: 2}
+  AttackChargingEvent: {fileID: 11400000, guid: 32207daa8197d9e4a825d46020af0760,
+    type: 2}
 --- !u!1001 &6901482142205454228
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -100,6 +177,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e846d781461d06143be27c399fb50f91, type: 3}
+--- !u!1 &3235572892860481181 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: e846d781461d06143be27c399fb50f91,
+    type: 3}
+  m_PrefabInstance: {fileID: 6901482142205454228}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1926495828856409230 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: e846d781461d06143be27c399fb50f91,
