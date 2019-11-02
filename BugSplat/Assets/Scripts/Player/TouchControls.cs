@@ -21,13 +21,13 @@ public class TouchControls : GameLoop
     // Setup the private variables needed for the calculations in the current script
     private Vector3 _inputTouch;
     private bool _recordPosition = true;
-    public Vector3 _recordedInputPosition;
-    public Vector3[] _currentInputPosition;
+    private Vector3 _recordedInputPosition;
+    private Vector3[] _currentInputPosition;
     private bool _inputMoved;
     private float _inputTime;
     private float _runtimeInputMax;
     private float _runtimeInputMin;
-    public int _inputFrames;
+    private int _inputFrames;
     private int _inputSwipeThreshold;
 
     // Debug UI stuff
@@ -234,7 +234,7 @@ public class TouchControls : GameLoop
         // Check if SWIPE has happened
         else if (Vector3.Distance(_currentInputPosition[0], _currentInputPosition[_inputFrames]) > _inputSwipeThreshold)
         {
-            Debug.Log("FINGER DIST: " + Vector3.Distance(_currentInputPosition[0], _currentInputPosition[_inputFrames]));
+            //Debug.Log("FINGER DIST: " + Vector3.Distance(_currentInputPosition[0], _currentInputPosition[_inputFrames]));
 
             DebugText.text = "DODGED!";
             DashInitiatedSO.Raise(this.gameObject);

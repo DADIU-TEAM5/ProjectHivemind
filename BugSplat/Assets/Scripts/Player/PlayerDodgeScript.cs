@@ -19,43 +19,70 @@ public class PlayerDodgeScript : GameLoop
     private NavMeshAgent _navMeshAgent;
     private Vector3 _dashDirection;
     private Vector3 _initialPos;
+    private bool _dashCooldownActive;
+
 
     private void Start()
     {
         IsDodging.Value = false;
+        _dashCooldownActive = false;
         _navMeshAgent = transform.GetComponent<NavMeshAgent>();
     }
 
 
     public override void LoopUpdate(float deltaTime)
     {
-        if (IsDodging.Value == true)
+        if (_dashCooldownActive)
         {
             _lerpTime = Time.time;
             float _diffTime = _lerpTime - _currentTime;
+            DashCooldownSO.Value = _diffTime;
 
-            float curveTime = DashAnimationCurve.Evaluate(_diffTime/DashSpeedSO.Value);
-            Debug.Log(curveTime);
+            Debug.Log(_diffTime);
 
-            if (_diffTime < DashCooldownSO.Value)
+            if (IsDodging.Value == true)
             {
+                float curveTime = 0; DashAnimationCurve.Evaluate(_diffTime / DashSpeedSO.Value);
+
+                float curveCounter = 0;
+
+                for (int i = 0; i < DashAnimationCurve.length; i++)
+                {
+                    curveCounter += DashAnimationCurve[i].value;
+                }
+
+                if (curveCounter == 0)
+                {
+                    curveTime = _diffTime / DashSpeedSO.Value;
+                }
+                else
+                {
+                    curveTime = DashAnimationCurve.Evaluate(_diffTime / DashSpeedSO.Value);
+                }
+
                 if (_diffTime < DashSpeedSO.Value)
                 {
                     PlayerVelocitySO.Value = Vector3.Lerp(Vector3.zero, _dashDirection * DashLengthSO.Value, curveTime);
+                    if (_navMeshAgent.isOnNavMesh)
+                    {
+                        _navMeshAgent.transform.position = _initialPos + PlayerVelocitySO.Value;
+                    }
                 }
                 else
                 {
                     PlayerVelocitySO.Value = Vector3.Lerp(Vector3.zero, _dashDirection * DashLengthSO.Value, 1);
-                }
-
-                if (_navMeshAgent.isOnNavMesh)
-                {
-                    _navMeshAgent.transform.position = _initialPos + PlayerVelocitySO.Value;
+                    if (_navMeshAgent.isOnNavMesh)
+                    {
+                        _navMeshAgent.transform.position = _initialPos + PlayerVelocitySO.Value;
+                    }
+                    IsDodging.Value = false;
                 }
             }
-            else 
+
+            if (_diffTime > DashCooldownSO.InitialValue)
             {
-                IsDodging.Value = false;
+                _dashCooldownActive = false;
+                DashCooldownSO.Value = DashCooldownSO.InitialValue;
             }
         }
     }
@@ -70,13 +97,14 @@ public class PlayerDodgeScript : GameLoop
     // Called from PlayerController
     public void PlayerDash()
     {
-        if (IsDodging.Value == false)
+        if (IsDodging.Value == false && !_dashCooldownActive)
         {
             _dashDirection = PlayerDirectionSO.Value;
             _currentTime = Time.time;
             _lerpTime = 0f;
             _initialPos = transform.position;
             IsDodging.Value = true;
+            _dashCooldownActive = true;
         }
     }
 
