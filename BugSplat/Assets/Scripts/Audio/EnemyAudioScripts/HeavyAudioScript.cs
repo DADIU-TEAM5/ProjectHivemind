@@ -6,8 +6,9 @@ public class HeavyAudioScript : MonoBehaviour
 {
     public AK.Wwise.Event Footstep;
     public AK.Wwise.Event Attack;
-    public AK.Wwise.Event Hit;
-    public AK.Wwise.Event ScaredScream;
+    public AK.Wwise.Event HitFront;
+    public AK.Wwise.Event HitBack;
+    public AK.Wwise.Event Detect;
     public AK.Wwise.Event DeathSplat;
     public AK.Wwise.Event Charge;
 
@@ -26,17 +27,22 @@ public class HeavyAudioScript : MonoBehaviour
         Attack.Post(source);
     }
 
-    public void HitEvent(GameObject source)
+    public void HitFrontEvent(GameObject source)
     {
-        Hit.Post(source);
+        HitFront.Post(source);
     }
 
-    public void Scared(GameObject source)
+    public void HitBackEvent(GameObject source)
     {
-        ScaredScream.Post(source);
+        HitBack.Post(source);
     }
 
-    public void Death(GameObject source)
+    public void DetectEvent(GameObject source)
+    {
+        Detect.Post(source);
+    }
+
+    public void DeathEvent(GameObject source)
     {
         DeathSplat.Post(source);
     }

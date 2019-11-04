@@ -56,7 +56,7 @@ public class AttackScript : GameLoop
 
 
         //Debug.DrawLine(PlayerGraphics.position, (_nearstTarget - PlayerGraphics.position), Color.red);
-        _coneHideTimer += Time.deltaTime;
+        _coneHideTimer += deltaTime;
         if (_coneHideTimer > 0.5f)
         {
             _cone.SetActive(false);
@@ -114,7 +114,7 @@ public class AttackScript : GameLoop
         }
         else
         {
-            print("no targets");
+           // print("no targets");
 
             RaycastHit hit;
             if(Physics.CapsuleCast(transform.position - (Vector3.up * 0.5f), transform.position + (Vector3.up * 0.5f), .1f, PlayerDirectionSO.Value, out hit))
@@ -215,6 +215,7 @@ public class AttackScript : GameLoop
 
     private void Attack()
     {
+        //print(PlayerDirectionSO.Value);
 
         Anim.SetTrigger("Attack");
 
@@ -228,20 +229,30 @@ public class AttackScript : GameLoop
 
         for (int i = 0; i < potentialTargets.Length; i++)
         {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, potentialTargets[i].transform.position - transform.position, out hit, 10))
+            {
+                Debug.DrawRay(transform.position, potentialTargets[i].transform.position - transform.position , Color.red,4);
+                if (hit.collider.gameObject.layer == 8)
+                {
+                    //print(Vector3.Angle(PlayerGraphics.position + transform.forward, potentialTargets[i].transform.position - PlayerGraphics.position));
+                    //if()
+                    Vector3 temp = potentialTargets[i].transform.position;
+                    temp.y = PlayerGraphics.position.y;
 
-            //print(Vector3.Angle(PlayerGraphics.position + transform.forward, potentialTargets[i].transform.position - PlayerGraphics.position));
-            //if()
-            Vector3 temp = potentialTargets[i].transform.position;
-            temp.y = PlayerGraphics.position.y;
+                    //print(Vector3.Angle(transform.position - (transform.position + PlayerSpeedDirectionSO.Value), transform.position - temp));
+                    // print("angle is "+ Vector3.Angle(PlayerGraphics.position - (PlayerGraphics.position + PlayerSpeedDirectionSO.Value), PlayerGraphics.position - temp) + " " + AttackAngle.Value);
 
-            //print(Vector3.Angle(transform.position - (transform.position + PlayerSpeedDirectionSO.Value), transform.position - temp));
-            // print("angle is "+ Vector3.Angle(PlayerGraphics.position - (PlayerGraphics.position + PlayerSpeedDirectionSO.Value), PlayerGraphics.position - temp) + " " + AttackAngle.Value);
+                    //print(PlayerSpeedDirectionSO.Value);
 
-            //print(PlayerSpeedDirectionSO.Value);
+                    if (Vector3.Angle(PlayerGraphics.position - (PlayerGraphics.position + PlayerDirectionSO.Value), PlayerGraphics.position - temp) < AttackAngle.Value)
+                        potentialTargets[i].GetComponent<Enemy>().TakeDamage(AttackDamage.Value);
+                }
+                else
+                    print("Attack blocked");
 
-            if (Vector3.Angle(PlayerGraphics.position - (PlayerGraphics.position + PlayerDirectionSO.Value), PlayerGraphics.position - temp) < AttackAngle.Value)
-                potentialTargets[i].GetComponent<Enemy>().TakeDamage(AttackDamage.Value);
-
+            }
+            
         }
 
     }

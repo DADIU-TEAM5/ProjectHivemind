@@ -2,34 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraSwitcher : MonoBehaviour
+namespace Cinemachine.Examples
 {
-    public List<GameObject> VirtualCameras;
-    private bool _activate = true;
-    private bool _deactivate = false;
-    
-    // Start is called before the first frame update
-    void Start()
+    public class CameraSwitcher : MonoBehaviour
     {
-        
-    }
+        public List<CinemachineVirtualCamera> VirtualCameras;
+        //public GameObjectVariable CurrentEnemySO;
+        private bool _activate = true;
+        private bool _deactivate = false;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void switchCamera (int cameraIndex)
-    {
-        VirtualCameras[cameraIndex].SetActive(_activate);
-
-        for (int i = 0; i < VirtualCameras.Count; i++)
+        // Start is called before the first frame update
+        void Start()
         {
-            if (i != cameraIndex)
+
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        public void switchCamera(int cameraIndex)
+        {
+            VirtualCameras[cameraIndex].gameObject.SetActive(_activate);
+
+            for (int i = 0; i < VirtualCameras.Count; i++)
             {
-                VirtualCameras[i].SetActive(_deactivate);
+                if (i != cameraIndex)
+                {
+                    VirtualCameras[i].gameObject.SetActive(_deactivate);
+                }
             }
+
+            /*if (VirtualCameras[cameraIndex].name == "KillCam")
+            {
+                VirtualCameras[cameraIndex].m_LookAt = CurrentEnemySO.Value.transform;
+                Debug.Log(CurrentEnemySO.Value.name);
+            }*/
         }
     }
 }
