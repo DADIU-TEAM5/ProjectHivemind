@@ -22,7 +22,8 @@ public class TouchControls : GameLoop
     public Camera PlayerCam;
     public GameObject UICanvas;
     public RectTransform UIMenuButton;
-
+    private bool _uiActivated = false;
+    private Vector2 _uiOffset;
 
     // Setup the private variables needed for the calculations in the current script
     private Vector3 _inputTouch;
@@ -67,6 +68,17 @@ public class TouchControls : GameLoop
         PlayerCurrentSpeedSO.Value = 0;
         
         PlayerDirectionSO.Value = Vector3.forward;
+
+        if (UICanvas != null)
+        {
+            _uiActivated = UICanvas.activeSelf;
+
+            _uiOffset = new Vector2(UIMenuButton.offsetMax.x, UIMenuButton.offsetMax.y);
+        } else
+        {
+            _uiActivated = false;
+            _uiOffset = new Vector2(0, 0);
+        }
     }
 
 
@@ -81,11 +93,11 @@ public class TouchControls : GameLoop
             {
                 DebugText.text = "TEST 0: " + touch0.fingerId.ToString();
 
-                Vector3 touchPosition = touch0.position;
+                Vector3 touchPosition = touch0.position;                
 
-                if (UICanvas.activeSelf == false)
+                if (_uiActivated == false)
                 {
-                    if (touchPosition.x > UIMenuButton.offsetMax.x || touchPosition.y > UIMenuButton.offsetMax.y)
+                    if (touchPosition.x > _uiOffset.x  || touchPosition.y > _uiOffset.y)
                     {
                         switch (touch0.phase)
                         {
@@ -113,9 +125,9 @@ public class TouchControls : GameLoop
 
             if (Input.GetMouseButton(0))
             {
-                if (UICanvas.activeSelf == false)
+                if (_uiActivated == false)
                 {
-                    if (inputPosition.x > UIMenuButton.offsetMax.x || inputPosition.y > UIMenuButton.offsetMax.y)
+                    if (inputPosition.x > _uiOffset.x || inputPosition.y > _uiOffset.y)
                     {
                         BeginMove(inputPosition);
                     }
@@ -124,9 +136,9 @@ public class TouchControls : GameLoop
             }
             if (Input.GetMouseButtonUp(0))
             {
-                if (UICanvas.activeSelf == false)
+                if (_uiActivated == false)
                 {
-                    if (inputPosition.x > UIMenuButton.offsetMax.x || inputPosition.y > UIMenuButton.offsetMax.y)
+                    if (inputPosition.x > _uiOffset.x || inputPosition.y > _uiOffset.y)
                     {
                         EndMove(Input.mousePosition);
                     }
