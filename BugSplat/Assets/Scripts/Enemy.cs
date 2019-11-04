@@ -20,7 +20,10 @@ public abstract class Enemy : GameLoop
 
     public abstract void TakeDamage(float damage);
 
-
+    private void OnDisable()
+    {
+        EnemyList.Remove(gameObject);
+    }
     public void RemoveFromLockedTargetIfNotVisible()
     {
         

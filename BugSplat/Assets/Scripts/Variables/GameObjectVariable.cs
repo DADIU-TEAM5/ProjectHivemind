@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Variables/GameObjectVariable")]
+[CreateAssetMenu(menuName = "Variables/Game Object")]
 public class GameObjectVariable : ScriptableObject
 {
     public GameObject Value;

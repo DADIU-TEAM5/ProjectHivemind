@@ -10,12 +10,14 @@ public class TestToolMenu : MonoBehaviour
     public bool ResetValuesOnPlay = false; 
     public List<BoolVariable> Boolvariables = new List<BoolVariable>();
 
+    public List<StringVariable> SceneVariables = new List<StringVariable>();
 
     public List<FloatVariable> Floatvariables = new List<FloatVariable>();
 
     public GameObject ScrollView;
 
     public GameObject Togglebutton;
+    public GameObject ScenButton;
     public GameObject FloatSlider;
     public Button TB;
 
@@ -45,6 +47,16 @@ public class TestToolMenu : MonoBehaviour
                 floatSlider.Setup(Floatvariables[i], Floatvariables[i].Min, Floatvariables[i].Max);
 
             }
+        }
+        for (int i = 0; i < SceneVariables.Count; i++)
+        {
+            GameObject newGO = (GameObject)GameObject.Instantiate(ScenButton);
+            newGO.transform.SetParent(ScrollView.transform, false);
+            newGO.SetActive(true);
+
+            SceneButton SceneButton = newGO.GetComponent<SceneButton>();
+            SceneButton.Setup(SceneVariables[i]);
+
         }
     }
 

@@ -91,34 +91,26 @@ public class TouchControls : GameLoop
         {
             Touch touch0 = Input.GetTouch(0);
 
-            Vector3 touchPosition = touch0.position;
-
-            if (touch0.phase == TouchPhase.Moved)
+            if (touch0.fingerId == 0)
             {
-                BeginMove(touchPosition); 
+                DebugText.text = touch0.fingerId.ToString();
 
-                /*if (Input.touchCount > 1)
+                Vector3 touchPosition = touch0.position;
+
+                switch (touch0.phase)
                 {
-                    Touch touch1 = Input.GetTouch(1);
-
-                    touchPosition = touch1.position;
-
-                    if (touch1.phase == TouchPhase.Moved)
-                    {
+                    case TouchPhase.Moved:
                         BeginMove(touchPosition);
-                    }
-
-                    if (touch1.phase == TouchPhase.Ended)
-                    {
+                        break;
+                    case TouchPhase.Ended:
                         EndMove(touchPosition);
-                    }
-                }*/
-            }
-
-            if (touch0.phase == TouchPhase.Ended)
+                        break;
+                }
+            } else
             {
-                EndMove(touchPosition);
+                DebugText.text = touch0.fingerId.ToString();
             }
+            
         }
 
 
