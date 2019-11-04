@@ -64,6 +64,11 @@ public class Spitter : Enemy
 
     public override bool IsVisible()
     {
+        if (_renderer == null)
+        {
+            _renderer = Graphics.GetComponent<Renderer>();
+        }
+
         if (_underground)
         {
             return false;
