@@ -11,6 +11,7 @@ public class PlayerHealth : GameLoop
 
     public BoolVariable IsInvulnerableSO;
     public FloatVariable InvulnerabilityTimerSO;
+    private bool _invulnerabilityTrigger;
 
     public FloatVariable MaxHealth;
 
@@ -32,6 +33,8 @@ public class PlayerHealth : GameLoop
         CurrentHealth.Value = MaxHealth.Value;
         _playerParent = transform.parent;
 
+        _invulnerabilityTrigger = false;
+
         _navMeshAgent = transform.parent.GetComponent<NavMeshAgent>();
 
     }
@@ -39,8 +42,7 @@ public class PlayerHealth : GameLoop
     public void TakeDamage(float damage)
     {
 
-        if (IsInvulnerableSO.Value != true)
-
+        if (InvulnerabilityTimerSO.Value < 0 && IsInvulnerableSO.Value != true)
         {
             InvulnerabilityTimerSO.Value = InvulnerabilityTimerSO.InitialValue;
             IsInvulnerableSO.Value = true;
@@ -67,11 +69,13 @@ public class PlayerHealth : GameLoop
         if (InvulnerabilityTimerSO.Value > 0)
         {
             InvulnerabilityTimerSO.Value -= Time.deltaTime;
-        } else
+            _invulnerabilityTrigger = true;
+
+        } else if (_invulnerabilityTrigger == true)
         {
             IsInvulnerableSO.Value = false;
+            _invulnerabilityTrigger = false;
         }
-
     }
 
     void CheckIfDead()
@@ -88,7 +92,7 @@ public class PlayerHealth : GameLoop
 
     public void KnockBackDamage(Vector3 direction, float length,float damage)
     {
-        if (IsInvulnerableSO.Value != true)
+        if (InvulnerabilityTimerSO.Value < 0 && IsInvulnerableSO.Value != true)
         {
             InvulnerabilityTimerSO.Value = InvulnerabilityTimerSO.InitialValue;
             IsInvulnerableSO.Value = true;
