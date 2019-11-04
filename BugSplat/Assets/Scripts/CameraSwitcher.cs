@@ -7,7 +7,7 @@ namespace Cinemachine.Examples
     public class CameraSwitcher : MonoBehaviour
     {
         public List<CinemachineVirtualCamera> VirtualCameras;
-        public GameObjectVariable CurrentEnemySO;
+        //public GameObjectVariable CurrentEnemySO;
         private bool _activate = true;
         private bool _deactivate = false;
 
@@ -35,11 +35,11 @@ namespace Cinemachine.Examples
                 }
             }
 
-            if (VirtualCameras[cameraIndex].name == "KillCam")
+            /*if (VirtualCameras[cameraIndex].name == "KillCam")
             {
                 VirtualCameras[cameraIndex].m_LookAt = CurrentEnemySO.Value.transform;
                 Debug.Log(CurrentEnemySO.Value.name);
-            }
+            }*/
         }
     }
 }
