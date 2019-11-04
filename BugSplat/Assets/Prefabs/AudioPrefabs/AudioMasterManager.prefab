@@ -832,7 +832,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2159845842660578015}
   - component: {fileID: 5959220859600176160}
-  - component: {fileID: 7294508151796107898}
+  - component: {fileID: 1821352100382249548}
   m_Layer: 0
   m_Name: HeavyAuido
   m_TagString: Untagged
@@ -873,15 +873,23 @@ MonoBehaviour:
   Attack:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
-  Hit:
+    WwiseObjectReference: {fileID: 11400000, guid: b7f2654cc9e8c40d7949b1a3944e5280,
+      type: 2}
+  HitFront:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
-  ScaredScream:
+    WwiseObjectReference: {fileID: 11400000, guid: 06547bf116a4b43aa936705078b1f988,
+      type: 2}
+  HitBack:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: df9c7bae6955448cf81847e8233ecc91,
+      type: 2}
+  Detect:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: ab2071739b4d04bc9a9b85d4d8dd776f,
+      type: 2}
   DeathSplat:
     idInternal: 0
     valueGuidInternal: 
@@ -890,7 +898,7 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 0}
---- !u!114 &7294508151796107898
+--- !u!114 &1821352100382249548
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -899,7 +907,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 9174410380775275465}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c570d4db2b60004c8cdddb970106913, type: 3}
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EventListeners: []
+  Event: {fileID: 0}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
