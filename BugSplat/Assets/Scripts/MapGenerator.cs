@@ -105,7 +105,7 @@ public class MapGenerator : MonoBehaviour
         _Parent.transform.Rotate(0, 90, 0);
         _Parent.SetActive(true);
         
-        print("Finished rotatin tiles");
+        //print("Finished rotatin tiles");
 
         yield return null;
     }

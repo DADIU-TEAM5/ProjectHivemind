@@ -13,7 +13,7 @@ public class PlayerAudioScript : MonoBehaviour
     public AK.Wwise.Event Dash;
     public AK.Wwise.Event Hit;
     public AK.Wwise.Event ScaredScream;
-    public AK.Wwise.Event DeathSplat;
+    public AK.Wwise.Event Killed;
 
     [Header("Wwise RTPCs")]
     public AK.Wwise.RTPC PlayerSpeedRTPC;
@@ -21,9 +21,7 @@ public class PlayerAudioScript : MonoBehaviour
     [Header("Variables")]
     public Vector3Variable PlayerSpeedVector3;
 
-    /*[Header("GameEvents")]
-    public UnityEngine.Events.UnityEvent[] Event;
-    */
+
 
 
     void Start()
@@ -66,6 +64,6 @@ public class PlayerAudioScript : MonoBehaviour
 
     public void Death(GameObject source)
     {
-        DeathSplat.Post(source);
+        Killed.Post(source);
     }
 }

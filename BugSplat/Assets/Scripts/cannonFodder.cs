@@ -42,6 +42,7 @@ public class cannonFodder : Enemy
         _cone.AddComponent<LineRenderer>();
         _coneRenderer = _cone.GetComponent<LineRenderer>();
         _cone.SetActive(false);
+        _cone.transform.parent = transform;
 
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _navMeshAgent.speed = stats.MoveSpeed;
@@ -80,6 +81,8 @@ public class cannonFodder : Enemy
 
     public override void LoopUpdate(float deltaTime)
     {
+        RemoveFromLockedTargetIfNotVisible();
+
         if (_attackCooldown > 0)
             _attackCooldown -= Time.deltaTime;
 
@@ -240,7 +243,7 @@ public class cannonFodder : Enemy
 
         float distanceToplayer = Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(_playerTransform.position.x, _playerTransform.position.z));
 
-        if (distanceToplayer > 2)
+        if (distanceToplayer > stats.AttackRange/2)
         {
 
             if (_navMeshAgent.destination != _playerTransform.position)

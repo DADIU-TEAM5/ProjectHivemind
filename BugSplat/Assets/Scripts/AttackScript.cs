@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AttackScript : GameLoop
 {
@@ -16,7 +17,10 @@ public class AttackScript : GameLoop
     public FloatVariable PlayerCurrentSpeedSO;
 
     public Transform PlayerGraphics;
+    public GameObjectVariable LockedTarget;
 
+
+    NavMeshAgent _navMeshAgent;
     Vector3 _nearstTarget;
     bool _lockedOntoTarget;
     float _distanceToNearstTarget;
@@ -40,6 +44,7 @@ public class AttackScript : GameLoop
         _rigidbody= GetComponent<Rigidbody>();
         _cone.AddComponent<LineRenderer>();
         _coneRenderer = _cone.GetComponent<LineRenderer>();
+        _navMeshAgent = GetComponent<NavMeshAgent>();
 
         _cone.SetActive(false);
 
@@ -87,25 +92,18 @@ public class AttackScript : GameLoop
 
             if (_distanceToNearstTarget > (AttackLength.Value * 0.5f))
             {
-                RaycastHit hit;
-                if (Physics.CapsuleCast(transform.position - (Vector3.up * 0.5f), transform.position + (Vector3.up * 0.5f), .1f, PlayerDirectionSO.Value, out hit))
+                if (_distanceToNearstTarget > AttackMoveDistance.Value + (AttackLength.Value * 0.5f))
                 {
-                    float ditanceToObject = Vector3.Distance(hit.point, transform.position);
-                    print(hit.collider.gameObject.name);
-                    if (ditanceToObject > AttackMoveDistance.Value)
-                    {
-                        transform.Translate(PlayerDirectionSO.Value * (_distanceToNearstTarget - (AttackLength.Value * 0.5f)));
-                    }
-                    else
-                    {
-                        transform.Translate(PlayerDirectionSO.Value * (ditanceToObject- (AttackLength.Value * 0.5f)));
-                    }
+
+                    _navMeshAgent.Move(PlayerDirectionSO.Value * (AttackMoveDistance.Value ));
                 }
                 else
                 {
-                    transform.Translate(PlayerDirectionSO.Value * (_distanceToNearstTarget - (AttackLength.Value * 0.5f)));
+                    _navMeshAgent.Move(PlayerDirectionSO.Value * (_distanceToNearstTarget - (AttackLength.Value * 0.5f)));
                 }
 
+
+                    
 
                 //transform.Translate(PlayerSpeedDirectionSO.Value * (_distanceToNearstTarget - (AttackLength.Value * 0.5f)));
                 //_rigidbody.MovePosition(transform.position + (PlayerSpeedDirectionSO.Value * (_distanceToNearstTarget - (AttackLength.Value * 0.5f))));
@@ -122,7 +120,7 @@ public class AttackScript : GameLoop
             if(Physics.CapsuleCast(transform.position - (Vector3.up * 0.5f), transform.position + (Vector3.up * 0.5f), .1f, PlayerDirectionSO.Value, out hit))
             {
                 float ditanceToObject = Vector3.Distance(hit.point, transform.position);
-                print(hit.collider.gameObject.name);
+                //print(hit.collider.gameObject.name);
                 if (ditanceToObject > AttackMoveDistance.Value)
                 {
                     transform.Translate(PlayerDirectionSO.Value * AttackMoveDistance.Value);
@@ -153,6 +151,7 @@ public class AttackScript : GameLoop
 
     private void LockOnToNearestTarget()
     {
+        if (LockedTarget.Value == null) { 
         Collider[] potentialTargets = Physics.OverlapSphere(PlayerGraphics.position, AttackLength.Value + AttackMoveDistance.Value, LayerMask.GetMask("Enemy"));
 
         int targetIndex = -1;
@@ -190,6 +189,18 @@ public class AttackScript : GameLoop
         {
             _lockedOntoTarget = false;
             _nearstTarget = Vector3.zero;
+        }
+    }
+        else
+        {
+            _lockedOntoTarget = true;
+            _nearstTarget = LockedTarget.Value.transform.position;
+
+            _nearstTarget.y = PlayerGraphics.position.y;
+            _distanceToNearstTarget = Vector3.Distance(PlayerGraphics.position, _nearstTarget);
+
+
+            _directionToNearstTarget = _nearstTarget - PlayerGraphics.position;
         }
     }
 
