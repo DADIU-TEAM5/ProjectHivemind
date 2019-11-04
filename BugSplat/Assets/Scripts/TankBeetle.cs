@@ -29,14 +29,18 @@ public class TankBeetle : Enemy
     GameObject _cone;
     LineRenderer _coneRenderer;
 
+    Color _startColor;
 
     [Header("Events")]
     public GameEvent TakeDamageEvent;
     public GameEvent AggroEvent;
     public GameEvent AttackEvent;
     public GameEvent DeathEvent;
-    
 
+    Color SetColor(Color color)
+    {
+        return Color.Lerp(_startColor, color, 0.5f);
+    }
 
     public override bool IsVisible()
     {
@@ -60,6 +64,8 @@ public class TankBeetle : Enemy
 
         _cone.SetActive(false);
         _cone.transform.parent = transform;
+
+        _startColor = _renderer.material.color;
 
         _navMeshAgent.speed = stats.MoveSpeed;
 
@@ -102,7 +108,7 @@ public class TankBeetle : Enemy
 
         if (!_playerDetected)
         {
-            _renderer.material.color = Color.blue;
+            _renderer.material.color = SetColor( Color.blue);
             DetectThePlayer();
         }
         else
@@ -111,7 +117,7 @@ public class TankBeetle : Enemy
                 _cone.SetActive(true);
 
             MoveTowardsThePlayer(deltaTime);
-            _renderer.material.color = Color.red;
+            _renderer.material.color = SetColor(Color.red);
 
 
             

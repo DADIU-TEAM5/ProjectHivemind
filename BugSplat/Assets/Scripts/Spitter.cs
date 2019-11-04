@@ -36,13 +36,19 @@ public class Spitter : Enemy
     NavMeshAgent _navMeshAgent;
 
 
-
+    Color _startColor;
     [Header("Events")]
     public GameEvent TakeDamageEvent;
     public GameEvent AggroEvent;
     public GameEvent AttackEvent;
     public GameEvent DeathEvent;
     public GameEvent AttackChargingEvent;
+
+
+    Color SetColor(Color color)
+    {
+        return Color.Lerp(_startColor, color, 0.5f);
+    }
 
     public void Start()
     {
@@ -58,6 +64,7 @@ public class Spitter : Enemy
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _navMeshAgent.speed = stats.MoveSpeed;
 
+        _startColor = _renderer.material.color;
         Burrow();
 
     }
@@ -171,7 +178,7 @@ public class Spitter : Enemy
 
         if (!_playerDetected)
         {
-            _renderer.material.color = Color.blue;
+            _renderer.material.color = SetColor(Color.blue);
             DetectThePlayer();
         }
         else if (playerInAttackRange() || _attacking)
@@ -188,25 +195,25 @@ public class Spitter : Enemy
                     if (_navMeshAgent.destination != transform.position)
                         _navMeshAgent.destination = transform.position;
 
-                    _renderer.material.color = Color.red;
+                    _renderer.material.color = SetColor(Color.red);
                     Attack();
                 }
                 else
                 {
                     LookAtPlayer();
-                    _renderer.material.color = Color.yellow;
+                    _renderer.material.color = SetColor(Color.yellow);
 
                 }
             }
             else
             {
-                _renderer.material.color = Color.yellow;
+                _renderer.material.color = SetColor(Color.yellow);
                 MoveTowardsThePlayer();
             }
         }
         else
         {
-            _renderer.material.color = Color.yellow;
+            _renderer.material.color = SetColor(Color.yellow);
             MoveTowardsThePlayer();
         }
     }
