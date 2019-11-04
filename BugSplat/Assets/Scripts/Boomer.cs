@@ -84,7 +84,7 @@ public class Boomer : Enemy
         RemoveFromLockedTargetIfNotVisible();
 
         if (_attackCooldown > 0)
-            _attackCooldown -= Time.deltaTime;
+            _attackCooldown -= deltaTime;
 
         Debug.DrawLine(transform.position, (transform.position + transform.forward), Color.red);
 

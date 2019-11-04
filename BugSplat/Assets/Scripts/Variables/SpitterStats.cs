@@ -14,6 +14,7 @@ public class SpitterStats : ScriptableObject
     public float AttackRange;
 
     public float FleeTime;
+    public float FleeThreshold;
 
     public float RetractionTime;
 
