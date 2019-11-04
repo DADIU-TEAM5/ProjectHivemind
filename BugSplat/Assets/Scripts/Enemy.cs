@@ -12,7 +12,7 @@ public abstract class Enemy : GameLoop
 
     private void OnEnable()
     {
-        Debug.Log(name + " spawned");
+        //Debug.Log(name + " spawned");
         EnemyList.Add(gameObject);
     }
 
