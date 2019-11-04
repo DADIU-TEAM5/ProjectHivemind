@@ -26,12 +26,19 @@ public class Boomer : Enemy
     private GameObject _cone;
     private LineRenderer _coneRenderer;
 
+    Color _startColor;
+
     [Header("Events")]
     public GameEvent TakeDamageEvent;
     public GameEvent AggroEvent;
     public GameEvent AttackEvent;
     public GameEvent DeathEvent;
     public GameEvent AttackChargingEvent;
+
+    Color SetColor(Color color)
+    {
+        return Color.Lerp(_startColor, color, 0.5f);
+    }
 
     public void Start()
     {
@@ -46,6 +53,8 @@ public class Boomer : Enemy
 
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _navMeshAgent.speed = stats.MoveSpeed;
+
+        _startColor = _renderer.material.color;
 
     }
 
@@ -63,7 +72,7 @@ public class Boomer : Enemy
     {
         // print(name + " took damage "+ damage);
         _currentHealth -= damage;
-        TakeDamageEvent.Raise();
+        TakeDamageEvent.Raise(gameObject);
 
         if (_currentHealth <= 0)
         {
@@ -75,7 +84,7 @@ public class Boomer : Enemy
                 part.transform.position = transform.position + ((Vector3.up * i) * 0.5f);
             }
 
-            DeathEvent.Raise();
+            DeathEvent.Raise(gameObject);
             EnemyList.Remove(gameObject);
 
             Destroy(_cone);
@@ -95,7 +104,7 @@ public class Boomer : Enemy
 
         if (!_playerDetected)
         {
-            _renderer.material.color = Color.blue;
+            _renderer.material.color = SetColor( Color.blue);
             DetectThePlayer();
         }
         else if (playerInAttackRange() || _attacking)
@@ -104,19 +113,19 @@ public class Boomer : Enemy
             {
                 
 
-                _renderer.material.color = Color.red;
+                _renderer.material.color = SetColor(Color.red);
                 Attack();
             }
             else
             {
-                _renderer.material.color = Color.yellow;
+                _renderer.material.color = SetColor(Color.yellow);
             }
                 MoveTowardsThePlayer();
             
         }
         else
         {
-            _renderer.material.color = Color.yellow;
+            _renderer.material.color = SetColor(Color.yellow);
             MoveTowardsThePlayer();
         }
     }
@@ -164,7 +173,7 @@ public class Boomer : Enemy
         if (_attacking == false)
         {
             _navMeshAgent.speed = stats.ChargeMoveSpeed;
-            AttackChargingEvent.Raise();
+            AttackChargingEvent.Raise(gameObject);
 
             Vector3 adjustedPlayerPos = _playerTransform.position;
 
@@ -181,7 +190,7 @@ public class Boomer : Enemy
 
         if (_attackCharge >= stats.AttackChargeUpTime)
         {
-            AttackEvent.Raise();
+            AttackEvent.Raise(gameObject);
             Collider[] potentialTargets = Physics.OverlapSphere(transform.position, stats.AttackRange, LayerMask.GetMask("Player"));
 
             RaycastHit hit;
@@ -262,7 +271,7 @@ public class Boomer : Enemy
 
         if (potentialTargets.Length > 0)
         {
-            AggroEvent.Raise();
+            AggroEvent.Raise(gameObject);
             _playerDetected = true;
             _playerTransform = potentialTargets[0].gameObject.transform;
 

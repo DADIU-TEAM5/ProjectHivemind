@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpitterAudioScript : MonoBehaviour
 {
-    public AK.Wwise.Event Footstep;
+    public AK.Wwise.Event Detect;
     public AK.Wwise.Event Attack;
     public AK.Wwise.Event Hit;
     public AK.Wwise.Event ScaredScream;
@@ -14,9 +14,9 @@ public class SpitterAudioScript : MonoBehaviour
     public AK.Wwise.Event HideUnderground;
 
 
-    public void FootStepEvent(GameObject source)
+    public void DetectEvent(GameObject source)
     {
-        Footstep.Post(source);
+        Detect.Post(source);
     }
 
     public void AttackEvent(GameObject source)

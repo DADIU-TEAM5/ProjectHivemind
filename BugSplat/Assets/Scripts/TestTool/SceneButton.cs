@@ -9,6 +9,8 @@ public class SceneButton : MonoBehaviour
     public StringVariable SceneName;
     public Text ButtonText;
     private string _toggleValue;
+    public GameObjectList EnemyList;
+    public GameObjectVariable HexMapParent;
 
 
     public void Setup(StringVariable sceneName)
@@ -25,6 +27,13 @@ public class SceneButton : MonoBehaviour
 
         if (SceneName != null)
         {
+
+            
+            Destroy(HexMapParent.Value);
+
+            EnemyList.Items = new List<GameObject>();
+            
+
             OverallSceneWorker.LoadScene(SceneName.Value);
             
         }

@@ -26,6 +26,8 @@ public class cannonFodder : Enemy
     private GameObject _cone;
     private LineRenderer _coneRenderer;
 
+    Color _startColor;
+
     [Header("Events")]
     public GameEvent TakeDamageEvent;
     public GameEvent AggroEvent;
@@ -46,6 +48,8 @@ public class cannonFodder : Enemy
 
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _navMeshAgent.speed = stats.MoveSpeed;
+
+        _startColor = _renderer.material.color;
 
     }
 
@@ -84,6 +88,11 @@ public class cannonFodder : Enemy
     }
 
 
+    Color SetColor(Color color)
+    {
+        return Color.Lerp(_startColor, color, 0.5f);
+    }
+
     public override void LoopUpdate(float deltaTime)
     {
         RemoveFromLockedTargetIfNotVisible();
@@ -95,7 +104,7 @@ public class cannonFodder : Enemy
 
         if (!_playerDetected)
         {
-            _renderer.material.color = Color.blue;
+            _renderer.material.color = SetColor(Color.blue);
             DetectThePlayer();
         }
         else if ( playerInAttackRange() || _attacking)
@@ -105,18 +114,18 @@ public class cannonFodder : Enemy
                 if (_navMeshAgent.destination != transform.position)
                     _navMeshAgent.destination = transform.position;
 
-                _renderer.material.color = Color.red;
+                _renderer.material.color = SetColor(Color.red);
                 Attack();
             }
             else
             {
-                _renderer.material.color = Color.yellow;
+                _renderer.material.color = SetColor(Color.yellow);
                 MoveTowardsThePlayer();
             }
         }
         else
         {
-            _renderer.material.color = Color.yellow;
+            _renderer.material.color = SetColor( Color.yellow);
             MoveTowardsThePlayer();
         }
     }
