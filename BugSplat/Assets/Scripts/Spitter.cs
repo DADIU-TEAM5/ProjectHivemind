@@ -29,6 +29,8 @@ public class Spitter : Enemy
 
     bool _underground;
 
+    float _waitForPathCalc;
+
     Renderer _renderer;
 
     NavMeshAgent _navMeshAgent;
@@ -78,7 +80,9 @@ public class Spitter : Enemy
             // print(name + " took damage "+ damage);
             _currentHealth -= damage;
 
+            if(_currentHealth < stats.FleeThreshold)
             _fleeValue = stats.FleeTime;
+
             TakeDamageEvent.Raise();
 
             if (_currentHealth <= 0)
@@ -120,6 +124,10 @@ public class Spitter : Enemy
 
     public override void LoopUpdate(float deltaTime)
     {
+
+        if (_waitForPathCalc > 0)
+            _waitForPathCalc -= deltaTime;
+
         RemoveFromLockedTargetIfNotVisible();
 
         if (_underground )
@@ -127,7 +135,7 @@ public class Spitter : Enemy
 
             if (_burrowLerp < 1)
             {
-                _burrowLerp += Time.deltaTime/stats.RetractionTime;
+                _burrowLerp += deltaTime / stats.RetractionTime;
             }
 
 
@@ -136,7 +144,7 @@ public class Spitter : Enemy
 
             if (_burrowLerp > 0)
             {
-                _burrowLerp -= Time.deltaTime/stats.RetractionTime;
+                _burrowLerp -= deltaTime / stats.RetractionTime;
             }
         }
         Vector3 tempPos = Graphics.transform.localPosition;
@@ -145,14 +153,14 @@ public class Spitter : Enemy
 
         Graphics.transform.localPosition = tempPos;
 
-        print(_fleeValue);
+       // print(_fleeValue);
 
 
         if (_fleeValue > 0)
-            _fleeValue -= Time.deltaTime;
+            _fleeValue -= deltaTime;
 
         if (_attackCooldown > 0)
-            _attackCooldown -= Time.deltaTime;
+            _attackCooldown -= deltaTime;
 
         Debug.DrawLine(transform.position, (transform.position + transform.forward), Color.red);
 
@@ -263,7 +271,7 @@ public class Spitter : Enemy
     {
         Burrow();
 
-        if (_burrowLerp >= 1)
+        if (_burrowLerp >= 1 && _waitForPathCalc<=0)
         {
             Vector3 adjustedPlayerPos = _playerTransform.position;
 
@@ -277,10 +285,15 @@ public class Spitter : Enemy
             destination = adjustedPlayerPos+((transform.position-adjustedPlayerPos).normalized*stats.AttackRange);
 
 
-            //Debug.DrawLine(transform.position, destination, Color.red);
+            
+
+            //destination = hit.position;
+
 
             if (_navMeshAgent.destination != destination)
                 _navMeshAgent.destination = destination;
+
+            _waitForPathCalc = .5f;
         }
     }
 
