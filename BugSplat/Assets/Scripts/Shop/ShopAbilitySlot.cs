@@ -18,7 +18,7 @@ public class ShopAbilitySlot : ShopSlot
 
     public override void OnPurchase()
     {
-        Ability.OnTrigger();
+        Ability.OnTrigger(null);
     }
 
     public override void Init()

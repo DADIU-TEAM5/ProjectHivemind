@@ -13,7 +13,7 @@ public class HealAbility : Ability
     {
     }
 
-    public override void OnTrigger()
+    public override void OnTrigger(GameObject GO)
     {
         Debug.Log("Heal Ability is Triggering");
         CurrentHealth.Value = Mathf.Min(CurrentHealth.Value + HealValue, MaxHealth.Value);
