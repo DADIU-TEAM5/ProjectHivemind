@@ -67,6 +67,9 @@ public class TouchControls : GameLoop
     // Start is called before the first frame update
     void Start()
     {
+        // Disable Multitouch for the phone touch to fix problems with multiple touches. However, multiple touches should be implemented at a later stage.
+        Input.multiTouchEnabled = false;
+
         _inputFrames = Mathf.RoundToInt(InputSwipeTapTimeSO.Value);
         _currentInputPosition = new Vector3[_inputFrames];
         _inputFrames--;
@@ -93,7 +96,7 @@ public class TouchControls : GameLoop
 
             if (touch0.fingerId == 0)
             {
-                DebugText.text = touch0.fingerId.ToString();
+                DebugText.text = "TEST 0: " + touch0.fingerId.ToString();
 
                 Vector3 touchPosition = touch0.position;
 
@@ -108,7 +111,7 @@ public class TouchControls : GameLoop
                 }
             } else
             {
-                DebugText.text = touch0.fingerId.ToString();
+                DebugText.text = "TEST ELSE: " + touch0.fingerId.ToString();
             }
             
         }
@@ -154,7 +157,7 @@ public class TouchControls : GameLoop
 
         ReturnInputPosition(inputPosition); // Recording Current Pos
 
-        DebugText.text = "MOVING!";
+        //DebugText.text = "MOVING!";
 
         _inputMoved = true;
 
