@@ -74,7 +74,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 61.17
+  m_Acceleration: 9999
   avoidancePriority: 50
   m_AngularSpeed: 50
   m_StoppingDistance: 0
@@ -105,6 +105,10 @@ MonoBehaviour:
   bodyPart: {fileID: 7324468612011702487, guid: 862620230bd5167459723c1fe51d3192,
     type: 3}
   stats: {fileID: 11400000, guid: 23cc4f488cfe3d74497cadffc6e59c9d, type: 2}
+  TakeDamageEvent: {fileID: 11400000, guid: 672974adbe25e4fdf8f22f73f62ef14a, type: 2}
+  AggroEvent: {fileID: 11400000, guid: 133c016a815fd4c2b9173028a37d05a4, type: 2}
+  AttackEvent: {fileID: 11400000, guid: bafbf450e60f74a218319f9cc59f4834, type: 2}
+  DeathEvent: {fileID: 11400000, guid: e1eece7e0f8b74ba48bd4b1a583fd49a, type: 2}
 --- !u!1001 &5852722917182829741
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -112,11 +116,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4176355153426757476}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 4172f0f129792d84ba9d733ae2a7bfff,
-        type: 3}
-      propertyPath: m_Name
-      value: graphics
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4172f0f129792d84ba9d733ae2a7bfff,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -171,6 +170,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 4172f0f129792d84ba9d733ae2a7bfff,
+        type: 3}
+      propertyPath: m_Name
+      value: graphics
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4172f0f129792d84ba9d733ae2a7bfff, type: 3}

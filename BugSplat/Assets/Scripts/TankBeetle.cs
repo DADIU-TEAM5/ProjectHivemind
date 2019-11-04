@@ -29,6 +29,15 @@ public class TankBeetle : Enemy
     GameObject _cone;
     LineRenderer _coneRenderer;
 
+
+    [Header("Events")]
+    public GameEvent TakeDamageEvent;
+    public GameEvent AggroEvent;
+    public GameEvent AttackEvent;
+    public GameEvent DeathEvent;
+    
+
+
     public override bool IsVisible()
     {
         return _renderer.isVisible;
@@ -55,9 +64,12 @@ public class TankBeetle : Enemy
     public override void TakeDamage(float damage)
     {
         // print(name + " took damage "+ damage);
+
+        TakeDamageEvent.Raise();
         _currentHealth -= damage;
         if (_currentHealth <= 0)
         {
+            DeathEvent.Raise();
             int partsToDrop = Random.Range(stats.minPartsToDrop, stats.maxPartsToDrop);
             for (int i = 0; i < partsToDrop; i++)
             {
@@ -94,7 +106,7 @@ public class TankBeetle : Enemy
             if (_cone.activeSelf == false)
                 _cone.SetActive(true);
 
-            MoveTowardsThePlayer();
+            MoveTowardsThePlayer(deltaTime);
             _renderer.material.color = Color.red;
 
 
@@ -201,6 +213,7 @@ public class TankBeetle : Enemy
                             directionToPush.y = 0;
                             directionToPush = Vector3.Normalize(directionToPush);
 
+                            AttackEvent.Raise();
                             playerHealth.KnockBackDamage(directionToPush, stats.PushLength, stats.AttackDamage);
                         }
                         else
@@ -257,7 +270,7 @@ public class TankBeetle : Enemy
         return Vector3.Distance(transform.position, adjustedPlayerPos) < stats.AttackRange / 2;
     }
 
-    void MoveTowardsThePlayer()
+    void MoveTowardsThePlayer(float deltaTime)
     {
         /*
         Vector3 adjustedPlayerPos = _playerTransform.position;
@@ -268,7 +281,27 @@ public class TankBeetle : Enemy
 
         transform.Translate(Vector3.forward * stats.MoveSpeed * Time.deltaTime);
         */
-        Vector3 temPlayerPos = _playerTransform.position;
+
+
+        Vector3 temp = _playerTransform.position;
+        temp.y = transform.position.y;
+
+
+        //print( Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp));
+        if (Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp) < stats.AttackAngle)
+        {
+            
+            _navMeshAgent.Move(transform.forward * deltaTime * stats.ChargeSpeed);
+        }
+        else
+        {
+            _navMeshAgent.Move(transform.forward * deltaTime * stats.MoveSpeed);
+        }
+
+
+
+
+            Vector3 temPlayerPos = _playerTransform.position;
         temPlayerPos.y = transform.position.y;
 
         NavMeshPath pathToPlayer = new NavMeshPath();
@@ -294,10 +327,10 @@ public class TankBeetle : Enemy
 
         Quaternion targetRotation = Quaternion.LookRotation(tempPathPos - transform.position );
 
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, stats.TurnSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, stats.TurnSpeed * deltaTime);
 
         //_navMeshAgent.SetPath(pathToPlayer);
-        _navMeshAgent.Move(transform.forward * Time.deltaTime * stats.MoveSpeed);
+        
         
         /*if (_navMeshAgent.destination != _playerTransform.position)
             _navMeshAgent.destination = _playerTransform.position;
@@ -311,6 +344,8 @@ public class TankBeetle : Enemy
 
         if (potentialTargets.Length > 0)
         {
+
+            AggroEvent.Raise();
             _playerDetected = true;
             _playerTransform = potentialTargets[0].gameObject.transform;
 
