@@ -13,6 +13,7 @@ namespace AK
 {
     namespace EVENTS
     {
+        static const AkUniqueID AMB_ARENA_01 = 1404225303U;
         static const AkUniqueID INTRO = 1125500713U;
         static const AkUniqueID NPC_BOOMER_ATTACK = 592638112U;
         static const AkUniqueID NPC_BOOMER_DEAD = 1879848174U;
@@ -31,6 +32,7 @@ namespace AK
         static const AkUniqueID NPC_FODDER_SPECIALATTACK = 2078456833U;
         static const AkUniqueID NPC_HEAVY_ATTACK = 3679048617U;
         static const AkUniqueID NPC_HEAVY_DEAD = 2658157895U;
+        static const AkUniqueID NPC_HEAVY_DETECT = 4074057964U;
         static const AkUniqueID NPC_HEAVY_FOOTSTEPS = 198238650U;
         static const AkUniqueID NPC_HEAVY_HIT = 78903020U;
         static const AkUniqueID NPC_HEAVY_HIT_FRONT = 3339782068U;
@@ -44,7 +46,6 @@ namespace AK
         static const AkUniqueID NPC_SPITTER_IDLE = 299564625U;
         static const AkUniqueID NPC_SPITTER_SCREAM = 2642000516U;
         static const AkUniqueID NPC_SPITTER_SPECIALATTACK = 3176358132U;
-        static const AkUniqueID PH = 1635194325U;
         static const AkUniqueID PLAYER_FOLEY_ATTACKEVENT = 2390168611U;
         static const AkUniqueID PLAYER_FOLEY_DASHEVENT = 1643920063U;
         static const AkUniqueID PLAYER_FOLEY_FOOTSTEPEVENT = 954324369U;

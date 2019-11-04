@@ -179,7 +179,7 @@ public class cannonFodder : Enemy
             Collider[] potentialTargets = Physics.OverlapSphere(transform.position, stats.AttackRange, LayerMask.GetMask("Player"));
 
             RaycastHit hit;
-            if (potentialTargets.Length>0 && Physics.Raycast(transform.position, potentialTargets[0].transform.position - transform.position, out hit, 10, LayerMask.GetMask("Player")))
+            if (potentialTargets.Length>0 && Physics.Raycast(transform.position, potentialTargets[0].transform.position - transform.position, out hit, 10))
             {
                 if (hit.collider.gameObject.layer == 9)
                 {
