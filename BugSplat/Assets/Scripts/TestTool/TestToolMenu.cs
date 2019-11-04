@@ -10,6 +10,7 @@ public class TestToolMenu : MonoBehaviour
     public bool ResetValuesOnPlay = false; 
     public List<BoolVariable> Boolvariables = new List<BoolVariable>();
 
+    public List<StringVariable> Scene = new List<StringVariable>();
 
     public List<FloatVariable> Floatvariables = new List<FloatVariable>();
 

@@ -65,11 +65,11 @@ public class TankBeetle : Enemy
     {
         // print(name + " took damage "+ damage);
 
-        TakeDamageEvent.Raise();
+        TakeDamageEvent.Raise(gameObject);
         _currentHealth -= damage;
         if (_currentHealth <= 0)
         {
-            DeathEvent.Raise();
+            DeathEvent.Raise(gameObject);
             int partsToDrop = Random.Range(stats.minPartsToDrop, stats.maxPartsToDrop);
             for (int i = 0; i < partsToDrop; i++)
             {
@@ -213,7 +213,7 @@ public class TankBeetle : Enemy
                             directionToPush.y = 0;
                             directionToPush = Vector3.Normalize(directionToPush);
 
-                            AttackEvent.Raise();
+                            AttackEvent.Raise(gameObject);
                             playerHealth.KnockBackDamage(directionToPush, stats.PushLength, stats.AttackDamage);
                         }
                         else
@@ -345,7 +345,7 @@ public class TankBeetle : Enemy
         if (potentialTargets.Length > 0)
         {
 
-            AggroEvent.Raise();
+            AggroEvent.Raise(gameObject);
             _playerDetected = true;
             _playerTransform = potentialTargets[0].gameObject.transform;
 
