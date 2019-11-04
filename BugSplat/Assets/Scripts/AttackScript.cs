@@ -114,7 +114,7 @@ public class AttackScript : GameLoop
         }
         else
         {
-            print("no targets");
+           // print("no targets");
 
             RaycastHit hit;
             if(Physics.CapsuleCast(transform.position - (Vector3.up * 0.5f), transform.position + (Vector3.up * 0.5f), .1f, PlayerDirectionSO.Value, out hit))
@@ -215,7 +215,7 @@ public class AttackScript : GameLoop
 
     private void Attack()
     {
-        print(PlayerDirectionSO.Value);
+        //print(PlayerDirectionSO.Value);
 
         Anim.SetTrigger("Attack");
 
