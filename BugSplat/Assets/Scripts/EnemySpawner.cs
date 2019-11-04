@@ -45,7 +45,7 @@ public class EnemySpawner : GameLoop
     {
         while (budget > 0)
         {
-            if (smallestValue < budget)
+            if (smallestValue > budget)
                 break;
 
             Debug.Log(budget);
