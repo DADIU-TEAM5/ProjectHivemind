@@ -258,7 +258,7 @@ public class TouchControls : GameLoop
 
                 }
 
-                DebugText.text = "ATTACKED!";
+                //DebugText.text = "ATTACKED!";
                 AttackInitiatedSO.Raise(this.gameObject);
             }
         }
@@ -267,14 +267,14 @@ public class TouchControls : GameLoop
         {
             //Debug.Log("FINGER DIST: " + Vector3.Distance(_currentInputPosition[0], _currentInputPosition[_inputFrames]));
 
-            DebugText.text = "DODGED!";
+            //DebugText.text = "DODGED!";
             DashInitiatedSO.Raise(this.gameObject);
         }
 
         // Check if MOVE has happened
         if (_inputMoved)
         {
-            DebugText.text = "MOVED!";
+            //DebugText.text = "MOVED!";
         }
 
 
