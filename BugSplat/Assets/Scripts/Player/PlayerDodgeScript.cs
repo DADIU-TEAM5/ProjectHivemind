@@ -5,8 +5,9 @@ using UnityEngine.AI;
 
 public class PlayerDodgeScript : GameLoop
 {
-    public BoolVariable IsDodging;
-
+    public BoolVariable IsDodgingSO;
+    public BoolVariable IsInvulnerableSO;
+    public FloatVariable DashInvulnerabilityTimeSO;
     public Vector3Variable PlayerDirectionSO;
     public Vector3Variable PlayerVelocitySO;
     public FloatVariable DashSpeedSO;
@@ -24,7 +25,8 @@ public class PlayerDodgeScript : GameLoop
 
     private void Start()
     {
-        IsDodging.Value = false;
+        IsDodgingSO.Value = false;
+        IsInvulnerableSO.Value = false;
         _dashCooldownActive = false;
         _navMeshAgent = transform.GetComponent<NavMeshAgent>();
     }
@@ -40,7 +42,7 @@ public class PlayerDodgeScript : GameLoop
 
             //Debug.Log(_diffTime);
 
-            if (IsDodging.Value == true)
+            if (IsDodgingSO.Value == true)
             {
                 float curveTime = 0; DashAnimationCurve.Evaluate(_diffTime / DashSpeedSO.Value);
 
@@ -75,14 +77,20 @@ public class PlayerDodgeScript : GameLoop
                     {
                         _navMeshAgent.transform.position = _initialPos + PlayerVelocitySO.Value;
                     }
-                    IsDodging.Value = false;
+                    IsDodgingSO.Value = false;
                 }
+            }
+
+            if (_diffTime > (DashSpeedSO.Value + DashInvulnerabilityTimeSO.Value))
+            {
+                IsInvulnerableSO.Value = false;
             }
 
             if (_diffTime > DashCooldownSO.InitialValue)
             {
                 _dashCooldownActive = false;
                 DashCooldownSO.Value = DashCooldownSO.InitialValue;
+                IsInvulnerableSO.Value = false;
             }
         }
     }
@@ -97,14 +105,15 @@ public class PlayerDodgeScript : GameLoop
     // Called from PlayerController
     public void PlayerDash()
     {
-        if (IsDodging.Value == false && !_dashCooldownActive)
+        if (IsDodgingSO.Value == false && !_dashCooldownActive)
         {
             _dashDirection = PlayerDirectionSO.Value;
             _currentTime = Time.time;
             _lerpTime = 0f;
             _initialPos = transform.position;
-            IsDodging.Value = true;
+            IsDodgingSO.Value = true;
             _dashCooldownActive = true;
+            IsInvulnerableSO.Value = true;
         }
     }      
 }
