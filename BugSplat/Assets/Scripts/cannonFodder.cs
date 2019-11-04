@@ -51,6 +51,11 @@ public class cannonFodder : Enemy
 
     public override bool IsVisible()
     {
+        if (_renderer == null)
+        {
+            _renderer = Graphics.GetComponent<Renderer>();
+        }
+
         return _renderer.isVisible;
     }
 
