@@ -38,7 +38,7 @@ public class PlayerDodgeScript : GameLoop
             float _diffTime = _lerpTime - _currentTime;
             DashCooldownSO.Value = _diffTime;
 
-            Debug.Log(_diffTime);
+            //Debug.Log(_diffTime);
 
             if (IsDodging.Value == true)
             {
@@ -106,13 +106,5 @@ public class PlayerDodgeScript : GameLoop
             IsDodging.Value = true;
             _dashCooldownActive = true;
         }
-    }
-
-
-    private void DashCurve()
-    {
-
-
-    }
-        
+    }      
 }
