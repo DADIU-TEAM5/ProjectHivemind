@@ -29,6 +29,15 @@ public class TankBeetle : Enemy
     GameObject _cone;
     LineRenderer _coneRenderer;
 
+
+    [Header("Events")]
+    public GameEvent TakeDamageEvent;
+    public GameEvent AggroEvent;
+    public GameEvent AttackEvent;
+    public GameEvent DeathEvent;
+    
+
+
     public override bool IsVisible()
     {
         return _renderer.isVisible;
@@ -55,9 +64,12 @@ public class TankBeetle : Enemy
     public override void TakeDamage(float damage)
     {
         // print(name + " took damage "+ damage);
+
+        TakeDamageEvent.Raise();
         _currentHealth -= damage;
         if (_currentHealth <= 0)
         {
+            DeathEvent.Raise();
             int partsToDrop = Random.Range(stats.minPartsToDrop, stats.maxPartsToDrop);
             for (int i = 0; i < partsToDrop; i++)
             {
@@ -201,6 +213,7 @@ public class TankBeetle : Enemy
                             directionToPush.y = 0;
                             directionToPush = Vector3.Normalize(directionToPush);
 
+                            AttackEvent.Raise();
                             playerHealth.KnockBackDamage(directionToPush, stats.PushLength, stats.AttackDamage);
                         }
                         else
@@ -331,6 +344,8 @@ public class TankBeetle : Enemy
 
         if (potentialTargets.Length > 0)
         {
+
+            AggroEvent.Raise();
             _playerDetected = true;
             _playerTransform = potentialTargets[0].gameObject.transform;
 
