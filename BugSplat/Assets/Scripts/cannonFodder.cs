@@ -243,7 +243,7 @@ public class cannonFodder : Enemy
 
         float distanceToplayer = Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(_playerTransform.position.x, _playerTransform.position.z));
 
-        if (distanceToplayer > 2)
+        if (distanceToplayer > stats.AttackRange/2)
         {
 
             if (_navMeshAgent.destination != _playerTransform.position)
