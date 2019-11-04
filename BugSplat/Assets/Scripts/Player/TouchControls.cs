@@ -16,31 +16,13 @@ public class TouchControls : GameLoop
     public FloatVariable InputMoveMinThresholdSO;
     public FloatVariable InputMoveMaxThresholdSO;
     public FloatVariable InputSwipeTapTimeSO;
-    public Transform MainCameraDirection; // Not used yet, but should be used for rotating the coordinate system of the touch input to  match the direction of the player
+    public FloatVariable InputSwipeThresholdSO; // Percentage of the screen width
 
     public GameObjectVariable LockedTarget;
     public Camera PlayerCam;
+    public GameObject UICanvas;
+    public RectTransform UIMenuButton;
 
-    /*
-    // Display sliders for altering the speed and acceleration of the Player - This could potentially be moved to an editor window for the designers
-    [Header("Player Variables")]
-    [Tooltip("Maximum Speed in m/s")]
-    public float PlayerMaxSpeed;
-    [Tooltip("Acceleration time in seconds, from 0 to max speed")]
-    public float PlayerAcceleration = 1f;
-
-    //Display Sliders for tweaking the amount of touch
-    [Header ("Touch Variables")]
-    [Tooltip("A percentage of the total screen width for setting the extent of the player's touch on the screen")]
-    public float _inputMoveMaxThreshold = 25f;
-
-    [Tooltip("A percentage of the total screen width for setting how far the player must move the finger to make it react as a move and not e.g. a tap")]
-    public float _inputMoveMinThreshold = 5f;
-
-    [Tooltip("Time in seconds before it is registered as a swipe or tap")]
-    public float _inputSwipeTapTime = 0.200;
-    */
-    public FloatVariable InputSwipeThresholdSO; // Percentage of the screen width
 
     // Setup the private variables needed for the calculations in the current script
     private Vector3 _inputTouch;
@@ -60,6 +42,7 @@ public class TouchControls : GameLoop
     public GameObject TouchUIDotCurrent;
     public GameObject TouchUIDotRecorded;
     public Transform TouchCanvas;
+
     private GameObject _uiRecord;
     private GameObject _uiCurrent;
 
@@ -100,36 +83,54 @@ public class TouchControls : GameLoop
 
                 Vector3 touchPosition = touch0.position;
 
-                switch (touch0.phase)
+                if (UICanvas.activeSelf == false)
                 {
-                    case TouchPhase.Moved:
-                        BeginMove(touchPosition);
-                        break;
-                    case TouchPhase.Ended:
-                        EndMove(touchPosition);
-                        break;
+                    if (touchPosition.x > UIMenuButton.offsetMax.x || touchPosition.y > UIMenuButton.offsetMax.y)
+                    {
+                        switch (touch0.phase)
+                        {
+                            case TouchPhase.Moved:
+                                BeginMove(touchPosition);
+                                break;
+                            case TouchPhase.Ended:
+                                EndMove(touchPosition);
+                                break;
+                        }
+                    }
                 }
-            } else
-            {
-                DebugText.text = "TEST ELSE: " + touch0.fingerId.ToString();
+                else
+                {
+                    DebugText.text = "TEST ELSE: " + touch0.fingerId.ToString();
+                }
             }
-            
         }
 
 
         // Simulate touch with mouse, if mouse present
         if (Input.mousePresent)
         {
+            Vector3 inputPosition = Input.mousePosition;
+
             if (Input.GetMouseButton(0))
             {
-                Vector3 inputPosition = Input.mousePosition;
-
-                BeginMove(inputPosition);
+                if (UICanvas.activeSelf == false)
+                {
+                    if (inputPosition.x > UIMenuButton.offsetMax.x || inputPosition.y > UIMenuButton.offsetMax.y)
+                    {
+                        BeginMove(inputPosition);
+                    }
+                }
 
             }
             if (Input.GetMouseButtonUp(0))
             {
-                EndMove(Input.mousePosition);
+                if (UICanvas.activeSelf == false)
+                {
+                    if (inputPosition.x > UIMenuButton.offsetMax.x || inputPosition.y > UIMenuButton.offsetMax.y)
+                    {
+                        EndMove(Input.mousePosition);
+                    }
+                }
             }
         }
     }
