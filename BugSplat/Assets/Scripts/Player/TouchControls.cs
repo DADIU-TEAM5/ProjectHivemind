@@ -292,6 +292,7 @@ public class TouchControls : GameLoop
         PlayerCurrentSpeedSO.Value = 0;
         _inputMoved = false;
         _recordPosition = true;
+        _inputFrames = Mathf.RoundToInt(InputSwipeTapTimeSO.Value);
         _currentInputPosition = new Vector3[_inputFrames + 1];
     }
 }

@@ -465,7 +465,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 180623408}
-  m_LocalRotation: {x: 0.38886788, y: -0.000000016657044, z: 0.0000000085979845, w: 0.92129356}
+  m_LocalRotation: {x: 0.38886788, y: 0.000000015047215, z: -0.000000004784034, w: 0.92129356}
   m_LocalPosition: {x: 0, y: 18.01, z: -22.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1812,12 +1812,12 @@ PrefabInstance:
     - target: {fileID: 8824079940401298488, guid: 67d09e3328c45534e866e21a2885e600,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000016657044
+      value: 0.000000015047215
       objectReference: {fileID: 0}
     - target: {fileID: 8824079940401298488, guid: 67d09e3328c45534e866e21a2885e600,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000085979845
+      value: -0.000000004784034
       objectReference: {fileID: 0}
     - target: {fileID: 300787277628764676, guid: 67d09e3328c45534e866e21a2885e600,
         type: 3}
@@ -2435,6 +2435,12 @@ MonoBehaviour:
     positionOffset: {x: 0, y: 0, z: 0}
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
+--- !u!20 &1715718482 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 8824079940401298489, guid: 67d09e3328c45534e866e21a2885e600,
+    type: 3}
+  m_PrefabInstance: {fileID: 1000889534}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1715718485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2962,6 +2968,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerGameObject
       objectReference: {fileID: 0}
+    - target: {fileID: 771227569, guid: ce93dae90c32b234eb5aa37ebcaa5582, type: 3}
+      propertyPath: VirtualCameras.Array.data[0]
+      value: 
+      objectReference: {fileID: 180623409}
+    - target: {fileID: 771227569, guid: ce93dae90c32b234eb5aa37ebcaa5582, type: 3}
+      propertyPath: VirtualCameras.Array.data[1]
+      value: 
+      objectReference: {fileID: 637563758}
     - target: {fileID: 5788987755461925660, guid: ce93dae90c32b234eb5aa37ebcaa5582,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3027,14 +3041,11 @@ PrefabInstance:
       propertyPath: TouchCanvas
       value: 
       objectReference: {fileID: 354218991}
-    - target: {fileID: 771227569, guid: ce93dae90c32b234eb5aa37ebcaa5582, type: 3}
-      propertyPath: VirtualCameras.Array.data[0]
+    - target: {fileID: 5788987755461925661, guid: ce93dae90c32b234eb5aa37ebcaa5582,
+        type: 3}
+      propertyPath: PlayerCam
       value: 
-      objectReference: {fileID: 180623408}
-    - target: {fileID: 771227569, guid: ce93dae90c32b234eb5aa37ebcaa5582, type: 3}
-      propertyPath: VirtualCameras.Array.data[1]
-      value: 
-      objectReference: {fileID: 637563757}
+      objectReference: {fileID: 1715718482}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce93dae90c32b234eb5aa37ebcaa5582, type: 3}
 --- !u!1001 &6311877561933221950
