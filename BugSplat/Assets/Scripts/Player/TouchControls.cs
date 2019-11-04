@@ -22,7 +22,7 @@ public class TouchControls : GameLoop
     private Vector3 _inputTouch;
     private bool _recordPosition = true;
     private Vector3 _recordedInputPosition;
-    private Vector3[] _currentInputPosition;
+    public Vector3[] _currentInputPosition;
     private bool _inputMoved;
     private float _inputTime;
     private float _runtimeInputMax;
@@ -68,8 +68,6 @@ public class TouchControls : GameLoop
             Touch touch0 = Input.GetTouch(0);
 
             Vector3 touchPosition = touch0.position;
-
-            ReturnInputPosition(touchPosition); // Record Start Pos
 
             if (touch0.phase == TouchPhase.Moved)
             {
@@ -136,51 +134,56 @@ public class TouchControls : GameLoop
     {
         PopulatePositionIndex(_currentInputPosition); // Move old positions one frame backwards in array
 
+        ReturnInputPosition(inputPosition); // Record Start Pos
+
         ReturnInputPosition(inputPosition); // Recording Current Pos
 
         DebugText.text = "MOVING!";
 
         _inputMoved = true;
 
-        PlayerCurrentSpeedSO.Value = PlayerMaxSpeedSO.Value;
+        PlayerCurrentSpeedSO.Value = PlayerCurrentSpeedSO.InitialValue;
 
-        Vector3 heading;
-        float distance;
-        Vector3 direction;
-
-        heading = _currentInputPosition[_inputFrames] - _recordedInputPosition;
-
-        // Calculates the outer rim position of the "joystick" if the player moves the finger beyond the borders of the designated joystick space
-        float x = 0f;
-        float y = 0f;
-        float a = Mathf.Atan2(heading.y, heading.x);
-
-        float circleCalc = (heading.x * heading.x) + (heading.y * heading.y);
-
-        if (circleCalc > (_runtimeInputMax * _runtimeInputMax))
+        if (Vector3.Distance(_currentInputPosition[_inputFrames],_recordedInputPosition) > InputMoveMinThresholdSO.Value)
         {
-            x = _runtimeInputMax * Mathf.Cos(a);
-            heading.x = x;
+            Vector3 heading;
+            float distance;
+            Vector3 direction;
 
-            y = _runtimeInputMax * Mathf.Sin(a);
-            heading.y = y;
+            heading = _currentInputPosition[_inputFrames] - _recordedInputPosition;
+
+            // Calculates the outer rim position of the "joystick" if the player moves the finger beyond the borders of the designated joystick space
+            float x = 0f;
+            float y = 0f;
+            float a = Mathf.Atan2(heading.y, heading.x);
+
+            float circleCalc = (heading.x * heading.x) + (heading.y * heading.y);
+
+            if (circleCalc > (_runtimeInputMax * _runtimeInputMax))
+            {
+                x = _runtimeInputMax * Mathf.Cos(a);
+                heading.x = x;
+
+                y = _runtimeInputMax * Mathf.Sin(a);
+                heading.y = y;
+            }
+            else
+            {
+                x = heading.x;
+                y = heading.y;
+            }
+
+            // Normalize the direction and speed vector
+            distance = heading.magnitude;
+            direction = heading.normalized;
+
+            // UI debug stuff
+            _uiCurrent.transform.localPosition = new Vector3(x, y);
+
+            // Export direction and speed vector to the PlayerSpeedDirectionSO
+            PlayerDirectionSO.Value.x = direction.x;
+            PlayerDirectionSO.Value.z = direction.y;
         }
-        else
-        {
-            x = heading.x;
-            y = heading.y;
-        }
-
-        // Normalize the direction and speed vector
-        distance = heading.magnitude;
-        direction = heading.normalized;
-
-        // UI debug stuff
-        _uiCurrent.transform.localPosition = new Vector3(x, y);
-
-        // Export direction and speed vector to the PlayerSpeedDirectionSO
-        PlayerDirectionSO.Value.x = direction.x;
-        PlayerDirectionSO.Value.z = direction.y;
     }
 
 
@@ -228,7 +231,6 @@ public class TouchControls : GameLoop
             {
                 DebugText.text = "ATTACKED!";
                 AttackInitiatedSO.Raise(this.gameObject);
-                PlayerCurrentSpeedSO.Value = 0;
             }
         }
         // Check if SWIPE has happened
@@ -238,21 +240,19 @@ public class TouchControls : GameLoop
 
             DebugText.text = "DODGED!";
             DashInitiatedSO.Raise(this.gameObject);
-            PlayerCurrentSpeedSO.Value = 0;
         }
 
         // Check if MOVE has happened
         if (_inputMoved)
         {
             DebugText.text = "MOVED!";
-            PlayerCurrentSpeedSO.Value = 0;
         }
 
 
 
 
 
-
+        PlayerCurrentSpeedSO.Value = 0;
         _inputMoved = false;
         _recordPosition = true;
         _currentInputPosition = new Vector3[_inputFrames + 1];

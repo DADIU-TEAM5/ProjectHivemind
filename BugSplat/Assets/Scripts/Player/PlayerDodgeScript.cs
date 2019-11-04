@@ -106,13 +106,5 @@ public class PlayerDodgeScript : GameLoop
             IsDodging.Value = true;
             _dashCooldownActive = true;
         }
-    }
-
-
-    private void DashCurve()
-    {
-
-
-    }
-        
+    }      
 }
