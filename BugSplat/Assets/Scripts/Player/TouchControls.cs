@@ -93,31 +93,14 @@ public class TouchControls : GameLoop
 
             Vector3 touchPosition = touch0.position;
 
-            if (touch0.phase == TouchPhase.Moved)
+            switch (touch0.phase)
             {
-                BeginMove(touchPosition); 
-
-                /*if (Input.touchCount > 1)
-                {
-                    Touch touch1 = Input.GetTouch(1);
-
-                    touchPosition = touch1.position;
-
-                    if (touch1.phase == TouchPhase.Moved)
-                    {
-                        BeginMove(touchPosition);
-                    }
-
-                    if (touch1.phase == TouchPhase.Ended)
-                    {
-                        EndMove(touchPosition);
-                    }
-                }*/
-            }
-
-            if (touch0.phase == TouchPhase.Ended)
-            {
-                EndMove(touchPosition);
+                case TouchPhase.Moved:
+                    BeginMove(touchPosition);
+                    break;
+                case TouchPhase.Ended:
+                    EndMove(touchPosition);
+                    break;
             }
         }
 
