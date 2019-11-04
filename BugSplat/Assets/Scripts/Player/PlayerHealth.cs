@@ -9,15 +9,14 @@ public class PlayerHealth : GameLoop
     public GameObjectList EnemyList;
     public GameObjectVariable HexMapParent;
 
-    public BoolVariable IsDodgeing;
+    public BoolVariable IsInvulnerableSO;
+    public FloatVariable InvulnerabilityTimerSO;
 
     public FloatVariable MaxHealth;
-    public float InvulnerabilityTime = 0.3f;
 
     NavMeshAgent _navMeshAgent;
 
     Transform _playerParent;
-    float _invulnerabilityTimer;
 
     [SerializeField]
     private FloatVariable CurrentHealth;
@@ -40,10 +39,11 @@ public class PlayerHealth : GameLoop
     public void TakeDamage(float damage)
     {
 
-        if (_invulnerabilityTimer <= 0 && IsDodgeing.Value != true)
+        if (IsInvulnerableSO.Value != true)
 
         {
-            _invulnerabilityTimer = InvulnerabilityTime;
+            InvulnerabilityTimerSO.Value = InvulnerabilityTimerSO.InitialValue;
+            IsInvulnerableSO.Value = true;
             //print("The player took " + damage);
             CurrentHealth.Value -= damage;
 
@@ -64,8 +64,14 @@ public class PlayerHealth : GameLoop
     }
     public override void LoopUpdate(float deltaTime)
     {
-        if (_invulnerabilityTimer > 0)
-            _invulnerabilityTimer -= Time.deltaTime;
+        if (InvulnerabilityTimerSO.Value > 0)
+        {
+            InvulnerabilityTimerSO.Value -= Time.deltaTime;
+        } else
+        {
+            IsInvulnerableSO.Value = false;
+        }
+
     }
 
     void CheckIfDead()
@@ -82,10 +88,10 @@ public class PlayerHealth : GameLoop
 
     public void KnockBackDamage(Vector3 direction, float length,float damage)
     {
-        if (_invulnerabilityTimer <= 0 && IsDodgeing.Value != true)
+        if (IsInvulnerableSO.Value != true)
         {
-            _invulnerabilityTimer = InvulnerabilityTime;
-
+            InvulnerabilityTimerSO.Value = InvulnerabilityTimerSO.InitialValue;
+            IsInvulnerableSO.Value = true;
 
             CurrentHealth.Value -= damage;
 
