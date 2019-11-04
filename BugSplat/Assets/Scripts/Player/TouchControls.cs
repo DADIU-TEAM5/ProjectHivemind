@@ -16,6 +16,30 @@ public class TouchControls : GameLoop
     public FloatVariable InputMoveMinThresholdSO;
     public FloatVariable InputMoveMaxThresholdSO;
     public FloatVariable InputSwipeTapTimeSO;
+    public Transform MainCameraDirection; // Not used yet, but should be used for rotating the coordinate system of the touch input to  match the direction of the player
+
+    public GameObjectVariable LockedTarget;
+    public Camera PlayerCam;
+
+    /*
+    // Display sliders for altering the speed and acceleration of the Player - This could potentially be moved to an editor window for the designers
+    [Header("Player Variables")]
+    [Tooltip("Maximum Speed in m/s")]
+    public float PlayerMaxSpeed;
+    [Tooltip("Acceleration time in seconds, from 0 to max speed")]
+    public float PlayerAcceleration = 1f;
+
+    //Display Sliders for tweaking the amount of touch
+    [Header ("Touch Variables")]
+    [Tooltip("A percentage of the total screen width for setting the extent of the player's touch on the screen")]
+    public float _inputMoveMaxThreshold = 25f;
+
+    [Tooltip("A percentage of the total screen width for setting how far the player must move the finger to make it react as a move and not e.g. a tap")]
+    public float _inputMoveMinThreshold = 5f;
+
+    [Tooltip("Time in seconds before it is registered as a swipe or tap")]
+    public float _inputSwipeTapTime = 0.200;
+    */
     public FloatVariable InputSwipeThresholdSO; // Percentage of the screen width
 
     // Setup the private variables needed for the calculations in the current script
@@ -88,14 +112,14 @@ public class TouchControls : GameLoop
 
                     if (touch1.phase == TouchPhase.Ended)
                     {
-                        EndMove();
+                        EndMove(touchPosition);
                     }
                 }*/
             }
 
             if (touch0.phase == TouchPhase.Ended)
             {
-                EndMove();
+                EndMove(touchPosition);
             }
         }
 
@@ -112,7 +136,7 @@ public class TouchControls : GameLoop
             }
             if (Input.GetMouseButtonUp(0))
             {
-                EndMove();
+                EndMove(Input.mousePosition);
             }
         }
     }
@@ -213,7 +237,7 @@ public class TouchControls : GameLoop
     }
 
 
-    private void EndMove()
+    private void EndMove(Vector3 touchPosition)
     {
         // UI Debug Stuff
         Object.Destroy(_uiRecord);
@@ -226,6 +250,19 @@ public class TouchControls : GameLoop
 
             if (endTime < InputSwipeTapTimeSO.Value)
             {
+                Ray ray = PlayerCam.ScreenPointToRay(touchPosition);
+                RaycastHit hit;
+
+                //Debug.DrawRay(ray.origin, ray.direction * 30, Color.red,5);
+
+                if (Physics.Raycast(ray, out hit, 30, LayerMask.GetMask("Enemy")))
+                {
+                    print(hit.collider.name);
+
+                    LockedTarget.Value = hit.collider.gameObject;
+
+                }
+
                 DebugText.text = "ATTACKED!";
                 AttackInitiatedSO.Raise(this.gameObject);
                 PlayerCurrentSpeedSO.Value = 0;

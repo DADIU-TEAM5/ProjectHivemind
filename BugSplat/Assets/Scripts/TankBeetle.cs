@@ -46,6 +46,7 @@ public class TankBeetle : Enemy
         _coneRenderer = _cone.GetComponent<LineRenderer>();
 
         _cone.SetActive(false);
+        _cone.transform.parent = transform;
 
         _navMeshAgent.speed = stats.MoveSpeed;
 
@@ -78,7 +79,9 @@ public class TankBeetle : Enemy
 
     public override void LoopUpdate(float deltaTime)
     {
-        
+
+        RemoveFromLockedTargetIfNotVisible();
+
         //Debug.DrawLine(transform.position, (transform.position + transform.forward), Color.red);
 
         if (!_playerDetected)
