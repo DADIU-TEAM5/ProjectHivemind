@@ -268,7 +268,27 @@ public class TankBeetle : Enemy
 
         transform.Translate(Vector3.forward * stats.MoveSpeed * Time.deltaTime);
         */
-        Vector3 temPlayerPos = _playerTransform.position;
+
+
+        Vector3 temp = _playerTransform.position;
+        temp.y = transform.position.y;
+
+
+        //print( Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp));
+        if (Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp) < stats.AttackAngle)
+        {
+            
+            _navMeshAgent.Move(transform.forward * Time.deltaTime * stats.ChargeSpeed);
+        }
+        else
+        {
+            _navMeshAgent.Move(transform.forward * Time.deltaTime * stats.MoveSpeed);
+        }
+
+
+
+
+            Vector3 temPlayerPos = _playerTransform.position;
         temPlayerPos.y = transform.position.y;
 
         NavMeshPath pathToPlayer = new NavMeshPath();
@@ -297,7 +317,7 @@ public class TankBeetle : Enemy
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, stats.TurnSpeed * Time.deltaTime);
 
         //_navMeshAgent.SetPath(pathToPlayer);
-        _navMeshAgent.Move(transform.forward * Time.deltaTime * stats.MoveSpeed);
+        
         
         /*if (_navMeshAgent.destination != _playerTransform.position)
             _navMeshAgent.destination = _playerTransform.position;

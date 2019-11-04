@@ -6,6 +6,8 @@ using UnityEngine;
 public class TankStats : ScriptableObject
 {
     public float MoveSpeed;
+    public float ChargeSpeed;
+
     public float TurnSpeed;
     public float HitPoints;
     
