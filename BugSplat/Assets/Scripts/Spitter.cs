@@ -95,7 +95,7 @@ public class Spitter : Enemy
             if(_currentHealth < stats.FleeThreshold)
             _fleeValue = stats.FleeTime;
 
-            TakeDamageEvent.Raise();
+            TakeDamageEvent.Raise(gameObject);
 
             if (_currentHealth <= 0)
             {
@@ -107,7 +107,7 @@ public class Spitter : Enemy
                     part.transform.position = transform.position + ((Vector3.up * i) * 0.5f);
                 }
 
-                DeathEvent.Raise();
+                DeathEvent.Raise(gameObject);
                 EnemyList.Remove(gameObject);
 
 
@@ -237,7 +237,7 @@ public class Spitter : Enemy
     {
         if (_attacking == false)
         {
-            AttackChargingEvent.Raise();
+            AttackChargingEvent.Raise(gameObject);
 
             Vector3 adjustedPlayerPos = _playerTransform.position;
 
@@ -256,7 +256,7 @@ public class Spitter : Enemy
             
 
 
-            AttackEvent.Raise();
+            AttackEvent.Raise(gameObject);
             Spit.Emit(1);
 
             _attackCooldown = stats.AttackSpeed;

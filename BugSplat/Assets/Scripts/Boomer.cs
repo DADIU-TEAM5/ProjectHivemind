@@ -72,7 +72,7 @@ public class Boomer : Enemy
     {
         // print(name + " took damage "+ damage);
         _currentHealth -= damage;
-        TakeDamageEvent.Raise();
+        TakeDamageEvent.Raise(gameObject);
 
         if (_currentHealth <= 0)
         {
@@ -84,7 +84,7 @@ public class Boomer : Enemy
                 part.transform.position = transform.position + ((Vector3.up * i) * 0.5f);
             }
 
-            DeathEvent.Raise();
+            DeathEvent.Raise(gameObject);
             EnemyList.Remove(gameObject);
 
             Destroy(_cone);
@@ -173,7 +173,7 @@ public class Boomer : Enemy
         if (_attacking == false)
         {
             _navMeshAgent.speed = stats.ChargeMoveSpeed;
-            AttackChargingEvent.Raise();
+            AttackChargingEvent.Raise(gameObject);
 
             Vector3 adjustedPlayerPos = _playerTransform.position;
 
@@ -190,7 +190,7 @@ public class Boomer : Enemy
 
         if (_attackCharge >= stats.AttackChargeUpTime)
         {
-            AttackEvent.Raise();
+            AttackEvent.Raise(gameObject);
             Collider[] potentialTargets = Physics.OverlapSphere(transform.position, stats.AttackRange, LayerMask.GetMask("Player"));
 
             RaycastHit hit;
@@ -271,7 +271,7 @@ public class Boomer : Enemy
 
         if (potentialTargets.Length > 0)
         {
-            AggroEvent.Raise();
+            AggroEvent.Raise(gameObject);
             _playerDetected = true;
             _playerTransform = potentialTargets[0].gameObject.transform;
 
