@@ -120,6 +120,7 @@ public class Spitter : Enemy
 
     public override void LoopUpdate(float deltaTime)
     {
+        RemoveFromLockedTargetIfNotVisible();
 
         if (_underground )
         {

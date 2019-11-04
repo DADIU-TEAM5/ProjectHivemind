@@ -18,6 +18,9 @@ public class TouchControls : GameLoop
     public FloatVariable InputSwipeTapTimeSO;
     public Transform MainCameraDirection; // Not used yet, but should be used for rotating the coordinate system of the touch input to  match the direction of the player
 
+    public GameObjectVariable LockedTarget;
+    public Camera PlayerCam;
+
     /*
     // Display sliders for altering the speed and acceleration of the Player - This could potentially be moved to an editor window for the designers
     [Header("Player Variables")]
@@ -106,14 +109,14 @@ public class TouchControls : GameLoop
 
                     if (touch1.phase == TouchPhase.Ended)
                     {
-                        EndMove();
+                        EndMove(touchPosition);
                     }
                 }
             }
 
             if (touch0.phase == TouchPhase.Ended)
             {
-                EndMove();
+                EndMove(touchPosition);
             }
         }
 
@@ -143,7 +146,7 @@ public class TouchControls : GameLoop
             }
             if (Input.GetMouseButtonUp(0))
             {
-                EndMove();
+                EndMove(Input.mousePosition);
             }
         }
     }
@@ -238,7 +241,7 @@ public class TouchControls : GameLoop
     }
 
 
-    private void EndMove()
+    private void EndMove(Vector3 touchPosition)
     {
         // UI Debug Stuff
         Object.Destroy(_uiRecord);
@@ -255,6 +258,19 @@ public class TouchControls : GameLoop
             }
             else
             {
+                Ray ray = PlayerCam.ScreenPointToRay(touchPosition);
+                RaycastHit hit;
+
+                //Debug.DrawRay(ray.origin, ray.direction * 30, Color.red,5);
+
+                if (Physics.Raycast(ray, out hit, 30, LayerMask.GetMask("Enemy")))
+                {
+                    print(hit.collider.name);
+
+                    LockedTarget.Value = hit.collider.gameObject;
+
+                }
+
                 DebugText.text = "ATTACKED!";
                 AttackInitiatedSO.Raise(this.gameObject);
                 PlayerCurrentSpeedSO.Value = 0;
