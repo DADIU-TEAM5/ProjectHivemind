@@ -6,13 +6,13 @@ using System.Linq;
 [CreateAssetMenu(menuName="Shop/ItemPool")]
 public class ItemPool : ScriptableObject
 {
-    public List<ItemObject> Items;
+    public List<Item> Items;
 
     private List<bool> Bought;
 
 
     // Takes an item out of the pool
-    public ItemObject GetItem(Tier tier) {
+    public Item GetItem(Tier tier) {
         if (Items.Count == 0) {
             return null;
         }
@@ -36,7 +36,7 @@ public class ItemPool : ScriptableObject
             if (!Bought[i]) {
                 var item = Items[i];
 
-                if (item.Tier == tier) {
+                if (item.Info.Tier == tier) {
                     result.Add(i);
                 }
             }
@@ -46,7 +46,7 @@ public class ItemPool : ScriptableObject
     }
 
     // If the item exists in the pool and has been bought. Set it to not bought.
-    public void ReplenishOnce(ItemObject itemToReplenish) {
+    public void ReplenishOnce(Item itemToReplenish) {
         for (var i = 0; i < Items.Count; i++) {
             var item = Items[i];
 
@@ -59,13 +59,13 @@ public class ItemPool : ScriptableObject
         }
     }
 
-    public void AddItem(ItemObject item) {
+    public void AddItem(Item item) {
         Items.Add(item);
         Bought.Add(false);
     }
 
     public void OnEnable() {
-        if (Items == null) Items = new List<ItemObject>();
+        if (Items == null) Items = new List<Item>();
         Bought = new List<bool>(new bool[Items.Count]);
     }
 }

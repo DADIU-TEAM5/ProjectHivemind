@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatChangeEffect : MonoBehaviour
+[CreateAssetMenu(menuName="Item/Stat Effect")]
+public class StatChangeEffect : Effect
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public FloatVariable Stat;
+    public float Change;
 
-    // Update is called once per frame
-    void Update()
+    public override void Trigger()
     {
-        
+        Stat.Value = Mathf.Min(Stat.Value + Change, Stat.Max);
     }
 }

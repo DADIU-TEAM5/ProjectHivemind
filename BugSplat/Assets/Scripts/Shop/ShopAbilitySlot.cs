@@ -6,7 +6,7 @@ using UnityEngine.UI;
 [CreateAssetMenu(menuName="Shop/AbilitySlot")]
 public class ShopAbilitySlot : ShopSlot
 {
-    public Ability Ability;
+    public Effect Ability;
 
     public int Price;
 
@@ -18,7 +18,7 @@ public class ShopAbilitySlot : ShopSlot
 
     public override void OnPurchase()
     {
-        Ability.OnTrigger(null);
+        Ability.Trigger();
     }
 
     public override void Init()

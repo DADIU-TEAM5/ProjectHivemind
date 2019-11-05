@@ -2,17 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Effect : MonoBehaviour
+public abstract class Effect : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public EffectType EffectType;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public abstract void Trigger();
 }
