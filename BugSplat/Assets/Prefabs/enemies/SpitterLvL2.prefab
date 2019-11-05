@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8018b668e9b9001438c43c2a6952ed4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  difficultyValue: 1
   EnemyList: {fileID: 11400000, guid: 73fb98983f89ab9418a547ca2aa08854, type: 2}
   LockedTarget: {fileID: 11400000, guid: 10807b189a56cf444ac0120f9222ea9e, type: 2}
   TargetGraphic: {fileID: 11400000, guid: 35750c098c4b5a64683897e38deae292, type: 2}
@@ -62,6 +63,7 @@ MonoBehaviour:
   DeathEvent: {fileID: 11400000, guid: 3488db3170d2c2c4095d2fd49a373f47, type: 2}
   AttackChargingEvent: {fileID: 11400000, guid: 967fe9cf4e62f5945b30869e11e13945,
     type: 2}
+  BurrowEvent: {fileID: 11400000, guid: 521b9c6bf00e14740a1e31190823fb5e, type: 2}
 --- !u!114 &-5392400671335020184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,6 +122,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 19900850904109372}
     m_Modifications:
+    - target: {fileID: 8070494227835517297, guid: 81634ae774af43e498268fd34d313802,
+        type: 3}
+      propertyPath: m_Name
+      value: Spit
+      objectReference: {fileID: 0}
     - target: {fileID: 8070494227835517301, guid: 81634ae774af43e498268fd34d313802,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -175,11 +182,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8070494227835517297, guid: 81634ae774af43e498268fd34d313802,
-        type: 3}
-      propertyPath: m_Name
-      value: Spit
-      objectReference: {fileID: 0}
     - target: {fileID: 8070494227835517300, guid: 81634ae774af43e498268fd34d313802,
         type: 3}
       propertyPath: playOnAwake
@@ -206,6 +208,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 259376843090518274}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: feebcbb68fd26454b96bc57e840331d5,
+        type: 3}
+      propertyPath: m_Name
+      value: Projectile_worm
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: feebcbb68fd26454b96bc57e840331d5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: feebcbb68fd26454b96bc57e840331d5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -274,16 +286,6 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: feebcbb68fd26454b96bc57e840331d5,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: feebcbb68fd26454b96bc57e840331d5,
-        type: 3}
-      propertyPath: m_Name
-      value: Projectile_worm
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: feebcbb68fd26454b96bc57e840331d5,
-        type: 3}
-      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: feebcbb68fd26454b96bc57e840331d5,
