@@ -10,6 +10,8 @@ public class Hexagon : MonoBehaviour
 
     public GameObject[] Walls;
 
+    public Tier difficultyLevel;
+
     bool _allNeighBoursFound;
 
     public bool IsaccesibleFromMiddle;
