@@ -82,7 +82,6 @@ public class AttackScript : GameLoop
         LockOnToNearestTarget();
         if (_lockedOntoTarget)
         {
-            _directionToNearstTarget *= 100;
             _directionToNearstTarget = _directionToNearstTarget.normalized;
 
             //print(_directionToNearstTarget);
@@ -93,28 +92,18 @@ public class AttackScript : GameLoop
             {
                 if (_distanceToNearstTarget > AttackMoveDistance.Value + (AttackLength.Value * 0.5f))
                 {
-
                     _navMeshAgent.Move(PlayerDirectionSO.Value * (AttackMoveDistance.Value ));
                 }
                 else
                 {
                     _navMeshAgent.Move(PlayerDirectionSO.Value * (_distanceToNearstTarget - (AttackLength.Value * 0.5f)));
                 }
-
-
-                    
-
-                //transform.Translate(PlayerSpeedDirectionSO.Value * (_distanceToNearstTarget - (AttackLength.Value * 0.5f)));
-                //_rigidbody.MovePosition(transform.position + (PlayerSpeedDirectionSO.Value * (_distanceToNearstTarget - (AttackLength.Value * 0.5f))));
             }
-
 
             Attack();
         }
         else
         {
-           // print("no targets");
-
             RaycastHit hit;
             if(Physics.CapsuleCast(transform.position - (Vector3.up * 0.5f), transform.position + (Vector3.up * 0.5f), .1f, PlayerDirectionSO.Value, out hit))
             {
@@ -134,64 +123,54 @@ public class AttackScript : GameLoop
                 transform.Translate(PlayerDirectionSO.Value * AttackMoveDistance.Value);
             }
 
-
-
-            //_rigidbody.AddForce((PlayerSpeedDirectionSO.Value * AttackMoveDistance.Value)*_rigidbody.mass);
-             //_rigidbody.MovePosition(transform.position + (PlayerSpeedDirectionSO.Value * AttackMoveDistance.Value));
-            //_rigidbody.MovePosition(Vector3.zero);
-
             Attack();
-
         }
-
-
     }
 
 
     private void LockOnToNearestTarget()
     {
         if (LockedTarget.Value == null) { 
-        Collider[] potentialTargets = Physics.OverlapSphere(PlayerGraphics.position, AutoAttackRange.Value, LayerMask.GetMask("Enemy"));
+            Collider[] potentialTargets = Physics.OverlapSphere(PlayerGraphics.position, AutoAttackRange.Value, LayerMask.GetMask("Enemy"));
 
-        int targetIndex = -1;
-        float distance = float.MaxValue;
+            int targetIndex = -1;
+            float distance = float.MaxValue;
 
-        for (int i = 0; i < potentialTargets.Length; i++)
-        {
-            //Debug.Log(potentialTargets[i].name);
-
-            Vector3 temp = potentialTargets[i].transform.position;
-            temp.y = PlayerGraphics.position.y;
-
-
-
-            float newDistance = Vector3.Distance(PlayerGraphics.position, temp);
-
-            if (newDistance < distance)
+            for (int i = 0; i < potentialTargets.Length; i++)
             {
-                distance = newDistance;
-                targetIndex = i;
+                //Debug.Log(potentialTargets[i].name);
+
+                Vector3 temp = potentialTargets[i].transform.position;
+                temp.y = PlayerGraphics.position.y;
+
+
+
+                float newDistance = Vector3.Distance(PlayerGraphics.position, temp);
+
+                if (newDistance < distance)
+                {
+                    distance = newDistance;
+                    targetIndex = i;
+                }
             }
-        }
-        if (potentialTargets.Length > 0)
-        {
-            _lockedOntoTarget = true;
-            _nearstTarget = potentialTargets[targetIndex].transform.position;
 
-            _nearstTarget.y = PlayerGraphics.position.y;
-            _distanceToNearstTarget = distance;
+            if (potentialTargets.Length > 0)
+            {
+                _lockedOntoTarget = true;
+                _nearstTarget = potentialTargets[targetIndex].transform.position;
+
+                _nearstTarget.y = PlayerGraphics.position.y;
+                _distanceToNearstTarget = distance;
 
 
-            _directionToNearstTarget = _nearstTarget - PlayerGraphics.position;
-        }
-        else
-        {
-            _lockedOntoTarget = false;
-            _nearstTarget = Vector3.zero;
-        }
-    }
-        else
-        {
+                _directionToNearstTarget = _nearstTarget - PlayerGraphics.position;
+            } 
+            else {
+                _lockedOntoTarget = false;
+                _nearstTarget = Vector3.zero;
+            }
+        } 
+        else {
             _lockedOntoTarget = true;
             _nearstTarget = LockedTarget.Value.transform.position;
 
@@ -225,13 +204,14 @@ public class AttackScript : GameLoop
         Collider[] potentialTargets = Physics.OverlapSphere(PlayerGraphics.position, AttackLength.Value, LayerMask.GetMask("Enemy"));
 
         // print(potentialTargets.Length);
-
+        int layer = 1 << 9;
+        layer = ~layer; 
         for (int i = 0; i < potentialTargets.Length; i++)
         {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, potentialTargets[i].transform.position - transform.position, out hit, 10))
+            if (Physics.Raycast(transform.position, potentialTargets[i].transform.position - transform.position, out hit, AttackLength.Value, layer))
             {
-                Debug.DrawRay(transform.position, potentialTargets[i].transform.position - transform.position , Color.red,4);
+                Debug.DrawRay(transform.position, potentialTargets[i].transform.position - transform.position , Color.red, 4);
                 if (hit.collider.gameObject.layer == 8)
                 {
                     //print(Vector3.Angle(PlayerGraphics.position + transform.forward, potentialTargets[i].transform.position - PlayerGraphics.position));
