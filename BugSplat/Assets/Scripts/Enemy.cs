@@ -62,4 +62,8 @@ public abstract class Enemy : GameLoop
             TargetGraphic.Value.SetActive(false);
         }
     }
+
+
+
+
 }

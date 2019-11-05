@@ -312,16 +312,23 @@ public class Spitter : Enemy
     void DetectThePlayer()
     {
         Collider[] potentialTargets = Physics.OverlapSphere(transform.position, stats.SpotDistance, LayerMask.GetMask("Player"));
+        RaycastHit hit;
 
         if (potentialTargets.Length > 0)
         {
-            AggroEvent.Raise();
-            _playerDetected = true;
-            _playerTransform = potentialTargets[0].gameObject.transform;
+            if (Physics.Raycast(transform.position, potentialTargets[0].transform.position - transform.position, out hit, 10))
+            {
+                if (hit.collider.gameObject.layer == 9)
+                {
+                    AggroEvent.Raise(this.gameObject);
+                    _playerDetected = true;
+                    _playerTransform = potentialTargets[0].gameObject.transform;
 
-            _isAlly = true;
+                    _isAlly = true;
 
-           
+                    
+                }
+            }
         }
     }
 }
