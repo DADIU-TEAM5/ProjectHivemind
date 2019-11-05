@@ -83,7 +83,7 @@ public class cannonFodder : Enemy
             EnemyList.Remove(gameObject);
 
             Destroy(_cone);
-            Destroy(gameObject);
+            Destroy(gameObject, 3f);
         }
     }
 
@@ -294,8 +294,8 @@ public class cannonFodder : Enemy
         {
             for (int i = 0; i < potentialAllies.Length; i++)
             {
-                cannonFodder allyTransform = potentialAllies[i].gameObject.transform.GetComponent<cannonFodder>();
-                if (!allyTransform._isAlly)
+                cannonFodder allyTransform = potentialAllies[i].gameObject.GetComponent<cannonFodder>();
+                if (!allyTransform?._isAlly ?? false)
                 {
                     allyTransform._playerDetected = true;
                     allyTransform._playerTransform = _playerTransform;
@@ -306,5 +306,4 @@ public class cannonFodder : Enemy
         }
     }
 
-    
 }
