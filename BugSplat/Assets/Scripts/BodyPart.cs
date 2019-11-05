@@ -14,7 +14,7 @@ public class BodyPart : GameLoop
     public float ExplosionDistance;
     public float ExplosionHeight;
 
-    public SphereCollider Collider;
+    public Collider Collider;
 
     float _time = 0;
 

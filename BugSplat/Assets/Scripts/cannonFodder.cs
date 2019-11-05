@@ -9,6 +9,8 @@ public class cannonFodder : Enemy
 
     public GameObject bodyPart;
 
+    public GameObject DeadFodder;
+
     public SimpleEnemyStats stats;
 
     private bool _playerDetected;
@@ -71,6 +73,7 @@ public class cannonFodder : Enemy
 
         if(_currentHealth <= 0)
         {
+            /*
             int partsToDrop = Random.Range(stats.minPartsToDrop, stats.maxPartsToDrop);
             for (int i = 0; i < partsToDrop; i++)
             {
@@ -78,6 +81,11 @@ public class cannonFodder : Enemy
                 
                 part.transform.position = transform.position +(( Vector3.up*i)*0.5f);
             }
+            */
+
+            //Graphics.SetActive(false);
+            DeadFodder.transform.SetParent(null);
+            DeadFodder.SetActive(true);
 
             DeathEvent.Raise(this.gameObject);
             EnemyList.Remove(gameObject);

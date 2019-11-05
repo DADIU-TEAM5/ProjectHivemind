@@ -5,11 +5,15 @@ using UnityEngine;
 public class MapGenerator : MonoBehaviour
 {
 
+    
 
 
     public int Seed;
 
     public int Rings = 1;
+    public int CurrentLevel = 1;
+
+    public ShopLevels Levels;
 
     public GameObject[] Hexagons;
     public GameObject[] CenterHexagons;
