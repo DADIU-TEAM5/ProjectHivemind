@@ -124,7 +124,7 @@ public class Spitter : Enemy
 
         _navMeshAgent.obstacleAvoidanceType =ObstacleAvoidanceType.NoObstacleAvoidance;
 
-        BurrowEvent.Raise(gameObject);
+        
        
     }
     public void Emerge()
@@ -133,7 +133,7 @@ public class Spitter : Enemy
         _underground = false;
         _navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
 
-        BurrowEvent.Raise(gameObject);
+        
     }
 
 
