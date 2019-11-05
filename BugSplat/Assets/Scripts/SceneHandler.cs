@@ -7,16 +7,28 @@ using UnityEditor;
 [System.Serializable]
 public class SceneHandler : MonoBehaviour
 {
+    [SerializeField]
     public StringList SceneListSO;
 
     [SerializeField]
     public int SelectedSceneIndex;
 
-    public string[] Guid;
+    [SerializeField]
     public string[] SceneList;
 
+    [SerializeField]
     public string SelectedScene;
+
+    [SerializeField]
     public string SelectedSceneGuid;
+
+    private void OnEnable()
+    {
+        int _sceneCount = EditorBuildSettings.scenes.Length;
+
+        SceneList = new string[_sceneCount];
+    }
+
 
     public void ChangeScene(string sceneGuid)
     {
@@ -24,13 +36,14 @@ public class SceneHandler : MonoBehaviour
         {
             string sceneName = "";
 
-            for (int i = 0; i < Guid.Length; i++)
-            {
-                if (Guid[i] == sceneGuid)
-                {
-                    sceneName = SceneList[i];
-                }
-            }
+            string tempPath = AssetDatabase.GUIDToAssetPath(sceneGuid);
+
+            int lastFolderIndex = tempPath.LastIndexOf('/');
+            sceneName = tempPath.Remove(0, lastFolderIndex + 1).ToString();
+
+            int fileEndingIndex = sceneName.LastIndexOf('.');
+            sceneName = sceneName.Remove(fileEndingIndex, sceneName.Length - fileEndingIndex);
+
             
             SceneManager.LoadScene(sceneName);
         }

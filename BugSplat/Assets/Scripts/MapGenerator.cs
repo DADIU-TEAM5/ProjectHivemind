@@ -5,17 +5,23 @@ using UnityEngine;
 public class MapGenerator : MonoBehaviour
 {
 
-    
+
+    public FloatVariable CurrentLevelBudget;
+    public IntVariable EnemySpawnerCount;
 
 
     public int Seed;
 
     public int Rings = 1;
-    public int CurrentLevel = 1;
+    public IntVariable CurrentLevel;
 
     public ShopLevels Levels;
 
     public GameObject[] Hexagons;
+
+    List<List<GameObject>> SortedHexagons;
+    List<Tier> availableTiers;
+
     public GameObject[] CenterHexagons;
 
     public GameObjectVariable hexmapParent;
@@ -42,6 +48,35 @@ public class MapGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        EnemySpawnerCount.Value = 0;
+
+        CurrentLevelBudget.Value = Levels.LevelTierPicker[CurrentLevel.Value].budget;
+
+        SortedHexagons = new List<List<GameObject>>();
+        availableTiers = new List<Tier>();
+
+
+
+        for (int i = 0; i < Hexagons.Length; i++)
+        {
+          Tier tier =   Hexagons[i].GetComponent<Hexagon>().difficultyLevel;
+            if (!availableTiers.Contains(tier))
+            {
+                availableTiers.Add(tier);
+            }
+           int tierIndex = availableTiers.IndexOf(tier);
+            if (SortedHexagons.Count < tierIndex + 1)
+            {
+                SortedHexagons.Add(new List<GameObject>());
+            }
+
+            SortedHexagons[tierIndex].Add(Hexagons[i]);
+
+        }
+        print("hexagons have been sorted"+ SortedHexagons.Count);
+
+
+
         if(hexmapParent.Value != null)
         {
             Destroy(hexmapParent.Value);
@@ -140,9 +175,15 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    GameObject getRandomHexagon()
+    GameObject getHexagonBasedOnLevel()
     {
-        return Hexagons[Random.Range(0, Hexagons.Length)];
+        Tier tier = Levels.LevelTierPicker[CurrentLevel.Value].ChooseTier();
+
+        int index = availableTiers.IndexOf(tier);
+
+
+
+        return SortedHexagons[index][Random.Range(0, SortedHexagons[index].Count)];
     }
     GameObject getRandomCenterHexagon()
     {
@@ -338,7 +379,7 @@ public class MapGenerator : MonoBehaviour
 
             
 
-            hex = Instantiate(getRandomHexagon());
+            hex = Instantiate(getHexagonBasedOnLevel());
 
             
             _hexagonsTiles.Add(hex);

@@ -8,6 +8,8 @@ public class TierPicker : ScriptableObject
 {
     public TierPercent[] TierPercents;
 
+    public float budget;
+
     private float _max;
 
     public void OnEnable() {

@@ -8,6 +8,10 @@ public class Hexagon : MonoBehaviour
 
     public bool[] OpenEdges;
 
+    public EnemySpawner[] EnemySpawners;
+
+    public float MinBudget;
+
     public GameObject[] Walls;
 
     public Tier difficultyLevel;
@@ -20,7 +24,10 @@ public class Hexagon : MonoBehaviour
     // Start is called before the first frame update
     private void OnEnable()
     {
-
+        for (int i = 0; i < EnemySpawners.Length; i++)
+        {
+            EnemySpawners[i].budget = MinBudget / EnemySpawners.Length;
+        }
 
         Neighbours = new Hexagon[6];
     }

@@ -5,13 +5,23 @@ using UnityEngine.AI;
 
 public class EnemySpawner : GameLoop
 {
-    public GameObject[] enemies;
+    public FloatVariable LevelBudget;
+    public EnemySpawnerList EnemylevelList;
+    public IntVariable CurrentLevel;
+
+    public IntVariable enemySpawnerCount;
+
+    GameObject[] enemies;
     public float budget;
     float[] _values;
     float smallestValue;
 
     private void OnEnable()
     {
+        enemies = EnemylevelList.Levels[CurrentLevel.Value].SpawnableEnemies;
+
+        enemySpawnerCount.Value++;
+
         smallestValue = float.MaxValue;
 
         _values = new float[enemies.Length];
@@ -43,10 +53,29 @@ public class EnemySpawner : GameLoop
 
     IEnumerator SpawnEnemiesRoutine()
     {
+        enemySpawnerCount.Value--;
+        float extraBudget;
+        if (enemySpawnerCount.Value <= 0)
+        {
+            extraBudget = LevelBudget.Value;
+        }
+        else
+        {
+
+            extraBudget = Random.Range(0, LevelBudget.Value);
+            
+        }
+
+        LevelBudget.Value -= extraBudget;
+        budget += extraBudget;
+
         while (budget > 0)
         {
             if (smallestValue > budget)
+            {
+                LevelBudget.Value += budget;
                 break;
+            }
 
             Debug.Log(budget);
             float valueToGet = float.MaxValue;
