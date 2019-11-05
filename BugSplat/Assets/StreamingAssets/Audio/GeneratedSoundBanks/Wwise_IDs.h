@@ -41,6 +41,7 @@ namespace AK
         static const AkUniqueID NPC_HEAVY_SPECIALATTACK = 575616738U;
         static const AkUniqueID NPC_SPITTER_ATTACK = 1630111423U;
         static const AkUniqueID NPC_SPITTER_DEAD = 1581237869U;
+        static const AkUniqueID NPC_SPITTER_DETECT = 2631762934U;
         static const AkUniqueID NPC_SPITTER_FOOTSTEPS = 3732201856U;
         static const AkUniqueID NPC_SPITTER_HIT = 2546983038U;
         static const AkUniqueID NPC_SPITTER_IDLE = 299564625U;

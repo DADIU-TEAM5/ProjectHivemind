@@ -1018,6 +1018,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 3338371503448954375}
+  PlayerCurrentSpeedSO: {fileID: 11400000, guid: dbd0aac2d5b26704bbdf49f8d6657a38,
+    type: 2}
 --- !u!1 &4608800963497995050
 GameObject:
   m_ObjectHideFlags: 0
@@ -1881,18 +1883,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4360403422767448012}
     m_Modifications:
-    - target: {fileID: 7531142839046661897, guid: e63eca684fbd2464c9e78091f0f791e1,
-        type: 3}
-      propertyPath: GameText
-      value: 
-      objectReference: {fileID: 11400000, guid: 9d473a6c1036616459861492577d6549,
-        type: 2}
-    - target: {fileID: 2983541001051181386, guid: e63eca684fbd2464c9e78091f0f791e1,
-        type: 3}
-      propertyPath: GameText
-      value: 
-      objectReference: {fileID: 11400000, guid: a1f137522994a524da807366a8198be8,
-        type: 2}
     - target: {fileID: 7010241146574000469, guid: e63eca684fbd2464c9e78091f0f791e1,
         type: 3}
       propertyPath: m_Name
@@ -2068,31 +2058,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 2796907296419501004, guid: e63eca684fbd2464c9e78091f0f791e1,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2796907296419501004, guid: e63eca684fbd2464c9e78091f0f791e1,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2796907296419501004, guid: e63eca684fbd2464c9e78091f0f791e1,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2796907296419501004, guid: e63eca684fbd2464c9e78091f0f791e1,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2796907296419501004, guid: e63eca684fbd2464c9e78091f0f791e1,
-        type: 3}
-      propertyPath: m_text
-      value: Options
-      objectReference: {fileID: 0}
     - target: {fileID: 193942634438280778, guid: e63eca684fbd2464c9e78091f0f791e1,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -2122,6 +2087,43 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontStyle
       value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 2983541001051181386, guid: e63eca684fbd2464c9e78091f0f791e1,
+        type: 3}
+      propertyPath: GameText
+      value: 
+      objectReference: {fileID: 11400000, guid: a1f137522994a524da807366a8198be8,
+        type: 2}
+    - target: {fileID: 7531142839046661897, guid: e63eca684fbd2464c9e78091f0f791e1,
+        type: 3}
+      propertyPath: GameText
+      value: 
+      objectReference: {fileID: 11400000, guid: 9d473a6c1036616459861492577d6549,
+        type: 2}
+    - target: {fileID: 2796907296419501004, guid: e63eca684fbd2464c9e78091f0f791e1,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2796907296419501004, guid: e63eca684fbd2464c9e78091f0f791e1,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2796907296419501004, guid: e63eca684fbd2464c9e78091f0f791e1,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2796907296419501004, guid: e63eca684fbd2464c9e78091f0f791e1,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2796907296419501004, guid: e63eca684fbd2464c9e78091f0f791e1,
+        type: 3}
+      propertyPath: m_text
+      value: Options
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e63eca684fbd2464c9e78091f0f791e1, type: 3}

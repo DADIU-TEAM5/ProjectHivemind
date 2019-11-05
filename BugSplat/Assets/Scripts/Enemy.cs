@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class Enemy : GameLoop
 {
+    public float difficultyValue = 1;
+
     public GameObjectList EnemyList;
     public GameObjectVariable LockedTarget;
     public GameObjectVariable TargetGraphic;

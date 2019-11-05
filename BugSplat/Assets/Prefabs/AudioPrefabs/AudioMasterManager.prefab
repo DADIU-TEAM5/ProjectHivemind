@@ -661,7 +661,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5172822991716516221
 Transform:
   m_ObjectHideFlags: 0
@@ -691,7 +691,7 @@ MonoBehaviour:
   ArenaAmbience:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: d6babe759cf554205a2b7d0fab46ffe4,
+    WwiseObjectReference: {fileID: 11400000, guid: d69417d0b360e448195ab971d40c7336,
       type: 2}
   HubAmbience:
     idInternal: 0
@@ -707,7 +707,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2885925839285422408}
   - component: {fileID: 3528176655793269506}
-  - component: {fileID: 6286533709426435384}
+  - component: {fileID: 4763946845846538546}
+  - component: {fileID: 3493926934185941711}
+  - component: {fileID: 8887086170879286946}
   m_Layer: 0
   m_Name: SpitterAudio
   m_TagString: Untagged
@@ -741,10 +743,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08dcfd50c9a954a4b908a6764a2609e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Footstep:
+  Detect:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: e42f0667f2be3481ebcd1cc0efad0138,
+      type: 2}
   Attack:
     idInternal: 0
     valueGuidInternal: 
@@ -752,7 +755,8 @@ MonoBehaviour:
   Hit:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 4eef1dd5729104420acd4d15a4eaff43,
+      type: 2}
   ScaredScream:
     idInternal: 0
     valueGuidInternal: 
@@ -773,7 +777,7 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 0}
---- !u!114 &6286533709426435384
+--- !u!114 &4763946845846538546
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -782,10 +786,73 @@ MonoBehaviour:
   m_GameObject: {fileID: 6596428402899259860}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c570d4db2b60004c8cdddb970106913, type: 3}
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EventListeners: []
+  Event: {fileID: 11400000, guid: 0173fcf88f6a554429d152c2e0bf604d, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3528176655793269506}
+        m_MethodName: DetectEvent
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &3493926934185941711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6596428402899259860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 6ae505af1f79bc34c83fb79358858821, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3528176655793269506}
+        m_MethodName: HitEvent
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &8887086170879286946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6596428402899259860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 0}
+  Response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &7984085108120578429
 GameObject:
   m_ObjectHideFlags: 0
@@ -833,6 +900,8 @@ GameObject:
   - component: {fileID: 2159845842660578015}
   - component: {fileID: 5959220859600176160}
   - component: {fileID: 1821352100382249548}
+  - component: {fileID: 6063313712825280198}
+  - component: {fileID: 7800986767393888800}
   m_Layer: 0
   m_Name: HeavyAuido
   m_TagString: Untagged
@@ -910,16 +979,74 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 0}
+  Event: {fileID: 11400000, guid: bafbf450e60f74a218319f9cc59f4834, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 5959220859600176160}
+        m_MethodName: AttackEvent
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &6063313712825280198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9174410380775275465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 672974adbe25e4fdf8f22f73f62ef14a, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5959220859600176160}
+        m_MethodName: HitBackEvent
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &7800986767393888800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9174410380775275465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 133c016a815fd4c2b9173028a37d05a4, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5959220859600176160}
+        m_MethodName: DetectEvent
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

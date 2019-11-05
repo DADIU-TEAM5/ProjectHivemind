@@ -16,31 +16,14 @@ public class TouchControls : GameLoop
     public FloatVariable InputMoveMinThresholdSO;
     public FloatVariable InputMoveMaxThresholdSO;
     public FloatVariable InputSwipeTapTimeSO;
-    public Transform MainCameraDirection; // Not used yet, but should be used for rotating the coordinate system of the touch input to  match the direction of the player
+    public FloatVariable InputSwipeThresholdSO; // Percentage of the screen width
 
     public GameObjectVariable LockedTarget;
     public Camera PlayerCam;
-
-    /*
-    // Display sliders for altering the speed and acceleration of the Player - This could potentially be moved to an editor window for the designers
-    [Header("Player Variables")]
-    [Tooltip("Maximum Speed in m/s")]
-    public float PlayerMaxSpeed;
-    [Tooltip("Acceleration time in seconds, from 0 to max speed")]
-    public float PlayerAcceleration = 1f;
-
-    //Display Sliders for tweaking the amount of touch
-    [Header ("Touch Variables")]
-    [Tooltip("A percentage of the total screen width for setting the extent of the player's touch on the screen")]
-    public float _inputMoveMaxThreshold = 25f;
-
-    [Tooltip("A percentage of the total screen width for setting how far the player must move the finger to make it react as a move and not e.g. a tap")]
-    public float _inputMoveMinThreshold = 5f;
-
-    [Tooltip("Time in seconds before it is registered as a swipe or tap")]
-    public float _inputSwipeTapTime = 0.200;
-    */
-    public FloatVariable InputSwipeThresholdSO; // Percentage of the screen width
+    public GameObject UICanvas;
+    public RectTransform UIMenuButton;
+    private bool _uiActivated = false;
+    private Vector2 _uiOffset;
 
     // Setup the private variables needed for the calculations in the current script
     private Vector3 _inputTouch;
@@ -60,6 +43,7 @@ public class TouchControls : GameLoop
     public GameObject TouchUIDotCurrent;
     public GameObject TouchUIDotRecorded;
     public Transform TouchCanvas;
+
     private GameObject _uiRecord;
     private GameObject _uiCurrent;
 
@@ -67,6 +51,9 @@ public class TouchControls : GameLoop
     // Start is called before the first frame update
     void Start()
     {
+        // Disable Multitouch for the phone touch to fix problems with multiple touches. However, multiple touches should be implemented at a later stage.
+        Input.multiTouchEnabled = false;
+
         _inputFrames = Mathf.RoundToInt(InputSwipeTapTimeSO.Value);
         _currentInputPosition = new Vector3[_inputFrames];
         _inputFrames--;
@@ -81,6 +68,17 @@ public class TouchControls : GameLoop
         PlayerCurrentSpeedSO.Value = 0;
         
         PlayerDirectionSO.Value = Vector3.forward;
+
+        if (UICanvas != null)
+        {
+            _uiActivated = UICanvas.activeSelf;
+
+            _uiOffset = new Vector2(UIMenuButton.offsetMax.x, UIMenuButton.offsetMax.y);
+        } else
+        {
+            _uiActivated = false;
+            _uiOffset = new Vector2(0, 0);
+        }
     }
 
 
@@ -93,40 +91,58 @@ public class TouchControls : GameLoop
 
             if (touch0.fingerId == 0)
             {
-                DebugText.text = touch0.fingerId.ToString();
+                DebugText.text = "TEST 0: " + touch0.fingerId.ToString();
 
-                Vector3 touchPosition = touch0.position;
+                Vector3 touchPosition = touch0.position;                
 
-                switch (touch0.phase)
+                if (_uiActivated == false)
                 {
-                    case TouchPhase.Moved:
-                        BeginMove(touchPosition);
-                        break;
-                    case TouchPhase.Ended:
-                        EndMove(touchPosition);
-                        break;
+                    if (touchPosition.x > _uiOffset.x  || touchPosition.y > _uiOffset.y)
+                    {
+                        switch (touch0.phase)
+                        {
+                            case TouchPhase.Moved:
+                                BeginMove(touchPosition);
+                                break;
+                            case TouchPhase.Ended:
+                                EndMove(touchPosition);
+                                break;
+                        }
+                    }
                 }
-            } else
-            {
-                DebugText.text = touch0.fingerId.ToString();
+                else
+                {
+                    DebugText.text = "TEST ELSE: " + touch0.fingerId.ToString();
+                }
             }
-            
         }
 
 
         // Simulate touch with mouse, if mouse present
         if (Input.mousePresent)
         {
+            Vector3 inputPosition = Input.mousePosition;
+
             if (Input.GetMouseButton(0))
             {
-                Vector3 inputPosition = Input.mousePosition;
-
-                BeginMove(inputPosition);
+                if (_uiActivated == false)
+                {
+                    if (inputPosition.x > _uiOffset.x || inputPosition.y > _uiOffset.y)
+                    {
+                        BeginMove(inputPosition);
+                    }
+                }
 
             }
             if (Input.GetMouseButtonUp(0))
             {
-                EndMove(Input.mousePosition);
+                if (_uiActivated == false)
+                {
+                    if (inputPosition.x > _uiOffset.x || inputPosition.y > _uiOffset.y)
+                    {
+                        EndMove(Input.mousePosition);
+                    }
+                }
             }
         }
     }
@@ -154,7 +170,7 @@ public class TouchControls : GameLoop
 
         ReturnInputPosition(inputPosition); // Recording Current Pos
 
-        DebugText.text = "MOVING!";
+        //DebugText.text = "MOVING!";
 
         _inputMoved = true;
 
