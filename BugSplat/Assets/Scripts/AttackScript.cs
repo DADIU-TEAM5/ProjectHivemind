@@ -19,6 +19,8 @@ public class AttackScript : GameLoop
     public Transform PlayerGraphics;
     public GameObjectVariable LockedTarget;
 
+    public FloatVariable AutoAttackRange;
+
 
     NavMeshAgent _navMeshAgent;
     Vector3 _nearstTarget;
@@ -52,9 +54,6 @@ public class AttackScript : GameLoop
 
     public override void LoopUpdate(float deltaTime)
     {
-
-
-
         //Debug.DrawLine(PlayerGraphics.position, (_nearstTarget - PlayerGraphics.position), Color.red);
         _coneHideTimer += deltaTime;
         if (_coneHideTimer > 0.5f)
@@ -152,7 +151,7 @@ public class AttackScript : GameLoop
     private void LockOnToNearestTarget()
     {
         if (LockedTarget.Value == null) { 
-        Collider[] potentialTargets = Physics.OverlapSphere(PlayerGraphics.position, AttackLength.Value + AttackMoveDistance.Value, LayerMask.GetMask("Enemy"));
+        Collider[] potentialTargets = Physics.OverlapSphere(PlayerGraphics.position, AutoAttackRange.Value, LayerMask.GetMask("Enemy"));
 
         int targetIndex = -1;
         float distance = float.MaxValue;
