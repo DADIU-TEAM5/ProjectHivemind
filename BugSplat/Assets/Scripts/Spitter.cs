@@ -43,6 +43,7 @@ public class Spitter : Enemy
     public GameEvent AttackEvent;
     public GameEvent DeathEvent;
     public GameEvent AttackChargingEvent;
+    public GameEvent BurrowEvent;
 
 
     Color SetColor(Color color)
@@ -122,6 +123,7 @@ public class Spitter : Enemy
         _underground = true;
 
         _navMeshAgent.obstacleAvoidanceType =ObstacleAvoidanceType.NoObstacleAvoidance;
+
         
        
     }
@@ -131,6 +133,7 @@ public class Spitter : Enemy
         _underground = false;
         _navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
 
+        
     }
 
 
