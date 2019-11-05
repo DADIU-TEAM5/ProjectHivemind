@@ -4,50 +4,27 @@ using UnityEngine;
 using UnityEditor;
 
 
-// STILL NEEDS TO SERIALIZE THE CHOSEN VALUE FROM THE DROPDOWN LIST!!! - Look at catlikecoding tutorial
-// ALSO, RIGHT NOW IF THE DESIGNERS CHOOSE AN INDEX FOR AN EVENT CALL, THIS COULD POTENTIALLY BE BROKEN, IF THE BUILD SETTINGS LIST IS SWITCHED AROUND.
-// MOVE THE SCENE LIST INTO A SCRIPTABLE OBJECT, AND DERIVE THE LIST FROM THIS, AND CHECK IF NEW SCENES ARE ADDED OR SOME REMOVED. MAYBE USE GUID?
-
-
 [CustomEditor(typeof(SceneHandler))]
 public class SceneHandlerEditor : Editor
 {
-
-    [SerializeField]
-    private string[] _sceneList;
-    [SerializeField]
-    private string[] _guid;
-    [SerializeField]
-    private string _selectedScene;
-    [SerializeField]
-    private string _selectedSceneGuid;
-
     [SerializeField]
     private static SceneHandler SceneHandlerVar;
 
-    [SerializeField]
-    private static int _selectedSceneIndex;
+    private int _sceneCount;
 
 
     private void OnEnable()
     {
-        int sceneCount = EditorBuildSettings.scenes.Length;
-
         SceneHandlerVar = (SceneHandler)target;
 
-        SceneHandlerVar.SceneList = new string[sceneCount];
-        _sceneList = SceneHandlerVar.SceneList;
+        SceneHandlerVar.SelectedSceneIndex = 0;
 
-        SceneHandlerVar.Guid = new string[sceneCount];
-        _guid = SceneHandlerVar.Guid;
-
-        _selectedSceneGuid = SceneHandlerVar.SelectedSceneGuid;
+        _sceneCount = EditorBuildSettings.scenes.Length;
 
         LoadScenes();
 
     }
 
-    // OnInspector GUI
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
@@ -63,16 +40,22 @@ public class SceneHandlerEditor : Editor
 
         GUILayout.Space(20f);
 
-        SceneHandlerVar.SelectedSceneIndex = EditorGUILayout.Popup("Select scene:", SceneHandlerVar.SelectedSceneIndex, _sceneList, EditorStyles.popup);
-        _selectedSceneIndex = SceneHandlerVar.SelectedSceneIndex;
+        SceneHandlerVar.SelectedSceneIndex = EditorGUILayout.Popup("Select scene:", SceneHandlerVar.SelectedSceneIndex, SceneHandlerVar.SceneList, EditorStyles.popup);
 
-        _selectedScene = _sceneList[_selectedSceneIndex];
-        SceneHandlerVar.SelectedScene = _selectedScene;
+        SceneHandlerVar.SelectedScene = SceneHandlerVar.SceneList[SceneHandlerVar.SelectedSceneIndex];
 
-        _selectedSceneGuid = _guid[_selectedSceneIndex];
-        SceneHandlerVar.SelectedSceneGuid = _selectedSceneGuid;
+        SceneHandlerVar.SelectedSceneGuid = SceneHandlerVar.SceneListSO.List[SceneHandlerVar.SelectedSceneIndex];
  
         GUILayout.Space(10f);
+
+        if (GUILayout.Button("Load Scenes"))
+        {
+            _sceneCount = EditorBuildSettings.scenes.Length;
+
+            SceneHandlerVar.SceneList = new string[_sceneCount];
+
+            LoadScenes();
+        }
 
         //ShowScenes();
 
@@ -85,7 +68,9 @@ public class SceneHandlerEditor : Editor
     void LoadScenes()
     {
 
-        for (int i = 0; i < _sceneList.Length; i++)
+        SceneHandlerVar.SceneListSO.List.Clear();
+
+        for (int i = 0; i < _sceneCount; i++)
         {
             EditorBuildSettingsScene tempPath = EditorBuildSettings.scenes[i];
             if (tempPath.enabled)
@@ -98,18 +83,18 @@ public class SceneHandlerEditor : Editor
                 }
             }
         }
-        
+
+        SceneHandlerVar.SceneList = new string[_sceneCount];
+
         for (int k = 0; k < SceneHandlerVar.SceneListSO.List.Count; k++)
         {
-            _guid[k] = SceneHandlerVar.SceneListSO.List[k];
-
-            string tempPath = AssetDatabase.GUIDToAssetPath(_guid[k]);
+            string tempPath = AssetDatabase.GUIDToAssetPath(SceneHandlerVar.SceneListSO.List[k]);
 
             int lastFolderIndex = tempPath.LastIndexOf('/');
-            _sceneList[k] = tempPath.Remove(0, lastFolderIndex + 1).ToString();
+            SceneHandlerVar.SceneList[k] = tempPath.Remove(0, lastFolderIndex + 1).ToString();
 
-            int fileEndingIndex = _sceneList[k].LastIndexOf('.');
-            _sceneList[k] = _sceneList[k].Remove(fileEndingIndex, _sceneList[k].Length - fileEndingIndex);
+            int fileEndingIndex = SceneHandlerVar.SceneList[k].LastIndexOf('.');
+            SceneHandlerVar.SceneList[k] = SceneHandlerVar.SceneList[k].Remove(fileEndingIndex, SceneHandlerVar.SceneList[k].Length - fileEndingIndex);
         }
     }
 
