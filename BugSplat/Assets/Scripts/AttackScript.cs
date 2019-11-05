@@ -19,7 +19,7 @@ public class AttackScript : GameLoop
     public Transform PlayerGraphics;
     public GameObjectVariable LockedTarget;
 
-    public float AutoAttackRange;
+    public FloatVariable AutoAttackRange;
 
 
     NavMeshAgent _navMeshAgent;
@@ -151,7 +151,7 @@ public class AttackScript : GameLoop
     private void LockOnToNearestTarget()
     {
         if (LockedTarget.Value == null) { 
-        Collider[] potentialTargets = Physics.OverlapSphere(PlayerGraphics.position, AutoAttackRange, LayerMask.GetMask("Enemy"));
+        Collider[] potentialTargets = Physics.OverlapSphere(PlayerGraphics.position, AutoAttackRange.Value, LayerMask.GetMask("Enemy"));
 
         int targetIndex = -1;
         float distance = float.MaxValue;
