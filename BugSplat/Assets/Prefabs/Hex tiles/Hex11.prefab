@@ -56,6 +56,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OpenEdges: 010101010101
+  EnemySpawners: []
+  MinBudget: 0
   Walls:
   - {fileID: 2553040478043897998}
   - {fileID: 3943020428335914676}
@@ -63,6 +65,7 @@ MonoBehaviour:
   - {fileID: 8675903403089364060}
   - {fileID: 8287217673411385346}
   - {fileID: 2133595026347914942}
+  difficultyLevel: {fileID: 11400000, guid: d19951e59292d2f4593c6a3fffc27fea, type: 2}
   IsaccesibleFromMiddle: 0
   Neighbours: []
 --- !u!1001 &937938268655115607
@@ -162,11 +165,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3475201748181521254}
     m_Modifications:
-    - target: {fileID: 1886347603161165432, guid: c80be2e2869100248a613519136c63c9,
-        type: 3}
-      propertyPath: m_Name
-      value: 1x1RockObstacle 3
-      objectReference: {fileID: 0}
     - target: {fileID: 6345151096559635838, guid: c80be2e2869100248a613519136c63c9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -222,6 +220,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1886347603161165432, guid: c80be2e2869100248a613519136c63c9,
+        type: 3}
+      propertyPath: m_Name
+      value: 1x1RockObstacle 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c80be2e2869100248a613519136c63c9, type: 3}
 --- !u!4 &6257432801601859343 stripped
@@ -237,11 +240,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3475201748181521254}
     m_Modifications:
-    - target: {fileID: 4176355153426755736, guid: 29a40903233920342810d2e5a7be0d4b,
-        type: 3}
-      propertyPath: m_Name
-      value: CannonFodder (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 4176355153426757476, guid: 29a40903233920342810d2e5a7be0d4b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -296,6 +294,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4176355153426755736, guid: 29a40903233920342810d2e5a7be0d4b,
+        type: 3}
+      propertyPath: m_Name
+      value: CannonFodder (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29a40903233920342810d2e5a7be0d4b, type: 3}
@@ -387,11 +390,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3475201748181521254}
     m_Modifications:
-    - target: {fileID: 1886347603161165432, guid: 4c3f227172df1e24384fe89b90714e99,
-        type: 3}
-      propertyPath: m_Name
-      value: 1x1RockObstacle 2
-      objectReference: {fileID: 0}
     - target: {fileID: 6345151096559635838, guid: 4c3f227172df1e24384fe89b90714e99,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -447,6 +445,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1886347603161165432, guid: 4c3f227172df1e24384fe89b90714e99,
+        type: 3}
+      propertyPath: m_Name
+      value: 1x1RockObstacle 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c3f227172df1e24384fe89b90714e99, type: 3}
 --- !u!4 &8513380236364177631 stripped
@@ -462,11 +465,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3475201748181521254}
     m_Modifications:
-    - target: {fileID: 4176355153426755736, guid: 29a40903233920342810d2e5a7be0d4b,
-        type: 3}
-      propertyPath: m_Name
-      value: CannonFodder (7)
-      objectReference: {fileID: 0}
     - target: {fileID: 4176355153426757476, guid: 29a40903233920342810d2e5a7be0d4b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -522,6 +520,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4176355153426755736, guid: 29a40903233920342810d2e5a7be0d4b,
+        type: 3}
+      propertyPath: m_Name
+      value: CannonFodder (7)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29a40903233920342810d2e5a7be0d4b, type: 3}
 --- !u!4 &8298987881239252232 stripped
@@ -537,11 +540,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3475201748181521254}
     m_Modifications:
-    - target: {fileID: 4176355153426755736, guid: 29a40903233920342810d2e5a7be0d4b,
-        type: 3}
-      propertyPath: m_Name
-      value: CannonFodder (5)
-      objectReference: {fileID: 0}
     - target: {fileID: 4176355153426757476, guid: 29a40903233920342810d2e5a7be0d4b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -596,6 +594,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4176355153426755736, guid: 29a40903233920342810d2e5a7be0d4b,
+        type: 3}
+      propertyPath: m_Name
+      value: CannonFodder (5)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29a40903233920342810d2e5a7be0d4b, type: 3}
@@ -837,11 +840,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3475201748181521254}
     m_Modifications:
-    - target: {fileID: 4176355153426755736, guid: 29a40903233920342810d2e5a7be0d4b,
-        type: 3}
-      propertyPath: m_Name
-      value: CannonFodder (3)
-      objectReference: {fileID: 0}
     - target: {fileID: 4176355153426757476, guid: 29a40903233920342810d2e5a7be0d4b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -896,6 +894,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4176355153426755736, guid: 29a40903233920342810d2e5a7be0d4b,
+        type: 3}
+      propertyPath: m_Name
+      value: CannonFodder (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29a40903233920342810d2e5a7be0d4b, type: 3}

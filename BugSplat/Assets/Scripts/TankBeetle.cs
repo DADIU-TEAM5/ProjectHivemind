@@ -71,6 +71,8 @@ public class TankBeetle : Enemy
 
         _navMeshAgent.speed = stats.MoveSpeed;
 
+        _coneRenderer.material.color = Color.red;
+
     }
 
     public override void TakeDamage(float damage)
@@ -354,17 +356,23 @@ public class TankBeetle : Enemy
     void DetectThePlayer()
     {
         Collider[] potentialTargets = Physics.OverlapSphere(transform.position, stats.SpotDistance, LayerMask.GetMask("Player"));
+        RaycastHit hit;
 
         if (potentialTargets.Length > 0)
         {
+            if (Physics.Raycast(transform.position, potentialTargets[0].transform.position - transform.position, out hit, 10))
+            {
+                if (hit.collider.gameObject.layer == 9)
+                {
+                    AggroEvent.Raise(this.gameObject);
+                    _playerDetected = true;
+                    _playerTransform = potentialTargets[0].gameObject.transform;
 
-            AggroEvent.Raise(gameObject);
-            _playerDetected = true;
-            _playerTransform = potentialTargets[0].gameObject.transform;
+                    _isAlly = true;
 
-            
-
-           
+                    
+                }
+            }
         }
     }
 

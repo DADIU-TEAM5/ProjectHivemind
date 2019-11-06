@@ -11,7 +11,7 @@ public abstract class Enemy : GameLoop
     public GameObjectVariable CurrentEnemySO;
     public GameObjectVariable CurrentEnemyGraphic;
     public GameObjectVariable TargetGraphic;
- 
+
     public BoolVariable NoVisibleEnemies;
 
     // Healthbar Variables
@@ -133,7 +133,7 @@ public abstract class Enemy : GameLoop
                 Destroy(TargetGraphic.Value.GetComponent<MeshCollider>());
                 TargetGraphic.Value.transform.rotation = Quaternion.Euler(90, 0, 0);
                 TargetGraphic.Value.GetComponent<Renderer>().material.color = Color.red;
-                
+
 
             }
             else

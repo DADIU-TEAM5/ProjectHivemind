@@ -187,6 +187,9 @@ public class Boomer : Enemy
             _cone.SetActive(true);
             
         }
+
+        _coneRenderer.material.color = Color.Lerp(Color.green, Color.red, _attackCharge / stats.AttackChargeUpTime);
+
         drawCone(20);
         _attacking = true;
         _attackCharge += Time.deltaTime;
@@ -248,7 +251,7 @@ public class Boomer : Enemy
 
         adjustedPlayerPos.y = transform.position.y;
 
-        return Vector3.Distance(transform.position, adjustedPlayerPos) < stats.AttackRange / 2;
+        return Vector3.Distance(transform.position, adjustedPlayerPos) < stats.AttackRange *0.8f;
     }
 
     void MoveTowardsThePlayer()
@@ -271,16 +274,23 @@ public class Boomer : Enemy
     void DetectThePlayer()
     {
         Collider[] potentialTargets = Physics.OverlapSphere(transform.position, stats.SpotDistance, LayerMask.GetMask("Player"));
+        RaycastHit hit;
 
         if (potentialTargets.Length > 0)
         {
-            AggroEvent.Raise(gameObject);
-            _playerDetected = true;
-            _playerTransform = potentialTargets[0].gameObject.transform;
+            if (Physics.Raycast(transform.position, potentialTargets[0].transform.position - transform.position, out hit, 10))
+            {
+                if (hit.collider.gameObject.layer == 9)
+                {
+                    AggroEvent.Raise(this.gameObject);
+                    _playerDetected = true;
+                    _playerTransform = potentialTargets[0].gameObject.transform;
 
-            
+                    
 
-            
+                    
+                }
+            }
         }
     }
 

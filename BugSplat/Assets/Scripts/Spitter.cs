@@ -43,6 +43,9 @@ public class Spitter : Enemy
     public GameEvent AttackEvent;
     public GameEvent DeathEvent;
     public GameEvent AttackChargingEvent;
+    public GameEvent BurrowEvent;
+
+    public GameEvent EmergeEvent;
 
 
     Color SetColor(Color color)
@@ -119,18 +122,19 @@ public class Spitter : Enemy
 
     public void Burrow()
     {
+        if (!_underground) BurrowEvent.Raise(gameObject);        
+
         _underground = true;
 
         _navMeshAgent.obstacleAvoidanceType =ObstacleAvoidanceType.NoObstacleAvoidance;
-        
-       
     }
     public void Emerge()
     {
-        
-        _underground = false;
-        _navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+        if (_underground) EmergeEvent.Raise(this.gameObject);
 
+        _underground = false;
+
+        _navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
     }
 
 
@@ -312,16 +316,23 @@ public class Spitter : Enemy
     void DetectThePlayer()
     {
         Collider[] potentialTargets = Physics.OverlapSphere(transform.position, stats.SpotDistance, LayerMask.GetMask("Player"));
+        RaycastHit hit;
 
         if (potentialTargets.Length > 0)
         {
-            AggroEvent.Raise();
-            _playerDetected = true;
-            _playerTransform = potentialTargets[0].gameObject.transform;
+            if (Physics.Raycast(transform.position, potentialTargets[0].transform.position - transform.position, out hit, 10))
+            {
+                if (hit.collider.gameObject.layer == 9)
+                {
+                    AggroEvent.Raise(gameObject);
+                    _playerDetected = true;
+                    _playerTransform = potentialTargets[0].gameObject.transform;
 
-            _isAlly = true;
+                    _isAlly = true;
 
-           
+                    
+                }
+            }
         }
     }
 }

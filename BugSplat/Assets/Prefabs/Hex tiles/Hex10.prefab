@@ -52,6 +52,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OpenEdges: 000000000101
+  EnemySpawners: []
+  MinBudget: 0
   Walls:
   - {fileID: 5553105494503660674}
   - {fileID: 6397025716620952248}
@@ -59,6 +61,7 @@ MonoBehaviour:
   - {fileID: 1592480839157389392}
   - {fileID: 2124780237587694606}
   - {fileID: 8350427493607991986}
+  difficultyLevel: {fileID: 11400000, guid: 016a8df0752f75349bd2de59f9e743e4, type: 2}
   IsaccesibleFromMiddle: 0
   Neighbours: []
 --- !u!1001 &581486891308571260
@@ -143,10 +146,45 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3475201748181521254}
     m_Modifications:
+    - target: {fileID: 4898357432086131981, guid: 2ed5b104da96426488c95b3ffdf49167,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6209376298426526519, guid: 2ed5b104da96426488c95b3ffdf49167,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5765198551886705148, guid: 2ed5b104da96426488c95b3ffdf49167,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 947192142064775141, guid: 2ed5b104da96426488c95b3ffdf49167,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3864221066357608551, guid: 2ed5b104da96426488c95b3ffdf49167,
         type: 3}
       propertyPath: m_Name
       value: AllOpen
+      objectReference: {fileID: 0}
+    - target: {fileID: 5765198551886705148, guid: 2ed5b104da96426488c95b3ffdf49167,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6209376298426526519, guid: 2ed5b104da96426488c95b3ffdf49167,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4898357432086131981, guid: 2ed5b104da96426488c95b3ffdf49167,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3475201748181521254, guid: 2ed5b104da96426488c95b3ffdf49167,
         type: 3}
@@ -203,26 +241,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4898357432086131981, guid: 2ed5b104da96426488c95b3ffdf49167,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5765198551886705148, guid: 2ed5b104da96426488c95b3ffdf49167,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6209376298426526519, guid: 2ed5b104da96426488c95b3ffdf49167,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 947192142064775141, guid: 2ed5b104da96426488c95b3ffdf49167,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ed5b104da96426488c95b3ffdf49167, type: 3}
 --- !u!4 &3100410915488883923 stripped
@@ -274,11 +292,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3475201748181521254}
     m_Modifications:
-    - target: {fileID: 4176355153426755736, guid: 29a40903233920342810d2e5a7be0d4b,
-        type: 3}
-      propertyPath: m_Name
-      value: CannonFodder (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 4176355153426757476, guid: 29a40903233920342810d2e5a7be0d4b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -334,6 +347,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4176355153426755736, guid: 29a40903233920342810d2e5a7be0d4b,
+        type: 3}
+      propertyPath: m_Name
+      value: CannonFodder (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29a40903233920342810d2e5a7be0d4b, type: 3}
 --- !u!4 &2469966930969465770 stripped
@@ -349,11 +367,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3475201748181521254}
     m_Modifications:
-    - target: {fileID: 4176355153426755736, guid: 29a40903233920342810d2e5a7be0d4b,
-        type: 3}
-      propertyPath: m_Name
-      value: CannonFodder (4)
-      objectReference: {fileID: 0}
     - target: {fileID: 4176355153426757476, guid: 29a40903233920342810d2e5a7be0d4b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -409,6 +422,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4176355153426755736, guid: 29a40903233920342810d2e5a7be0d4b,
+        type: 3}
+      propertyPath: m_Name
+      value: CannonFodder (4)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29a40903233920342810d2e5a7be0d4b, type: 3}
 --- !u!4 &1931887351140680980 stripped
@@ -424,11 +442,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3475201748181521254}
     m_Modifications:
-    - target: {fileID: 1886347603161165432, guid: c80be2e2869100248a613519136c63c9,
-        type: 3}
-      propertyPath: m_Name
-      value: 1x1RockObstacle 3
-      objectReference: {fileID: 0}
     - target: {fileID: 6345151096559635838, guid: c80be2e2869100248a613519136c63c9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -483,6 +496,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1886347603161165432, guid: c80be2e2869100248a613519136c63c9,
+        type: 3}
+      propertyPath: m_Name
+      value: 1x1RockObstacle 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c80be2e2869100248a613519136c63c9, type: 3}

@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8018b668e9b9001438c43c2a6952ed4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  difficultyValue: 1
+  m_Name:
+  m_EditorClassIdentifier:
+  difficultyValue: 2
   EnemyList: {fileID: 11400000, guid: 73fb98983f89ab9418a547ca2aa08854, type: 2}
   LockedTarget: {fileID: 11400000, guid: 10807b189a56cf444ac0120f9222ea9e, type: 2}
   CurrentEnemySO: {fileID: 11400000, guid: f105a26415b393b4294e03ed33f33397, type: 2}
@@ -70,6 +70,8 @@ MonoBehaviour:
   DeathEvent: {fileID: 11400000, guid: 3488db3170d2c2c4095d2fd49a373f47, type: 2}
   AttackChargingEvent: {fileID: 11400000, guid: 967fe9cf4e62f5945b30869e11e13945,
     type: 2}
+  BurrowEvent: {fileID: 11400000, guid: 521b9c6bf00e14740a1e31190823fb5e, type: 2}
+  EmergeEvent: {fileID: 11400000, guid: 521b9c6bf00e14740a1e31190823fb5e, type: 2}
 --- !u!114 &-5392400671335020184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,8 +82,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae8cd77b9a3fb574486a4a4a4ef4a938, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   GameLoopHandler: {fileID: 11400000, guid: b20923f160198a245bcdd80c8342f9ac, type: 2}
   GameLoops:
   - {fileID: 9169004595408006772}
@@ -128,6 +130,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 19900850904109372}
     m_Modifications:
+    - target: {fileID: 8070494227835517300, guid: 81634ae774af43e498268fd34d313802,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8070494227835517297, guid: 81634ae774af43e498268fd34d313802,
         type: 3}
       propertyPath: m_Name
@@ -188,15 +195,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8070494227835517300, guid: 81634ae774af43e498268fd34d313802,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8070494227835517302, guid: 81634ae774af43e498268fd34d313802,
         type: 3}
       propertyPath: stats
-      value: 
+      value:
       objectReference: {fileID: 11400000, guid: cbaf78494567dd143a052ea9fd43de50,
         type: 2}
     m_RemovedComponents: []
@@ -302,7 +304,7 @@ PrefabInstance:
     - target: {fileID: -1504981713932161579, guid: feebcbb68fd26454b96bc57e840331d5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
-      value: 
+      value:
       objectReference: {fileID: 2100000, guid: 8c5680d92968406448ad20273c09331b, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: feebcbb68fd26454b96bc57e840331d5, type: 3}

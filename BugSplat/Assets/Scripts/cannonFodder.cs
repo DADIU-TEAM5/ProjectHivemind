@@ -47,6 +47,7 @@ public class cannonFodder : Enemy
         _cone = new GameObject();
         _cone.AddComponent<LineRenderer>();
         _coneRenderer = _cone.GetComponent<LineRenderer>();
+        
         _cone.SetActive(false);
         _cone.transform.parent = transform;
 
@@ -145,6 +146,9 @@ public class cannonFodder : Enemy
 
     void drawCone(int points)
     {
+
+
+
         Vector3[] pointsForTheCone = new Vector3[points];
         _coneRenderer.positionCount = points;
 
@@ -175,9 +179,12 @@ public class cannonFodder : Enemy
         }
 
         _coneRenderer.SetPositions(pointsForTheCone);
-        _coneRenderer.widthMultiplier = 0.1f;
+        _coneRenderer.widthMultiplier = 0.2f;
         
         _coneRenderer.loop = true;
+
+        print(_attackCharge / stats.AttackChargeUpTime);
+        
     }
     void Attack()
     {
@@ -194,6 +201,8 @@ public class cannonFodder : Enemy
             _cone.SetActive(true);
             drawCone(10);
         }
+        _coneRenderer.material.color = Color.Lerp(Color.green, Color.red, _attackCharge / stats.AttackChargeUpTime);
+
 
         _attacking = true;
         _attackCharge += Time.deltaTime;
@@ -284,16 +293,23 @@ public class cannonFodder : Enemy
     void DetectThePlayer()
     {
         Collider[] potentialTargets = Physics.OverlapSphere(transform.position, stats.SpotDistance, LayerMask.GetMask("Player"));
+        RaycastHit hit;
 
         if (potentialTargets.Length > 0)
         {
-            AggroEvent.Raise(this.gameObject);
-            _playerDetected = true;
-            _playerTransform = potentialTargets[0].gameObject.transform;
+            if (Physics.Raycast(transform.position, potentialTargets[0].transform.position - transform.position, out hit, 10))
+            {
+                if (hit.collider.gameObject.layer == 9)
+                {
+                    AggroEvent.Raise(this.gameObject);
+                    _playerDetected = true;
+                    _playerTransform = potentialTargets[0].gameObject.transform;
 
-            _isAlly = true;
+                    _isAlly = true;
 
-            DetectAllies();
+                    DetectAllies();
+                }
+            }
         } 
     }
 

@@ -50,6 +50,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OpenEdges: 010100000000
+  EnemySpawners: []
+  MinBudget: 0
   Walls:
   - {fileID: 8778586010647670873}
   - {fileID: 7783796369244565091}
@@ -57,7 +59,7 @@ MonoBehaviour:
   - {fileID: 2511589755588752523}
   - {fileID: 3008379468438333653}
   - {fileID: 5125651499227006569}
-  difficultyLevel: {fileID: 11400000, guid: 0dd9ffccf4a749d48b9411fec27d4029, type: 2}
+  difficultyLevel: {fileID: 11400000, guid: d19951e59292d2f4593c6a3fffc27fea, type: 2}
   IsaccesibleFromMiddle: 0
   Neighbours: []
 --- !u!1001 &438136456059371072
@@ -142,11 +144,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3475201748181521254}
     m_Modifications:
-    - target: {fileID: 4176355153426755736, guid: 29a40903233920342810d2e5a7be0d4b,
-        type: 3}
-      propertyPath: m_Name
-      value: CannonFodder (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 4176355153426757476, guid: 29a40903233920342810d2e5a7be0d4b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -202,6 +199,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4176355153426755736, guid: 29a40903233920342810d2e5a7be0d4b,
+        type: 3}
+      propertyPath: m_Name
+      value: CannonFodder (2)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29a40903233920342810d2e5a7be0d4b, type: 3}
 --- !u!4 &3364018879499866631 stripped
@@ -217,11 +219,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3475201748181521254}
     m_Modifications:
-    - target: {fileID: 1886347603161165432, guid: c80be2e2869100248a613519136c63c9,
-        type: 3}
-      propertyPath: m_Name
-      value: 1x1RockObstacle 3
-      objectReference: {fileID: 0}
     - target: {fileID: 6345151096559635838, guid: c80be2e2869100248a613519136c63c9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -277,6 +274,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1886347603161165432, guid: c80be2e2869100248a613519136c63c9,
+        type: 3}
+      propertyPath: m_Name
+      value: 1x1RockObstacle 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c80be2e2869100248a613519136c63c9, type: 3}
 --- !u!4 &8263561113269855185 stripped
@@ -292,20 +294,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3475201748181521254}
     m_Modifications:
-    - target: {fileID: 3864221066357608551, guid: 2ed5b104da96426488c95b3ffdf49167,
+    - target: {fileID: 5765198551886705148, guid: 2ed5b104da96426488c95b3ffdf49167,
         type: 3}
-      propertyPath: m_Name
-      value: AllOpen
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7556502852029422855, guid: 2ed5b104da96426488c95b3ffdf49167,
         type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5765198551886705148, guid: 2ed5b104da96426488c95b3ffdf49167,
+    - target: {fileID: 947192142064775141, guid: 2ed5b104da96426488c95b3ffdf49167,
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 450367111835366331, guid: 2ed5b104da96426488c95b3ffdf49167,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3864221066357608551, guid: 2ed5b104da96426488c95b3ffdf49167,
+        type: 3}
+      propertyPath: m_Name
+      value: AllOpen
       objectReference: {fileID: 0}
     - target: {fileID: 3475201748181521254, guid: 2ed5b104da96426488c95b3ffdf49167,
         type: 3}
@@ -362,16 +374,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 450367111835366331, guid: 2ed5b104da96426488c95b3ffdf49167,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 947192142064775141, guid: 2ed5b104da96426488c95b3ffdf49167,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ed5b104da96426488c95b3ffdf49167, type: 3}
 --- !u!4 &2289387978600105992 stripped
@@ -423,11 +425,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3475201748181521254}
     m_Modifications:
-    - target: {fileID: 4176355153426755736, guid: 29a40903233920342810d2e5a7be0d4b,
-        type: 3}
-      propertyPath: m_Name
-      value: CannonFodder (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 4176355153426757476, guid: 29a40903233920342810d2e5a7be0d4b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -483,6 +480,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4176355153426755736, guid: 29a40903233920342810d2e5a7be0d4b,
+        type: 3}
+      propertyPath: m_Name
+      value: CannonFodder (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29a40903233920342810d2e5a7be0d4b, type: 3}
 --- !u!4 &8672194336021622479 stripped
@@ -498,11 +500,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3475201748181521254}
     m_Modifications:
-    - target: {fileID: 4176355153426755736, guid: 29a40903233920342810d2e5a7be0d4b,
-        type: 3}
-      propertyPath: m_Name
-      value: CannonFodder
-      objectReference: {fileID: 0}
     - target: {fileID: 4176355153426757476, guid: 29a40903233920342810d2e5a7be0d4b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -557,6 +554,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4176355153426755736, guid: 29a40903233920342810d2e5a7be0d4b,
+        type: 3}
+      propertyPath: m_Name
+      value: CannonFodder
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29a40903233920342810d2e5a7be0d4b, type: 3}
