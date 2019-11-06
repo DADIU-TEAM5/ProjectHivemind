@@ -21,6 +21,8 @@ public class AttackScript : GameLoop
 
     public FloatVariable AutoAttackRange;
 
+    public GameObjectVariable CurrentEnemySO;
+
 
     NavMeshAgent _navMeshAgent;
     Vector3 _nearstTarget;
@@ -61,7 +63,7 @@ public class AttackScript : GameLoop
             _cone.SetActive(false);
         }
 
-        //LockOnToNearestTarget();
+        LockOnToNearestTarget();
     }
 
     public override void LoopLateUpdate(float deltaTime)
@@ -164,10 +166,13 @@ public class AttackScript : GameLoop
 
 
                 _directionToNearstTarget = _nearstTarget - PlayerGraphics.position;
+
+                CurrentEnemySO.Value = potentialTargets[targetIndex].gameObject;
             } 
             else {
                 _lockedOntoTarget = false;
                 _nearstTarget = Vector3.zero;
+                CurrentEnemySO.Value = null;
             }
         } 
         else {

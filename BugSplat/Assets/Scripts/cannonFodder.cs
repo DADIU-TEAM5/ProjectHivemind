@@ -42,6 +42,8 @@ public class cannonFodder : Enemy
         _currentHealth = stats.HitPoints;
         _renderer = Graphics.GetComponent<Renderer>();
 
+        Initialize(_currentHealth);
+
         _cone = new GameObject();
         _cone.AddComponent<LineRenderer>();
         _coneRenderer = _cone.GetComponent<LineRenderer>();
@@ -69,6 +71,7 @@ public class cannonFodder : Enemy
     {
        // print(name + " took damage "+ damage);
         _currentHealth -= damage;
+        UpdateHealthBar(_currentHealth);
         TakeDamageEvent.Raise(this.gameObject); 
 
         if(_currentHealth <= 0)
@@ -133,7 +136,7 @@ public class cannonFodder : Enemy
         }
         else
         {
-            _renderer.material.color = SetColor( Color.yellow);
+            _renderer.material.color = SetColor(Color.yellow);
             MoveTowardsThePlayer();
         }
     }

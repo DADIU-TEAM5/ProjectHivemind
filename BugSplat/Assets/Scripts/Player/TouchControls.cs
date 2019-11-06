@@ -293,10 +293,6 @@ public class TouchControls : GameLoop
             //DebugText.text = "MOVED!";
         }
 
-
-
-
-
         PlayerCurrentSpeedSO.Value = 0;
         _inputMoved = false;
         _recordPosition = true;

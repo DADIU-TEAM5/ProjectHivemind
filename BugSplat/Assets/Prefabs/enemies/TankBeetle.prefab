@@ -97,10 +97,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d5159b0b2983b44eb6ebfe97af915a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  difficultyValue: 1
   EnemyList: {fileID: 11400000, guid: 73fb98983f89ab9418a547ca2aa08854, type: 2}
   LockedTarget: {fileID: 11400000, guid: 10807b189a56cf444ac0120f9222ea9e, type: 2}
+  CurrentEnemySO: {fileID: 11400000, guid: f105a26415b393b4294e03ed33f33397, type: 2}
+  CurrentEnemyGraphic: {fileID: 11400000, guid: 622f7e966361b8946aed8997885a3b76,
+    type: 2}
   TargetGraphic: {fileID: 11400000, guid: 35750c098c4b5a64683897e38deae292, type: 2}
+  PlayerCamBrain: {fileID: 639618510448564449, guid: b222bf4daa60abc4ab286aa2fe1f5b53,
+    type: 3}
   NoVisibleEnemies: {fileID: 11400000, guid: fab092924697b554a8c0751c87f04669, type: 2}
+  HealthBarWidth: 150
+  HealthBarHeight: 20
+  HealthBarOffsetX: -50
+  HealthBarOffsetY: -350
   Graphics: {fileID: 2456961457170361764}
   bodyPart: {fileID: 7324468612011702487, guid: 862620230bd5167459723c1fe51d3192,
     type: 3}
@@ -116,6 +126,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4176355153426757476}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 4172f0f129792d84ba9d733ae2a7bfff,
+        type: 3}
+      propertyPath: m_Name
+      value: graphics
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4172f0f129792d84ba9d733ae2a7bfff,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -170,11 +185,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 4172f0f129792d84ba9d733ae2a7bfff,
-        type: 3}
-      propertyPath: m_Name
-      value: graphics
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 4172f0f129792d84ba9d733ae2a7bfff,
         type: 3}
