@@ -29,6 +29,7 @@ public class Arrow : GameLoop
         _arrow.AddComponent<LineRenderer>();
         _arrowRenderer = _arrow.GetComponent<LineRenderer>();
 
+        _arrowRenderer.material.color = new Color(0, 255, 255);
         //_arrow.SetActive(false);
 
         DrawArrow();
