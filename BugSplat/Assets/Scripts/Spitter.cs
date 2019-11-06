@@ -59,10 +59,10 @@ public class Spitter : Enemy
         spitSettings.startSpeed = stats.ProjectileSpeed;
         spitSettings.startLifetime = stats.AttackRange/stats.ProjectileSpeed ;
 
-
         _currentHealth = stats.HitPoints;
         _renderer = Graphics.GetComponent<Renderer>();
 
+        Initialize(_currentHealth);
 
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _navMeshAgent.speed = stats.MoveSpeed;
@@ -94,8 +94,8 @@ public class Spitter : Enemy
         {
             // print(name + " took damage "+ damage);
             _currentHealth -= damage;
-
-            if(_currentHealth < stats.FleeThreshold)
+            UpdateHealthBar(_currentHealth);
+            if (_currentHealth < stats.FleeThreshold)
             _fleeValue = stats.FleeTime;
 
             TakeDamageEvent.Raise(gameObject);
