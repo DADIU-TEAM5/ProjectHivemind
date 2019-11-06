@@ -45,6 +45,8 @@ public class Spitter : Enemy
     public GameEvent AttackChargingEvent;
     public GameEvent BurrowEvent;
 
+    public GameEvent EmergeEvent;
+
 
     Color SetColor(Color color)
     {
@@ -124,7 +126,7 @@ public class Spitter : Enemy
 
         _navMeshAgent.obstacleAvoidanceType =ObstacleAvoidanceType.NoObstacleAvoidance;
 
-        
+        BurrowEvent.Raise();        
        
     }
     public void Emerge()
@@ -133,7 +135,7 @@ public class Spitter : Enemy
         _underground = false;
         _navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
 
-        
+        EmergeEvent.Raise();
     }
 
 
