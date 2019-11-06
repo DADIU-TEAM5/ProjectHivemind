@@ -122,20 +122,19 @@ public class Spitter : Enemy
 
     public void Burrow()
     {
+        if (!_underground) BurrowEvent.Raise(gameObject);        
+
         _underground = true;
 
         _navMeshAgent.obstacleAvoidanceType =ObstacleAvoidanceType.NoObstacleAvoidance;
-
-        BurrowEvent.Raise(gameObject);        
-       
     }
     public void Emerge()
     {
-        
-        _underground = false;
-        _navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+        if (_underground) EmergeEvent.Raise(this.gameObject);
 
-        EmergeEvent.Raise(this.gameObject);
+        _underground = false;
+
+        _navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
     }
 
 
