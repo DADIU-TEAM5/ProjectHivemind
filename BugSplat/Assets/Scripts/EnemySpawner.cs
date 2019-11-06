@@ -7,6 +7,8 @@ public class EnemySpawner : GameLoop
 {
     public FloatVariable LevelBudget;
     public EnemySpawnerList EnemylevelList;
+    public Color DisplayColor = Color.red;
+
     public IntVariable CurrentLevel;
 
     public IntVariable enemySpawnerCount;
@@ -101,7 +103,7 @@ public class EnemySpawner : GameLoop
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = DisplayColor;
         Gizmos.DrawSphere(transform.position, 1);
     }
 
