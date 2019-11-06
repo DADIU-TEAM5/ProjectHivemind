@@ -7,6 +7,7 @@ public class TestToggleButton : MonoBehaviour
     public BoolVariable Bool;
     public Text ButtonText;
     private string _toggleValue;
+    public int FontSize;
 
 
     public void Setup(BoolVariable boolVar)
@@ -54,6 +55,7 @@ public class TestToggleButton : MonoBehaviour
 
 
             ButtonText.text = Bool.name + ": " + _toggleValue;
+            ButtonText.fontSize = FontSize;
 
         }
         else

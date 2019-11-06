@@ -9,6 +9,7 @@ public class TestSliderScript : MonoBehaviour
     public Text text;
     private string _textLabel;
     public Slider slider;
+    public int FontSize;
     //public FloatVariable FloatVar;
     
     public void Setup(IntVariable intVar) 
@@ -27,5 +28,6 @@ public class TestSliderScript : MonoBehaviour
     public void SetText()
     {
         _textLabel = text.text + ": " + IntVar.Value;
+        text.fontSize = FontSize;
     }
 }

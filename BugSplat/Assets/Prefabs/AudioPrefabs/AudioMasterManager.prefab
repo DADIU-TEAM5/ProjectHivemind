@@ -559,6 +559,7 @@ GameObject:
   - component: {fileID: 984170977718082443}
   - component: {fileID: 2065512477816436485}
   - component: {fileID: 9171255139393157755}
+  - component: {fileID: 3067801462606097766}
   m_Layer: 0
   m_Name: BoomerAudio
   m_TagString: Untagged
@@ -599,11 +600,13 @@ MonoBehaviour:
   Attack:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 70ef9c24732494927bbe43bf633d7431,
+      type: 2}
   Hit:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: fa36bc195025a4416a3d163b0ded027c,
+      type: 2}
   ScaredScream:
     idInternal: 0
     valueGuidInternal: 
@@ -639,6 +642,35 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2065512477816436485}
         m_MethodName: DetectEvent
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &3067801462606097766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4546422351566072139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: cbf2e11fe0927e4409ee5d4ea64352b8, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2065512477816436485}
+        m_MethodName: HitEvent
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -116,7 +116,7 @@ public abstract class Enemy : GameLoop
                 CurrentEnemyGraphic.Value.SetActive(false);
         }
 
-        if (LockedTarget.Value == gameObject)
+        /*if (LockedTarget.Value == gameObject)
         {
             if(TargetGraphic.Value == null)
             {
@@ -152,7 +152,7 @@ public abstract class Enemy : GameLoop
         if (CurrentEnemySO.Value != gameObject && LockedTarget.Value != gameObject)
         {
             _showHealthBar = false;
-        }
+        }*/
     }
 
     public void UpdateHealthBar(float hitPoints)
