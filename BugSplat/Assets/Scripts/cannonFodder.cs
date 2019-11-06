@@ -5,6 +5,11 @@ using UnityEngine.AI;
 
 public class cannonFodder : Enemy
 {
+
+    public AnimationCurve AttackCurve;
+
+    public Material ConeMaterial;
+
     public GameObject Graphics;
 
     public GameObject bodyPart;
@@ -26,7 +31,11 @@ public class cannonFodder : Enemy
 
     private Renderer _renderer;
     private GameObject _cone;
-    private LineRenderer _coneRenderer;
+    private MeshRenderer _coneRenderer;
+    private Mesh _coneMesh;
+    private GameObject _outline;
+    private MeshRenderer _outlineRenderer;
+    private Mesh _outlineMesh;
 
     Color _startColor;
 
@@ -39,18 +48,19 @@ public class cannonFodder : Enemy
 
     public void Start()
     {
+        _navMeshAgent = GetComponent<NavMeshAgent>();
+        _navMeshAgent.speed = stats.MoveSpeed;
+
         _currentHealth = stats.HitPoints;
         _renderer = Graphics.GetComponent<Renderer>();
 
-        _cone = new GameObject();
-        _cone.AddComponent<LineRenderer>();
-        _coneRenderer = _cone.GetComponent<LineRenderer>();
-        
-        _cone.SetActive(false);
-        _cone.transform.parent = transform;
+        CreateCone();
+        CreateOutline();
+        _coneRenderer.material = ConeMaterial;
+        _outlineRenderer.material = ConeMaterial;
 
-        _navMeshAgent = GetComponent<NavMeshAgent>();
-        _navMeshAgent.speed = stats.MoveSpeed;
+        _outlineRenderer.material.color = new Color(.2f, .2f, .2f, .1f);
+        
 
         _startColor = _renderer.material.color;
 
@@ -92,10 +102,56 @@ public class cannonFodder : Enemy
             EnemyList.Remove(gameObject);
 
             Destroy(_cone);
+            Destroy(_outline);
             Destroy(gameObject, 3f);
         }
     }
 
+    void CreateCone()
+    {
+        _cone = new GameObject();
+        _cone.name = "cone";
+        _coneMesh = _cone.AddComponent<MeshFilter>().mesh;
+        _coneRenderer = _cone.AddComponent<MeshRenderer>();
+
+        Vector3 offset = transform.position;
+
+        offset.y = 0.005f;
+        _cone.transform.position = offset;
+
+        _cone.transform.rotation = transform.rotation;
+
+
+        _cone.transform.parent = transform;
+        _cone.SetActive(false);
+        
+
+
+    }
+    void CreateOutline()
+    {
+        _outline = new GameObject();
+        _outline.name = "outline";
+        _outlineMesh = _outline.AddComponent<MeshFilter>().mesh;
+        _outlineRenderer = _outline.AddComponent<MeshRenderer>();
+
+
+
+        //_outlineRenderer.material.color = new Color(.01f, .01f, .01f, .01f);
+        
+        Vector3 offset = transform.position; 
+
+        offset.y = 0;
+        _outline.transform.position = offset;
+
+        _outline.transform.rotation = transform.rotation;
+
+        _outline.transform.parent = transform;
+
+        _outline.SetActive(false);
+        
+
+    }
 
     Color SetColor(Color color)
     {
@@ -141,21 +197,81 @@ public class cannonFodder : Enemy
 
     public override void LoopLateUpdate(float deltaTime) {}
 
-    void drawCone(int points)
+
+    int[] _triangles = { };
+    Vector3[] _normals= { };
+
+
+    void drawCone(int points, Mesh mesh,bool constant)
     {
+        if(_triangles.Length != points)
+        {
+            _triangles = new int[points * 3 + 3];
+
+            int triangleIndex = 0;
+
+            for (int i = 0; i < points; i++)
+            {
+                if (i != points - 1)
+                {
 
 
 
-        Vector3[] pointsForTheCone = new Vector3[points];
-        _coneRenderer.positionCount = points;
+                    _triangles[triangleIndex] = 0;
 
-        pointsForTheCone[0] = transform.position;
+                    _triangles[triangleIndex + 2] = i;
+                    _triangles[triangleIndex + 1] = i + 1;
 
-        Vector3 vectorToRotate = transform.forward * stats.AttackRange;
+
+
+                }
+
+                triangleIndex += 3;
+            }
+
+            _triangles[triangleIndex] = 0;
+
+            _triangles[triangleIndex + 2] = points - 1;
+            _triangles[triangleIndex + 1] = 1;
+
+        }
+
+        if(_normals.Length != points)
+        {
+
+            _normals = new Vector3[points];
+
+            for (int i = 0; i < points; i++)
+            {
+                _normals[i] = Vector3.up;
+            }
+        }
+
+
+
+
+        Vector3[] vertices = new Vector3[points];
+        
+
+        
+        
+        
+
+        vertices[0] = Vector3.zero;
+
+
+        Vector3 vectorToRotate;
+        if (constant)
+            vectorToRotate = Vector3.forward * stats.AttackRange;
+        else
+            vectorToRotate = Vector3.forward * (stats.AttackRange * AttackCurve.Evaluate(_attackCharge / stats.AttackChargeUpTime));
+
         Vector3 rotatedVector = Vector3.zero;
 
         float stepSize = 1f/((float)points-1);
         int step = 0;
+
+        
 
         for (int i = 1; i < points; i++)
         {
@@ -171,20 +287,28 @@ public class cannonFodder : Enemy
             rotatedVector.x = vectorToRotate.x * c - vectorToRotate.z * s;
             rotatedVector.z = vectorToRotate.x * s + vectorToRotate.z * c;
 
-            pointsForTheCone[i] = transform.position + rotatedVector;
+            vertices[i] =  rotatedVector;
             step++;
         }
 
-        _coneRenderer.SetPositions(pointsForTheCone);
-        _coneRenderer.widthMultiplier = 0.2f;
-        
-        _coneRenderer.loop = true;
+        mesh.vertices = vertices;
 
-        print(_attackCharge / stats.AttackChargeUpTime);
+        if(mesh.triangles != _triangles)
+            mesh.triangles = _triangles;
+
+        if (mesh.normals != _normals)
+            mesh.normals = _normals;
+
+
+        
+
         
     }
     void Attack()
     {
+       
+
+
         if (_attacking == false)
         {
             AttackChargingEvent.Raise(this.gameObject);
@@ -196,9 +320,14 @@ public class cannonFodder : Enemy
             transform.LookAt(adjustedPlayerPos);
 
             _cone.SetActive(true);
-            drawCone(10);
+            _outline.SetActive(true);
+
+            drawCone(10, _outlineMesh,true);
+
         }
-        _coneRenderer.material.color = Color.Lerp(Color.green, Color.red, _attackCharge / stats.AttackChargeUpTime);
+        drawCone(10,_coneMesh,false);
+
+        _coneRenderer.material.color = Color.Lerp(new Color(0,1,0,0.5f), new Color(1, 0, 0, 0.5f), _attackCharge / stats.AttackChargeUpTime);
 
 
         _attacking = true;
@@ -251,6 +380,7 @@ public class cannonFodder : Enemy
             _attacking = false;
             _attackCharge = 0;
             _cone.SetActive(false);
+            _outline.SetActive(false);
 
         }
         
