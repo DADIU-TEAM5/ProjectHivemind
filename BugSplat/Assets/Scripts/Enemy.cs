@@ -16,10 +16,10 @@ public abstract class Enemy : GameLoop
 
     // Healthbar Variables
     private GUIStyle currentStyle = null;
-    public int HealthBarWidth;
-    public int HealthBarHeight;
-    public float HealthBarOffsetX;
-    public float HealthBarOffsetY;
+    public int HealthBarWidth = 150;
+    public int HealthBarHeight = 20;
+    public float HealthBarOffsetX = -50f;
+    public float HealthBarOffsetY = -200f;
     private bool _showHealthBar;
     private float _initialHealth;
     private Color _maxHealthColor = new Color(0f, 1f, 0f);
