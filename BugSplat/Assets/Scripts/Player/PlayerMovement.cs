@@ -15,6 +15,8 @@ public class PlayerMovement : GameLoop
     public FloatVariable PlayerAccelerationSO;
     public BoolVariable isDodging;
     public Vector3Variable PlayerPosition;
+    public GameObject CameraTarget;
+    public FloatVariable CameraLookAheadDistanceSO;
 
 
     NavMeshAgent _navMeshAgent;
@@ -64,6 +66,16 @@ public class PlayerMovement : GameLoop
         Anim.SetBool("Running", PlayerCurrentSpeedSO.Value != 0);
         if(_navMeshAgent.isOnNavMesh)
         _navMeshAgent.Move(PlayerVelocitySO.Value * PlayerCurrentSpeedSO.Value * Time.deltaTime);
+
+        /*if (PlayerCurrentSpeedSO.Value > 0)
+        {
+            //CameraTarget.transform.localPosition = new Vector3(PlayerDirectionSO.Value.x * CameraLookAheadDistanceSO.Value,0,0);
+            CameraTarget.transform.localPosition = PlayerDirectionSO.Value * CameraLookAheadDistanceSO.Value;
+        } else
+        {
+            CameraTarget.transform.localPosition = Vector3.zero;
+        }*/
+
 
 
         // Move player using translate

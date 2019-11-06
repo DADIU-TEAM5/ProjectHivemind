@@ -67,6 +67,8 @@ public class TankBeetle : Enemy
 
         _cone = new GameObject();
 
+        Initialize(_currentHealth);
+
         _navMeshAgent = GetComponent<NavMeshAgent>();
 
 
@@ -137,6 +139,7 @@ public class TankBeetle : Enemy
 
         TakeDamageEvent.Raise(gameObject);
         _currentHealth -= damage;
+        UpdateHealthBar(_currentHealth);
         if (_currentHealth <= 0)
         {
             DeathEvent.Raise(gameObject);
