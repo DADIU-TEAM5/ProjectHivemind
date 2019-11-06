@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2904836501674625065
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2576753921563373728}
+  m_Layer: 0
+  m_Name: CameraTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2576753921563373728
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2904836501674625065}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.07427883, y: 0.9406148, z: 0.038185894}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5788987755461925660}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5788987755461925658
 GameObject:
   m_ObjectHideFlags: 0
@@ -41,6 +71,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5788987755592666204}
+  - {fileID: 2576753921563373728}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -66,6 +97,9 @@ MonoBehaviour:
     type: 2}
   isDodging: {fileID: 11400000, guid: 046d32af02590954e84257844646064e, type: 2}
   PlayerPosition: {fileID: 11400000, guid: 0119b5f64c03ff94091694f4b88d57e6, type: 2}
+  CameraTarget: {fileID: 2904836501674625065}
+  CameraLookAheadDistanceSO: {fileID: 11400000, guid: df0719e77539de645bfba9d60617add5,
+    type: 2}
 --- !u!114 &5788987755461925661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,8 +131,8 @@ MonoBehaviour:
     type: 2}
   LockedTarget: {fileID: 11400000, guid: 10807b189a56cf444ac0120f9222ea9e, type: 2}
   PlayerCam: {fileID: 0}
-  HubUI: {fileID: 4661602490103932182, guid: 5ac2c3c695d245c4cbd2a653796bc334, type: 3}
-  HubUIButton: {fileID: 0}
+  UICanvas: {fileID: 0}
+  UIMenuButton: {fileID: 0}
   _currentInputPosition:
   - {x: 1e-45, y: 0, z: 3.977e-42}
   - {x: 0, y: 3.977e-42, z: 0}
@@ -270,6 +304,8 @@ MonoBehaviour:
     type: 2}
   PlayerGraphics: {fileID: 5788987755592666204}
   LockedTarget: {fileID: 11400000, guid: 10807b189a56cf444ac0120f9222ea9e, type: 2}
+  AutoAttackRange: {fileID: 0}
+  CurrentEnemySO: {fileID: 0}
 --- !u!114 &8831838245759697901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,6 +395,9 @@ MonoBehaviour:
   VirtualCameras:
   - {fileID: 0}
   - {fileID: 0}
+  TankBeetle: {fileID: 0}
+  PlayerCurrentSpeedSO: {fileID: 0}
+  PlayerDirectionSO: {fileID: 0}
 --- !u!195 &1799847258
 NavMeshAgent:
   m_ObjectHideFlags: 0

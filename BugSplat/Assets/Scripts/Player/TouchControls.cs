@@ -261,7 +261,7 @@ public class TouchControls : GameLoop
 
             if (endTime < InputSwipeTapTimeSO.Value)
             {
-                Ray ray = PlayerCam.ScreenPointToRay(touchPosition);
+                Ray ray = Camera.main.ScreenPointToRay(touchPosition);
                 RaycastHit hit;
 
                 //Debug.DrawRay(ray.origin, ray.direction * 30, Color.red,5);
@@ -292,10 +292,6 @@ public class TouchControls : GameLoop
         {
             //DebugText.text = "MOVED!";
         }
-
-
-
-
 
         PlayerCurrentSpeedSO.Value = 0;
         _inputMoved = false;

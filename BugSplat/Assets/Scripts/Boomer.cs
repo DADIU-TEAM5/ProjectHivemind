@@ -45,6 +45,8 @@ public class Boomer : Enemy
         _currentHealth = stats.HitPoints;
         _renderer = Graphics.GetComponent<Renderer>();
 
+        Initialize(_currentHealth);
+
         _cone = new GameObject();
         _cone.AddComponent<LineRenderer>();
         _coneRenderer = _cone.GetComponent<LineRenderer>();
@@ -72,6 +74,7 @@ public class Boomer : Enemy
     {
         // print(name + " took damage "+ damage);
         _currentHealth -= damage;
+        UpdateHealthBar(_currentHealth);
         TakeDamageEvent.Raise(gameObject);
 
         if (_currentHealth <= 0)
