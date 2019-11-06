@@ -37,7 +37,7 @@ namespace Cinemachine.Examples
                 }
             }
 
-            if (VirtualCameras[cameraIndex].name == "KillCamTank")
+            if (VirtualCameras[cameraIndex].name == "KillCam")
             {
                 PlayerCurrentSpeedSO.Value = 0;
                 PlayerDirectionSO.Value = Vector3.zero;
@@ -53,7 +53,7 @@ namespace Cinemachine.Examples
         {
             yield return new WaitForSeconds(WaitTime);
 
-            Destroy(TankBeetle.gameObject);
+            //Destroy(TankBeetle.gameObject);
             Time.timeScale = 1f;
             VirtualCameras[0].gameObject.SetActive(_activate);
             VirtualCameras[cameraIndex].gameObject.SetActive(_deactivate);

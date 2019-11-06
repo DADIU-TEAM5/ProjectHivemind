@@ -575,8 +575,9 @@ GameObject:
   - component: {fileID: 190916793}
   - component: {fileID: 190916796}
   - component: {fileID: 190916795}
+  - component: {fileID: 190916797}
   m_Layer: 0
-  m_Name: KillCamTank
+  m_Name: KillCam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -600,8 +601,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 0
-  m_LookAt: {fileID: 1751372200}
-  m_Follow: {fileID: 1751372200}
+  m_LookAt: {fileID: 1807878026}
+  m_Follow: {fileID: 1807878026}
   m_Lens:
     FieldOfView: 40
     OrthographicSize: 10
@@ -627,7 +628,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 190916792}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.52, y: 0.49, z: -5.06}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1876998401}
@@ -672,6 +673,21 @@ PlayableDirector:
     value: {fileID: 190916795}
   m_ExposedReferences:
     m_References: []
+--- !u!114 &190916797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190916792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1103310394}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FocusTracksTarget: 0
+  m_FocusOffset: 0
+  m_Profile: {fileID: 0}
 --- !u!1001 &222458810
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2403,7 +2419,7 @@ PrefabInstance:
     - target: {fileID: 4810181012153414076, guid: df0cb40ff40f9d040b7d5670937b21a3,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 259376843090518274, guid: df0cb40ff40f9d040b7d5670937b21a3,
         type: 3}
@@ -2991,6 +3007,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29a40903233920342810d2e5a7be0d4b, type: 3}
+--- !u!115 &1103310394
+MonoScript:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 5
+  m_Script: 
+  m_DefaultReferences: {}
+  m_Icon: {fileID: 0}
+  m_ExecutionOrder: 0
+  m_ClassName: CinemachinePostProcessing
+  m_Namespace: Cinemachine.PostFX
 --- !u!1 &1137047228
 GameObject:
   m_ObjectHideFlags: 0
@@ -4012,7 +4042,7 @@ MonoBehaviour:
   m_XAxis:
     Value: 0
     m_MaxSpeed: 300
-    m_AccelTime: 0.1
+    m_AccelTime: 0.5
     m_DecelTime: 0.1
     m_InputAxisName: Mouse X
     m_InputAxisValue: 0
@@ -4421,12 +4451,12 @@ PrefabInstance:
     - target: {fileID: 5972615590450833164, guid: 4e76b7d45b085e440a555c42289897b9,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000015852132
+      value: 0.000000015852127
       objectReference: {fileID: 0}
     - target: {fileID: 5972615590450833164, guid: 4e76b7d45b085e440a555c42289897b9,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000066910113
+      value: -0.0000000066910073
       objectReference: {fileID: 0}
     - target: {fileID: 5972615590450833164, guid: 4e76b7d45b085e440a555c42289897b9,
         type: 3}
@@ -4685,6 +4715,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 19c4e000b50a1274693be77afb3b7bbb,
         type: 2}
+    - target: {fileID: 771227568, guid: ce93dae90c32b234eb5aa37ebcaa5582, type: 3}
+      propertyPath: Event
+      value: 
+      objectReference: {fileID: 11400000, guid: 4cf9a708d5633f04bbbc56776410d56d,
+        type: 2}
+    - target: {fileID: 771227568, guid: ce93dae90c32b234eb5aa37ebcaa5582, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce93dae90c32b234eb5aa37ebcaa5582, type: 3}
 --- !u!1001 &6311877561933221950
@@ -4856,12 +4895,12 @@ PrefabInstance:
     - target: {fileID: 7758408714953450980, guid: 1d1aaeda9d7a5bf42af0e13c8162ee86,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000015852132
+      value: 0.000000015852127
       objectReference: {fileID: 0}
     - target: {fileID: 7758408714953450980, guid: 1d1aaeda9d7a5bf42af0e13c8162ee86,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000066910113
+      value: -0.0000000066910073
       objectReference: {fileID: 0}
     - target: {fileID: 7758408714953450980, guid: 1d1aaeda9d7a5bf42af0e13c8162ee86,
         type: 3}
