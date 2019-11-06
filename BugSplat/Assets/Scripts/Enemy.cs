@@ -33,6 +33,7 @@ public abstract class Enemy : GameLoop
     private GradientMode _gradientMode;
     private GradientColorKey[] _colorKey;
     private GradientAlphaKey[] _alphaKey;
+    private bool _updateHealth;
 
 
 
@@ -165,6 +166,10 @@ public abstract class Enemy : GameLoop
 
         _currentHealthColor = _gradient.Evaluate(1f);
 
+        InitStyles();
+
+        _updateHealth = true;
+
     }
 
     private void OnDisable()
@@ -200,6 +205,9 @@ public abstract class Enemy : GameLoop
 
             _showHealthBar = true;
 
+        } else
+        {
+            _showHealthBar = false;
         }
 
         if (CurrentEnemySO.Value == null)
@@ -252,6 +260,7 @@ public abstract class Enemy : GameLoop
         float percOfInitialHealth = hitPoints / _initialHealth;
         _currentHealthColor = _gradient.Evaluate(percOfInitialHealth);
         _newHealthBarWidth = (HealthBarWidth / _initialHealth) * hitPoints;
+        _updateHealth = true;
     }
 
     private void UpdateBarPos()
@@ -264,7 +273,7 @@ public abstract class Enemy : GameLoop
         InitStyles();
         UpdateBarPos();
 
-        if (_showHealthBar)
+        if (_showHealthBar == true)
         {
             GUI.Box(new Rect(_currentHealthPos.x + HealthBarOffsetX, Screen.height - _currentHealthPos.y + HealthBarOffsetY, _newHealthBarWidth, HealthBarHeight), "", currentStyle);
         }
@@ -272,8 +281,13 @@ public abstract class Enemy : GameLoop
 
     private void InitStyles()
     {
-        currentStyle = new GUIStyle(GUI.skin.box);
-        currentStyle.normal.background = MakeTex(2, 2, _currentHealthColor);
+        if (_updateHealth)
+        {
+            currentStyle = new GUIStyle(GUI.skin.box);
+            currentStyle.normal.background = MakeTex(2, 2, _currentHealthColor);
+
+            _updateHealth = false;
+        }
     }
 
     private Texture2D MakeTex(int width, int height, Color col)

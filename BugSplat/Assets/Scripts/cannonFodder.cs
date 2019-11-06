@@ -47,7 +47,7 @@ public class cannonFodder : Enemy
         
         Renderer = Graphics.GetComponent<Renderer>();
 
-        _currentHealth = MaxHealth;
+        _currentHealth = stats.HitPoints;
 
         Initialize(_currentHealth);
 
