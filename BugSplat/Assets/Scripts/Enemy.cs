@@ -22,12 +22,15 @@ public abstract class Enemy : GameLoop
     public float HealthBarOffsetY = -200f;
     private bool _showHealthBar;
     private float _initialHealth;
-    private Color _maxHealthColor = new Color(0f, 1f, 0f);
-    private Color _lowHealthColor = new Color(1f, 0f, 0f);
+    //private Color _maxHealthColor = new Color(0f, 1f, 0f);
+    //private Color _lowHealthColor = new Color(1f, 0f, 0f);
     private float _newHealthBarWidth;
     private Vector2 _currentHealthPos;
     private Color _currentHealthColor;
-
+    private Gradient _gradient = new Gradient();
+    private GradientMode _gradientMode;
+    private GradientColorKey[] _colorKey;
+    private GradientAlphaKey[] _alphaKey;
 
     private void OnEnable()
     {
@@ -42,8 +45,36 @@ public abstract class Enemy : GameLoop
     public void Initialize(float hitPoints)
     {
         _initialHealth = hitPoints;
-        _currentHealthColor = _maxHealthColor;
         _newHealthBarWidth = (HealthBarWidth / _initialHealth) * hitPoints;
+
+        // Populate the color keys at the relative time 0 and 1 (0 and 100%)
+        _colorKey = new GradientColorKey[4];
+        _colorKey[0].color = Color.red;
+        _colorKey[0].time = 0.0f;
+        _colorKey[1].color = Color.red;
+        _colorKey[1].time = 0.33f;
+        _colorKey[2].color = Color.yellow;
+        _colorKey[2].time = 0.66f;
+        _colorKey[3].color = Color.green;
+        _colorKey[3].time = 1.0f;
+
+        // Populate the alpha  keys at relative time 0 and 1  (0 and 100%)
+        _alphaKey = new GradientAlphaKey[4];
+        _alphaKey[0].alpha = 0.5f;
+        _alphaKey[0].time = 0.0f;
+        _alphaKey[1].alpha = 0.5f;
+        _alphaKey[1].time = 0.33f;
+        _alphaKey[2].alpha = 0.5f;
+        _alphaKey[2].time = 0.66f;
+        _alphaKey[3].alpha = 0.5f;
+        _alphaKey[3].time = 1.0f;
+
+        _gradient.SetKeys(_colorKey, _alphaKey);
+        _gradientMode = GradientMode.Fixed;
+        _gradient.mode = _gradientMode;
+
+        _currentHealthColor = _gradient.Evaluate(1f);
+
     }
 
     private void OnDisable()
@@ -130,7 +161,7 @@ public abstract class Enemy : GameLoop
     public void UpdateHealthBar(float hitPoints)
     {
         float percOfInitialHealth = hitPoints / _initialHealth;
-        _currentHealthColor = Color.Lerp(_lowHealthColor, _maxHealthColor, percOfInitialHealth);
+        _currentHealthColor = _gradient.Evaluate(percOfInitialHealth);
         _newHealthBarWidth = (HealthBarWidth / _initialHealth) * hitPoints;
         _showHealthBar = true;
     }
