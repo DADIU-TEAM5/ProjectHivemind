@@ -132,7 +132,7 @@ public class AttackScript : GameLoop
 
     private void LockOnToNearestTarget()
     {
-        if (LockedTarget.Value == null) { 
+        
             Collider[] potentialTargets = Physics.OverlapSphere(PlayerGraphics.position, AutoAttackRange.Value, LayerMask.GetMask("Enemy"));
 
             int targetIndex = -1;
@@ -169,13 +169,15 @@ public class AttackScript : GameLoop
 
                 CurrentEnemySO.Value = potentialTargets[targetIndex].gameObject;
             } 
-            else {
+            else
+            {
                 _lockedOntoTarget = false;
                 _nearstTarget = Vector3.zero;
                 CurrentEnemySO.Value = null;
             }
-        } 
-        else {
+
+        if (LockedTarget.Value != null)
+        {
             _lockedOntoTarget = true;
             _nearstTarget = LockedTarget.Value.transform.position;
 

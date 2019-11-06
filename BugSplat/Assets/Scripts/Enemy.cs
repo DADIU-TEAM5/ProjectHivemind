@@ -22,8 +22,6 @@ public abstract class Enemy : GameLoop
     public float HealthBarOffsetY = -200f;
     private bool _showHealthBar;
     private float _initialHealth;
-    //private Color _maxHealthColor = new Color(0f, 1f, 0f);
-    //private Color _lowHealthColor = new Color(1f, 0f, 0f);
     private float _newHealthBarWidth;
     private Vector2 _currentHealthPos;
     private Color _currentHealthColor;
@@ -93,8 +91,6 @@ public abstract class Enemy : GameLoop
                 Destroy(CurrentEnemyGraphic.Value.GetComponent<MeshCollider>());
                 CurrentEnemyGraphic.Value.transform.rotation = Quaternion.Euler(90, 0, 0);
                 CurrentEnemyGraphic.Value.GetComponent<Renderer>().material.color = Color.green;
-
-
             }
             else
             {
@@ -113,10 +109,6 @@ public abstract class Enemy : GameLoop
             _showHealthBar = true;
 
         }
-        else
-        {
-            _showHealthBar = false;
-        }
 
         if (CurrentEnemySO.Value == null)
         {
@@ -133,8 +125,6 @@ public abstract class Enemy : GameLoop
                 Destroy(TargetGraphic.Value.GetComponent<MeshCollider>());
                 TargetGraphic.Value.transform.rotation = Quaternion.Euler(90, 0, 0);
                 TargetGraphic.Value.GetComponent<Renderer>().material.color = Color.red;
-
-
             }
             else
             {
@@ -149,12 +139,19 @@ public abstract class Enemy : GameLoop
                 TargetGraphic.Value.SetActive(false);
                 LockedTarget.Value = null;
             }
+
+            _showHealthBar = true;
         }
 
         if (LockedTarget.Value == null)
         {
             if(TargetGraphic.Value != null)
             TargetGraphic.Value.SetActive(false);
+        }
+
+        if (CurrentEnemySO.Value != gameObject && LockedTarget.Value != gameObject)
+        {
+            _showHealthBar = false;
         }
     }
 
@@ -163,7 +160,6 @@ public abstract class Enemy : GameLoop
         float percOfInitialHealth = hitPoints / _initialHealth;
         _currentHealthColor = _gradient.Evaluate(percOfInitialHealth);
         _newHealthBarWidth = (HealthBarWidth / _initialHealth) * hitPoints;
-        _showHealthBar = true;
     }
 
     private void UpdateBarPos()
