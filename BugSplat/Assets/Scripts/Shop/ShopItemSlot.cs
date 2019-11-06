@@ -12,26 +12,19 @@ public class ShopItemSlot : ShopSlot
     public Inventory PlayerInventory;
 
     [SerializeField]
-    private ItemObject Item;
+    private Item Item;
 
 
     public override void OnPurchase()
     {
         if (Item == null) return;
+
         if(PlayerInventory== null)
         {
             Debug.LogError("No Refference to player inventory!");
         }
 
-        if (PlayerInventory.AddItem(Item))
-            // Remove item   
-            Item = null;
-        else
-        {
-            Debug.LogError("Player did not add item from shop!");
-        }
-         
-
+        PlayerInventory.AddItem(Item);
     }
 
     public void GetItemFromItemPool()
@@ -48,7 +41,7 @@ public class ShopItemSlot : ShopSlot
         Item = decidedItem;
     }
 
-    public ItemObject GetItem() => Item;
+    public Item GetItem() => Item;
 
     void OnDisable()
     {
@@ -58,9 +51,9 @@ public class ShopItemSlot : ShopSlot
         }
     }
 
-    public override Sprite GetSprite() => Item?.Icon;
+    public override Sprite GetSprite() => Item?.Info?.Icon;
 
-    public override int GetPrice() => Item?.Price ?? 0;
+    public override int GetPrice() => Item?.Info?.Price ?? 0;
 
     public override void Init()
     {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+/* 
 [CustomEditor(typeof(ItemManager))]
 [CanEditMultipleObjects]
 public class ItemManagerEditor : Editor
@@ -91,5 +92,7 @@ public class ItemManagerEditor : Editor
 
 
     }
+
 }
+    */
 
