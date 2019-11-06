@@ -7,7 +7,7 @@ public class ItemInvoker : MonoBehaviour
 {
     public Inventory Inventory;
 
-    public EffectType StatChange;
+    public EffectType CurrentEffectType;
 
     private Dictionary<EffectType, List<Effect>> Effects;
 
@@ -17,6 +17,12 @@ public class ItemInvoker : MonoBehaviour
 
     public void Start() {
        LoadInventory(); 
+    }
+
+    public void SetCurrentEffectType(EffectType type) {
+        if (Effects.ContainsKey(type)) {
+            CurrentEffectType = type;
+        }
     }
 
     private void LoadInventory() {
@@ -35,13 +41,11 @@ public class ItemInvoker : MonoBehaviour
         }
     }
 
-    public void TriggerEffects(EffectType type) {
-        if (!Effects.ContainsKey(type)) return;
-
-        var effects = Effects[type];
+    public void TriggerEffects(GameObject target) {
+        var effects = Effects[CurrentEffectType];
 
         foreach (var effect in effects) {
-            effect.Trigger();
+            effect.Trigger(target);
         }
     }
 }
