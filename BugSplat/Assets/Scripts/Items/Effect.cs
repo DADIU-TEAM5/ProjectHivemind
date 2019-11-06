@@ -7,4 +7,5 @@ public abstract class Effect : ScriptableObject
     public EffectType EffectType;
 
     public abstract void Trigger(GameObject target = null);
+    public abstract void Init();
 }

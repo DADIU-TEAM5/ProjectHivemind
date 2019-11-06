@@ -7,6 +7,10 @@ public class DamageEnemyEffect : Effect
 {
     public float AmountOfDamage;
 
+    public override void Init()
+    {
+    }
+
     public override void Trigger(GameObject target = null)
     {
         var enemy = target?.GetComponent<Enemy>();
