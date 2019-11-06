@@ -11,6 +11,7 @@ public class SceneButton : MonoBehaviour
     private string _toggleValue;
     public GameObjectList EnemyList;
     public GameObjectVariable HexMapParent;
+    public int FontSize;
 
 
     public void Setup(StringVariable sceneName)
@@ -55,6 +56,8 @@ public class SceneButton : MonoBehaviour
 
 
             ButtonText.text = "load "+SceneName;
+
+            ButtonText.fontSize = FontSize;
 
         }
         else

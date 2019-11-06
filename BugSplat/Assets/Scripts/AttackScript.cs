@@ -176,7 +176,7 @@ public class AttackScript : GameLoop
                 CurrentEnemySO.Value = null;
             }
 
-        if (LockedTarget.Value != null)
+        /*if (LockedTarget.Value != null)
         {
             _lockedOntoTarget = true;
             _nearstTarget = LockedTarget.Value.transform.position;
@@ -186,7 +186,7 @@ public class AttackScript : GameLoop
 
 
             _directionToNearstTarget = _nearstTarget - PlayerGraphics.position;
-        }
+        }*/
     }
 
     private IEnumerator StartAttackCooldown()
