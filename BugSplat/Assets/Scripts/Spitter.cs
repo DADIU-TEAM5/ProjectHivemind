@@ -126,7 +126,7 @@ public class Spitter : Enemy
 
         _navMeshAgent.obstacleAvoidanceType =ObstacleAvoidanceType.NoObstacleAvoidance;
 
-        BurrowEvent.Raise();        
+        BurrowEvent.Raise(gameObject);        
        
     }
     public void Emerge()
@@ -135,7 +135,7 @@ public class Spitter : Enemy
         _underground = false;
         _navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
 
-        EmergeEvent.Raise();
+        EmergeEvent.Raise(this.gameObject);
     }
 
 
@@ -325,7 +325,7 @@ public class Spitter : Enemy
             {
                 if (hit.collider.gameObject.layer == 9)
                 {
-                    AggroEvent.Raise(this.gameObject);
+                    AggroEvent.Raise(gameObject);
                     _playerDetected = true;
                     _playerTransform = potentialTargets[0].gameObject.transform;
 
