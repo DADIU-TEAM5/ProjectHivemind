@@ -69,6 +69,8 @@ public class TankBeetle : Enemy
 
         _navMeshAgent.speed = stats.MoveSpeed;
 
+        _coneRenderer.material.color = Color.red;
+
     }
 
     public override void TakeDamage(float damage)

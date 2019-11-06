@@ -184,6 +184,9 @@ public class Boomer : Enemy
             _cone.SetActive(true);
             
         }
+
+        _coneRenderer.material.color = Color.Lerp(Color.green, Color.red, _attackCharge / stats.AttackChargeUpTime);
+
         drawCone(20);
         _attacking = true;
         _attackCharge += Time.deltaTime;
