@@ -5,6 +5,10 @@ using UnityEngine.AI;
 
 public class Boomer : Enemy
 {
+
+    public AnimationCurve AttackCurve;
+    public Material AttackMaterial;
+
     public GameObject Graphics;
 
     public GameObject bodyPart;
@@ -24,7 +28,11 @@ public class Boomer : Enemy
 
     private Renderer _renderer;
     private GameObject _cone;
-    private LineRenderer _coneRenderer;
+    private MeshRenderer _coneRenderer;
+    private Mesh _coneMesh;
+    private GameObject _outline;
+    private MeshRenderer _outlineRenderer;
+    private Mesh _outlineMesh;
 
     Color _startColor;
 
@@ -45,20 +53,71 @@ public class Boomer : Enemy
         _currentHealth = stats.HitPoints;
         _renderer = Graphics.GetComponent<Renderer>();
 
+        
         Initialize(_currentHealth);
+        CreateCone();
+        CreateOutline();
 
-        _cone = new GameObject();
-        _cone.AddComponent<LineRenderer>();
-        _coneRenderer = _cone.GetComponent<LineRenderer>();
-        _cone.SetActive(false);
-        _cone.transform.parent = transform;
+        _coneRenderer.material = AttackMaterial;
+        _outlineRenderer.material = AttackMaterial;
 
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _navMeshAgent.speed = stats.MoveSpeed;
 
+
+        _outlineRenderer.material.color = new Color(.2f, .2f, .2f, .1f);
+
         _startColor = _renderer.material.color;
 
     }
+
+    void CreateCone()
+    {
+        _cone = new GameObject();
+        _cone.name = "cone";
+        _coneMesh = _cone.AddComponent<MeshFilter>().mesh;
+        _coneRenderer = _cone.AddComponent<MeshRenderer>();
+
+        Vector3 offset = transform.position;
+
+        offset.y = 0.005f;
+        _cone.transform.position = offset;
+
+        _cone.transform.rotation = transform.rotation;
+
+
+        _cone.transform.parent = transform;
+        _cone.SetActive(false);
+
+
+
+    }
+    void CreateOutline()
+    {
+        _outline = new GameObject();
+        _outline.name = "outline";
+        _outlineMesh = _outline.AddComponent<MeshFilter>().mesh;
+        _outlineRenderer = _outline.AddComponent<MeshRenderer>();
+
+
+
+        //_outlineRenderer.material.color = new Color(.01f, .01f, .01f, .01f);
+
+        Vector3 offset = transform.position;
+
+        offset.y = 0;
+        _outline.transform.position = offset;
+
+        _outline.transform.rotation = transform.rotation;
+
+        _outline.transform.parent = transform;
+
+        _outline.SetActive(false);
+
+
+    }
+
+
 
     public override bool IsVisible()
     {
@@ -135,22 +194,85 @@ public class Boomer : Enemy
 
     public override void LoopLateUpdate(float deltaTime) { }
 
-    void drawCone(int points)
+    int[] _triangles = { };
+    Vector3[] _normals = { };
+
+
+    void drawCone(int points, Mesh mesh, bool constant)
     {
-        Vector3[] pointsForTheCone = new Vector3[points];
-        _coneRenderer.positionCount = points;
+        if (_triangles.Length != points)
+        {
+            _triangles = new int[points * 3+3 ];
 
-        //pointsForTheCone[0] = transform.position;
+            int triangleIndex = 0;
 
-        Vector3 vectorToRotate = transform.forward * stats.AttackRange;
+            for (int i = 0; i < points; i++)
+            {
+                if (i != points - 1)
+                {
+
+
+
+                    _triangles[triangleIndex] = 0;
+
+                    _triangles[triangleIndex + 2] = i;
+                    _triangles[triangleIndex + 1] = i + 1;
+
+
+
+                }
+
+                triangleIndex += 3;
+            }
+
+            _triangles[triangleIndex] = 0;
+
+            _triangles[triangleIndex + 2] = points-1;
+            _triangles[triangleIndex + 1] = 1;
+
+
+        }
+
+        if (_normals.Length != points)
+        {
+
+            _normals = new Vector3[points];
+
+            for (int i = 0; i < points; i++)
+            {
+                _normals[i] = Vector3.up;
+            }
+        }
+
+
+
+
+        Vector3[] vertices = new Vector3[points];
+
+
+
+
+
+
+        vertices[0] = Vector3.zero;
+
+
+        Vector3 vectorToRotate;
+        if (constant)
+            vectorToRotate = Vector3.forward * stats.AttackRange;
+        else
+            vectorToRotate = Vector3.forward * (stats.AttackRange * AttackCurve.Evaluate(_attackCharge / stats.AttackChargeUpTime));
+
         Vector3 rotatedVector = Vector3.zero;
 
         float stepSize = 1f / ((float)points - 1);
         int step = 0;
 
-        for (int i = 0; i < points; i++)
+
+
+        for (int i = 1; i < points; i++)
         {
-            float angle = Mathf.Lerp(0, 360, step * stepSize);
+            float angle = Mathf.Lerp(-180, 180, step * stepSize);
 
 
 
@@ -162,14 +284,22 @@ public class Boomer : Enemy
             rotatedVector.x = vectorToRotate.x * c - vectorToRotate.z * s;
             rotatedVector.z = vectorToRotate.x * s + vectorToRotate.z * c;
 
-            pointsForTheCone[i] = transform.position + rotatedVector;
+            vertices[i] = rotatedVector;
             step++;
         }
 
-        _coneRenderer.SetPositions(pointsForTheCone);
-        _coneRenderer.widthMultiplier = 0.1f;
+        mesh.vertices = vertices;
 
-        _coneRenderer.loop = true;
+        if (mesh.triangles != _triangles)
+            mesh.triangles = _triangles;
+
+        if (mesh.normals != _normals)
+            mesh.normals = _normals;
+
+
+
+
+
     }
     void Attack()
     {
@@ -185,12 +315,14 @@ public class Boomer : Enemy
             transform.LookAt(adjustedPlayerPos);
 
             _cone.SetActive(true);
-            
+            _outline.SetActive(true);
+            drawCone(20, _outlineMesh, true);
+
         }
 
         _coneRenderer.material.color = Color.Lerp(Color.green, Color.red, _attackCharge / stats.AttackChargeUpTime);
 
-        drawCone(20);
+        drawCone(20,_coneMesh,false);
         _attacking = true;
         _attackCharge += Time.deltaTime;
 
@@ -238,6 +370,7 @@ public class Boomer : Enemy
             _attacking = false;
             _attackCharge = 0;
             _cone.SetActive(false);
+            _outline.SetActive(false);
             _navMeshAgent.speed = stats.MoveSpeed;
         }
 

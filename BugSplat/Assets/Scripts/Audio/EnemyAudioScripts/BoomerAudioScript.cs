@@ -10,11 +10,17 @@ public class BoomerAudioScript : MonoBehaviour
     public AK.Wwise.Event ScaredScream;
     public AK.Wwise.Event DeathSplat;
     public AK.Wwise.Event BoomerAttack;
+    public AK.Wwise.Event Detect;
 
 
     public void FootstepEvent(GameObject source)
     {
         FootStep.Post(source);
+    }
+
+    public void DetectEvent(GameObject source)
+    {
+        Detect.Post(source);
     }
 
     public void AttackEvent(GameObject source)

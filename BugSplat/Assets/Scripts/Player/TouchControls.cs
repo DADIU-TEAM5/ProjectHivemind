@@ -19,7 +19,6 @@ public class TouchControls : GameLoop
     public FloatVariable InputSwipeThresholdSO; // Percentage of the screen width
 
     public GameObjectVariable LockedTarget;
-    public Camera PlayerCam;
     public GameObject UICanvas;
     public RectTransform UIMenuButton;
     private bool _uiActivated = false;
@@ -261,6 +260,7 @@ public class TouchControls : GameLoop
 
             if (endTime < InputSwipeTapTimeSO.Value)
             {
+                /*
                 Ray ray = Camera.main.ScreenPointToRay(touchPosition);
                 RaycastHit hit;
 
@@ -273,6 +273,7 @@ public class TouchControls : GameLoop
                     LockedTarget.Value = hit.collider.gameObject;
 
                 }
+                */
 
                 //DebugText.text = "ATTACKED!";
                 AttackInitiatedSO.Raise(this.gameObject);
