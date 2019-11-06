@@ -260,6 +260,7 @@ public class TouchControls : GameLoop
 
             if (endTime < InputSwipeTapTimeSO.Value)
             {
+                /*
                 Ray ray = Camera.main.ScreenPointToRay(touchPosition);
                 RaycastHit hit;
 
@@ -272,6 +273,7 @@ public class TouchControls : GameLoop
                     LockedTarget.Value = hit.collider.gameObject;
 
                 }
+                */
 
                 //DebugText.text = "ATTACKED!";
                 AttackInitiatedSO.Raise(this.gameObject);
