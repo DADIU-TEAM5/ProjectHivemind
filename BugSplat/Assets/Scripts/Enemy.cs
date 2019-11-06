@@ -5,6 +5,10 @@ using UnityEngine;
 public abstract class Enemy : GameLoop
 {
     public float difficultyValue = 1;
+    public AnimationCurve AttackCurve;
+
+    public Material ConeMaterial;
+
 
     public GameObjectList EnemyList;
     public GameObjectVariable LockedTarget;
@@ -30,15 +34,103 @@ public abstract class Enemy : GameLoop
     private GradientColorKey[] _colorKey;
     private GradientAlphaKey[] _alphaKey;
 
+
+
+
+    public Renderer Renderer;
+    public GameObject Cone;
+    public MeshRenderer ConeRenderer;
+    public Mesh ConeMesh;
+    public GameObject Outline;
+    public MeshRenderer OutlineRenderer;
+    public Mesh OutlineMesh;
+
+    public float AttackAngle;
+    public float AttackChargeUpTime;
+    public float SpotDistance;
+    public float AttackRange;
+
+    public GameEvent AggroEvent;
+    public bool _playerDetected;
+    public Transform _playerTransform;
+    public bool _isAlly;
+
+
+    public float _currentHealth;
+    public float MaxHealth;
+
+
+
     private void OnEnable()
     {
         //Debug.Log(name + " spawned");
         EnemyList.Add(gameObject);
+
+        
+
+
+        CreateCone();
+        CreateOutline();
+        ConeRenderer.material = ConeMaterial;
+        OutlineRenderer.material = ConeMaterial;
+
+        OutlineRenderer.material.color = new Color(.2f, .2f, .2f, .1f);
+
     }
 
     public abstract bool IsVisible();
 
     public abstract void TakeDamage(float damage);
+
+
+
+    void CreateCone()
+    {
+        Cone = new GameObject();
+        Cone.name = "cone";
+        ConeMesh = Cone.AddComponent<MeshFilter>().mesh;
+        ConeRenderer = Cone.AddComponent<MeshRenderer>();
+
+        Vector3 offset = transform.position;
+
+        offset.y = 0.005f;
+        Cone.transform.position = offset;
+
+        Cone.transform.rotation = transform.rotation;
+
+
+        Cone.transform.parent = transform;
+        Cone.SetActive(false);
+
+
+
+    }
+    void CreateOutline()
+    {
+        Outline = new GameObject();
+        Outline.name = "outline";
+        OutlineMesh = Outline.AddComponent<MeshFilter>().mesh;
+        OutlineRenderer = Outline.AddComponent<MeshRenderer>();
+
+
+
+        //_outlineRenderer.material.color = new Color(.01f, .01f, .01f, .01f);
+
+        Vector3 offset = transform.position;
+
+        offset.y = 0;
+        Outline.transform.position = offset;
+
+        Outline.transform.rotation = transform.rotation;
+
+        Outline.transform.parent = transform;
+
+        Outline.SetActive(false);
+
+
+    }
+
+
 
     public void Initialize(float hitPoints)
     {
@@ -196,4 +288,159 @@ public abstract class Enemy : GameLoop
         result.Apply();
         return result;
     }
+
+
+    int[] _triangles = { };
+    Vector3[] _normals = { };
+
+
+    public void DrawCone(int points, Mesh mesh, bool constant,float attackCharge)
+    {
+        if (_triangles.Length != points)
+        {
+            _triangles = new int[points * 3 + 3];
+
+            int triangleIndex = 0;
+
+            for (int i = 0; i < points; i++)
+            {
+                if (i != points - 1)
+                {
+
+
+
+                    _triangles[triangleIndex] = 0;
+
+                    _triangles[triangleIndex + 2] = i;
+                    _triangles[triangleIndex + 1] = i + 1;
+
+
+
+                }
+
+                triangleIndex += 3;
+            }
+
+            _triangles[triangleIndex] = 0;
+
+            _triangles[triangleIndex + 2] = points - 1;
+            _triangles[triangleIndex + 1] = 1;
+
+        }
+
+        if (_normals.Length != points)
+        {
+
+            _normals = new Vector3[points];
+
+            for (int i = 0; i < points; i++)
+            {
+                _normals[i] = Vector3.up;
+            }
+        }
+
+
+
+
+        Vector3[] vertices = new Vector3[points];
+
+
+
+
+
+
+        vertices[0] = Vector3.zero;
+
+
+        Vector3 vectorToRotate;
+        if (constant)
+            vectorToRotate = Vector3.forward * AttackRange;
+        else
+            vectorToRotate = Vector3.forward * (AttackRange * AttackCurve.Evaluate(attackCharge / AttackChargeUpTime));
+
+        Vector3 rotatedVector = Vector3.zero;
+
+        float stepSize = 1f / ((float)points - 1);
+        int step = 0;
+
+
+
+        for (int i = 1; i < points; i++)
+        {
+            float angle = Mathf.Lerp(-AttackAngle, AttackAngle, step * stepSize);
+
+
+
+            angle = angle * Mathf.Deg2Rad;
+
+            float s = Mathf.Sin(angle);
+            float c = Mathf.Cos(angle);
+
+            rotatedVector.x = vectorToRotate.x * c - vectorToRotate.z * s;
+            rotatedVector.z = vectorToRotate.x * s + vectorToRotate.z * c;
+
+            vertices[i] = rotatedVector;
+            step++;
+        }
+
+        mesh.vertices = vertices;
+
+        if (mesh.triangles != _triangles)
+            mesh.triangles = _triangles;
+
+        if (mesh.normals != _normals)
+            mesh.normals = _normals;
+
+
+
+
+
+    }
+
+
+
+    public void DetectThePlayer()
+    {
+        Collider[] potentialTargets = Physics.OverlapSphere(transform.position, SpotDistance, LayerMask.GetMask("Player"));
+        RaycastHit hit;
+
+        if (potentialTargets.Length > 0)
+        {
+            if (Physics.Raycast(transform.position, potentialTargets[0].transform.position - transform.position, out hit, 10))
+            {
+                if (hit.collider.gameObject.layer == 9)
+                {
+                    AggroEvent.Raise(this.gameObject);
+                    _playerDetected = true;
+                    _playerTransform = potentialTargets[0].gameObject.transform;
+
+                    _isAlly = true;
+
+                    DetectAllies();
+                }
+            }
+        }
+    }
+
+    void DetectAllies()
+    {
+        Collider[] potentialAllies = Physics.OverlapSphere(transform.position, SpotDistance, LayerMask.GetMask("Enemy"));
+
+        if (potentialAllies.Length > 0)
+        {
+            for (int i = 0; i < potentialAllies.Length; i++)
+            {
+                Enemy allyTransform = potentialAllies[i].gameObject.GetComponent<Enemy>();
+                if (!allyTransform?._isAlly ?? false)
+                {
+                    allyTransform._playerDetected = true;
+                    allyTransform._playerTransform = _playerTransform;
+                    allyTransform._isAlly = true;
+                    allyTransform.DetectAllies();
+                }
+            }
+        }
+    }
+
+
 }

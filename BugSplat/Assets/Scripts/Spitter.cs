@@ -12,14 +12,14 @@ public class Spitter : Enemy
     public ParticleSystem Spit;
 
 
-    bool _playerDetected;
-    bool _isAlly;
+    
+    
     public SpitterStats stats;
-    Transform _playerTransform;
+    
     bool _attacking;
     float _attackCharge;
 
-    float _currentHealth;
+    
 
     float _attackCooldown = 0;
 
@@ -39,7 +39,7 @@ public class Spitter : Enemy
     Color _startColor;
     [Header("Events")]
     public GameEvent TakeDamageEvent;
-    public GameEvent AggroEvent;
+    
     public GameEvent AttackEvent;
     public GameEvent DeathEvent;
     public GameEvent AttackChargingEvent;
@@ -70,6 +70,17 @@ public class Spitter : Enemy
         _startColor = _renderer.material.color;
         Burrow();
 
+        SetupVars();
+
+    }
+
+    void SetupVars()
+    {
+        
+        AttackChargeUpTime = stats.AttackChargeUpTime;
+        SpotDistance = stats.SpotDistance;
+
+        AttackRange = stats.AttackRange;
     }
 
     public override bool IsVisible()
@@ -313,26 +324,5 @@ public class Spitter : Enemy
         }
     }
 
-    void DetectThePlayer()
-    {
-        Collider[] potentialTargets = Physics.OverlapSphere(transform.position, stats.SpotDistance, LayerMask.GetMask("Player"));
-        RaycastHit hit;
-
-        if (potentialTargets.Length > 0)
-        {
-            if (Physics.Raycast(transform.position, potentialTargets[0].transform.position - transform.position, out hit, 10))
-            {
-                if (hit.collider.gameObject.layer == 9)
-                {
-                    AggroEvent.Raise(gameObject);
-                    _playerDetected = true;
-                    _playerTransform = potentialTargets[0].gameObject.transform;
-
-                    _isAlly = true;
-
-                    
-                }
-            }
-        }
-    }
+    
 }

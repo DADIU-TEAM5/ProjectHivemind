@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class Boomer : Enemy
 {
 
-    public AnimationCurve AttackCurve;
+    
     public Material AttackMaterial;
 
     public GameObject Graphics;
@@ -15,30 +15,22 @@ public class Boomer : Enemy
 
     public BoomerStats stats;
 
-    private bool _playerDetected;
     
-    private Transform _playerTransform;
     private bool _attacking;
     private float _attackCharge;
     private float _attackCooldown = 0;
 
-    private float _currentHealth;
+    
 
     private NavMeshAgent _navMeshAgent;
 
-    private Renderer _renderer;
-    private GameObject _cone;
-    private MeshRenderer _coneRenderer;
-    private Mesh _coneMesh;
-    private GameObject _outline;
-    private MeshRenderer _outlineRenderer;
-    private Mesh _outlineMesh;
+    
 
     Color _startColor;
 
     [Header("Events")]
     public GameEvent TakeDamageEvent;
-    public GameEvent AggroEvent;
+    
     public GameEvent AttackEvent;
     public GameEvent DeathEvent;
     public GameEvent AttackChargingEvent;
@@ -51,53 +43,64 @@ public class Boomer : Enemy
     public void Start()
     {
         _currentHealth = stats.HitPoints;
-        _renderer = Graphics.GetComponent<Renderer>();
+        Renderer = Graphics.GetComponent<Renderer>();
 
         
         Initialize(_currentHealth);
         CreateCone();
         CreateOutline();
 
-        _coneRenderer.material = AttackMaterial;
-        _outlineRenderer.material = AttackMaterial;
+        ConeRenderer.material = AttackMaterial;
+        OutlineRenderer.material = AttackMaterial;
 
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _navMeshAgent.speed = stats.MoveSpeed;
 
 
-        _outlineRenderer.material.color = new Color(.2f, .2f, .2f, .1f);
+        OutlineRenderer.material.color = new Color(.2f, .2f, .2f, .1f);
 
-        _startColor = _renderer.material.color;
+        _startColor = Renderer.material.color;
 
+        SetupVars();
+
+    }
+
+    void SetupVars()
+    {
+        AttackAngle = 180;
+        AttackChargeUpTime = stats.AttackChargeUpTime;
+        SpotDistance = stats.SpotDistance;
+
+        AttackRange = stats.AttackRange;
     }
 
     void CreateCone()
     {
-        _cone = new GameObject();
-        _cone.name = "cone";
-        _coneMesh = _cone.AddComponent<MeshFilter>().mesh;
-        _coneRenderer = _cone.AddComponent<MeshRenderer>();
+        Cone = new GameObject();
+        Cone.name = "cone";
+        ConeMesh = Cone.AddComponent<MeshFilter>().mesh;
+        ConeRenderer = Cone.AddComponent<MeshRenderer>();
 
         Vector3 offset = transform.position;
 
         offset.y = 0.005f;
-        _cone.transform.position = offset;
+        Cone.transform.position = offset;
 
-        _cone.transform.rotation = transform.rotation;
+        Cone.transform.rotation = transform.rotation;
 
 
-        _cone.transform.parent = transform;
-        _cone.SetActive(false);
+        Cone.transform.parent = transform;
+        Cone.SetActive(false);
 
 
 
     }
     void CreateOutline()
     {
-        _outline = new GameObject();
-        _outline.name = "outline";
-        _outlineMesh = _outline.AddComponent<MeshFilter>().mesh;
-        _outlineRenderer = _outline.AddComponent<MeshRenderer>();
+        Outline = new GameObject();
+        Outline.name = "outline";
+        OutlineMesh = Outline.AddComponent<MeshFilter>().mesh;
+        OutlineRenderer = Outline.AddComponent<MeshRenderer>();
 
 
 
@@ -106,13 +109,13 @@ public class Boomer : Enemy
         Vector3 offset = transform.position;
 
         offset.y = 0;
-        _outline.transform.position = offset;
+        Outline.transform.position = offset;
 
-        _outline.transform.rotation = transform.rotation;
+        Outline.transform.rotation = transform.rotation;
 
-        _outline.transform.parent = transform;
+        Outline.transform.parent = transform;
 
-        _outline.SetActive(false);
+        Outline.SetActive(false);
 
 
     }
@@ -121,12 +124,12 @@ public class Boomer : Enemy
 
     public override bool IsVisible()
     {
-        if(_renderer == null)
+        if(Renderer == null)
         {
-            _renderer = Graphics.GetComponent<Renderer>();
+            Renderer = Graphics.GetComponent<Renderer>();
         }
 
-        return _renderer.isVisible;
+        return Renderer.isVisible;
     }
 
     public override void TakeDamage(float damage)
@@ -149,7 +152,7 @@ public class Boomer : Enemy
             DeathEvent.Raise(gameObject);
             EnemyList.Remove(gameObject);
 
-            Destroy(_cone);
+            Destroy(Cone);
             Destroy(gameObject);
         }
     }
@@ -166,7 +169,7 @@ public class Boomer : Enemy
 
         if (!_playerDetected)
         {
-            _renderer.material.color = SetColor( Color.blue);
+            Renderer.material.color = SetColor( Color.blue);
             DetectThePlayer();
         }
         else if (playerInAttackRange() || _attacking)
@@ -175,132 +178,25 @@ public class Boomer : Enemy
             {
                 
 
-                _renderer.material.color = SetColor(Color.red);
+                Renderer.material.color = SetColor(Color.red);
                 Attack();
             }
             else
             {
-                _renderer.material.color = SetColor(Color.yellow);
+                Renderer.material.color = SetColor(Color.yellow);
             }
                 MoveTowardsThePlayer();
             
         }
         else
         {
-            _renderer.material.color = SetColor(Color.yellow);
+            Renderer.material.color = SetColor(Color.yellow);
             MoveTowardsThePlayer();
         }
     }
 
     public override void LoopLateUpdate(float deltaTime) { }
 
-    int[] _triangles = { };
-    Vector3[] _normals = { };
-
-
-    void drawCone(int points, Mesh mesh, bool constant)
-    {
-        if (_triangles.Length != points)
-        {
-            _triangles = new int[points * 3+3 ];
-
-            int triangleIndex = 0;
-
-            for (int i = 0; i < points; i++)
-            {
-                if (i != points - 1)
-                {
-
-
-
-                    _triangles[triangleIndex] = 0;
-
-                    _triangles[triangleIndex + 2] = i;
-                    _triangles[triangleIndex + 1] = i + 1;
-
-
-
-                }
-
-                triangleIndex += 3;
-            }
-
-            _triangles[triangleIndex] = 0;
-
-            _triangles[triangleIndex + 2] = points-1;
-            _triangles[triangleIndex + 1] = 1;
-
-
-        }
-
-        if (_normals.Length != points)
-        {
-
-            _normals = new Vector3[points];
-
-            for (int i = 0; i < points; i++)
-            {
-                _normals[i] = Vector3.up;
-            }
-        }
-
-
-
-
-        Vector3[] vertices = new Vector3[points];
-
-
-
-
-
-
-        vertices[0] = Vector3.zero;
-
-
-        Vector3 vectorToRotate;
-        if (constant)
-            vectorToRotate = Vector3.forward * stats.AttackRange;
-        else
-            vectorToRotate = Vector3.forward * (stats.AttackRange * AttackCurve.Evaluate(_attackCharge / stats.AttackChargeUpTime));
-
-        Vector3 rotatedVector = Vector3.zero;
-
-        float stepSize = 1f / ((float)points - 1);
-        int step = 0;
-
-
-
-        for (int i = 1; i < points; i++)
-        {
-            float angle = Mathf.Lerp(-180, 180, step * stepSize);
-
-
-
-            angle = angle * Mathf.Deg2Rad;
-
-            float s = Mathf.Sin(angle);
-            float c = Mathf.Cos(angle);
-
-            rotatedVector.x = vectorToRotate.x * c - vectorToRotate.z * s;
-            rotatedVector.z = vectorToRotate.x * s + vectorToRotate.z * c;
-
-            vertices[i] = rotatedVector;
-            step++;
-        }
-
-        mesh.vertices = vertices;
-
-        if (mesh.triangles != _triangles)
-            mesh.triangles = _triangles;
-
-        if (mesh.normals != _normals)
-            mesh.normals = _normals;
-
-
-
-
-
-    }
     void Attack()
     {
         if (_attacking == false)
@@ -314,15 +210,15 @@ public class Boomer : Enemy
 
             transform.LookAt(adjustedPlayerPos);
 
-            _cone.SetActive(true);
-            _outline.SetActive(true);
-            drawCone(20, _outlineMesh, true);
+            Cone.SetActive(true);
+            Outline.SetActive(true);
+            DrawCone(20, OutlineMesh, true,_attackCharge);
 
         }
 
-        _coneRenderer.material.color = Color.Lerp(Color.green, Color.red, _attackCharge / stats.AttackChargeUpTime);
+        ConeRenderer.material.color = Color.Lerp(Color.green, Color.red, _attackCharge / stats.AttackChargeUpTime);
 
-        drawCone(20,_coneMesh,false);
+        DrawCone(20,ConeMesh,false, _attackCharge);
         _attacking = true;
         _attackCharge += Time.deltaTime;
 
@@ -369,8 +265,8 @@ public class Boomer : Enemy
             _attackCooldown = stats.AttackSpeed;
             _attacking = false;
             _attackCharge = 0;
-            _cone.SetActive(false);
-            _outline.SetActive(false);
+            Cone.SetActive(false);
+            Outline.SetActive(false);
             _navMeshAgent.speed = stats.MoveSpeed;
         }
 
@@ -404,28 +300,7 @@ public class Boomer : Enemy
         }
     }
 
-    void DetectThePlayer()
-    {
-        Collider[] potentialTargets = Physics.OverlapSphere(transform.position, stats.SpotDistance, LayerMask.GetMask("Player"));
-        RaycastHit hit;
-
-        if (potentialTargets.Length > 0)
-        {
-            if (Physics.Raycast(transform.position, potentialTargets[0].transform.position - transform.position, out hit, 10))
-            {
-                if (hit.collider.gameObject.layer == 9)
-                {
-                    AggroEvent.Raise(this.gameObject);
-                    _playerDetected = true;
-                    _playerTransform = potentialTargets[0].gameObject.transform;
-
-                    
-
-                    
-                }
-            }
-        }
-    }
+    
 
     
 

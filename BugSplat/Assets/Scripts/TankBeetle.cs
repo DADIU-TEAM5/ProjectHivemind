@@ -7,20 +7,18 @@ public class TankBeetle : Enemy
 
 {
     
-
-    public Material ConeMaterial;
     public GameObject Graphics;
 
     public GameObject bodyPart;
 
-    bool _playerDetected;
-    bool _isAlly;
+   
+    
     public TankStats stats;
-    Transform _playerTransform;
+   
     bool _attacking;
     float _attackCharge;
 
-    float _currentHealth;
+    
 
     float _attackCooldown = 0;
 
@@ -31,18 +29,13 @@ public class TankBeetle : Enemy
 
     
 
-    private GameObject _cone;
-    private MeshRenderer _coneRenderer;
-    private Mesh _coneMesh;
-    private GameObject _outline;
-    private MeshRenderer _outlineRenderer;
-    private Mesh _outlineMesh;
+    
 
     Color _startColor;
 
     [Header("Events")]
     public GameEvent TakeDamageEvent;
-    public GameEvent AggroEvent;
+    
     public GameEvent AttackEvent;
     public GameEvent DeathEvent;
 
@@ -65,55 +58,62 @@ public class TankBeetle : Enemy
         _currentHealth = stats.HitPoints;
         _renderer = Graphics.GetComponent<Renderer>();
 
-        _cone = new GameObject();
+        Cone = new GameObject();
 
         Initialize(_currentHealth);
 
         _navMeshAgent = GetComponent<NavMeshAgent>();
 
 
-        CreateCone();
-        CreateOutline();
-        _coneRenderer.material = ConeMaterial;
-        _outlineRenderer.material = ConeMaterial;
+        
 
-        _outlineRenderer.material.color = new Color(.2f, .2f, .2f, .1f);
+        
 
         _startColor = _renderer.material.color;
 
         _navMeshAgent.speed = stats.MoveSpeed;
 
-        _coneRenderer.material.color = Color.red;
+        ConeRenderer.material.color = Color.red;
 
+        SetupVars();
+
+    }
+
+    void SetupVars()
+    {
+        AttackAngle = stats.AttackAngle;
+
+        SpotDistance = stats.SpotDistance;
+        AttackRange = stats.AttackRange;
     }
 
     void CreateCone()
     {
-        _cone = new GameObject();
-        _cone.name = "cone";
-        _coneMesh = _cone.AddComponent<MeshFilter>().mesh;
-        _coneRenderer = _cone.AddComponent<MeshRenderer>();
+        Cone = new GameObject();
+        Cone.name = "cone";
+        ConeMesh = Cone.AddComponent<MeshFilter>().mesh;
+        ConeRenderer = Cone.AddComponent<MeshRenderer>();
 
         Vector3 offset = transform.position;
 
         offset.y = 0.005f;
-        _cone.transform.position = offset;
+        Cone.transform.position = offset;
 
-        _cone.transform.rotation = transform.rotation;
+        Cone.transform.rotation = transform.rotation;
 
 
-        _cone.transform.parent = transform;
-        _cone.SetActive(false);
+        Cone.transform.parent = transform;
+        Cone.SetActive(false);
 
 
 
     }
     void CreateOutline()
     {
-        _outline = new GameObject();
-        _outline.name = "outline";
-        _outlineMesh = _outline.AddComponent<MeshFilter>().mesh;
-        _outlineRenderer = _outline.AddComponent<MeshRenderer>();
+        Outline = new GameObject();
+        Outline.name = "outline";
+        OutlineMesh = Outline.AddComponent<MeshFilter>().mesh;
+        OutlineRenderer = Outline.AddComponent<MeshRenderer>();
 
 
 
@@ -122,13 +122,13 @@ public class TankBeetle : Enemy
         Vector3 offset = transform.position;
 
         offset.y = 0;
-        _outline.transform.position = offset;
+        Outline.transform.position = offset;
 
-        _outline.transform.rotation = transform.rotation;
+        Outline.transform.rotation = transform.rotation;
 
-        _outline.transform.parent = transform;
+        Outline.transform.parent = transform;
 
-        _outline.SetActive(false);
+        Outline.SetActive(false);
 
 
     }
@@ -154,7 +154,7 @@ public class TankBeetle : Enemy
 
             EnemyList.Remove(gameObject);
 
-            Destroy(_cone);
+            Destroy(Cone);
 
             Destroy(gameObject);
 
@@ -176,8 +176,8 @@ public class TankBeetle : Enemy
         }
         else
         {
-            if (_cone.activeSelf == false)
-                _cone.SetActive(true);
+            if (Cone.activeSelf == false)
+                Cone.SetActive(true);
 
             MoveTowardsThePlayer(deltaTime);
             _renderer.material.color = SetColor(Color.red);
@@ -200,116 +200,11 @@ public class TankBeetle : Enemy
     }
 
 
-    int[] _triangles = { };
-    Vector3[] _normals = { };
-
-
-    void drawCone(int points, Mesh mesh)
-    {
-        if (_triangles.Length != points)
-        {
-            _triangles = new int[points * 3 + 3];
-
-            int triangleIndex = 0;
-
-            for (int i = 0; i < points; i++)
-            {
-                if (i != points - 1)
-                {
-
-
-
-                    _triangles[triangleIndex] = 0;
-
-                    _triangles[triangleIndex + 2] = i;
-                    _triangles[triangleIndex + 1] = i + 1;
-
-
-
-                }
-
-                triangleIndex += 3;
-            }
-
-            _triangles[triangleIndex] = 0;
-
-            _triangles[triangleIndex + 2] = points - 1;
-            _triangles[triangleIndex + 1] = 1;
-
-        }
-
-        if (_normals.Length != points)
-        {
-
-            _normals = new Vector3[points];
-
-            for (int i = 0; i < points; i++)
-            {
-                _normals[i] = Vector3.up;
-            }
-        }
-
-
-
-
-        Vector3[] vertices = new Vector3[points];
-
-
-
-
-
-
-        vertices[0] = Vector3.zero;
-
-
-        Vector3 vectorToRotate;
-        
-            vectorToRotate = Vector3.forward * stats.AttackRange;
-        
-
-        Vector3 rotatedVector = Vector3.zero;
-
-        float stepSize = 1f / ((float)points - 1);
-        int step = 0;
-
-
-
-        for (int i = 1; i < points; i++)
-        {
-            float angle = Mathf.Lerp(-stats.AttackAngle, stats.AttackAngle, step * stepSize);
-
-
-
-            angle = angle * Mathf.Deg2Rad;
-
-            float s = Mathf.Sin(angle);
-            float c = Mathf.Cos(angle);
-
-            rotatedVector.x = vectorToRotate.x * c - vectorToRotate.z * s;
-            rotatedVector.z = vectorToRotate.x * s + vectorToRotate.z * c;
-
-            vertices[i] = rotatedVector;
-            step++;
-        }
-
-        mesh.vertices = vertices;
-
-        if (mesh.triangles != _triangles)
-            mesh.triangles = _triangles;
-
-        if (mesh.normals != _normals)
-            mesh.normals = _normals;
-
-
-
-
-
-    }
     void Attack()
     {
 
-        drawCone(10,_coneMesh);
-        _coneRenderer.material.color = new Color(1, 0, 0, .4f);
+        DrawCone(10,ConeMesh,true,0);
+        ConeRenderer.material.color = new Color(1, 0, 0, .4f);
 
         
 
@@ -476,28 +371,7 @@ public class TankBeetle : Enemy
 
     }
 
-    void DetectThePlayer()
-    {
-        Collider[] potentialTargets = Physics.OverlapSphere(transform.position, stats.SpotDistance, LayerMask.GetMask("Player"));
-        RaycastHit hit;
-
-        if (potentialTargets.Length > 0)
-        {
-            if (Physics.Raycast(transform.position, potentialTargets[0].transform.position - transform.position, out hit, 10))
-            {
-                if (hit.collider.gameObject.layer == 9)
-                {
-                    AggroEvent.Raise(this.gameObject);
-                    _playerDetected = true;
-                    _playerTransform = potentialTargets[0].gameObject.transform;
-
-                    _isAlly = true;
-
-                    
-                }
-            }
-        }
-    }
+    
 
    
 
