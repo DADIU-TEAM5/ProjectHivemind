@@ -19,7 +19,6 @@ public class TouchControls : GameLoop
     public FloatVariable InputSwipeThresholdSO; // Percentage of the screen width
 
     public GameObjectVariable LockedTarget;
-    public Camera PlayerCam;
     public GameObject UICanvas;
     public RectTransform UIMenuButton;
     private bool _uiActivated = false;
