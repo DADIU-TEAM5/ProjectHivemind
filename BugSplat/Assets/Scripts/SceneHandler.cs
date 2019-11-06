@@ -24,34 +24,14 @@ public class SceneHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        int _sceneCount = EditorBuildSettings.scenes.Length;
+        int _sceneCount = SceneManager.sceneCount;
 
         SceneList = new string[_sceneCount];
     }
 
 
-    public void ChangeScene(string sceneGuid)
+    public void ChangeScene(string sceneName)
     {
-        if(sceneGuid != "")
-        {
-            string sceneName = "";
-
-            string tempPath = AssetDatabase.GUIDToAssetPath(sceneGuid);
-
-            int lastFolderIndex = tempPath.LastIndexOf('/');
-            sceneName = tempPath.Remove(0, lastFolderIndex + 1).ToString();
-
-            int fileEndingIndex = sceneName.LastIndexOf('.');
-            sceneName = sceneName.Remove(fileEndingIndex, sceneName.Length - fileEndingIndex);
-
-            
-            SceneManager.LoadScene(sceneName);
-        }
-        else
-        {
-            SceneManager.LoadScene(SelectedScene);
-        }
-
-
+        SceneManager.LoadScene(sceneName);
     }
 }
