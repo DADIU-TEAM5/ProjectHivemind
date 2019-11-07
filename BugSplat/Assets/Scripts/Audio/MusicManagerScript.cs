@@ -18,9 +18,20 @@ public class MusicManagerScript : MonoBehaviour
     public FloatVariable MaxHealth;
     public FloatVariable CurrentHealth;
 
+    [Header("Parameters")]
+    public float IntenseOMeter;
+    public float IntensityOffset;
+
+
     void Start()
     {
         MainScore.Post(this.gameObject);
+    }
+
+
+    void Update()
+    {
+        IntenseOMeter = EnemiesAgroed.Value - CurrentHealth.Value;
     }
 
 }
