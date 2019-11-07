@@ -63,8 +63,9 @@ public class DashMeshEffect : Effect
         }
 
         void FixedUpdate() {
-            var enemies = Physics.OverlapBox(transform.position, transform.localScale * 0.5f, transform.rotation);
-            Debug.Log(enemies.Length);
+            var enemies = Physics.OverlapBox(transform.position, transform.localScale * 0.5f, transform.rotation, (1 << 8));
+           
+
             foreach (var enemy in enemies) {
                 ZoneEffect.Trigger(enemy.gameObject);
             }
