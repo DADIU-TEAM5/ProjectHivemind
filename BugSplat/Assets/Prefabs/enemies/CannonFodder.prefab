@@ -168,13 +168,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficultyValue: 1
-  EnemyList: {fileID: 11400000, guid: 73fb98983f89ab9418a547ca2aa08854, type: 2}
-  LockedTarget: {fileID: 11400000, guid: 10807b189a56cf444ac0120f9222ea9e, type: 2}
-  CurrentEnemySO: {fileID: 11400000, guid: f105a26415b393b4294e03ed33f33397, type: 2}
-  CurrentEnemyGraphic: {fileID: 11400000, guid: 622f7e966361b8946aed8997885a3b76,
-    type: 2}
-  TargetGraphic: {fileID: 11400000, guid: 35750c098c4b5a64683897e38deae292, type: 2}
-  NoVisibleEnemies: {fileID: 11400000, guid: fab092924697b554a8c0751c87f04669, type: 2}
   AttackCurve:
     serializedVersion: 2
     m_Curve:
@@ -200,15 +193,39 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   ConeMaterial: {fileID: 2100000, guid: 334b626f7df17c24098755a1717def0b, type: 2}
-  Graphics: {fileID: 4177807577158512369}
+  stats: {fileID: 11400000, guid: 938a1c16fd0669d419bbb10ee50f5cc1, type: 2}
   bodyPart: {fileID: 7324468612011702487, guid: 862620230bd5167459723c1fe51d3192,
     type: 3}
-  DeadFodder: {fileID: 1078330638321028596}
-  stats: {fileID: 11400000, guid: 938a1c16fd0669d419bbb10ee50f5cc1, type: 2}
-  TakeDamageEvent: {fileID: 11400000, guid: 46b539ed7fe3a4045bef6d3d79362c8a, type: 2}
+  DeadCutout: {fileID: 1078330638321028596}
+  Graphics: {fileID: 4177807577158512369}
+  EnemyList: {fileID: 11400000, guid: 73fb98983f89ab9418a547ca2aa08854, type: 2}
+  LockedTarget: {fileID: 11400000, guid: 10807b189a56cf444ac0120f9222ea9e, type: 2}
+  CurrentEnemySO: {fileID: 11400000, guid: f105a26415b393b4294e03ed33f33397, type: 2}
+  CurrentEnemyGraphic: {fileID: 11400000, guid: 622f7e966361b8946aed8997885a3b76,
+    type: 2}
+  TargetGraphic: {fileID: 11400000, guid: 35750c098c4b5a64683897e38deae292, type: 2}
+  NoVisibleEnemies: {fileID: 11400000, guid: fab092924697b554a8c0751c87f04669, type: 2}
+  HealthBarWidth: 150
+  HealthBarHeight: 20
+  HealthBarOffsetX: -50
+  HealthBarOffsetY: -200
+  NavMeshAgent: {fileID: 0}
+  _startColor: {r: 0, g: 0, b: 0, a: 0}
+  Renderer: {fileID: 0}
+  Cone: {fileID: 0}
+  ConeRenderer: {fileID: 0}
+  ConeMesh: {fileID: 0}
+  Outline: {fileID: 0}
+  OutlineRenderer: {fileID: 0}
+  OutlineMesh: {fileID: 0}
   AggroEvent: {fileID: 11400000, guid: be12647e984d140b9be0d4e76d9f2632, type: 2}
-  AttackEvent: {fileID: 11400000, guid: 081b4c0dd37d842fd903003d45719da7, type: 2}
+  TakeDamageEvent: {fileID: 11400000, guid: 46b539ed7fe3a4045bef6d3d79362c8a, type: 2}
   DeathEvent: {fileID: 11400000, guid: 2c5a919c90cdd4362b1d0c9143c118f6, type: 2}
+  _playerDetected: 0
+  _playerTransform: {fileID: 0}
+  _isAlly: 0
+  _currentHealth: 0
+  AttackEvent: {fileID: 11400000, guid: 081b4c0dd37d842fd903003d45719da7, type: 2}
   AttackChargingEvent: {fileID: 11400000, guid: d32ebc9c33fbd2146b3e615d158c9a87,
     type: 2}
 --- !u!114 &4176355153426757474
@@ -374,16 +391,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4176355153426757476}
     m_Modifications:
-    - target: {fileID: 4254999180625798128, guid: 94e04ac382935fb4798bf07b956b2258,
-        type: 3}
-      propertyPath: ExplosionDistance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4254999180625798128, guid: 94e04ac382935fb4798bf07b956b2258,
-        type: 3}
-      propertyPath: ExplosionHeight
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 4360065284092291422, guid: 94e04ac382935fb4798bf07b956b2258,
         type: 3}
       propertyPath: m_Name
@@ -393,46 +400,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1300356337438608342, guid: 94e04ac382935fb4798bf07b956b2258,
-        type: 3}
-      propertyPath: ExplosionDistance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1300356337438608342, guid: 94e04ac382935fb4798bf07b956b2258,
-        type: 3}
-      propertyPath: ExplosionHeight
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 1335007028889640082, guid: 94e04ac382935fb4798bf07b956b2258,
-        type: 3}
-      propertyPath: ExplosionDistance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1335007028889640082, guid: 94e04ac382935fb4798bf07b956b2258,
-        type: 3}
-      propertyPath: ExplosionHeight
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 2262142827765078232, guid: 94e04ac382935fb4798bf07b956b2258,
-        type: 3}
-      propertyPath: ExplosionDistance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2262142827765078232, guid: 94e04ac382935fb4798bf07b956b2258,
-        type: 3}
-      propertyPath: ExplosionHeight
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 220056217369275403, guid: 94e04ac382935fb4798bf07b956b2258,
-        type: 3}
-      propertyPath: ExplosionDistance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 220056217369275403, guid: 94e04ac382935fb4798bf07b956b2258,
-        type: 3}
-      propertyPath: ExplosionHeight
-      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 781736955833719629, guid: 94e04ac382935fb4798bf07b956b2258,
         type: 3}
@@ -504,6 +471,16 @@ PrefabInstance:
       propertyPath: ExplosionHeight
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 4254999180625798128, guid: 94e04ac382935fb4798bf07b956b2258,
+        type: 3}
+      propertyPath: ExplosionDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4254999180625798128, guid: 94e04ac382935fb4798bf07b956b2258,
+        type: 3}
+      propertyPath: ExplosionHeight
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 2550092306675443478, guid: 94e04ac382935fb4798bf07b956b2258,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -529,6 +506,26 @@ PrefabInstance:
       propertyPath: ExplosionHeight
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 1300356337438608342, guid: 94e04ac382935fb4798bf07b956b2258,
+        type: 3}
+      propertyPath: ExplosionDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300356337438608342, guid: 94e04ac382935fb4798bf07b956b2258,
+        type: 3}
+      propertyPath: ExplosionHeight
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1335007028889640082, guid: 94e04ac382935fb4798bf07b956b2258,
+        type: 3}
+      propertyPath: ExplosionDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1335007028889640082, guid: 94e04ac382935fb4798bf07b956b2258,
+        type: 3}
+      propertyPath: ExplosionHeight
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 1335007028889640082, guid: 94e04ac382935fb4798bf07b956b2258,
         type: 3}
       propertyPath: ExplosionDistance
@@ -545,6 +542,26 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2262142827765078232, guid: 94e04ac382935fb4798bf07b956b2258,
+        type: 3}
+      propertyPath: ExplosionHeight
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262142827765078232, guid: 94e04ac382935fb4798bf07b956b2258,
+        type: 3}
+      propertyPath: ExplosionDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262142827765078232, guid: 94e04ac382935fb4798bf07b956b2258,
+        type: 3}
+      propertyPath: ExplosionHeight
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 220056217369275403, guid: 94e04ac382935fb4798bf07b956b2258,
+        type: 3}
+      propertyPath: ExplosionDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 220056217369275403, guid: 94e04ac382935fb4798bf07b956b2258,
         type: 3}
       propertyPath: ExplosionHeight
       value: 20

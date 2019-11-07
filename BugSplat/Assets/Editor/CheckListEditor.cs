@@ -8,12 +8,32 @@ using UnityEditor;
 public class CheckListEditor : Editor
 {
     EnemyCheckOff checkOff;
+    bool[] oldChecks;
 
-
+    
 
     private void OnEnable()
     {
         checkOff = (EnemyCheckOff)target;
+
+            
+
+            oldChecks = checkOff.Checks;
+
+
+
+            checkOff.Checks = new bool[checkOff.Enemies.SpawnableEnemies.Length];
+
+
+            for (int i = 0; i < oldChecks.Length; i++)
+            {
+                if (i < checkOff.Checks.Length)
+                {
+                    checkOff.Checks[i] = oldChecks[i];
+                }
+            }
+
+        
     }
 
 
@@ -21,18 +41,18 @@ public class CheckListEditor : Editor
     {
 
         DrawDefaultInspector();
+        EditorUtility.SetDirty(target);
 
-        if(checkOff.Checks.Length != checkOff.Enemies.SpawnableEnemies.Length)
-        {
-            checkOff.Checks = new bool[checkOff.Enemies.SpawnableEnemies.Length];
-        }
+
+
+
+
 
         for (int i = 0; i < checkOff.Checks.Length; i++)
         {
-            GUILayout.Toggle(checkOff.Checks[i], checkOff.Enemies.SpawnableEnemies[i].name);
+            checkOff.Checks[i] = GUILayout.Toggle(checkOff.Checks[i], checkOff.Enemies.SpawnableEnemies[i].name);
         }
 
-        
 
 
 

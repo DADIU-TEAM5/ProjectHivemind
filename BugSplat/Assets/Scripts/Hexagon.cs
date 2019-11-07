@@ -24,10 +24,16 @@ public class Hexagon : MonoBehaviour
     // Start is called before the first frame update
     private void OnEnable()
     {
-        for (int i = 0; i < EnemySpawners.Length; i++)
+        if (EnemySpawners.Length > 0)
         {
-            EnemySpawners[i].budget = MinBudget / EnemySpawners.Length;
+             
+                EnemySpawners[Random.Range(0, EnemySpawners.Length)].budget += MinBudget;
+
+            MinBudget = 0;
+                
+            
         }
+        
 
         Neighbours = new Hexagon[6];
     }

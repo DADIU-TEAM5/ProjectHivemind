@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "EnemySpawner/Enemy Spawner")]
 public class EnemySpawnerList : ScriptableObject
 {
 
 
-    public EnemyList[] Levels;
+    public EnemyCheckOff[] Levels;
 }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6481230334795772230}
   - component: {fileID: 6436373596737254204}
   - component: {fileID: 902297998463300980}
+  - component: {fileID: 7598397230566833110}
   m_Layer: 0
   m_Name: FodderAudio
   m_TagString: Untagged
@@ -76,6 +77,11 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 07d1965afa9c94679ae376c1c35102dd,
+      type: 2}
+  AttackCharging:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: e5e57ba3e0cc7454280277d53cf963d0,
       type: 2}
 --- !u!114 &5272705415988718470
 MonoBehaviour:
@@ -182,6 +188,35 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7210876547091908325}
         m_MethodName: Death
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &7598397230566833110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 423242476136994105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: d32ebc9c33fbd2146b3e615d158c9a87, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7210876547091908325}
+        m_MethodName: AttackChargingEvent
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -313,6 +348,19 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 0}
+  Test:
+    idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  EnemiesLeft: {fileID: 11400000, guid: 3cbd84a3a3e9533498d0bea1a1cbe33c, type: 2}
+  EnemiesAgroed: {fileID: 0}
+  NoEnemiesOnScreen: {fileID: 11400000, guid: fab092924697b554a8c0751c87f04669, type: 2}
+  MaxHealth: {fileID: 11400000, guid: bd56d08eef8fd2648ba7efd6397151bb, type: 2}
+  CurrentHealth: {fileID: 11400000, guid: d980b5989185a2948b70c02cdfccf718, type: 2}
+  IntenseOMeter: 0
+  IntensityOffset: 0
 --- !u!1 &2311351607263475786
 GameObject:
   m_ObjectHideFlags: 0
