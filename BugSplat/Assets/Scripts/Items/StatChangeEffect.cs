@@ -8,6 +8,10 @@ public class StatChangeEffect : Effect
     public FloatVariable Stat;
     public float Change;
 
+    public override void Init()
+    {
+    }
+
     public override void Trigger(GameObject effectTarget = null)
     {
         Stat.Value = Mathf.Min(Stat.Value + Change, Stat.Max);
