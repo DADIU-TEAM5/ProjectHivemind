@@ -13,21 +13,33 @@ public class EnemySpawner : GameLoop
 
     public IntVariable enemySpawnerCount;
 
-    GameObject[] enemies;
+    List<GameObject> enemies;
     public float budget;
     float[] _values;
     float smallestValue;
 
     private void OnEnable()
     {
-        enemies = EnemylevelList.Levels[CurrentLevel.Value].SpawnableEnemies;
+        enemies = new List<GameObject>();
+
+        for (int i = 0; i < EnemylevelList.Levels[CurrentLevel.Value].Checks.Length; i++)
+        {
+            
+            if (EnemylevelList.Levels[CurrentLevel.Value].Checks[i])
+            {
+                enemies.Add(EnemylevelList.Levels[CurrentLevel.Value].Enemies.SpawnableEnemies[i]);
+            }
+
+
+        }
+        
 
         enemySpawnerCount.Value++;
 
         smallestValue = float.MaxValue;
 
-        _values = new float[enemies.Length];
-        for (int i = 0; i < enemies.Length; i++)
+        _values = new float[enemies.Count];
+        for (int i = 0; i < enemies.Count; i++)
         {
             if (_values[i] < smallestValue)
                 smallestValue = _values[i];
@@ -84,7 +96,7 @@ public class EnemySpawner : GameLoop
             int index = 0;
             while (valueToGet > budget)
             {
-                index = Random.Range(0, enemies.Length);
+                index = Random.Range(0, enemies.Count);
 
                 valueToGet = _values[index];
             }
