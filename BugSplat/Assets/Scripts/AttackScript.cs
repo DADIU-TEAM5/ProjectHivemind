@@ -23,6 +23,7 @@ public class AttackScript : GameLoop
 
     public GameObjectVariable CurrentEnemySO;
 
+    public GameEvent AttackOnHit;
 
     NavMeshAgent _navMeshAgent;
     Vector3 _nearstTarget;
@@ -232,7 +233,12 @@ public class AttackScript : GameLoop
                     //print(PlayerSpeedDirectionSO.Value);
 
                     if (Vector3.Angle(PlayerGraphics.position - (PlayerGraphics.position + PlayerDirectionSO.Value), PlayerGraphics.position - temp) < AttackAngle.Value)
-                        potentialTargets[i].GetComponent<Enemy>().TakeDamage(AttackDamage.Value);
+                    {
+                        var potentialEnemy = potentialTargets[i].GetComponent<Enemy>();
+
+                        potentialEnemy.TakeDamage(AttackDamage.Value);
+                        AttackOnHit.Raise(potentialEnemy.gameObject);
+                    }
                 }
                 else
                     print("Attack blocked");

@@ -19,7 +19,15 @@ public class PopEffect : Effect
     public override void Trigger(GameObject target = null)
     {
         Debug.Log("POPPING OFF YO");
+
+        
         if (!_poppingOff) {
+            var deadEnemy = target?.GetComponent<Enemy>();
+
+            // Only pop the enemies, if the enemy that died was marked
+            if (deadEnemy == null || !Mark.MarkedEnemies.Contains(deadEnemy)) return;
+
+
             _poppingOff = true;
 
             foreach (var enemy in Mark.MarkedEnemies) {
