@@ -16,7 +16,7 @@ public class cannonFodder : Enemy
 
     public GameObject DeadFodder;
 
-    public SimpleEnemyStats stats;
+    
 
     
     
@@ -61,12 +61,9 @@ public class cannonFodder : Enemy
 
     }
 
-    void SetupVars()
+    public override void SetupVars()
     {
-        AttackAngle = stats.AttackAngle;
-        AttackChargeUpTime = stats.AttackChargeUpTime;
-        SpotDistance = stats.SpotDistance;
-        AttackRange = stats.AttackRange;
+        
     }
 
     public override bool IsVisible()
@@ -199,13 +196,12 @@ public class cannonFodder : Enemy
                 if (hit.collider.gameObject.layer == 9)
                 {
 
-                    //print(Vector3.Angle(transform.position + transform.forward, potentialTargets[i].transform.position - transform.position));
-                    //if()
+                    
                     Vector3 temp = potentialTargets[0].transform.position;
                     temp.y = transform.position.y;
 
 
-                    //print( Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp));
+                    
                     if (Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp) < stats.AttackAngle)
                     {
                         PlayerHealth playerHealth = potentialTargets[0].GetComponent<PlayerHealth>();

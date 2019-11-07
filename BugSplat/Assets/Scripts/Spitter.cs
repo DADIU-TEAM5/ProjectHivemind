@@ -14,7 +14,7 @@ public class Spitter : Enemy
 
     
     
-    public SpitterStats stats;
+    SpitterStats _spitterStats;
     
     bool _attacking;
     float _attackCharge;
@@ -55,17 +55,20 @@ public class Spitter : Enemy
 
     public void Start()
     {
-        var spitSettings = Spit.main;
-        spitSettings.startSpeed = stats.ProjectileSpeed;
-        spitSettings.startLifetime = stats.AttackRange/stats.ProjectileSpeed ;
 
-        _currentHealth = stats.HitPoints;
+        _spitterStats = (SpitterStats)stats;
+
+        var spitSettings = Spit.main;
+        spitSettings.startSpeed = _spitterStats.ProjectileSpeed;
+        spitSettings.startLifetime = _spitterStats.AttackRange/_spitterStats.ProjectileSpeed ;
+
+        _currentHealth = _spitterStats.HitPoints;
         _renderer = Graphics.GetComponent<Renderer>();
 
         Initialize(_currentHealth);
 
         _navMeshAgent = GetComponent<NavMeshAgent>();
-        _navMeshAgent.speed = stats.MoveSpeed;
+        _navMeshAgent.speed = _spitterStats.MoveSpeed;
 
         _startColor = _renderer.material.color;
         Burrow();
@@ -74,13 +77,10 @@ public class Spitter : Enemy
 
     }
 
-    void SetupVars()
+    public override void SetupVars()
     {
         
-        AttackChargeUpTime = stats.AttackChargeUpTime;
-        SpotDistance = stats.SpotDistance;
-
-        AttackRange = stats.AttackRange;
+        
     }
 
     public override bool IsVisible()
@@ -106,14 +106,14 @@ public class Spitter : Enemy
             // print(name + " took damage "+ damage);
             _currentHealth -= damage;
             UpdateHealthBar(_currentHealth);
-            if (_currentHealth < stats.FleeThreshold)
-            _fleeValue = stats.FleeTime;
+            if (_currentHealth < _spitterStats.FleeThreshold)
+            _fleeValue = _spitterStats.FleeTime;
 
             TakeDamageEvent.Raise(gameObject);
 
             if (_currentHealth <= 0)
             {
-                int partsToDrop = Random.Range(stats.minPartsToDrop, stats.maxPartsToDrop);
+                int partsToDrop = Random.Range(_spitterStats.minPartsToDrop, _spitterStats.maxPartsToDrop);
                 for (int i = 0; i < partsToDrop; i++)
                 {
                     GameObject part = Instantiate(bodyPart);
@@ -162,7 +162,7 @@ public class Spitter : Enemy
 
             if (_burrowLerp < 1)
             {
-                _burrowLerp += deltaTime / stats.RetractionTime;
+                _burrowLerp += deltaTime / _spitterStats.RetractionTime;
             }
 
 
@@ -171,7 +171,7 @@ public class Spitter : Enemy
 
             if (_burrowLerp > 0)
             {
-                _burrowLerp -= deltaTime / stats.RetractionTime;
+                _burrowLerp -= deltaTime / _spitterStats.RetractionTime;
             }
         }
         Vector3 tempPos = Graphics.transform.localPosition;
@@ -266,7 +266,7 @@ public class Spitter : Enemy
         _attacking = true;
         _attackCharge += Time.deltaTime;
 
-        if (_attackCharge >= stats.AttackChargeUpTime)
+        if (_attackCharge >= _spitterStats.AttackChargeUpTime)
         {
             
 
@@ -274,7 +274,7 @@ public class Spitter : Enemy
             AttackEvent.Raise(gameObject);
             Spit.Emit(1);
 
-            _attackCooldown = stats.AttackSpeed;
+            _attackCooldown = _spitterStats.AttackSpeed;
             _attacking = false;
             _attackCharge = 0;
             
@@ -291,7 +291,7 @@ public class Spitter : Enemy
 
         adjustedPlayerPos.y = transform.position.y;
 
-        return Vector3.Distance(transform.position, adjustedPlayerPos) <= stats.AttackRange ;
+        return Vector3.Distance(transform.position, adjustedPlayerPos) <= _spitterStats.AttackRange ;
     }
 
     void MoveTowardsThePlayer()
@@ -309,7 +309,7 @@ public class Spitter : Enemy
             
 
 
-            destination = adjustedPlayerPos+((transform.position-adjustedPlayerPos).normalized*stats.AttackRange);
+            destination = adjustedPlayerPos+((transform.position-adjustedPlayerPos).normalized*_spitterStats.AttackRange);
 
 
             

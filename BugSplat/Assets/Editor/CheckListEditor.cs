@@ -29,7 +29,7 @@ public class CheckListEditor : Editor
 
         for (int i = 0; i < checkOff.Checks.Length; i++)
         {
-            GUILayout.Toggle(checkOff.Checks[i], checkOff.Enemies.SpawnableEnemies[i].name);
+            checkOff.Checks[i] = GUILayout.Toggle(checkOff.Checks[i], checkOff.Enemies.SpawnableEnemies[i].name);
         }
 
         

@@ -13,7 +13,7 @@ public class Boomer : Enemy
 
     public GameObject bodyPart;
 
-    public BoomerStats stats;
+    BoomerStats _boomerStats;
 
     
     private bool _attacking;
@@ -42,7 +42,9 @@ public class Boomer : Enemy
 
     public void Start()
     {
-        _currentHealth = stats.HitPoints;
+        _boomerStats = (BoomerStats)stats;
+
+        _currentHealth = _boomerStats.HitPoints;
         Renderer = Graphics.GetComponent<Renderer>();
 
         
@@ -54,7 +56,7 @@ public class Boomer : Enemy
         OutlineRenderer.material = AttackMaterial;
 
         _navMeshAgent = GetComponent<NavMeshAgent>();
-        _navMeshAgent.speed = stats.MoveSpeed;
+        _navMeshAgent.speed = _boomerStats.MoveSpeed;
 
 
         OutlineRenderer.material.color = new Color(.2f, .2f, .2f, .1f);
@@ -65,13 +67,9 @@ public class Boomer : Enemy
 
     }
 
-    void SetupVars()
+    public override void SetupVars()
     {
-        AttackAngle = 180;
-        AttackChargeUpTime = stats.AttackChargeUpTime;
-        SpotDistance = stats.SpotDistance;
-
-        AttackRange = stats.AttackRange;
+        
     }
 
     void CreateCone()
@@ -141,7 +139,7 @@ public class Boomer : Enemy
 
         if (_currentHealth <= 0)
         {
-            int partsToDrop = Random.Range(stats.minPartsToDrop, stats.maxPartsToDrop);
+            int partsToDrop = Random.Range(_boomerStats.minPartsToDrop, _boomerStats.maxPartsToDrop);
             for (int i = 0; i < partsToDrop; i++)
             {
                 GameObject part = Instantiate(bodyPart);
@@ -201,7 +199,7 @@ public class Boomer : Enemy
     {
         if (_attacking == false)
         {
-            _navMeshAgent.speed = stats.ChargeMoveSpeed;
+            _navMeshAgent.speed = _boomerStats.ChargeMoveSpeed;
             AttackChargingEvent.Raise(gameObject);
 
             Vector3 adjustedPlayerPos = _playerTransform.position;
@@ -216,16 +214,16 @@ public class Boomer : Enemy
 
         }
 
-        ConeRenderer.material.color = Color.Lerp(Color.green, Color.red, _attackCharge / stats.AttackChargeUpTime);
+        ConeRenderer.material.color = Color.Lerp(Color.green, Color.red, _attackCharge / _boomerStats.AttackChargeUpTime);
 
         DrawCone(20,ConeMesh,false, _attackCharge);
         _attacking = true;
         _attackCharge += Time.deltaTime;
 
-        if (_attackCharge >= stats.AttackChargeUpTime)
+        if (_attackCharge >= _boomerStats.AttackChargeUpTime)
         {
             AttackEvent.Raise(gameObject);
-            Collider[] potentialTargets = Physics.OverlapSphere(transform.position, stats.AttackRange, LayerMask.GetMask("Player"));
+            Collider[] potentialTargets = Physics.OverlapSphere(transform.position, _boomerStats.AttackRange, LayerMask.GetMask("Player"));
 
             RaycastHit hit;
             if (potentialTargets.Length > 0 && Physics.Raycast(transform.position, potentialTargets[0].transform.position - transform.position, out hit,10, LayerMask.GetMask("Player")))
@@ -247,7 +245,7 @@ public class Boomer : Enemy
                         {
                             
 
-                            playerHealth.TakeDamage(stats.AttackDamage);
+                            playerHealth.TakeDamage(_boomerStats.AttackDamage);
                         }
                         else
                         {
@@ -262,12 +260,12 @@ public class Boomer : Enemy
             else
                 print("this should never show i guess");
 
-            _attackCooldown = stats.AttackSpeed;
+            _attackCooldown = _boomerStats.AttackSpeed;
             _attacking = false;
             _attackCharge = 0;
             Cone.SetActive(false);
             Outline.SetActive(false);
-            _navMeshAgent.speed = stats.MoveSpeed;
+            _navMeshAgent.speed = _boomerStats.MoveSpeed;
         }
 
     }
@@ -280,7 +278,7 @@ public class Boomer : Enemy
 
         adjustedPlayerPos.y = transform.position.y;
 
-        return Vector3.Distance(transform.position, adjustedPlayerPos) < stats.AttackRange *0.8f;
+        return Vector3.Distance(transform.position, adjustedPlayerPos) < _boomerStats.AttackRange *0.8f;
     }
 
     void MoveTowardsThePlayer()
