@@ -9,6 +9,7 @@ public abstract class Enemy : GameLoop
 
     public Material ConeMaterial;
 
+    public EnemyStats stats;
 
     public GameObjectList EnemyList;
     public GameObjectVariable LockedTarget;
@@ -46,10 +47,7 @@ public abstract class Enemy : GameLoop
     public MeshRenderer OutlineRenderer;
     public Mesh OutlineMesh;
 
-    public float AttackAngle;
-    public float AttackChargeUpTime;
-    public float SpotDistance;
-    public float AttackRange;
+    
 
     public GameEvent AggroEvent;
     public bool _playerDetected;
@@ -78,6 +76,9 @@ public abstract class Enemy : GameLoop
         OutlineRenderer.material.color = new Color(.2f, .2f, .2f, .1f);
 
     }
+
+    public abstract void SetupVars();
+    
 
     public abstract bool IsVisible();
 
@@ -368,9 +369,9 @@ public abstract class Enemy : GameLoop
 
         Vector3 vectorToRotate;
         if (constant)
-            vectorToRotate = Vector3.forward * AttackRange;
+            vectorToRotate = Vector3.forward * stats.AttackRange;
         else
-            vectorToRotate = Vector3.forward * (AttackRange * AttackCurve.Evaluate(attackCharge / AttackChargeUpTime));
+            vectorToRotate = Vector3.forward * (stats.AttackRange * AttackCurve.Evaluate(attackCharge / stats.AttackChargeUpTime));
 
         Vector3 rotatedVector = Vector3.zero;
 
@@ -381,7 +382,7 @@ public abstract class Enemy : GameLoop
 
         for (int i = 1; i < points; i++)
         {
-            float angle = Mathf.Lerp(-AttackAngle, AttackAngle, step * stepSize);
+            float angle = Mathf.Lerp(-stats.AttackAngle, stats.AttackAngle, step * stepSize);
 
 
 
@@ -415,7 +416,7 @@ public abstract class Enemy : GameLoop
 
     public void DetectThePlayer()
     {
-        Collider[] potentialTargets = Physics.OverlapSphere(transform.position, SpotDistance, LayerMask.GetMask("Player"));
+        Collider[] potentialTargets = Physics.OverlapSphere(transform.position, stats.SpotDistance, LayerMask.GetMask("Player"));
         RaycastHit hit;
 
         if (potentialTargets.Length > 0)
@@ -438,7 +439,7 @@ public abstract class Enemy : GameLoop
 
     void DetectAllies()
     {
-        Collider[] potentialAllies = Physics.OverlapSphere(transform.position, SpotDistance, LayerMask.GetMask("Enemy"));
+        Collider[] potentialAllies = Physics.OverlapSphere(transform.position, stats.SpotDistance, LayerMask.GetMask("Enemy"));
 
         if (potentialAllies.Length > 0)
         {

@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class BoomerStats : EnemyStats
+public class CannonfodderStats : EnemyStats
 {
-    
-    public float ChargeMoveSpeed;
-
     
 
 }

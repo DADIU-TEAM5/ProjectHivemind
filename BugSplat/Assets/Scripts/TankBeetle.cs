@@ -13,7 +13,7 @@ public class TankBeetle : Enemy
 
    
     
-    public TankStats stats;
+    TankStats TankStats;
    
     bool _attacking;
     float _attackCharge;
@@ -55,7 +55,10 @@ public class TankBeetle : Enemy
 
     public void Start()
     {
-        _currentHealth = stats.HitPoints;
+        TankStats = (TankStats)stats;
+
+
+        _currentHealth = TankStats.HitPoints;
         _renderer = Graphics.GetComponent<Renderer>();
 
         Cone = new GameObject();
@@ -71,7 +74,7 @@ public class TankBeetle : Enemy
 
         _startColor = _renderer.material.color;
 
-        _navMeshAgent.speed = stats.MoveSpeed;
+        _navMeshAgent.speed = TankStats.MoveSpeed;
 
         ConeRenderer.material.color = Color.red;
 
@@ -79,12 +82,9 @@ public class TankBeetle : Enemy
 
     }
 
-    void SetupVars()
+    public override void SetupVars()
     {
-        AttackAngle = stats.AttackAngle;
-
-        SpotDistance = stats.SpotDistance;
-        AttackRange = stats.AttackRange;
+        
     }
 
     void CreateCone()
@@ -143,7 +143,7 @@ public class TankBeetle : Enemy
         if (_currentHealth <= 0)
         {
             DeathEvent.Raise(gameObject);
-            int partsToDrop = Random.Range(stats.minPartsToDrop, stats.maxPartsToDrop);
+            int partsToDrop = Random.Range(TankStats.minPartsToDrop, TankStats.maxPartsToDrop);
             for (int i = 0; i < partsToDrop; i++)
             {
                 GameObject part = Instantiate(bodyPart);
@@ -212,7 +212,7 @@ public class TankBeetle : Enemy
 
         
 
-            Collider[] potentialTargets = Physics.OverlapSphere(transform.position, stats.AttackRange, LayerMask.GetMask("Player"));
+            Collider[] potentialTargets = Physics.OverlapSphere(transform.position, TankStats.AttackRange, LayerMask.GetMask("Player"));
 
 
         
@@ -236,7 +236,7 @@ public class TankBeetle : Enemy
 
 
                     //print( Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp));
-                    if (Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp) < stats.AttackAngle)
+                    if (Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp) < TankStats.AttackAngle)
                     {
                         PlayerHealth playerHealth = potentialTargets[i].GetComponent<PlayerHealth>();
                         //apply damage to the player
@@ -247,7 +247,7 @@ public class TankBeetle : Enemy
                             directionToPush = Vector3.Normalize(directionToPush);
 
                             AttackEvent.Raise(gameObject);
-                            playerHealth.KnockBackDamage(directionToPush, stats.PushLength, stats.AttackDamage);
+                            playerHealth.KnockBackDamage(directionToPush, TankStats.PushLength, TankStats.AttackDamage);
                         }
                         else
                         {
@@ -267,7 +267,7 @@ public class TankBeetle : Enemy
 
 
                 //print( Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp));
-                if (Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp) < stats.AttackAngle)
+                if (Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp) < TankStats.AttackAngle)
                 {
                     PlayerHealth playerHealth = potentialTargets[i].GetComponent<PlayerHealth>();
                     //apply damage to the player
@@ -277,7 +277,7 @@ public class TankBeetle : Enemy
                         directionToPush.y = 0;
                         directionToPush = Vector3.Normalize(directionToPush);
 
-                        playerHealth.KnockBackDamage(directionToPush, stats.PushLength, stats.AttackDamage);
+                        playerHealth.KnockBackDamage(directionToPush, TankStats.PushLength, TankStats.AttackDamage);
                     }
                     else
                     {
@@ -300,7 +300,7 @@ public class TankBeetle : Enemy
 
         adjustedPlayerPos.y = transform.position.y;
 
-        return Vector3.Distance(transform.position, adjustedPlayerPos) < stats.AttackRange / 2;
+        return Vector3.Distance(transform.position, adjustedPlayerPos) < TankStats.AttackRange / 2;
     }
 
     void MoveTowardsThePlayer(float deltaTime)
@@ -321,14 +321,14 @@ public class TankBeetle : Enemy
 
 
         //print( Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp));
-        if (Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp) < stats.AttackAngle)
+        if (Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp) < TankStats.AttackAngle)
         {
             
-            _navMeshAgent.Move(transform.forward * deltaTime * stats.ChargeSpeed);
+            _navMeshAgent.Move(transform.forward * deltaTime * TankStats.ChargeSpeed);
         }
         else
         {
-            _navMeshAgent.Move(transform.forward * deltaTime * stats.MoveSpeed);
+            _navMeshAgent.Move(transform.forward * deltaTime * TankStats.MoveSpeed);
         }
 
 
@@ -360,7 +360,7 @@ public class TankBeetle : Enemy
 
         Quaternion targetRotation = Quaternion.LookRotation(tempPathPos - transform.position );
 
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, stats.TurnSpeed * deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, TankStats.TurnSpeed * deltaTime);
 
         //_navMeshAgent.SetPath(pathToPlayer);
         

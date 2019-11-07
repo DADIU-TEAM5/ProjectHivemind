@@ -3,26 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class TankStats : ScriptableObject
+public class TankStats : EnemyStats
 {
-    public float MoveSpeed;
+    
     public float ChargeSpeed;
 
     public float TurnSpeed;
-    public float HitPoints;
     
-
-    public float AttackRange;
-    public float AttackAngle;
-
-
-    public float SpotDistance;
-    
-
-    public float AttackDamage;
     public float PushLength;
 
-    public int minPartsToDrop;
-    public int maxPartsToDrop;
+    
 
 }
