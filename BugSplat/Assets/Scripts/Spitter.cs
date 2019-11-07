@@ -6,9 +6,9 @@ using UnityEngine.AI;
 public class Spitter : Enemy
 {
 
-    public GameObject Graphics;
+    
 
-    public GameObject bodyPart;
+    
     public ParticleSystem Spit;
 
 
@@ -31,27 +31,20 @@ public class Spitter : Enemy
 
     float _waitForPathCalc;
 
-    Renderer _renderer;
+    
 
-    NavMeshAgent _navMeshAgent;
+    
 
-
-    Color _startColor;
     [Header("Events")]
-    public GameEvent TakeDamageEvent;
+    
     
     public GameEvent AttackEvent;
-    public GameEvent DeathEvent;
+    
     public GameEvent AttackChargingEvent;
     public GameEvent BurrowEvent;
 
     public GameEvent EmergeEvent;
 
-
-    Color SetColor(Color color)
-    {
-        return Color.Lerp(_startColor, color, 0.5f);
-    }
 
     public void Start()
     {
@@ -62,73 +55,18 @@ public class Spitter : Enemy
         spitSettings.startSpeed = _spitterStats.ProjectileSpeed;
         spitSettings.startLifetime = _spitterStats.AttackRange/_spitterStats.ProjectileSpeed ;
 
-        _currentHealth = _spitterStats.HitPoints;
-        _renderer = Graphics.GetComponent<Renderer>();
-
-        Initialize(_currentHealth);
-
-        _navMeshAgent = GetComponent<NavMeshAgent>();
-        _navMeshAgent.speed = _spitterStats.MoveSpeed;
-
-        _startColor = _renderer.material.color;
+        
         Burrow();
 
-        SetupVars();
-
-    }
-
-    public override void SetupVars()
-    {
         
-        
+
     }
 
-    public override bool IsVisible()
-    {
-        if (_renderer == null)
-        {
-            _renderer = Graphics.GetComponent<Renderer>();
-        }
+    
 
-        if (_underground)
-        {
-            return false;
-                
-        }
+    
 
-        return _renderer.isVisible;
-    }
-
-    public override void TakeDamage(float damage)
-    {
-        if (_burrowLerp <= 0)
-        {
-            // print(name + " took damage "+ damage);
-            _currentHealth -= damage;
-            UpdateHealthBar(_currentHealth);
-            if (_currentHealth < _spitterStats.FleeThreshold)
-            _fleeValue = _spitterStats.FleeTime;
-
-            TakeDamageEvent.Raise(gameObject);
-
-            if (_currentHealth <= 0)
-            {
-                int partsToDrop = Random.Range(_spitterStats.minPartsToDrop, _spitterStats.maxPartsToDrop);
-                for (int i = 0; i < partsToDrop; i++)
-                {
-                    GameObject part = Instantiate(bodyPart);
-
-                    part.transform.position = transform.position + ((Vector3.up * i) * 0.5f);
-                }
-
-                DeathEvent.Raise(gameObject);
-                EnemyList.Remove(gameObject);
-
-
-                Destroy(gameObject);
-            }
-        }
-    }
+    
 
 
     public void Burrow()
@@ -137,7 +75,7 @@ public class Spitter : Enemy
 
         _underground = true;
 
-        _navMeshAgent.obstacleAvoidanceType =ObstacleAvoidanceType.NoObstacleAvoidance;
+        NavMeshAgent.obstacleAvoidanceType =ObstacleAvoidanceType.NoObstacleAvoidance;
     }
     public void Emerge()
     {
@@ -145,7 +83,7 @@ public class Spitter : Enemy
 
         _underground = false;
 
-        _navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+        NavMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
     }
 
 
@@ -191,9 +129,9 @@ public class Spitter : Enemy
 
         Debug.DrawLine(transform.position, (transform.position + transform.forward), Color.red);
 
-        if (!_playerDetected)
+        if (!PlayerDetected)
         {
-            _renderer.material.color = SetColor(Color.blue);
+            Renderer.material.color = SetColor(Color.blue);
             DetectThePlayer();
         }
         else if (playerInAttackRange() || _attacking)
@@ -203,32 +141,32 @@ public class Spitter : Enemy
 
                 Emerge();
 
-                _navMeshAgent.destination = transform.position;
+                NavMeshAgent.destination = transform.position;
 
                 if (_attackCooldown <= 0 && _burrowLerp <= 0)
                 {
-                    if (_navMeshAgent.destination != transform.position)
-                        _navMeshAgent.destination = transform.position;
+                    if (NavMeshAgent.destination != transform.position)
+                        NavMeshAgent.destination = transform.position;
 
-                    _renderer.material.color = SetColor(Color.red);
+                    Renderer.material.color = SetColor(Color.red);
                     Attack();
                 }
                 else
                 {
                     LookAtPlayer();
-                    _renderer.material.color = SetColor(Color.yellow);
+                    Renderer.material.color = SetColor(Color.yellow);
 
                 }
             }
             else
             {
-                _renderer.material.color = SetColor(Color.yellow);
+                Renderer.material.color = SetColor(Color.yellow);
                 MoveTowardsThePlayer();
             }
         }
         else
         {
-            _renderer.material.color = SetColor(Color.yellow);
+            Renderer.material.color = SetColor(Color.yellow);
             MoveTowardsThePlayer();
         }
     }
@@ -237,7 +175,7 @@ public class Spitter : Enemy
 
     void LookAtPlayer()
     {
-        Vector3 adjustedPlayerPos = _playerTransform.position;
+        Vector3 adjustedPlayerPos = PlayerTransform.position;
 
         adjustedPlayerPos.y = transform.position.y;
 
@@ -254,7 +192,7 @@ public class Spitter : Enemy
         {
             AttackChargingEvent.Raise(gameObject);
 
-            Vector3 adjustedPlayerPos = _playerTransform.position;
+            Vector3 adjustedPlayerPos = PlayerTransform.position;
 
             adjustedPlayerPos.y = transform.position.y;
             transform.LookAt(adjustedPlayerPos);
@@ -285,14 +223,7 @@ public class Spitter : Enemy
 
 
 
-    bool playerInAttackRange()
-    {
-        Vector3 adjustedPlayerPos = _playerTransform.position;
-
-        adjustedPlayerPos.y = transform.position.y;
-
-        return Vector3.Distance(transform.position, adjustedPlayerPos) <= _spitterStats.AttackRange ;
-    }
+    
 
     void MoveTowardsThePlayer()
     {
@@ -300,7 +231,7 @@ public class Spitter : Enemy
 
         if (_burrowLerp >= 1 && _waitForPathCalc<=0)
         {
-            Vector3 adjustedPlayerPos = _playerTransform.position;
+            Vector3 adjustedPlayerPos = PlayerTransform.position;
 
             adjustedPlayerPos.y = transform.position.y;
 
@@ -317,8 +248,8 @@ public class Spitter : Enemy
             //destination = hit.position;
 
 
-            if (_navMeshAgent.destination != destination)
-                _navMeshAgent.destination = destination;
+            if (NavMeshAgent.destination != destination)
+                NavMeshAgent.destination = destination;
 
             _waitForPathCalc = .5f;
         }
