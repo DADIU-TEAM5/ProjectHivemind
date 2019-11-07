@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public abstract class Enemy : GameLoop
 {
@@ -10,6 +11,13 @@ public abstract class Enemy : GameLoop
     public Material ConeMaterial;
 
     public EnemyStats stats;
+
+    public GameObject bodyPart;
+
+
+    public GameObject DeadCutout;
+
+    public GameObject Graphics;
 
     public GameObjectList EnemyList;
     public GameObjectVariable LockedTarget;
@@ -36,36 +44,63 @@ public abstract class Enemy : GameLoop
     private GradientAlphaKey[] _alphaKey;
     private bool _updateHealth;
 
+    [HideInInspector]
+    public NavMeshAgent NavMeshAgent;
+    [HideInInspector]
+    public Color StartColor;
 
-
-
+    [HideInInspector]
     public Renderer Renderer;
+    [HideInInspector]
     public GameObject Cone;
+    [HideInInspector]
     public MeshRenderer ConeRenderer;
+    [HideInInspector]
     public Mesh ConeMesh;
+    [HideInInspector]
     public GameObject Outline;
+    [HideInInspector]
     public MeshRenderer OutlineRenderer;
+    [HideInInspector]
     public Mesh OutlineMesh;
 
     
 
     public GameEvent AggroEvent;
-    public bool _playerDetected;
-    public Transform _playerTransform;
-    public bool _isAlly;
+    public GameEvent TakeDamageEvent;
+    public GameEvent DeathEvent;
 
+    [HideInInspector]
+    public bool PlayerDetected;
+    [HideInInspector]
+    public Transform PlayerTransform;
+    [HideInInspector]
+    public bool IsAlly;
 
+    [HideInInspector]
     public float _currentHealth;
-    public float MaxHealth;
+   
 
 
 
     private void OnEnable()
     {
         //Debug.Log(name + " spawned");
+
+
+
         EnemyList.Add(gameObject);
 
-        
+        Renderer = Graphics.GetComponent<Renderer>();
+
+        StartColor = Renderer.material.color;
+
+        NavMeshAgent = GetComponent<NavMeshAgent>();
+        NavMeshAgent.speed = stats.MoveSpeed;
+
+        _currentHealth = stats.HitPoints;
+
+        Initialize(_currentHealth);
 
 
         CreateCone();
@@ -77,12 +112,64 @@ public abstract class Enemy : GameLoop
 
     }
 
-    public abstract void SetupVars();
-    
 
-    public abstract bool IsVisible();
 
-    public abstract void TakeDamage(float damage);
+
+    public bool IsVisible()
+    {
+        if (Renderer == null)
+        {
+            Renderer = Graphics.GetComponent<Renderer>();
+        }
+
+        return Renderer.isVisible;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        // print(name + " took damage "+ damage);
+        _currentHealth -= damage;
+        UpdateHealthBar(_currentHealth);
+        TakeDamageEvent.Raise(this.gameObject);
+
+        if (_currentHealth <= 0)
+        {
+            if (DeadCutout == null)
+            {
+
+                
+                int partsToDrop = Random.Range(stats.minPartsToDrop, stats.maxPartsToDrop);
+                for (int i = 0; i < partsToDrop; i++)
+                {
+                    GameObject part = Instantiate(bodyPart);
+
+                    part.transform.position = transform.position +(( Vector3.up*i)*0.5f);
+                }
+                
+            }
+            else
+            {
+
+                //Graphics.SetActive(false);
+                DeadCutout.transform.SetParent(null);
+                DeadCutout.SetActive(true);
+
+                
+                
+
+                
+            }
+
+            DeathEvent.Raise(this.gameObject);
+
+            EnemyList.Remove(gameObject);
+
+            Destroy(Cone);
+            Destroy(Outline);
+            Destroy(gameObject, 3f);
+
+        }
+    }
 
 
 
@@ -262,6 +349,7 @@ public abstract class Enemy : GameLoop
         _currentHealthColor = _gradient.Evaluate(percOfInitialHealth);
         _newHealthBarWidth = (HealthBarWidth / _initialHealth) * hitPoints;
         _updateHealth = true;
+        _showHealthBar = true;
     }
 
     private void UpdateBarPos()
@@ -426,10 +514,10 @@ public abstract class Enemy : GameLoop
                 if (hit.collider.gameObject.layer == 9)
                 {
                     AggroEvent.Raise(this.gameObject);
-                    _playerDetected = true;
-                    _playerTransform = potentialTargets[0].gameObject.transform;
+                    PlayerDetected = true;
+                    PlayerTransform = potentialTargets[0].gameObject.transform;
 
-                    _isAlly = true;
+                    IsAlly = true;
 
                     DetectAllies();
                 }
@@ -446,15 +534,32 @@ public abstract class Enemy : GameLoop
             for (int i = 0; i < potentialAllies.Length; i++)
             {
                 Enemy allyTransform = potentialAllies[i].gameObject.GetComponent<Enemy>();
-                if (!allyTransform?._isAlly ?? false)
+                if (!allyTransform?.IsAlly ?? false)
                 {
-                    allyTransform._playerDetected = true;
-                    allyTransform._playerTransform = _playerTransform;
-                    allyTransform._isAlly = true;
+                    allyTransform.PlayerDetected = true;
+                    allyTransform.PlayerTransform = PlayerTransform;
+                    allyTransform.IsAlly = true;
                     allyTransform.DetectAllies();
                 }
             }
         }
+    }
+
+
+
+    public Color SetColor(Color color)
+    {
+        return Color.Lerp(StartColor, color, 0.5f);
+    }
+
+
+    public bool playerInAttackRange()
+    {
+        Vector3 adjustedPlayerPos = PlayerTransform.position;
+
+        adjustedPlayerPos.y = transform.position.y;
+
+        return Vector3.Distance(transform.position, adjustedPlayerPos) < stats.AttackRange / 2;
     }
 
 
