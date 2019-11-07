@@ -71,19 +71,25 @@ public class Spitter : Enemy
 
     public void Burrow()
     {
-        if (!_underground) BurrowEvent.Raise(gameObject);        
+        if (!_underground)
+        {
+            BurrowEvent.Raise(gameObject);
 
-        _underground = true;
+            _underground = true;
 
-        NavMeshAgent.obstacleAvoidanceType =ObstacleAvoidanceType.NoObstacleAvoidance;
+            NavMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
+        }
     }
     public void Emerge()
     {
-        if (_underground) EmergeEvent.Raise(this.gameObject);
+        if (_underground)
+        {
+            EmergeEvent.Raise(this.gameObject);
 
-        _underground = false;
+            _underground = false;
 
-        NavMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+            NavMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+        }
     }
 
 
@@ -255,5 +261,83 @@ public class Spitter : Enemy
         }
     }
 
-    
+
+    int[] _triangles = { };
+    Vector3[] _normals = { };
+
+    public void DrawSpitTrajectory()
+    {
+        if (_triangles.Length != 6)
+        {
+            _triangles = new int[6];
+
+            
+
+            _triangles[0] = 0;
+            _triangles[1] = 1;
+            _triangles[2] = 2;
+
+            _triangles[3] = 0;
+            _triangles[4] = 3;
+            _triangles[5] = 2;
+
+
+
+        }
+
+        if (_normals.Length != 4)
+        {
+
+            _normals = new Vector3[4];
+
+            for (int i = 0; i < 4; i++)
+            {
+                _normals[i] = Vector3.up;
+            }
+        }
+
+
+
+
+        Vector3[] vertices = new Vector3[4];
+
+
+
+
+
+
+        vertices[0] = Vector3.zero;
+
+
+        Vector3 vectorToRotate;
+
+
+        
+        vectorToRotate = Vector3.forward * stats.AttackRange;
+        
+
+        Vector3 rotatedVector = Vector3.zero;
+
+        
+        int step = 0;
+
+
+
+        
+
+        OutlineMesh.vertices = vertices;
+
+        if (OutlineMesh.triangles != _triangles)
+            OutlineMesh.triangles = _triangles;
+
+        if (OutlineMesh.normals != _normals)
+            OutlineMesh.normals = _normals;
+
+
+
+
+
+    }
+
+
 }
