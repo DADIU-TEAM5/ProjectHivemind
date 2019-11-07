@@ -5,6 +5,15 @@ using UnityEngine.AI;
 
 public class EnemySpawner : GameLoop
 {
+
+    public static List<IEnumerator> QueuedSpawns;
+
+
+
+    public static bool SpawningDone;
+
+    bool counted = false;
+
     public FloatVariable LevelBudget;
     public EnemySpawnerList EnemylevelList;
     public Color DisplayColor = Color.red;
@@ -16,10 +25,18 @@ public class EnemySpawner : GameLoop
     List<GameObject> enemies;
     public float budget;
     float[] _values;
-    float smallestValue;
+    public float SmallestValue;
 
     private void OnEnable()
     {
+        SpawningDone = true;
+
+        if(QueuedSpawns == null)
+        {
+            QueuedSpawns = new List<IEnumerator>();
+        }
+
+
         enemies = new List<GameObject>();
 
         for (int i = 0; i < EnemylevelList.Levels[CurrentLevel.Value].Checks.Length; i++)
@@ -32,19 +49,28 @@ public class EnemySpawner : GameLoop
 
 
         }
-        
 
-        enemySpawnerCount.Value++;
+        print(name + " has enemies " + enemies.Count);
 
-        smallestValue = float.MaxValue;
+
+        if (!counted)
+        {
+            enemySpawnerCount.Value++;
+            counted = true;
+        }
+
+        SmallestValue = float.MaxValue;
 
         _values = new float[enemies.Count];
         for (int i = 0; i < enemies.Count; i++)
         {
-            if (_values[i] < smallestValue)
-                smallestValue = _values[i];
+            
 
             _values[i] = enemies[i].GetComponent<Enemy>().difficultyValue;
+
+
+            if (_values[i] < SmallestValue)
+                SmallestValue = _values[i];
         }
     }
 
@@ -61,8 +87,10 @@ public class EnemySpawner : GameLoop
 
     public void SpawnEnemies()
     {
+        
 
-        StartCoroutine(SpawnEnemiesRoutine());
+        StartCoroutine( SpawnEnemiesRoutine() );
+        
     }
 
     IEnumerator SpawnEnemiesRoutine()
@@ -71,13 +99,16 @@ public class EnemySpawner : GameLoop
         float extraBudget;
         if (enemySpawnerCount.Value <= 0)
         {
+            Debug.Log("last enemy spawned left wit " + LevelBudget.Value + " budget to spawn for");
             extraBudget = LevelBudget.Value;
         }
         else
         {
-
-            extraBudget = Random.Range(0, LevelBudget.Value);
             
+            extraBudget = Random.Range(0, LevelBudget.Value);
+            Debug.Log(name + " spawn enemies with a budget of " + (budget + extraBudget));
+
+
         }
 
         LevelBudget.Value -= extraBudget;
@@ -85,13 +116,16 @@ public class EnemySpawner : GameLoop
 
         while (budget > 0)
         {
-            if (smallestValue > budget)
+            if (SmallestValue > budget)
             {
+                //Debug.Log("smallest value is bigger than budget");
                 LevelBudget.Value += budget;
+                
                 break;
             }
 
-            Debug.Log(budget);
+            //Debug.Log("curren budget "+ budget);
+            //Debug.Log("smallest value "+ _smallestValue);
             float valueToGet = float.MaxValue;
             int index = 0;
             while (valueToGet > budget)
@@ -99,16 +133,30 @@ public class EnemySpawner : GameLoop
                 index = Random.Range(0, enemies.Count);
 
                 valueToGet = _values[index];
+
+                
             }
             budget -= _values[index];
 
-            GameObject spawnedEnemy = Instantiate(enemies[index]);
+            GameObject spawnedEnemy = Instantiate(enemies[index],transform);
+
+            Vector3 spawnPoint = transform.position;
+            spawnPoint.y = 0;
+
+            /*
             NavMeshHit hit;
+            
+
             NavMesh.SamplePosition(transform.position, out hit, 3, NavMesh.AllAreas);
-            spawnedEnemy.transform.position = hit.position;
+            */
+            spawnedEnemy.transform.position = spawnPoint;
+
             yield return new WaitForSeconds(0.2f);
         }
 
+
+        Debug.Log(name + " is done");
+        
         yield return null;
     }
 

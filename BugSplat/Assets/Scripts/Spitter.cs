@@ -262,37 +262,37 @@ public class Spitter : Enemy
     }
 
 
-    int[] _triangles = { };
-    Vector3[] _normals = { };
+    int[] _trianglesfortraj = { };
+    Vector3[] _normalsfotraj = { };
 
     public void DrawSpitTrajectory()
     {
-        if (_triangles.Length != 6)
+        if (_trianglesfortraj.Length != 6)
         {
-            _triangles = new int[6];
+            _trianglesfortraj = new int[6];
 
             
 
-            _triangles[0] = 0;
-            _triangles[1] = 1;
-            _triangles[2] = 2;
+            _trianglesfortraj[0] = 0;
+            _trianglesfortraj[1] = 1;
+            _trianglesfortraj[2] = 2;
 
-            _triangles[3] = 0;
-            _triangles[4] = 3;
-            _triangles[5] = 2;
+            _trianglesfortraj[3] = 0;
+            _trianglesfortraj[4] = 3;
+            _trianglesfortraj[5] = 2;
 
 
 
         }
 
-        if (_normals.Length != 4)
+        if (_normalsfotraj.Length != 4)
         {
 
-            _normals = new Vector3[4];
+            _normalsfotraj = new Vector3[4];
 
             for (int i = 0; i < 4; i++)
             {
-                _normals[i] = Vector3.up;
+                _normalsfotraj[i] = Vector3.up;
             }
         }
 
@@ -327,11 +327,11 @@ public class Spitter : Enemy
 
         OutlineMesh.vertices = vertices;
 
-        if (OutlineMesh.triangles != _triangles)
-            OutlineMesh.triangles = _triangles;
+        if (OutlineMesh.triangles != _trianglesfortraj)
+            OutlineMesh.triangles = _trianglesfortraj;
 
-        if (OutlineMesh.normals != _normals)
-            OutlineMesh.normals = _normals;
+        if (OutlineMesh.normals != _normalsfotraj)
+            OutlineMesh.normals = _normalsfotraj;
 
 
 
