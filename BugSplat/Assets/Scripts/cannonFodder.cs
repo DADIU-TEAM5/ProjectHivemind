@@ -10,11 +10,11 @@ public class cannonFodder : Enemy
 
     
 
-    public GameObject Graphics;
+    
 
-    public GameObject bodyPart;
+    
 
-    public GameObject DeadFodder;
+    
 
     
 
@@ -26,94 +26,30 @@ public class cannonFodder : Enemy
 
     
 
-    private NavMeshAgent _navMeshAgent;
+    
 
     
 
-    Color _startColor;
+    
 
     [Header("Events")]
-    public GameEvent TakeDamageEvent;
     
+
     public GameEvent AttackEvent;
-    public GameEvent DeathEvent;
+    
     public GameEvent AttackChargingEvent;
 
-    public void Start()
-    {
-        _navMeshAgent = GetComponent<NavMeshAgent>();
-        _navMeshAgent.speed = stats.MoveSpeed;
-
-        
-        Renderer = Graphics.GetComponent<Renderer>();
-
-        _currentHealth = stats.HitPoints;
-
-        Initialize(_currentHealth);
-
-
-
-
-
-        SetupVars();
-
-        _startColor = Renderer.material.color;
-
-    }
-
-    public override void SetupVars()
-    {
-        
-    }
-
-    public override bool IsVisible()
-    {
-        if (Renderer == null)
-        {
-            Renderer = Graphics.GetComponent<Renderer>();
-        }
-
-        return Renderer.isVisible;
-    }
-
-    public override void TakeDamage(float damage)
-    {
-       // print(name + " took damage "+ damage);
-        _currentHealth -= damage;
-        UpdateHealthBar(_currentHealth);
-        TakeDamageEvent.Raise(this.gameObject); 
-
-        if(_currentHealth <= 0)
-        {
-            /*
-            int partsToDrop = Random.Range(stats.minPartsToDrop, stats.maxPartsToDrop);
-            for (int i = 0; i < partsToDrop; i++)
-            {
-                GameObject part = Instantiate(bodyPart);
-                
-                part.transform.position = transform.position +(( Vector3.up*i)*0.5f);
-            }
-            */
-
-            //Graphics.SetActive(false);
-            DeadFodder.transform.SetParent(null);
-            DeadFodder.SetActive(true);
-
-            DeathEvent.Raise(this.gameObject);
-            EnemyList.Remove(gameObject);
-
-            Destroy(Cone);
-            Destroy(Outline);
-            Destroy(gameObject, 3f);
-        }
-    }
+    
 
     
 
-    Color SetColor(Color color)
-    {
-        return Color.Lerp(_startColor, color, 0.5f);
-    }
+    
+
+    
+
+    
+
+    
 
     public override void LoopUpdate(float deltaTime)
     {
@@ -124,7 +60,7 @@ public class cannonFodder : Enemy
 
         Debug.DrawLine(transform.position, (transform.position + transform.forward), Color.red);
 
-        if (!_playerDetected)
+        if (!PlayerDetected)
         {
             Renderer.material.color = SetColor(Color.blue);
             DetectThePlayer();
@@ -133,8 +69,8 @@ public class cannonFodder : Enemy
         {
             if (_attackCooldown <= 0)
             {
-                if (_navMeshAgent.destination != transform.position)
-                    _navMeshAgent.destination = transform.position;
+                if (NavMeshAgent.destination != transform.position)
+                    NavMeshAgent.destination = transform.position;
 
                 Renderer.material.color = SetColor(Color.red);
                 Attack();
@@ -165,7 +101,7 @@ public class cannonFodder : Enemy
         {
             AttackChargingEvent.Raise(this.gameObject);
 
-            Vector3 adjustedPlayerPos = _playerTransform.position;
+            Vector3 adjustedPlayerPos = PlayerTransform.position;
 
             adjustedPlayerPos.y = transform.position.y;
 
@@ -239,32 +175,25 @@ public class cannonFodder : Enemy
 
     
 
-    bool playerInAttackRange()
-    {
-        Vector3 adjustedPlayerPos = _playerTransform.position;
-
-        adjustedPlayerPos.y = transform.position.y;
-
-        return Vector3.Distance(transform.position, adjustedPlayerPos) < stats.AttackRange / 2;
-    }
+    
 
     void MoveTowardsThePlayer()
     {
         float jitter = 2;
-        _navMeshAgent.Move(new Vector3(Random.Range(-jitter, jitter), 0, Random.Range(-jitter, jitter))*Time.deltaTime);
+        NavMeshAgent.Move(new Vector3(Random.Range(-jitter, jitter), 0, Random.Range(-jitter, jitter))*Time.deltaTime);
 
-        float distanceToplayer = Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(_playerTransform.position.x, _playerTransform.position.z));
+        float distanceToplayer = Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(PlayerTransform.position.x, PlayerTransform.position.z));
 
         if (distanceToplayer > stats.AttackRange/2)
         {
 
-            if (_navMeshAgent.destination != _playerTransform.position)
-                _navMeshAgent.destination = _playerTransform.position;
+            if (NavMeshAgent.destination != PlayerTransform.position)
+                NavMeshAgent.destination = PlayerTransform.position;
         }
         else
         {
-            if (_navMeshAgent.destination != transform.position)
-                _navMeshAgent.destination = transform.position;
+            if (NavMeshAgent.destination != transform.position)
+                NavMeshAgent.destination = transform.position;
         }
     }
 

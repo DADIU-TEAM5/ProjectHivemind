@@ -58,8 +58,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae8cd77b9a3fb574486a4a4a4ef4a938, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   GameLoopHandler: {fileID: 11400000, guid: b20923f160198a245bcdd80c8342f9ac, type: 2}
   GameLoops:
   - {fileID: 6499693330658036423}
@@ -95,30 +95,49 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d5159b0b2983b44eb6ebfe97af915a1, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   difficultyValue: 4
+  AttackCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  ConeMaterial: {fileID: 2100000, guid: 334b626f7df17c24098755a1717def0b, type: 2}
+  stats: {fileID: 11400000, guid: 23cc4f488cfe3d74497cadffc6e59c9d, type: 2}
+  bodyPart: {fileID: 7324468612011702487, guid: 862620230bd5167459723c1fe51d3192,
+    type: 3}
+  DeadCutout: {fileID: 0}
+  Graphics: {fileID: 2456961457170361764}
   EnemyList: {fileID: 11400000, guid: 73fb98983f89ab9418a547ca2aa08854, type: 2}
   LockedTarget: {fileID: 11400000, guid: 10807b189a56cf444ac0120f9222ea9e, type: 2}
   CurrentEnemySO: {fileID: 11400000, guid: f105a26415b393b4294e03ed33f33397, type: 2}
   CurrentEnemyGraphic: {fileID: 11400000, guid: 622f7e966361b8946aed8997885a3b76,
     type: 2}
   TargetGraphic: {fileID: 11400000, guid: 35750c098c4b5a64683897e38deae292, type: 2}
-  PlayerCamBrain: {fileID: 639618510448564449, guid: b222bf4daa60abc4ab286aa2fe1f5b53,
-    type: 3}
   NoVisibleEnemies: {fileID: 11400000, guid: fab092924697b554a8c0751c87f04669, type: 2}
   HealthBarWidth: 150
   HealthBarHeight: 20
   HealthBarOffsetX: -50
   HealthBarOffsetY: -350
-  Graphics: {fileID: 2456961457170361764}
-  bodyPart: {fileID: 7324468612011702487, guid: 862620230bd5167459723c1fe51d3192,
-    type: 3}
-  stats: {fileID: 11400000, guid: 23cc4f488cfe3d74497cadffc6e59c9d, type: 2}
-  TakeDamageEvent: {fileID: 11400000, guid: 672974adbe25e4fdf8f22f73f62ef14a, type: 2}
+  NavMeshAgent: {fileID: 0}
+  _startColor: {r: 0, g: 0, b: 0, a: 0}
+  Renderer: {fileID: 0}
+  Cone: {fileID: 0}
+  ConeRenderer: {fileID: 0}
+  ConeMesh: {fileID: 0}
+  Outline: {fileID: 0}
+  OutlineRenderer: {fileID: 0}
+  OutlineMesh: {fileID: 0}
   AggroEvent: {fileID: 11400000, guid: 133c016a815fd4c2b9173028a37d05a4, type: 2}
-  AttackEvent: {fileID: 11400000, guid: bafbf450e60f74a218319f9cc59f4834, type: 2}
+  TakeDamageEvent: {fileID: 11400000, guid: 672974adbe25e4fdf8f22f73f62ef14a, type: 2}
   DeathEvent: {fileID: 11400000, guid: e1eece7e0f8b74ba48bd4b1a583fd49a, type: 2}
+  _playerDetected: 0
+  _playerTransform: {fileID: 0}
+  _isAlly: 0
+  _currentHealth: 0
+  AttackEvent: {fileID: 11400000, guid: bafbf450e60f74a218319f9cc59f4834, type: 2}
 --- !u!1001 &5852722917182829741
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -189,7 +208,7 @@ PrefabInstance:
     - target: {fileID: -1504981713932161579, guid: 4172f0f129792d84ba9d733ae2a7bfff,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
-      value:
+      value: 
       objectReference: {fileID: 2100000, guid: 8c5680d92968406448ad20273c09331b, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4172f0f129792d84ba9d733ae2a7bfff, type: 3}
