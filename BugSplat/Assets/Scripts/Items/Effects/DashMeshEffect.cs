@@ -43,12 +43,14 @@ public class DashMeshEffect : Effect
         Destroy(box.GetComponent<BoxCollider>());
 
         var direction = endPlace.transform.position - DashInit.StartPos;
-        Debug.Log("Dir: " + endPlace.transform.position);
+        var midPoint = DashInit.StartPos + direction * 0.5f;
+
         var height = direction.magnitude;
 
         box.transform.localScale = new Vector3(MeshWidth, MeshDepth, height);
-        box.transform.position = DashInit.StartPos + direction * 0.5f;
-        box.transform.LookAt(direction + endPlace.transform.position);
+        box.transform.position = new Vector3(midPoint.x, 0, midPoint.z);
+
+        box.transform.LookAt(new Vector3(endPlace.transform.position.x, 0, endPlace.transform.position.z));
 
         return box;
     }
@@ -69,13 +71,6 @@ public class DashMeshEffect : Effect
             foreach (var enemy in enemies) {
                 ZoneEffect.Trigger(enemy.gameObject);
             }
-        }
-
-        void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-
-            Gizmos.DrawWireCube(transform.position, transform.localScale);
         }
     }
 }
