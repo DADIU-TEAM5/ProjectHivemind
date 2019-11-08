@@ -39,7 +39,6 @@ public class ProjectileEffect : Effect
 
         private void OnParticleCollision(GameObject other)
         {
-            Debug.Log("COLLIDING");
             CollideEffect.Trigger(other);
         }
     }
