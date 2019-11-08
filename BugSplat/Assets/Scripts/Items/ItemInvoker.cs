@@ -44,7 +44,8 @@ public class ItemInvoker : MonoBehaviour
 
     public void TriggerEffects(GameObject target) {
         if (target == null) Debug.Log("Perfect OUT!");
-        var effects = Effects[CurrentEffectType];
+
+        var effects = (Effects.Keys.Contains(CurrentEffectType)) ? Effects[CurrentEffectType] : new List<Effect>();
 
         foreach (var effect in effects) {
             effect.Trigger(target);

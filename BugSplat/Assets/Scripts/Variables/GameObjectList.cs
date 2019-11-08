@@ -7,7 +7,7 @@ using UnityEditor;
 public class GameObjectList : RuntimeSet<GameObject>
 {
     public GameEvent HasWon;
-    public GameEvent EnemyDied;
+    
 
     private void OnEnable()
     {
@@ -18,7 +18,7 @@ public class GameObjectList : RuntimeSet<GameObject>
         
             if (Items.Contains(t))
             {
-                EnemyDied.Raise(t);
+                
                 Items.Remove(t);
             }
         if(Items.Count <=0)
