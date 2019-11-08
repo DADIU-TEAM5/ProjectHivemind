@@ -15,12 +15,15 @@ public class PlayerDodgeScript : GameLoop
     public FloatVariable DashCooldownSO;
     public AnimationCurve DashAnimationCurve;
 
+    public GameEvent DashDoneEvent;
+
     private float _currentTime;
     private float _lerpTime = 0f;
     private NavMeshAgent _navMeshAgent;
     private Vector3 _dashDirection;
     private Vector3 _initialPos;
     private bool _dashCooldownActive;
+
 
 
     private void Start()
@@ -78,6 +81,7 @@ public class PlayerDodgeScript : GameLoop
                         _navMeshAgent.transform.position = _initialPos + PlayerVelocitySO.Value;
                     }
                     IsDodgingSO.Value = false;
+                    DashDoneEvent.Raise(this.gameObject);
                 }
             }
 
@@ -92,7 +96,7 @@ public class PlayerDodgeScript : GameLoop
                 DashCooldownSO.Value = DashCooldownSO.InitialValue;
                 IsInvulnerableSO.Value = false;
             }
-        }
+        } 
     }
 
 

@@ -90,8 +90,6 @@ public class TouchControls : GameLoop
 
             if (touch0.fingerId == 0)
             {
-                DebugText.text = "TEST 0: " + touch0.fingerId.ToString();
-
                 Vector3 touchPosition = touch0.position;                
 
                 if (_uiActivated == false)
@@ -108,10 +106,6 @@ public class TouchControls : GameLoop
                                 break;
                         }
                     }
-                }
-                else
-                {
-                    DebugText.text = "TEST ELSE: " + touch0.fingerId.ToString();
                 }
             }
         }

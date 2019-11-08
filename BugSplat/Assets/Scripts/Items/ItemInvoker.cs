@@ -31,6 +31,7 @@ public class ItemInvoker : MonoBehaviour
 
             for (var j = 0; j < item.Effects.Length; j++) {
                 var effect = item.Effects[j];
+                Debug.Log(effect.name);
                 effect.Init();
                 if (!Effects.ContainsKey(effect.EffectType)) {
                     Effects[effect.EffectType] = new List<Effect>(10) { effect };
@@ -46,12 +47,7 @@ public class ItemInvoker : MonoBehaviour
         var effects = Effects[CurrentEffectType];
 
         foreach (var effect in effects) {
-            Debug.Log(effect.name);
             effect.Trigger(target);
         }
-    }
-
-    public void TriggerWithNull() {
-        TriggerEffects(null);
     }
 }

@@ -15,6 +15,8 @@ public class DamageEnemyEffect : Effect
     {
         var enemy = target?.GetComponent<Enemy>();
 
+        if (enemy == null) Debug.Log("Hold up what??");
+
         enemy?.TakeDamage(AmountOfDamage);
     }
 }
