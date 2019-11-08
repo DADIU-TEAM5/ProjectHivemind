@@ -49,6 +49,11 @@ public class PreProcess : MonoBehaviour
             // }
         }
         GetMagicMotion();
+        //EditorUtility.SetDirty(AnimationsPreProcess);
+        //EditorUtility.SetDirty(AnimationsPlay);
+        //EditorUtility.SetDirty(MagicMotions);
+        //EditorUtility.SetDirty(MagicMotion);
+
     }
 
     // public bool IsMagicMotion(string animName)
