@@ -6,6 +6,7 @@ using UnityEngine.AI;
 
 public class PlayerHealth : GameLoop
 {
+    public GameObject PlayerGraphics; 
     public GameObjectList EnemyList;
     public GameObjectVariable HexMapParent;
 
@@ -53,7 +54,7 @@ public class PlayerHealth : GameLoop
 
             if (TookDamageEvent != null)
             {
-                TookDamageEvent.Raise(this.gameObject);
+                TookDamageEvent.Raise(PlayerGraphics);
             }
 
             CheckIfDead();
@@ -82,7 +83,7 @@ public class PlayerHealth : GameLoop
     {
         if (CurrentHealth.Value <= 0)
         {
-            PlayerDiedEvent.Raise();
+            PlayerDiedEvent.Raise(PlayerGraphics);
             Destroy(HexMapParent.Value);
 
             EnemyList.Items = new List<GameObject>();
@@ -103,7 +104,7 @@ public class PlayerHealth : GameLoop
             {
                 if (damage > 0f)
                 {
-                    TookDamageEvent.Raise(gameObject);
+                    TookDamageEvent.Raise(PlayerGraphics);
                 }
             }
 

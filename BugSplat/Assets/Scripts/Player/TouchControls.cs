@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class TouchControls : GameLoop
 {
+    public GameObject PlayerGraphics;
     // Setup ScriptableObjects for holding the PlayerMovementInfo
     public Vector3Variable PlayerDirectionSO;
     public FloatVariable PlayerMaxSpeedSO;
@@ -270,7 +271,7 @@ public class TouchControls : GameLoop
                 */
 
                 //DebugText.text = "ATTACKED!";
-                AttackInitiatedSO.Raise(this.gameObject);
+                AttackInitiatedSO.Raise(PlayerGraphics);
             }
         }
         // Check if SWIPE has happened
@@ -279,7 +280,7 @@ public class TouchControls : GameLoop
             //Debug.Log("FINGER DIST: " + Vector3.Distance(_currentInputPosition[0], _currentInputPosition[_inputFrames]));
 
             //DebugText.text = "DODGED!";
-            DashInitiatedSO.Raise(this.gameObject);
+            DashInitiatedSO.Raise(PlayerGraphics);
         }
 
         // Check if MOVE has happened
