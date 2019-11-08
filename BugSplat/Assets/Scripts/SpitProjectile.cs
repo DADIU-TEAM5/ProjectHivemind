@@ -6,11 +6,9 @@ public class SpitProjectile : MonoBehaviour
 {
     public SpitterStats stats;
 
-
     private void OnParticleCollision(GameObject other)
     {
 
-        print(other.name);
         if(other.CompareTag("Player"))
         {
 
