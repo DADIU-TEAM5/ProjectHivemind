@@ -204,7 +204,7 @@ public class TouchControls : GameLoop
             direction = heading.normalized;
 
             // UI debug stuff
-            //_uiCurrent.transform.localPosition = new Vector3(x, y);
+            _uiCurrent.transform.localPosition = new Vector3(x, y);
 
             // Export direction and speed vector to the PlayerSpeedDirectionSO
             PlayerDirectionSO.Value.x = direction.x;
@@ -222,8 +222,8 @@ public class TouchControls : GameLoop
             _recordPosition = false;
 
             // UI Debug Stuff
-            //_uiRecord = Instantiate(TouchUIDotRecorded, TouchCanvas);
-            //_uiRecord.transform.position = touchPos;
+            _uiRecord = Instantiate(TouchUIDotRecorded, TouchCanvas);
+            _uiRecord.transform.position = touchPos;
         }
         else
         {
@@ -231,22 +231,22 @@ public class TouchControls : GameLoop
         }
 
         // UI Debug Stuff
-        //if (_uiCurrent == null)
-        //{
-        //    _uiCurrent = Instantiate(TouchUIDotCurrent, _uiRecord.transform.position, Quaternion.identity, _uiRecord.transform);
-        //}
-        //else
-        //{
-        //    _uiCurrent.transform.position = _uiRecord.transform.position;
-        //}
+        if (_uiCurrent == null)
+        {
+            _uiCurrent = Instantiate(TouchUIDotCurrent, _uiRecord.transform.position, Quaternion.identity, _uiRecord.transform);
+        }
+        else
+        {
+            _uiCurrent.transform.position = _uiRecord.transform.position;
+        }
     }
 
 
     private void EndMove(Vector3 touchPosition)
     {
         // UI Debug Stuff
-        //Object.Destroy(_uiRecord);
-        //Object.Destroy(_uiCurrent);
+        Object.Destroy(_uiRecord);
+        Object.Destroy(_uiCurrent);
 
         // Check if TAP has happened
         if (Vector3.Distance(_currentInputPosition[_inputFrames], _recordedInputPosition) < _runtimeInputMin)

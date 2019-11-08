@@ -27,6 +27,7 @@ public class PlayerTrajectory : GameLoop
 
     public AnimationCapsules AnimationTrajectories;
     public AnimationClips AnimationClips;
+    public AnimationClips DeadAnimationClips;
     public Result Results;
     public bool Blend = false;
     //it is okay for static?
@@ -142,7 +143,7 @@ public class PlayerTrajectory : GameLoop
             Results.FrameNum++;
 
 
-        PlayAnimationJoints(rotationPlayer, PlayerTrajectoryCapusule,
+        PlayAnimationJoints(PlayerTrajectoryCapusule,
                                                 Results, AnimationClips, _skeletonJoints);
         //transform.Rotate(rotationPlayer);
     }
@@ -165,7 +166,7 @@ public class PlayerTrajectory : GameLoop
 
 
             if (isSimilarMotion)
-                PlayAnimationJoints(rotationPlayer, PlayerTrajectoryCapusule,
+                PlayAnimationJoints( PlayerTrajectoryCapusule,
                                                 Results, AnimationClips, _skeletonJoints);
             else
             {
@@ -183,7 +184,7 @@ public class PlayerTrajectory : GameLoop
         else
         {
             Results.FrameNum++;
-            PlayAnimationJoints(rotationPlayer, PlayerTrajectoryCapusule,
+            PlayAnimationJoints( PlayerTrajectoryCapusule,
                                                 Results, AnimationClips, _skeletonJoints);
         }
     }
@@ -219,7 +220,7 @@ public class PlayerTrajectory : GameLoop
 
 
             if (isSimilarMotion)
-                PlayAnimationJoints(rotationPlayer, PlayerTrajectoryCapusule,
+                PlayAnimationJoints( PlayerTrajectoryCapusule,
                                                 Results, AnimationClips, _skeletonJoints); 
             else
             {
@@ -236,7 +237,7 @@ public class PlayerTrajectory : GameLoop
         }
         else if (!_blendFlag)
         {
-            PlayAnimationJoints(rotationPlayer, PlayerTrajectoryCapusule,
+            PlayAnimationJoints(PlayerTrajectoryCapusule,
                                                 Results, AnimationClips, _skeletonJoints);
             Results.FrameNum++;
         }
@@ -347,11 +348,27 @@ public class PlayerTrajectory : GameLoop
 
 
 
+    public void PlayDeadAnim()
+    {
+        var deadAnimIndex = Random.Range(0, DeadAnimationClips.AnimClips.Count - 1);
+        PlayOneWholeAnimation(DeadAnimationClips.AnimClips[deadAnimIndex]);
+    }
+
+
+    private void PlayOneWholeAnimation(AnimClip animClip)
+    {
+        for(int i = 0; i < animClip.Frames.Count; i++)
+        {
+            FrameToJoints(_skeletonJoints, animClip.Frames[i]);
+        }
+
+    }
+
 
 
 
     //play animation
-    public void PlayAnimationJoints(Vector3 rotationPlayer,
+    public void PlayAnimationJoints(
                                     CapsuleScriptObject current, Result result,
                                     AnimationClips animationClips,
                                     Dictionary<string, Transform> skeletonJoints)
@@ -362,6 +379,7 @@ public class PlayerTrajectory : GameLoop
         current.Capsule.AnimClipName = result.ClipName;
         current.Capsule.FrameNum = result.FrameNum;
 
+        //watch out here
         if (result.FrameNum >= animationClips.AnimClips[result.AnimClipIndex].Frames.Count - 1)
             result.FrameNum = 0;
 
