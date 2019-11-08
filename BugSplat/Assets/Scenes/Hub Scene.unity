@@ -1932,7 +1932,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &958002658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2306,6 +2306,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1383441881}
   - component: {fileID: 1383441882}
+  - component: {fileID: 1383441883}
   m_Layer: 0
   m_Name: ShopColliderObject
   m_TagString: Untagged
@@ -2353,6 +2354,7 @@ MonoBehaviour:
     type: 2}
   PlayerControlOverrideSO: {fileID: 11400000, guid: 6c60755199019534381ecc8c862bb419,
     type: 2}
+  IsShopOpenSO: {fileID: 11400000, guid: c09e3d7f04a88d94da99e89ff963fea8, type: 2}
   PlayerExitPos: {fileID: 11400000, guid: 5e0eff17506805f47bbcfca8d30d3610, type: 2}
   IsExiting: {fileID: 11400000, guid: 6f8138e6015624643a13ae94cac318c3, type: 2}
   TimeScale: 0.15
@@ -2362,6 +2364,21 @@ MonoBehaviour:
   - {fileID: 1168518869}
   PlayerDirectionSO: {fileID: 11400000, guid: 857036471d8e63b46b304293dca2794e, type: 2}
   PlayerGraphics: {fileID: 1848848006}
+--- !u!114 &1383441883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383441880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cfb8dfe89197384e9374e37d7e6823b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsShopOpenSO: {fileID: 11400000, guid: c09e3d7f04a88d94da99e89ff963fea8, type: 2}
+  ShopDoor: {fileID: 1467944153}
+  ShopCollider: {fileID: 958002657}
 --- !u!1001 &1444065290
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2471,6 +2488,12 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 95992159057380580, guid: 9db6b7d4dc6aad9408744eedbda3c8b0,
     type: 3}
   m_PrefabInstance: {fileID: 1696978865}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1467944153 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 603036437539022044, guid: dd19708ac672f9f4686f741e262461c5,
+    type: 3}
+  m_PrefabInstance: {fileID: 4294597274677462541}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1512055342 stripped
 GameObject:
@@ -3302,7 +3325,7 @@ PrefabInstance:
     - target: {fileID: 603036437539022044, guid: dd19708ac672f9f4686f741e262461c5,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 603036437539022044, guid: dd19708ac672f9f4686f741e262461c5,
         type: 3}

@@ -9,6 +9,7 @@ public class PlayerControlOverride : MonoBehaviour
     public Transform Player;
     public FloatVariable PlayerCurrentSpeedSO;
     public BoolVariable PlayerControlOverrideSO;
+    public BoolVariable IsShopOpenSO;
     public Vector3Variable PlayerExitPos;
     public BoolVariable IsExiting;
     public float TimeScale;
@@ -21,23 +22,27 @@ public class PlayerControlOverride : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (IsExiting.Value != true)
+        if (IsShopOpenSO.Value == true)
         {
-            for (int i = ShopColliders.Length-1; i >= 0; i--)
+            if (IsExiting.Value != true)
             {
-                ShopColliders[i].SetActive(true);
+                for (int i = ShopColliders.Length - 1; i >= 0; i--)
+                {
+                    ShopColliders[i].SetActive(true);
+                }
+                Target[1].gameObject.SetActive(false);
             }
-            Target[1].gameObject.SetActive(false);
+            else
+            {
+                PlayerControlOverrideSO.Value = true;
+                Vector3 heading = Target[2].position - Target[1].position;
+                Debug.Log(heading.normalized);
+                PlayerDirectionSO.Value = heading.normalized;
+                Player.position = Target[1].position;
+                IsExiting.Value = false;
+            }
         }
-        else
-        {
-            PlayerControlOverrideSO.Value = true;
-            Vector3 heading = Target[2].position - Target[1].position;
-            Debug.Log(heading.normalized);
-            PlayerDirectionSO.Value = heading.normalized;
-            Player.position = Target[1].position;
-            IsExiting.Value = false;
-        }
+
     }
 
 
