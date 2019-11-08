@@ -171,12 +171,9 @@ public abstract class Enemy : GameLoop
 
             DeathEvent.Raise(this.gameObject);
 
-            EnemyList.Remove(gameObject);
-
             Destroy(Cone);
             Destroy(Outline);
-            Destroy(gameObject, 3f);
-
+            Destroy(gameObject);
         }
     }
 
