@@ -22,6 +22,9 @@ public class ItemInvoker : MonoBehaviour
     public void SetCurrentEffectType(EffectType type) {
         if (Effects.ContainsKey(type)) {
             CurrentEffectType = type;
+        } else
+        {
+            CurrentEffectType = null;
         }
     }
 
