@@ -1,5 +1,51 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &255754536
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 255754537}
+  - component: {fileID: 255754538}
+  m_Layer: 0
+  m_Name: debug
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &255754537
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255754536}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4454619244096978617}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &255754538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255754536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 366cbba58bae2a2438bdbb3bf75af73e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationCapsules: {fileID: 11400000, guid: 327ec0fd83ed26641b0b423ab2b9d968, type: 2}
+  transformToShowFrom: {fileID: 255754537}
+  result: {fileID: 11400000, guid: fc2935224d0935b409173ca4fafc3dd2, type: 2}
 --- !u!1 &2904836501674625065
 GameObject:
   m_ObjectHideFlags: 0
@@ -51,8 +97,8 @@ GameObject:
   - component: {fileID: 771227558}
   - component: {fileID: 771227568}
   - component: {fileID: 771227569}
-  - component: {fileID: 1799847258}
   - component: {fileID: 282145137683011156}
+  - component: {fileID: 1799847258}
   m_Layer: 9
   m_Name: PlayerGameObject
   m_TagString: Player
@@ -90,7 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Anim: {fileID: 0}
-  PlayerGraphics: {fileID: 0}
+  PlayerGraphics: {fileID: 4454619244096978617}
   PlayerDirectionSO: {fileID: 11400000, guid: 857036471d8e63b46b304293dca2794e, type: 2}
   PlayerCurrentSpeedSO: {fileID: 11400000, guid: dbd0aac2d5b26704bbdf49f8d6657a38,
     type: 2}
@@ -114,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c353e778184c774aa8207a8da5793ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerGraphics: {fileID: 0}
+  PlayerGraphics: {fileID: 831658780760607914}
   PlayerDirectionSO: {fileID: 11400000, guid: 857036471d8e63b46b304293dca2794e, type: 2}
   PlayerMaxSpeedSO: {fileID: 11400000, guid: 93c017ab6cc3fb74294b1f9f15a4860b, type: 2}
   PlayerCurrentSpeedSO: {fileID: 11400000, guid: dbd0aac2d5b26704bbdf49f8d6657a38,
@@ -264,6 +310,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 831658780760607913}
+        m_MethodName: GetAttack1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
 --- !u!114 &8708014117340893829
@@ -306,7 +363,7 @@ MonoBehaviour:
   PlayerDirectionSO: {fileID: 11400000, guid: 857036471d8e63b46b304293dca2794e, type: 2}
   PlayerCurrentSpeedSO: {fileID: 11400000, guid: dbd0aac2d5b26704bbdf49f8d6657a38,
     type: 2}
-  PlayerGraphics: {fileID: 0}
+  PlayerGraphics: {fileID: 4454619244096978617}
   LockedTarget: {fileID: 11400000, guid: 10807b189a56cf444ac0120f9222ea9e, type: 2}
   AutoAttackRange: {fileID: 11400000, guid: 19c4e000b50a1274693be77afb3b7bbb, type: 2}
   CurrentEnemySO: {fileID: 11400000, guid: f105a26415b393b4294e03ed33f33397, type: 2}
@@ -318,7 +375,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5788987755461925658}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35d9276563b62684296dce1377b78b23, type: 3}
   m_Name: 
@@ -403,6 +460,28 @@ MonoBehaviour:
   TankBeetle: {fileID: 0}
   PlayerCurrentSpeedSO: {fileID: 0}
   PlayerDirectionSO: {fileID: 0}
+--- !u!114 &282145137683011156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5788987755461925658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ec595245cfec614e867624ebae35483, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerGraphics: {fileID: 831658780760607914}
+  EnemyList: {fileID: 11400000, guid: 73fb98983f89ab9418a547ca2aa08854, type: 2}
+  HexMapParent: {fileID: 11400000, guid: d6a385588fc3812449772760c0c71603, type: 2}
+  IsInvulnerableSO: {fileID: 11400000, guid: 3e721a80afd6d0643a68ebff8a1d86d0, type: 2}
+  InvulnerabilityTimerSO: {fileID: 11400000, guid: 71863109185fbb54d8667c91b4b24ef8,
+    type: 2}
+  MaxHealth: {fileID: 11400000, guid: bd56d08eef8fd2648ba7efd6397151bb, type: 2}
+  CurrentHealth: {fileID: 11400000, guid: d980b5989185a2948b70c02cdfccf718, type: 2}
+  TookDamageEvent: {fileID: 11400000, guid: a7269a05022ef469c883eb9a01dab7af, type: 2}
+  PlayerDiedEvent: {fileID: 11400000, guid: c3ddde208a1b34097a8737cd5f891f2a, type: 2}
 --- !u!195 &1799847258
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -425,28 +504,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &282145137683011156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5788987755461925658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ec595245cfec614e867624ebae35483, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerGraphics: {fileID: 0}
-  EnemyList: {fileID: 11400000, guid: 73fb98983f89ab9418a547ca2aa08854, type: 2}
-  HexMapParent: {fileID: 11400000, guid: d6a385588fc3812449772760c0c71603, type: 2}
-  IsInvulnerableSO: {fileID: 11400000, guid: 3e721a80afd6d0643a68ebff8a1d86d0, type: 2}
-  InvulnerabilityTimerSO: {fileID: 11400000, guid: 71863109185fbb54d8667c91b4b24ef8,
-    type: 2}
-  MaxHealth: {fileID: 11400000, guid: bd56d08eef8fd2648ba7efd6397151bb, type: 2}
-  CurrentHealth: {fileID: 11400000, guid: d980b5989185a2948b70c02cdfccf718, type: 2}
-  TookDamageEvent: {fileID: 11400000, guid: a7269a05022ef469c883eb9a01dab7af, type: 2}
-  PlayerDiedEvent: {fileID: 11400000, guid: c3ddde208a1b34097a8737cd5f891f2a, type: 2}
 --- !u!1001 &5305206887310836533
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -514,14 +571,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4761787838801661853, guid: 29eb06ddfc536af4dab58434973c8881,
+        type: 3}
+      propertyPath: PlayerGraphics
+      value: 
+      objectReference: {fileID: 831658780760607914}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29eb06ddfc536af4dab58434973c8881, type: 3}
+--- !u!1 &831658780760607914 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4761787838801661855, guid: 29eb06ddfc536af4dab58434973c8881,
+    type: 3}
+  m_PrefabInstance: {fileID: 5305206887310836533}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4454619244096978617 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8380667943823523212, guid: 29eb06ddfc536af4dab58434973c8881,
     type: 3}
   m_PrefabInstance: {fileID: 5305206887310836533}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &831658780760607913 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4761787838801661852, guid: 29eb06ddfc536af4dab58434973c8881,
+    type: 3}
+  m_PrefabInstance: {fileID: 5305206887310836533}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831658780760607914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d915697d1e1ac764eb9278a5eadb4310, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5616347645806694160
 PrefabInstance:
   m_ObjectHideFlags: 0
