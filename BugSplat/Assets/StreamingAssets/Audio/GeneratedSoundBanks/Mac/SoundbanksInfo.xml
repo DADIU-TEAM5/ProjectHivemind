@@ -21,12 +21,12 @@
 			<ShortName>sb_arena</ShortName>
 			<Path>sb_arena.bnk</Path>
 			<IncludedEvents>
-				<Event Id="1635194325" Name="PH" ObjectPath="\Events\ArenaEvents\Ambience\PH" DurationType="Infinite"/>
+				<Event Id="1404225303" Name="amb_arena_01" ObjectPath="\Events\ArenaEvents\Ambience\Arena\amb_arena_01" DurationType="Infinite"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
-				<File Id="806435875" Language="SFX">
-					<ShortName>amb_arena_PH.wav</ShortName>
-					<Path>SFX/amb_arena_PH_EBC987A4.wem</Path>
+				<File Id="207969396" Language="SFX">
+					<ShortName>amb_arena_dome_01.wav</ShortName>
+					<Path>SFX/amb_arena_dome_01_ADF7B7FB.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
@@ -54,6 +54,654 @@
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 		</SoundBank>
+		<SoundBank Id="1907550163" Language="SFX">
+			<ObjectPath>\SoundBanks\Default Work Unit\sb_enemies</ObjectPath>
+			<ShortName>sb_enemies</ShortName>
+			<Path>sb_enemies.bnk</Path>
+			<IncludedEvents>
+				<Event Id="592638112" Name="npc_boomer_attack" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_attack" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="1879848174" Name="npc_boomer_dead" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_dead" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="852176873" Name="npc_boomer_detect" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_detect" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.710403" DurationMax="1.784024"/>
+				<Event Id="199898249" Name="npc_boomer_footsteps" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_footsteps" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.377227" DurationMax="0.604751"/>
+				<Event Id="3079577491" Name="npc_boomer_hit" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_hit" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="1.250000" DurationMax="2.130431"/>
+				<Event Id="145632074" Name="npc_boomer_idle" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_idle" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="1549899671" Name="npc_boomer_scream" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_scream" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="81359797" Name="npc_boomer_specialAttack" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_specialAttack" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="1529994500" Name="npc_fodder_attack" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_attack" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.414320" DurationMax="0.576782"/>
+				<Event Id="3201101332" Name="npc_fodder_charge" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_charge" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="2985061994" Name="npc_fodder_dead" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_dead" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.532272" DurationMax="0.992047"/>
+				<Event Id="1205968901" Name="npc_fodder_detect" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_detect" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.609705" DurationMax="1.124989"/>
+				<Event Id="3043968597" Name="npc_fodder_footsteps" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_footsteps" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.314967" DurationMax="0.583161"/>
+				<Event Id="1374986823" Name="npc_fodder_hit" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_hit" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.532272" DurationMax="0.992047"/>
+				<Event Id="2887557750" Name="npc_fodder_idle" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_idle" MaxAttenuation="100.000000" DurationType="Infinite"/>
+				<Event Id="6383691" Name="npc_fodder_scream" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_scream" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="2078456833" Name="npc_fodder_specialAttack" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_specialAttack" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="3679048617" Name="npc_heavy_attack" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_attack" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.648028" DurationMax="2.314713"/>
+				<Event Id="2658157895" Name="npc_heavy_dead" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_dead" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="4074057964" Name="npc_heavy_detect" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_detect" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.801885" DurationMax="2.314713"/>
+				<Event Id="198238650" Name="npc_heavy_footsteps" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_footsteps" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.815072" DurationMax="1.244730"/>
+				<Event Id="78903020" Name="npc_heavy_hit" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_hit" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.722119" DurationMax="2.525671"/>
+				<Event Id="3339782068" Name="npc_heavy_hit_front" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_hit_front" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.688360" DurationMax="1.200843"/>
+				<Event Id="4075444627" Name="npc_heavy_idle" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_idle" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="1586397994" Name="npc_heavy_scream" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_scream" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="575616738" Name="npc_heavy_specialAttack" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_specialAttack" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="1630111423" Name="npc_spitter_attack" ObjectPath="\Events\EnemyInsectEvents\Spitter\npc_spitter_attack" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.685397" DurationMax="0.863152"/>
+				<Event Id="141041902" Name="npc_spitter_burrow" ObjectPath="\Events\EnemyInsectEvents\Spitter\npc_spitter_burrow" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="1.154897" DurationMax="1.812896"/>
+				<Event Id="1581237869" Name="npc_spitter_dead" ObjectPath="\Events\EnemyInsectEvents\Spitter\npc_spitter_dead" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="2631762934" Name="npc_spitter_detect" ObjectPath="\Events\EnemyInsectEvents\Spitter\npc_spitter_detect" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.750000" DurationMax="1.204308"/>
+				<Event Id="3732201856" Name="npc_spitter_footsteps" ObjectPath="\Events\EnemyInsectEvents\Spitter\npc_spitter_footsteps" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="2546983038" Name="npc_spitter_hit" ObjectPath="\Events\EnemyInsectEvents\Spitter\npc_spitter_hit" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.622041" DurationMax="0.750000"/>
+				<Event Id="299564625" Name="npc_spitter_idle" ObjectPath="\Events\EnemyInsectEvents\Spitter\npc_spitter_idle" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="2642000516" Name="npc_spitter_scream" ObjectPath="\Events\EnemyInsectEvents\Spitter\npc_spitter_scream" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="3176358132" Name="npc_spitter_specialAttack" ObjectPath="\Events\EnemyInsectEvents\Spitter\npc_spitter_specialAttack" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="22184777" Language="SFX">
+					<ShortName>boomer_detect_05.wav</ShortName>
+					<Path>SFX/boomer_detect_05_8EDF57DD.wem</Path>
+				</File>
+				<File Id="27872520" Language="SFX">
+					<ShortName>heavy_hit_stab_03.wav</ShortName>
+					<Path>SFX/heavy_hit_stab_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="36722581" Language="SFX">
+					<ShortName>fodder_attack_bite_02_c1.wav</ShortName>
+					<Path>SFX/fodder_attack_bite_02_c1_8EDF57DD.wem</Path>
+				</File>
+				<File Id="38374292" Language="SFX">
+					<ShortName>RangedDetect_01.wav</ShortName>
+					<Path>SFX/RangedDetect_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="40167073" Language="SFX">
+					<ShortName>heavy_hit_rockdrag_03.wav</ShortName>
+					<Path>SFX/heavy_hit_rockdrag_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="42863926" Language="SFX">
+					<ShortName>fodder_detect_squirm_03.wav</ShortName>
+					<Path>SFX/fodder_detect_squirm_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="45276157" Language="SFX">
+					<ShortName>fodder_footstep_spuirm_02.wav</ShortName>
+					<Path>SFX/fodder_footstep_spuirm_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="61970463" Language="SFX">
+					<ShortName>heavy_hit_crack_02.wav</ShortName>
+					<Path>SFX/heavy_hit_crack_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="62610590" Language="SFX">
+					<ShortName>fodder_attack_scream_04_c1.wav</ShortName>
+					<Path>SFX/fodder_attack_scream_04_c1_8EDF57DD.wem</Path>
+				</File>
+				<File Id="66306714" Language="SFX">
+					<ShortName>heavy_grunt_detect_01.wav</ShortName>
+					<Path>SFX/heavy_grunt_detect_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="70125322" Language="SFX">
+					<ShortName>fodder_footstep_spuirm_03.wav</ShortName>
+					<Path>SFX/fodder_footstep_spuirm_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="87488872" Language="SFX">
+					<ShortName>heavy_hit_chop_wet_02.wav</ShortName>
+					<Path>SFX/heavy_hit_chop_wet_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="91482951" Language="SFX">
+					<ShortName>boomer_detect_03.wav</ShortName>
+					<Path>SFX/boomer_detect_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="94572721" Language="SFX">
+					<ShortName>boomer_hit_gurgle_03.wav</ShortName>
+					<Path>SFX/boomer_hit_gurgle_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="94900319" Language="SFX">
+					<ShortName>boomer_footstep_layer2_03.wav</ShortName>
+					<Path>SFX/boomer_footstep_layer2_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="120939781" Language="SFX">
+					<ShortName>spitter_spitlayer2_03.wav</ShortName>
+					<Path>SFX/spitter_spitlayer2_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="121458227" Language="SFX">
+					<ShortName>RangedDetect_03.wav</ShortName>
+					<Path>SFX/RangedDetect_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="125353367" Language="SFX">
+					<ShortName>heavy_hit_metal_01.wav</ShortName>
+					<Path>SFX/heavy_hit_metal_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="127061111" Language="SFX">
+					<ShortName>heavy_footstep_top_03.wav</ShortName>
+					<Path>SFX/heavy_footstep_top_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="128684335" Language="SFX">
+					<ShortName>fodder_footstep_spuirm_09.wav</ShortName>
+					<Path>SFX/fodder_footstep_spuirm_09_8EDF57DD.wem</Path>
+				</File>
+				<File Id="132670371" Language="SFX">
+					<ShortName>fodder_attack_snarl_01.wav</ShortName>
+					<Path>SFX/fodder_attack_snarl_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="133126319" Language="SFX">
+					<ShortName>fodder_footstep_spuirm_08.wav</ShortName>
+					<Path>SFX/fodder_footstep_spuirm_08_8EDF57DD.wem</Path>
+				</File>
+				<File Id="152809177" Language="SFX">
+					<ShortName>heavy_hit_rockdrag_04.wav</ShortName>
+					<Path>SFX/heavy_hit_rockdrag_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="159457897" Language="SFX">
+					<ShortName>fodder_footstep_spuirm_06.wav</ShortName>
+					<Path>SFX/fodder_footstep_spuirm_06_8EDF57DD.wem</Path>
+				</File>
+				<File Id="163514365" Language="SFX">
+					<ShortName>spitter_spitlayer1_03.wav</ShortName>
+					<Path>SFX/spitter_spitlayer1_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="166690112" Language="SFX">
+					<ShortName>boomer_hit_scream_01.wav</ShortName>
+					<Path>SFX/boomer_hit_scream_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="173894074" Language="SFX">
+					<ShortName>heavy_scream_04.wav</ShortName>
+					<Path>SFX/heavy_scream_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="189303187" Language="SFX">
+					<ShortName>fodder_attack_scream_02_c1.wav</ShortName>
+					<Path>SFX/fodder_attack_scream_02_c1_8EDF57DD.wem</Path>
+				</File>
+				<File Id="197953743" Language="SFX">
+					<ShortName>ranged_top_02.wav</ShortName>
+					<Path>SFX/ranged_top_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="204072445" Language="SFX">
+					<ShortName>heavy_hit_chop_wet_01.wav</ShortName>
+					<Path>SFX/heavy_hit_chop_wet_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="205678483" Language="SFX">
+					<ShortName>fodder_attack_bite_03_c1.wav</ShortName>
+					<Path>SFX/fodder_attack_bite_03_c1_8EDF57DD.wem</Path>
+				</File>
+				<File Id="233842972" Language="SFX">
+					<ShortName>heavy_hit_metal_03.wav</ShortName>
+					<Path>SFX/heavy_hit_metal_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="239572427" Language="SFX">
+					<ShortName>fodder_footstep_spuirm_05.wav</ShortName>
+					<Path>SFX/fodder_footstep_spuirm_05_8EDF57DD.wem</Path>
+				</File>
+				<File Id="240418113" Language="SFX">
+					<ShortName>boomer_hit_scream_02.wav</ShortName>
+					<Path>SFX/boomer_hit_scream_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="263111478" Language="SFX">
+					<ShortName>ranged_top_05.wav</ShortName>
+					<Path>SFX/ranged_top_05_8EDF57DD.wem</Path>
+				</File>
+				<File Id="264221852" Language="SFX">
+					<ShortName>ranged_top_01.wav</ShortName>
+					<Path>SFX/ranged_top_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="264632186" Language="SFX">
+					<ShortName>fodder_footstep_spuirm_07.wav</ShortName>
+					<Path>SFX/fodder_footstep_spuirm_07_8EDF57DD.wem</Path>
+				</File>
+				<File Id="278315933" Language="SFX">
+					<ShortName>spitter_spitlayer1_02.wav</ShortName>
+					<Path>SFX/spitter_spitlayer1_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="287996172" Language="SFX">
+					<ShortName>heavy_footstep_bund_04.wav</ShortName>
+					<Path>SFX/heavy_footstep_bund_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="290142535" Language="SFX">
+					<ShortName>fodder_footstep_spuirm_11.wav</ShortName>
+					<Path>SFX/fodder_footstep_spuirm_11_8EDF57DD.wem</Path>
+				</File>
+				<File Id="290895312" Language="SFX">
+					<ShortName>heavy_hit_splat_02.wav</ShortName>
+					<Path>SFX/heavy_hit_splat_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="299277544" Language="SFX">
+					<ShortName>fodder_attack_scream_01_c1.wav</ShortName>
+					<Path>SFX/fodder_attack_scream_01_c1_8EDF57DD.wem</Path>
+				</File>
+				<File Id="301587145" Language="SFX">
+					<ShortName>heavy_hit_stab_02.wav</ShortName>
+					<Path>SFX/heavy_hit_stab_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="311169141" Language="SFX">
+					<ShortName>fodder_footstep_spuirm_04.wav</ShortName>
+					<Path>SFX/fodder_footstep_spuirm_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="322133386" Language="SFX">
+					<ShortName>heavy_grunt_06.wav</ShortName>
+					<Path>SFX/heavy_grunt_06_8EDF57DD.wem</Path>
+				</File>
+				<File Id="325752283" Language="SFX">
+					<ShortName>heavy_grunt_03.wav</ShortName>
+					<Path>SFX/heavy_grunt_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="326945394" Language="SFX">
+					<ShortName>heavy_footstep_bund_01.wav</ShortName>
+					<Path>SFX/heavy_footstep_bund_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="332054516" Language="SFX">
+					<ShortName>ranged_hit_shriek_01.wav</ShortName>
+					<Path>SFX/ranged_hit_shriek_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="334302475" Language="SFX">
+					<ShortName>ramged_cribbly_01.wav</ShortName>
+					<Path>SFX/ramged_cribbly_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="350110776" Language="SFX">
+					<ShortName>spitter_spitlayer1_01.wav</ShortName>
+					<Path>SFX/spitter_spitlayer1_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="354648546" Language="SFX">
+					<ShortName>boomer_hit_scream_03.wav</ShortName>
+					<Path>SFX/boomer_hit_scream_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="355122184" Language="SFX">
+					<ShortName>heavy_hit_splat_01.wav</ShortName>
+					<Path>SFX/heavy_hit_splat_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="358171187" Language="SFX">
+					<ShortName>boomer_detect_02.wav</ShortName>
+					<Path>SFX/boomer_detect_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="360063080" Language="SFX">
+					<ShortName>heavy_hit_splat_04.wav</ShortName>
+					<Path>SFX/heavy_hit_splat_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="363550817" Language="SFX">
+					<ShortName>fodder_detect_squirm_04.wav</ShortName>
+					<Path>SFX/fodder_detect_squirm_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="366800668" Language="SFX">
+					<ShortName>fodder_attack_scream_07_c1.wav</ShortName>
+					<Path>SFX/fodder_attack_scream_07_c1_8EDF57DD.wem</Path>
+				</File>
+				<File Id="376069661" Language="SFX">
+					<ShortName>heavy_hit_stab_01.wav</ShortName>
+					<Path>SFX/heavy_hit_stab_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="404217055" Language="SFX">
+					<ShortName>ranged_hit_shriek_03.wav</ShortName>
+					<Path>SFX/ranged_hit_shriek_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="404345239" Language="SFX">
+					<ShortName>fodder_attack_hizz_01_c1.wav</ShortName>
+					<Path>SFX/fodder_attack_hizz_01_c1_8EDF57DD.wem</Path>
+				</File>
+				<File Id="422176221" Language="SFX">
+					<ShortName>fodder_hit_03.wav</ShortName>
+					<Path>SFX/fodder_hit_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="427467749" Language="SFX">
+					<ShortName>RangedDetect_04.wav</ShortName>
+					<Path>SFX/RangedDetect_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="444883480" Language="SFX">
+					<ShortName>heavy_scream_01.wav</ShortName>
+					<Path>SFX/heavy_scream_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="451710428" Language="SFX">
+					<ShortName>fodder_attack_hizz_03_c1.wav</ShortName>
+					<Path>SFX/fodder_attack_hizz_03_c1_8EDF57DD.wem</Path>
+				</File>
+				<File Id="460590506" Language="SFX">
+					<ShortName>heavy_grunt_02.wav</ShortName>
+					<Path>SFX/heavy_grunt_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="461975951" Language="SFX">
+					<ShortName>boomer_hit_gurgle_02.wav</ShortName>
+					<Path>SFX/boomer_hit_gurgle_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="493058146" Language="SFX">
+					<ShortName>boomer_footstep_layer1_03.wav</ShortName>
+					<Path>SFX/boomer_footstep_layer1_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="494245364" Language="SFX">
+					<ShortName>boomer_hit_gurgle_05.wav</ShortName>
+					<Path>SFX/boomer_hit_gurgle_05_8EDF57DD.wem</Path>
+				</File>
+				<File Id="504775385" Language="SFX">
+					<ShortName>ranged_burrow_01.wav</ShortName>
+					<Path>SFX/ranged_burrow_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="505823087" Language="SFX">
+					<ShortName>RangedDetect_02.wav</ShortName>
+					<Path>SFX/RangedDetect_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="525357099" Language="SFX">
+					<ShortName>heavy_hit_chop_dry_02.wav</ShortName>
+					<Path>SFX/heavy_hit_chop_dry_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="531200082" Language="SFX">
+					<ShortName>heavy_hit_chop_wet_04.wav</ShortName>
+					<Path>SFX/heavy_hit_chop_wet_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="531211544" Language="SFX">
+					<ShortName>heavy_scream_03.wav</ShortName>
+					<Path>SFX/heavy_scream_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="534102189" Language="SFX">
+					<ShortName>heavy_hit_chop_wet_03.wav</ShortName>
+					<Path>SFX/heavy_hit_chop_wet_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="537599016" Language="SFX">
+					<ShortName>fodder_attack_snarl_04.wav</ShortName>
+					<Path>SFX/fodder_attack_snarl_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="542509424" Language="SFX">
+					<ShortName>fodder_hit_02.wav</ShortName>
+					<Path>SFX/fodder_hit_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="545051713" Language="SFX">
+					<ShortName>boomer_hit_body_05.wav</ShortName>
+					<Path>SFX/boomer_hit_body_05_8EDF57DD.wem</Path>
+				</File>
+				<File Id="552890096" Language="SFX">
+					<ShortName>heavy_hit_crack_05.wav</ShortName>
+					<Path>SFX/heavy_hit_crack_05_8EDF57DD.wem</Path>
+				</File>
+				<File Id="554792711" Language="SFX">
+					<ShortName>boomer_footstep_layer2_01.wav</ShortName>
+					<Path>SFX/boomer_footstep_layer2_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="556605699" Language="SFX">
+					<ShortName>fodder_idle_test.wav</ShortName>
+					<Path>SFX/fodder_idle_test_ADF7B7FB.wem</Path>
+				</File>
+				<File Id="561982492" Language="SFX">
+					<ShortName>boomer_hit_body_03.wav</ShortName>
+					<Path>SFX/boomer_hit_body_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="572723568" Language="SFX">
+					<ShortName>heavy_footstep_bund_03.wav</ShortName>
+					<Path>SFX/heavy_footstep_bund_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="572901335" Language="SFX">
+					<ShortName>fodder_attack_snarl_03.wav</ShortName>
+					<Path>SFX/fodder_attack_snarl_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="574312497" Language="SFX">
+					<ShortName>fodder_detect_vocal_01.wav</ShortName>
+					<Path>SFX/fodder_detect_vocal_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="580520592" Language="SFX">
+					<ShortName>heavy_hit_crack_01.wav</ShortName>
+					<Path>SFX/heavy_hit_crack_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="582726207" Language="SFX">
+					<ShortName>fodder_detect_vocal_04.wav</ShortName>
+					<Path>SFX/fodder_detect_vocal_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="582871599" Language="SFX">
+					<ShortName>spitter_spitlayer2_02.wav</ShortName>
+					<Path>SFX/spitter_spitlayer2_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="584968800" Language="SFX">
+					<ShortName>ranged_hit_shriekMain_02.wav</ShortName>
+					<Path>SFX/ranged_hit_shriekMain_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="585284674" Language="SFX">
+					<ShortName>ramged_cribbly_02.wav</ShortName>
+					<Path>SFX/ramged_cribbly_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="587269442" Language="SFX">
+					<ShortName>fodder_attack_scream_03_c1.wav</ShortName>
+					<Path>SFX/fodder_attack_scream_03_c1_8EDF57DD.wem</Path>
+				</File>
+				<File Id="588924493" Language="SFX">
+					<ShortName>heavy_hit_rockdrag_01.wav</ShortName>
+					<Path>SFX/heavy_hit_rockdrag_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="596805904" Language="SFX">
+					<ShortName>boomer_hit_body_04.wav</ShortName>
+					<Path>SFX/boomer_hit_body_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="600127302" Language="SFX">
+					<ShortName>fodder_attack_snarl_02.wav</ShortName>
+					<Path>SFX/fodder_attack_snarl_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="616452719" Language="SFX">
+					<ShortName>heavy_grunt_07.wav</ShortName>
+					<Path>SFX/heavy_grunt_07_8EDF57DD.wem</Path>
+				</File>
+				<File Id="623083583" Language="SFX">
+					<ShortName>spitter_spitlayer2_01.wav</ShortName>
+					<Path>SFX/spitter_spitlayer2_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="626787956" Language="SFX">
+					<ShortName>ranged_hit_shriek_02.wav</ShortName>
+					<Path>SFX/ranged_hit_shriek_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="629395190" Language="SFX">
+					<ShortName>fodder_detect_vocal_02.wav</ShortName>
+					<Path>SFX/fodder_detect_vocal_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="646191349" Language="SFX">
+					<ShortName>heavy_hit_crack_04.wav</ShortName>
+					<Path>SFX/heavy_hit_crack_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="658151957" Language="SFX">
+					<ShortName>boomer_footstep_layer2_02.wav</ShortName>
+					<Path>SFX/boomer_footstep_layer2_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="667514742" Language="SFX">
+					<ShortName>boomer_footstep_layer1_01.wav</ShortName>
+					<Path>SFX/boomer_footstep_layer1_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="673269960" Language="SFX">
+					<ShortName>heavy_grunt_01.wav</ShortName>
+					<Path>SFX/heavy_grunt_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="673542932" Language="SFX">
+					<ShortName>fodder_hit_04.wav</ShortName>
+					<Path>SFX/fodder_hit_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="681093086" Language="SFX">
+					<ShortName>fodder_detect_squirm_02.wav</ShortName>
+					<Path>SFX/fodder_detect_squirm_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="682005315" Language="SFX">
+					<ShortName>heavy_hit_chop_dry_03.wav</ShortName>
+					<Path>SFX/heavy_hit_chop_dry_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="696323350" Language="SFX">
+					<ShortName>heavy_grunt_08.wav</ShortName>
+					<Path>SFX/heavy_grunt_08_8EDF57DD.wem</Path>
+				</File>
+				<File Id="697835655" Language="SFX">
+					<ShortName>heavy_hit_crack_06.wav</ShortName>
+					<Path>SFX/heavy_hit_crack_06_8EDF57DD.wem</Path>
+				</File>
+				<File Id="703023536" Language="SFX">
+					<ShortName>heavy_hit_splat_03.wav</ShortName>
+					<Path>SFX/heavy_hit_splat_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="706360279" Language="SFX">
+					<ShortName>fodder_attack_hizz_02_c1.wav</ShortName>
+					<Path>SFX/fodder_attack_hizz_02_c1_8EDF57DD.wem</Path>
+				</File>
+				<File Id="711598802" Language="SFX">
+					<ShortName>heavy_scream_02.wav</ShortName>
+					<Path>SFX/heavy_scream_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="715378566" Language="SFX">
+					<ShortName>heavy_hit_crack_03.wav</ShortName>
+					<Path>SFX/heavy_hit_crack_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="718200890" Language="SFX">
+					<ShortName>boomer_hit_gurgle_04.wav</ShortName>
+					<Path>SFX/boomer_hit_gurgle_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="728676807" Language="SFX">
+					<ShortName>heavy_grunt_04.wav</ShortName>
+					<Path>SFX/heavy_grunt_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="730614822" Language="SFX">
+					<ShortName>ranged_top_03.wav</ShortName>
+					<Path>SFX/ranged_top_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="734943404" Language="SFX">
+					<ShortName>heavy_footstep_top_04.wav</ShortName>
+					<Path>SFX/heavy_footstep_top_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="745219211" Language="SFX">
+					<ShortName>boomer_hit_gurgle_01.wav</ShortName>
+					<Path>SFX/boomer_hit_gurgle_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="745392583" Language="SFX">
+					<ShortName>heavy_hit_metal_02.wav</ShortName>
+					<Path>SFX/heavy_hit_metal_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="746942708" Language="SFX">
+					<ShortName>boomer_footstep_layer1_02.wav</ShortName>
+					<Path>SFX/boomer_footstep_layer1_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="759037802" Language="SFX">
+					<ShortName>boomer_detect_01.wav</ShortName>
+					<Path>SFX/boomer_detect_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="762974751" Language="SFX">
+					<ShortName>heavy_grunt_05.wav</ShortName>
+					<Path>SFX/heavy_grunt_05_8EDF57DD.wem</Path>
+				</File>
+				<File Id="765517855" Language="SFX">
+					<ShortName>heavy_footstep_bund_02.wav</ShortName>
+					<Path>SFX/heavy_footstep_bund_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="766666499" Language="SFX">
+					<ShortName>ranged_hit_shriekMain_04.wav</ShortName>
+					<Path>SFX/ranged_hit_shriekMain_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="777331835" Language="SFX">
+					<ShortName>heavy_hit_chop_wet_05.wav</ShortName>
+					<Path>SFX/heavy_hit_chop_wet_05_8EDF57DD.wem</Path>
+				</File>
+				<File Id="789640430" Language="SFX">
+					<ShortName>ranged_hit_base.wav</ShortName>
+					<Path>SFX/ranged_hit_base_8EDF57DD.wem</Path>
+				</File>
+				<File Id="790391500" Language="SFX">
+					<ShortName>heavy_hit_metal_04.wav</ShortName>
+					<Path>SFX/heavy_hit_metal_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="790683228" Language="SFX">
+					<ShortName>ramged_cribbly_03.wav</ShortName>
+					<Path>SFX/ramged_cribbly_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="799082744" Language="SFX">
+					<ShortName>fodder_attack_bite_01_c1.wav</ShortName>
+					<Path>SFX/fodder_attack_bite_01_c1_8EDF57DD.wem</Path>
+				</File>
+				<File Id="799617853" Language="SFX">
+					<ShortName>heavy_hit_chop_dry_04.wav</ShortName>
+					<Path>SFX/heavy_hit_chop_dry_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="810714271" Language="SFX">
+					<ShortName>heavy_footstep_top_01.wav</ShortName>
+					<Path>SFX/heavy_footstep_top_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="836029098" Language="SFX">
+					<ShortName>heavy_grunt_detect_02.wav</ShortName>
+					<Path>SFX/heavy_grunt_detect_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="838850284" Language="SFX">
+					<ShortName>ranged_hit_shriekMain_03.wav</ShortName>
+					<Path>SFX/ranged_hit_shriekMain_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="842579468" Language="SFX">
+					<ShortName>heavy_hit_stab_05.wav</ShortName>
+					<Path>SFX/heavy_hit_stab_05_8EDF57DD.wem</Path>
+				</File>
+				<File Id="847229577" Language="SFX">
+					<ShortName>fodder_footstep_spuirm_01.wav</ShortName>
+					<Path>SFX/fodder_footstep_spuirm_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="857157975" Language="SFX">
+					<ShortName>fodder_attack_bite_04_c1.wav</ShortName>
+					<Path>SFX/fodder_attack_bite_04_c1_8EDF57DD.wem</Path>
+				</File>
+				<File Id="862770595" Language="SFX">
+					<ShortName>ranged_hit_shriekMain_01.wav</ShortName>
+					<Path>SFX/ranged_hit_shriekMain_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="865061769" Language="SFX">
+					<ShortName>ranged_top_04.wav</ShortName>
+					<Path>SFX/ranged_top_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="868654676" Language="SFX">
+					<ShortName>fodder_hit_01.wav</ShortName>
+					<Path>SFX/fodder_hit_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="890370492" Language="SFX">
+					<ShortName>boomer_hit_body_01.wav</ShortName>
+					<Path>SFX/boomer_hit_body_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="892470759" Language="SFX">
+					<ShortName>fodder_attack_scream_05_c1.wav</ShortName>
+					<Path>SFX/fodder_attack_scream_05_c1_8EDF57DD.wem</Path>
+				</File>
+				<File Id="896825853" Language="SFX">
+					<ShortName>fodder_footstep_spuirm_10.wav</ShortName>
+					<Path>SFX/fodder_footstep_spuirm_10_8EDF57DD.wem</Path>
+				</File>
+				<File Id="906324897" Language="SFX">
+					<ShortName>boomer_detect_04.wav</ShortName>
+					<Path>SFX/boomer_detect_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="920322443" Language="SFX">
+					<ShortName>heavy_hit_rockdrag_02.wav</ShortName>
+					<Path>SFX/heavy_hit_rockdrag_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="935387074" Language="SFX">
+					<ShortName>ranged_burrow_02.wav</ShortName>
+					<Path>SFX/ranged_burrow_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="949645582" Language="SFX">
+					<ShortName>heavy_hit_kick.wav</ShortName>
+					<Path>SFX/heavy_hit_kick_8EDF57DD.wem</Path>
+				</File>
+				<File Id="962162331" Language="SFX">
+					<ShortName>fodder_detect_vocal_03.wav</ShortName>
+					<Path>SFX/fodder_detect_vocal_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="994308815" Language="SFX">
+					<ShortName>fodder_attack_scream_06_c1.wav</ShortName>
+					<Path>SFX/fodder_attack_scream_06_c1_8EDF57DD.wem</Path>
+				</File>
+				<File Id="998314970" Language="SFX">
+					<ShortName>heavy_footstep_bund_05.wav</ShortName>
+					<Path>SFX/heavy_footstep_bund_05_8EDF57DD.wem</Path>
+				</File>
+				<File Id="1026809844" Language="SFX">
+					<ShortName>boomer_hit_body_02.wav</ShortName>
+					<Path>SFX/boomer_hit_body_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="1027755779" Language="SFX">
+					<ShortName>heavy_hit_chop_dry_01.wav</ShortName>
+					<Path>SFX/heavy_hit_chop_dry_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="1030626176" Language="SFX">
+					<ShortName>ranged_burrow_03.wav</ShortName>
+					<Path>SFX/ranged_burrow_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="1037248320" Language="SFX">
+					<ShortName>heavy_hit_stab_04.wav</ShortName>
+					<Path>SFX/heavy_hit_stab_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="1038020377" Language="SFX">
+					<ShortName>fodder_detect_squirm_01.wav</ShortName>
+					<Path>SFX/fodder_detect_squirm_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="1069280202" Language="SFX">
+					<ShortName>boomer_hit_scream_04.wav</ShortName>
+					<Path>SFX/boomer_hit_scream_04_8EDF57DD.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
 		<SoundBank Id="2688509691" Language="SFX">
 			<ObjectPath>\SoundBanks\Default Work Unit\sb_playerCharacter</ObjectPath>
 			<ShortName>sb_playerCharacter</ShortName>
@@ -62,12 +710,22 @@
 				<Event Id="2390168611" Name="player_foley_attackEvent" ObjectPath="\Events\PlayerCharacterEvents\Foley\player_foley_attackEvent" DurationType="OneShot" DurationMin="0.416035" DurationMax="0.416035"/>
 				<Event Id="1643920063" Name="player_foley_dashEvent" ObjectPath="\Events\PlayerCharacterEvents\Foley\player_foley_dashEvent" DurationType="OneShot" DurationMin="0.633846" DurationMax="0.633846"/>
 				<Event Id="954324369" Name="player_foley_footstepEvent" ObjectPath="\Events\PlayerCharacterEvents\Foley\player_foley_footstepEvent" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="830213708" Name="player_foley_hit" ObjectPath="\Events\PlayerCharacterEvents\Foley\player_foley_hit" DurationType="OneShot" DurationMin="0.433510" DurationMax="0.433510"/>
+				<Event Id="3187150534" Name="player_foley_killed" ObjectPath="\Events\PlayerCharacterEvents\Foley\player_foley_killed" DurationType="OneShot" DurationMin="2.122885" DurationMax="2.122885"/>
 				<Event Id="586291076" Name="player_foleyPHfootstepEvent" ObjectPath="\Events\PlayerCharacterEvents\Foley\player_foleyPHfootstepEvent" DurationType="Infinite"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
+				<File Id="115522779" Language="SFX">
+					<ShortName>Human, Male, Scream, Pain 4 SND23409.wav</ShortName>
+					<Path>SFX/Human, Male, Scream, Pain 4 SND23409_8EDF57DD.wem</Path>
+				</File>
 				<File Id="547378800" Language="SFX">
 					<ShortName>player_foley_PhAttack.wav</ShortName>
 					<Path>SFX/player_foley_PhAttack_7EC2BD1A.wem</Path>
+				</File>
+				<File Id="563002238" Language="SFX">
+					<ShortName>Human, Vocal, Male, Grunt, Ouch, Pain 2 SND23309.wav</ShortName>
+					<Path>SFX/Human, Vocal, Male, Grunt, Ouch, Pain 2 SND23309_8EDF57DD.wem</Path>
 				</File>
 				<File Id="729234363" Language="SFX">
 					<ShortName>player_foley_PhDash.wav</ShortName>

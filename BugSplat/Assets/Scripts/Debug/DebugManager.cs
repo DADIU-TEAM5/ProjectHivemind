@@ -18,7 +18,7 @@ public class DebugManager : GameLoop
     void OnGUI()
     {
         //GUILayout.Label($"FPS: ");
-        GUI.Label(new Rect(40, 40, 200, 80), $"FPS: {_fps}", _overlayStyle);
+        GUI.Label(new Rect(40, 280, 200, 80), $"FPS: {_fps}", _overlayStyle);
     }
 
     public override void LoopUpdate(float deltaTime)

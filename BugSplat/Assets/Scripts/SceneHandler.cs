@@ -7,38 +7,31 @@ using UnityEditor;
 [System.Serializable]
 public class SceneHandler : MonoBehaviour
 {
+    [SerializeField]
     public StringList SceneListSO;
 
     [SerializeField]
     public int SelectedSceneIndex;
 
-    public string[] Guid;
+    [SerializeField]
     public string[] SceneList;
 
+    [SerializeField]
     public string SelectedScene;
+
+    [SerializeField]
     public string SelectedSceneGuid;
 
-    public void ChangeScene(string sceneGuid)
+    private void OnEnable()
     {
-        if(sceneGuid != "")
-        {
-            string sceneName = "";
+        int _sceneCount = SceneManager.sceneCount;
 
-            for (int i = 0; i < Guid.Length; i++)
-            {
-                if (Guid[i] == sceneGuid)
-                {
-                    sceneName = SceneList[i];
-                }
-            }
-            
-            SceneManager.LoadScene(sceneName);
-        }
-        else
-        {
-            SceneManager.LoadScene(SelectedScene);
-        }
+        SceneList = new string[_sceneCount];
+    }
 
 
+    public void ChangeScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 }

@@ -26,8 +26,8 @@ public class VariantGameLoopInvoker : SimpleGameLoopInvoker
 
             for (var i = 0; i < _gameLoops.Count; i++) {
                 var gameLoop = _gameLoops[i];    
-
-                gameLoop.LoopUpdate(_deltaTime);
+                if (gameLoop.isActiveAndEnabled)
+                    gameLoop.LoopUpdate(_deltaTime);
             }
         } 
     }

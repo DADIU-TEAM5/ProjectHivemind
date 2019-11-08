@@ -10,6 +10,7 @@ public class TestFloatSlider : MonoBehaviour
     public Text TextLabel;
     private string _textLabel;
     public Slider slider;
+    public int FontSize;
     
     public float MaxValue;
     public float MinValue;
@@ -20,6 +21,7 @@ public class TestFloatSlider : MonoBehaviour
         slider.value = FloatVar.Value;
         slider.maxValue = max;
         slider.minValue = min;
+        slider.value = FloatVar.InitialValue;
         SetText();
     }
 
@@ -40,5 +42,6 @@ public class TestFloatSlider : MonoBehaviour
     {
         _textLabel = FloatVar.name + ": " + FloatVar.Value;
         TextLabel.text = _textLabel;
+        TextLabel.fontSize = FontSize;
     }
 }

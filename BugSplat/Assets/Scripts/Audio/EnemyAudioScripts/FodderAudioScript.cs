@@ -10,30 +10,44 @@ public class FodderAudioScript : MonoBehaviour
     public AK.Wwise.Event Hit;
     public AK.Wwise.Event ScaredScream;
     public AK.Wwise.Event DeathSplat;
+    public AK.Wwise.Event PlayerDetected;
+    public AK.Wwise.Event AttackCharging;
 
 
-    public void FootStepEvent()
+    public void FootStepEvent(GameObject source)
     {
-        Footstep.Post(this.gameObject);
+        Footstep.Post(source);
     }
 
-    public void AttackEvent()
+    public void AttackEvent(GameObject source)
     {
-        Attack.Post(this.gameObject);
+        Attack.Post(source);
+        AttackCharging.Stop(source);
     }
 
-    public void HitStepEvent()
+    public void HitEvent(GameObject source)
     {
-        Hit.Post(this.gameObject);
+        Hit.Post(source);
     }
 
-    public void Scared()
+    public void Scared(GameObject source)
     {
-        ScaredScream.Post(this.gameObject);
+        ScaredScream.Post(source);
     }
 
-    public void Death()
+    public void Death(GameObject source)
     {
-        DeathSplat.Post(this.gameObject);
+        Debug.Log("play kill sound");
+        DeathSplat.Post(source);
+    }
+
+    public void PlayerDetect(GameObject source)
+    {
+        PlayerDetected.Post(source);
+    }
+
+    public void AttackChargingEvent(GameObject source)
+    {
+        AttackCharging.Post(source);
     }
 }

@@ -8,7 +8,13 @@ public class Hexagon : MonoBehaviour
 
     public bool[] OpenEdges;
 
+    public EnemySpawner[] EnemySpawners;
+
+    public float MinBudget;
+
     public GameObject[] Walls;
+
+    public Tier difficultyLevel;
 
     bool _allNeighBoursFound;
 
@@ -18,7 +24,16 @@ public class Hexagon : MonoBehaviour
     // Start is called before the first frame update
     private void OnEnable()
     {
+        if (EnemySpawners.Length > 0)
+        {
+             
+                EnemySpawners[Random.Range(0, EnemySpawners.Length)].budget += MinBudget;
 
+            MinBudget = 0;
+                
+            
+        }
+        
 
         Neighbours = new Hexagon[6];
     }

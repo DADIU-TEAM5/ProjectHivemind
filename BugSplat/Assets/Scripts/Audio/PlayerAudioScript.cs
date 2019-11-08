@@ -13,7 +13,7 @@ public class PlayerAudioScript : MonoBehaviour
     public AK.Wwise.Event Dash;
     public AK.Wwise.Event Hit;
     public AK.Wwise.Event ScaredScream;
-    public AK.Wwise.Event DeathSplat;
+    public AK.Wwise.Event Killed;
 
     [Header("Wwise RTPCs")]
     public AK.Wwise.RTPC PlayerSpeedRTPC;
@@ -21,51 +21,49 @@ public class PlayerAudioScript : MonoBehaviour
     [Header("Variables")]
     public Vector3Variable PlayerSpeedVector3;
 
-    /*[Header("GameEvents")]
-    public UnityEngine.Events.UnityEvent[] Event;
-    */
+
 
 
     void Start()
     {
-        //PH
-        PhFootsteps.Post(this.gameObject);    
+         
     }
 
 
     void Update()
     {
         //PH
-        PlayerSpeedRTPC.SetValue(this.gameObject, PlayerSpeedVector3.Value.magnitude);
+       // PlayerSpeedRTPC.SetValue(this.gameObject, PlayerSpeedVector3.Value.magnitude);
     }
 
-    public void FootStepEvent()
+    public void FootStepEvent(GameObject source)
     {
-        Footstep.Post(this.gameObject);
+        Footstep.Post(source);
     }
 
-    public void AttackEvent()
+    public void AttackEvent(GameObject source)
     {
-        Attack.Post(this.gameObject);
+        Debug.Log(source);
+        Attack.Post(source);
     }
 
-    public void DashEvent()
+    public void DashEvent(GameObject source)
     {
-        Dash.Post(this.gameObject);
+        Dash.Post(source);
     }
 
-    public void HitEvent()
+    public void HitEvent(GameObject source)
     {
-        Hit.Post(this.gameObject);
+        Hit.Post(source);
     }
 
-    public void Scared()
+    public void Scared(GameObject source)
     {
-        ScaredScream.Post(this.gameObject);
+        ScaredScream.Post(source);
     }
 
-    public void Death()
+    public void Death(GameObject source)
     {
-        DeathSplat.Post(this.gameObject);
+        Killed.Post(source);
     }
 }

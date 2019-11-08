@@ -18,7 +18,9 @@ public class MainGameLoopInvoker : SimpleGameLoopInvoker
         _timeLastTrigger = time;
 
         for (var i = 0; i < _gameLoops.Count; i++) {
-            _gameLoops[i].LoopUpdate(_deltaTime);
+            var loop = _gameLoops[i];
+            if (loop.isActiveAndEnabled)
+                _gameLoops[i].LoopUpdate(_deltaTime);
         }
     }
 }
