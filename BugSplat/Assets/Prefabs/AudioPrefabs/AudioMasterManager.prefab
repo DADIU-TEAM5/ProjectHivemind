@@ -271,16 +271,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35c0053828e68467ba37d236a155e639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Arena:
+  AreaArena:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 11c6293156a82499a8dd6fc0f2f45420,
       type: 2}
-  Hub:
+  AreaHub:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 856a56a9affe045c38907d178b7f6d64,
       type: 2}
+  AreaShop:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
   Music:
     idInternal: 0
     valueGuidInternal: 
@@ -301,6 +305,7 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 72dcbb57015d34b788498cdd1050e867,
       type: 2}
+  currentScenePlaceholderSO: 
 --- !u!1 &696792192367085575
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,6 +414,7 @@ GameObject:
   - component: {fileID: 4259593067639554197}
   - component: {fileID: 7081412859214289985}
   - component: {fileID: 5228136498780480230}
+  - component: {fileID: 2366870453247719922}
   m_Layer: 0
   m_Name: PlayerAudioManager
   m_TagString: Untagged
@@ -449,7 +455,8 @@ MonoBehaviour:
   Footstep:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 1c5268d17851044b5a3a013f36f52a3c,
+      type: 2}
   Attack:
     idInternal: 0
     valueGuidInternal: 
@@ -585,6 +592,35 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7152729167784068075}
         m_MethodName: Death
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &2366870453247719922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4412941264856523361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 8ee79a55d80494fb184472e83bf93ef0, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7152729167784068075}
+        m_MethodName: FootStepEvent
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -770,6 +806,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5172822991716516221}
   - component: {fileID: 4335405448226846213}
+  - component: {fileID: 4466324516886727042}
   m_Layer: 0
   m_Name: AmbienceManager
   m_TagString: Untagged
@@ -803,15 +840,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e45cadacd6bf423796e5a446938ce9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArenaAmbience:
+  arenaAmbience:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: d69417d0b360e448195ab971d40c7336,
       type: 2}
-  HubAmbience:
+  hubAmbience:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 0}
+  shopAmbience:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  fadeAmbience:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  currentScenePlaceholderSO: 
+--- !u!114 &4466324516886727042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5767124523087305666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: bccb1ce44bfacae4db5c5ace29262218, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4335405448226846213}
+        m_MethodName: SceneChange
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &6596428402899259860
 GameObject:
   m_ObjectHideFlags: 0
