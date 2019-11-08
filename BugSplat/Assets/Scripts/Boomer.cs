@@ -18,7 +18,7 @@ public class Boomer : Enemy
     private float _attackCharge;
     private float _attackCooldown = 0;
 
-    
+
 
     
 
@@ -33,23 +33,33 @@ public class Boomer : Enemy
     
     public GameEvent AttackChargingEvent;
 
-    
+
+    public Animator BoomerAnimator;
+
+    public AnimationClip ChargeClip;
+    float _percentIncrease;
+
 
     public void Start()
     {
+        stats.AttackAngle = 180;
+
         _boomerStats = (BoomerStats)stats;
 
-        
 
+        
         
         
 
 
         OutlineRenderer.material.color = new Color(.2f, .2f, .2f, .1f);
 
-        
+        float Increase = ChargeClip.length - stats.AttackChargeUpTime;
 
-        
+        float percenIncrease = Increase / stats.AttackChargeUpTime;
+        _percentIncrease = percenIncrease;
+
+
 
     }
 
@@ -120,6 +130,9 @@ public class Boomer : Enemy
             Outline.SetActive(true);
             DrawCone(20, OutlineMesh, true,_attackCharge);
 
+            BoomerAnimator.SetTrigger("Attack");
+            BoomerAnimator.speed = 1 + _percentIncrease;
+
         }
 
         ConeRenderer.material.color = Color.Lerp(Color.green, Color.red, _attackCharge / _boomerStats.AttackChargeUpTime);
@@ -174,6 +187,8 @@ public class Boomer : Enemy
             Cone.SetActive(false);
             Outline.SetActive(false);
             NavMeshAgent.speed = _boomerStats.MoveSpeed;
+
+            BoomerAnimator.speed = 1 ;
         }
 
     }
@@ -188,12 +203,14 @@ public class Boomer : Enemy
 
         if (distanceToplayer > 2)
         {
+            BoomerAnimator.SetBool("Walking", true);
 
             if (NavMeshAgent.destination != PlayerTransform.position)
                 NavMeshAgent.destination = PlayerTransform.position;
         }
         else
         {
+            BoomerAnimator.SetBool("Walking", false);
             if (NavMeshAgent.destination != transform.position)
                 NavMeshAgent.destination = transform.position;
         }
