@@ -203,7 +203,7 @@ public class AttackScript : GameLoop
     {
         //print(PlayerDirectionSO.Value);
 
-        Anim.SetTrigger("Attack");
+        //Anim.SetTrigger("Attack");
 
         DrawCone(10);
         _cone.SetActive(true);

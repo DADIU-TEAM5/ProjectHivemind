@@ -4,7 +4,8 @@ using UnityEngine;
 using System.Linq;
 using UnityEditor;
 
-using UnityEditor.Animations;
+//using UnityEditor.Animations;
+using System;
 
 public class PreProcess : MonoBehaviour
 {
@@ -31,42 +32,69 @@ public class PreProcess : MonoBehaviour
             if (AllAnimations.AnimClips[i].Name.Contains("InPlace"))
             {
                 AnimationsPlay.AnimClips.Add(AllAnimations.AnimClips[i]);
-                GetCorrespondingAnimations(AllAnimations.AnimClips[i].Name, count);
+                GetCorrespondingAnimations(AllAnimations.AnimClips[i].Name, count, false);
                 count++;
             }
+            // if(!IsMagicMotion(AllAnimations.AnimClips[i].Name))
+            // {
+            //     AnimationsPlay.AnimClips.Add(AllAnimations.AnimClips[i]);
+            //     GetCorrespondingAnimations(AllAnimations.AnimClips[i].Name, count, false);
+            //     count++;
+            // }
+            // else
+            // {
+            //     AnimationsPlay.MagicClips.Add(AllAnimations.AnimClips[i]);
+            //     GetCorrespondingAnimations(AllAnimations.AnimClips[i].Name, count,true);
+            //     count++;
+            // }
         }
         GetMagicMotion();
     }
 
+    // public bool IsMagicMotion(string animName)
+    // {
+    //     for(int i = 0; i < MagicMotionNames.Count; i++)
+    //     {
+    //         if(animName.Contains(MagicMotionNames[i]))
+    //             return true;
+    //     }
+    //     return false;
+    // }
     private void InitializeAnimation()
     {
         var animclips = new List<AnimClip>();
         AnimationsPlay.AnimClips = animclips;
         AnimationsPreProcess.FrameCapsules = new List<Capsule>();
+        // AnimationsPreProcess.MagicCapsules = new List<Capsule>();
         _maxSpeedInAnim = 1f / GetMaxSpeed();
 
     }
 
 
-    private void GetAnimaitionTrajectory(AnimClip animClip, int animIndex)
+    private void GetAnimaitionTrajectory(AnimClip animClip, int animIndex, bool isMagic)
     {
+        // if(!isMagic)
         AnimationTrajectory.ObtainRootFromAnim(Second, SaveInSecond, FrameRate,
-                      animClip, animIndex, Speed, AnimationsPreProcess.FrameCapsules, _maxSpeedInAnim);
+                  animClip, animIndex, Speed, AnimationsPreProcess.FrameCapsules, _maxSpeedInAnim);
+        // else
+        //     AnimationTrajectory.ObtainRootFromAnim(Second, SaveInSecond, FrameRate,
+        //               animClip, animIndex, Speed, AnimationsPreProcess.MagicCapsules, _maxSpeedInAnim);
     }
 
-    private void GetCorrespondingAnimations(string inPlaceAnimationName, int animIndex)
+    private void GetCorrespondingAnimations(string inPlaceAnimationName, int animIndex, bool isMagic)
     {
         var name = inPlaceAnimationName.Replace("_InPlace", "");
         for (int i = 0; i < AllAnimations.AnimClips.Count; i++)
         {
             if (AllAnimations.AnimClips[i].Name == name)
             {
-                GetAnimaitionTrajectory(AllAnimations.AnimClips[i], animIndex);
-
+                GetAnimaitionTrajectory(AllAnimations.AnimClips[i], animIndex, isMagic);
                 break;
             }
         }
     }
+
+
 
     private void GetMagicMotion()
     {
@@ -85,7 +113,6 @@ public class PreProcess : MonoBehaviour
             }
     }
 
-
     private float GetMaxSpeed()
     {
         float maxSpeed = 0.01f;
@@ -94,8 +121,8 @@ public class PreProcess : MonoBehaviour
             if (!AllAnimations.AnimClips[i].Name.Contains("InPlace"))
                 for (int j = 1; j < AllAnimations.AnimClips[i].Frames.Count; j++)
                 {
-                    var joint = AllAnimations.AnimClips[i].Frames[j].JointPoints.Find(x => x.Name.Contains("Hips"));
-                    var jointBefore = AllAnimations.AnimClips[i].Frames[j - 1].JointPoints.Find(x => x.Name.Contains("Hips"));
+                    var joint = AllAnimations.AnimClips[i].Frames[j].JointPoints.Find(x => x.Name.Contains("Root"));
+                    var jointBefore = AllAnimations.AnimClips[i].Frames[j - 1].JointPoints.Find(x => x.Name.Contains("Root"));
                     joint.Position.y = 0;
                     jointBefore.Position.y = 0;
                     //distance / time = speed
@@ -104,6 +131,7 @@ public class PreProcess : MonoBehaviour
                         maxSpeed = speed;
                 }
 
-        return maxSpeed;
+        //return maxSpeed;
+        return 1;
     }
 }

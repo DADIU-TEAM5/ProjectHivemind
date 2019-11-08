@@ -9,6 +9,7 @@ public class PlayerTrajectory : GameLoop
     //public float RotationSpeed = 5;
     public float Second = 1f;
     public int SaveInSecond = 10;
+    public int FrameRateForAnim = 30;
     public int PredictSpeed = 20;
     [Range(0.1f, 2f)]
     public float MoMaUpdateTime = 0.1f;
@@ -94,7 +95,7 @@ public class PlayerTrajectory : GameLoop
 
     public void GetAttack1()
     {
-        _attack = "Attack";
+        _attack = "Attack03_L";
     }
 
     //todo add attack motion
@@ -291,7 +292,7 @@ public class PlayerTrajectory : GameLoop
     private void HistoryTrajectory(Vector3 currentPos)
     {
         //save History only in the gap
-        if (_timer > (Second / SaveInSecond))
+        if (_timer > 1f/FrameRateForAnim)//(Second / SaveInSecond))
         {
             _timer = 0;
             _history.Dequeue();
@@ -304,17 +305,21 @@ public class PlayerTrajectory : GameLoop
     private void FuturePredict(Vector3 currentPos, Vector3 inputVel, Quaternion currentRot)
     {
         _future[0] = currentPos ;
+        Vector3 direct = new Vector3(0, 0, 0);
+        direct.y = Direction.Value.y;
 
-        var rotation = Quaternion.Euler( Direction.Value);
+        var rotation = Quaternion.Euler(direct);
 
         for (int i = 1; i < SaveInSecond; i++)
         {
             var increase = Second / SaveInSecond * i;
-            var gap_increase = Quaternion.ToEulerAngles(rotation) * increase;
-            var angle_increase = Quaternion.EulerRotation(gap_increase);
-            var gap = inputVel * increase* PlayerCurrentSpeedSO.Value;
-            gap.x = 0;
-            var futureP = (currentPos + angle_increase  * gap);
+
+            //var gap_increase = Quaternion.ToEulerAngles(rotation)* increase;
+            //var angle_increase = Quaternion.EulerRotation(gap_increase);
+            //var gap = inputVel * increase;
+            //gap.x = 0;
+            var futureP = currentPos + inputVel * increase;
+            //var futureP = (currentPos + angle_increase  * gap);
             _future[i] = futureP;
         }
 

@@ -8,19 +8,21 @@ public class CalculateCost : MotionMatcher
     //todo change to piority queue or related
 
     public static int GetBestFrameIndex(AnimationCapsules animationCapsules, Capsule current,
-                                AnimationClips animationClips)
+                                AnimationClips animationClips, MagicMotions magicMotions)
     {
         int BestIndex = 0;
 
         float bestScore = float.MaxValue;
 
-        var bestTrajectIndexes = FindBestTrajectories(animationCapsules, current);
+        var bestTrajectIndexes = FindBestTrajectories(animationCapsules, current, magicMotions);
 
         for (int i = 0; i < bestTrajectIndexes.Count; i++)
         {
             var animCap = animationCapsules.FrameCapsules[bestTrajectIndexes[i]];
-            var jointcost = JointsCost(animationClips.AnimClips[animCap.AnimClipIndex].Frames[animCap.FrameNum],
-                                        animationClips.AnimClips[current.AnimClipIndex].Frames[current.FrameNum]);
+            //var jointcost = JointsCost(animationClips.AnimClips[animCap.AnimClipIndex].Frames[animCap.FrameNum],
+            //                            animationClips.AnimClips[current.AnimClipIndex].Frames[current.FrameNum]);
+
+            var jointcost = TestCapusuleJointCost(animCap, animationCapsules.FrameCapsules[current.CapsuleIndex]);
             if (jointcost < bestScore)
             {
                 bestScore = jointcost;
@@ -33,6 +35,17 @@ public class CalculateCost : MotionMatcher
 
         return BestIndex;
     }
+
+    private static float TestCapusuleJointCost(Capsule animationCapsule, Capsule current)
+    {
+        float allCost = 0;
+        for (int j = 0; j < animationCapsule.KeyJoints.Count; j++)
+        {
+            allCost += BoneCost(animationCapsule.KeyJoints[j], current.KeyJoints[j]);
+        }
+        return allCost;
+    }
+
 
     private static float JointsCost(AnimationFrame animation, AnimationFrame current)
     {
@@ -50,10 +63,11 @@ public class CalculateCost : MotionMatcher
         return posCost;
     }
 
-    private static List<int> FindBestTrajectories(AnimationCapsules animationCapsules, Capsule current)
+    private static List<int> FindBestTrajectories(AnimationCapsules animationCapsules,
+                                            Capsule current, MagicMotions MagicMotionNames)
     {
 
-        int bestNum = 20;
+        int bestNum = 10;
 
         List<float> scores = new List<float>();
         List<int> frameindex = new List<int>();
@@ -66,6 +80,8 @@ public class CalculateCost : MotionMatcher
 
         for (int i = 0; i < animationCapsules.FrameCapsules.Count; i++)
         {
+            if (IsMagicMotion(animationCapsules.FrameCapsules[i].AnimClipName, MagicMotionNames))
+                continue;
 
             var score = TrajectoryCost(animationCapsules.FrameCapsules[i], current);
 
@@ -81,6 +97,16 @@ public class CalculateCost : MotionMatcher
         return frameindex;
     }
 
+    //could be update
+    private static bool IsMagicMotion(string animName, MagicMotions MagicMotionNames)
+    {
+        for (int i = 0; i < MagicMotionNames.AttackMotions.Count; i++)
+        {
+            if (animName == MagicMotionNames.AttackMotions[i].AnimClipName)
+                return true;
+        }
+        return false;
+    }
     private static float TrajectoryCost(Capsule frame, Capsule current)
     {
         float trajectoryCost = 0;

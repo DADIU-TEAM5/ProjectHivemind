@@ -36,7 +36,12 @@ public class AnimationTrajectory : PreProcess
             capsule.AnimClipName = animClip.Name;
             capsule.FrameNum = index;
             capsule.AnimClipIndex = animIndex;
-
+            //key joints
+            //for (int i = 0; i < animClip.Frames[index].JointPoints.Count; i++)
+            //{
+            //    capsule.KeyJoints.Add(animClip.Frames[index].JointPoints[i]);
+            //}
+            GetKeyJoints(animClip.Frames[index], ref capsule);
             capsules.Add(capsule);
         }
 
@@ -54,8 +59,9 @@ public class AnimationTrajectory : PreProcess
 
 
             var futureRelativePos = (furetureJoint.Position - currentCapsule.CurrentPosition) * speed * maxSpeedInAnim;
-            futureRelativePos.y = 0; // assum we have no jump now
+            //futureRelativePos.y = 0; // assum we have no jump now
             var futureRotatedBackPos = Quaternion.Inverse(furetureJoint.Rotation) * futureRelativePos;
+            futureRotatedBackPos.y = 0;
             fureturepositions.Add(futureRotatedBackPos);
 
 
@@ -64,12 +70,23 @@ public class AnimationTrajectory : PreProcess
             var hisJoint = animClip.Frames[historyIndex].JointPoints.Find(x => x.Name.Contains("Hips"));
 
             var hisRelativePos = (hisJoint.Position - currentCapsule.CurrentPosition) * speed * maxSpeedInAnim;
-            hisRelativePos.y = 0;
-            var hisRotatedBackPos = Quaternion.Inverse(furetureJoint.Rotation) * hisRelativePos;
+            //hisRelativePos.y = 0;
+            var hisRotatedBackPos = Quaternion.Inverse(hisJoint.Rotation) * hisRelativePos;
+            hisRotatedBackPos.y = 0;
             historypositions.Add(hisRotatedBackPos);
         }
     }
 
+    private static void GetKeyJoints(AnimationFrame animationFrame, ref Capsule capsule)
+    {
+        capsule.KeyJoints = new List<AnimationJointPoint>();
+        for (int i = 0; i < animationFrame.JointPoints.Count; i++)
+        {
+            if (animationFrame.JointPoints[i].Name == "Hips")
+                continue;
 
+            capsule.KeyJoints.Add(animationFrame.JointPoints[i]);
+        }
+    }
 
 }

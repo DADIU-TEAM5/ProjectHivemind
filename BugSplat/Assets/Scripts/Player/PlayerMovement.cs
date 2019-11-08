@@ -63,7 +63,7 @@ public class PlayerMovement : GameLoop
             _isMoving = false;
         }
 
-        Anim.SetBool("Running", PlayerCurrentSpeedSO.Value != 0);
+        //Anim.SetBool("Running", PlayerCurrentSpeedSO.Value != 0);
         if(_navMeshAgent.isOnNavMesh)
         _navMeshAgent.Move(PlayerVelocitySO.Value * PlayerCurrentSpeedSO.Value * Time.deltaTime);
 
