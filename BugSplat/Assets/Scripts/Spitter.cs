@@ -12,6 +12,7 @@ public class Spitter : Enemy
     public ParticleSystem Spit;
 
 
+    public Animator WormAnimator;
     
     
     SpitterStats _spitterStats;
@@ -19,15 +20,17 @@ public class Spitter : Enemy
     bool _attacking;
     float _attackCharge;
 
+    [HideInInspector]
+    public bool FullyUnderground;
     
 
     float _attackCooldown = 0;
 
-    float _burrowLerp;
+    
 
     float _fleeValue;
 
-    bool _underground;
+    
 
     float _waitForPathCalc;
 
@@ -46,6 +49,10 @@ public class Spitter : Enemy
     public GameEvent EmergeEvent;
 
 
+    float _percentIncrease;
+    float _chargeCLipLength;
+    public AnimationClip ChargeAnimation;
+
     public void Start()
     {
 
@@ -54,11 +61,20 @@ public class Spitter : Enemy
         var spitSettings = Spit.main;
         spitSettings.startSpeed = _spitterStats.ProjectileSpeed;
         spitSettings.startLifetime = _spitterStats.AttackRange/_spitterStats.ProjectileSpeed ;
+        _chargeCLipLength = ChargeAnimation.length;
 
-        
+
         Burrow();
 
         
+
+        float Increase = _chargeCLipLength - stats.AttackChargeUpTime;
+
+        float percenIncrease = Increase / stats.AttackChargeUpTime;
+        _percentIncrease = percenIncrease;
+
+
+
 
     }
 
@@ -71,22 +87,25 @@ public class Spitter : Enemy
 
     public void Burrow()
     {
-        if (!_underground)
+        if (!FullyUnderground)
         {
+            WormAnimator.SetBool("Underground", true);
             BurrowEvent.Raise(gameObject);
 
-            _underground = true;
+            
 
             NavMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
         }
     }
     public void Emerge()
     {
-        if (_underground)
+        if (FullyUnderground)
         {
+
+            WormAnimator.SetBool("Underground", false);
             EmergeEvent.Raise(this.gameObject);
 
-            _underground = false;
+            
 
             NavMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
         }
@@ -96,33 +115,15 @@ public class Spitter : Enemy
     public override void LoopUpdate(float deltaTime)
     {
 
+        
+
         if (_waitForPathCalc > 0)
             _waitForPathCalc -= deltaTime;
 
         RemoveFromLockedTargetIfNotVisible();
 
-        if (_underground )
-        {
-
-            if (_burrowLerp < 1)
-            {
-                _burrowLerp += deltaTime / _spitterStats.RetractionTime;
-            }
-
-
-        }
-        else {
-
-            if (_burrowLerp > 0)
-            {
-                _burrowLerp -= deltaTime / _spitterStats.RetractionTime;
-            }
-        }
-        Vector3 tempPos = Graphics.transform.localPosition;
-
-        tempPos.y = Mathf.Lerp(0, -2.3f, _burrowLerp);
-
-        Graphics.transform.localPosition = tempPos;
+        
+        
 
        // print(_fleeValue);
 
@@ -137,19 +138,21 @@ public class Spitter : Enemy
 
         if (!PlayerDetected)
         {
+           // FullyUnderground = true;
+            Burrow();
             Renderer.material.color = SetColor(Color.blue);
             DetectThePlayer();
         }
-        else if (playerInAttackRange() || _attacking)
+        else if (playerInRangedAttackRange() || _attacking)
         {
             if (_fleeValue <= 0)
             {
-
+                
                 Emerge();
 
                 NavMeshAgent.destination = transform.position;
 
-                if (_attackCooldown <= 0 && _burrowLerp <= 0)
+                if (_attackCooldown <= 0 && !FullyUnderground)
                 {
                     if (NavMeshAgent.destination != transform.position)
                         NavMeshAgent.destination = transform.position;
@@ -194,6 +197,8 @@ public class Spitter : Enemy
     }
     void Attack()
     {
+        
+
         if (_attacking == false)
         {
             AttackChargingEvent.Raise(gameObject);
@@ -204,16 +209,41 @@ public class Spitter : Enemy
             transform.LookAt(adjustedPlayerPos);
 
 
+           
+
+            
+            
+
+            
+
+
+            WormAnimator.speed = 1 + _percentIncrease;
+
+            WormAnimator.SetTrigger("ChargeAttack");
+
+
+
 
         }
+        //print(_attackCharge / _spitterStats.AttackChargeUpTime);
+
+        //WormAnimator.SetFloat("ChargeTime", _attackCharge/_spitterStats.AttackChargeUpTime);
+
+        
+
 
         _attacking = true;
         _attackCharge += Time.deltaTime;
 
         if (_attackCharge >= _spitterStats.AttackChargeUpTime)
         {
-            
+            print("spit emittet");
 
+            Vector3 temppos = PlayerTransform.position;
+            temppos.y = Spit.transform.position.y;
+
+
+            Spit.transform.LookAt(temppos);
 
             AttackEvent.Raise(gameObject);
             Spit.Emit(1);
@@ -221,7 +251,7 @@ public class Spitter : Enemy
             _attackCooldown = _spitterStats.AttackSpeed;
             _attacking = false;
             _attackCharge = 0;
-            
+            WormAnimator.speed = 1;
 
         }
 
@@ -235,7 +265,7 @@ public class Spitter : Enemy
     {
         Burrow();
 
-        if (_burrowLerp >= 1 && _waitForPathCalc<=0)
+        if (FullyUnderground && _waitForPathCalc<=0)
         {
             Vector3 adjustedPlayerPos = PlayerTransform.position;
 
