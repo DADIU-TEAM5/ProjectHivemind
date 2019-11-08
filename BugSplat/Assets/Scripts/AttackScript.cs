@@ -236,8 +236,8 @@ public class AttackScript : GameLoop
                     {
                         var potentialEnemy = potentialTargets[i].GetComponent<Enemy>();
 
-                        potentialEnemy.TakeDamage(AttackDamage.Value);
                         AttackOnHit.Raise(potentialEnemy.gameObject);
+                        potentialEnemy.TakeDamage(AttackDamage.Value);
                     }
                 }
                 else

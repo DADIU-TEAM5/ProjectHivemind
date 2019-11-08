@@ -52,6 +52,7 @@ GameObject:
   - component: {fileID: 771227568}
   - component: {fileID: 771227569}
   - component: {fileID: 1799847258}
+  - component: {fileID: 282145137683011156}
   m_Layer: 9
   m_Name: PlayerGameObject
   m_TagString: Player
@@ -113,6 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c353e778184c774aa8207a8da5793ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerGraphics: {fileID: 5788987755592666200}
   PlayerDirectionSO: {fileID: 11400000, guid: 857036471d8e63b46b304293dca2794e, type: 2}
   PlayerMaxSpeedSO: {fileID: 11400000, guid: 93c017ab6cc3fb74294b1f9f15a4860b, type: 2}
   PlayerCurrentSpeedSO: {fileID: 11400000, guid: dbd0aac2d5b26704bbdf49f8d6657a38,
@@ -188,6 +190,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  PlayerGraphics: {fileID: 5788987755592666200}
   DashDoneEvent: {fileID: 11400000, guid: f52db6c548489134587267cd10b1afc9, type: 2}
 --- !u!54 &5788987755461925663
 Rigidbody:
@@ -422,6 +425,28 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &282145137683011156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5788987755461925658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ec595245cfec614e867624ebae35483, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerGraphics: {fileID: 5788987755592666200}
+  EnemyList: {fileID: 11400000, guid: 73fb98983f89ab9418a547ca2aa08854, type: 2}
+  HexMapParent: {fileID: 11400000, guid: d6a385588fc3812449772760c0c71603, type: 2}
+  IsInvulnerableSO: {fileID: 11400000, guid: 3e721a80afd6d0643a68ebff8a1d86d0, type: 2}
+  InvulnerabilityTimerSO: {fileID: 11400000, guid: 71863109185fbb54d8667c91b4b24ef8,
+    type: 2}
+  MaxHealth: {fileID: 11400000, guid: bd56d08eef8fd2648ba7efd6397151bb, type: 2}
+  CurrentHealth: {fileID: 11400000, guid: d980b5989185a2948b70c02cdfccf718, type: 2}
+  TookDamageEvent: {fileID: 11400000, guid: a7269a05022ef469c883eb9a01dab7af, type: 2}
+  PlayerDiedEvent: {fileID: 11400000, guid: c3ddde208a1b34097a8737cd5f891f2a, type: 2}
 --- !u!1 &5788987755592666200
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,7 +516,6 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -525,11 +549,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5788987755592666200}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ec595245cfec614e867624ebae35483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerGraphics: {fileID: 0}
   EnemyList: {fileID: 11400000, guid: 73fb98983f89ab9418a547ca2aa08854, type: 2}
   HexMapParent: {fileID: 11400000, guid: d6a385588fc3812449772760c0c71603, type: 2}
   IsInvulnerableSO: {fileID: 11400000, guid: 3e721a80afd6d0643a68ebff8a1d86d0, type: 2}
