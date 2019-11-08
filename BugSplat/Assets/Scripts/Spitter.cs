@@ -34,7 +34,7 @@ public class Spitter : Enemy
 
     float _waitForPathCalc;
 
-    
+    Vector3 _playerAttackPos;
 
     
 
@@ -138,7 +138,7 @@ public class Spitter : Enemy
 
         if (!PlayerDetected)
         {
-           // FullyUnderground = true;
+            FullyUnderground = true;
             Burrow();
             Renderer.material.color = SetColor(Color.blue);
             DetectThePlayer();
@@ -209,12 +209,13 @@ public class Spitter : Enemy
             transform.LookAt(adjustedPlayerPos);
 
 
-           
 
-            
-            
 
-            
+
+
+            _playerAttackPos = PlayerTransform.position;
+
+
 
 
             WormAnimator.speed = 1 + _percentIncrease;
@@ -239,7 +240,7 @@ public class Spitter : Enemy
         {
             print("spit emittet");
 
-            Vector3 temppos = PlayerTransform.position;
+            Vector3 temppos = _playerAttackPos;
             temppos.y = Spit.transform.position.y;
 
 
