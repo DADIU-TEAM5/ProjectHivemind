@@ -50,7 +50,7 @@ public class EnemySpawner : GameLoop
 
         }
 
-        print(name + " has enemies " + enemies.Count);
+        //print(name + " has enemies " + enemies.Count);
 
 
         if (!counted)
