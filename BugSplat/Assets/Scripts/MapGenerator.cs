@@ -74,7 +74,7 @@ public class MapGenerator : MonoBehaviour
             SortedHexagons[tierIndex].Add(Hexagons[i]);
 
         }
-        print("hexagons have been sorted "+ SortedHexagons.Count);
+        //print("hexagons have been sorted "+ SortedHexagons.Count);
 
 
 

@@ -18,6 +18,7 @@ public abstract class Enemy : GameLoop
     public GameObject DeadCutout;
 
     public GameObject Graphics;
+    public GameObject RenderGraphics;
 
     public GameObjectList EnemyList;
     public GameObjectVariable LockedTarget;
@@ -91,7 +92,15 @@ public abstract class Enemy : GameLoop
 
         EnemyList.Add(gameObject);
 
-        Renderer = Graphics.GetComponent<Renderer>();
+        if (RenderGraphics == null)
+        {
+            Renderer = Graphics.GetComponent<Renderer>();
+        }
+        else
+        {
+            Renderer = RenderGraphics.GetComponent<Renderer>();
+        }
+
 
         StartColor = Renderer.material.color;
 
@@ -162,12 +171,9 @@ public abstract class Enemy : GameLoop
 
             DeathEvent.Raise(this.gameObject);
 
-            EnemyList.Remove(gameObject);
-
             Destroy(Cone);
             Destroy(Outline);
-            Destroy(gameObject, 3f);
-
+            Destroy(gameObject);
         }
     }
 
@@ -254,7 +260,6 @@ public abstract class Enemy : GameLoop
 
         _currentHealthColor = _gradient.Evaluate(1f);
 
-        InitStyles();
 
         _updateHealth = true;
 
@@ -560,6 +565,14 @@ public abstract class Enemy : GameLoop
         adjustedPlayerPos.y = transform.position.y;
 
         return Vector3.Distance(transform.position, adjustedPlayerPos) < stats.AttackRange / 2;
+    }
+    public bool playerInRangedAttackRange()
+    {
+        Vector3 adjustedPlayerPos = PlayerTransform.position;
+
+        adjustedPlayerPos.y = transform.position.y;
+
+        return Vector3.Distance(transform.position, adjustedPlayerPos) < stats.AttackRange*1.1f ;
     }
 
 
