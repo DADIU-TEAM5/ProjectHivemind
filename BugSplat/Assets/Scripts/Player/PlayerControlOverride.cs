@@ -31,6 +31,7 @@ public class PlayerControlOverride : MonoBehaviour
                     ShopColliders[i].SetActive(true);
                 }
                 Target[1].gameObject.SetActive(false);
+                PlayerControlOverrideSO.Value = false;
             }
             else
             {
@@ -43,6 +44,11 @@ public class PlayerControlOverride : MonoBehaviour
             }
         }
 
+    }
+
+    public void EnterShop()
+    {
+        IsExiting.Value = true;
     }
 
 
