@@ -21,10 +21,4 @@ public class OpenShop : MonoBehaviour
             ShopCollider.SetActive(false);
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
