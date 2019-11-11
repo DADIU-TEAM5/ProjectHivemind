@@ -113,6 +113,8 @@ GameObject:
   - component: {fileID: 4333754930655340069}
   - component: {fileID: 4333754930655340122}
   - component: {fileID: 4333754930655340123}
+  - component: {fileID: 1099981793}
+  - component: {fileID: 1099981799}
   m_Layer: 0
   m_Name: AggroTest
   m_TagString: Untagged
@@ -253,3 +255,35 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &1099981793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4333754930655340121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c61478d86339f934c9855271793e5d2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AC: {fileID: 4333754930655340069}
+  EnemyList: {fileID: 11400000, guid: 73fb98983f89ab9418a547ca2aa08854, type: 2}
+  UM: {fileID: 0}
+  TimeBeforeResetAggro: {fileID: 11400000, guid: 5ec49120ebea7b944b9d1ba6fa9e406e,
+    type: 2}
+--- !u!114 &1099981799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4333754930655340121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8cd77b9a3fb574486a4a4a4ef4a938, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameLoopHandler: {fileID: 11400000, guid: c0a55c38f93f1454584d2283a658d361, type: 2}
+  GameLoops:
+  - {fileID: 1099981793}
