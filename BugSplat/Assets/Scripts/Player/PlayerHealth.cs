@@ -36,7 +36,7 @@ public class PlayerHealth : GameLoop
 
         _invulnerabilityTrigger = false;
 
-        _navMeshAgent = transform.parent.GetComponent<NavMeshAgent>();
+        _navMeshAgent = transform.GetComponent<NavMeshAgent>();
 
     }
 
