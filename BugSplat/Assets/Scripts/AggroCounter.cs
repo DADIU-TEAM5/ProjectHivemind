@@ -16,7 +16,7 @@ public class AggroCounter : MonoBehaviour
         AggroTest.text = AggroedEnemies.Value.ToString();
     }
 
-    public void EnemyKilled()
+    public void EnemyUnaggro()
     {
 
         // If PlayerDetected 

@@ -13,7 +13,9 @@ namespace AK
 {
     namespace EVENTS
     {
-        static const AkUniqueID AMB_ARENA_01 = 1404225303U;
+        static const AkUniqueID AMB_ARENA_01_START = 4090897946U;
+        static const AkUniqueID AMB_ARENA_01_STOP = 3018226098U;
+        static const AkUniqueID AMB_HUB_MAINEVENT = 1797197367U;
         static const AkUniqueID INTRO = 1125500713U;
         static const AkUniqueID NPC_BOOMER_ATTACK = 592638112U;
         static const AkUniqueID NPC_BOOMER_DEAD = 1879848174U;
@@ -55,8 +57,23 @@ namespace AK
         static const AkUniqueID PLAYER_FOLEY_FOOTSTEPEVENT = 954324369U;
         static const AkUniqueID PLAYER_FOLEY_HIT = 830213708U;
         static const AkUniqueID PLAYER_FOLEY_KILLED = 3187150534U;
-        static const AkUniqueID PLAYER_FOLEYPHFOOTSTEPEVENT = 586291076U;
     } // namespace EVENTS
+
+    namespace SWITCHES
+    {
+        namespace SWITCH_AMB
+        {
+            static const AkUniqueID GROUP = 4218164408U;
+
+            namespace SWITCH
+            {
+                static const AkUniqueID SWITCH_AMB_ARENA = 3536551912U;
+                static const AkUniqueID SWITCH_AMB_HUB = 2665294484U;
+                static const AkUniqueID SWITCH_AMB_SHOP = 3307969155U;
+            } // namespace SWITCH
+        } // namespace SWITCH_AMB
+
+    } // namespace SWITCHES
 
     namespace GAME_PARAMETERS
     {
@@ -84,7 +101,6 @@ namespace AK
         static const AkUniqueID MASTER_BUS = 1399649189U;
         static const AkUniqueID MASTER_OUT = 1330420139U;
         static const AkUniqueID MUSIC_BUS = 2680856269U;
-        static const AkUniqueID PRL_VERB_RTN = 3022286562U;
         static const AkUniqueID SFX_CHANNEL = 3990010218U;
         static const AkUniqueID SUMMER_BUS = 1348578857U;
     } // namespace BUSSES
@@ -94,9 +110,6 @@ namespace AK
         static const AkUniqueID HDR_REVERB_RECEIVE = 1172022782U;
         static const AkUniqueID HDR_VERB_ARENA = 2679963831U;
         static const AkUniqueID HDR_VERB_HUB = 1013890195U;
-        static const AkUniqueID PRL_REVERB_RECEIVE = 2698328542U;
-        static const AkUniqueID PRL_VERB_ARENA = 1570853527U;
-        static const AkUniqueID PRL_VERB_HUB = 3373630835U;
     } // namespace AUX_BUSSES
 
     namespace AUDIO_DEVICES
