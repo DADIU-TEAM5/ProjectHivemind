@@ -70,8 +70,6 @@ public abstract class Enemy : GameLoop
     public GameEvent AggroEvent;
     public GameEvent TakeDamageEvent;
     public GameEvent DeathEvent;
-    public GameEvent EnemyDied;
-
 
     [HideInInspector]
     public bool PlayerDetected;
@@ -172,11 +170,13 @@ public abstract class Enemy : GameLoop
             }
 
             DeathEvent.Raise(this.gameObject);
-            EnemyDied.Raise(gameObject);
+
+            EnemyList.Remove(gameObject);
 
             Destroy(Cone);
             Destroy(Outline);
-            Destroy(gameObject);
+            Destroy(gameObject, 3f);
+
         }
     }
 

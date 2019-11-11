@@ -5,13 +5,41 @@ using UnityEngine.AI;
 
 public class cannonFodder : Enemy
 {
+
+   
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
     private bool _attacking;
     private float _attackCharge;
     private float _attackCooldown = 0;
 
+    
+
+    
+
+    
+
+    
+
     [Header("Events")]
+    
+
     public GameEvent AttackEvent;
+    
     public GameEvent AttackChargingEvent;
+
+
 
     public Animator FodderAnimator;
     public AnimationClip ChargeClip;
@@ -20,13 +48,21 @@ public class cannonFodder : Enemy
 
     private void Start()
     {
+
+
         OutlineRenderer.material.color = new Color(.2f, .2f, .2f, .1f);
 
         float Increase = ChargeClip.length - stats.AttackChargeUpTime;
 
         float percenIncrease = Increase / stats.AttackChargeUpTime;
         _percentIncrease = percenIncrease;
+
+
     }
+
+
+
+
 
     public override void LoopUpdate(float deltaTime)
     {

@@ -91,7 +91,7 @@ public class Spitter : Enemy
         {
             WormAnimator.SetBool("Underground", true);
             BurrowEvent.Raise(gameObject);
-            FullyUnderground = true;
+
             
 
             NavMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
@@ -104,7 +104,7 @@ public class Spitter : Enemy
 
             WormAnimator.SetBool("Underground", false);
             EmergeEvent.Raise(this.gameObject);
-            FullyUnderground = false;
+
             
 
             NavMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
@@ -138,6 +138,7 @@ public class Spitter : Enemy
 
         if (!PlayerDetected)
         {
+            FullyUnderground = true;
             Burrow();
             Renderer.material.color = SetColor(Color.blue);
             DetectThePlayer();
