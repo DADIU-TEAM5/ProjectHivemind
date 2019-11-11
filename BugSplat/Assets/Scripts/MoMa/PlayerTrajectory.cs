@@ -124,7 +124,7 @@ public class PlayerTrajectory : GameLoop
         {
             _motionMatcher.GetMotionAndFrame(_attack, AttackMotions, AnimationTrajectories, PlayerTrajectoryCapusule,
                                               Results, AnimationClips, DifferentClipLength);
-            
+
             _tempMoMaTime = 0;
             _attack = null;
             bool isSimilarMotion = ((thisClip == Results.AnimClipIndex)
@@ -166,7 +166,7 @@ public class PlayerTrajectory : GameLoop
 
 
             if (isSimilarMotion)
-                PlayAnimationJoints( PlayerTrajectoryCapusule,
+                PlayAnimationJoints(PlayerTrajectoryCapusule,
                                                 Results, AnimationClips, _skeletonJoints);
             else
             {
@@ -184,7 +184,7 @@ public class PlayerTrajectory : GameLoop
         else
         {
             Results.FrameNum++;
-            PlayAnimationJoints( PlayerTrajectoryCapusule,
+            PlayAnimationJoints(PlayerTrajectoryCapusule,
                                                 Results, AnimationClips, _skeletonJoints);
         }
     }
@@ -220,8 +220,8 @@ public class PlayerTrajectory : GameLoop
 
 
             if (isSimilarMotion)
-                PlayAnimationJoints( PlayerTrajectoryCapusule,
-                                                Results, AnimationClips, _skeletonJoints); 
+                PlayAnimationJoints(PlayerTrajectoryCapusule,
+                                                Results, AnimationClips, _skeletonJoints);
             else
             {
                 _blendFlag = true;
@@ -230,7 +230,7 @@ public class PlayerTrajectory : GameLoop
                 PlayBlendAnimation(_skeletonJoints, BlendDegree, _beginFrame, _beginAnimClip,
                     Results, PlayerTrajectoryCapusule, AnimationClips,
                     _forBlendPlay, rotationPlayer);
-                
+
             }
 
 
@@ -250,7 +250,7 @@ public class PlayerTrajectory : GameLoop
                 //Results.FrameNum = BlendLength;//_forBlendPlay + _beginFrame;
 
                 _forBlendPlay = 0;
-                
+
             }
             else
             {
@@ -293,7 +293,7 @@ public class PlayerTrajectory : GameLoop
     private void HistoryTrajectory(Vector3 currentPos)
     {
         //save History only in the gap
-        if (_timer > 1f/FrameRateForAnim)//(Second / SaveInSecond))
+        if (_timer > 1f / FrameRateForAnim)//(Second / SaveInSecond))
         {
             _timer = 0;
             _history.Dequeue();
@@ -305,7 +305,7 @@ public class PlayerTrajectory : GameLoop
     /* if we do not use the root as the player, it seems we don't need currentRot*/
     private void FuturePredict(Vector3 currentPos, Vector3 inputVel, Quaternion currentRot)
     {
-        _future[0] = currentPos ;
+        _future[0] = currentPos;
         Vector3 direct = new Vector3(0, 0, 0);
         direct.y = Direction.Value.y;
 
@@ -357,7 +357,7 @@ public class PlayerTrajectory : GameLoop
 
     private void PlayOneWholeAnimation(AnimClip animClip)
     {
-        for(int i = 0; i < animClip.Frames.Count; i++)
+        for (int i = 0; i < animClip.Frames.Count; i++)
         {
             FrameToJoints(_skeletonJoints, animClip.Frames[i]);
         }
@@ -429,7 +429,7 @@ public class PlayerTrajectory : GameLoop
         PlayerTrajectoryCapusule.Capsule.AnimClipName = result.ClipName;
         PlayerTrajectoryCapusule.Capsule.FrameNum = result.FrameNum;
 
-        if (result.FrameNum >= animationClips.AnimClips[result.AnimClipIndex].Frames.Count-1)//3 should be start frame 
+        if (result.FrameNum >= animationClips.AnimClips[result.AnimClipIndex].Frames.Count - 1)//3 should be start frame 
             result.FrameNum = 0; //3 should be start frame 
 
         BlendAnimation(beginFrameIndex, bestFrameIndex, skeletonJoints,
@@ -473,7 +473,7 @@ public class PlayerTrajectory : GameLoop
     }
 
 
-     public override void LoopLateUpdate(float deltaTime)
+    public override void LoopLateUpdate(float deltaTime)
     {
 
     }
