@@ -18,6 +18,7 @@ namespace AK
         static const AkUniqueID AMB_HUB_MAINEVENT = 1797197367U;
         static const AkUniqueID INTRO = 1125500713U;
         static const AkUniqueID NPC_BOOMER_ATTACK = 592638112U;
+        static const AkUniqueID NPC_BOOMER_CHARGE = 1929315744U;
         static const AkUniqueID NPC_BOOMER_DEAD = 1879848174U;
         static const AkUniqueID NPC_BOOMER_DETECT = 852176873U;
         static const AkUniqueID NPC_BOOMER_FOOTSTEPS = 199898249U;
