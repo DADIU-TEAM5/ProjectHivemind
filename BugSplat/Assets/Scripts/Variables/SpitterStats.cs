@@ -9,7 +9,8 @@ public class SpitterStats : EnemyStats
 
     public float ProjectileSpeed;
 
-    
+
+    public bool ShootEggs;
 
     public float FleeTime;
     public float FleeThreshold;
