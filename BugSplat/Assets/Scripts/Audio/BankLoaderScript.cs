@@ -13,25 +13,48 @@ public class BankLoaderScript : MonoBehaviour
     public AK.Wwise.Bank Player;
     public AK.Wwise.Bank EnemyInsects;
 
-    public string currentScenePlaceholderSO;
 
     void Awake()
     {
         Music.Load(false, false);
         UI.Load(false, false);
-        //This section, "start", is only a placeholder for the playable
         Player.Load(false, false);
-        AreaArena.Load(false, false);
-        EnemyInsects.Load(false, false);
+        //AreaArena.Load(false, false);
+        //EnemyInsects.Load(false, false);
     }
 
     public void OnEnterGame()
     {
-       // AreaHub.Load(false, false);
-        //Player.Load(false, false);
+       //AreaHub.Load(false, false);
+       //Player.Load(false, false);
+    }
+
+    public void SceneChange()
+    {
+        AreaArena.Unload();
+        AreaHub.Unload();
+        AreaShop.Unload();
+        EnemyInsects.Unload();
     }
 
 
+    public void EnterArena()
+    {
+        Debug.Log("Loading Arena soundbanks");
+        AreaArena.Load(false, false);
+        EnemyInsects.Load(false, false);
+        Debug.Log("Arena soundbanks loaded");
+    }
+
+    public void EnterHub()
+    {
+        AreaHub.Load(false, false);
+    }
+
+    public void EnterShop()
+    {
+        AreaShop.Load(false, false);
+    }
 
 
 }

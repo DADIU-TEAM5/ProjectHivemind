@@ -14,11 +14,16 @@ public class TestToolMenu : MonoBehaviour
 
     public List<FloatVariable> Floatvariables = new List<FloatVariable>();
 
+    public List<IntVariable> IntVariables = new List<IntVariable>();
+
+    public List<GameEvent> GameEvents = new List<GameEvent>();
+
     public GameObject ScrollView;
 
     public GameObject Togglebutton;
     public GameObject ScenButton;
     public GameObject FloatSlider;
+    public GameObject IntSlider;
     public Button TB;
 
     public void CreateUIElements()
@@ -48,6 +53,21 @@ public class TestToolMenu : MonoBehaviour
 
             }
         }
+
+        if (IntVariables.Count > 0)
+        {
+            for (int i = 0; i < IntVariables.Count; i++)
+            {
+                GameObject newGO = (GameObject)GameObject.Instantiate(IntSlider);
+                newGO.transform.SetParent(ScrollView.transform, false);
+                newGO.SetActive(true);
+
+                TestSliderScript intSlider = newGO.GetComponent<TestSliderScript>();
+                intSlider.Setup(IntVariables[i], IntVariables[i].Min, IntVariables[i].Max);
+
+            }
+        }
+
         for (int i = 0; i < SceneVariables.Count; i++)
         {
             GameObject newGO = (GameObject)GameObject.Instantiate(ScenButton);

@@ -14,6 +14,7 @@ public class PopEffect : Effect
     public override void Init()
     {
         _poppingOff = false;
+        Pop.Init();
     }
 
     public override void Trigger(GameObject target = null)
