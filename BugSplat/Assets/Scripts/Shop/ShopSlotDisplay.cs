@@ -7,6 +7,8 @@ public class ShopSlotDisplay : MonoBehaviour
 {
     public ShopSlot Slot;
 
+    public IntVariable PlayerCurrency;
+
     [SerializeField]
     private GameObject SlotObject;
 
@@ -30,9 +32,11 @@ public class ShopSlotDisplay : MonoBehaviour
     public AnimationCurve AnimPosCurve;
     public AnimationCurve AnimRotationCurve;
 
-    private Vector3 _nextPos;
     private float _lerpTime;
-    private Quaternion _nextRotation;
+
+    private Vector3 StartPos;
+    private Quaternion StartRot, EndRot;
+
     public GameObject BuyButton;
 
 
@@ -47,32 +51,36 @@ public class ShopSlotDisplay : MonoBehaviour
 
         SlotItemInst = Instantiate(SlotObject, SlotPlaceholder);
         PriceText.text = Slot?.GetPrice().ToString();
+
+        StartPos = SlotItemInst.transform.position;
+        StartRot = Quaternion.Euler(20, 0, 0);
+        EndRot = Quaternion.Euler(0, 0, 0);
     }
 
-    private IEnumerator SelectItemRoutine() {
-        yield return MoveItem();
+    private IEnumerator SelectItemRoutine(bool select) {
+        yield return select ? 
+            MoveItem(StartPos, AnimTargetPos.position, StartRot, EndRot) 
+            : MoveItem(AnimTargetPos.position, StartPos, EndRot, StartRot);
 
         BuyButton.SetActive(true);
+        if (PlayerCurrency.Value < Slot.GetPrice()) {
+            BuyButton.GetComponent<Button>().enabled = false;
+        }
 
         yield return RotateItem();
     }
 
-    private IEnumerator MoveItem() {
-        var startPos = SlotItemInst.transform.position;
-        var endPos = AnimTargetPos.position;
-
-        var startRot = Quaternion.Euler(20, 0, 0);
-        var endRot = Quaternion.Euler(0, 0, 0);
+    private IEnumerator MoveItem(Vector3 from, Vector3 to, Quaternion fromRot, Quaternion toRot) {
 
         for (var time = 0f; time < AnimationPositionTime; time += Time.deltaTime) {
             //float curveTime = 1 - (_lerpTime / AnimationPositionTime);
             var curveTime = time / AnimationPositionTime;
 
-            _nextPos = Vector3.Lerp(startPos, endPos, AnimPosCurve.Evaluate(curveTime));
-            _nextRotation = Quaternion.Lerp(startRot, endRot, AnimPosCurve.Evaluate(curveTime) * 4);
+            var nextPos = Vector3.Lerp(from, to, AnimPosCurve.Evaluate(curveTime));
+            var nextRotation = Quaternion.Lerp(fromRot, toRot, AnimPosCurve.Evaluate(curveTime) * 4);
 
-            SlotItemInst.transform.position = _nextPos;
-            SlotItemInst.transform.rotation = _nextRotation;
+            SlotItemInst.transform.position = nextPos;
+            SlotItemInst.transform.rotation = nextRotation;
 
             yield return null;
         }
@@ -94,6 +102,12 @@ public class ShopSlotDisplay : MonoBehaviour
     {
         SlotItemInst.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
 
-        StartCoroutine(SelectItemRoutine());
+        StartCoroutine(SelectItemRoutine(true));
+    }
+
+    public void DeselectItem() {
+        SlotItemInst.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
+
+        StartCoroutine(SelectItemRoutine(false));
     }
 }
