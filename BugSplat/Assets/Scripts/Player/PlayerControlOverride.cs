@@ -17,6 +17,7 @@ public class PlayerControlOverride : MonoBehaviour
     public GameObject[] ShopColliders;
     public Vector3Variable PlayerDirectionSO;
     public Transform PlayerGraphics;
+    public GameObject WhiteFadeIn;
 
 
     // Start is called before the first frame update
@@ -40,6 +41,7 @@ public class PlayerControlOverride : MonoBehaviour
                 Debug.Log(heading.normalized);
                 PlayerDirectionSO.Value = heading.normalized;
                 Player.position = Target[1].position;
+                WhiteFadeIn.SetActive(true);
                 IsExiting.Value = false;
             }
         }

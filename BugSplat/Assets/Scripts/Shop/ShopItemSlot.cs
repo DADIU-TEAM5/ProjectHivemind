@@ -51,7 +51,7 @@ public class ShopItemSlot : ShopSlot
         }
     }
 
-    public override Sprite GetSprite() => Item?.Info?.Icon;
+    public override GameObject GetItemPrefab() => Item?.Info?.ItemPrefab;
 
     public override int GetPrice() => Item?.Info?.Price ?? 0;
 
