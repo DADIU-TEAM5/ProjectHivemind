@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Debuff : MonoBehaviour
+public class DebuffEffect : Effect
 {
-    // Start is called before the first frame update
-    void Start()
+    public MarkEffect Mark;
+
+    public override void Init()
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Trigger(GameObject target = null)
     {
-        
     }
 }
