@@ -12,6 +12,21 @@ public class TankStats : EnemyStats
     
     public float PushLength;
 
+
+
+    public float ChargeDistance;
+
+    public float EngageChargeDistance;
+
+    public float ChargeSpotAngle;
+    public float MoveBackDistance;
     
+    
+
+    public float StunDuration;
+    public float PlayerStunDuration;
+
+
+
 
 }
