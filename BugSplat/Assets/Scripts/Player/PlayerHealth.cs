@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class PlayerHealth : GameLoop
 {
-    public GameObject PlayerGraphics; 
+    public GameObject PlayerGraphics;
     public GameObjectList EnemyList;
     public GameObjectVariable HexMapParent;
 
@@ -15,6 +15,8 @@ public class PlayerHealth : GameLoop
     private bool _invulnerabilityTrigger;
 
     public FloatVariable MaxHealth;
+
+
 
     NavMeshAgent _navMeshAgent;
 
@@ -37,7 +39,8 @@ public class PlayerHealth : GameLoop
         _invulnerabilityTrigger = false;
 
         _navMeshAgent = transform.parent.GetComponent<NavMeshAgent>();
-
+        if (_navMeshAgent == null)
+            Debug.LogError("No NavMesh Agent in PlayerHealth.CS");
     }
 
     public void TakeDamage(float damage)
@@ -63,7 +66,7 @@ public class PlayerHealth : GameLoop
 
     public override void LoopLateUpdate(float deltaTime)
     {
-        
+
     }
     public override void LoopUpdate(float deltaTime)
     {
@@ -72,7 +75,8 @@ public class PlayerHealth : GameLoop
             InvulnerabilityTimerSO.Value -= Time.deltaTime;
             _invulnerabilityTrigger = true;
 
-        } else if (_invulnerabilityTrigger == true)
+        }
+        else if (_invulnerabilityTrigger == true)
         {
             IsInvulnerableSO.Value = false;
             _invulnerabilityTrigger = false;
@@ -91,8 +95,9 @@ public class PlayerHealth : GameLoop
         }
     }
 
-    public void KnockBackDamage(Vector3 direction, float length,float damage)
+    public void KnockBackDamage(Vector3 direction, float length, float damage)
     {
+        //Debug.Log("KnockBackDamage " + direction + ", " + length);
         if (InvulnerabilityTimerSO.Value < 0 && IsInvulnerableSO.Value != true)
         {
             InvulnerabilityTimerSO.Value = InvulnerabilityTimerSO.InitialValue;
@@ -110,7 +115,10 @@ public class PlayerHealth : GameLoop
 
             CheckIfDead();
 
+
             _navMeshAgent.Move(direction * length);
+
+
             /*
             RaycastHit[] hits = Physics.CapsuleCastAll(_playerParent.position - (Vector3.up * 0.5f), _playerParent.position + (Vector3.up * 0.5f), .1f, direction, (direction * length).magnitude);
             if (hits.Length > 0)

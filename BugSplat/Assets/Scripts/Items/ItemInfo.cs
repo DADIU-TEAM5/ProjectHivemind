@@ -8,6 +8,6 @@ public class ItemInfo
     public Tier Tier;
     public int Price;
     public string Description;
-    public Sprite Icon;
+    public GameObject ItemPrefab;
 
 }

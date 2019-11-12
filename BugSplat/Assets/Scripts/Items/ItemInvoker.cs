@@ -22,6 +22,9 @@ public class ItemInvoker : MonoBehaviour
     public void SetCurrentEffectType(EffectType type) {
         if (Effects.ContainsKey(type)) {
             CurrentEffectType = type;
+        } else
+        {
+            CurrentEffectType = null;
         }
     }
 
@@ -43,9 +46,9 @@ public class ItemInvoker : MonoBehaviour
     }
 
     public void TriggerEffects(GameObject target) {
-        if (target == null) Debug.Log("Perfect OUT!");
+        if (target == null || CurrentEffectType == null || !Effects.ContainsKey(CurrentEffectType)) return;
 
-        var effects = (Effects.Keys.Contains(CurrentEffectType)) ? Effects[CurrentEffectType] : new List<Effect>();
+        var effects = Effects[CurrentEffectType];
 
         foreach (var effect in effects) {
             effect.Trigger(target);
