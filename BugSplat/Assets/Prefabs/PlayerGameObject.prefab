@@ -228,8 +228,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c353e778184c774aa8207a8da5793ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerGraphics: {fileID: 2700275941276276989}
-  MoveDirectionSO: {fileID: 11400000, guid: c1f170982022e2e4f8f993a769166f2b, type: 2}
+  IsStunned: {fileID: 11400000, guid: e206e2a2d0299224e8e9cfcc6ab47f33, type: 2}
+  PlayerGraphics: {fileID: 5788987755592666200}
+  PlayerDirectionSO: {fileID: 11400000, guid: 857036471d8e63b46b304293dca2794e, type: 2}
+  PlayerMaxSpeedSO: {fileID: 11400000, guid: 93c017ab6cc3fb74294b1f9f15a4860b, type: 2}
+  PlayerCurrentSpeedSO: {fileID: 11400000, guid: dbd0aac2d5b26704bbdf49f8d6657a38,
+    type: 2}
+  PlayerAccelerationSO: {fileID: 11400000, guid: 3b40e6de48c22034a88c6e75710815d4,
+    type: 2}
+  PlayerVelocitySO: {fileID: 11400000, guid: d1f4ccfac4a47fb4da89d998092775b8, type: 2}
   DashInitiatedSO: {fileID: 11400000, guid: a325fabc21f4650479d69a9c7bdd3d21, type: 2}
   AttackInitiatedSO: {fileID: 11400000, guid: 4cf9a708d5633f04bbbc56776410d56d, type: 2}
   InputMoveMinThresholdSO: {fileID: 11400000, guid: 06f2711f3ca5c4d4eba7f5b9b751f4c3,
@@ -529,13 +536,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ec595245cfec614e867624ebae35483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerGraphics: {fileID: 2700275941276276989}
+  IsStunned: {fileID: 11400000, guid: e206e2a2d0299224e8e9cfcc6ab47f33, type: 2}
+  PlayerGraphics: {fileID: 5788987755592666200}
   EnemyList: {fileID: 11400000, guid: 73fb98983f89ab9418a547ca2aa08854, type: 2}
   HexMapParent: {fileID: 11400000, guid: d6a385588fc3812449772760c0c71603, type: 2}
   IsInvulnerableSO: {fileID: 11400000, guid: 3e721a80afd6d0643a68ebff8a1d86d0, type: 2}
   InvulnerabilityTimerSO: {fileID: 11400000, guid: 71863109185fbb54d8667c91b4b24ef8,
     type: 2}
   MaxHealth: {fileID: 11400000, guid: bd56d08eef8fd2648ba7efd6397151bb, type: 2}
+  NavAgent: {fileID: 0}
   CurrentHealth: {fileID: 11400000, guid: d980b5989185a2948b70c02cdfccf718, type: 2}
   TookDamageEvent: {fileID: 11400000, guid: a7269a05022ef469c883eb9a01dab7af, type: 2}
   PlayerDiedEvent: {fileID: 11400000, guid: c3ddde208a1b34097a8737cd5f891f2a, type: 2}
@@ -583,10 +592,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 366cbba58bae2a2438bdbb3bf75af73e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationCapsules: {fileID: 11400000, guid: 327ec0fd83ed26641b0b423ab2b9d968, type: 2}
-  transformToShowFrom: {fileID: 1378690212658981614}
-  result: {fileID: 11400000, guid: fc2935224d0935b409173ca4fafc3dd2, type: 2}
---- !u!114 &7772208168166661170
+  IsStunned: {fileID: 11400000, guid: e206e2a2d0299224e8e9cfcc6ab47f33, type: 2}
+  PlayerGraphics: {fileID: 0}
+  EnemyList: {fileID: 11400000, guid: 73fb98983f89ab9418a547ca2aa08854, type: 2}
+  HexMapParent: {fileID: 11400000, guid: d6a385588fc3812449772760c0c71603, type: 2}
+  IsInvulnerableSO: {fileID: 11400000, guid: 3e721a80afd6d0643a68ebff8a1d86d0, type: 2}
+  InvulnerabilityTimerSO: {fileID: 11400000, guid: 71863109185fbb54d8667c91b4b24ef8,
+    type: 2}
+  MaxHealth: {fileID: 11400000, guid: bd56d08eef8fd2648ba7efd6397151bb, type: 2}
+  NavAgent: {fileID: 1799847258}
+  CurrentHealth: {fileID: 11400000, guid: d980b5989185a2948b70c02cdfccf718, type: 2}
+  TookDamageEvent: {fileID: 11400000, guid: a7269a05022ef469c883eb9a01dab7af, type: 2}
+  PlayerDiedEvent: {fileID: 11400000, guid: c3ddde208a1b34097a8737cd5f891f2a, type: 2}
+--- !u!114 &2095437824759393568
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
