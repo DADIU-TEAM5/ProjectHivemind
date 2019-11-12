@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class SpitterAudioScript : MonoBehaviour
 {
+    [Header("Wwise events")]
     public AK.Wwise.Event Detect;
     public AK.Wwise.Event Attack;
     public AK.Wwise.Event Hit;
     public AK.Wwise.Event ScaredScream;
     public AK.Wwise.Event DeathSplat;
-    public AK.Wwise.Event RangedAttack;
+    public AK.Wwise.Event Charge;
     public AK.Wwise.Event EmergeFromGround;
-    public AK.Wwise.Event HideUnderground;
 
 
     public void DetectEvent(GameObject source)
@@ -39,9 +39,9 @@ public class SpitterAudioScript : MonoBehaviour
         DeathSplat.Post(source);
     }
 
-    public void RangedAttackEvent(GameObject source)
+    public void ChargeEvent(GameObject source)
     {
-        RangedAttack.Post(source);
+        Charge.Post(source);
     }
 
     public void EmergeEvent(GameObject source)
@@ -49,8 +49,4 @@ public class SpitterAudioScript : MonoBehaviour
         EmergeFromGround.Post(source);
     }
 
-    public void HideEvent(GameObject source)
-    {
-        HideUnderground.Post(source);
-    }
 }
