@@ -7,7 +7,7 @@ public class TestToolMenu : MonoBehaviour
 {
     //List or Array?
 
-    public bool ResetValuesOnPlay = false; 
+    public bool ResetValuesOnPlay = false;
     public List<BoolVariable> Boolvariables = new List<BoolVariable>();
 
     public List<StringVariable> SceneVariables = new List<StringVariable>();
@@ -21,6 +21,7 @@ public class TestToolMenu : MonoBehaviour
     public GameObject ScrollView;
 
     public GameObject Togglebutton;
+    public GameObject EventButton;
     public GameObject ScenButton;
     public GameObject FloatSlider;
     public GameObject IntSlider;
@@ -68,6 +69,21 @@ public class TestToolMenu : MonoBehaviour
             }
         }
 
+        if (GameEvents.Count > 0)
+        {
+            for (int i = 0; i < GameEvents.Count; i++)
+            {
+                GameObject newGO = (GameObject)GameObject.Instantiate(EventButton);
+                newGO.transform.SetParent(ScrollView.transform, false);
+                newGO.SetActive(true);
+
+                TestEventButton eventButton = newGO.GetComponent<TestEventButton>();
+                eventButton.Setup(GameEvents[i]);
+
+            }
+
+        }
+
         for (int i = 0; i < SceneVariables.Count; i++)
         {
             GameObject newGO = (GameObject)GameObject.Instantiate(ScenButton);
@@ -86,7 +102,7 @@ public class TestToolMenu : MonoBehaviour
             ResetFloatValues();
 
         CreateUIElements();
-       
+
     }
 
     private void ResetFloatValues()
