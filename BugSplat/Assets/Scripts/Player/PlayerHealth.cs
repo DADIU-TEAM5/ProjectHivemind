@@ -33,7 +33,8 @@ public class PlayerHealth : GameLoop
 
     public void Start()
     {
-        CurrentHealth.Value = MaxHealth.Value;
+        if(CurrentHealth.Value<=0)
+            CurrentHealth.Value = MaxHealth.Value;
         _playerParent = transform.parent;
 
         _invulnerabilityTrigger = false;
