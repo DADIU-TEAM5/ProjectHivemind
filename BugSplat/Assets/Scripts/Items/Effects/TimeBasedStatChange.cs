@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName="Effects/Timebased StatChange")]
 public class TimeBasedStatChange : Effect
 {
     public StatChangeEffect StatChange;
@@ -10,22 +11,23 @@ public class TimeBasedStatChange : Effect
 
     private StatChangeEffect InverseStatChange;
 
+    private EmptyMono CoroutineBoy;
+
     public override void Init()
     {
-        InverseStatChange = new StatChangeEffect();
+        InverseStatChange = (StatChangeEffect) CreateInstance(typeof(StatChangeEffect));
         InverseStatChange.Stat = StatChange.Stat;
-        InverseStatChange.Change = -InverseStatChange.Change;
+        InverseStatChange.Change = -StatChange.Change;
+
+        var coroutineObject = new GameObject();
+        coroutineObject.name = "TimeBasedStatChange_CoroutineBoy";
+        CoroutineBoy = coroutineObject.AddComponent<EmptyMono>();
+        coroutineObject.SetActive(true);
     }
 
     public override void Trigger(GameObject target = null)
     {
-        var enemy = target?.GetComponent<Enemy>();
-        enemy?.StartCoroutine(EffectCountdown());
-
-        if (enemy == null) {
-            var player = target?.GetComponent<PlayerMovement>();
-            player?.StartCoroutine(EffectCountdown());
-        }
+        CoroutineBoy.StartCoroutine(EffectCountdown());
     }
 
     private IEnumerator EffectCountdown() {
