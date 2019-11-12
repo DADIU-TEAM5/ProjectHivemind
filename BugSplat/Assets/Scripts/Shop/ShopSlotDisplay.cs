@@ -9,6 +9,8 @@ public class ShopSlotDisplay : MonoBehaviour
 
     public IntVariable PlayerCurrency;
 
+    public Camera MainCamera;
+
     [SerializeField]
     private GameObject SlotObject;
 
@@ -50,6 +52,10 @@ public class ShopSlotDisplay : MonoBehaviour
         }
 
         SlotItemInst = Instantiate(SlotObject, SlotPlaceholder);
+        var itemSelector = SlotItemInst.GetComponent<ItemSelecter>();
+        itemSelector.ShopCamera = MainCamera;
+        itemSelector.ShopDisplay = this;
+
         PriceText.text = Slot?.GetPrice().ToString();
 
         StartPos = SlotItemInst.transform.position;
@@ -58,11 +64,11 @@ public class ShopSlotDisplay : MonoBehaviour
     }
 
     private IEnumerator SelectItemRoutine(bool select) {
-        yield return select ? 
-            MoveItem(StartPos, AnimTargetPos.position, StartRot, EndRot) 
+        yield return select ?
+            MoveItem(StartPos, AnimTargetPos.position, StartRot, EndRot)
             : MoveItem(AnimTargetPos.position, StartPos, EndRot, StartRot);
 
-        BuyButton.SetActive(true);
+        BuyButton.SetActive(select);
         if (PlayerCurrency.Value < Slot.GetPrice()) {
             BuyButton.GetComponent<Button>().enabled = false;
         }
