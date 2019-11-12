@@ -6,7 +6,8 @@ using UnityEngine.AI;
 public class Spitter : Enemy
 {
 
-    
+
+    public GameObject EggProjectile;
 
     
     public ParticleSystem Spit;
@@ -252,7 +253,26 @@ public class Spitter : Enemy
             Spit.transform.LookAt(temppos);
 
             AttackEvent.Raise(gameObject);
-            Spit.Emit(1);
+
+
+            if (_spitterStats.ShootEggs)
+            {
+                GameObject egg = Instantiate(EggProjectile,Spit.transform);
+
+                egg.transform.parent = null;
+
+                EggShell eggScript = egg.GetComponent<EggShell>();
+
+                eggScript.Damage = _spitterStats.AttackDamage;
+
+                eggScript.setSpeed(_spitterStats.ProjectileSpeed);
+                eggScript.SetLifeTime(_spitterStats.AttackRange / _spitterStats.ProjectileSpeed);
+
+            }
+            else
+            {
+                Spit.Emit(1);
+            }
 
             _attackCooldown = _spitterStats.AttackSpeed;
             _attacking = false;
