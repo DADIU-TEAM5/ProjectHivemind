@@ -12,6 +12,7 @@ public class PlayerMovement : GameLoop
     public FloatVariable PlayerCurrentSpeedSO;
     public FloatVariable PlayerMaxSpeedSO;
     public Vector3Variable PlayerPosition;
+    public Vector3Variable PlayerVelocity;
 
     public AnimationCurve RampUpMovespeed;
 
@@ -38,7 +39,7 @@ public class PlayerMovement : GameLoop
     {
         var moving = PlayerDirectionSO.Value != Vector3.zero;
 
-        Anim.SetBool("Running", moving);
+        //Anim.SetBool("Running", moving);
 
         if (moving) {
             var lerpTime = Mathf.Min(_currentTime / LerpTime, 1f);
@@ -53,11 +54,13 @@ public class PlayerMovement : GameLoop
             PlayerCurrentSpeedSO.Value = 0f;
         }
 
+        PlayerVelocity.Value = PlayerDirectionSO.Value * PlayerCurrentSpeedSO.Value;
+
         if(_navMeshAgent.isOnNavMesh)
         {
             if (!_navMeshAgent.hasPath)
             {
-                _navMeshAgent.Move(PlayerDirectionSO.Value * PlayerCurrentSpeedSO.Value * Time.deltaTime);
+                _navMeshAgent.Move(PlayerVelocity.Value * Time.deltaTime);
             } 
         }
     }
