@@ -33,4 +33,10 @@ public class EnemiesTrackUI : GameLoop
     {
         EnemiesKilledSO.Value++;
     }
+
+    public void UpdateEnemyCount()
+    {
+        EnemiesAtStart.text = EnemiesListSO.Items.Count.ToString();
+            
+    }
 }

@@ -34,7 +34,7 @@ public abstract class ShopSlot : ScriptableObject
 
     public abstract void OnPurchase(); 
 
-    public abstract Sprite GetSprite(); 
+    public abstract GameObject GetItemPrefab(); 
 
     public abstract int GetPrice();
 }

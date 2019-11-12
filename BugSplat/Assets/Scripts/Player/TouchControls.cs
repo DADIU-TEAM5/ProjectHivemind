@@ -18,6 +18,7 @@ public class TouchControls : GameLoop
     public FloatVariable InputMoveMaxThresholdSO;
     public FloatVariable InputSwipeTapTimeSO;
     public FloatVariable InputSwipeThresholdSO; // Percentage of the screen width
+    public BoolVariable PlayerControlOverrideSO;
 
     public GameObjectVariable LockedTarget;
     public GameObject UICanvas;
@@ -67,7 +68,10 @@ public class TouchControls : GameLoop
 
         PlayerCurrentSpeedSO.Value = 0;
         
-        PlayerDirectionSO.Value = Vector3.forward;
+        if (PlayerControlOverrideSO.Value == false)
+        {
+            PlayerDirectionSO.Value = Vector3.forward;
+        }
 
         if (UICanvas != null)
         {
@@ -84,57 +88,61 @@ public class TouchControls : GameLoop
 
     public override void LoopUpdate(float deltaTime)
     {
-        // Detect Touch
-        if (Input.touchCount > 0)
+        if (PlayerControlOverrideSO.Value == false)
         {
-            Touch touch0 = Input.GetTouch(0);
 
-            if (touch0.fingerId == 0)
+            // Detect Touch
+            if (Input.touchCount > 0)
             {
-                Vector3 touchPosition = touch0.position;                
+                Touch touch0 = Input.GetTouch(0);
 
-                if (_uiActivated == false)
+                if (touch0.fingerId == 0)
                 {
-                    if (touchPosition.x > _uiOffset.x  || touchPosition.y > _uiOffset.y)
+                    Vector3 touchPosition = touch0.position;
+
+                    if (_uiActivated == false)
                     {
-                        switch (touch0.phase)
+                        if (touchPosition.x > _uiOffset.x || touchPosition.y > _uiOffset.y)
                         {
-                            case TouchPhase.Moved:
-                                BeginMove(touchPosition);
-                                break;
-                            case TouchPhase.Ended:
-                                EndMove(touchPosition);
-                                break;
+                            switch (touch0.phase)
+                            {
+                                case TouchPhase.Moved:
+                                    BeginMove(touchPosition);
+                                    break;
+                                case TouchPhase.Ended:
+                                    EndMove(touchPosition);
+                                    break;
+                            }
                         }
                     }
                 }
             }
-        }
 
 
-        // Simulate touch with mouse, if mouse present
-        if (Input.mousePresent)
-        {
-            Vector3 inputPosition = Input.mousePosition;
-
-            if (Input.GetMouseButton(0))
+            // Simulate touch with mouse, if mouse present
+            if (Input.mousePresent)
             {
-                if (_uiActivated == false)
+                Vector3 inputPosition = Input.mousePosition;
+
+                if (Input.GetMouseButton(0))
                 {
-                    if (inputPosition.x > _uiOffset.x || inputPosition.y > _uiOffset.y)
+                    if (_uiActivated == false)
                     {
-                        BeginMove(inputPosition);
+                        if (inputPosition.x > _uiOffset.x || inputPosition.y > _uiOffset.y)
+                        {
+                            BeginMove(inputPosition);
+                        }
                     }
-                }
 
-            }
-            if (Input.GetMouseButtonUp(0))
-            {
-                if (_uiActivated == false)
+                }
+                if (Input.GetMouseButtonUp(0))
                 {
-                    if (inputPosition.x > _uiOffset.x || inputPosition.y > _uiOffset.y)
+                    if (_uiActivated == false)
                     {
-                        EndMove(Input.mousePosition);
+                        if (inputPosition.x > _uiOffset.x || inputPosition.y > _uiOffset.y)
+                        {
+                            EndMove(Input.mousePosition);
+                        }
                     }
                 }
             }

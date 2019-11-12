@@ -10,9 +10,9 @@ public class ShopAbilitySlot : ShopSlot
 
     public int Price;
 
-    public Sprite Sprite;
+    public GameObject ItemPrefab;
 
-    public override Sprite GetSprite() => Sprite;
+    public override GameObject GetItemPrefab() => ItemPrefab;
 
     public override int GetPrice() => Price;
 

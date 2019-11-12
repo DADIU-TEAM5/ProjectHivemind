@@ -5,51 +5,28 @@ using UnityEngine.AI;
 
 public class cannonFodder : Enemy
 {
-
-   
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
     private bool _attacking;
     private float _attackCharge;
     private float _attackCooldown = 0;
 
-    
-
-    
-
-    
-
-    
-
     [Header("Events")]
-    
-
     public GameEvent AttackEvent;
-    
     public GameEvent AttackChargingEvent;
 
-    
+    public Animator FodderAnimator;
+    public AnimationClip ChargeClip;
+    float _percentIncrease;
 
-    
 
-    
+    private void Start()
+    {
+        OutlineRenderer.material.color = new Color(.2f, .2f, .2f, .1f);
 
-    
+        float Increase = ChargeClip.length - stats.AttackChargeUpTime;
 
-    
-
-    
+        float percenIncrease = Increase / stats.AttackChargeUpTime;
+        _percentIncrease = percenIncrease;
+    }
 
     public override void LoopUpdate(float deltaTime)
     {
@@ -110,6 +87,9 @@ public class cannonFodder : Enemy
             Cone.SetActive(true);
             Outline.SetActive(true);
 
+            FodderAnimator.SetTrigger("Attack");
+            FodderAnimator.speed = 1 + _percentIncrease;
+
             DrawCone(10, OutlineMesh, true,_attackCharge);
 
         }
@@ -168,6 +148,7 @@ public class cannonFodder : Enemy
             _attackCharge = 0;
             Cone.SetActive(false);
             Outline.SetActive(false);
+            FodderAnimator.speed = 1 ;
 
         }
         
@@ -179,19 +160,22 @@ public class cannonFodder : Enemy
 
     void MoveTowardsThePlayer()
     {
-        float jitter = 2;
-        NavMeshAgent.Move(new Vector3(Random.Range(-jitter, jitter), 0, Random.Range(-jitter, jitter))*Time.deltaTime);
+        
 
         float distanceToplayer = Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(PlayerTransform.position.x, PlayerTransform.position.z));
 
         if (distanceToplayer > stats.AttackRange/2)
         {
+            FodderAnimator.SetBool("Walking", true);
 
             if (NavMeshAgent.destination != PlayerTransform.position)
                 NavMeshAgent.destination = PlayerTransform.position;
         }
         else
         {
+
+            FodderAnimator.SetBool("Walking", false);
+
             if (NavMeshAgent.destination != transform.position)
                 NavMeshAgent.destination = transform.position;
         }

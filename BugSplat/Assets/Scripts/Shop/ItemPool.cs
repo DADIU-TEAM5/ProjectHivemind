@@ -23,6 +23,8 @@ public class ItemPool : ScriptableObject
         // Pick a random
         var rngResult = Random.Range(0f, 1f);
         var rngInt = (int) (rngResult * (filteredItems.Count() - 1));
+        Debug.Log(rngInt);
+        Debug.Log("count: " + filteredItems.Count);
         var index = filteredItems.ElementAt(rngInt);
 
         Bought[index] = true;

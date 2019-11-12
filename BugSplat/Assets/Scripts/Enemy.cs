@@ -68,8 +68,11 @@ public abstract class Enemy : GameLoop
     
 
     public GameEvent AggroEvent;
+    public GameEvent DefaultAggroEvent;
     public GameEvent TakeDamageEvent;
     public GameEvent DeathEvent;
+    public GameEvent EnemyDied;
+
 
     [HideInInspector]
     public bool PlayerDetected;
@@ -170,13 +173,11 @@ public abstract class Enemy : GameLoop
             }
 
             DeathEvent.Raise(this.gameObject);
-
-            EnemyList.Remove(gameObject);
+            EnemyDied.Raise(gameObject);
 
             Destroy(Cone);
             Destroy(Outline);
-            Destroy(gameObject, 3f);
-
+            Destroy(gameObject);
         }
     }
 
@@ -521,6 +522,7 @@ public abstract class Enemy : GameLoop
             {
                 if (hit.collider.gameObject.layer == 9)
                 {
+                    DefaultAggroEvent.Raise(this.gameObject);
                     AggroEvent.Raise(this.gameObject);
                     PlayerDetected = true;
                     PlayerTransform = potentialTargets[0].gameObject.transform;
@@ -544,6 +546,7 @@ public abstract class Enemy : GameLoop
                 Enemy allyTransform = potentialAllies[i].gameObject.GetComponent<Enemy>();
                 if (!allyTransform?.IsAlly ?? false)
                 {
+                    DefaultAggroEvent.Raise(allyTransform.gameObject);
                     allyTransform.PlayerDetected = true;
                     allyTransform.PlayerTransform = PlayerTransform;
                     allyTransform.IsAlly = true;

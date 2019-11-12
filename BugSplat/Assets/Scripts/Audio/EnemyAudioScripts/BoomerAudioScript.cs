@@ -9,7 +9,7 @@ public class BoomerAudioScript : MonoBehaviour
     public AK.Wwise.Event Hit; 
     public AK.Wwise.Event ScaredScream;
     public AK.Wwise.Event DeathSplat;
-    public AK.Wwise.Event BoomerAttack;
+    public AK.Wwise.Event Charge;
     public AK.Wwise.Event Detect;
 
 
@@ -43,8 +43,8 @@ public class BoomerAudioScript : MonoBehaviour
         DeathSplat.Post(source);
     }
 
-    public void BoomerAttackEvent(GameObject source)
+    public void ChargeEvent(GameObject source)
     {
-        BoomerAttack.Post(source);
+        Charge.Post(source);
     }
 }

@@ -7,7 +7,9 @@ public class ProjectileEffect : Effect
 {
     public Effect ProjectileHitEffect;
 
-    public Vector3Variable PlayerDirection;
+    public float AngleOffset;
+
+    public GameEvent OnCollideEvent;
 
     public GameObject Particles;
     private ParticleSystem _particleSystem;
@@ -19,13 +21,9 @@ public class ProjectileEffect : Effect
         _particles = Instantiate(Particles);
         _particleSystem = _particles.GetComponentInChildren<ParticleSystem>();
 
-        // TODO: DUMB DEBUG HACK RIGHT NOW
-        var spitProjectile = _particles.GetComponent<SpitProjectile>();
-        if (spitProjectile != null) Destroy(spitProjectile);
-        // --------------------------------------------------
-
         var projectileCollide = _particles.AddComponent<ProjectileCollideEffect>();
         projectileCollide.CollideEffect = ProjectileHitEffect;
+        projectileCollide.CollideEvent = OnCollideEvent;
 
         _particles.layer = (1 << 11);
     }
@@ -33,21 +31,20 @@ public class ProjectileEffect : Effect
     public override void Trigger(GameObject effectTarget = null)
     {
 
-        Debug.Log("PROJECTILES YO");
         _particles.transform.position = effectTarget.transform.position;
-        _particles.transform.rotation = Quaternion.LookRotation(PlayerDirection.Value, effectTarget.transform.up);
-        _particles.transform.position += PlayerDirection.Value;
+        _particles.transform.rotation = Quaternion.LookRotation(effectTarget.transform.forward, effectTarget.transform.up) * Quaternion.Euler(0, AngleOffset, 0);
 
         _particleSystem.Emit(1);
     }
 
     internal class ProjectileCollideEffect : MonoBehaviour {
         internal Effect CollideEffect;
+        internal GameEvent CollideEvent;
 
         private void OnParticleCollision(GameObject other)
         {
-            Debug.Log("COLLIDING");
             CollideEffect.Trigger(other);
+            CollideEvent?.Raise(other);
         }
     }
 }
