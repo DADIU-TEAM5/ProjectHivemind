@@ -2,17 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TickBasedEffect : MonoBehaviour
+public class TickBasedEffect : Effect
 {
-    // Start is called before the first frame update
-    void Start()
+    public Effect TickEffect;
+
+    public float SecondsPerTick; 
+
+    public override void Init()
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Trigger(GameObject target = null)
     {
-        
+       var enemy = target.GetComponent<Enemy>();
+       enemy?.StartCoroutine(Tick(target));
+    }
+
+    private IEnumerator Tick(GameObject target) {
+        while (true) {
+            if (!(target?.activeInHierarchy ?? false)) break;
+
+            TickEffect.Trigger(target);
+            yield return new WaitForSeconds(SecondsPerTick);
+        }
     }
 }

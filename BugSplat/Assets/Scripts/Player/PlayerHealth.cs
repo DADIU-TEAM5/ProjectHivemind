@@ -38,7 +38,7 @@ public class PlayerHealth : GameLoop
 
         _invulnerabilityTrigger = false;
 
-        _navMeshAgent = transform.parent.GetComponent<NavMeshAgent>();
+        _navMeshAgent = GetComponent<NavMeshAgent>();
         if (_navMeshAgent == null)
             Debug.LogError("No NavMesh Agent in PlayerHealth.CS");
     }
