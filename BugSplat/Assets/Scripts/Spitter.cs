@@ -113,7 +113,7 @@ public class Spitter : Enemy
     }
 
 
-    public override void LoopUpdate(float deltaTime)
+    public override void LoopBehaviour(float deltaTime)
     {
 
         
