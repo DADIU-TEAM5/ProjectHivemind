@@ -96,11 +96,33 @@ MonoBehaviour:
   PlayerVelocitySO: {fileID: 11400000, guid: d1f4ccfac4a47fb4da89d998092775b8, type: 2}
   PlayerAccelerationSO: {fileID: 11400000, guid: 3b40e6de48c22034a88c6e75710815d4,
     type: 2}
-  isDodging: {fileID: 11400000, guid: 046d32af02590954e84257844646064e, type: 2}
+  PlayerMaxSpeedSO: {fileID: 11400000, guid: 93c017ab6cc3fb74294b1f9f15a4860b, type: 2}
   PlayerPosition: {fileID: 11400000, guid: 0119b5f64c03ff94091694f4b88d57e6, type: 2}
-  CameraTarget: {fileID: 2904836501674625065}
-  CameraLookAheadDistanceSO: {fileID: 11400000, guid: df0719e77539de645bfba9d60617add5,
-    type: 2}
+  RampUpMovespeed:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  LerpTime: 1
 --- !u!114 &5788987755461925661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -558,16 +580,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5788987755592666204}
     m_Modifications:
-    - target: {fileID: 1639814296029586681, guid: 4fed1e57ebefa5240bd9ca286a55f6c7,
-        type: 3}
-      propertyPath: m_Name
-      value: CharANim
-      objectReference: {fileID: 0}
-    - target: {fileID: 1639814296029586681, guid: 4fed1e57ebefa5240bd9ca286a55f6c7,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 2349352552298288874, guid: 4fed1e57ebefa5240bd9ca286a55f6c7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -637,6 +649,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1639814296029586681, guid: 4fed1e57ebefa5240bd9ca286a55f6c7,
+        type: 3}
+      propertyPath: m_Name
+      value: CharANim
+      objectReference: {fileID: 0}
+    - target: {fileID: 1639814296029586681, guid: 4fed1e57ebefa5240bd9ca286a55f6c7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4868384143759711827, guid: 4fed1e57ebefa5240bd9ca286a55f6c7,
         type: 3}
@@ -909,11 +931,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5788987755461925660}
     m_Modifications:
-    - target: {fileID: 623513609571133943, guid: 21fda503c8a62e3428df8cb40d920a27,
-        type: 3}
-      propertyPath: m_Name
-      value: PlayerLighting
-      objectReference: {fileID: 0}
     - target: {fileID: 623513609571133942, guid: 21fda503c8a62e3428df8cb40d920a27,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -968,6 +985,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 623513609571133943, guid: 21fda503c8a62e3428df8cb40d920a27,
+        type: 3}
+      propertyPath: m_Name
+      value: PlayerLighting
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21fda503c8a62e3428df8cb40d920a27, type: 3}
