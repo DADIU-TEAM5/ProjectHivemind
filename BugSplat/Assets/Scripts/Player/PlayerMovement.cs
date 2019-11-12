@@ -8,6 +8,8 @@ public class PlayerMovement : GameLoop
     public Animator Anim;
 
     public Transform PlayerGraphics;
+
+    public Vector3Variable MoveDirectionSO;
     public Vector3Variable PlayerDirectionSO;
     public FloatVariable PlayerCurrentSpeedSO;
     public FloatVariable PlayerMaxSpeedSO;
@@ -37,7 +39,7 @@ public class PlayerMovement : GameLoop
 
     public override void LoopUpdate(float deltaTime)
     {
-        var moving = PlayerDirectionSO.Value != Vector3.zero;
+        var moving = MoveDirectionSO.Value != Vector3.zero;
 
         //Anim.SetBool("Running", moving);
 
@@ -47,6 +49,7 @@ public class PlayerMovement : GameLoop
 
             PlayerCurrentSpeedSO.Value = lerpTime * PlayerMaxSpeedSO.Value;
             PlayerGraphics.localRotation = Quaternion.LookRotation(PlayerDirectionSO.Value, Vector3.up);
+            PlayerDirectionSO.Value = MoveDirectionSO.Value;
 
             _currentTime += Time.deltaTime;
         } else {

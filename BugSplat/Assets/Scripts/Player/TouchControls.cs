@@ -7,8 +7,7 @@ public class TouchControls : GameLoop
 {
     public GameObject PlayerGraphics;
     // Setup ScriptableObjects for holding the PlayerMovementInfo
-    public Vector3Variable PlayerDirectionSO;
-    public FloatVariable PlayerCurrentSpeedSO;
+    public Vector3Variable MoveDirectionSO;
 
     public GameEvent DashInitiatedSO;
     public GameEvent AttackInitiatedSO;
@@ -50,7 +49,7 @@ public class TouchControls : GameLoop
     // Start is called before the first frame update
     void Start()
     {
-        PlayerDirectionSO.Value = Vector3.zero;
+        MoveDirectionSO.Value = Vector3.zero;
         // Disable Multitouch for the phone touch to fix problems with multiple touches. However, multiple touches should be implemented at a later stage.
         Input.multiTouchEnabled = false;
 
@@ -209,8 +208,8 @@ public class TouchControls : GameLoop
             _uiCurrent.transform.localPosition = new Vector3(x, y);
 
             // Export direction and speed vector to the PlayerSpeedDirectionSO
-            PlayerDirectionSO.Value.x = direction.x;
-            PlayerDirectionSO.Value.z = direction.y;
+            MoveDirectionSO.Value.x = direction.x;
+            MoveDirectionSO.Value.z = direction.y;
         }
     }
 
@@ -274,7 +273,7 @@ public class TouchControls : GameLoop
             //DebugText.text = "MOVED!";
         }
 
-        PlayerDirectionSO.Value = Vector3.zero;
+        MoveDirectionSO.Value = Vector3.zero;
         _inputMoved = false;
         _recordPosition = true;
         _inputFrames = Mathf.RoundToInt(InputSwipeTapTimeSO.Value);
