@@ -90,8 +90,8 @@ public class TouchControls : GameLoop
         {
             if (PlayerControlOverrideSO.Value == false)
             // Detect Touch
-            if (Input.touchCount > 0)
-            {
+          
+            
 
                 // Detect Touch
                 if (Input.touchCount > 0)
@@ -148,7 +148,7 @@ public class TouchControls : GameLoop
                         }
                     }
                 }
-            }
+            
         }
     }
 
