@@ -255,18 +255,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentLevelBudget: {fileID: 11400000, guid: 5320fd9814e1e014f8045d9b1cff7a18, type: 2}
   EnemySpawnerCount: {fileID: 11400000, guid: 1785f0cf3e44b45408a5b497be1a2a96, type: 2}
-  UseRandomSeed: 0
+  UseRandomSeed: 1
   Seed: 685475
   Rings: 1
   CurrentLevel: {fileID: 11400000, guid: 7ccab12c744825340b00517feda72de3, type: 2}
-  Levels: {fileID: 11400000, guid: 425f297782d8c7a4eb05cdd1f463639d, type: 2}
+  Levels: {fileID: 11400000, guid: b7290c95468148a4b9174bd4586fecaf, type: 2}
   Hexagons:
-  - {fileID: 3864221066357608551, guid: d9a57ea7ab5c1b54281e0da5cde44ab4, type: 3}
+  - {fileID: 3864221066357608551, guid: 14f8234bfe5e812489670963da7ede8f, type: 3}
   - {fileID: 3864221066357608551, guid: 984323089cbdd9e4b8c72796ed3d471b, type: 3}
+  - {fileID: 3864221066357608551, guid: d9a57ea7ab5c1b54281e0da5cde44ab4, type: 3}
   - {fileID: 3864221066357608551, guid: 86cdc45c2dd113648a253a12cc89390d, type: 3}
-  - {fileID: 3864221066357608551, guid: af1702577ed746c4baa104ae56dab12a, type: 3}
+  - {fileID: 3864221066357608551, guid: eb1b3643fe127214394ba9b61183f3dd, type: 3}
   - {fileID: 3864221066357608551, guid: 77e1b1ca98a79744e93b043ee786444f, type: 3}
-  - {fileID: 3864221066357608551, guid: 9ac41fc53617155498d5ed75429e991c, type: 3}
   CenterHexagons:
   - {fileID: 3864221066357608551, guid: 5132584d8b4a8d848b966b3d50257580, type: 3}
   hexmapParent: {fileID: 11400000, guid: d6a385588fc3812449772760c0c71603, type: 2}
@@ -355,7 +355,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -493,6 +493,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DebugUICanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 2206537851693025998, guid: d434f7c4d0a502f44b5795bcfc83634f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2206537851693025994, guid: d434f7c4d0a502f44b5795bcfc83634f,
         type: 3}
@@ -825,6 +830,11 @@ PrefabInstance:
       value: PlayerGameObject
       objectReference: {fileID: 0}
     - target: {fileID: 5788987755461925658, guid: ce93dae90c32b234eb5aa37ebcaa5582,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904836501674625065, guid: ce93dae90c32b234eb5aa37ebcaa5582,
         type: 3}
       propertyPath: m_Layer
       value: 9
@@ -1464,7 +1474,7 @@ PrefabInstance:
     - target: {fileID: 1163922598476413067, guid: 139b83f8c1c94d0429dc0c295bacc163,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7925624218261250698, guid: 139b83f8c1c94d0429dc0c295bacc163,
         type: 3}
@@ -1572,23 +1582,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 522807501, guid: 139b83f8c1c94d0429dc0c295bacc163, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 522807501, guid: 139b83f8c1c94d0429dc0c295bacc163, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 522807501, guid: 139b83f8c1c94d0429dc0c295bacc163, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -74.4209
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 501706324, guid: 139b83f8c1c94d0429dc0c295bacc163, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 501706324, guid: 139b83f8c1c94d0429dc0c295bacc163, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 501706324, guid: 139b83f8c1c94d0429dc0c295bacc163, type: 3}
       propertyPath: m_AnchorMin.y
@@ -1772,6 +1782,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FpsCounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 483992326936255622, guid: 16939ef1c880a664e95272b77f10bc31,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 483992326936255621, guid: 16939ef1c880a664e95272b77f10bc31,
         type: 3}
@@ -2077,6 +2092,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: InGameHUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 532107752483308039, guid: d45af46a377f4a94f8b48f244e8c9f76,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5731645971512569078, guid: d45af46a377f4a94f8b48f244e8c9f76,
         type: 3}
@@ -2491,6 +2511,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LookaheadTime
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5120024975390727192, guid: b222bf4daa60abc4ab286aa2fe1f5b53,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985877980733986480, guid: b222bf4daa60abc4ab286aa2fe1f5b53,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b222bf4daa60abc4ab286aa2fe1f5b53, type: 3}
