@@ -8,10 +8,13 @@ public class PlayerMovement : GameLoop
     public Animator Anim;
 
     public Transform PlayerGraphics;
+
+    public Vector3Variable MoveDirectionSO;
     public Vector3Variable PlayerDirectionSO;
     public FloatVariable PlayerCurrentSpeedSO;
     public FloatVariable PlayerMaxSpeedSO;
     public Vector3Variable PlayerPosition;
+    public Vector3Variable PlayerVelocity;
 
     public AnimationCurve RampUpMovespeed;
 
@@ -36,9 +39,9 @@ public class PlayerMovement : GameLoop
 
     public override void LoopUpdate(float deltaTime)
     {
-        var moving = PlayerDirectionSO.Value != Vector3.zero;
+        var moving = MoveDirectionSO.Value != Vector3.zero;
 
-        Anim.SetBool("Running", moving);
+        //Anim.SetBool("Running", moving);
 
         if (moving) {
             var lerpTime = Mathf.Min(_currentTime / LerpTime, 1f);
@@ -46,6 +49,7 @@ public class PlayerMovement : GameLoop
 
             PlayerCurrentSpeedSO.Value = lerpTime * PlayerMaxSpeedSO.Value;
             PlayerGraphics.localRotation = Quaternion.LookRotation(PlayerDirectionSO.Value, Vector3.up);
+            PlayerDirectionSO.Value = MoveDirectionSO.Value;
 
             _currentTime += Time.deltaTime;
         } else {
@@ -53,11 +57,13 @@ public class PlayerMovement : GameLoop
             PlayerCurrentSpeedSO.Value = 0f;
         }
 
+        PlayerVelocity.Value = PlayerDirectionSO.Value * PlayerCurrentSpeedSO.Value;
+
         if(_navMeshAgent.isOnNavMesh)
         {
             if (!_navMeshAgent.hasPath)
             {
-                _navMeshAgent.Move(PlayerDirectionSO.Value * PlayerCurrentSpeedSO.Value * Time.deltaTime);
+                _navMeshAgent.Move(PlayerVelocity.Value * Time.deltaTime);
             } 
         }
     }
