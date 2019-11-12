@@ -6,7 +6,8 @@ using UnityEngine.AI;
 public class Spitter : Enemy
 {
 
-    
+
+    public GameObject EggProjectile;
 
     
     public ParticleSystem Spit;
@@ -221,15 +222,21 @@ public class Spitter : Enemy
 
             WormAnimator.SetTrigger("ChargeAttack");
 
-
+            Outline.SetActive(true);
+            Cone.SetActive(true);
+            DrawSpitTrajectory();
 
 
         }
+        DrawSpitFillup();
+
+        ConeRenderer.material.color = Color.Lerp(new Color(0, 1, 0, 0.5f), new Color(1, 0, 0, 0.5f), _attackCharge / stats.AttackChargeUpTime);
+
         //print(_attackCharge / _spitterStats.AttackChargeUpTime);
 
         //WormAnimator.SetFloat("ChargeTime", _attackCharge/_spitterStats.AttackChargeUpTime);
 
-        
+
 
 
         _attacking = true;
@@ -246,12 +253,34 @@ public class Spitter : Enemy
             Spit.transform.LookAt(temppos);
 
             AttackEvent.Raise(gameObject);
-            Spit.Emit(1);
+
+
+            if (_spitterStats.ShootEggs)
+            {
+                GameObject egg = Instantiate(EggProjectile,Spit.transform);
+
+                egg.transform.parent = null;
+
+                EggShell eggScript = egg.GetComponent<EggShell>();
+
+                eggScript.Damage = _spitterStats.AttackDamage;
+
+                eggScript.setSpeed(_spitterStats.ProjectileSpeed);
+                eggScript.SetLifeTime(_spitterStats.AttackRange / _spitterStats.ProjectileSpeed);
+
+            }
+            else
+            {
+                Spit.Emit(1);
+            }
 
             _attackCooldown = _spitterStats.AttackSpeed;
             _attacking = false;
             _attackCharge = 0;
             WormAnimator.speed = 1;
+
+            Outline.SetActive(false);
+            Cone.SetActive(false);
 
         }
 
@@ -307,9 +336,9 @@ public class Spitter : Enemy
             _trianglesfortraj[1] = 1;
             _trianglesfortraj[2] = 2;
 
-            _trianglesfortraj[3] = 0;
-            _trianglesfortraj[4] = 3;
-            _trianglesfortraj[5] = 2;
+            _trianglesfortraj[3] = 2;
+            _trianglesfortraj[4] = 1;
+            _trianglesfortraj[5] = 3;
 
 
 
@@ -334,25 +363,17 @@ public class Spitter : Enemy
 
 
 
+        float trajectoryWidt = 0.5f;
+
+        vertices[0] =  Vector3.right * trajectoryWidt;
+        vertices[1] =  Vector3.left * trajectoryWidt;
 
 
-        vertices[0] = Vector3.zero;
-
-
-        Vector3 vectorToRotate;
+        vertices[2] =  (Vector3.right* trajectoryWidt) + (Vector3.forward * stats.AttackRange);
+        vertices[3] =  (Vector3.left* trajectoryWidt) + (Vector3.forward * stats.AttackRange);
 
 
         
-        vectorToRotate = Vector3.forward * stats.AttackRange;
-        
-
-        Vector3 rotatedVector = Vector3.zero;
-
-        
-        int step = 0;
-
-
-
         
 
         OutlineMesh.vertices = vertices;
@@ -362,6 +383,75 @@ public class Spitter : Enemy
 
         if (OutlineMesh.normals != _normalsfotraj)
             OutlineMesh.normals = _normalsfotraj;
+
+
+
+
+
+    }
+
+
+    public void DrawSpitFillup()
+    {
+        if (_trianglesfortraj.Length != 6)
+        {
+            _trianglesfortraj = new int[6];
+
+
+
+            _trianglesfortraj[0] = 0;
+            _trianglesfortraj[1] = 1;
+            _trianglesfortraj[2] = 2;
+
+            _trianglesfortraj[3] = 2;
+            _trianglesfortraj[4] = 1;
+            _trianglesfortraj[5] = 3;
+
+
+
+        }
+
+        if (_normalsfotraj.Length != 4)
+        {
+
+            _normalsfotraj = new Vector3[4];
+
+            for (int i = 0; i < 4; i++)
+            {
+                _normalsfotraj[i] = Vector3.up;
+            }
+        }
+
+
+
+
+        Vector3[] vertices = new Vector3[4];
+
+
+
+
+        float trajectoryWidt = 0.5f;
+
+        vertices[0] = Vector3.right * trajectoryWidt;
+        vertices[1] = Vector3.left * trajectoryWidt;
+
+
+        vertices[2] = (Vector3.right * trajectoryWidt) + (Vector3.forward * Mathf.Lerp(0, stats.AttackRange,_attackCharge/stats.AttackChargeUpTime));
+        vertices[3] = (Vector3.left * trajectoryWidt) + (Vector3.forward * Mathf.Lerp(0, stats.AttackRange, _attackCharge / stats.AttackChargeUpTime));
+
+
+
+
+
+
+
+        ConeMesh.vertices = vertices;
+
+        if (ConeMesh.triangles != _trianglesfortraj)
+            ConeMesh.triangles = _trianglesfortraj;
+
+        if (ConeMesh.normals != _normalsfotraj)
+            ConeMesh.normals = _normalsfotraj;
 
 
 

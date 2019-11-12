@@ -33,12 +33,13 @@ public class PlayerHealth : GameLoop
 
     public void Start()
     {
-        CurrentHealth.Value = MaxHealth.Value;
+        if(CurrentHealth.Value<=0)
+            CurrentHealth.Value = MaxHealth.Value;
         _playerParent = transform.parent;
 
         _invulnerabilityTrigger = false;
 
-        _navMeshAgent = transform.parent.GetComponent<NavMeshAgent>();
+        _navMeshAgent = GetComponent<NavMeshAgent>();
         if (_navMeshAgent == null)
             Debug.LogError("No NavMesh Agent in PlayerHealth.CS");
     }

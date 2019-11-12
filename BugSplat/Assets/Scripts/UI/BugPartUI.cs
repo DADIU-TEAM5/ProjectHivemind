@@ -13,7 +13,7 @@ public class BugPartUI : GameLoop
 
     private void Start()
     {
-        BugParts.Value = 0;
+        //BugParts.Value = 0;
         _startText = TextToChange.text;
     }
 
