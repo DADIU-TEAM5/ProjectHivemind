@@ -83,9 +83,15 @@ public abstract class Enemy : GameLoop
 
     [HideInInspector]
     public float _currentHealth;
-   
+
+    [HideInInspector]
+    public float _stunTime;
 
 
+    public void Stun(float time)
+    {
+        _stunTime = time;
+    }
 
     private void OnEnable()
     {
@@ -125,6 +131,24 @@ public abstract class Enemy : GameLoop
     }
 
 
+    public override void LoopUpdate(float deltaTime)
+    {
+        if (_stunTime > 0)
+        {
+            _stunTime -= deltaTime;
+        }
+
+        if (_stunTime <= 0)
+        {
+            LoopBehaviour(deltaTime);
+        }
+        else
+        {
+            Renderer.material.color = SetColor(Color.blue);
+        }
+    }
+
+    public abstract void LoopBehaviour(float deltaTime);
 
 
     public bool IsVisible()

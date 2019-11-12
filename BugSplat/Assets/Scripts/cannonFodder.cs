@@ -28,7 +28,7 @@ public class cannonFodder : Enemy
         _percentIncrease = percenIncrease;
     }
 
-    public override void LoopUpdate(float deltaTime)
+    public override void LoopBehaviour(float deltaTime)
     {
         RemoveFromLockedTargetIfNotVisible();
 
