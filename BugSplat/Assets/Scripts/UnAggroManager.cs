@@ -49,6 +49,7 @@ public class UnAggroManager : GameLoop
                     {
 
                         enemy.PlayerDetected = false;
+                        
                         AC.EnemyUnaggro();
                     }
 
