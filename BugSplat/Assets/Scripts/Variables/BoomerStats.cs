@@ -18,4 +18,7 @@ public class BoomerStats : EnemyStats
     public float SackLifeTime;
     public GameObject SackToSpawn;
 
+
+    public bool DiesWhenItExplode;
+
 }

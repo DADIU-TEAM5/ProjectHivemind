@@ -195,7 +195,13 @@ public class Boomer : Enemy
             Outline.SetActive(false);
             NavMeshAgent.speed = _boomerStats.MoveSpeed;
 
+            
+
             BoomerAnimator.speed = 1 ;
+
+
+            if (_boomerStats.DiesWhenItExplode)
+                TakeDamage(999999999999);
         }
 
     }
@@ -219,6 +225,12 @@ public class Boomer : Enemy
         }
 
     }
+
+
+
+
+
+
 
     float _angle = 0;
 
