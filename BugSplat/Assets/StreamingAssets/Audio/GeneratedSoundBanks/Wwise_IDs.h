@@ -16,6 +16,7 @@ namespace AK
         static const AkUniqueID AMB_ARENA_01_START = 4090897946U;
         static const AkUniqueID AMB_ARENA_01_STOP = 3018226098U;
         static const AkUniqueID AMB_HUB_MAINEVENT = 1797197367U;
+        static const AkUniqueID AMB_SHOP_MAINEVENT = 3126464902U;
         static const AkUniqueID INTRO = 1125500713U;
         static const AkUniqueID NPC_BOOMER_ATTACK = 592638112U;
         static const AkUniqueID NPC_BOOMER_CHARGE = 1929315744U;
@@ -90,6 +91,7 @@ namespace AK
         static const AkUniqueID SB_HUB = 1262967946U;
         static const AkUniqueID SB_MUSIC = 779753582U;
         static const AkUniqueID SB_PLAYERCHARACTER = 2688509691U;
+        static const AkUniqueID SB_SHOP = 2345835849U;
         static const AkUniqueID SB_UI = 289583631U;
     } // namespace BANKS
 
