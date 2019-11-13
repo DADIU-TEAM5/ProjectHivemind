@@ -34,7 +34,7 @@ public class EnemySpawner : GameLoop
 
     private void OnEnable()
     {
-     //   budget = 0;
+        budget = 0;
 
         //Debug.Log(name + " start budget " + budget);
         SpawningDone = true;
@@ -113,15 +113,17 @@ public class EnemySpawner : GameLoop
     {
 
 
-        print(LevelBudget);
+        print(budget);
 
-        if (LevelBudget >=SmallestValue)
+        if (LevelBudget+budget >=SmallestValue)
         {
 
-            int extraBudget;
-
-            LevelBudget -= SmallestValue;
-            extraBudget = SmallestValue;
+            int extraBudget =0;
+            if (LevelBudget > SmallestValue)
+            {
+                LevelBudget -= SmallestValue;
+                extraBudget = SmallestValue;
+            }
                 
             budget += extraBudget;
 
@@ -132,7 +134,10 @@ public class EnemySpawner : GameLoop
                     //Debug.Log("smallest value is bigger than budget");
 
                     //LevelBudget.usedBudget -= budget;
+                    
                     LevelBudget += budget;
+                    budget = 0;
+
                     break;
                 }
 
@@ -170,6 +175,11 @@ public class EnemySpawner : GameLoop
             
 
 
+        }
+        else if(budget >0)
+        {
+            LevelBudget += budget;
+            budget = 0;
         }
         // Debug.Log(name + " is done");
 
