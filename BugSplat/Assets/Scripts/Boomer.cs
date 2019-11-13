@@ -88,7 +88,7 @@ public class Boomer : Enemy
             Renderer.material.color = SetColor( Color.blue);
             DetectThePlayer();
         }
-        else if (playerInRangedAttackRange() || _attacking)
+        else if (playerInCustomAttackRange(_boomerStats.AttackRangeTrigger) || _attacking)
         {
             if (_attackCooldown <= 0 )
             {

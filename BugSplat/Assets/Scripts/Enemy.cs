@@ -601,4 +601,13 @@ public abstract class Enemy : GameLoop
     }
 
 
+    public bool playerInCustomAttackRange(float length)
+    {
+        Vector3 adjustedPlayerPos = PlayerTransform.position;
+
+        adjustedPlayerPos.y = transform.position.y;
+
+        return Vector3.Distance(transform.position, adjustedPlayerPos) < stats.AttackRange * length;
+    }
+
 }

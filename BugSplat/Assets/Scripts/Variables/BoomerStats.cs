@@ -21,4 +21,7 @@ public class BoomerStats : EnemyStats
 
     public bool DiesWhenItExplode;
 
+
+
+    public float AttackRangeTrigger = 1;
 }
