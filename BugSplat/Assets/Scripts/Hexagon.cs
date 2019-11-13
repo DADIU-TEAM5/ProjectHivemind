@@ -10,7 +10,7 @@ public class Hexagon : MonoBehaviour
 
     public EnemySpawner[] EnemySpawners;
 
-    public float MinBudget;
+    public int MinBudget;
 
     public GameObject[] Walls;
 
@@ -24,23 +24,35 @@ public class Hexagon : MonoBehaviour
     // Start is called before the first frame update
     private void OnEnable()
     {
-        if (EnemySpawners.Length > 0)
-        {
-             
-                EnemySpawners[Random.Range(0, EnemySpawners.Length)].budget += MinBudget;
-
-            MinBudget = 0;
-                
-            
-        }
+        
         
 
         Neighbours = new Hexagon[6];
     }
     
+    public void DistributeBudget()
+    {
+        if (EnemySpawners.Length > 0)
+        {
+
+            EnemySpawners[Random.Range(0, EnemySpawners.Length)].budget += MinBudget;
+
+
+
+            MinBudget = 0;
+
+
+        }
+    }
+
 
     public void GetNeighbours()
     {
+
+
+
+
+
         if (!_allNeighBoursFound)
         {
             bool temp = true;
