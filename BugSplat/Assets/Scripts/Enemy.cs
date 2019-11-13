@@ -176,8 +176,6 @@ public abstract class Enemy : GameLoop
         {
             if (DeadCutout == null)
             {
-
-                
                 int partsToDrop = Random.Range(stats.minPartsToDrop, stats.maxPartsToDrop);
                 for (int i = 0; i < partsToDrop; i++)
                 {
@@ -189,15 +187,9 @@ public abstract class Enemy : GameLoop
             }
             else
             {
-
                 //Graphics.SetActive(false);
                 DeadCutout.transform.SetParent(null);
                 DeadCutout.SetActive(true);
-
-                
-                
-
-                
             }
 
             DeathEvent.Raise(this.gameObject);
