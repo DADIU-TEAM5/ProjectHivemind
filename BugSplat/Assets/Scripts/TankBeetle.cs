@@ -198,7 +198,10 @@ public class TankBeetle : Enemy
 
 
 
-            ColliderHits = Physics.SphereCastAll(transform.position+Vector3.up,1, transform.forward,  1, finalmask);
+            //ColliderHits = Physics.SphereCastAll(transform.position+Vector3.up,1, transform.forward,  1, finalmask);
+            ColliderHits = Physics.RaycastAll(transform.position + Vector3.up, transform.forward, 1, finalmask);
+
+
             for (int i = 0; i < ColliderHits.Length; i++)
             {
 
@@ -542,9 +545,44 @@ public class TankBeetle : Enemy
         adjustedPlayerPos.y = transform.position.y;
 
         if (Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - adjustedPlayerPos) < TankStats.ChargeSpotAngle)
+        {
+            bool theBool = false;
+
+            theBool = Vector3.Distance(transform.position, adjustedPlayerPos) < TankStats.ChargeDistance * 1.1f;
 
 
-            return Vector3.Distance(transform.position, adjustedPlayerPos) < TankStats.ChargeDistance * 1.1f;
+            RaycastHit[] ColliderHits;
+
+            var layer1 = 9;
+            var layer2 = 8;
+            var layermask1 = 1 << layer1;
+            var layermask2 = 1 << layer2;
+            var finalmask = ~((1 << layer1) | (1 << layer2));
+
+
+
+
+           // ColliderHits = Physics.SphereCastAll(transform.position + Vector3.up, 1, transform.forward, 1, finalmask);
+            ColliderHits = Physics.RaycastAll(transform.position + Vector3.up, transform.forward, 1, finalmask);
+
+            for (int i = 0; i < ColliderHits.Length; i++)
+            {
+
+                if (ColliderHits[i].collider.gameObject.layer != 8 || ColliderHits[i].collider.gameObject.layer != 9)
+                {
+                    //print(ColliderHits[i].collider.name);
+
+                    theBool = false;
+                    //Stun(TankStats.StunDuration);
+                    
+                }
+
+            }
+
+
+            return theBool;
+
+        }
 
         else
 
