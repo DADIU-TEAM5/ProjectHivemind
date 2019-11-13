@@ -24,9 +24,8 @@ public class ItemSelecter : MonoBehaviour
 
             RaycastHit hit;
             var ray = Camera.main.ScreenPointToRay(mousePos);
-            Debug.Log(ray);
+
             if (Physics.Raycast(ray, out hit, 100f)) {
-                Debug.Log($"Raycast hit {hit.transform.gameObject.name}");
                 if (hit.transform == this.transform) {
                     if (_selected) {
                         ShopDisplay.DeselectItem();
@@ -36,9 +35,7 @@ public class ItemSelecter : MonoBehaviour
                         _selected = true;
                     }
                 }
-            } else {
-                Debug.Log("Didnt hit a thing");
-            }
+            } 
         }
     }
 

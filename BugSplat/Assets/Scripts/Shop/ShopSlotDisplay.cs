@@ -69,9 +69,6 @@ public class ShopSlotDisplay : MonoBehaviour
             : MoveItem(AnimTargetPos.position, StartPos, EndRot, StartRot);
 
         BuyButton.SetActive(select);
-        if (PlayerCurrency.Value < Slot.GetPrice()) {
-            BuyButton.GetComponent<Button>().enabled = false;
-        }
 
         yield return RotateItem();
     }
