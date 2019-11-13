@@ -99,14 +99,14 @@ public class EnemySpawner : GameLoop
         float extraBudget;
         if (enemySpawnerCount.Value <= 0)
         {
-            Debug.Log("last enemy spawned left wit " + LevelBudget.Value + " budget to spawn for");
+            //Debug.Log("last enemy spawned left wit " + LevelBudget.Value + " budget to spawn for");
             extraBudget = LevelBudget.Value;
         }
         else
         {
             
             extraBudget = Random.Range(0, LevelBudget.Value);
-            Debug.Log(name + " spawn enemies with a budget of " + (budget + extraBudget));
+            //Debug.Log(name + " spawn enemies with a budget of " + (budget + extraBudget));
 
 
         }
@@ -155,8 +155,8 @@ public class EnemySpawner : GameLoop
         }
 
 
-        Debug.Log(name + " is done");
-        
+        // Debug.Log(name + " is done");
+
         yield return null;
     }
 

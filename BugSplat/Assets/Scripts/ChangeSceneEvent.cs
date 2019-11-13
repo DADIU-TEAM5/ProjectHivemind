@@ -33,13 +33,13 @@ public class ChangeSceneEvent : MonoBehaviour
     public void RaiseEvent()
     {
         string sceneName = SceneManager.GetActiveScene().name;
-        Debug.Log("RaiseEvent() - SceneName = " + sceneName);
+        //Debug.Log("RaiseEvent() - SceneName = " + sceneName);
 
         //HardcodeLife
         if (sceneName.Equals("ArenaGeneration"))
         {
             ChangeSceneEvents[0].Raise();
-            Debug.Log("RaiseEvent() - Arena Raised");
+          //  Debug.Log("RaiseEvent() - Arena Raised");
         }
 
         if (sceneName.Equals("Hub Scene"))

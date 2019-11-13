@@ -6,6 +6,9 @@ using UnityEngine.AI;
 
 public class PlayerHealth : GameLoop
 {
+
+    public BoolVariable IsStunned;
+
     public GameObject PlayerGraphics;
     public GameObjectList EnemyList;
     public GameObjectVariable HexMapParent;
@@ -17,8 +20,11 @@ public class PlayerHealth : GameLoop
     public FloatVariable MaxHealth;
 
 
+    float _stunTimer;
 
-    NavMeshAgent _navMeshAgent;
+
+
+    public NavMeshAgent NavAgent;
 
     Transform _playerParent;
 
@@ -39,9 +45,10 @@ public class PlayerHealth : GameLoop
 
         _invulnerabilityTrigger = false;
 
-        _navMeshAgent = GetComponent<NavMeshAgent>();
-        if (_navMeshAgent == null)
-            Debug.LogError("No NavMesh Agent in PlayerHealth.CS");
+        if (NavAgent == null)
+            NavAgent = GetComponent<NavMeshAgent>();
+       
+            
     }
 
     public void TakeDamage(float damage)
@@ -71,6 +78,17 @@ public class PlayerHealth : GameLoop
     }
     public override void LoopUpdate(float deltaTime)
     {
+        if (_stunTimer > 0)
+        {
+            _stunTimer -= deltaTime;
+            IsStunned.Value = true;
+        }
+        else
+        {
+            IsStunned.Value = false;
+        }
+
+
         if (InvulnerabilityTimerSO.Value > 0)
         {
             InvulnerabilityTimerSO.Value -= Time.deltaTime;
@@ -117,7 +135,7 @@ public class PlayerHealth : GameLoop
             CheckIfDead();
 
 
-            _navMeshAgent.Move(direction * length);
+            NavAgent.Move(direction * length);
 
 
             /*
@@ -152,5 +170,12 @@ public class PlayerHealth : GameLoop
 
         }
 
+    }
+
+
+    public void StunPlayer(float time)
+    {
+
+        _stunTimer = time;
     }
 }
