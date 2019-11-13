@@ -66,4 +66,8 @@ public class ShopItemSlot : ShopSlot
         Pool.ReplenishOnce(Item);
         Item = null;
     }
+
+    public override string GetTitle() => Item.name;
+
+    public override string GetDescription() => Item?.Info?.Description;
 }
