@@ -22,7 +22,7 @@ public class ShopSlotDisplay : MonoBehaviour
 
     private bool _runOnce;
 
-    private bool Select;
+    private bool Select = false;
 
     private GameObject SlotItemInst;
 
@@ -52,10 +52,6 @@ public class ShopSlotDisplay : MonoBehaviour
         }
 
         SlotItemInst = Instantiate(SlotObject, SlotPlaceholder);
-        var itemSelector = SlotItemInst.GetComponent<ItemSelecter>();
-        itemSelector.ShopCamera = MainCamera;
-        itemSelector.ShopDisplay = this;
-
         PriceText.text = Slot?.GetPrice().ToString();
 
         StartPos = SlotItemInst.transform.position;
@@ -101,16 +97,31 @@ public class ShopSlotDisplay : MonoBehaviour
         }
    }
 
-    public void SelectItem()
-    {
+    public void SelectItem() {
+      if (Select) return;
+
         SlotItemInst.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
 
         StartCoroutine(SelectItemRoutine(true));
+
+        Select = true;
     }
 
     public void DeselectItem() {
+        if (!Select) return;
+
         SlotItemInst.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
 
         StartCoroutine(SelectItemRoutine(false));
+
+        Select = false;
+    }
+
+    public void ToggleItem() {
+        if (Select) {
+            DeselectItem();
+        } else {
+            SelectItem();
+        }
     }
 }
