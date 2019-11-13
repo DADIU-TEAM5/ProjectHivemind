@@ -88,7 +88,7 @@ public class Boomer : Enemy
             Renderer.material.color = SetColor( Color.blue);
             DetectThePlayer();
         }
-        else if (playerInRangedAttackRange() || _attacking)
+        else if (playerInCustomAttackRange(_boomerStats.AttackRangeTrigger) || _attacking)
         {
             if (_attackCooldown <= 0 )
             {
@@ -195,7 +195,13 @@ public class Boomer : Enemy
             Outline.SetActive(false);
             NavMeshAgent.speed = _boomerStats.MoveSpeed;
 
+            
+
             BoomerAnimator.speed = 1 ;
+
+
+            if (_boomerStats.DiesWhenItExplode)
+                TakeDamage(999999999999);
         }
 
     }
@@ -219,6 +225,12 @@ public class Boomer : Enemy
         }
 
     }
+
+
+
+
+
+
 
     float _angle = 0;
 
