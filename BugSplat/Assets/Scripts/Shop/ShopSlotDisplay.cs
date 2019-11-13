@@ -66,7 +66,7 @@ public class ShopSlotDisplay : MonoBehaviour
 
         BuyButton.SetActive(select);
 
-        yield return RotateItem();
+        if (select) StartCoroutine(RotateItem());
     }
 
     private IEnumerator MoveItem(Vector3 from, Vector3 to, Quaternion fromRot, Quaternion toRot) {
@@ -86,19 +86,21 @@ public class ShopSlotDisplay : MonoBehaviour
    }
 
    private IEnumerator RotateItem() {
-        for (var time = 0f; time < AnimationRotationTime; time += Time.deltaTime) {
-            float curveTime = time / AnimationRotationTime;
+        var curveTime = 0f;
+        while (true) {
             float curveAnimTime = AnimRotationCurve.Evaluate(curveTime);
-
             Quaternion nextRotation = Quaternion.Euler(0, -360 * curveAnimTime, 0);
             SlotItemInst.transform.rotation = nextRotation;
+
+            curveTime += Time.deltaTime;
 
             yield return null;
         }
    }
 
     public void SelectItem() {
-      if (Select) return;
+        if (Select) return;
+        StopAllCoroutines();
 
         SlotItemInst.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
 
@@ -109,6 +111,7 @@ public class ShopSlotDisplay : MonoBehaviour
 
     public void DeselectItem() {
         if (!Select) return;
+        StopAllCoroutines();
 
         SlotItemInst.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
 
