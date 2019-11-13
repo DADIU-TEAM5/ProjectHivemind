@@ -51,7 +51,7 @@ public class PlayerTrajectory : GameLoop
 
     private MotionMatcher _motionMatcher;
     private Dictionary<string, Transform> _skeletonJoints = new Dictionary<string, Transform>();
-
+    private float _scale;
 
     //i can't believe it is too long
     void Start()
@@ -66,6 +66,7 @@ public class PlayerTrajectory : GameLoop
         _tempMoMaTime = 0;
         Results.FrameNum = 0;
         Results.AnimClipIndex = 0;
+        _scale = transform.lossyScale.x;
     }
 
     // Update is called once per frame
@@ -73,7 +74,7 @@ public class PlayerTrajectory : GameLoop
     {
         _timer += deltaTime;
         _tempMoMaTime += deltaTime;
-
+        _scale = transform.lossyScale.x;
 
         int thisClip = Results.AnimClipIndex;
         int thisClipNum = Results.FrameNum;
@@ -416,7 +417,7 @@ public class PlayerTrajectory : GameLoop
     private void ApplyJointPointToJoint(AnimationJointPoint jointPoint, Transform joint)
     {
         joint.rotation = transform.rotation * jointPoint.Rotation;
-        joint.position = transform.TransformDirection(jointPoint.Position) + transform.position;
+        joint.position = transform.TransformDirection(jointPoint.Position* _scale) + transform.position;
     }
 
 
