@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StaminaController : GameLoop
 {
@@ -16,6 +17,7 @@ public class StaminaController : GameLoop
     // Used to determine DashPower depending on current stamina
     public AnimationCurve DashEffectivenessCurve;
 
+    public Text StaminaText;
 
 
     public override void LoopLateUpdate(float deltaTime)
@@ -25,14 +27,26 @@ public class StaminaController : GameLoop
             Stamina.Value = Mathf.Min(MaxStamina.Value, Stamina.Value + StaminaRegen.Value);
         }
 
-        float dashEffect = Stamina.Value / MaxStamina.Value;
+        float dashPower = Stamina.Value / MaxStamina.Value;
 
-        //DashPower.Value =
+        DashPower.Value = DashEffectivenessCurve.Evaluate(dashPower);
+
+        Debug.Log("Dash Update: Current Stamina: " + Stamina.Value + ", Dash Power: " + DashPower.Value);
+
+        int val = (int)Stamina.Value;
+        StaminaText.text = val.ToString();
+
     }
 
     public override void LoopUpdate(float deltaTime)
     {
      
+    }
+
+    public void OnDash()
+    {
+        // Ask GameDesign
+        Stamina.Value = Mathf.Max(Stamina.Value - DashCost.Value, 0);
     }
 
 

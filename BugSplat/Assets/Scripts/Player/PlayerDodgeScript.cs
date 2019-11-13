@@ -15,6 +15,9 @@ public class PlayerDodgeScript : GameLoop
     public FloatVariable DashCooldownSO;
     public AnimationCurve DashAnimationCurve;
 
+    // Used to change Dash legnth Depending on Stamina
+    public FloatVariable DashPower;
+
     public GameObject PlayerGraphics;
 
     public GameEvent DashDoneEvent;
@@ -49,6 +52,7 @@ public class PlayerDodgeScript : GameLoop
 
             if (IsDodgingSO.Value == true)
             {
+                // DashPower Edit
                 float curveTime = 0; DashAnimationCurve.Evaluate(_diffTime / DashSpeedSO.Value);
 
                 float curveCounter = 0;
@@ -72,7 +76,7 @@ public class PlayerDodgeScript : GameLoop
                     PlayerVelocitySO.Value = Vector3.Lerp(Vector3.zero, _dashDirection * DashLengthSO.Value, curveTime);
                     if (_navMeshAgent.isOnNavMesh)
                     {
-                        _navMeshAgent.transform.position = _initialPos + PlayerVelocitySO.Value;
+                        _navMeshAgent.transform.position = _initialPos + PlayerVelocitySO.Value * DashPower.Value;
                     }
                 }
                 else
@@ -80,7 +84,7 @@ public class PlayerDodgeScript : GameLoop
                     PlayerVelocitySO.Value = Vector3.Lerp(Vector3.zero, _dashDirection * DashLengthSO.Value, 1);
                     if (_navMeshAgent.isOnNavMesh)
                     {
-                        _navMeshAgent.transform.position = _initialPos + PlayerVelocitySO.Value;
+                        _navMeshAgent.transform.position = _initialPos + PlayerVelocitySO.Value * DashPower.Value;
                     }
                     IsDodgingSO.Value = false;
                     DashDoneEvent.Raise(PlayerGraphics);
