@@ -113,7 +113,7 @@ public class EnemySpawner : GameLoop
     {
 
 
-        print(budget);
+        //print(budget);
 
         if (LevelBudget+budget >=SmallestValue)
         {
