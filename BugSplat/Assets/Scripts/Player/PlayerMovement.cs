@@ -25,6 +25,7 @@ public class PlayerMovement : GameLoop
     private float LerpTime = 1f;
     private bool _isMoving;
     private float _currentTime;
+    public BoolVariable PlayerControlOverrideSO;
 
     Rigidbody _rigidbody;
 
@@ -43,19 +44,26 @@ public class PlayerMovement : GameLoop
 
         //Anim.SetBool("Running", moving);
 
-        if (moving) {
-            var lerpTime = Mathf.Min(_currentTime / LerpTime, 1f);
-            lerpTime = RampUpMovespeed.Evaluate(lerpTime);
+        if (PlayerControlOverrideSO.Value == false)
+        {
+            if (moving)
+            {
+                var lerpTime = Mathf.Min(_currentTime / LerpTime, 1f);
+                lerpTime = RampUpMovespeed.Evaluate(lerpTime);
 
-            PlayerCurrentSpeedSO.Value = lerpTime * PlayerMaxSpeedSO.Value;
-            PlayerGraphics.localRotation = Quaternion.LookRotation(PlayerDirectionSO.Value, Vector3.up);
-            PlayerDirectionSO.Value = MoveDirectionSO.Value;
+                PlayerCurrentSpeedSO.Value = lerpTime * PlayerMaxSpeedSO.Value;
+                PlayerGraphics.localRotation = Quaternion.LookRotation(PlayerDirectionSO.Value, Vector3.up);
+                PlayerDirectionSO.Value = MoveDirectionSO.Value;
 
-            _currentTime += Time.deltaTime;
-        } else {
-            _currentTime = 0f;
-            PlayerCurrentSpeedSO.Value = 0f;
+                _currentTime += Time.deltaTime;
+            }
+            else
+            {
+                _currentTime = 0f;
+                PlayerCurrentSpeedSO.Value = 0f;
+            }
         }
+
 
         PlayerVelocity.Value = PlayerDirectionSO.Value * PlayerCurrentSpeedSO.Value;
 

@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class TouchControls : GameLoop
 {
-    public BoolVariable IsStunned;
-
 
     public GameObject PlayerGraphics;
     // Setup ScriptableObjects for holding the PlayerMovementInfo
@@ -19,6 +17,7 @@ public class TouchControls : GameLoop
     public FloatVariable InputSwipeTapTimeSO;
     public FloatVariable InputSwipeThresholdSO; // Percentage of the screen width
     public BoolVariable PlayerControlOverrideSO;
+    public BoolVariable IsStunnedSO;
 
     public GameObjectVariable LockedTarget;
     public GameObject UICanvas;
@@ -86,13 +85,10 @@ public class TouchControls : GameLoop
 
     public override void LoopUpdate(float deltaTime)
     {
-        if (!IsStunned.Value)
+        if (PlayerControlOverrideSO.Value == false)
         {
-            if (PlayerControlOverrideSO.Value == false)
-            // Detect Touch
-          
-            
-
+            if (IsStunnedSO.Value == false)
+            {
                 // Detect Touch
                 if (Input.touchCount > 0)
                 {
@@ -148,7 +144,7 @@ public class TouchControls : GameLoop
                         }
                     }
                 }
-            
+            }
         }
     }
 

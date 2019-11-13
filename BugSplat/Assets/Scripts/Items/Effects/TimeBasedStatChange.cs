@@ -19,10 +19,8 @@ public class TimeBasedStatChange : Effect
         InverseStatChange.Stat = StatChange.Stat;
         InverseStatChange.Change = -StatChange.Change;
 
-        var coroutineObject = new GameObject();
-        coroutineObject.name = "TimeBasedStatChange_CoroutineBoy";
-        CoroutineBoy = coroutineObject.AddComponent<EmptyMono>();
-        coroutineObject.SetActive(true);
+        CoroutineBoy = MakeCoroutineObject();
+        CoroutineBoy.gameObject.name = "TimeBasedStatChange_CoroutineBoy";
     }
 
     public override void Trigger(GameObject target = null)
