@@ -36,5 +36,9 @@ public abstract class ShopSlot : ScriptableObject
 
     public abstract GameObject GetItemPrefab(); 
 
+    public abstract string GetTitle();
+
+    public abstract string GetDescription();
+
     public abstract int GetPrice();
 }
