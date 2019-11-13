@@ -348,7 +348,8 @@ MonoBehaviour:
   AreaShop:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: e18e2d09e87e64b4c854fc992592e302,
+      type: 2}
   Music:
     idInternal: 0
     valueGuidInternal: 
@@ -369,7 +370,6 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 72dcbb57015d34b788498cdd1050e867,
       type: 2}
-  currentScenePlaceholderSO: 
 --- !u!114 &7555610221593116734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -540,7 +540,7 @@ MonoBehaviour:
     groupGuidInternal: 
     WwiseObjectReference: {fileID: 0}
   EnemiesLeft: {fileID: 11400000, guid: 3cbd84a3a3e9533498d0bea1a1cbe33c, type: 2}
-  EnemiesAgroed: {fileID: 0}
+  EnemiesAgroed: {fileID: 11400000, guid: 962a0a956b7fb164e8efc072cefe4de5, type: 2}
   NoEnemiesOnScreen: {fileID: 11400000, guid: fab092924697b554a8c0751c87f04669, type: 2}
   MaxHealth: {fileID: 11400000, guid: bd56d08eef8fd2648ba7efd6397151bb, type: 2}
   CurrentHealth: {fileID: 11400000, guid: d980b5989185a2948b70c02cdfccf718, type: 2}
@@ -1079,6 +1079,9 @@ GameObject:
   - component: {fileID: 5172822991716516221}
   - component: {fileID: 4335405448226846213}
   - component: {fileID: 4466324516886727042}
+  - component: {fileID: 419331822851459515}
+  - component: {fileID: 8233037482780601946}
+  - component: {fileID: 6658433440886948361}
   m_Layer: 0
   m_Name: AmbienceManager
   m_TagString: Untagged
@@ -1120,16 +1123,13 @@ MonoBehaviour:
   hubAmbience:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 7df8bbd6e8ae8405cb5978ce760928a7,
+      type: 2}
   shopAmbience:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
-  fadeAmbience:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
-  currentScenePlaceholderSO: 
+    WwiseObjectReference: {fileID: 11400000, guid: cf31d3cab97334d6989f1d338054d6e7,
+      type: 2}
 --- !u!114 &4466324516886727042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1159,6 +1159,93 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &419331822851459515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5767124523087305666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: ced00bd65385f8443983f498d89f6945, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4335405448226846213}
+        m_MethodName: ArenaSceneLoad
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &8233037482780601946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5767124523087305666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: c4ce3a3220defeb48aa82db2783310a7, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4335405448226846213}
+        m_MethodName: HubSceneLoad
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &6658433440886948361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5767124523087305666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 5fcf023afa3ee9346a11146b3bb87101, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4335405448226846213}
+        m_MethodName: ShopSceneLoad
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &6596428402899259860
 GameObject:
   m_ObjectHideFlags: 0
@@ -1174,6 +1261,7 @@ GameObject:
   - component: {fileID: 8887086170879286946}
   - component: {fileID: 3592241427933244894}
   - component: {fileID: 7659103684836773823}
+  - component: {fileID: 5279711769826241768}
   m_Layer: 0
   m_Name: SpitterAudio
   m_TagString: Untagged
@@ -1229,7 +1317,8 @@ MonoBehaviour:
   DeathSplat:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: b50c3c72d0b114b70aa4250b4a32d7df,
+      type: 2}
   Charge:
     idInternal: 0
     valueGuidInternal: 
@@ -1374,6 +1463,35 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3528176655793269506}
         m_MethodName: ChargeEvent
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &5279711769826241768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6596428402899259860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 3488db3170d2c2c4095d2fd49a373f47, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3528176655793269506}
+        m_MethodName: Death
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
