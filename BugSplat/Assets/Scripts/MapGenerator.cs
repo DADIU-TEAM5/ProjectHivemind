@@ -6,8 +6,6 @@ public class MapGenerator : MonoBehaviour
 {
 
     
-
-    public FloatVariable CurrentLevelBudget;
     public IntVariable EnemySpawnerCount;
 
     public bool UseRandomSeed;
@@ -50,8 +48,10 @@ public class MapGenerator : MonoBehaviour
     void Start()
     {
         EnemySpawnerCount.Value = 0;
-
-        CurrentLevelBudget.Value = Levels.LevelTierPicker[CurrentLevel.Value].budget;
+        Debug.Log("THE MAPGEN SET UP THE VALUES!!");
+        EnemySpawner.LevelBudget = Levels.LevelTierPicker[CurrentLevel.Value].budget;
+        print("spawner budget set to "+ EnemySpawner.LevelBudget);
+        print("spawner budget should be set to " + Levels.LevelTierPicker[CurrentLevel.Value].budget);
 
         SortedHexagons = new List<List<GameObject>>();
         availableTiers = new List<Tier>();
@@ -407,7 +407,7 @@ public class MapGenerator : MonoBehaviour
 
             positionToPlaceHex.x += hexStepHeight * (i + multiplierHeight);
 
-            hex.name = "edge " + i;
+           // hex.name = "edge " + i;
             hex.transform.position = positionToPlaceHex;
 
             hex.transform.parent = _Parent.transform;
