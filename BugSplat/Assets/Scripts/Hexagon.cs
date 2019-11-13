@@ -10,7 +10,7 @@ public class Hexagon : MonoBehaviour
 
     public EnemySpawner[] EnemySpawners;
 
-    public float MinBudget;
+    public int MinBudget;
 
     public GameObject[] Walls;
 
@@ -27,7 +27,7 @@ public class Hexagon : MonoBehaviour
         if (EnemySpawners.Length > 0)
         {
              
-                EnemySpawners[Random.Range(0, EnemySpawners.Length)].budget += MinBudget;
+               EnemySpawners[Random.Range(0, EnemySpawners.Length)].budget += MinBudget;
 
             MinBudget = 0;
                 

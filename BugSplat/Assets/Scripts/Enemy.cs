@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public abstract class Enemy : GameLoop
 {
-    public float difficultyValue = 1;
+    public int difficultyValue = 1;
     public AnimationCurve AttackCurve;
 
     public Material ConeMaterial;
