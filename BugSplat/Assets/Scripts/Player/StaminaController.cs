@@ -13,7 +13,7 @@ public class StaminaController : GameLoop
 
     // Used to change effectiveness of dash by .Value %
     public FloatVariable DashPower;
-    
+
     // Used to determine DashPower depending on current stamina
     public AnimationCurve DashEffectivenessCurve;
 
@@ -22,7 +22,7 @@ public class StaminaController : GameLoop
 
     public override void LoopLateUpdate(float deltaTime)
     {
-        if(Stamina.Value < MaxStamina.Value)
+        if (Stamina.Value < MaxStamina.Value)
         {
             Stamina.Value = Mathf.Min(MaxStamina.Value, Stamina.Value + StaminaRegen.Value);
         }
@@ -31,7 +31,7 @@ public class StaminaController : GameLoop
 
         DashPower.Value = DashEffectivenessCurve.Evaluate(dashPower);
 
-        Debug.Log("Dash Update: Current Stamina: " + Stamina.Value + ", Dash Power: " + DashPower.Value);
+        //Debug.Log("Dash Update: Current Stamina: " + Stamina.Value + ", Dash Power: " + DashPower.Value);
 
         int val = (int)Stamina.Value;
         StaminaText.text = val.ToString();
@@ -40,13 +40,14 @@ public class StaminaController : GameLoop
 
     public override void LoopUpdate(float deltaTime)
     {
-     
+
     }
 
     public void OnDash()
     {
-        // Ask GameDesign
-        Stamina.Value = Mathf.Max(Stamina.Value - DashCost.Value, 0);
+        
+        if (Stamina.Value >= DashCost.Value)
+            Stamina.Value = Mathf.Max(Stamina.Value - DashCost.Value, 0);
     }
 
 

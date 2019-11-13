@@ -17,6 +17,9 @@ public class PlayerDodgeScript : GameLoop
 
     // Used to change Dash legnth Depending on Stamina
     public FloatVariable DashPower;
+    public FloatVariable DashCost;
+    public FloatVariable Stamina;
+
 
     public GameObject PlayerGraphics;
 
@@ -115,7 +118,7 @@ public class PlayerDodgeScript : GameLoop
     // Called from PlayerController
     public void PlayerDash()
     {
-        if (IsDodgingSO.Value == false && !_dashCooldownActive)
+        if (IsDodgingSO.Value == false && !_dashCooldownActive && DashCost.Value<=Stamina.Value)
         {
             _dashDirection = PlayerDirectionSO.Value;
             _currentTime = Time.time;
