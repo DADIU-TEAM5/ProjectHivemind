@@ -176,7 +176,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &254173656
 Transform:
   m_ObjectHideFlags: 0
@@ -743,6 +743,12 @@ MonoBehaviour:
     roll: 0
   - position: {x: 6.487375, y: -3.837514, z: 10.173453}
     roll: 0
+--- !u!4 &682394957 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1378690212658981614, guid: ce93dae90c32b234eb5aa37ebcaa5582,
+    type: 3}
+  m_PrefabInstance: {fileID: 840415873}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &746137803 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3073335834627570852, guid: 297e036692bd9534e9dc9aa79e893fa0,
@@ -1050,6 +1056,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5788987755461925659, guid: ce93dae90c32b234eb5aa37ebcaa5582,
+        type: 3}
+      propertyPath: PlayerControlOverrideSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 6c60755199019534381ecc8c862bb419,
+        type: 2}
     - target: {fileID: 5788987755461925661, guid: ce93dae90c32b234eb5aa37ebcaa5582,
         type: 3}
       propertyPath: TouchCanvas
@@ -1064,11 +1076,6 @@ PrefabInstance:
         type: 3}
       propertyPath: PlayerCam
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4996299851507640039, guid: ce93dae90c32b234eb5aa37ebcaa5582,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5788987755461925632, guid: ce93dae90c32b234eb5aa37ebcaa5582,
         type: 3}
@@ -1123,6 +1130,11 @@ PrefabInstance:
     - target: {fileID: 8831838245759697901, guid: ce93dae90c32b234eb5aa37ebcaa5582,
         type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4996299851507640039, guid: ce93dae90c32b234eb5aa37ebcaa5582,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3639936229954285785, guid: ce93dae90c32b234eb5aa37ebcaa5582,
@@ -2158,39 +2170,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1048500108}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 254173655}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2041863837}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1383441882}
         m_MethodName: EnterShop
         m_Mode: 1
@@ -2222,7 +2201,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1048500109
 Transform:
   m_ObjectHideFlags: 0
@@ -2498,6 +2477,7 @@ MonoBehaviour:
   Target:
   - {fileID: 1168518870}
   - {fileID: 1048500109}
+  - {fileID: 254173656}
   - {fileID: 2041863838}
   Player: {fileID: 1209097220}
   PlayerCurrentSpeedSO: {fileID: 11400000, guid: dbd0aac2d5b26704bbdf49f8d6657a38,
@@ -2506,14 +2486,14 @@ MonoBehaviour:
     type: 2}
   IsShopOpenSO: {fileID: 11400000, guid: c09e3d7f04a88d94da99e89ff963fea8, type: 2}
   PlayerExitPos: {fileID: 11400000, guid: 5e0eff17506805f47bbcfca8d30d3610, type: 2}
-  IsExiting: {fileID: 11400000, guid: 6f8138e6015624643a13ae94cac318c3, type: 2}
+  IsExitingShop: {fileID: 11400000, guid: 6f8138e6015624643a13ae94cac318c3, type: 2}
   TimeScale: 0.15
   Anim: {fileID: 0}
   ShopColliders:
   - {fileID: 958002657}
   - {fileID: 1168518869}
   PlayerDirectionSO: {fileID: 11400000, guid: 857036471d8e63b46b304293dca2794e, type: 2}
-  PlayerGraphics: {fileID: 0}
+  PlayerGraphics: {fileID: 682394957}
   WhiteFadeIn: {fileID: 1855045133}
 --- !u!114 &1383441883
 MonoBehaviour:
@@ -2723,11 +2703,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5353087396765526188, guid: e185d3beb72f075458c815d5c96a04ff,
-        type: 3}
-      propertyPath: m_Name
-      value: SceneHandlerObject
-      objectReference: {fileID: 0}
     - target: {fileID: 9019366068559028522, guid: e185d3beb72f075458c815d5c96a04ff,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2797,6 +2772,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.3997576
+      objectReference: {fileID: 0}
+    - target: {fileID: 5353087396765526188, guid: e185d3beb72f075458c815d5c96a04ff,
+        type: 3}
+      propertyPath: m_Name
+      value: SceneHandlerObject
       objectReference: {fileID: 0}
     - target: {fileID: 8516260075238119321, guid: e185d3beb72f075458c815d5c96a04ff,
         type: 3}
@@ -3342,7 +3322,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2041863838
 Transform:
   m_ObjectHideFlags: 0

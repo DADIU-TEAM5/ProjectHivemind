@@ -11,9 +11,8 @@ public class PlayerControlOverride : MonoBehaviour
     public BoolVariable PlayerControlOverrideSO;
     public BoolVariable IsShopOpenSO;
     public Vector3Variable PlayerExitPos;
-    public BoolVariable IsExiting;
+    public BoolVariable IsExitingShop;
     public float TimeScale;
-    public Animator Anim;
     public GameObject[] ShopColliders;
     public Vector3Variable PlayerDirectionSO;
     public Transform PlayerGraphics;
@@ -25,24 +24,34 @@ public class PlayerControlOverride : MonoBehaviour
     {
         if (IsShopOpenSO.Value == true)
         {
-            if (IsExiting.Value != true)
+            if (IsExitingShop.Value != true)
             {
                 for (int i = ShopColliders.Length - 1; i >= 0; i--)
                 {
                     ShopColliders[i].SetActive(true);
                 }
-                Target[1].gameObject.SetActive(false);
+
+                for (int k = Target.Length -1; k > 0; k--)
+                {
+                    Target[k].gameObject.SetActive(false);
+                }
+
                 PlayerControlOverrideSO.Value = false;
             }
             else
             {
-                PlayerControlOverrideSO.Value = true;
+                for (int j = Target.Length - 1; j > 0; j--)
+                {
+                    Target[j].gameObject.SetActive(true);
+                }
+
+                //PlayerControlOverrideSO.Value = true;
                 Vector3 heading = Target[2].position - Target[1].position;
                 Debug.Log(heading.normalized);
                 PlayerDirectionSO.Value = heading.normalized;
                 Player.position = Target[1].position;
                 WhiteFadeIn.SetActive(true);
-                IsExiting.Value = false;
+                IsExitingShop.Value = false;
             }
         }
 
@@ -50,7 +59,7 @@ public class PlayerControlOverride : MonoBehaviour
 
     public void EnterShop()
     {
-        IsExiting.Value = true;
+        IsExitingShop.Value = true;
     }
 
 
@@ -59,10 +68,10 @@ public class PlayerControlOverride : MonoBehaviour
 
         PlayerGraphics.localRotation = Quaternion.LookRotation(PlayerDirectionSO.Value, Vector3.up);
         Debug.Log(PlayerDirectionSO.Value);
-        IsExiting.Value = true;
+        IsExitingShop.Value = true;
         PlayerControlOverrideSO.Value = true;
 
-        if (IsExiting.Value == false)
+        if (IsExitingShop.Value == false)
         {
             Time.timeScale = TimeScale;
         } else
@@ -73,7 +82,6 @@ public class PlayerControlOverride : MonoBehaviour
         Player.GetComponent<TouchControls>().enabled = false;
         Player.GetComponent<PlayerMovement>().enabled = false;
         PlayerCurrentSpeedSO.Value = PlayerCurrentSpeedSO.InitialValue;
-        Anim.SetBool("Running", true);
   
         PlayerExitPos.Value = Target[index].position;
 
@@ -104,7 +112,7 @@ public class PlayerControlOverride : MonoBehaviour
 
         PlayerCurrentSpeedSO.Value = 0f;
 
-        IsExiting.Value = false;
+        IsExitingShop.Value = false;
 
     }
 
