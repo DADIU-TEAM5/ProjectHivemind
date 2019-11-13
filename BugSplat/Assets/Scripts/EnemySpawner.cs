@@ -32,6 +32,8 @@ public class EnemySpawner : GameLoop
     int[] _values;
     public int SmallestValue;
 
+    float _timer;
+
     private void OnEnable()
     {
         budget = 0;
@@ -95,7 +97,13 @@ public class EnemySpawner : GameLoop
 
         if (startedSpawning)
         {
+            _timer += deltaTime;
             SpawnEnemiesRoutine();
+        }
+
+        if(_timer > 1.5)
+        {
+            Destroy(gameObject);
         }
 
     }
@@ -113,7 +121,7 @@ public class EnemySpawner : GameLoop
     {
 
 
-        print(budget);
+        
 
         if (LevelBudget+budget >=SmallestValue)
         {
@@ -158,6 +166,7 @@ public class EnemySpawner : GameLoop
                 GameObject spawnedEnemy = Instantiate(enemies[index], transform);
 
                 spawnedEnemy.name = "Little fucker";
+                spawnedEnemy.transform.parent = null;
 
                 Vector3 spawnPoint = transform.position;
                 spawnPoint.y = 0;
