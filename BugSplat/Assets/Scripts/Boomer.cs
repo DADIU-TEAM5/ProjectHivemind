@@ -228,7 +228,10 @@ public class Boomer : Enemy
 
 
 
-
+    public override void TakeDamageBehaviour(float damage)
+    {
+        
+    }
 
 
 
