@@ -15,16 +15,21 @@ public class ShopItemSlot : ShopSlot
     private Item Item;
 
 
-    public override void OnPurchase()
+    public override bool OnPurchase()
     {
-        if (Item == null) return;
+        if (Item == null) return false;
 
-        if(PlayerInventory== null)
+        if(PlayerInventory == null)
         {
             Debug.LogError("No Refference to player inventory!");
+            return false;
         }
 
         PlayerInventory.AddItem(Item);
+
+        Item = null;
+
+        return true;
     }
 
     public void GetItemFromItemPool()

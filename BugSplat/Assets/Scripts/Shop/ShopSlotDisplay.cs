@@ -22,7 +22,7 @@ public class ShopSlotDisplay : MonoBehaviour
 
     private bool _runOnce;
 
-    private bool Select;
+    private bool Select = false;
 
     private GameObject SlotItemInst;
 
@@ -52,10 +52,6 @@ public class ShopSlotDisplay : MonoBehaviour
         }
 
         SlotItemInst = Instantiate(SlotObject, SlotPlaceholder);
-        var itemSelector = SlotItemInst.GetComponent<ItemSelecter>();
-        itemSelector.ShopCamera = MainCamera;
-        itemSelector.ShopDisplay = this;
-
         PriceText.text = Slot?.GetPrice().ToString();
 
         StartPos = SlotItemInst.transform.position;
@@ -69,11 +65,8 @@ public class ShopSlotDisplay : MonoBehaviour
             : MoveItem(AnimTargetPos.position, StartPos, EndRot, StartRot);
 
         BuyButton.SetActive(select);
-        if (PlayerCurrency.Value < Slot.GetPrice()) {
-            BuyButton.GetComponent<Button>().enabled = false;
-        }
 
-        yield return RotateItem();
+        if (select) StartCoroutine(RotateItem());
     }
 
     private IEnumerator MoveItem(Vector3 from, Vector3 to, Quaternion fromRot, Quaternion toRot) {
@@ -93,27 +86,45 @@ public class ShopSlotDisplay : MonoBehaviour
    }
 
    private IEnumerator RotateItem() {
-        for (var time = 0f; time < AnimationRotationTime; time += Time.deltaTime) {
-            float curveTime = time / AnimationRotationTime;
+        var curveTime = 0f;
+        while (true) {
             float curveAnimTime = AnimRotationCurve.Evaluate(curveTime);
-
             Quaternion nextRotation = Quaternion.Euler(0, -360 * curveAnimTime, 0);
             SlotItemInst.transform.rotation = nextRotation;
+
+            curveTime += Time.deltaTime;
 
             yield return null;
         }
    }
 
-    public void SelectItem()
-    {
+    public void SelectItem() {
+        if (Select) return;
+        StopAllCoroutines();
+
         SlotItemInst.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
 
         StartCoroutine(SelectItemRoutine(true));
+
+        Select = true;
     }
 
     public void DeselectItem() {
+        if (!Select) return;
+        StopAllCoroutines();
+
         SlotItemInst.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
 
         StartCoroutine(SelectItemRoutine(false));
+
+        Select = false;
+    }
+
+    public void ToggleItem() {
+        if (Select) {
+            DeselectItem();
+        } else {
+            SelectItem();
+        }
     }
 }
