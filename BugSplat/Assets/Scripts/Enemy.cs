@@ -20,7 +20,7 @@ public abstract class Enemy : GameLoop
     public GameObject Graphics;
     public GameObject RenderGraphics;
 
-    public GameObjectList EnemyList;
+    public EnemyObjectList EnemyList;
     public GameObjectVariable LockedTarget;
     public GameObjectVariable CurrentEnemySO;
     public GameObjectVariable CurrentEnemyGraphic;
@@ -103,7 +103,7 @@ public abstract class Enemy : GameLoop
 
 
 
-        EnemyList.Add(gameObject);
+        EnemyList.Add(this);
 
         if (RenderGraphics == null)
         {
@@ -132,8 +132,10 @@ public abstract class Enemy : GameLoop
 
         OutlineRenderer.material.color = ConeEmptyColor;
 
-        NavMeshAgent.destination = transform.position +(new Vector3(Random.Range(-2, 2), 0, Random.Range(-2, 2)));
-
+        if (NavMeshAgent.isOnNavMesh)
+        {
+            NavMeshAgent.destination = transform.position + (new Vector3(Random.Range(-2, 2), 0, Random.Range(-2, 2)));
+        }
     }
 
 
@@ -170,9 +172,13 @@ public abstract class Enemy : GameLoop
     public void TakeDamage(float damage)
     {
         // print(name + " took damage "+ damage);
+
+
         _currentHealth -= damage;
         UpdateHealthBar(_currentHealth);
         TakeDamageEvent.Raise(this.gameObject);
+        TakeDamageBehaviour(damage);
+
 
         if (_currentHealth <= 0)
         {
@@ -202,6 +208,8 @@ public abstract class Enemy : GameLoop
             Destroy(gameObject);
         }
     }
+
+    public abstract void TakeDamageBehaviour(float damage);
 
 
 
@@ -293,7 +301,7 @@ public abstract class Enemy : GameLoop
 
     private void OnDisable()
     {
-        EnemyList.Remove(gameObject);
+        EnemyList.Remove(this);
     }
 
     public void RemoveFromLockedTargetIfNotVisible()
@@ -539,7 +547,7 @@ public abstract class Enemy : GameLoop
 
         if (potentialTargets.Length > 0)
         {
-            if (Physics.Raycast(transform.position, potentialTargets[0].transform.position - transform.position, out hit, 10))
+            if (Physics.Raycast(transform.position, potentialTargets[0].transform.position - transform.position, out hit, stats.SpotDistance))
             {
                 if (hit.collider.gameObject.layer == 9)
                 {

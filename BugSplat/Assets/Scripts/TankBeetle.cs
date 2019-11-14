@@ -35,6 +35,8 @@ public class TankBeetle : Enemy
     Vector3 _chargeEndpos;
 
 
+    public Animator Anim;
+
 
 
     [Header("Events")]
@@ -51,6 +53,8 @@ public class TankBeetle : Enemy
         TankStats = (TankStats)stats;
         ConeRenderer.material.color = Color.red;
 
+        
+
     }
 
     
@@ -62,6 +66,12 @@ public class TankBeetle : Enemy
 
     public override void LoopBehaviour(float deltaTime)
     {
+
+        if (NavMeshAgent.isOnNavMesh)
+        {
+            NavMeshAgent.ResetPath();
+        }
+
 
         if (_attackCooldown > 0)
             _attackCooldown -= deltaTime;
@@ -118,6 +128,11 @@ public class TankBeetle : Enemy
     {
       return   Vector3.Distance(transform.position, _chargeEndpos);
     }
+
+    public override void TakeDamageBehaviour(float damage)
+    {
+    }
+
     void Attack(float deltaTime)
     {
 
@@ -167,6 +182,14 @@ public class TankBeetle : Enemy
 
         if (_Chargeing)
         {
+            if (Anim.GetBool("Attacking") == false)
+            {
+                
+                Anim.SetBool("Attacking", true);
+
+            }
+
+
             Outline.transform.parent = null;
             DrawCone(10, ConeMesh, true, 0);
             ConeRenderer.material.color = new Color(1, 0, 0, .4f);
@@ -209,6 +232,9 @@ public class TankBeetle : Enemy
                 {
                     print(ColliderHits[i].collider.name);
                     EndCharge();
+
+                    Anim.SetBool("Idle", true);
+
 
                     Stun( TankStats.StunDuration);
                     return;
@@ -314,6 +340,14 @@ public class TankBeetle : Enemy
 
     void EndCharge()
     {
+
+        if (Anim.GetBool("Attacking") == true)
+        {
+            Anim.SetBool("Attacking", false);
+
+        }
+
+
         _attackCooldown = TankStats.AttackSpeed;
         _attacking = false;
         _attackCharge = 0;
@@ -471,6 +505,13 @@ public class TankBeetle : Enemy
 
     void MoveTowardsThePlayer(float deltaTime)
     {
+
+        if(Anim.GetBool("Idle") == true)
+        {
+
+            Anim.SetBool("Idle", false);
+        }
+
         /*
         Vector3 adjustedPlayerPos = _playerTransform.position;
 
