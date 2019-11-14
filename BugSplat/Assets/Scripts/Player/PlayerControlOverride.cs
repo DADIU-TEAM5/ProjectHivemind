@@ -5,14 +5,21 @@ using UnityEngine.AI;
 
 public class PlayerControlOverride : MonoBehaviour
 {
-    public GameObject[] EnterColliders;
-    public Transform[] ExitTargets;
+    [SerializeField]
+    private GameObject[] EnterColliders;
+
+    [SerializeField]
+    private Transform[] ExitTargets;
+
+    [SerializeField]
+    private BoolVariable IsAreaOpenSO;
+
+    [SerializeField]
+    private BoolVariable IsExitingScene;
+
     public Transform Player;
     public FloatVariable PlayerCurrentSpeedSO;
     public BoolVariable PlayerControlOverrideSO;
-    public BoolVariable IsAreaOpenSO;
-    public Vector3Variable PlayerExitPos;
-    public BoolVariable IsExitingScene;
     public float TimeScale;
     public Vector3Variable PlayerDirectionSO;
     public Transform PlayerGraphics;
@@ -79,7 +86,7 @@ public class PlayerControlOverride : MonoBehaviour
         Player.GetComponent<NavMeshAgent>().enabled = true;
 
         WhiteFadeIn.SetActive(true);
-        IsExitingScene.Value = false;
+        ExitArea();
     }
 
     public void EnterArea()
