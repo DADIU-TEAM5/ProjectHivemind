@@ -12,6 +12,9 @@ public class BoomerStats : EnemyStats
 
     public float OrbitSpeed;
 
+    public float TargetDistanceToPlayer;
+
+
     public float SackSpawnCooldown;
 
     public bool SpawnsSacks;
