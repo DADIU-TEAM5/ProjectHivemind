@@ -138,6 +138,9 @@ public class Boomer : Enemy
             DrawCone(20, OutlineMesh, true,_attackCharge);
 
             BoomerAnimator.SetTrigger("Attack");
+
+            BoomerAnimator.SetBool("Walking", false);
+
             BoomerAnimator.speed = 1 + _percentIncrease;
 
         }
@@ -240,12 +243,16 @@ public class Boomer : Enemy
     void MoveTowardsThePlayer(float deltaTime)
     {
 
+        
+
         if (_attackCooldown <= 0)
         {
             if (Vector3.Distance(transform.position, PlayerTransform.position) > _boomerStats.TargetDistanceToPlayer)
             {
                 if (NavMeshAgent.destination != PlayerTransform.position)
                 {
+
+                    BoomerAnimator.SetBool("Walking", true);
                     NavMeshAgent.destination = PlayerTransform.position;
 
                 }
@@ -254,6 +261,7 @@ public class Boomer : Enemy
             {
                 if (NavMeshAgent.destination != transform.position)
                 {
+                    BoomerAnimator.SetBool("Walking", false);
                     NavMeshAgent.destination = transform.position;
 
                 }
@@ -284,6 +292,8 @@ public class Boomer : Enemy
 
             if (NavMeshAgent.destination != rotatedVector)
             {
+
+                BoomerAnimator.SetBool("Walking", true);
                 NavMeshAgent.destination = rotatedVector;
 
 
