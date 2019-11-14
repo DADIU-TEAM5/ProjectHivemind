@@ -9,7 +9,7 @@ public class SceneButton : MonoBehaviour
     public StringVariable SceneName;
     public Text ButtonText;
     private string _toggleValue;
-    public GameObjectList EnemyList;
+    public EnemyObjectList EnemyList;
     public GameObjectVariable HexMapParent;
     public int FontSize;
 
@@ -32,7 +32,7 @@ public class SceneButton : MonoBehaviour
             
             Destroy(HexMapParent.Value);
 
-            EnemyList.Items = new List<GameObject>();
+            EnemyList.Items = new List<Enemy>();
             
 
             OverallSceneWorker.LoadScene(SceneName.Value);
