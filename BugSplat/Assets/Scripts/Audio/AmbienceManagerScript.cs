@@ -10,20 +10,29 @@ public class AmbienceManagerScript : MonoBehaviour
     public AK.Wwise.Event hubAmbience;
     public AK.Wwise.Event shopAmbience;
 
+    [Header("Wwise reverb states")]
+    public AK.Wwise.State Arenaverb;
+    public AK.Wwise.State Hubverb;
+    public AK.Wwise.State Shopverb;
+
 
     public void ArenaSceneLoad()
     {
         arenaAmbience.Post(this.gameObject);
+        Arenaverb.SetValue();
+        
     }
 
     public void HubSceneLoad()
     {
         hubAmbience.Post(this.gameObject);
+        Hubverb.SetValue();
     }
 
     public void ShopSceneLoad()
     {
         shopAmbience.Post(this.gameObject);
+        Shopverb.SetValue();
     }
 
     public void SceneChange()
