@@ -16,12 +16,17 @@ public class MapGenerator : MonoBehaviour
 
     public ShopLevels Levels;
 
+    public bool IsGauntlet;
+
     public GameObject[] Hexagons;
+
+    public GameObject[] GauntletHexagons;
 
     List<List<GameObject>> SortedHexagons;
     List<Tier> availableTiers;
 
     public GameObject[] CenterHexagons;
+    public GameObject[] GauntletCenterHexagons;
 
     public GameObjectVariable hexmapParent;
 
@@ -47,6 +52,13 @@ public class MapGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (IsGauntlet)
+        {
+            Hexagons = GauntletHexagons;
+            CenterHexagons = GauntletCenterHexagons;
+        }
+
+
         EnemySpawnerCount.Value = 0;
         Debug.Log("THE MAPGEN SET UP THE VALUES!!");
         EnemySpawner.LevelBudget = Levels.LevelTierPicker[CurrentLevel.Value].budget;
