@@ -52,7 +52,6 @@ public class PlayerMovement : GameLoop
                 lerpTime = RampUpMovespeed.Evaluate(lerpTime);
 
                 PlayerCurrentSpeedSO.Value = lerpTime * PlayerMaxSpeedSO.Value;
-                PlayerGraphics.localRotation = Quaternion.LookRotation(PlayerDirectionSO.Value, Vector3.up);
                 PlayerDirectionSO.Value = MoveDirectionSO.Value;
 
                 _currentTime += Time.deltaTime;
@@ -65,6 +64,7 @@ public class PlayerMovement : GameLoop
         }
 
             PlayerVelocity.Value = PlayerDirectionSO.Value * PlayerCurrentSpeedSO.Value;
+            PlayerGraphics.localRotation = Quaternion.LookRotation(PlayerDirectionSO.Value, Vector3.up);
 
             if (_navMeshAgent.isOnNavMesh)
             {
