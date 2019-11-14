@@ -5,15 +5,15 @@ using UnityEngine.AI;
 
 public class PlayerControlOverride : MonoBehaviour
 {
-    public Transform[] Target;
+    public GameObject[] EnterColliders;
+    public Transform[] ExitTargets;
     public Transform Player;
     public FloatVariable PlayerCurrentSpeedSO;
     public BoolVariable PlayerControlOverrideSO;
-    public BoolVariable IsShopOpenSO;
+    public BoolVariable IsAreaOpenSO;
     public Vector3Variable PlayerExitPos;
-    public BoolVariable IsExitingShop;
+    public BoolVariable IsExitingScene;
     public float TimeScale;
-    public GameObject[] ShopColliders;
     public Vector3Variable PlayerDirectionSO;
     public Transform PlayerGraphics;
     public GameObject WhiteFadeIn;
@@ -22,98 +22,107 @@ public class PlayerControlOverride : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (IsShopOpenSO.Value == true)
+        if (IsAreaOpenSO != null)
         {
-            if (IsExitingShop.Value != true)
+            if (IsAreaOpenSO == true)
             {
-                for (int i = ShopColliders.Length - 1; i >= 0; i--)
-                {
-                    ShopColliders[i].SetActive(true);
-                }
-
-                for (int k = Target.Length -1; k > 0; k--)
-                {
-                    Target[k].gameObject.SetActive(false);
-                }
-
-                PlayerControlOverrideSO.Value = false;
-            }
-            else
-            {
-                for (int j = Target.Length - 1; j > 0; j--)
-                {
-                    Target[j].gameObject.SetActive(true);
-                }
-
-                //PlayerControlOverrideSO.Value = true;
-                Vector3 heading = Target[2].position - Target[1].position;
-                Debug.Log(heading.normalized);
-                PlayerDirectionSO.Value = heading.normalized;
-                Player.position = Target[1].position;
-                WhiteFadeIn.SetActive(true);
-                IsExitingShop.Value = false;
+                LoadColliders();
             }
         }
-
+        else
+        {
+            LoadColliders();
+        }
     }
 
-    public void EnterShop()
+    private void LoadColliders()
     {
-        IsExitingShop.Value = true;
+        if (IsExitingScene.Value != true)
+        {
+            for (int i = EnterColliders.Length - 1; i >= 0; i--)
+            {
+                EnterColliders[i].SetActive(true);
+            }
+
+            for (int k = ExitTargets.Length - 1; k >= 0; k--)
+            {
+                ExitTargets[k].gameObject.SetActive(false);
+            }
+
+            PlayerControlOverrideSO.Value = false;
+        }
+        else
+        {
+            for (int i = EnterColliders.Length - 1; i >= 0; i--)
+            {
+                EnterColliders[i].SetActive(false);
+            }
+
+            for (int k = ExitTargets.Length - 1; k >= 0; k--)
+            {
+                ExitTargets[k].gameObject.SetActive(true);
+            }
+            LoadPlayerPos();
+        }
     }
 
+    private void LoadPlayerPos()
+    {
+        PlayerControlOverrideSO.Value = true;
+        Vector3 heading = ExitTargets[ExitTargets.Length - 1].position - ExitTargets[0].position;
+        PlayerDirectionSO.Value = new Vector3(heading.normalized.x, 0, heading.normalized.z);
+
+        PlayerCurrentSpeedSO.Value = PlayerCurrentSpeedSO.InitialValue;
+
+        Player.GetComponent<NavMeshAgent>().enabled = false;
+        Player.position = ExitTargets[0].position;
+        Player.GetComponent<NavMeshAgent>().enabled = true;
+
+        WhiteFadeIn.SetActive(true);
+        IsExitingScene.Value = false;
+    }
+
+    public void EnterArea()
+    {
+        IsExitingScene.Value = true;
+    }
+
+    public void ExitArea()
+    {
+        IsExitingScene.Value = false;
+    }
 
     public void GoToTarget(int index)
     {
 
-        PlayerGraphics.localRotation = Quaternion.LookRotation(PlayerDirectionSO.Value, Vector3.up);
-        Debug.Log(PlayerDirectionSO.Value);
-        IsExitingShop.Value = true;
         PlayerControlOverrideSO.Value = true;
+        PlayerGraphics.localRotation = Quaternion.LookRotation(PlayerDirectionSO.Value, Vector3.up);
 
-        if (IsExitingShop.Value == false)
-        {
-            Time.timeScale = TimeScale;
-        } else
-        {
-            Time.timeScale = 0.75f;
-        }
-
-        Player.GetComponent<TouchControls>().enabled = false;
-        Player.GetComponent<PlayerMovement>().enabled = false;
         PlayerCurrentSpeedSO.Value = PlayerCurrentSpeedSO.InitialValue;
-  
-        PlayerExitPos.Value = Target[index].position;
 
-        Player.GetComponent<NavMeshAgent>().SetDestination(Target[index].position);
+        Player.GetComponent<NavMeshAgent>().SetDestination(ExitTargets[index].position);
         Player.GetComponent<NavMeshAgent>().updateRotation = false;
-
     }
 
     public void ResetPlayerControl()
     {
         PlayerControlOverrideSO.Value = false;
-        Player.GetComponent<TouchControls>().enabled = true;
-        Player.GetComponent<PlayerMovement>().enabled = true;
 
         Time.timeScale = 1f;
 
-        for (int i = ShopColliders.Length-1; i >= 0; i--)
+        for (int i = EnterColliders.Length-1; i >= 0; i--)
         {
-            ShopColliders[i].SetActive(true);
+            EnterColliders[i].SetActive(true);
         }
 
-        for (int k = Target.Length-1; k > 1; k--)
+        for (int k = ExitTargets.Length-1; k > 0; k--)
         {
-            Target[k].gameObject.SetActive(false);
+            ExitTargets[k].gameObject.SetActive(false);
         }
 
         Player.GetComponent<NavMeshAgent>().ResetPath();
 
         PlayerCurrentSpeedSO.Value = 0f;
-
-        IsExitingShop.Value = false;
-
     }
 
 }
