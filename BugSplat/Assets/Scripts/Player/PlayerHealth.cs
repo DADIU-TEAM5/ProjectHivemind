@@ -10,7 +10,7 @@ public class PlayerHealth : GameLoop
     public BoolVariable IsStunned;
 
     public GameObject PlayerGraphics;
-    public GameObjectList EnemyList;
+    public EnemyObjectList EnemyList;
     public GameObjectVariable HexMapParent;
 
     public BoolVariable IsInvulnerableSO;
@@ -109,7 +109,7 @@ public class PlayerHealth : GameLoop
             PlayerDiedEvent.Raise(PlayerGraphics);
             Destroy(HexMapParent.Value);
 
-            EnemyList.Items = new List<GameObject>();
+            EnemyList.Items = new List<Enemy>();
             OverallSceneWorker.LoadScene("Death Scene");
         }
     }

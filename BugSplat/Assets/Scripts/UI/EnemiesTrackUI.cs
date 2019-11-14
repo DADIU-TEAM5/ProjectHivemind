@@ -6,7 +6,7 @@ using TMPro;
 
 public class EnemiesTrackUI : GameLoop
 {
-    public GameObjectList EnemiesListSO;
+    public EnemyObjectList EnemiesListSO;
     public IntVariable EnemiesKilledSO;
     public TextMeshProUGUI EKills;
     public TextMeshProUGUI EnemiesAtStart;
@@ -24,10 +24,7 @@ public class EnemiesTrackUI : GameLoop
         EKills.text = EnemiesKilledSO.Value.ToString();
     }
 
-    public override void LoopLateUpdate(float deltaTime)
-    {
-
-    }
+    public override void LoopLateUpdate(float deltaTime) {}
 
     public void UpdateKills()
     {
