@@ -9,7 +9,6 @@ public class TierPicker : ScriptableObject
     public TierPercent[] TierPercents;
 
     public int budget;
-    public bool IsGauntlet;
 
     private float _max;
 
