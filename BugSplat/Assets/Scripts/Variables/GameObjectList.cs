@@ -7,6 +7,7 @@ using UnityEditor;
 public class GameObjectList : RuntimeSet<GameObject>
 {
     public GameEvent HasWon;
+    public GameEvent EnemySpawned;
     
 
     private void OnEnable()
@@ -27,4 +28,15 @@ public class GameObjectList : RuntimeSet<GameObject>
         }
     }
 
+    public override void Add(GameObject t)
+    {
+        if (!Items.Contains(t))
+        {
+            Items.Add(t);
+            if (EnemySpawned != null)
+                EnemySpawned.Raise();
+            else
+                Debug.LogError("No Enemy Spawn Event Found");
+        }
+    }
 }

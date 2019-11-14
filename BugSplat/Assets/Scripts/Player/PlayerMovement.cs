@@ -40,19 +40,18 @@ public class PlayerMovement : GameLoop
 
     public override void LoopUpdate(float deltaTime)
     {
-        var moving = MoveDirectionSO.Value != Vector3.zero;
-
-        //Anim.SetBool("Running", moving);
-
         if (PlayerControlOverrideSO.Value == false)
         {
+            var moving = MoveDirectionSO.Value != Vector3.zero;
+
+            //Anim.SetBool("Running", moving);
+
             if (moving)
             {
                 var lerpTime = Mathf.Min(_currentTime / LerpTime, 1f);
                 lerpTime = RampUpMovespeed.Evaluate(lerpTime);
 
                 PlayerCurrentSpeedSO.Value = lerpTime * PlayerMaxSpeedSO.Value;
-                PlayerGraphics.localRotation = Quaternion.LookRotation(PlayerDirectionSO.Value, Vector3.up);
                 PlayerDirectionSO.Value = MoveDirectionSO.Value;
 
                 _currentTime += Time.deltaTime;
@@ -64,16 +63,16 @@ public class PlayerMovement : GameLoop
             }
         }
 
+            PlayerVelocity.Value = PlayerDirectionSO.Value * PlayerCurrentSpeedSO.Value;
+            PlayerGraphics.localRotation = Quaternion.LookRotation(PlayerDirectionSO.Value, Vector3.up);
 
-        PlayerVelocity.Value = PlayerDirectionSO.Value * PlayerCurrentSpeedSO.Value;
-
-        if(_navMeshAgent.isOnNavMesh)
-        {
-            if (!_navMeshAgent.hasPath)
+            if (_navMeshAgent.isOnNavMesh)
             {
-                _navMeshAgent.Move(PlayerVelocity.Value * Time.deltaTime);
-            } 
-        }
+                if (!_navMeshAgent.hasPath)
+                {
+                    _navMeshAgent.Move(PlayerVelocity.Value * Time.deltaTime);
+                }
+            }
     }
 
 

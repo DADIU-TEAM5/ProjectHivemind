@@ -14,6 +14,8 @@ public class BodyPart : GameLoop
     public float ExplosionDistance;
     public float ExplosionHeight;
 
+    public int minValue, MaxValue;
+
     public Collider Collider;
 
     float _time = 0;
@@ -62,7 +64,7 @@ public class BodyPart : GameLoop
 
             if (distanceToPlayer < 0.2f)
             {
-                BodyParts.Value++;
+                BodyParts.Value += Random.Range(minValue,MaxValue);
                 Destroy(gameObject);
                 
                 

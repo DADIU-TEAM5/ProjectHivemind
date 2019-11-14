@@ -17,7 +17,7 @@ public class TouchControls : GameLoop
     public FloatVariable InputSwipeTapTimeSO;
     public FloatVariable InputSwipeThresholdSO; // Percentage of the screen width
     public BoolVariable PlayerControlOverrideSO;
-    public BoolVariable IsStunnedSO;
+    public BoolVariable IsStunned;
 
     public GameObjectVariable LockedTarget;
     public GameObject UICanvas;
@@ -87,7 +87,7 @@ public class TouchControls : GameLoop
     {
         if (PlayerControlOverrideSO.Value == false)
         {
-            if (IsStunnedSO.Value == false)
+            if (IsStunned.Value == false)
             {
                 // Detect Touch
                 if (Input.touchCount > 0)
@@ -145,6 +145,10 @@ public class TouchControls : GameLoop
                     }
                 }
             }
+        }
+        else
+        {
+            ClearInputUI();
         }
     }
 
@@ -250,9 +254,7 @@ public class TouchControls : GameLoop
 
     private void EndMove(Vector3 touchPosition)
     {
-        // UI Debug Stuff
-        Object.Destroy(_uiRecord);
-        Object.Destroy(_uiCurrent);
+        ClearInputUI();
 
         // Check if TAP has happened
         if (Vector3.Distance(_currentInputPosition[_inputFrames], _recordedInputPosition) < _runtimeInputMin)
@@ -283,5 +285,19 @@ public class TouchControls : GameLoop
         _recordPosition = true;
         _inputFrames = Mathf.RoundToInt(InputSwipeTapTimeSO.Value);
         _currentInputPosition = new Vector3[_inputFrames + 1];
+    }
+
+    private void ClearInputUI()
+    {
+        // UI Debug Stuff
+        if (_uiRecord != null)
+        {
+            Destroy(_uiRecord);
+        }
+
+        if (_uiCurrent != null)
+        {
+            Destroy(_uiCurrent);
+        }
     }
 }
