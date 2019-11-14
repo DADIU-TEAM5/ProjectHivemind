@@ -172,9 +172,13 @@ public abstract class Enemy : GameLoop
     public void TakeDamage(float damage)
     {
         // print(name + " took damage "+ damage);
+
+
         _currentHealth -= damage;
         UpdateHealthBar(_currentHealth);
         TakeDamageEvent.Raise(this.gameObject);
+        TakeDamageBehaviour(damage);
+
 
         if (_currentHealth <= 0)
         {
@@ -204,6 +208,8 @@ public abstract class Enemy : GameLoop
             Destroy(gameObject);
         }
     }
+
+    public abstract void TakeDamageBehaviour(float damage);
 
 
 
@@ -560,7 +566,7 @@ public abstract class Enemy : GameLoop
 
     void DetectAllies()
     {
-        Collider[] potentialAllies = Physics.OverlapSphere(transform.position, stats.SpotDistance, LayerMask.GetMask("Enemy"));
+        Collider[] potentialAllies = Physics.OverlapSphere(transform.position, stats.AllySpotDistance, LayerMask.GetMask("Enemy"));
 
         if (potentialAllies.Length > 0)
         {

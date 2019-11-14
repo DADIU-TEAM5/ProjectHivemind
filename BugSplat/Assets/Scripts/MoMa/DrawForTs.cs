@@ -16,15 +16,18 @@ public class DrawForTs : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
 
-        for (int i = 0; i < animationCapsules.FrameCapsules[result.CapsuleNum].TrajectoryHistory.Length; i++)
+        if (animationCapsules != null)
         {
-            Gizmos.DrawSphere(transformToShowFrom.TransformVector(animationCapsules.FrameCapsules[result.CapsuleNum].TrajectoryHistory[i]) + transformToShowFrom.position, 0.1f);
-        }
+            for (int i = 0; i < animationCapsules.FrameCapsules[result.CapsuleNum].TrajectoryHistory.Length; i++)
+            {
+                Gizmos.DrawSphere(transformToShowFrom.TransformVector(animationCapsules.FrameCapsules[result.CapsuleNum].TrajectoryHistory[i]) + transformToShowFrom.position, 0.1f);
+            }
 
-        Gizmos.color = Color.green;
-        for (int i = 0; i < animationCapsules.FrameCapsules[result.CapsuleNum].TrajectoryFuture.Length; i++)
-        {
-            Gizmos.DrawSphere(transformToShowFrom.TransformVector(animationCapsules.FrameCapsules[result.CapsuleNum].TrajectoryFuture[i]) + transformToShowFrom.position, 0.1f);
+            Gizmos.color = Color.green;
+            for (int i = 0; i < animationCapsules.FrameCapsules[result.CapsuleNum].TrajectoryFuture.Length; i++)
+            {
+                Gizmos.DrawSphere(transformToShowFrom.TransformVector(animationCapsules.FrameCapsules[result.CapsuleNum].TrajectoryFuture[i]) + transformToShowFrom.position, 0.1f);
+            }
         }
     }
 }

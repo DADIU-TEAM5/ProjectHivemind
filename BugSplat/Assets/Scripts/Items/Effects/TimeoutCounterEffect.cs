@@ -19,8 +19,8 @@ public class TimeoutCounterEffect : CounterEffect
     public override void Trigger(GameObject target = null) {
         base.Trigger();
 
-        CoroutineBoy.StopCoroutine("Timeout");
-        CoroutineBoy.StartCoroutine("Timeout");
+        CoroutineBoy.StopAllCoroutines();
+        CoroutineBoy.StartCoroutine(Timeout());
     }
 
     private IEnumerator Timeout() {

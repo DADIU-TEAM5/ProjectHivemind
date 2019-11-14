@@ -11,6 +11,9 @@ public class EnemyStats : ScriptableObject
     public float AttackRange;
     public float AttackAngle;
     public float SpotDistance;
+    public float AllySpotDistance;
+
+
     public float AttackChargeUpTime;
     public float AttackDamage;
 
