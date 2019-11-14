@@ -6,7 +6,7 @@ public class UnAggroManager : GameLoop
 {
     //Use A slower GameLoop for better performance;
     public AggroCounter AC;
-    public GameObjectList EnemyList;
+    public EnemyObjectList EnemyList;
     public UpdateManager UM;
     public IntVariable TimeBeforeResetAggro;
     
@@ -26,16 +26,15 @@ public class UnAggroManager : GameLoop
     public override void LoopUpdate(float deltaTime)
     {
         int i = 0;
-       foreach(GameObject go in EnemyList.Items)
+       foreach (var enemy in EnemyList.Items)
         {
             if (countdownTimers.Count <= i)
             {
                 countdownTimers.Add(TimeBeforeResetAggro.Value);
             }
 
-            Enemy enemy = go.GetComponent<Enemy>(); 
             
-            if(enemy !=null && enemy.PlayerDetected)
+            if(enemy != null && enemy.PlayerDetected)
             {
 
                 if (!enemy.IsVisible())
