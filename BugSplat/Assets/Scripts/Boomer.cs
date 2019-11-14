@@ -237,28 +237,54 @@ public class Boomer : Enemy
     void MoveTowardsThePlayer(float deltaTime)
     {
 
-        _angle += deltaTime *_boomerStats.OrbitSpeed;
+        if (_attackCooldown <= 0)
+        {
+            if (Vector3.Distance(transform.position, PlayerTransform.position) > _boomerStats.TargetDistanceToPlayer)
+            {
+                if (NavMeshAgent.destination != PlayerTransform.position)
+                {
+                    NavMeshAgent.destination = PlayerTransform.position;
 
-        Vector3 vectorToRotate = Vector3.forward *_boomerStats.OrbitRadius;
-        Vector3 rotatedVector = Vector3.zero;
+                }
+            }
+            else
+            {
+                if (NavMeshAgent.destination != transform.position)
+                {
+                    NavMeshAgent.destination = transform.position;
 
-        
-        float s = Mathf.Sin(_angle);
-        float c = Mathf.Cos(_angle);
+                }
 
-        rotatedVector.x = vectorToRotate.x * c - vectorToRotate.z * s;
-        rotatedVector.z = vectorToRotate.x * s + vectorToRotate.z * c;
+            }
+        }
+        else
+        {
+
+            _angle += deltaTime * _boomerStats.OrbitSpeed;
+
+            Vector3 vectorToRotate = Vector3.forward * _boomerStats.OrbitRadius;
+            Vector3 rotatedVector = Vector3.zero;
+
+
+            float s = Mathf.Sin(_angle);
+            float c = Mathf.Cos(_angle);
+
+            rotatedVector.x = vectorToRotate.x * c - vectorToRotate.z * s;
+            rotatedVector.z = vectorToRotate.x * s + vectorToRotate.z * c;
 
 
 
-        rotatedVector += PlayerTransform.position;
+            rotatedVector += PlayerTransform.position;
 
-        rotatedVector.y = 0;
+            rotatedVector.y = 0;
 
 
-        if (NavMeshAgent.destination != PlayerTransform.position) {
-            NavMeshAgent.destination = rotatedVector;
+            if (NavMeshAgent.destination != rotatedVector)
+            {
+                NavMeshAgent.destination = rotatedVector;
 
+
+            }
 
         }
         
