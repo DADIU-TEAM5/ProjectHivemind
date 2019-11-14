@@ -128,6 +128,11 @@ public class TankBeetle : Enemy
     {
       return   Vector3.Distance(transform.position, _chargeEndpos);
     }
+
+    public override void TakeDamageBehaviour(float damage)
+    {
+    }
+
     void Attack(float deltaTime)
     {
 
