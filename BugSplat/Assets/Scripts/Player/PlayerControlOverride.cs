@@ -85,8 +85,10 @@ public class PlayerControlOverride : MonoBehaviour
         Player.position = ExitTargets[0].position;
         Player.GetComponent<NavMeshAgent>().enabled = true;
 
-        WhiteFadeIn.SetActive(true);
-        ExitArea();
+        if (WhiteFadeIn != null)
+        {
+            WhiteFadeIn.SetActive(true);
+        }
     }
 
     public void EnterArea()
@@ -130,6 +132,8 @@ public class PlayerControlOverride : MonoBehaviour
         Player.GetComponent<NavMeshAgent>().ResetPath();
 
         PlayerCurrentSpeedSO.Value = 0f;
+
+        ExitArea();
     }
 
 }

@@ -16,7 +16,7 @@ public class MapGenerator : MonoBehaviour
 
     public ShopLevels Levels;
 
-    //public bool IsGauntlet;
+    public bool IsGauntlet;
 
     public GameObject[] Hexagons;
 
@@ -52,7 +52,7 @@ public class MapGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (Levels.LevelTierPicker[CurrentLevel.Value].IsGauntlet)
+        if (IsGauntlet)
         {
             Hexagons = GauntletHexagons;
             CenterHexagons = GauntletCenterHexagons;
