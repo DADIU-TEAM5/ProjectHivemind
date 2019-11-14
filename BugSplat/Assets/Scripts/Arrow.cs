@@ -4,41 +4,30 @@ using UnityEngine;
 
 public class Arrow : GameLoop
 {
-
     public GameObjectList EnemyList;
     public GameObjectVariable VictoryObject;
-
 
     public BoolVariable NoVisibleEnemies;
 
     public Enemy[] _enemyScripts;
-    
 
 
-    GameObject _arrow;
-    LineRenderer _arrowRenderer;
+    public GameObject ArrowPrefab;
+
+    private GameObject _arrow;
 
     private void Start()
     {
         _enemyScripts = new Enemy[0];
 
-        _arrow = new GameObject();
+        _arrow = Instantiate(ArrowPrefab);
         _arrow.transform.position = transform.position;
         _arrow.transform.rotation = transform.rotation;
 
-        _arrow.AddComponent<LineRenderer>();
-        _arrowRenderer = _arrow.GetComponent<LineRenderer>();
-
-        _arrowRenderer.material.color = new Color(0, 255, 255);
-        //_arrow.SetActive(false);
-
-        DrawArrow();
+        _arrow.gameObject.SetActive(true);
     }
 
-    public override void LoopLateUpdate(float deltaTime)
-    {
-        
-    }
+    public override void LoopLateUpdate(float deltaTime) {}
 
     public override void LoopUpdate(float deltaTime)
     {
@@ -47,6 +36,7 @@ public class Arrow : GameLoop
             if (EnemyList.Items.Count != _enemyScripts.Length)
             {
                 _enemyScripts = new Enemy[EnemyList.Items.Count];
+
                 for (int i = 0; i < EnemyList.Items.Count; i++)
                 {
                     _enemyScripts[i] = EnemyList.Items[i].GetComponent<Enemy>();
@@ -64,8 +54,6 @@ public class Arrow : GameLoop
                 }
 
             }
-
-
 
             if (NoVisibleEnemies.Value)
             {
@@ -93,15 +81,11 @@ public class Arrow : GameLoop
                 Vector3 enemyPos = EnemyList.Items[index].transform.position;
                 enemyPos.y = _arrow.transform.position.y;
                 _arrow.transform.LookAt(enemyPos);
-
-
-
                 //_arrow.transform.Rotate(0, 20 * Time.deltaTime, 0);
-                DrawArrow();
             }
             else
             {
-                if (_arrow.activeSelf == true)
+                if (_arrow.activeSelf)
                     _arrow.SetActive(false);
             }
 
@@ -120,44 +104,7 @@ public class Arrow : GameLoop
                 _arrow.transform.LookAt(tempVictory);
             }
 
-
-
             //_arrow.transform.Rotate(0, 20 * Time.deltaTime, 0);
-            DrawArrow();
         }
     }
-
-    
-
-    void DrawArrow()
-    {
-        Vector3[] pointsForArrow = new Vector3[6];
-        _arrowRenderer.positionCount = 6;
-
-        pointsForArrow[0] = _arrow.transform.TransformPoint(Vector3.back);
-
-
-
-
-
-        pointsForArrow[1] = _arrow.transform.TransformPoint(Vector3.forward *1.3f);
-
-        pointsForArrow[2] = _arrow.transform.TransformPoint(Vector3.forward*.7f + Vector3.right*.5f);
-
-        pointsForArrow[3] = _arrow.transform.TransformPoint(Vector3.forward * 1.3f);
-
-        pointsForArrow[4] = _arrow.transform.TransformPoint(Vector3.forward * .7f + Vector3.left * .5f);
-
-        pointsForArrow[5] = _arrow.transform.TransformPoint(Vector3.forward * 1.3f);
-
-
-
-
-
-        _arrowRenderer.SetPositions(pointsForArrow);
-        _arrowRenderer.widthMultiplier = 0.1f;
-
-        //_coneRenderer.loop = true;
-    }
-
 }

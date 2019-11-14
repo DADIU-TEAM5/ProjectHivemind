@@ -14,9 +14,10 @@ public class ShopAbilitySlot : ShopSlot
 
     public override int GetPrice() => Info?.Price ?? 0;
 
-    public override void OnPurchase()
+    public override bool OnPurchase()
     {
         Ability?.Trigger();
+        return true;
     }
 
     public override void Init()
