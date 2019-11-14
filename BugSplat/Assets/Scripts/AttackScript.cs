@@ -77,9 +77,7 @@ public class AttackScript : GameLoop
         if (!_canAttack) return;
         StartCoroutine(StartAttackCooldown());
 
-        if (PlayerDirectionSO.Value == Vector3.zero)
-            PlayerDirectionSO.Value = transform.forward;
-
+        PlayerDirectionSO.Value =  PlayerGraphics.forward;
 
         LockOnToNearestTarget();
         if (_lockedOntoTarget)

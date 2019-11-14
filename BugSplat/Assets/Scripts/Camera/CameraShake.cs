@@ -5,12 +5,6 @@ using Cinemachine;
 
 public class CameraShake : MonoBehaviour
 {
-    public float ShakeDuration;
-    public float ShakeAmplitude;
-    public float ShakeFrequency;
-
-    private float _shakeElapsedTime;
-
     public CinemachineVirtualCamera VirtualCam;
     private CinemachineBasicMultiChannelPerlin _noise;
     
@@ -23,15 +17,15 @@ public class CameraShake : MonoBehaviour
         }
     }
 
-    public void AddCamNoise()
+    public void AddCamNoise(CameraShakeArguments shakeArguments)
     {
         if (VirtualCam != null)
         {
-            _noise.m_AmplitudeGain = ShakeAmplitude;
-            _noise.m_FrequencyGain = ShakeFrequency;
+            _noise.m_AmplitudeGain = shakeArguments.ShakeAmplitude;
+            _noise.m_FrequencyGain = shakeArguments.ShakeFrequency;
         }
 
-        StartCoroutine(RunCamNoise());
+        StartCoroutine(RunCamNoise(shakeArguments.ShakeDuration));
 
     }
 
@@ -44,11 +38,11 @@ public class CameraShake : MonoBehaviour
         }
     }
 
-    private IEnumerator RunCamNoise()
+    private IEnumerator RunCamNoise(float shakeDuration)
     {
         while(true)
         {
-            yield return new WaitForSeconds(ShakeDuration);
+            yield return new WaitForSeconds(shakeDuration);
             StopCamNoise();
         }
     }
