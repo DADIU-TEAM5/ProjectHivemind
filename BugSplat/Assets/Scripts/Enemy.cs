@@ -172,9 +172,13 @@ public abstract class Enemy : GameLoop
     public void TakeDamage(float damage)
     {
         // print(name + " took damage "+ damage);
+
+
         _currentHealth -= damage;
         UpdateHealthBar(_currentHealth);
         TakeDamageEvent.Raise(this.gameObject);
+        TakeDamageBehaviour(damage);
+
 
         if (_currentHealth <= 0)
         {
@@ -204,6 +208,8 @@ public abstract class Enemy : GameLoop
             Destroy(gameObject);
         }
     }
+
+    public abstract void TakeDamageBehaviour(float damage);
 
 
 
