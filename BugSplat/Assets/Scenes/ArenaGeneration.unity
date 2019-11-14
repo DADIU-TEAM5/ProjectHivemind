@@ -8,9 +8,8 @@ OcclusionCullingSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
-  m_SceneGUID: 890d86ec7f8170b48b42dc62ad6099ba
-  m_OcclusionCullingData: {fileID: 36300000, guid: 4acdd7df6af66094ca5a3119746518da,
-    type: 2}
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -260,7 +259,6 @@ MonoBehaviour:
   Rings: 1
   CurrentLevel: {fileID: 11400000, guid: 7ccab12c744825340b00517feda72de3, type: 2}
   Levels: {fileID: 11400000, guid: b7290c95468148a4b9174bd4586fecaf, type: 2}
-  IsGauntlet: 0
   Hexagons:
   - {fileID: 3864221066357608551, guid: fb84adfbe954533458b4f754460b2364, type: 3}
   - {fileID: 3864221066357608551, guid: 88e42e3f72d435141bd3b83045b6d895, type: 3}
@@ -280,10 +278,8 @@ MonoBehaviour:
   - {fileID: 3864221066357608551, guid: 07060bc795e5b04439f7e6b38f730219, type: 3}
   - {fileID: 3864221066357608551, guid: 107381802e7740a429ce746aa1607dfa, type: 3}
   - {fileID: 3864221066357608551, guid: fc7352a8080eccd418aa4595cbf7a9d7, type: 3}
-  GauntletHexagons: []
   CenterHexagons:
   - {fileID: 3864221066357608551, guid: e0f2bb12f9023d049bf1f1de4df35ac0, type: 3}
-  GauntletCenterHexagons: []
   hexmapParent: {fileID: 11400000, guid: d6a385588fc3812449772760c0c71603, type: 2}
   BaseHexagon: {fileID: 1822204861827709847, guid: 907a204f5c6e94e4a84aae40878ab6d1,
     type: 3}
@@ -512,7 +508,7 @@ PrefabInstance:
     - target: {fileID: 2206537851693025998, guid: d434f7c4d0a502f44b5795bcfc83634f,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2206537851693025994, guid: d434f7c4d0a502f44b5795bcfc83634f,
         type: 3}
@@ -853,16 +849,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5788987755461925658, guid: ce93dae90c32b234eb5aa37ebcaa5582,
-        type: 3}
-      propertyPath: m_Name
-      value: PlayerGameObject
-      objectReference: {fileID: 0}
-    - target: {fileID: 5788987755461925658, guid: ce93dae90c32b234eb5aa37ebcaa5582,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 5788987755461925660, guid: ce93dae90c32b234eb5aa37ebcaa5582,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -918,33 +904,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2904836501674625065, guid: ce93dae90c32b234eb5aa37ebcaa5582,
+    - target: {fileID: 5788987755461925658, guid: ce93dae90c32b234eb5aa37ebcaa5582,
+        type: 3}
+      propertyPath: m_Name
+      value: PlayerGameObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 5788987755461925658, guid: ce93dae90c32b234eb5aa37ebcaa5582,
         type: 3}
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 2904836501674625065, guid: ce93dae90c32b234eb5aa37ebcaa5582,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 4996299851507640039, guid: ce93dae90c32b234eb5aa37ebcaa5582,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5788987755461925659, guid: ce93dae90c32b234eb5aa37ebcaa5582,
-        type: 3}
-      propertyPath: PlayerVelocity
-      value: 
-      objectReference: {fileID: 11400000, guid: d1f4ccfac4a47fb4da89d998092775b8,
-        type: 2}
-    - target: {fileID: 5788987755461925659, guid: ce93dae90c32b234eb5aa37ebcaa5582,
-        type: 3}
-      propertyPath: PlayerVelocity
-      value: 
-      objectReference: {fileID: 11400000, guid: d1f4ccfac4a47fb4da89d998092775b8,
-        type: 2}
     - target: {fileID: 5788987755461925661, guid: ce93dae90c32b234eb5aa37ebcaa5582,
         type: 3}
       propertyPath: PlayerCam
@@ -966,11 +935,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: e206e2a2d0299224e8e9cfcc6ab47f33,
         type: 2}
-    - target: {fileID: 5788987755461925632, guid: ce93dae90c32b234eb5aa37ebcaa5582,
+    - target: {fileID: 4996299851507640039, guid: ce93dae90c32b234eb5aa37ebcaa5582,
         type: 3}
-      propertyPath: DashPower
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5788987755461925659, guid: ce93dae90c32b234eb5aa37ebcaa5582,
+        type: 3}
+      propertyPath: PlayerVelocity
       value: 
-      objectReference: {fileID: 11400000, guid: 4deec6bed9728f54682a860cf51f027d,
+      objectReference: {fileID: 11400000, guid: d1f4ccfac4a47fb4da89d998092775b8,
+        type: 2}
+    - target: {fileID: 5788987755461925659, guid: ce93dae90c32b234eb5aa37ebcaa5582,
+        type: 3}
+      propertyPath: PlayerVelocity
+      value: 
+      objectReference: {fileID: 11400000, guid: d1f4ccfac4a47fb4da89d998092775b8,
         type: 2}
     - target: {fileID: 5788987755461925632, guid: ce93dae90c32b234eb5aa37ebcaa5582,
         type: 3}
@@ -978,6 +958,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 4deec6bed9728f54682a860cf51f027d,
         type: 2}
+    - target: {fileID: 5788987755461925632, guid: ce93dae90c32b234eb5aa37ebcaa5582,
+        type: 3}
+      propertyPath: DashPower
+      value: 
+      objectReference: {fileID: 11400000, guid: 4deec6bed9728f54682a860cf51f027d,
+        type: 2}
+    - target: {fileID: 8831838245759697901, guid: ce93dae90c32b234eb5aa37ebcaa5582,
+        type: 3}
+      propertyPath: ArrowPrefab
+      value: 
+      objectReference: {fileID: 2056091490981271736, guid: 0691285fd6effa249819a51c812b84a0,
+        type: 3}
+    - target: {fileID: 2904836501674625065, guid: ce93dae90c32b234eb5aa37ebcaa5582,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904836501674625065, guid: ce93dae90c32b234eb5aa37ebcaa5582,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 5012523203288252738, guid: ce93dae90c32b234eb5aa37ebcaa5582,
         type: 3}
       propertyPath: AutoAttackRange
@@ -996,12 +998,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: f105a26415b393b4294e03ed33f33397,
         type: 2}
-    - target: {fileID: 8831838245759697901, guid: ce93dae90c32b234eb5aa37ebcaa5582,
-        type: 3}
-      propertyPath: ArrowPrefab
-      value: 
-      objectReference: {fileID: 2056091490981271736, guid: 0691285fd6effa249819a51c812b84a0,
-        type: 3}
     - target: {fileID: 8596601525046920592, guid: ce93dae90c32b234eb5aa37ebcaa5582,
         type: 3}
       propertyPath: AutoAttackRange
@@ -1288,11 +1284,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: NewHP_InGameHUD
       objectReference: {fileID: 0}
-    - target: {fileID: 1394633742864131926, guid: a6f8d4358568a544faccb1453c14230f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6607401371647953319, guid: a6f8d4358568a544faccb1453c14230f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1477,16 +1468,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6610424809638490254, guid: a6f8d4358568a544faccb1453c14230f,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6610424809342978174, guid: a6f8d4358568a544faccb1453c14230f,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6f8d4358568a544faccb1453c14230f, type: 3}
@@ -2125,11 +2106,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StaminaController
-      objectReference: {fileID: 0}
-    - target: {fileID: 5369742857715096723, guid: f483d104543ebb14780e656246b8dbf3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5369742857715096734, guid: f483d104543ebb14780e656246b8dbf3,
         type: 3}
