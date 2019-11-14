@@ -10,6 +10,9 @@ public class ParticleController : MonoBehaviour
     [SerializeField]
     private UnityEvent PlayEvent;
 
+    [SerializeField]
+    private UnityEvent StopEvent;
+
     public void MoveTo(GameObject gameObject) {
         var actualGO = gameObject.transform.GetChild(0);
         this.transform.position = new Vector3(actualGO.position.x, 0, actualGO.position.z);
@@ -18,6 +21,10 @@ public class ParticleController : MonoBehaviour
 
     public void Play() {
         PlayEvent?.Invoke();
+    }
+
+    public void Stop() {
+        StopEvent?.Invoke();
     }
 
     public void InstantiateAfterParts() {
