@@ -6,6 +6,7 @@ using UnityEditor;
 
 
 [CustomEditor(typeof(GameLoopParticipant))]
+[CanEditMultipleObjects]
 public class GameLoopEditor : Editor
 {
 
