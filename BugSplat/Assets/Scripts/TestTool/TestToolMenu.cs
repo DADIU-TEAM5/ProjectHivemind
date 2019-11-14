@@ -7,18 +7,24 @@ public class TestToolMenu : MonoBehaviour
 {
     //List or Array?
 
-    public bool ResetValuesOnPlay = false; 
+    public bool ResetValuesOnPlay = false;
     public List<BoolVariable> Boolvariables = new List<BoolVariable>();
 
     public List<StringVariable> SceneVariables = new List<StringVariable>();
 
     public List<FloatVariable> Floatvariables = new List<FloatVariable>();
 
+    public List<IntVariable> IntVariables = new List<IntVariable>();
+
+    public List<GameEvent> GameEvents = new List<GameEvent>();
+
     public GameObject ScrollView;
 
     public GameObject Togglebutton;
+    public GameObject EventButton;
     public GameObject ScenButton;
     public GameObject FloatSlider;
+    public GameObject IntSlider;
     public Button TB;
 
     public void CreateUIElements()
@@ -48,6 +54,36 @@ public class TestToolMenu : MonoBehaviour
 
             }
         }
+
+        if (IntVariables.Count > 0)
+        {
+            for (int i = 0; i < IntVariables.Count; i++)
+            {
+                GameObject newGO = (GameObject)GameObject.Instantiate(IntSlider);
+                newGO.transform.SetParent(ScrollView.transform, false);
+                newGO.SetActive(true);
+
+                TestSliderScript intSlider = newGO.GetComponent<TestSliderScript>();
+                intSlider.Setup(IntVariables[i], IntVariables[i].Min, IntVariables[i].Max);
+
+            }
+        }
+
+        if (GameEvents.Count > 0)
+        {
+            for (int i = 0; i < GameEvents.Count; i++)
+            {
+                GameObject newGO = (GameObject)GameObject.Instantiate(EventButton);
+                newGO.transform.SetParent(ScrollView.transform, false);
+                newGO.SetActive(true);
+
+                TestEventButton eventButton = newGO.GetComponent<TestEventButton>();
+                eventButton.Setup(GameEvents[i]);
+
+            }
+
+        }
+
         for (int i = 0; i < SceneVariables.Count; i++)
         {
             GameObject newGO = (GameObject)GameObject.Instantiate(ScenButton);
@@ -66,7 +102,7 @@ public class TestToolMenu : MonoBehaviour
             ResetFloatValues();
 
         CreateUIElements();
-       
+
     }
 
     private void ResetFloatValues()

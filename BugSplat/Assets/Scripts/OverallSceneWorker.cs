@@ -5,10 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class OverallSceneWorker : MonoBehaviour
 {
-    
-
-    
-
     public static void LoadScene(string sceneName)
     {
         //Scene currentScene = SceneManager.GetActiveScene();
@@ -19,7 +15,4 @@ public class OverallSceneWorker : MonoBehaviour
 
 
     }
-
-
-
 }

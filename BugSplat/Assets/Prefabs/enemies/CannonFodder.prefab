@@ -173,18 +173,18 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
@@ -218,6 +218,9 @@ MonoBehaviour:
   Outline: {fileID: 0}
   OutlineRenderer: {fileID: 0}
   OutlineMesh: {fileID: 0}
+  ConeInitColor: {r: 0, g: 1, b: 0, a: 1}
+  ConeEndColor: {r: 1, g: 0, b: 0, a: 1}
+  ConeEmptyColor: {r: 0.2, g: 0.2, b: 0.2, a: 0.101960786}
   AggroEvent: {fileID: 11400000, guid: be12647e984d140b9be0d4e76d9f2632, type: 2}
   DefaultAggroEvent: {fileID: 11400000, guid: 63ffb2b788fa9bd4f9d9b37ee11c6c82, type: 2}
   TakeDamageEvent: {fileID: 11400000, guid: 46b539ed7fe3a4045bef6d3d79362c8a, type: 2}
@@ -227,6 +230,7 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   IsAlly: 0
   _currentHealth: 0
+  _stunTime: 0
   AttackEvent: {fileID: 11400000, guid: 081b4c0dd37d842fd903003d45719da7, type: 2}
   AttackChargingEvent: {fileID: 11400000, guid: d32ebc9c33fbd2146b3e615d158c9a87,
     type: 2}
@@ -322,26 +326,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4176355153426757476}
     m_Modifications:
-    - target: {fileID: 4254999180625798128, guid: 94e04ac382935fb4798bf07b956b2258,
-        type: 3}
-      propertyPath: ExplosionDistance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4254999180625798128, guid: 94e04ac382935fb4798bf07b956b2258,
-        type: 3}
-      propertyPath: ExplosionHeight
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4254999180625798128, guid: 94e04ac382935fb4798bf07b956b2258,
-        type: 3}
-      propertyPath: ExplosionDistance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4254999180625798128, guid: 94e04ac382935fb4798bf07b956b2258,
-        type: 3}
-      propertyPath: ExplosionHeight
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 4360065284092291422, guid: 94e04ac382935fb4798bf07b956b2258,
         type: 3}
       propertyPath: m_Name
@@ -351,86 +335,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1300356337438608342, guid: 94e04ac382935fb4798bf07b956b2258,
-        type: 3}
-      propertyPath: ExplosionDistance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1300356337438608342, guid: 94e04ac382935fb4798bf07b956b2258,
-        type: 3}
-      propertyPath: ExplosionHeight
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 1300356337438608342, guid: 94e04ac382935fb4798bf07b956b2258,
-        type: 3}
-      propertyPath: ExplosionDistance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1300356337438608342, guid: 94e04ac382935fb4798bf07b956b2258,
-        type: 3}
-      propertyPath: ExplosionHeight
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 1335007028889640082, guid: 94e04ac382935fb4798bf07b956b2258,
-        type: 3}
-      propertyPath: ExplosionDistance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1335007028889640082, guid: 94e04ac382935fb4798bf07b956b2258,
-        type: 3}
-      propertyPath: ExplosionHeight
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 1335007028889640082, guid: 94e04ac382935fb4798bf07b956b2258,
-        type: 3}
-      propertyPath: ExplosionDistance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1335007028889640082, guid: 94e04ac382935fb4798bf07b956b2258,
-        type: 3}
-      propertyPath: ExplosionHeight
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 2262142827765078232, guid: 94e04ac382935fb4798bf07b956b2258,
-        type: 3}
-      propertyPath: ExplosionDistance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2262142827765078232, guid: 94e04ac382935fb4798bf07b956b2258,
-        type: 3}
-      propertyPath: ExplosionHeight
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 2262142827765078232, guid: 94e04ac382935fb4798bf07b956b2258,
-        type: 3}
-      propertyPath: ExplosionDistance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2262142827765078232, guid: 94e04ac382935fb4798bf07b956b2258,
-        type: 3}
-      propertyPath: ExplosionHeight
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 220056217369275403, guid: 94e04ac382935fb4798bf07b956b2258,
-        type: 3}
-      propertyPath: ExplosionDistance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 220056217369275403, guid: 94e04ac382935fb4798bf07b956b2258,
-        type: 3}
-      propertyPath: ExplosionHeight
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 220056217369275403, guid: 94e04ac382935fb4798bf07b956b2258,
-        type: 3}
-      propertyPath: ExplosionDistance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 220056217369275403, guid: 94e04ac382935fb4798bf07b956b2258,
-        type: 3}
-      propertyPath: ExplosionHeight
-      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 781736955833719629, guid: 94e04ac382935fb4798bf07b956b2258,
         type: 3}
@@ -492,6 +396,26 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8c5680d92968406448ad20273c09331b, type: 2}
+    - target: {fileID: 4254999180625798128, guid: 94e04ac382935fb4798bf07b956b2258,
+        type: 3}
+      propertyPath: ExplosionDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4254999180625798128, guid: 94e04ac382935fb4798bf07b956b2258,
+        type: 3}
+      propertyPath: ExplosionHeight
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4254999180625798128, guid: 94e04ac382935fb4798bf07b956b2258,
+        type: 3}
+      propertyPath: ExplosionDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4254999180625798128, guid: 94e04ac382935fb4798bf07b956b2258,
+        type: 3}
+      propertyPath: ExplosionHeight
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 2550092306675443478, guid: 94e04ac382935fb4798bf07b956b2258,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -507,6 +431,86 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8c5680d92968406448ad20273c09331b, type: 2}
+    - target: {fileID: 1300356337438608342, guid: 94e04ac382935fb4798bf07b956b2258,
+        type: 3}
+      propertyPath: ExplosionDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300356337438608342, guid: 94e04ac382935fb4798bf07b956b2258,
+        type: 3}
+      propertyPath: ExplosionHeight
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300356337438608342, guid: 94e04ac382935fb4798bf07b956b2258,
+        type: 3}
+      propertyPath: ExplosionDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300356337438608342, guid: 94e04ac382935fb4798bf07b956b2258,
+        type: 3}
+      propertyPath: ExplosionHeight
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1335007028889640082, guid: 94e04ac382935fb4798bf07b956b2258,
+        type: 3}
+      propertyPath: ExplosionDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1335007028889640082, guid: 94e04ac382935fb4798bf07b956b2258,
+        type: 3}
+      propertyPath: ExplosionHeight
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1335007028889640082, guid: 94e04ac382935fb4798bf07b956b2258,
+        type: 3}
+      propertyPath: ExplosionDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1335007028889640082, guid: 94e04ac382935fb4798bf07b956b2258,
+        type: 3}
+      propertyPath: ExplosionHeight
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262142827765078232, guid: 94e04ac382935fb4798bf07b956b2258,
+        type: 3}
+      propertyPath: ExplosionDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262142827765078232, guid: 94e04ac382935fb4798bf07b956b2258,
+        type: 3}
+      propertyPath: ExplosionHeight
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262142827765078232, guid: 94e04ac382935fb4798bf07b956b2258,
+        type: 3}
+      propertyPath: ExplosionDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262142827765078232, guid: 94e04ac382935fb4798bf07b956b2258,
+        type: 3}
+      propertyPath: ExplosionHeight
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 220056217369275403, guid: 94e04ac382935fb4798bf07b956b2258,
+        type: 3}
+      propertyPath: ExplosionDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 220056217369275403, guid: 94e04ac382935fb4798bf07b956b2258,
+        type: 3}
+      propertyPath: ExplosionHeight
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 220056217369275403, guid: 94e04ac382935fb4798bf07b956b2258,
+        type: 3}
+      propertyPath: ExplosionDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 220056217369275403, guid: 94e04ac382935fb4798bf07b956b2258,
+        type: 3}
+      propertyPath: ExplosionHeight
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 453873199581288204, guid: 94e04ac382935fb4798bf07b956b2258,
         type: 3}
       propertyPath: ExplosionDistance
@@ -792,6 +796,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CannonFodderRiggged
+      objectReference: {fileID: 0}
+    - target: {fileID: 8529984694075212352, guid: ef6a80b28bc6bc74399f76d964ebd552,
+        type: 3}
+      propertyPath: m_Name
+      value: Graphics
       objectReference: {fileID: 0}
     - target: {fileID: 2616942745638807166, guid: ef6a80b28bc6bc74399f76d964ebd552,
         type: 3}

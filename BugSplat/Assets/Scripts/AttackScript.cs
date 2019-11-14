@@ -14,7 +14,6 @@ public class AttackScript : GameLoop
     public FloatVariable AttackCooldown;
 
     public Vector3Variable PlayerDirectionSO;
-    public FloatVariable PlayerCurrentSpeedSO;
 
     public Transform PlayerGraphics;
     public GameObjectVariable LockedTarget;

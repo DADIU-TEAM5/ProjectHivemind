@@ -5,105 +5,80 @@ using UnityEngine.AI;
 
 public class PlayerMovement : GameLoop
 {
-
     public Animator Anim;
 
     public Transform PlayerGraphics;
+
+    public Vector3Variable MoveDirectionSO;
     public Vector3Variable PlayerDirectionSO;
     public FloatVariable PlayerCurrentSpeedSO;
-    public Vector3Variable PlayerVelocitySO;
-    public FloatVariable PlayerAccelerationSO;
-    public BoolVariable isDodging;
+    public FloatVariable PlayerMaxSpeedSO;
     public Vector3Variable PlayerPosition;
-    public GameObject CameraTarget;
-    public FloatVariable CameraLookAheadDistanceSO;
+    public Vector3Variable PlayerVelocity;
+
+    public AnimationCurve RampUpMovespeed;
 
 
     NavMeshAgent _navMeshAgent;
 
-    private float _lerpTime = 0f;
-    private Vector3 _velocity;
+    [SerializeField]
+    private float LerpTime = 1f;
     private bool _isMoving;
     private float _currentTime;
+    public BoolVariable PlayerControlOverrideSO;
 
     Rigidbody _rigidbody;
+
     private void Start()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _rigidbody = GetComponent<Rigidbody>();
-    }
 
+        PlayerCurrentSpeedSO.Value = 0;
+        _currentTime = 0f;
+    }
 
     public override void LoopUpdate(float deltaTime)
     {
-        // Lerp from 0 to 1 on Normal movement
-        if (PlayerCurrentSpeedSO.Value != 0)
+        if (PlayerControlOverrideSO.Value == false)
         {
-            if (_isMoving == false)
-            {
-                _currentTime = Time.time;
-                _lerpTime = 0;
-                _isMoving = true;
-            }
+            var moving = MoveDirectionSO.Value != Vector3.zero;
 
-            if (_lerpTime - _currentTime < PlayerAccelerationSO.Value)
+            //Anim.SetBool("Running", moving);
+
+            if (moving)
             {
-                _lerpTime = Time.time;
-                float _diffTime = _lerpTime - _currentTime;
-                PlayerVelocitySO.Value = Vector3.Lerp(Vector3.zero, PlayerDirectionSO.Value, _diffTime / PlayerAccelerationSO.Value);
+                var lerpTime = Mathf.Min(_currentTime / LerpTime, 1f);
+                lerpTime = RampUpMovespeed.Evaluate(lerpTime);
+
+                PlayerCurrentSpeedSO.Value = lerpTime * PlayerMaxSpeedSO.Value;
+                PlayerGraphics.localRotation = Quaternion.LookRotation(PlayerDirectionSO.Value, Vector3.up);
+                PlayerDirectionSO.Value = MoveDirectionSO.Value;
+
+                _currentTime += Time.deltaTime;
             }
             else
             {
-                PlayerVelocitySO.Value = Vector3.Lerp(Vector3.zero, PlayerDirectionSO.Value, 1);
+                _currentTime = 0f;
+                PlayerCurrentSpeedSO.Value = 0f;
             }
         }
-        else
-        {
-            PlayerVelocitySO.Value = Vector3.zero;
-            _isMoving = false;
-        }
 
-        Anim.SetBool("Running", PlayerCurrentSpeedSO.Value != 0);
-        if(_navMeshAgent.isOnNavMesh)
-        {
-            if (!_navMeshAgent.hasPath)
+            PlayerVelocity.Value = PlayerDirectionSO.Value * PlayerCurrentSpeedSO.Value;
+
+            if (_navMeshAgent.isOnNavMesh)
             {
-                _navMeshAgent.Move(PlayerVelocitySO.Value * PlayerCurrentSpeedSO.Value * Time.deltaTime);
-            } 
-        }
-
-
-        /*if (PlayerCurrentSpeedSO.Value > 0)
-        {
-            //CameraTarget.transform.localPosition = new Vector3(PlayerDirectionSO.Value.x * CameraLookAheadDistanceSO.Value,0,0);
-            CameraTarget.transform.localPosition = PlayerDirectionSO.Value * CameraLookAheadDistanceSO.Value;
-        } else
-        {
-            CameraTarget.transform.localPosition = Vector3.zero;
-        }*/
-
-
-
-        // Move player using translate
-        //transform.Translate(PlayerVelocitySO.Value * PlayerMaxSpeedSO.Value * Time.deltaTime);
-
-
-        // Rotate the graphics along the PlayerSpeedDirection
-        if (PlayerDirectionSO.Value != Vector3.zero)
-        {
-            PlayerGraphics.localRotation = Quaternion.LookRotation(PlayerDirectionSO.Value, Vector3.up);
-        }
-
+                if (!_navMeshAgent.hasPath)
+                {
+                    _navMeshAgent.Move(PlayerVelocity.Value * Time.deltaTime);
+                }
+            }
     }
 
 
     private void FixedUpdate()
     {
-        /*
-        Anim.SetBool("Running", PlayerCurrentSpeedSO.Value != 0);
-        _rigidbody.MovePosition(transform.position+(PlayerVelocitySO.Value * PlayerCurrentSpeedSO.Value * Time.deltaTime));
-        */
-        _rigidbody.velocity = Vector3.zero;
+       _rigidbody.velocity = Vector3.zero;
         
     }
     public override void LoopLateUpdate(float deltaTime)

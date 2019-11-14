@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShopSlotDisplay : GameLoop
+public class ShopSlotDisplay : MonoBehaviour
 {
     public ShopSlot Slot;
+
+    public IntVariable PlayerCurrency;
+
+    public Camera MainCamera;
 
     [SerializeField]
     private GameObject SlotObject;
@@ -18,7 +22,7 @@ public class ShopSlotDisplay : GameLoop
 
     private bool _runOnce;
 
-    private bool Select;
+    private bool Select = false;
 
     private GameObject SlotItemInst;
 
@@ -30,80 +34,97 @@ public class ShopSlotDisplay : GameLoop
     public AnimationCurve AnimPosCurve;
     public AnimationCurve AnimRotationCurve;
 
-    private Vector3 _nextPos;
     private float _lerpTime;
-    private Quaternion _nextRotation;
+
+    private Vector3 StartPos;
+    private Quaternion StartRot, EndRot;
+
     public GameObject BuyButton;
 
 
     public void Start() {
         Slot.Init();
         _lerpTime = AnimationPositionTime;
-    }
 
-    public override void LoopUpdate(float deltaTime)
-    {
-        if (_runOnce == false)
+        if (SlotObject == null)
         {
-            if (SlotObject == null)
-            {
-                SlotObject = Slot?.GetItemPrefab();
-            }
-            SlotItemInst = Instantiate(SlotObject, SlotPlaceholder);
-            PriceText.text = Slot?.GetPrice().ToString();
-            _runOnce = true;
+            SlotObject = Slot?.GetItemPrefab();
         }
 
-        if (Select)
-        {
+        SlotItemInst = Instantiate(SlotObject, SlotPlaceholder);
+        PriceText.text = Slot?.GetPrice().ToString();
 
-            Vector3 startPos = SlotItemInst.transform.position;
+        StartPos = SlotItemInst.transform.position;
+        StartRot = Quaternion.Euler(20, 0, 0);
+        EndRot = Quaternion.Euler(0, 0, 0);
+    }
 
-            _lerpTime -= Time.deltaTime;
+    private IEnumerator SelectItemRoutine(bool select) {
+        yield return select ?
+            MoveItem(StartPos, AnimTargetPos.position, StartRot, EndRot)
+            : MoveItem(AnimTargetPos.position, StartPos, EndRot, StartRot);
 
-            if (_lerpTime > 0)
-            {
-                float curveTime = 1 - (_lerpTime / AnimationPositionTime);
-                _nextPos = Vector3.Lerp(startPos, AnimTargetPos.position, AnimPosCurve.Evaluate(curveTime)/AnimationPositionTime);
-                _nextRotation = Quaternion.Lerp(Quaternion.Euler(20, 0, 0), Quaternion.Euler(0, 0, 0), AnimPosCurve.Evaluate(curveTime)*4);
-                SlotItemInst.transform.position = _nextPos;
-                SlotItemInst.transform.rotation = _nextRotation;
-            }
+        BuyButton.SetActive(select);
 
-            if (_lerpTime <= 0 && _lerpTime >= -AnimationRotationTime)
-            {
-                BuyButton.SetActive(true);
-                float curveTime = 1 - (-_lerpTime / AnimationRotationTime);
-                float curveAnimTime = AnimRotationCurve.Evaluate(curveTime);
-                Quaternion nextRotation = Quaternion.Euler(0, -360*curveAnimTime, 0);
-                SlotItemInst.transform.rotation = nextRotation;
-            }
+        if (select) StartCoroutine(RotateItem());
+    }
 
-            if (_lerpTime <= -AnimationRotationTime)
-            {
-                _lerpTime = 0;
-            }
+    private IEnumerator MoveItem(Vector3 from, Vector3 to, Quaternion fromRot, Quaternion toRot) {
 
-            
+        for (var time = 0f; time < AnimationPositionTime; time += Time.deltaTime) {
+            //float curveTime = 1 - (_lerpTime / AnimationPositionTime);
+            var curveTime = time / AnimationPositionTime;
+
+            var nextPos = Vector3.Lerp(from, to, AnimPosCurve.Evaluate(curveTime));
+            var nextRotation = Quaternion.Lerp(fromRot, toRot, AnimPosCurve.Evaluate(curveTime) * 4);
+
+            SlotItemInst.transform.position = nextPos;
+            SlotItemInst.transform.rotation = nextRotation;
+
+            yield return null;
         }
+   }
+
+   private IEnumerator RotateItem() {
+        var curveTime = 0f;
+        while (true) {
+            float curveAnimTime = AnimRotationCurve.Evaluate(curveTime);
+            Quaternion nextRotation = Quaternion.Euler(0, -360 * curveAnimTime, 0);
+            SlotItemInst.transform.rotation = nextRotation;
+
+            curveTime += Time.deltaTime;
+
+            yield return null;
+        }
+   }
+
+    public void SelectItem() {
+        if (Select) return;
+        StopAllCoroutines();
+
+        SlotItemInst.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+
+        StartCoroutine(SelectItemRoutine(true));
+
+        Select = true;
     }
 
-    public override void LoopLateUpdate(float deltaTime)
-    {
+    public void DeselectItem() {
+        if (!Select) return;
+        StopAllCoroutines();
 
-    }
+        SlotItemInst.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
 
-    public void Buy() {
-        Slot.Buy();
-        Debug.Log("ITEM BOUGHT");
-        SlotItemInst.SetActive(false);
+        StartCoroutine(SelectItemRoutine(false));
+
         Select = false;
     }
 
-    public void SelectItem()
-    {
-        Select = true;
-
-        SlotItemInst.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+    public void ToggleItem() {
+        if (Select) {
+            DeselectItem();
+        } else {
+            SelectItem();
+        }
     }
 }
