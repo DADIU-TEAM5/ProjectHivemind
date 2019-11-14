@@ -132,6 +132,8 @@ public abstract class Enemy : GameLoop
 
         OutlineRenderer.material.color = ConeEmptyColor;
 
+        NavMeshAgent.destination = transform.position +(new Vector3(Random.Range(0, 2), 0, Random.Range(0, 2)));
+
     }
 
 
