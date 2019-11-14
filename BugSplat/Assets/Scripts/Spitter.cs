@@ -57,6 +57,7 @@ public class Spitter : Enemy
     public void Start()
     {
 
+
         _spitterStats = (SpitterStats)stats;
 
         var spitSettings = Spit.main;
@@ -79,11 +80,22 @@ public class Spitter : Enemy
 
     }
 
-    
 
-    
 
-    
+
+    public override void TakeDamageBehaviour(float damage)
+    {
+
+        if(_currentHealth < _spitterStats.FleeThreshold)
+        {
+            _fleeValue = _spitterStats.FleeTime;
+            EndAttack();
+            
+        }
+
+
+    }
+
 
 
     public void Burrow()
@@ -92,7 +104,7 @@ public class Spitter : Enemy
         {
             WormAnimator.SetBool("Underground", true);
             BurrowEvent.Raise(gameObject);
-            FullyUnderground = true;
+            
             
 
             NavMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
@@ -105,7 +117,7 @@ public class Spitter : Enemy
 
             WormAnimator.SetBool("Underground", false);
             EmergeEvent.Raise(this.gameObject);
-            FullyUnderground = false;
+            
             
 
             NavMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
@@ -287,7 +299,16 @@ public class Spitter : Enemy
     }
 
 
+    void EndAttack()
+    {
+        _attackCooldown = _spitterStats.AttackSpeed;
+        _attacking = false;
+        _attackCharge = 0;
+        WormAnimator.speed = 1;
 
+        Outline.SetActive(false);
+        Cone.SetActive(false);
+    }
     
 
     void MoveTowardsThePlayer()
