@@ -23,18 +23,22 @@ public abstract class ShopSlot : ScriptableObject
 
         PlayerCurrency.Value -= price;
 
-        OnPurchase();
-
-        PurchasedItem.Raise();
+        if (OnPurchase()) {
+            PurchasedItem.Raise();
+        } 
     }
 
     public abstract void Init();
 
     public abstract void Reset();
 
-    public abstract void OnPurchase(); 
+    public abstract bool OnPurchase(); 
 
     public abstract GameObject GetItemPrefab(); 
+
+    public abstract string GetTitle();
+
+    public abstract string GetDescription();
 
     public abstract int GetPrice();
 }

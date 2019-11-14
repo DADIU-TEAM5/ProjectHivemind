@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public abstract class Enemy : GameLoop
 {
-    public float difficultyValue = 1;
+    public int difficultyValue = 1;
     public AnimationCurve AttackCurve;
 
     public Material ConeMaterial;
@@ -600,5 +600,14 @@ public abstract class Enemy : GameLoop
         return Vector3.Distance(transform.position, adjustedPlayerPos) < stats.AttackRange*1.1f ;
     }
 
+
+    public bool playerInCustomAttackRange(float length)
+    {
+        Vector3 adjustedPlayerPos = PlayerTransform.position;
+
+        adjustedPlayerPos.y = transform.position.y;
+
+        return Vector3.Distance(transform.position, adjustedPlayerPos) < stats.AttackRange * length;
+    }
 
 }
