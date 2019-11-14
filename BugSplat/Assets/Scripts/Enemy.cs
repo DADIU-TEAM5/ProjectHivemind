@@ -20,7 +20,7 @@ public abstract class Enemy : GameLoop
     public GameObject Graphics;
     public GameObject RenderGraphics;
 
-    public GameObjectList EnemyList;
+    public EnemyObjectList EnemyList;
     public GameObjectVariable LockedTarget;
     public GameObjectVariable CurrentEnemySO;
     public GameObjectVariable CurrentEnemyGraphic;
@@ -103,7 +103,7 @@ public abstract class Enemy : GameLoop
 
 
 
-        EnemyList.Add(gameObject);
+        EnemyList.Add(this);
 
         if (RenderGraphics == null)
         {
@@ -295,7 +295,7 @@ public abstract class Enemy : GameLoop
 
     private void OnDisable()
     {
-        EnemyList.Remove(gameObject);
+        EnemyList.Remove(this);
     }
 
     public void RemoveFromLockedTargetIfNotVisible()

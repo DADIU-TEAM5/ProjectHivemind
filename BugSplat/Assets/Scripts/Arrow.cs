@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Arrow : GameLoop
 {
-    public GameObjectList EnemyList;
+    public EnemyObjectList EnemyList;
     public GameObjectVariable VictoryObject;
 
     public BoolVariable NoVisibleEnemies;
@@ -31,6 +31,8 @@ public class Arrow : GameLoop
 
     public override void LoopUpdate(float deltaTime)
     {
+        
+
         if (EnemyList.Items.Count != 0)
         {
             if (EnemyList.Items.Count != _enemyScripts.Length)
@@ -39,7 +41,7 @@ public class Arrow : GameLoop
 
                 for (int i = 0; i < EnemyList.Items.Count; i++)
                 {
-                    _enemyScripts[i] = EnemyList.Items[i].GetComponent<Enemy>();
+                    _enemyScripts[i] = EnemyList.Items[i];
                 }
             }
 
