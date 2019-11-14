@@ -566,7 +566,7 @@ public abstract class Enemy : GameLoop
 
     void DetectAllies()
     {
-        Collider[] potentialAllies = Physics.OverlapSphere(transform.position, stats.SpotDistance, LayerMask.GetMask("Enemy"));
+        Collider[] potentialAllies = Physics.OverlapSphere(transform.position, stats.AllySpotDistance, LayerMask.GetMask("Enemy"));
 
         if (potentialAllies.Length > 0)
         {
