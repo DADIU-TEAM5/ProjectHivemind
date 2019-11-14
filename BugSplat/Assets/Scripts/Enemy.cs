@@ -539,7 +539,7 @@ public abstract class Enemy : GameLoop
 
         if (potentialTargets.Length > 0)
         {
-            if (Physics.Raycast(transform.position, potentialTargets[0].transform.position - transform.position, out hit, 10))
+            if (Physics.Raycast(transform.position, potentialTargets[0].transform.position - transform.position, out hit, stats.SpotDistance))
             {
                 if (hit.collider.gameObject.layer == 9)
                 {
