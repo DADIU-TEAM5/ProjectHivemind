@@ -32,6 +32,8 @@ public class EnemySpawner : GameLoop
     int[] _values;
     public int SmallestValue;
 
+    public int LargestValue;
+
     float _timer;
 
     private void OnEnable()
@@ -70,6 +72,7 @@ public class EnemySpawner : GameLoop
         }
 
         SmallestValue = int.MaxValue;
+        LargestValue = int.MinValue;
 
         _values = new int[enemies.Count];
         for (int i = 0; i < enemies.Count; i++)
@@ -81,6 +84,10 @@ public class EnemySpawner : GameLoop
 
             if (_values[i] < SmallestValue)
                 SmallestValue = _values[i];
+
+            if (_values[i] > LargestValue)
+                LargestValue = _values[i];
+
         }
 
 
@@ -127,11 +134,18 @@ public class EnemySpawner : GameLoop
         {
 
             int extraBudget =0;
-            if (LevelBudget > SmallestValue)
+            if (LevelBudget >= LargestValue)
+            {
+                LevelBudget -= LargestValue;
+                extraBudget = LargestValue;
+            }
+            else if(LevelBudget >= SmallestValue)
             {
                 LevelBudget -= SmallestValue;
                 extraBudget = SmallestValue;
             }
+
+
                 
             budget += extraBudget;
 
