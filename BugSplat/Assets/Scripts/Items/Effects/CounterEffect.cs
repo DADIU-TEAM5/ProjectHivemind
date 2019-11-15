@@ -21,7 +21,7 @@ public class CounterEffect : Effect
     public override void Trigger(GameObject target = null)
     {
         _counter += CountTick;
-
+        Debug.Log(_counter);
         if (_counter >= TargetCount) {
             OnTargetEffect.Trigger(target);
             Init();

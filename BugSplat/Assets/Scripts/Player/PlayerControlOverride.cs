@@ -5,14 +5,21 @@ using UnityEngine.AI;
 
 public class PlayerControlOverride : MonoBehaviour
 {
-    public GameObject[] EnterColliders;
-    public Transform[] ExitTargets;
+    [SerializeField]
+    private GameObject[] EnterColliders;
+
+    [SerializeField]
+    private Transform[] ExitTargets;
+
+    [SerializeField]
+    private BoolVariable IsAreaOpenSO;
+
+    [SerializeField]
+    private BoolVariable IsExitingScene;
+
     public Transform Player;
     public FloatVariable PlayerCurrentSpeedSO;
     public BoolVariable PlayerControlOverrideSO;
-    public BoolVariable IsAreaOpenSO;
-    public Vector3Variable PlayerExitPos;
-    public BoolVariable IsExitingScene;
     public float TimeScale;
     public Vector3Variable PlayerDirectionSO;
     public Transform PlayerGraphics;
@@ -53,6 +60,8 @@ public class PlayerControlOverride : MonoBehaviour
         }
         else
         {
+            LoadPlayerPos();
+
             for (int i = EnterColliders.Length - 1; i >= 0; i--)
             {
                 EnterColliders[i].SetActive(false);
@@ -62,7 +71,6 @@ public class PlayerControlOverride : MonoBehaviour
             {
                 ExitTargets[k].gameObject.SetActive(true);
             }
-            LoadPlayerPos();
         }
     }
 
@@ -72,14 +80,15 @@ public class PlayerControlOverride : MonoBehaviour
         Vector3 heading = ExitTargets[ExitTargets.Length - 1].position - ExitTargets[0].position;
         PlayerDirectionSO.Value = new Vector3(heading.normalized.x, 0, heading.normalized.z);
 
-        PlayerCurrentSpeedSO.Value = PlayerCurrentSpeedSO.InitialValue;
-
         Player.GetComponent<NavMeshAgent>().enabled = false;
         Player.position = ExitTargets[0].position;
         Player.GetComponent<NavMeshAgent>().enabled = true;
+        PlayerCurrentSpeedSO.Value = PlayerCurrentSpeedSO.InitialValue;
 
-        WhiteFadeIn.SetActive(true);
-        IsExitingScene.Value = false;
+        if (WhiteFadeIn != null)
+        {
+            WhiteFadeIn.SetActive(true);
+        }
     }
 
     public void EnterArea()
@@ -92,15 +101,15 @@ public class PlayerControlOverride : MonoBehaviour
         IsExitingScene.Value = false;
     }
 
-    public void GoToTarget(int index)
+    public void GoToTarget(Transform target)
     {
 
         PlayerControlOverrideSO.Value = true;
         PlayerGraphics.localRotation = Quaternion.LookRotation(PlayerDirectionSO.Value, Vector3.up);
 
-        PlayerCurrentSpeedSO.Value = PlayerCurrentSpeedSO.InitialValue;
+        //PlayerCurrentSpeedSO.Value = PlayerCurrentSpeedSO.InitialValue;
 
-        Player.GetComponent<NavMeshAgent>().SetDestination(ExitTargets[index].position);
+        Player.GetComponent<NavMeshAgent>().SetDestination(target.position);
         Player.GetComponent<NavMeshAgent>().updateRotation = false;
     }
 
@@ -115,7 +124,7 @@ public class PlayerControlOverride : MonoBehaviour
             EnterColliders[i].SetActive(true);
         }
 
-        for (int k = ExitTargets.Length-1; k > 0; k--)
+        for (int k = ExitTargets.Length-1; k >= 0; k--)
         {
             ExitTargets[k].gameObject.SetActive(false);
         }
@@ -123,6 +132,8 @@ public class PlayerControlOverride : MonoBehaviour
         Player.GetComponent<NavMeshAgent>().ResetPath();
 
         PlayerCurrentSpeedSO.Value = 0f;
+
+        ExitArea();
     }
 
 }

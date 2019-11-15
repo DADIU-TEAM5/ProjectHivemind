@@ -7,23 +7,12 @@ namespace Cinemachine.Examples
     public class CameraSwitcher : MonoBehaviour
     {
         public List<CinemachineVirtualCamera> VirtualCameras;
-        public Transform TankBeetle;
-        public FloatVariable PlayerCurrentSpeedSO;
-        public Vector3Variable PlayerDirectionSO;
+        public GameObjectVariable CurrentEnemySO;
+        //public FloatVariable PlayerCurrentSpeedSO;
+        //public Vector3Variable PlayerDirectionSO;
         private bool _activate = true;
         private bool _deactivate = false;
 
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
 
         public void switchCamera(int cameraIndex)
         {
@@ -37,7 +26,7 @@ namespace Cinemachine.Examples
                 }
             }
 
-            if (VirtualCameras[cameraIndex].name == "KillCam")
+            /*if (VirtualCameras[cameraIndex].name == "KillCam")
             {
                 PlayerCurrentSpeedSO.Value = 0;
                 PlayerDirectionSO.Value = Vector3.zero;
@@ -46,7 +35,7 @@ namespace Cinemachine.Examples
 
                 StartCoroutine(SlowDownTime(cameraIndex, 1f));
 
-            }
+            }*/
         }
 
         private IEnumerator SlowDownTime(int cameraIndex, float WaitTime)
