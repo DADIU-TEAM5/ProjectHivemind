@@ -5,6 +5,7 @@ using UnityEngine;
 public class HeavyAudioScript : MonoBehaviour
 {
     public AK.Wwise.Event Footstep;
+    public AK.Wwise.Event FootstepLight;
     public AK.Wwise.Event Attack;
     public AK.Wwise.Event HitFront;
     public AK.Wwise.Event HitBack;
@@ -20,6 +21,11 @@ public class HeavyAudioScript : MonoBehaviour
     public void FootStepEvent(GameObject source)
     {
         Footstep.Post(source);
+    }
+
+    public void FootStepLightEvent(GameObject source)
+    {
+        FootstepLight.Post(source);
     }
 
     public void AttackEvent(GameObject source)
