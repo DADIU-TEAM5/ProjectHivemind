@@ -39,6 +39,7 @@ namespace AK
         static const AkUniqueID NPC_HEAVY_ATTACK = 3679048617U;
         static const AkUniqueID NPC_HEAVY_DEAD = 2658157895U;
         static const AkUniqueID NPC_HEAVY_DETECT = 4074057964U;
+        static const AkUniqueID NPC_HEAVY_FOOTSTEP_LIGHT = 620102210U;
         static const AkUniqueID NPC_HEAVY_FOOTSTEPS = 198238650U;
         static const AkUniqueID NPC_HEAVY_HIT = 78903020U;
         static const AkUniqueID NPC_HEAVY_HIT_FRONT = 3339782068U;
