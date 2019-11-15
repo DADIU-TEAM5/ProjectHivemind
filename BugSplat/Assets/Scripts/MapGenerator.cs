@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
-
-    
     public IntVariable EnemySpawnerCount;
+
+    public GameEvent DoneGenerating;
 
     public bool UseRandomSeed;
     public int Seed;
@@ -52,7 +52,8 @@ public class MapGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (Levels.LevelTierPicker[CurrentLevel.Value].IsGauntlet)
+        var isGauntlet = Levels.LevelTierPicker[CurrentLevel.Value].IsGauntlet;
+        if (isGauntlet)
         {
             Hexagons = GauntletHexagons;
             CenterHexagons = GauntletCenterHexagons;
@@ -119,7 +120,7 @@ public class MapGenerator : MonoBehaviour
 
         GameObject hex = Instantiate(getRandomCenterHexagon());
         Hexagon hexHex= hex.GetComponent<Hexagon>();
-        hexHex.RotateTile(Random.Range(0, 5));
+        //hexHex.RotateTile(Random.Range(0, 5));
         hexHex.IsaccesibleFromMiddle = true;
 
         hex.name = "middle";
@@ -130,9 +131,12 @@ public class MapGenerator : MonoBehaviour
         _hexagonsTiles.Add(hex);
 
 
-
         StartCoroutine(GeneratAllTheRings());
 
+        _hexagonsTiles.Remove(hex);
+
+
+        
         StartCoroutine(RotateTilesToMakeMostPossibleConnections());
 
         hexmapParent.Value = _Parent;
@@ -142,21 +146,23 @@ public class MapGenerator : MonoBehaviour
     {
         yield return new WaitUntil(() => _allTilesGenerated);
 
-        RotateAllPossibleSolutions();
-        for (int i = 0; i < _hexagonsTiles.Count; i++)
+        if (!Levels.LevelTierPicker[CurrentLevel.Value].IsGauntlet)
         {
-            Hexagon hexScript = _hexagonsTiles[i].GetComponent<Hexagon>();
-
-           
-
-           if (!hexScript.IsaccesibleFromMiddle)
+            RotateAllPossibleSolutions();
+            for (int i = 0; i < _hexagonsTiles.Count; i++)
             {
-                hexScript.OpenAndRotateNeighbour();
-                RotateAllPossibleSolutions();
+                Hexagon hexScript = _hexagonsTiles[i].GetComponent<Hexagon>();
+
+
+
+                if (!hexScript.IsaccesibleFromMiddle)
+                {
+                    hexScript.OpenAndRotateNeighbour();
+                    RotateAllPossibleSolutions();
+                }
+
             }
-
         }
-
         _Parent.SetActive(false);
         _Parent.transform.Rotate(0, 90, 0);
         _Parent.SetActive(true);
@@ -166,7 +172,10 @@ public class MapGenerator : MonoBehaviour
             Hexagon hexScript = _hexagonsTiles[i].GetComponent<Hexagon>();
             hexScript.DistributeBudget();
         }
-        
+
+        if(DoneGenerating != null)
+        DoneGenerating.Raise();
+
         //print("Finished rotatin tiles");
 
         yield return null;
@@ -217,9 +226,6 @@ public class MapGenerator : MonoBehaviour
     public void GenrateAroundTile(GameObject tile)
     {
         StartCoroutine(GenrateRingAroundHex(tile));
-
-
-        
 
         UpdateAllTheNeighbours();
 
@@ -408,7 +414,29 @@ public class MapGenerator : MonoBehaviour
             _hexagonsTiles.Add(hex);
             Hexagon hexagonScript = hex.GetComponent<Hexagon>();
 
-            hexagonScript.RotateTile(Random.Range(0, 5)); 
+
+            if (Levels.LevelTierPicker[CurrentLevel.Value].IsGauntlet)
+            {
+
+                if(i == 0)
+                    hexagonScript.RotateTile(3);
+                else if (i == 1)
+                    hexagonScript.RotateTile(4);
+                else if (i == 2)
+                    hexagonScript.RotateTile(5);
+                else if (i == 3)
+                    hexagonScript.RotateTile(0);
+                else if (i == 4)
+                    hexagonScript.RotateTile(1);
+                else if (i == 5)
+                    hexagonScript.RotateTile(2);
+
+            }
+            else
+            {
+                hexagonScript.RotateTile(Random.Range(0, 5));
+            }
+            
 
             hexagonEdge.Neighbours[i] = hexagonScript;
 
@@ -428,7 +456,7 @@ public class MapGenerator : MonoBehaviour
 
             positionToPlaceHex.x += hexStepHeight * (i + multiplierHeight);
 
-           // hex.name = "edge " + i;
+            hex.name = "edge " + i;
             hex.transform.position = positionToPlaceHex;
 
             hex.transform.parent = _Parent.transform;

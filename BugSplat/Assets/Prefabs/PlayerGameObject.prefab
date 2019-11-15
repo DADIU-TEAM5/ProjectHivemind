@@ -32,8 +32,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d915697d1e1ac764eb9278a5eadb4310, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsPaticipant: 0
   Second: 0.5
   SaveInSecond: 4
   FrameRateForAnim: 30
@@ -65,12 +66,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae8cd77b9a3fb574486a4a4a4ef4a938, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsPaticipant: 1
   GameLoopHandler: {fileID: 11400000, guid: b20923f160198a245bcdd80c8342f9ac, type: 2}
   GameLoops:
-  - {fileID: 3672788084440026805}
   - {fileID: 1079554088562805781}
+  - {fileID: 3672788084440026805}
 --- !u!114 &3672788084440026805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,8 +83,9 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ec595245cfec614e867624ebae35483, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsPaticipant: 0
   IsStunned: {fileID: 11400000, guid: e206e2a2d0299224e8e9cfcc6ab47f33, type: 2}
   PlayerGraphics: {fileID: 2700275941276276989}
   EnemyList: {fileID: 11400000, guid: 73fb98983f89ab9418a547ca2aa08854, type: 2}
@@ -146,6 +149,7 @@ GameObject:
   - component: {fileID: 771227558}
   - component: {fileID: 1799847258}
   - component: {fileID: 282145137683011156}
+  - component: {fileID: 5507652567450167358}
   m_Layer: 9
   m_Name: PlayerGameObject
   m_TagString: Player
@@ -181,8 +185,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4b03362b6a2ebc4087e8d75887799d5, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsPaticipant: 0
   Anim: {fileID: 9054509797827413908}
   PlayerGraphics: {fileID: 1378690212658981614}
   MoveDirectionSO: {fileID: 11400000, guid: c1f170982022e2e4f8f993a769166f2b, type: 2}
@@ -229,8 +234,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c353e778184c774aa8207a8da5793ff, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsPaticipant: 0
   PlayerGraphics: {fileID: 2700275941276276989}
   MoveDirectionSO: {fileID: 11400000, guid: c1f170982022e2e4f8f993a769166f2b, type: 2}
   DashInitiatedSO: {fileID: 11400000, guid: a325fabc21f4650479d69a9c7bdd3d21, type: 2}
@@ -245,7 +251,7 @@ MonoBehaviour:
     type: 2}
   PlayerControlOverrideSO: {fileID: 11400000, guid: 6c60755199019534381ecc8c862bb419,
     type: 2}
-  IsStunnedSO: {fileID: 11400000, guid: e206e2a2d0299224e8e9cfcc6ab47f33, type: 2}
+  IsStunned: {fileID: 0}
   LockedTarget: {fileID: 11400000, guid: 10807b189a56cf444ac0120f9222ea9e, type: 2}
   UICanvas: {fileID: 0}
   UIMenuButton: {fileID: 0}
@@ -269,8 +275,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f667abb4971be8f42af0fd96229336c6, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsPaticipant: 0
   IsDodgingSO: {fileID: 11400000, guid: 046d32af02590954e84257844646064e, type: 2}
   IsInvulnerableSO: {fileID: 11400000, guid: 3e721a80afd6d0643a68ebff8a1d86d0, type: 2}
   DashInvulnerabilityTimeSO: {fileID: 11400000, guid: c5895a72cdae65c4f8c8fc44440eb977,
@@ -336,8 +343,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   Event: {fileID: 11400000, guid: a325fabc21f4650479d69a9c7bdd3d21, type: 2}
   Response:
     m_PersistentCalls:
@@ -350,7 +357,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument:
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
@@ -365,8 +372,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   Event: {fileID: 11400000, guid: 4cf9a708d5633f04bbbc56776410d56d, type: 2}
   Response:
     m_PersistentCalls:
@@ -379,7 +386,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument:
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1079554088562805781}
@@ -390,7 +397,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument:
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
@@ -405,15 +412,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae8cd77b9a3fb574486a4a4a4ef4a938, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsPaticipant: 1
   GameLoopHandler: {fileID: 11400000, guid: b20923f160198a245bcdd80c8342f9ac, type: 2}
   GameLoops:
-  - {fileID: 5788987755461925632}
-  - {fileID: 5788987755461925661}
   - {fileID: 5788987755461925659}
+  - {fileID: 5788987755461925661}
+  - {fileID: 5788987755461925632}
   - {fileID: 5012523203288252738}
   - {fileID: 8831838245759697901}
+  - {fileID: 282145137683011156}
 --- !u!114 &5012523203288252738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,8 +433,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8c5f6793e1b83f4182ca861a6811443, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsPaticipant: 0
   Anim: {fileID: 9054509797827413908}
   AttackLength: {fileID: 11400000, guid: 952145735412aab47867a517998c8419, type: 2}
   AttackAngle: {fileID: 11400000, guid: c4842e0c6a01e0447ae8f5fb780f7277, type: 2}
@@ -448,13 +458,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35d9276563b62684296dce1377b78b23, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsPaticipant: 0
   EnemyList: {fileID: 11400000, guid: 73fb98983f89ab9418a547ca2aa08854, type: 2}
   VictoryObject: {fileID: 11400000, guid: 526d766c9a89e8d4d8158c178bed92cb, type: 2}
+  DisableDistance: 5
   NoVisibleEnemies: {fileID: 11400000, guid: fab092924697b554a8c0751c87f04669, type: 2}
-  _enemyScripts: []
-  ArrowPrefab: {fileID: 0}
+  ArrowPrefab: {fileID: 2056091490981271736, guid: 0691285fd6effa249819a51c812b84a0,
+    type: 3}
 --- !u!114 &771227558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,8 +477,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   Event: {fileID: 11400000, guid: 0523889f9d83c094dac1b4d2c2eb7c2c, type: 2}
   Response:
     m_PersistentCalls:
@@ -479,7 +491,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument:
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
@@ -516,8 +528,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ec595245cfec614e867624ebae35483, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsPaticipant: 0
   IsStunned: {fileID: 11400000, guid: e206e2a2d0299224e8e9cfcc6ab47f33, type: 2}
   PlayerGraphics: {fileID: 2700275941276276989}
   EnemyList: {fileID: 11400000, guid: 73fb98983f89ab9418a547ca2aa08854, type: 2}
@@ -530,6 +543,35 @@ MonoBehaviour:
   CurrentHealth: {fileID: 11400000, guid: d980b5989185a2948b70c02cdfccf718, type: 2}
   TookDamageEvent: {fileID: 11400000, guid: a7269a05022ef469c883eb9a01dab7af, type: 2}
   PlayerDiedEvent: {fileID: 11400000, guid: c3ddde208a1b34097a8737cd5f891f2a, type: 2}
+--- !u!114 &5507652567450167358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5788987755461925658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: c3ddde208a1b34097a8737cd5f891f2a, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1079554088562805781}
+        m_MethodName: PlayDeadAnim
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &8501583412075040587
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,8 +614,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 366cbba58bae2a2438bdbb3bf75af73e, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   animationCapsules: {fileID: 0}
   transformToShowFrom: {fileID: 0}
   result: {fileID: 0}
@@ -587,8 +629,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7f871ac56918cf4aa4a4f33a4eae07a, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   capsuleScriptObject: {fileID: 11400000, guid: 338b6842abe87f74a8f87f95380567b8,
     type: 2}
   transformToShowFrom: {fileID: 1378690212658981614}

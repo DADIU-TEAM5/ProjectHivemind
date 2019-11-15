@@ -110,8 +110,13 @@ public class PlayerHealth : GameLoop
             Destroy(HexMapParent.Value);
 
             EnemyList.Items = new List<Enemy>();
-            OverallSceneWorker.LoadScene("Death Scene");
+            Invoke("LoadDeadScene", 1f);
         }
+    }
+
+    void LoadDeadScene()
+    {
+        OverallSceneWorker.LoadScene("Death Scene");
     }
 
     public void KnockBackDamage(Vector3 direction, float length, float damage)
