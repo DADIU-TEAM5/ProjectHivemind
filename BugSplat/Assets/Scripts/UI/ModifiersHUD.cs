@@ -69,18 +69,24 @@ public class ModifiersHUD : MonoBehaviour
     public void AddItem(int index)
     {
         Transform model = ItemList[index].transform.GetChild(0);
-        if(model.childCount > 0)
-        {
-            Debug.LogError("No. I am your father");
-            return;
-        }
+        //if(model.childCount > 0)
+        //{
+        //    Debug.LogError("No. I am your father");
+        //    return;
+        //}
         int i = (_pageNR - 1) * 9;
-        if (PlayerIventory.Items.Count > i)
+        Debug.Log("i, ItemsCount: " + i + ", " + PlayerIventory.Items.Count);
+
+        if (PlayerIventory.Items.Count > i+index)
         {
             GameObject prefab = PlayerIventory.Items[i].Info.ItemPrefab;
             GameObject item = Instantiate(prefab);
             item.SetActive(true);
             item.transform.SetParent(model);
+            item.transform.position = model.position;
+            item.transform.localScale = new Vector3(1,1,1);
+           
+
         }
       
     }
