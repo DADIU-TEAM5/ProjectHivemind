@@ -110,7 +110,7 @@ public class PlayerHealth : GameLoop
             Destroy(HexMapParent.Value);
 
             EnemyList.Items = new List<Enemy>();
-            Invoke("LoadDeadScene", 1f);
+            Invoke("LoadDeadScene", 2f);
         }
     }
 

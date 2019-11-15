@@ -44,6 +44,7 @@ public class PlayerTrajectory : GameLoop
     private bool _blendFlag = false;
     private int _forBlendPlay = 0;
     private string _attack = null;
+    private bool _isDead = false;
 
     //for test
     private int _beginFrame;
@@ -86,11 +87,16 @@ public class PlayerTrajectory : GameLoop
         GetRelativeTrajectory(Velocity.Value);
 
 
-
-        if (Blend)
-            UpdateWithBlend(thisClip, thisClipNum, rotationPlayer);
-        else
-            UpdateWithoutBlend(thisClip, thisClipNum, rotationPlayer);
+        if(!_isDead)
+            if (Blend)
+                UpdateWithBlend(thisClip, thisClipNum, rotationPlayer);
+            else
+                UpdateWithoutBlend(thisClip, thisClipNum, rotationPlayer);
+        if (_tempMoMaTime < 0)
+        {
+            _isDead = false;
+            _tempMoMaTime = 0;
+        }
 
     }
 
@@ -120,8 +126,12 @@ public class PlayerTrajectory : GameLoop
 
     private void UpdateWithoutBlend(int thisClip, int thisClipNum, Vector3 rotationPlayer)
     {
+        //change it to more safety way
         if (_tempMoMaTime < 0)
+        {
+            _isDead = false;
             _tempMoMaTime = 0;
+        }
 
         if (_tempMoMaTime > MoMaUpdateTime)
         {
@@ -281,6 +291,7 @@ public class PlayerTrajectory : GameLoop
 
     private void InitializeTrajectory()
     {
+        _isDead = false;
         while (_history.Count < SaveInSecond)
         {
             _history.Enqueue(transform.localPosition);
@@ -358,6 +369,7 @@ public class PlayerTrajectory : GameLoop
 
     public void PlayDeadAnim()
     {
+        _isDead = true;
         var deadAnimIndex = Random.Range(0, DeadAnimationClips.AnimClips.Count - 1);
         StartCoroutine(PlayOneWholeAnimation(DeadAnimationClips.AnimClips[deadAnimIndex]));
     }
