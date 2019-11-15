@@ -29,12 +29,14 @@ public class Egg : Enemy
         if( _currentHealth <= 0)
         {
 
-            if (Random.Range(0, 100) < _eggStats.ChanceForEnemySpawn)
+            float roll = Random.Range(0, 100);
+
+            if (roll < _eggStats.ChanceForEnemySpawn)
             {
                 GameObject enemy = Instantiate(_eggStats.EnemyToSpawn, transform);
                 enemy.transform.parent = null;
             }
-            else
+            else if(roll < _eggStats.ChanceForCurrency)
             {
                 int partsToDrop = Random.Range(stats.minPartsToDrop, stats.maxPartsToDrop);
                 for (int i = 0; i < partsToDrop; i++)
