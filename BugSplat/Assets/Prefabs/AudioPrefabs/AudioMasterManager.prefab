@@ -1220,6 +1220,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4912769306926005073}
+  - component: {fileID: 7265208892233610491}
+  - component: {fileID: 1989902555411510268}
+  - component: {fileID: 3852929365551562912}
   m_Layer: 0
   m_Name: UIAudioManager
   m_TagString: Untagged
@@ -1241,6 +1244,88 @@ Transform:
   m_Father: {fileID: 3963921505665548280}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7265208892233610491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5118077106112889694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fce4dd369082d47dfaa33f62d5a4f580, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SFXVolume:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: f58e28f6d4f5243d380c759af2bb6d97,
+      type: 2}
+  MusicVolume:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: ac0d7610082954d9ebbf4cb9b6dd2cc9,
+      type: 2}
+  SFXVolumeVAR: {fileID: 11400000, guid: 8fe9fec31f6da8f4a8f0917b13b7c3fc, type: 2}
+  MusicVolumeVAR: {fileID: 11400000, guid: a19d0cacb207d044785d5f997f490c35, type: 2}
+--- !u!114 &1989902555411510268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5118077106112889694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 623d4645385f1a64588d380ffc90aa9f, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7265208892233610491}
+        m_MethodName: onSFXLevelChange
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &3852929365551562912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5118077106112889694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: f3750de70fe4dda45884c22676f1ebb1, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7265208892233610491}
+        m_MethodName: onMusicLevelChange
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &5767124523087305666
 GameObject:
   m_ObjectHideFlags: 0
