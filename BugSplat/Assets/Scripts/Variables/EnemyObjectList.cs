@@ -19,14 +19,15 @@ public class EnemyObjectList : RuntimeSet<Enemy>
         
         if (Items.Contains(t))
         {
-            
+           
             Items.Remove(t);
+            if (Items.Count == 0)
+            {
+                HasWon.Raise();
+            }
         }
 
-        if(Items.Count <= 0)
-        {
-            HasWon.Raise();
-        }
+        
     }
 
     public override void Add(Enemy t)
