@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InGameHUDController : MonoBehaviour
 {
@@ -44,6 +45,12 @@ public class InGameHUDController : MonoBehaviour
                 anim.updateMode = AnimatorUpdateMode.UnscaledTime;
                 Debug.Log("Found animator: Updatemode = " + anim.updateMode);
         }
+    }
+
+    public void QuitButton()
+    {
+        Unpause();
+        SceneManager.LoadScene("MainMenu");
     }
 
 }
