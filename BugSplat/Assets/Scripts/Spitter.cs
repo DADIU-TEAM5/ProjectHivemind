@@ -152,7 +152,7 @@ public class Spitter : Enemy
         if (!PlayerDetected)
         {
             Burrow();
-            Renderer.material.color = SetColor(Color.blue);
+            //Renderer.material.color = SetColor(Color.blue);
             DetectThePlayer();
         }
         else if (playerInRangedAttackRange() || _attacking)
@@ -169,25 +169,25 @@ public class Spitter : Enemy
                     if (NavMeshAgent.destination != transform.position)
                         NavMeshAgent.destination = transform.position;
 
-                    Renderer.material.color = SetColor(Color.red);
+                    //Renderer.material.color = SetColor(Color.red);
                     Attack();
                 }
                 else
                 {
                     LookAtPlayer();
-                    Renderer.material.color = SetColor(Color.yellow);
+                   // Renderer.material.color = SetColor(Color.yellow);
 
                 }
             }
             else
             {
-                Renderer.material.color = SetColor(Color.yellow);
+               // Renderer.material.color = SetColor(Color.yellow);
                 MoveTowardsThePlayer();
             }
         }
         else
         {
-            Renderer.material.color = SetColor(Color.yellow);
+            //Renderer.material.color = SetColor(Color.yellow);
             MoveTowardsThePlayer();
         }
     }
