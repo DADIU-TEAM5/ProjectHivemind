@@ -113,6 +113,8 @@ namespace AK
 
     namespace GAME_PARAMETERS
     {
+        static const AkUniqueID MANAGE_MUSICMAIN_LEVEL = 724781984U;
+        static const AkUniqueID MANAGE_SFXMAIN_LEVEL = 429852744U;
         static const AkUniqueID PLAYERSPEED = 1493153371U;
     } // namespace GAME_PARAMETERS
 
