@@ -36,7 +36,8 @@ public class VariantGameLoopInvoker : SimpleGameLoopInvoker
     {
         if (_ticked) {
             for (var i = 0; i < _gameLoops.Count; i++) {
-                _gameLoops[i].LoopLateUpdate(_deltaTime);
+                if (_gameLoops[i].isActiveAndEnabled)
+                    _gameLoops[i].LoopLateUpdate(_deltaTime);
             }
         }
 

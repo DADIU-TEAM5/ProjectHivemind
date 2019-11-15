@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class PlayerAudioScript : MonoBehaviour
 {
-    [Header("Placeholder events")]
-    public AK.Wwise.Event PhFootsteps;
-
+   
     [Header("Wwise events")]
     public AK.Wwise.Event Footstep;
     public AK.Wwise.Event Attack;
@@ -14,27 +12,9 @@ public class PlayerAudioScript : MonoBehaviour
     public AK.Wwise.Event Hit;
     public AK.Wwise.Event ScaredScream;
     public AK.Wwise.Event Killed;
-
-    [Header("Wwise RTPCs")]
-    public AK.Wwise.RTPC PlayerSpeedRTPC;
-
-    [Header("Variables")]
-    public Vector3Variable PlayerSpeedVector3;
+    public AK.Wwise.Event pickup;
 
 
-
-
-    void Start()
-    {
-         
-    }
-
-
-    void Update()
-    {
-        //PH
-       // PlayerSpeedRTPC.SetValue(this.gameObject, PlayerSpeedVector3.Value.magnitude);
-    }
 
     public void FootStepEvent(GameObject source)
     {
@@ -43,8 +23,12 @@ public class PlayerAudioScript : MonoBehaviour
 
     public void AttackEvent(GameObject source)
     {
-        Debug.Log(source);
         Attack.Post(source);
+    }
+
+    public void PickupEvent(GameObject source)
+    {
+        pickup.Post(source);
     }
 
     public void DashEvent(GameObject source)

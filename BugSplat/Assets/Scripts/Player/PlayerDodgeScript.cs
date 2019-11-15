@@ -15,6 +15,14 @@ public class PlayerDodgeScript : GameLoop
     public FloatVariable DashCooldownSO;
     public AnimationCurve DashAnimationCurve;
 
+    // Stamina stuff ------------
+    public bool StaminaIsActive;
+    // Used to change Dash legnth Depending on Stamina
+    public FloatVariable DashPower;
+    public FloatVariable DashCost;
+    public FloatVariable Stamina;
+
+
     public GameObject PlayerGraphics;
 
     public GameEvent DashDoneEvent;
@@ -49,6 +57,7 @@ public class PlayerDodgeScript : GameLoop
 
             if (IsDodgingSO.Value == true)
             {
+                // DashPower Edit
                 float curveTime = 0; DashAnimationCurve.Evaluate(_diffTime / DashSpeedSO.Value);
 
                 float curveCounter = 0;
@@ -72,7 +81,9 @@ public class PlayerDodgeScript : GameLoop
                     PlayerVelocitySO.Value = Vector3.Lerp(Vector3.zero, _dashDirection * DashLengthSO.Value, curveTime);
                     if (_navMeshAgent.isOnNavMesh)
                     {
-                        _navMeshAgent.transform.position = _initialPos + PlayerVelocitySO.Value;
+                        if (StaminaIsActive)
+                            _navMeshAgent.transform.position = _initialPos + PlayerVelocitySO.Value * DashPower.Value;
+                        else _navMeshAgent.transform.position = _initialPos + PlayerVelocitySO.Value;
                     }
                 }
                 else
@@ -80,7 +91,9 @@ public class PlayerDodgeScript : GameLoop
                     PlayerVelocitySO.Value = Vector3.Lerp(Vector3.zero, _dashDirection * DashLengthSO.Value, 1);
                     if (_navMeshAgent.isOnNavMesh)
                     {
-                        _navMeshAgent.transform.position = _initialPos + PlayerVelocitySO.Value;
+                        if (StaminaIsActive)
+                            _navMeshAgent.transform.position = _initialPos + PlayerVelocitySO.Value * DashPower.Value;
+                        else _navMeshAgent.transform.position = _initialPos + PlayerVelocitySO.Value;
                     }
                     IsDodgingSO.Value = false;
                     DashDoneEvent.Raise(PlayerGraphics);
@@ -98,7 +111,7 @@ public class PlayerDodgeScript : GameLoop
                 DashCooldownSO.Value = DashCooldownSO.InitialValue;
                 IsInvulnerableSO.Value = false;
             }
-        } 
+        }
     }
 
 
@@ -113,13 +126,17 @@ public class PlayerDodgeScript : GameLoop
     {
         if (IsDodgingSO.Value == false && !_dashCooldownActive)
         {
-            _dashDirection = PlayerDirectionSO.Value;
-            _currentTime = Time.time;
-            _lerpTime = 0f;
-            _initialPos = transform.position;
-            IsDodgingSO.Value = true;
-            _dashCooldownActive = true;
-            IsInvulnerableSO.Value = true;
+            if (!StaminaIsActive || DashCost.Value <= Stamina.Value)
+            {
+
+                _dashDirection = PlayerDirectionSO.Value;
+                _currentTime = Time.time;
+                _lerpTime = 0f;
+                _initialPos = transform.position;
+                IsDodgingSO.Value = true;
+                _dashCooldownActive = true;
+                IsInvulnerableSO.Value = true;
+            }
         }
-    }      
+    }
 }

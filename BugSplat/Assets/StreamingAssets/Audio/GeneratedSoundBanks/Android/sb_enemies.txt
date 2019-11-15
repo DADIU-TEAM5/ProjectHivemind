@@ -18,7 +18,9 @@ Event	ID	Name			Wwise Object Path	Notes
 	1586397994	npc_heavy_scream			\EnemyInsectEvents\Heavy\npc_heavy_scream	
 	1630111423	npc_spitter_attack			\EnemyInsectEvents\Spitter\npc_spitter_attack	
 	1879848174	npc_boomer_dead			\EnemyInsectEvents\Boomer\npc_boomer_dead	
+	1929315744	npc_boomer_charge			\EnemyInsectEvents\Boomer\npc_boomer_charge	
 	2078456833	npc_fodder_specialAttack			\EnemyInsectEvents\Fodder\npc_fodder_specialAttack	
+	2415521115	npc_spitter_charge			\EnemyInsectEvents\Spitter\npc_spitter_charge	
 	2546983038	npc_spitter_hit			\EnemyInsectEvents\Spitter\npc_spitter_hit	
 	2631762934	npc_spitter_detect			\EnemyInsectEvents\Spitter\npc_spitter_detect	
 	2642000516	npc_spitter_scream			\EnemyInsectEvents\Spitter\npc_spitter_scream	
@@ -34,6 +36,9 @@ Event	ID	Name			Wwise Object Path	Notes
 	3732201856	npc_spitter_footsteps			\EnemyInsectEvents\Spitter\npc_spitter_footsteps	
 	4074057964	npc_heavy_detect			\EnemyInsectEvents\Heavy\npc_heavy_detect	
 	4075444627	npc_heavy_idle			\EnemyInsectEvents\Heavy\npc_heavy_idle	
+
+Modulator Time	ID	Name			Wwise Object Path	Notes
+	687775220	Modulator Time (Custom)				
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	22184777	boomer_detect_05	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\boomer_detect_05_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Boomer\boomer_mastermix\boomer_detect_limiter\boomer_detect_mix\boomer_detect\boomer_detect_05		18844
@@ -101,7 +106,6 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	451710428	fodder_attack_hizz_03_c1	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\fodder_attack_hizz_03_c1_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Fodder\fodder_mastermix\fodder_attack_limiter\fodder_attack_mix\fodder_attack_hiss\fodder_attack_hizz_03_c1		9041
 	460590506	heavy_grunt_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\heavy_grunt_02_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Heavy\heavy_mastermix\heavy_grunt_limiter\heavy_grunt_mix\heavy_grunt\heavy_grunt_02		23391
 	461975951	boomer_hit_gurgle_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\boomer_hit_gurgle_02_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Boomer\boomer_mastermix\boomer_hit_limiter\boomer_hit_mix\boomer_hit_gurgle\boomer_hit_gurgle_02		16404
-	493058146	boomer_footstep_layer1_03	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\boomer_footstep_layer1_03_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Boomer\boomer_mastermix\boomer_footstep_limiter\boomer_footstep_mix\boomer_footstep_layer1\boomer_footstep_layer1_03		9789
 	494245364	boomer_hit_gurgle_05	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\boomer_hit_gurgle_05_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Boomer\boomer_mastermix\boomer_hit_limiter\boomer_hit_mix\boomer_hit_gurgle\boomer_hit_gurgle_05		17165
 	504775385	ranged_burrow_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\ranged_burrow_01_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Ranged\ranged_mastermix\spitter_burrow_limiter\spitter_burrow_mix\spitter_burrow\ranged_burrow_01		37167
 	505823087	RangedDetect_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\RangedDetect_02_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Ranged\ranged_mastermix\spitter_detect_mixlimit\spitter_detect\RangedDetect_02		22063
@@ -130,11 +134,11 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	600127302	fodder_attack_snarl_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\fodder_attack_snarl_02_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Fodder\fodder_mastermix\fodder_attack_limiter\fodder_attack_mix\fodder_attack_scream\fodder_attack_snarl_02		12912
 	616452719	heavy_grunt_07	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\heavy_grunt_07_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Heavy\heavy_mastermix\heavy_grunt_limiter\heavy_grunt_mix\heavy_grunt\heavy_grunt_07		26307
 	623083583	spitter_spitlayer2_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\spitter_spitlayer2_01_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Ranged\ranged_mastermix\spitter_spit_limiter\spitter_spit_mix\spitter_spitlayer2\spitter_spitlayer2_01		15789
+	626706690	boomer_charge_novari	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\boomer_charge_novari_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Boomer\boomer_mastermix\boomer_charge_limiter\boomer_charge_mix\boomer_charge_novari		40392
 	626787956	ranged_hit_shriek_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\ranged_hit_shriek_02_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Ranged\ranged_mastermix\spitter_scream_limiter\spitter_scream_mix\spitter_hit_shriek\ranged_hit_shriek_02		10036
 	629395190	fodder_detect_vocal_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\fodder_detect_vocal_02_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Fodder\fodder_mastermix\fodder_detect_limiter\fodder_detect_mix\fodder_detect_vocal\fodder_detect_vocal_02		21097
 	646191349	heavy_hit_crack_04	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\heavy_hit_crack_04_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Heavy\heavy_mastermix\heavy_hit_limiter\heavy_hit_hit_mix\heavy_hit_crack\heavy_hit_crack_04		12324
 	658151957	boomer_footstep_layer2_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\boomer_footstep_layer2_02_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Boomer\boomer_mastermix\boomer_footstep_limiter\boomer_footstep_mix\boomer_footstep_layer2\boomer_footstep_layer2_02		8450
-	667514742	boomer_footstep_layer1_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\boomer_footstep_layer1_01_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Boomer\boomer_mastermix\boomer_footstep_limiter\boomer_footstep_mix\boomer_footstep_layer1\boomer_footstep_layer1_01		9624
 	673269960	heavy_grunt_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\heavy_grunt_01_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Heavy\heavy_mastermix\heavy_grunt_limiter\heavy_grunt_mix\heavy_grunt\heavy_grunt_01		21303
 	673542932	fodder_hit_04	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\fodder_hit_04_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Fodder\fodder_mastermix\fodder_hit_limiter\fodder_hit_mix\fodder_hit\fodder_hit_04		17079
 	681093086	fodder_detect_squirm_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\fodder_detect_squirm_02_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Fodder\fodder_mastermix\fodder_detect_limiter\fodder_detect_mix\fodder_detect_squirm\fodder_detect_squirm_02		25887
@@ -151,7 +155,6 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	734943404	heavy_footstep_top_04	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\heavy_footstep_top_04_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Heavy\heavy_mastermix\heavy_footstep_limiter\heavy_footstep_mix\heavy_footstep_top\heavy_footstep_top_04		9261
 	745219211	boomer_hit_gurgle_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\boomer_hit_gurgle_01_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Boomer\boomer_mastermix\boomer_hit_limiter\boomer_hit_mix\boomer_hit_gurgle\boomer_hit_gurgle_01		16138
 	745392583	heavy_hit_metal_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\heavy_hit_metal_02_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Heavy\heavy_mastermix\heavy_hit_limiter\heavy_hit_hit_mix\heavy_hit_metal\heavy_hit_metal_02		12215
-	746942708	boomer_footstep_layer1_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\boomer_footstep_layer1_02_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Boomer\boomer_mastermix\boomer_footstep_limiter\boomer_footstep_mix\boomer_footstep_layer1\boomer_footstep_layer1_02		9047
 	759037802	boomer_detect_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\boomer_detect_01_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Boomer\boomer_mastermix\boomer_detect_limiter\boomer_detect_mix\boomer_detect\boomer_detect_01		20514
 	762974751	heavy_grunt_05	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\heavy_grunt_05_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Heavy\heavy_mastermix\heavy_grunt_limiter\heavy_grunt_mix\heavy_grunt\heavy_grunt_05		32436
 	765517855	heavy_footstep_bund_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\heavy_footstep_bund_02_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Heavy\heavy_mastermix\heavy_footstep_limiter\heavy_footstep_mix\heavy_footstep_bottom\heavy_footstep_bund_02		17365
@@ -176,9 +179,11 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	896825853	fodder_footstep_spuirm_10	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\fodder_footstep_spuirm_10_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Fodder\fodder_mastermix\fodder_footstep_limiter\fodder_footstep_mix\fodder_footstep_squirm\fodder_footstep_spuirm_10		15102
 	906324897	boomer_detect_04	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\boomer_detect_04_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Boomer\boomer_mastermix\boomer_detect_limiter\boomer_detect_mix\boomer_detect\boomer_detect_04		26370
 	920322443	heavy_hit_rockdrag_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\heavy_hit_rockdrag_02_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Heavy\heavy_mastermix\heavy_hit_limiter\heavy_hit_hit_mix\heavy_hit_rock\heavy_hit_rockdrag_02		11377
+	932196501	boomer_attack_novari	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\boomer_attack_novari_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Boomer\boomer_mastermix\boomer_attack_limiter\boomer_attack_mix\boomer_attack_novari		83959
 	935387074	ranged_burrow_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\ranged_burrow_02_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Ranged\ranged_mastermix\spitter_burrow_limiter\spitter_burrow_mix\spitter_burrow\ranged_burrow_02		40350
 	949645582	heavy_hit_kick	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\heavy_hit_kick_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Heavy\heavy_mastermix\heavy_hit_limiter\heavy_hit_hit_mix\heavy_hit_kick		4158
 	962162331	fodder_detect_vocal_03	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\fodder_detect_vocal_03_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Fodder\fodder_mastermix\fodder_detect_limiter\fodder_detect_mix\fodder_detect_vocal\fodder_detect_vocal_03		7896
+	982010684	spitter_charge_chirploop	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\spitter_charge_chirploop_ADF7B7FB.wem		\Actor-Mixer Hierarchy\Enemies\Ranged\ranged_mastermix\spitter_charge_limiter\spitter_charge_mix\spitter_charge_chirploop		32846
 	994308815	fodder_attack_scream_06_c1	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\fodder_attack_scream_06_c1_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Fodder\fodder_mastermix\fodder_hit_limiter\fodder_hit_mix\fodder_hit_vocal\fodder_attack_scream_06_c1		8147
 	998314970	heavy_footstep_bund_05	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\heavy_footstep_bund_05_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Heavy\heavy_mastermix\heavy_footstep_limiter\heavy_footstep_mix\heavy_footstep_bottom\heavy_footstep_bund_05		16149
 	1026809844	boomer_hit_body_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Android\SFX\boomer_hit_body_02_8EDF57DD.wem		\Actor-Mixer Hierarchy\Enemies\Boomer\boomer_mastermix\boomer_hit_limiter\boomer_hit_mix\boomer_hit_body\boomer_hit_body_02		25891

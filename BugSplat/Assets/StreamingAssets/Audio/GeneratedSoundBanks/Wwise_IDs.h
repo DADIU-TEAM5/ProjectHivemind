@@ -13,9 +13,13 @@ namespace AK
 {
     namespace EVENTS
     {
-        static const AkUniqueID AMB_ARENA_01 = 1404225303U;
+        static const AkUniqueID AMB_ARENA_01_START = 4090897946U;
+        static const AkUniqueID AMB_ARENA_01_STOP = 3018226098U;
+        static const AkUniqueID AMB_HUB_MAINEVENT = 1797197367U;
+        static const AkUniqueID AMB_SHOP_MAINEVENT = 3126464902U;
         static const AkUniqueID INTRO = 1125500713U;
         static const AkUniqueID NPC_BOOMER_ATTACK = 592638112U;
+        static const AkUniqueID NPC_BOOMER_CHARGE = 1929315744U;
         static const AkUniqueID NPC_BOOMER_DEAD = 1879848174U;
         static const AkUniqueID NPC_BOOMER_DETECT = 852176873U;
         static const AkUniqueID NPC_BOOMER_FOOTSTEPS = 199898249U;
@@ -43,6 +47,7 @@ namespace AK
         static const AkUniqueID NPC_HEAVY_SPECIALATTACK = 575616738U;
         static const AkUniqueID NPC_SPITTER_ATTACK = 1630111423U;
         static const AkUniqueID NPC_SPITTER_BURROW = 141041902U;
+        static const AkUniqueID NPC_SPITTER_CHARGE = 2415521115U;
         static const AkUniqueID NPC_SPITTER_DEAD = 1581237869U;
         static const AkUniqueID NPC_SPITTER_DETECT = 2631762934U;
         static const AkUniqueID NPC_SPITTER_FOOTSTEPS = 3732201856U;
@@ -55,8 +60,52 @@ namespace AK
         static const AkUniqueID PLAYER_FOLEY_FOOTSTEPEVENT = 954324369U;
         static const AkUniqueID PLAYER_FOLEY_HIT = 830213708U;
         static const AkUniqueID PLAYER_FOLEY_KILLED = 3187150534U;
-        static const AkUniqueID PLAYER_FOLEYPHFOOTSTEPEVENT = 586291076U;
+        static const AkUniqueID PLAYER_PICKUP = 1627434233U;
     } // namespace EVENTS
+
+    namespace STATES
+    {
+        namespace STATE_SCENE
+        {
+            static const AkUniqueID GROUP = 2072924777U;
+
+            namespace STATE
+            {
+                static const AkUniqueID STATE_ARENA = 1124786752U;
+                static const AkUniqueID STATE_HUB = 324041644U;
+                static const AkUniqueID STATE_SHOP = 238388283U;
+            } // namespace STATE
+        } // namespace STATE_SCENE
+
+    } // namespace STATES
+
+    namespace SWITCHES
+    {
+        namespace SWITCH_AMB
+        {
+            static const AkUniqueID GROUP = 4218164408U;
+
+            namespace SWITCH
+            {
+                static const AkUniqueID SWITCH_AMB_ARENA = 3536551912U;
+                static const AkUniqueID SWITCH_AMB_HUB = 2665294484U;
+                static const AkUniqueID SWITCH_AMB_SHOP = 3307969155U;
+            } // namespace SWITCH
+        } // namespace SWITCH_AMB
+
+        namespace SWITCH_MUSIC_SCENE
+        {
+            static const AkUniqueID GROUP = 693628484U;
+
+            namespace SWITCH
+            {
+                static const AkUniqueID SWITCH_MUSIC_SCENE_ARENA = 389115708U;
+                static const AkUniqueID SWITCH_MUSIC_SCENE_HUB = 1801485104U;
+                static const AkUniqueID SWITCH_MUSIC_SCENE_SHOP = 3910460951U;
+            } // namespace SWITCH
+        } // namespace SWITCH_MUSIC_SCENE
+
+    } // namespace SWITCHES
 
     namespace GAME_PARAMETERS
     {
@@ -71,32 +120,26 @@ namespace AK
         static const AkUniqueID SB_HUB = 1262967946U;
         static const AkUniqueID SB_MUSIC = 779753582U;
         static const AkUniqueID SB_PLAYERCHARACTER = 2688509691U;
+        static const AkUniqueID SB_SHOP = 2345835849U;
         static const AkUniqueID SB_UI = 289583631U;
     } // namespace BANKS
 
     namespace BUSSES
     {
-        static const AkUniqueID AMBIENCE_CHANNEL = 655445U;
-        static const AkUniqueID CROWD_CHANNEL = 1944073392U;
         static const AkUniqueID DIALOGUE_BUS = 573466488U;
         static const AkUniqueID HDR_MAGIC_BUS = 2239254138U;
-        static const AkUniqueID HDR_REVERB_RTN = 228236773U;
         static const AkUniqueID MASTER_BUS = 1399649189U;
         static const AkUniqueID MASTER_OUT = 1330420139U;
         static const AkUniqueID MUSIC_BUS = 2680856269U;
-        static const AkUniqueID PRL_VERB_RTN = 3022286562U;
-        static const AkUniqueID SFX_CHANNEL = 3990010218U;
+        static const AkUniqueID REVERB_RETURN = 358140370U;
         static const AkUniqueID SUMMER_BUS = 1348578857U;
     } // namespace BUSSES
 
     namespace AUX_BUSSES
     {
-        static const AkUniqueID HDR_REVERB_RECEIVE = 1172022782U;
-        static const AkUniqueID HDR_VERB_ARENA = 2679963831U;
-        static const AkUniqueID HDR_VERB_HUB = 1013890195U;
-        static const AkUniqueID PRL_REVERB_RECEIVE = 2698328542U;
-        static const AkUniqueID PRL_VERB_ARENA = 1570853527U;
-        static const AkUniqueID PRL_VERB_HUB = 3373630835U;
+        static const AkUniqueID REVERB_ARENA = 1569207989U;
+        static const AkUniqueID REVERB_HUB = 3119546469U;
+        static const AkUniqueID REVERB_SHOP = 788805620U;
     } // namespace AUX_BUSSES
 
     namespace AUDIO_DEVICES

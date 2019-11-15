@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public abstract class Enemy : GameLoop
 {
-    public float difficultyValue = 1;
+    public int difficultyValue = 1;
     public AnimationCurve AttackCurve;
 
     public Material ConeMaterial;
@@ -20,7 +20,7 @@ public abstract class Enemy : GameLoop
     public GameObject Graphics;
     public GameObject RenderGraphics;
 
-    public GameObjectList EnemyList;
+    public EnemyObjectList EnemyList;
     public GameObjectVariable LockedTarget;
     public GameObjectVariable CurrentEnemySO;
     public GameObjectVariable CurrentEnemyGraphic;
@@ -65,9 +65,14 @@ public abstract class Enemy : GameLoop
     [HideInInspector]
     public Mesh OutlineMesh;
 
+    public Color ConeInitColor = new Color(0f, 1f, 0f, 1f);
+    public Color ConeEndColor = new Color(1f, 0f, 0f, 1f);
+    public Color ConeEmptyColor = new Color(.2f, .2f, .2f, .1f);
+
     
 
     public GameEvent AggroEvent;
+    public GameEvent DefaultAggroEvent;
     public GameEvent TakeDamageEvent;
     public GameEvent DeathEvent;
 
@@ -80,9 +85,15 @@ public abstract class Enemy : GameLoop
 
     [HideInInspector]
     public float _currentHealth;
-   
+
+    [HideInInspector]
+    public float _stunTime;
 
 
+    public void Stun(float time)
+    {
+        _stunTime = time;
+    }
 
     private void OnEnable()
     {
@@ -90,7 +101,7 @@ public abstract class Enemy : GameLoop
 
 
 
-        EnemyList.Add(gameObject);
+        EnemyList.Add(this);
 
         if (RenderGraphics == null)
         {
@@ -117,11 +128,33 @@ public abstract class Enemy : GameLoop
         ConeRenderer.material = ConeMaterial;
         OutlineRenderer.material = ConeMaterial;
 
-        OutlineRenderer.material.color = new Color(.2f, .2f, .2f, .1f);
+        OutlineRenderer.material.color = ConeEmptyColor;
 
+        if (NavMeshAgent.isOnNavMesh)
+        {
+            NavMeshAgent.destination = transform.position + (new Vector3(Random.Range(-2, 2), 0, Random.Range(-2, 2)));
+        }
     }
 
 
+    public override void LoopUpdate(float deltaTime)
+    {
+        if (_stunTime > 0)
+        {
+            _stunTime -= deltaTime;
+        }
+
+        if (_stunTime <= 0)
+        {
+            LoopBehaviour(deltaTime);
+        }
+        else
+        {
+            Renderer.material.color = SetColor(Color.blue);
+        }
+    }
+
+    public abstract void LoopBehaviour(float deltaTime);
 
 
     public bool IsVisible()
@@ -137,16 +170,18 @@ public abstract class Enemy : GameLoop
     public void TakeDamage(float damage)
     {
         // print(name + " took damage "+ damage);
+
+
         _currentHealth -= damage;
         UpdateHealthBar(_currentHealth);
         TakeDamageEvent.Raise(this.gameObject);
+        TakeDamageBehaviour(damage);
+
 
         if (_currentHealth <= 0)
         {
             if (DeadCutout == null)
             {
-
-                
                 int partsToDrop = Random.Range(stats.minPartsToDrop, stats.maxPartsToDrop);
                 for (int i = 0; i < partsToDrop; i++)
                 {
@@ -158,15 +193,9 @@ public abstract class Enemy : GameLoop
             }
             else
             {
-
                 //Graphics.SetActive(false);
                 DeadCutout.transform.SetParent(null);
                 DeadCutout.SetActive(true);
-
-                
-                
-
-                
             }
 
             DeathEvent.Raise(this.gameObject);
@@ -179,6 +208,8 @@ public abstract class Enemy : GameLoop
 
         }
     }
+
+    public abstract void TakeDamageBehaviour(float damage);
 
 
 
@@ -270,7 +301,7 @@ public abstract class Enemy : GameLoop
 
     private void OnDisable()
     {
-        EnemyList.Remove(gameObject);
+        EnemyList.Remove(this);
     }
 
     public void RemoveFromLockedTargetIfNotVisible()
@@ -403,6 +434,7 @@ public abstract class Enemy : GameLoop
 
     int[] _triangles = { };
     Vector3[] _normals = { };
+    Vector2[] _uvs = { };
 
 
     public void DrawCone(int points, Mesh mesh, bool constant,float attackCharge)
@@ -417,16 +449,10 @@ public abstract class Enemy : GameLoop
             {
                 if (i != points - 1)
                 {
-
-
-
                     _triangles[triangleIndex] = 0;
 
                     _triangles[triangleIndex + 2] = i;
                     _triangles[triangleIndex + 1] = i + 1;
-
-
-
                 }
 
                 triangleIndex += 3;
@@ -451,17 +477,9 @@ public abstract class Enemy : GameLoop
         }
 
 
-
-
         Vector3[] vertices = new Vector3[points];
 
-
-
-
-
-
         vertices[0] = Vector3.zero;
-
 
         Vector3 vectorToRotate;
         if (constant)
@@ -473,14 +491,11 @@ public abstract class Enemy : GameLoop
 
         float stepSize = 1f / ((float)points - 1);
         int step = 0;
-
-
+        
 
         for (int i = 1; i < points; i++)
         {
             float angle = Mathf.Lerp(-stats.AttackAngle, stats.AttackAngle, step * stepSize);
-
-
 
             angle = angle * Mathf.Deg2Rad;
 
@@ -496,15 +511,30 @@ public abstract class Enemy : GameLoop
 
         mesh.vertices = vertices;
 
+        if (_uvs.Length != vertices.Length)
+        {
+            _uvs = new Vector2[vertices.Length];
+
+
+            Bounds bounds = mesh.bounds;
+
+            int i = 0;
+            while (i < _uvs.Length)
+            {
+                _uvs[i] = new Vector2(vertices[i].x / bounds.size.x, vertices[i].z / bounds.size.z);
+                i++;
+            }
+
+        }
+
         if (mesh.triangles != _triangles)
             mesh.triangles = _triangles;
 
         if (mesh.normals != _normals)
             mesh.normals = _normals;
 
-
-
-
+        if (mesh.uv != _uvs)
+            mesh.uv = _uvs;
 
     }
 
@@ -517,10 +547,11 @@ public abstract class Enemy : GameLoop
 
         if (potentialTargets.Length > 0)
         {
-            if (Physics.Raycast(transform.position, potentialTargets[0].transform.position - transform.position, out hit, 10))
+            if (Physics.Raycast(transform.position, potentialTargets[0].transform.position - transform.position, out hit, stats.SpotDistance))
             {
                 if (hit.collider.gameObject.layer == 9)
                 {
+                    DefaultAggroEvent.Raise(this.gameObject);
                     AggroEvent.Raise(this.gameObject);
                     PlayerDetected = true;
                     PlayerTransform = potentialTargets[0].gameObject.transform;
@@ -535,7 +566,7 @@ public abstract class Enemy : GameLoop
 
     void DetectAllies()
     {
-        Collider[] potentialAllies = Physics.OverlapSphere(transform.position, stats.SpotDistance, LayerMask.GetMask("Enemy"));
+        Collider[] potentialAllies = Physics.OverlapSphere(transform.position, stats.AllySpotDistance, LayerMask.GetMask("Enemy"));
 
         if (potentialAllies.Length > 0)
         {
@@ -544,6 +575,7 @@ public abstract class Enemy : GameLoop
                 Enemy allyTransform = potentialAllies[i].gameObject.GetComponent<Enemy>();
                 if (!allyTransform?.IsAlly ?? false)
                 {
+                    DefaultAggroEvent.Raise(allyTransform.gameObject);
                     allyTransform.PlayerDetected = true;
                     allyTransform.PlayerTransform = PlayerTransform;
                     allyTransform.IsAlly = true;
@@ -578,5 +610,14 @@ public abstract class Enemy : GameLoop
         return Vector3.Distance(transform.position, adjustedPlayerPos) < stats.AttackRange*1.1f ;
     }
 
+
+    public bool playerInCustomAttackRange(float length)
+    {
+        Vector3 adjustedPlayerPos = PlayerTransform.position;
+
+        adjustedPlayerPos.y = transform.position.y;
+
+        return Vector3.Distance(transform.position, adjustedPlayerPos) < stats.AttackRange * length;
+    }
 
 }

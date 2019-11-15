@@ -1,163 +1,105 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Arrow : GameLoop
 {
-
-    public GameObjectList EnemyList;
+    public EnemyObjectList EnemyList;
     public GameObjectVariable VictoryObject;
 
+    public float DisableDistance = 5f;
 
     public BoolVariable NoVisibleEnemies;
 
-    public Enemy[] _enemyScripts;
-    
+    public GameObject ArrowPrefab;
 
-
-    GameObject _arrow;
-    LineRenderer _arrowRenderer;
+    private GameObject _arrow;
 
     private void Start()
     {
-        _enemyScripts = new Enemy[0];
+        _arrow = Instantiate(ArrowPrefab, transform);
 
-        _arrow = new GameObject();
-        _arrow.transform.position = transform.position;
-        _arrow.transform.rotation = transform.rotation;
-
-        _arrow.AddComponent<LineRenderer>();
-        _arrowRenderer = _arrow.GetComponent<LineRenderer>();
-
-        _arrowRenderer.material.color = new Color(0, 255, 255);
-        //_arrow.SetActive(false);
-
-        DrawArrow();
+        _arrow.gameObject.SetActive(true);
     }
 
-    public override void LoopLateUpdate(float deltaTime)
-    {
-        
-    }
+    public override void LoopLateUpdate(float deltaTime) {}
 
     public override void LoopUpdate(float deltaTime)
     {
         if (EnemyList.Items.Count != 0)
         {
-            if (EnemyList.Items.Count != _enemyScripts.Length)
-            {
-                _enemyScripts = new Enemy[EnemyList.Items.Count];
-                for (int i = 0; i < EnemyList.Items.Count; i++)
-                {
-                    _enemyScripts[i] = EnemyList.Items[i].GetComponent<Enemy>();
-                }
-            }
-
             NoVisibleEnemies.Value = true;
 
-            for (int i = 0; i < _enemyScripts.Length; i++)
+            for (int i = 0; i < EnemyList.Items.Count; i++)
             {
-                bool enemyIsVisible = _enemyScripts[i].IsVisible();
-                if (enemyIsVisible)
-                {
+                if (EnemyList.Items[i].IsVisible()) {
                     NoVisibleEnemies.Value = false;
+                    break;
                 }
-
             }
 
-
-
+            // If there is no visible enemies, definitely show arrow
             if (NoVisibleEnemies.Value)
             {
-
                 if (_arrow.activeSelf == false)
                     _arrow.SetActive(true);
+                
+                var closestEnemy = FindClosestEnemy();
 
-                _arrow.transform.position = transform.position;
-
-                float distance = float.MaxValue;
-                int index = 0;
-                for (int i = 0; i < EnemyList.Items.Count; i++)
-                {
-
-
-                    float distanceToEnemy = Vector3.Distance(transform.position, EnemyList.Items[i].transform.position);
-
-                    if (distanceToEnemy < distance)
-                    {
-                        index = i;
-                        distance = distanceToEnemy;
-                    }
-                }
-
-                Vector3 enemyPos = EnemyList.Items[index].transform.position;
-                enemyPos.y = _arrow.transform.position.y;
-                _arrow.transform.LookAt(enemyPos);
-
-
-
-                //_arrow.transform.Rotate(0, 20 * Time.deltaTime, 0);
-                DrawArrow();
+                var enemy = EnemyList.Items[closestEnemy.Item1];
+                RotateArrow(enemy.gameObject);
             }
             else
             {
-                if (_arrow.activeSelf == true)
+                var closestEnemy = FindClosestEnemy();
+
+                if (closestEnemy.Item2 > DisableDistance) {
+                    _arrow.SetActive(true);
+
+                    var enemy = EnemyList.Items[closestEnemy.Item1];
+                    RotateArrow(enemy.gameObject);
+                } else {
                     _arrow.SetActive(false);
+                }
             }
 
         }
         else
         {
-            if (_arrow.activeSelf == false)
-                _arrow.SetActive(true);
-
-            _arrow.transform.position = transform.position;
-
             if (VictoryObject.Value != null)
             {
-                Vector3 tempVictory = VictoryObject.Value.transform.position;
-                tempVictory.y = transform.position.y;
-                _arrow.transform.LookAt(tempVictory);
+                _arrow.SetActive(true);
+
+                RotateArrow(VictoryObject.Value);
+            } else {
+                _arrow.SetActive(false);
             }
-
-
-
-            //_arrow.transform.Rotate(0, 20 * Time.deltaTime, 0);
-            DrawArrow();
         }
     }
 
-    
+    private Tuple<int, float> FindClosestEnemy() {
+        float distance = float.MaxValue;
+        int index = 0;
 
-    void DrawArrow()
-    {
-        Vector3[] pointsForArrow = new Vector3[6];
-        _arrowRenderer.positionCount = 6;
+        for (int i = 0; i < EnemyList.Items.Count; i++)
+        {
+            float distanceToEnemy = Vector3.Distance(transform.position, EnemyList.Items[i].transform.position);
 
-        pointsForArrow[0] = _arrow.transform.TransformPoint(Vector3.back);
+            if (distanceToEnemy < distance)
+            {
+                index = i;
+                distance = distanceToEnemy;
+            }
+        }
 
-
-
-
-
-        pointsForArrow[1] = _arrow.transform.TransformPoint(Vector3.forward *1.3f);
-
-        pointsForArrow[2] = _arrow.transform.TransformPoint(Vector3.forward*.7f + Vector3.right*.5f);
-
-        pointsForArrow[3] = _arrow.transform.TransformPoint(Vector3.forward * 1.3f);
-
-        pointsForArrow[4] = _arrow.transform.TransformPoint(Vector3.forward * .7f + Vector3.left * .5f);
-
-        pointsForArrow[5] = _arrow.transform.TransformPoint(Vector3.forward * 1.3f);
-
-
-
-
-
-        _arrowRenderer.SetPositions(pointsForArrow);
-        _arrowRenderer.widthMultiplier = 0.1f;
-
-        //_coneRenderer.loop = true;
+        return new Tuple<int, float>(index, distance);
     }
 
+    private void RotateArrow(GameObject enemy) {
+        var targetPos = enemy.transform.position;
+        targetPos.y = _arrow.transform.position.y;
+        _arrow.transform.LookAt(targetPos);
+
+    }
 }

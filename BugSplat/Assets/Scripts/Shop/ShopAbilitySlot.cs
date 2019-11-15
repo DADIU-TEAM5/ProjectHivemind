@@ -8,17 +8,16 @@ public class ShopAbilitySlot : ShopSlot
 {
     public Effect Ability;
 
-    public int Price;
+    public ItemInfo Info;
 
-    public Sprite Sprite;
+    public override GameObject GetItemPrefab() => Info?.ItemPrefab;
 
-    public override Sprite GetSprite() => Sprite;
+    public override int GetPrice() => Info?.Price ?? 0;
 
-    public override int GetPrice() => Price;
-
-    public override void OnPurchase()
+    public override bool OnPurchase()
     {
-        Ability.Trigger();
+        Ability?.Trigger();
+        return true;
     }
 
     public override void Init()
@@ -28,4 +27,8 @@ public class ShopAbilitySlot : ShopSlot
     public override void Reset()
     {
     }
+
+    public override string GetTitle() => Ability?.name;
+
+    public override string GetDescription() => Info?.Description;
 }

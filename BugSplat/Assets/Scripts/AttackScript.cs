@@ -14,7 +14,6 @@ public class AttackScript : GameLoop
     public FloatVariable AttackCooldown;
 
     public Vector3Variable PlayerDirectionSO;
-    public FloatVariable PlayerCurrentSpeedSO;
 
     public Transform PlayerGraphics;
     public GameObjectVariable LockedTarget;
@@ -78,9 +77,7 @@ public class AttackScript : GameLoop
         if (!_canAttack) return;
         StartCoroutine(StartAttackCooldown());
 
-        if (PlayerDirectionSO.Value == Vector3.zero)
-            PlayerDirectionSO.Value = transform.forward;
-
+        PlayerDirectionSO.Value =  PlayerGraphics.forward;
 
         LockOnToNearestTarget();
         if (_lockedOntoTarget)

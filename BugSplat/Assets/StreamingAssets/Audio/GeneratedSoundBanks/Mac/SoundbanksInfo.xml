@@ -21,12 +21,17 @@
 			<ShortName>sb_arena</ShortName>
 			<Path>sb_arena.bnk</Path>
 			<IncludedEvents>
-				<Event Id="1404225303" Name="amb_arena_01" ObjectPath="\Events\ArenaEvents\Ambience\Arena\amb_arena_01" DurationType="Infinite"/>
+				<Event Id="4090897946" Name="amb_arena_01_start" ObjectPath="\Events\ArenaEvents\ArenaAmbience\amb_arena_01_start" DurationType="Infinite"/>
+				<Event Id="3018226098" Name="amb_arena_01_stop" ObjectPath="\Events\ArenaEvents\ArenaAmbience\amb_arena_01_stop" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
 				<File Id="207969396" Language="SFX">
 					<ShortName>amb_arena_dome_01.wav</ShortName>
 					<Path>SFX/amb_arena_dome_01_ADF7B7FB.wem</Path>
+				</File>
+				<File Id="554419865" Language="SFX">
+					<ShortName>DivorceBeach.wav</ShortName>
+					<Path>Plugins/Wwise Convolution Reverb/DivorceBeach_6480C31C.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
@@ -35,44 +40,54 @@
 			<ShortName>sb_music</ShortName>
 			<Path>sb_music.bnk</Path>
 			<IncludedEvents>
-				<Event Id="1125500713" Name="Intro" ObjectPath="\Events\MusicEvents\Placeholder\Intro" DurationType="OneShot" DurationMin="154.551468" DurationMax="154.551468"/>
+				<Event Id="1125500713" Name="Intro" ObjectPath="\Events\MusicEvents\Placeholder\Intro" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 			</IncludedEvents>
-			<IncludedMemoryFiles>
-				<File Id="531104102" Language="SFX">
-					<ShortName>Prayer.wav</ShortName>
-					<Path>SFX/Prayer_EBC987A4.wem</Path>
-				</File>
-			</IncludedMemoryFiles>
 		</SoundBank>
 		<SoundBank Id="1262967946" Language="SFX">
 			<ObjectPath>\SoundBanks\Default Work Unit\sb_hub</ObjectPath>
 			<ShortName>sb_hub</ShortName>
 			<Path>sb_hub.bnk</Path>
+			<IncludedEvents>
+				<Event Id="1797197367" Name="amb_hub_mainEvent" ObjectPath="\Events\HubEvents\HubAmbience\amb_hub_mainEvent" DurationType="Infinite"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="887260266" Language="SFX">
+					<ShortName>amb_hub_01.wav</ShortName>
+					<Path>SFX/amb_hub_01_ADF7B7FB.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
 		</SoundBank>
 		<SoundBank Id="1355168291" Language="SFX">
 			<ObjectPath>Init</ObjectPath>
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
+			<ExcludedMemoryFiles>
+				<File Id="554419865" Language="SFX">
+					<ShortName>DivorceBeach.wav</ShortName>
+					<Path>Plugins/Wwise Convolution Reverb/DivorceBeach_6480C31C.wem</Path>
+				</File>
+			</ExcludedMemoryFiles>
 		</SoundBank>
 		<SoundBank Id="1907550163" Language="SFX">
 			<ObjectPath>\SoundBanks\Default Work Unit\sb_enemies</ObjectPath>
 			<ShortName>sb_enemies</ShortName>
 			<Path>sb_enemies.bnk</Path>
 			<IncludedEvents>
-				<Event Id="592638112" Name="npc_boomer_attack" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_attack" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="592638112" Name="npc_boomer_attack" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_attack" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="4.122245" DurationMax="4.122245"/>
+				<Event Id="1929315744" Name="npc_boomer_charge" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_charge" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="2.754785" DurationMax="2.754785"/>
 				<Event Id="1879848174" Name="npc_boomer_dead" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_dead" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 				<Event Id="852176873" Name="npc_boomer_detect" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_detect" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.710403" DurationMax="1.784024"/>
 				<Event Id="199898249" Name="npc_boomer_footsteps" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_footsteps" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.377227" DurationMax="0.604751"/>
-				<Event Id="3079577491" Name="npc_boomer_hit" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_hit" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="1.250000" DurationMax="2.130431"/>
+				<Event Id="3079577491" Name="npc_boomer_hit" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_hit" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="1.450000" DurationMax="2.330431"/>
 				<Event Id="145632074" Name="npc_boomer_idle" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_idle" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 				<Event Id="1549899671" Name="npc_boomer_scream" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_scream" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 				<Event Id="81359797" Name="npc_boomer_specialAttack" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_specialAttack" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 				<Event Id="1529994500" Name="npc_fodder_attack" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_attack" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.414320" DurationMax="0.576782"/>
-				<Event Id="3201101332" Name="npc_fodder_charge" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_charge" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="3201101332" Name="npc_fodder_charge" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_charge" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 				<Event Id="2985061994" Name="npc_fodder_dead" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_dead" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.532272" DurationMax="0.992047"/>
 				<Event Id="1205968901" Name="npc_fodder_detect" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_detect" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.609705" DurationMax="1.124989"/>
 				<Event Id="3043968597" Name="npc_fodder_footsteps" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_footsteps" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.314967" DurationMax="0.583161"/>
-				<Event Id="1374986823" Name="npc_fodder_hit" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_hit" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.532272" DurationMax="0.992047"/>
+				<Event Id="1374986823" Name="npc_fodder_hit" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_hit" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.800000" DurationMax="1.192047"/>
 				<Event Id="2887557750" Name="npc_fodder_idle" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_idle" MaxAttenuation="100.000000" DurationType="Infinite"/>
 				<Event Id="6383691" Name="npc_fodder_scream" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_scream" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 				<Event Id="2078456833" Name="npc_fodder_specialAttack" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_specialAttack" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
@@ -80,17 +95,18 @@
 				<Event Id="2658157895" Name="npc_heavy_dead" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_dead" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 				<Event Id="4074057964" Name="npc_heavy_detect" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_detect" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.801885" DurationMax="2.314713"/>
 				<Event Id="198238650" Name="npc_heavy_footsteps" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_footsteps" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.815072" DurationMax="1.244730"/>
-				<Event Id="78903020" Name="npc_heavy_hit" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_hit" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.722119" DurationMax="2.525671"/>
+				<Event Id="78903020" Name="npc_heavy_hit" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_hit" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="1.022119" DurationMax="2.825671"/>
 				<Event Id="3339782068" Name="npc_heavy_hit_front" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_hit_front" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.688360" DurationMax="1.200843"/>
 				<Event Id="4075444627" Name="npc_heavy_idle" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_idle" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 				<Event Id="1586397994" Name="npc_heavy_scream" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_scream" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 				<Event Id="575616738" Name="npc_heavy_specialAttack" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_specialAttack" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 				<Event Id="1630111423" Name="npc_spitter_attack" ObjectPath="\Events\EnemyInsectEvents\Spitter\npc_spitter_attack" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.685397" DurationMax="0.863152"/>
 				<Event Id="141041902" Name="npc_spitter_burrow" ObjectPath="\Events\EnemyInsectEvents\Spitter\npc_spitter_burrow" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="1.154897" DurationMax="1.812896"/>
+				<Event Id="2415521115" Name="npc_spitter_charge" ObjectPath="\Events\EnemyInsectEvents\Spitter\npc_spitter_charge" MaxAttenuation="100.000000" DurationType="Infinite"/>
 				<Event Id="1581237869" Name="npc_spitter_dead" ObjectPath="\Events\EnemyInsectEvents\Spitter\npc_spitter_dead" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 				<Event Id="2631762934" Name="npc_spitter_detect" ObjectPath="\Events\EnemyInsectEvents\Spitter\npc_spitter_detect" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.750000" DurationMax="1.204308"/>
 				<Event Id="3732201856" Name="npc_spitter_footsteps" ObjectPath="\Events\EnemyInsectEvents\Spitter\npc_spitter_footsteps" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
-				<Event Id="2546983038" Name="npc_spitter_hit" ObjectPath="\Events\EnemyInsectEvents\Spitter\npc_spitter_hit" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.622041" DurationMax="0.750000"/>
+				<Event Id="2546983038" Name="npc_spitter_hit" ObjectPath="\Events\EnemyInsectEvents\Spitter\npc_spitter_hit" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="1.022041" DurationMax="1.150000"/>
 				<Event Id="299564625" Name="npc_spitter_idle" ObjectPath="\Events\EnemyInsectEvents\Spitter\npc_spitter_idle" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 				<Event Id="2642000516" Name="npc_spitter_scream" ObjectPath="\Events\EnemyInsectEvents\Spitter\npc_spitter_scream" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 				<Event Id="3176358132" Name="npc_spitter_specialAttack" ObjectPath="\Events\EnemyInsectEvents\Spitter\npc_spitter_specialAttack" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
@@ -356,10 +372,6 @@
 					<ShortName>boomer_hit_gurgle_02.wav</ShortName>
 					<Path>SFX/boomer_hit_gurgle_02_8EDF57DD.wem</Path>
 				</File>
-				<File Id="493058146" Language="SFX">
-					<ShortName>boomer_footstep_layer1_03.wav</ShortName>
-					<Path>SFX/boomer_footstep_layer1_03_8EDF57DD.wem</Path>
-				</File>
 				<File Id="494245364" Language="SFX">
 					<ShortName>boomer_hit_gurgle_05.wav</ShortName>
 					<Path>SFX/boomer_hit_gurgle_05_8EDF57DD.wem</Path>
@@ -472,6 +484,10 @@
 					<ShortName>spitter_spitlayer2_01.wav</ShortName>
 					<Path>SFX/spitter_spitlayer2_01_8EDF57DD.wem</Path>
 				</File>
+				<File Id="626706690" Language="SFX">
+					<ShortName>boomer_charge_novari.wav</ShortName>
+					<Path>SFX/boomer_charge_novari_8EDF57DD.wem</Path>
+				</File>
 				<File Id="626787956" Language="SFX">
 					<ShortName>ranged_hit_shriek_02.wav</ShortName>
 					<Path>SFX/ranged_hit_shriek_02_8EDF57DD.wem</Path>
@@ -487,10 +503,6 @@
 				<File Id="658151957" Language="SFX">
 					<ShortName>boomer_footstep_layer2_02.wav</ShortName>
 					<Path>SFX/boomer_footstep_layer2_02_8EDF57DD.wem</Path>
-				</File>
-				<File Id="667514742" Language="SFX">
-					<ShortName>boomer_footstep_layer1_01.wav</ShortName>
-					<Path>SFX/boomer_footstep_layer1_01_8EDF57DD.wem</Path>
 				</File>
 				<File Id="673269960" Language="SFX">
 					<ShortName>heavy_grunt_01.wav</ShortName>
@@ -555,10 +567,6 @@
 				<File Id="745392583" Language="SFX">
 					<ShortName>heavy_hit_metal_02.wav</ShortName>
 					<Path>SFX/heavy_hit_metal_02_8EDF57DD.wem</Path>
-				</File>
-				<File Id="746942708" Language="SFX">
-					<ShortName>boomer_footstep_layer1_02.wav</ShortName>
-					<Path>SFX/boomer_footstep_layer1_02_8EDF57DD.wem</Path>
 				</File>
 				<File Id="759037802" Language="SFX">
 					<ShortName>boomer_detect_01.wav</ShortName>
@@ -656,6 +664,10 @@
 					<ShortName>heavy_hit_rockdrag_02.wav</ShortName>
 					<Path>SFX/heavy_hit_rockdrag_02_8EDF57DD.wem</Path>
 				</File>
+				<File Id="932196501" Language="SFX">
+					<ShortName>boomer_attack_novari.wav</ShortName>
+					<Path>SFX/boomer_attack_novari_8EDF57DD.wem</Path>
+				</File>
 				<File Id="935387074" Language="SFX">
 					<ShortName>ranged_burrow_02.wav</ShortName>
 					<Path>SFX/ranged_burrow_02_8EDF57DD.wem</Path>
@@ -667,6 +679,10 @@
 				<File Id="962162331" Language="SFX">
 					<ShortName>fodder_detect_vocal_03.wav</ShortName>
 					<Path>SFX/fodder_detect_vocal_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="982010684" Language="SFX">
+					<ShortName>spitter_charge_chirploop.wav</ShortName>
+					<Path>SFX/spitter_charge_chirploop_ADF7B7FB.wem</Path>
 				</File>
 				<File Id="994308815" Language="SFX">
 					<ShortName>fodder_attack_scream_06_c1.wav</ShortName>
@@ -702,38 +718,264 @@
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
+		<SoundBank Id="2345835849" Language="SFX">
+			<ObjectPath>\SoundBanks\Default Work Unit\sb_shop</ObjectPath>
+			<ShortName>sb_shop</ShortName>
+			<Path>sb_shop.bnk</Path>
+			<IncludedEvents>
+				<Event Id="3126464902" Name="amb_shop_mainEvent" ObjectPath="\Events\ShopEvents\ShopAmbience\amb_shop_mainEvent" DurationType="Infinite"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="7418491" Language="SFX">
+					<ShortName>amb_shop_01.wav</ShortName>
+					<Path>SFX/amb_shop_01_ADF7B7FB.wem</Path>
+				</File>
+				<File Id="99765881" Language="SFX">
+					<ShortName>ambsource_drip_05.wav</ShortName>
+					<Path>SFX/ambsource_drip_05_8EDF57DD.wem</Path>
+				</File>
+				<File Id="420773879" Language="SFX">
+					<ShortName>ambsource_drip_02.wav</ShortName>
+					<Path>SFX/ambsource_drip_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="600179770" Language="SFX">
+					<ShortName>ambsource_drip_06.wav</ShortName>
+					<Path>SFX/ambsource_drip_06_8EDF57DD.wem</Path>
+				</File>
+				<File Id="654805538" Language="SFX">
+					<ShortName>ambsource_drip_01.wav</ShortName>
+					<Path>SFX/ambsource_drip_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="672876930" Language="SFX">
+					<ShortName>ambsource_drip_07.wav</ShortName>
+					<Path>SFX/ambsource_drip_07_8EDF57DD.wem</Path>
+				</File>
+				<File Id="728931627" Language="SFX">
+					<ShortName>ambsource_drip_03.wav</ShortName>
+					<Path>SFX/ambsource_drip_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="742953182" Language="SFX">
+					<ShortName>ambsource_drip_04.wav</ShortName>
+					<Path>SFX/ambsource_drip_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="752146179" Language="SFX">
+					<ShortName>ambsource_drip_08.wav</ShortName>
+					<Path>SFX/ambsource_drip_08_8EDF57DD.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
 		<SoundBank Id="2688509691" Language="SFX">
 			<ObjectPath>\SoundBanks\Default Work Unit\sb_playerCharacter</ObjectPath>
 			<ShortName>sb_playerCharacter</ShortName>
 			<Path>sb_playerCharacter.bnk</Path>
 			<IncludedEvents>
-				<Event Id="2390168611" Name="player_foley_attackEvent" ObjectPath="\Events\PlayerCharacterEvents\Foley\player_foley_attackEvent" DurationType="OneShot" DurationMin="0.416035" DurationMax="0.416035"/>
+				<Event Id="2390168611" Name="player_foley_attackEvent" ObjectPath="\Events\PlayerCharacterEvents\Foley\player_foley_attackEvent" DurationType="OneShot" DurationMin="0.546666" DurationMax="1.020996"/>
 				<Event Id="1643920063" Name="player_foley_dashEvent" ObjectPath="\Events\PlayerCharacterEvents\Foley\player_foley_dashEvent" DurationType="OneShot" DurationMin="0.633846" DurationMax="0.633846"/>
-				<Event Id="954324369" Name="player_foley_footstepEvent" ObjectPath="\Events\PlayerCharacterEvents\Foley\player_foley_footstepEvent" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="954324369" Name="player_foley_footstepEvent" ObjectPath="\Events\PlayerCharacterEvents\Foley\player_foley_footstepEvent" DurationType="OneShot" DurationMin="0.338565" DurationMax="0.504824"/>
 				<Event Id="830213708" Name="player_foley_hit" ObjectPath="\Events\PlayerCharacterEvents\Foley\player_foley_hit" DurationType="OneShot" DurationMin="0.433510" DurationMax="0.433510"/>
 				<Event Id="3187150534" Name="player_foley_killed" ObjectPath="\Events\PlayerCharacterEvents\Foley\player_foley_killed" DurationType="OneShot" DurationMin="2.122885" DurationMax="2.122885"/>
-				<Event Id="586291076" Name="player_foleyPHfootstepEvent" ObjectPath="\Events\PlayerCharacterEvents\Foley\player_foleyPHfootstepEvent" DurationType="Infinite"/>
+				<Event Id="1627434233" Name="player_pickup" ObjectPath="\Events\PlayerCharacterEvents\player_pickup" DurationType="OneShot" DurationMin="0.500000" DurationMax="0.500000"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
+				<File Id="21209393" Language="SFX">
+					<ShortName>player_footsteps_layer2_05.wav</ShortName>
+					<Path>SFX/player_footsteps_layer2_05_8EDF57DD.wem</Path>
+				</File>
+				<File Id="74388081" Language="SFX">
+					<ShortName>player_footsteps_layer1_04.wav</ShortName>
+					<Path>SFX/player_footsteps_layer1_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="86083034" Language="SFX">
+					<ShortName>pickup_flop_05.wav</ShortName>
+					<Path>SFX/pickup_flop_05_8EDF57DD.wem</Path>
+				</File>
 				<File Id="115522779" Language="SFX">
 					<ShortName>Human, Male, Scream, Pain 4 SND23409.wav</ShortName>
 					<Path>SFX/Human, Male, Scream, Pain 4 SND23409_8EDF57DD.wem</Path>
 				</File>
-				<File Id="547378800" Language="SFX">
-					<ShortName>player_foley_PhAttack.wav</ShortName>
-					<Path>SFX/player_foley_PhAttack_7EC2BD1A.wem</Path>
+				<File Id="141951328" Language="SFX">
+					<ShortName>pickup_flop_03.wav</ShortName>
+					<Path>SFX/pickup_flop_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="169910416" Language="SFX">
+					<ShortName>player_attack_swing_01.wav</ShortName>
+					<Path>SFX/player_attack_swing_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="174019984" Language="SFX">
+					<ShortName>player_footsteps_layer1_01.wav</ShortName>
+					<Path>SFX/player_footsteps_layer1_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="194834046" Language="SFX">
+					<ShortName>pickup_flop_10.wav</ShortName>
+					<Path>SFX/pickup_flop_10_8EDF57DD.wem</Path>
+				</File>
+				<File Id="216994291" Language="SFX">
+					<ShortName>player_footsteps_layer2_03.wav</ShortName>
+					<Path>SFX/player_footsteps_layer2_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="280314429" Language="SFX">
+					<ShortName>pickup_sheperdclaves_10.wav</ShortName>
+					<Path>SFX/pickup_sheperdclaves_10_8EDF57DD.wem</Path>
+				</File>
+				<File Id="294329244" Language="SFX">
+					<ShortName>pickup_flop_04.wav</ShortName>
+					<Path>SFX/pickup_flop_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="345840530" Language="SFX">
+					<ShortName>pickup_sheperdclaves_09.wav</ShortName>
+					<Path>SFX/pickup_sheperdclaves_09_8EDF57DD.wem</Path>
+				</File>
+				<File Id="372828274" Language="SFX">
+					<ShortName>pickup_gore_08.wav</ShortName>
+					<Path>SFX/pickup_gore_08_8EDF57DD.wem</Path>
+				</File>
+				<File Id="403040303" Language="SFX">
+					<ShortName>player_footsteps_layer1_06.wav</ShortName>
+					<Path>SFX/player_footsteps_layer1_06_8EDF57DD.wem</Path>
+				</File>
+				<File Id="403721275" Language="SFX">
+					<ShortName>pickup_sheperdclaves_03.wav</ShortName>
+					<Path>SFX/pickup_sheperdclaves_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="414592383" Language="SFX">
+					<ShortName>pickup_gore_05.wav</ShortName>
+					<Path>SFX/pickup_gore_05_8EDF57DD.wem</Path>
+				</File>
+				<File Id="414859925" Language="SFX">
+					<ShortName>pickup_flop_02.wav</ShortName>
+					<Path>SFX/pickup_flop_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="437158742" Language="SFX">
+					<ShortName>pickup_gore_06.wav</ShortName>
+					<Path>SFX/pickup_gore_06_8EDF57DD.wem</Path>
+				</File>
+				<File Id="437305237" Language="SFX">
+					<ShortName>player_attack_swing_02.wav</ShortName>
+					<Path>SFX/player_attack_swing_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="440259285" Language="SFX">
+					<ShortName>pickup_flop_07.wav</ShortName>
+					<Path>SFX/pickup_flop_07_8EDF57DD.wem</Path>
+				</File>
+				<File Id="442842554" Language="SFX">
+					<ShortName>player_footsteps_layer1_03.wav</ShortName>
+					<Path>SFX/player_footsteps_layer1_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="482577767" Language="SFX">
+					<ShortName>pickup_sheperdclaves_01.wav</ShortName>
+					<Path>SFX/pickup_sheperdclaves_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="489887477" Language="SFX">
+					<ShortName>player_footsteps_layer1_02.wav</ShortName>
+					<Path>SFX/player_footsteps_layer1_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="495684286" Language="SFX">
+					<ShortName>player_footsteps_layer2_04.wav</ShortName>
+					<Path>SFX/player_footsteps_layer2_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="509191122" Language="SFX">
+					<ShortName>pickup_flop_01.wav</ShortName>
+					<Path>SFX/pickup_flop_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="534700570" Language="SFX">
+					<ShortName>pickup_sheperdclaves_05.wav</ShortName>
+					<Path>SFX/pickup_sheperdclaves_05_8EDF57DD.wem</Path>
+				</File>
+				<File Id="545764476" Language="SFX">
+					<ShortName>pickup_gore_03.wav</ShortName>
+					<Path>SFX/pickup_gore_03_8EDF57DD.wem</Path>
 				</File>
 				<File Id="563002238" Language="SFX">
 					<ShortName>Human, Vocal, Male, Grunt, Ouch, Pain 2 SND23309.wav</ShortName>
 					<Path>SFX/Human, Vocal, Male, Grunt, Ouch, Pain 2 SND23309_8EDF57DD.wem</Path>
 				</File>
+				<File Id="565473138" Language="SFX">
+					<ShortName>pickup_gore_02.wav</ShortName>
+					<Path>SFX/pickup_gore_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="680450465" Language="SFX">
+					<ShortName>player_footsteps_layer2_02.wav</ShortName>
+					<Path>SFX/player_footsteps_layer2_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="681999255" Language="SFX">
+					<ShortName>pickup_flop_09.wav</ShortName>
+					<Path>SFX/pickup_flop_09_8EDF57DD.wem</Path>
+				</File>
 				<File Id="729234363" Language="SFX">
 					<ShortName>player_foley_PhDash.wav</ShortName>
-					<Path>SFX/player_foley_PhDash_7EC2BD1A.wem</Path>
+					<Path>SFX/player_foley_PhDash_8EDF57DD.wem</Path>
 				</File>
-				<File Id="758032860" Language="SFX">
-					<ShortName>Footsteps\player_foley_PhFoots.wav</ShortName>
-					<Path>SFX/Footsteps/player_foley_PhFoots_EBC987A4.wem</Path>
+				<File Id="740970673" Language="SFX">
+					<ShortName>pickup_sheperdclaves_07.wav</ShortName>
+					<Path>SFX/pickup_sheperdclaves_07_8EDF57DD.wem</Path>
+				</File>
+				<File Id="755504567" Language="SFX">
+					<ShortName>pickup_flop_08.wav</ShortName>
+					<Path>SFX/pickup_flop_08_8EDF57DD.wem</Path>
+				</File>
+				<File Id="769135946" Language="SFX">
+					<ShortName>player_footsteps_layer1_07.wav</ShortName>
+					<Path>SFX/player_footsteps_layer1_07_8EDF57DD.wem</Path>
+				</File>
+				<File Id="790727847" Language="SFX">
+					<ShortName>pickup_sheperdclaves_02.wav</ShortName>
+					<Path>SFX/pickup_sheperdclaves_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="820134146" Language="SFX">
+					<ShortName>player_footsteps_layer1_05.wav</ShortName>
+					<Path>SFX/player_footsteps_layer1_05_8EDF57DD.wem</Path>
+				</File>
+				<File Id="829006442" Language="SFX">
+					<ShortName>pickup_flop_06.wav</ShortName>
+					<Path>SFX/pickup_flop_06_8EDF57DD.wem</Path>
+				</File>
+				<File Id="857603566" Language="SFX">
+					<ShortName>player_footsteps_layer1_08.wav</ShortName>
+					<Path>SFX/player_footsteps_layer1_08_8EDF57DD.wem</Path>
+				</File>
+				<File Id="864833495" Language="SFX">
+					<ShortName>player_attack_swing_03.wav</ShortName>
+					<Path>SFX/player_attack_swing_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="894389888" Language="SFX">
+					<ShortName>pickup_gore_07.wav</ShortName>
+					<Path>SFX/pickup_gore_07_8EDF57DD.wem</Path>
+				</File>
+				<File Id="896414305" Language="SFX">
+					<ShortName>pickup_sheperdclaves_08.wav</ShortName>
+					<Path>SFX/pickup_sheperdclaves_08_8EDF57DD.wem</Path>
+				</File>
+				<File Id="905814177" Language="SFX">
+					<ShortName>player_attack_swing_04.wav</ShortName>
+					<Path>SFX/player_attack_swing_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="924444846" Language="SFX">
+					<ShortName>player_footsteps_layer2_01.wav</ShortName>
+					<Path>SFX/player_footsteps_layer2_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="930543282" Language="SFX">
+					<ShortName>pickup_sheperdclaves_04.wav</ShortName>
+					<Path>SFX/pickup_sheperdclaves_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="969225261" Language="SFX">
+					<ShortName>player_footsteps_layer2_06.wav</ShortName>
+					<Path>SFX/player_footsteps_layer2_06_8EDF57DD.wem</Path>
+				</File>
+				<File Id="1015637353" Language="SFX">
+					<ShortName>pickup_sheperdclaves_06.wav</ShortName>
+					<Path>SFX/pickup_sheperdclaves_06_8EDF57DD.wem</Path>
+				</File>
+				<File Id="1022319066" Language="SFX">
+					<ShortName>pickup_gore_01.wav</ShortName>
+					<Path>SFX/pickup_gore_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="1052881731" Language="SFX">
+					<ShortName>player_footsteps_layer2_0.wav</ShortName>
+					<Path>SFX/player_footsteps_layer2_0_8EDF57DD.wem</Path>
+				</File>
+				<File Id="1069892010" Language="SFX">
+					<ShortName>pickup_gore_04.wav</ShortName>
+					<Path>SFX/pickup_gore_04_8EDF57DD.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>

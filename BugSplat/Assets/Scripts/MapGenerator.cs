@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
-
-    
-
-    public FloatVariable CurrentLevelBudget;
     public IntVariable EnemySpawnerCount;
 
     public bool UseRandomSeed;
@@ -18,12 +14,17 @@ public class MapGenerator : MonoBehaviour
 
     public ShopLevels Levels;
 
+    //public bool IsGauntlet;
+
     public GameObject[] Hexagons;
+
+    public GameObject[] GauntletHexagons;
 
     List<List<GameObject>> SortedHexagons;
     List<Tier> availableTiers;
 
     public GameObject[] CenterHexagons;
+    public GameObject[] GauntletCenterHexagons;
 
     public GameObjectVariable hexmapParent;
 
@@ -49,9 +50,19 @@ public class MapGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EnemySpawnerCount.Value = 0;
+        var isGauntlet = Levels.LevelTierPicker[CurrentLevel.Value].IsGauntlet;
+        if (isGauntlet)
+        {
+            Hexagons = GauntletHexagons;
+            CenterHexagons = GauntletCenterHexagons;
+        }
 
-        CurrentLevelBudget.Value = Levels.LevelTierPicker[CurrentLevel.Value].budget;
+
+        EnemySpawnerCount.Value = 0;
+        Debug.Log("THE MAPGEN SET UP THE VALUES!!");
+        EnemySpawner.LevelBudget = Levels.LevelTierPicker[CurrentLevel.Value].budget;
+        print("spawner budget set to "+ EnemySpawner.LevelBudget);
+        print("spawner budget should be set to " + Levels.LevelTierPicker[CurrentLevel.Value].budget);
 
         SortedHexagons = new List<List<GameObject>>();
         availableTiers = new List<Tier>();
@@ -107,7 +118,7 @@ public class MapGenerator : MonoBehaviour
 
         GameObject hex = Instantiate(getRandomCenterHexagon());
         Hexagon hexHex= hex.GetComponent<Hexagon>();
-        hexHex.RotateTile(Random.Range(0, 5));
+        //hexHex.RotateTile(Random.Range(0, 5));
         hexHex.IsaccesibleFromMiddle = true;
 
         hex.name = "middle";
@@ -118,8 +129,9 @@ public class MapGenerator : MonoBehaviour
         _hexagonsTiles.Add(hex);
 
 
-
         StartCoroutine(GeneratAllTheRings());
+
+        _hexagonsTiles.Remove(hex);
 
         StartCoroutine(RotateTilesToMakeMostPossibleConnections());
 
@@ -134,6 +146,9 @@ public class MapGenerator : MonoBehaviour
         for (int i = 0; i < _hexagonsTiles.Count; i++)
         {
             Hexagon hexScript = _hexagonsTiles[i].GetComponent<Hexagon>();
+
+           
+
            if (!hexScript.IsaccesibleFromMiddle)
             {
                 hexScript.OpenAndRotateNeighbour();
@@ -145,6 +160,12 @@ public class MapGenerator : MonoBehaviour
         _Parent.SetActive(false);
         _Parent.transform.Rotate(0, 90, 0);
         _Parent.SetActive(true);
+
+        for (int i = 0; i < _hexagonsTiles.Count; i++)
+        {
+            Hexagon hexScript = _hexagonsTiles[i].GetComponent<Hexagon>();
+            hexScript.DistributeBudget();
+        }
         
         //print("Finished rotatin tiles");
 
@@ -196,9 +217,6 @@ public class MapGenerator : MonoBehaviour
     public void GenrateAroundTile(GameObject tile)
     {
         StartCoroutine(GenrateRingAroundHex(tile));
-
-
-        
 
         UpdateAllTheNeighbours();
 
@@ -407,7 +425,7 @@ public class MapGenerator : MonoBehaviour
 
             positionToPlaceHex.x += hexStepHeight * (i + multiplierHeight);
 
-            hex.name = "edge " + i;
+           // hex.name = "edge " + i;
             hex.transform.position = positionToPlaceHex;
 
             hex.transform.parent = _Parent.transform;

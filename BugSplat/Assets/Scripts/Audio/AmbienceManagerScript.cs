@@ -9,59 +9,37 @@ public class AmbienceManagerScript : MonoBehaviour
     public AK.Wwise.Event arenaAmbience;
     public AK.Wwise.Event hubAmbience;
     public AK.Wwise.Event shopAmbience;
-    public AK.Wwise.Event fadeAmbience;
 
-    public string currentScenePlaceholderSO;
+    [Header("Wwise reverb states")]
+    public AK.Wwise.State Arenaverb;
+    public AK.Wwise.State Hubverb;
+    public AK.Wwise.State Shopverb;
 
 
-    void Start()
+    public void ArenaSceneLoad()
     {
-        //PH
         arenaAmbience.Post(this.gameObject);
-
-        /*if (currentScenePlaceholderSO == "arena")
-        {
-            arenaAmbience.Post(this.gameObject);
-        }
-
-        if (currentScenePlaceholderSO == "hub")
-        {
-            hubAmbience.Post(this.gameObject);
-        }
-
-        if (currentScenePlaceholderSO == "shop")
-        {
-            shopAmbience.Post(this.gameObject);
-        }*/
-
+        Arenaverb.SetValue();
+        
     }
 
+    public void HubSceneLoad()
+    {
+        hubAmbience.Post(this.gameObject);
+        Hubverb.SetValue();
+    }
+
+    public void ShopSceneLoad()
+    {
+        shopAmbience.Post(this.gameObject);
+        Shopverb.SetValue();
+    }
 
     public void SceneChange()
     {
-
-        fadeAmbience.Post(this.gameObject, (uint)AkCallbackType.AK_EndOfEvent, UnloadBankOnEventEnd);
-
-        if (currentScenePlaceholderSO == "arena")
-        {
-            arenaAmbience.Post(this.gameObject);
-        }
-
-        if (currentScenePlaceholderSO == "hub")
-        {
-            hubAmbience.Post(this.gameObject);
-        }
-
-        if (currentScenePlaceholderSO == "shop")
-        {
-            shopAmbience.Post(this.gameObject);
-        }
-
-    }
-
-    public void UnloadBankOnEventEnd(object in_cookie, AkCallbackType in_type, object in_info)
-    {
-
+        arenaAmbience.Stop(this.gameObject);
+        hubAmbience.Stop(this.gameObject);
+        hubAmbience.Stop(this.gameObject);
     }
 
 

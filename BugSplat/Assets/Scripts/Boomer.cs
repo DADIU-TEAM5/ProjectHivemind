@@ -18,7 +18,7 @@ public class Boomer : Enemy
     private float _attackCharge;
     private float _attackCooldown = 0;
 
-
+    float _SackCD;
 
     
 
@@ -63,18 +63,18 @@ public class Boomer : Enemy
 
     }
 
-    
+
+
+
+
+
+
+
 
     
 
 
-
-    
-
-    
-
-
-    public override void LoopUpdate(float deltaTime)
+    public override void LoopBehaviour(float deltaTime)
     {
         RemoveFromLockedTargetIfNotVisible();
 
@@ -88,9 +88,9 @@ public class Boomer : Enemy
             Renderer.material.color = SetColor( Color.blue);
             DetectThePlayer();
         }
-        else if (playerInAttackRange() || _attacking)
+        else if (playerInCustomAttackRange(_boomerStats.AttackRangeTrigger) || _attacking)
         {
-            if (_attackCooldown <= 0)
+            if (_attackCooldown <= 0 )
             {
                 
 
@@ -101,14 +101,21 @@ public class Boomer : Enemy
             {
                 Renderer.material.color = SetColor(Color.yellow);
             }
-                MoveTowardsThePlayer();
-            
+            MoveTowardsThePlayer(deltaTime);
+
         }
         else
         {
             Renderer.material.color = SetColor(Color.yellow);
-            MoveTowardsThePlayer();
+            MoveTowardsThePlayer(deltaTime);
         }
+
+
+        if (PlayerDetected && _boomerStats.SpawnsSacks)
+        {
+            SpawnSack(deltaTime);
+        }
+
     }
 
     public override void LoopLateUpdate(float deltaTime) { }
@@ -131,6 +138,9 @@ public class Boomer : Enemy
             DrawCone(20, OutlineMesh, true,_attackCharge);
 
             BoomerAnimator.SetTrigger("Attack");
+
+            BoomerAnimator.SetBool("Walking", false);
+
             BoomerAnimator.speed = 1 + _percentIncrease;
 
         }
@@ -188,32 +198,109 @@ public class Boomer : Enemy
             Outline.SetActive(false);
             NavMeshAgent.speed = _boomerStats.MoveSpeed;
 
+            
+
             BoomerAnimator.speed = 1 ;
+
+
+            if (_boomerStats.DiesWhenItExplode)
+                TakeDamage(999999999999);
+        }
+
+    }
+
+
+    void SpawnSack(float deltaTime)
+    {
+
+        if (_SackCD > 0) {
+            _SackCD -= deltaTime;
+        }
+        else
+        {
+            _SackCD = _boomerStats.SackSpawnCooldown;
+           GameObject Sack =  Instantiate(_boomerStats.SackToSpawn, transform);
+
+            Destroy(Sack, _boomerStats.SackLifeTime);
+
+            Sack.transform.parent = null;
+
         }
 
     }
 
 
 
-    
-
-    void MoveTowardsThePlayer()
+    public override void TakeDamageBehaviour(float damage)
     {
-        float distanceToplayer = Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(PlayerTransform.position.x, PlayerTransform.position.z));
+        
+    }
 
-        if (distanceToplayer > 2)
+
+
+    float _angle = 0;
+
+    void MoveTowardsThePlayer(float deltaTime)
+    {
+
+        
+
+        if (_attackCooldown <= 0)
         {
-            BoomerAnimator.SetBool("Walking", true);
+            if (Vector3.Distance(transform.position, PlayerTransform.position) > _boomerStats.TargetDistanceToPlayer)
+            {
+                if (NavMeshAgent.destination != PlayerTransform.position)
+                {
 
-            if (NavMeshAgent.destination != PlayerTransform.position)
-                NavMeshAgent.destination = PlayerTransform.position;
+                    BoomerAnimator.SetBool("Walking", true);
+                    NavMeshAgent.destination = PlayerTransform.position;
+
+                }
+            }
+            else
+            {
+                if (NavMeshAgent.destination != transform.position)
+                {
+                    BoomerAnimator.SetBool("Walking", false);
+                    NavMeshAgent.destination = transform.position;
+
+                }
+
+            }
         }
         else
         {
-            BoomerAnimator.SetBool("Walking", false);
-            if (NavMeshAgent.destination != transform.position)
-                NavMeshAgent.destination = transform.position;
+
+            _angle += deltaTime * _boomerStats.OrbitSpeed;
+
+            Vector3 vectorToRotate = Vector3.forward * _boomerStats.OrbitRadius;
+            Vector3 rotatedVector = Vector3.zero;
+
+
+            float s = Mathf.Sin(_angle);
+            float c = Mathf.Cos(_angle);
+
+            rotatedVector.x = vectorToRotate.x * c - vectorToRotate.z * s;
+            rotatedVector.z = vectorToRotate.x * s + vectorToRotate.z * c;
+
+
+
+            rotatedVector += PlayerTransform.position;
+
+            rotatedVector.y = 0;
+
+
+            if (NavMeshAgent.destination != rotatedVector)
+            {
+
+                BoomerAnimator.SetBool("Walking", true);
+                NavMeshAgent.destination = rotatedVector;
+
+
+            }
+
         }
+        
     }
 
     

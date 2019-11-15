@@ -8,4 +8,12 @@ public abstract class Effect : ScriptableObject
 
     public abstract void Trigger(GameObject target = null);
     public abstract void Init();
+
+    protected static EmptyMono MakeCoroutineObject() {
+        var coroutineObject = new GameObject();
+        var emptymonoObj = coroutineObject.AddComponent<EmptyMono>();
+        coroutineObject.SetActive(true);
+
+        return emptymonoObj;
+    }
 }
