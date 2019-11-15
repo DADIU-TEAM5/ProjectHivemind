@@ -15,7 +15,10 @@ public class RotateHubEnterColliderObject : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         transform.rotation = GameObject.Find("middle").transform.rotation;
-        PlayerControlOverride.SetActive(true);
+        if (PlayerControlOverride != null)
+        {
+            PlayerControlOverride.SetActive(true);
+        }
         yield break;
     }
 }

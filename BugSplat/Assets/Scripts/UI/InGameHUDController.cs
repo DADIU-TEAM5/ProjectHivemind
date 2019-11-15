@@ -16,21 +16,6 @@ public class InGameHUDController : MonoBehaviour
        
     }
 
-    //public void PauseToggle()
-    //{
-    //    if (GameIsPaused.Value)
-    //    {
-    //        Time.timeScale = 1;
-    //        GameIsPaused.Value = false;
-    //        uM.SetActive(true);
-    //    }
-    //    else
-    //    {
-    //        Time.timeScale = 0;
-    //        GameIsPaused.Value = true;
-    //        uM.SetActive(false);
-    //    }
-    //}
 
     public void Pause()
     {
