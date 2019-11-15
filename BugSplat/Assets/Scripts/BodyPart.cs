@@ -9,6 +9,8 @@ public class BodyPart : GameLoop
     public float PickUpRange;
     public IntVariable BodyParts;
 
+    public GameEvent PickedUpEvent;
+
     public float enableTime = 1;
     public float PickUpSpeed;
     public float ExplosionDistance;
@@ -65,9 +67,8 @@ public class BodyPart : GameLoop
             if (distanceToPlayer < 0.2f)
             {
                 BodyParts.Value += Random.Range(minValue,MaxValue);
+                PickedUpEvent?.Raise(gameObject);
                 Destroy(gameObject);
-                
-                
             }
         }
     }
