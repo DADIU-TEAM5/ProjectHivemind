@@ -82,12 +82,10 @@ public class PlayerControlOverride : MonoBehaviour
             Vector3 heading = ExitTargets[ExitTargets.Length - 1].position - ExitTargets[0].position;
             PlayerDirectionSO.Value = new Vector3(heading.normalized.x, 0, heading.normalized.z);
             Debug.Log("Target: " + ExitTargets[0].position);
-            //Player.GetComponent<NavMeshAgent>().enabled = false;
-            Player.GetComponent<NavMeshAgent>().updatePosition = false;
+            Player.GetComponent<NavMeshAgent>().enabled = false;
             Player.position = ExitTargets[0].position;
             Debug.Log("Player: " + Player.position);
-            //Player.GetComponent<NavMeshAgent>().enabled = true;
-            //Player.GetComponent<NavMeshAgent>().updatePosition = true;
+            Player.GetComponent<NavMeshAgent>().enabled = true;
             PlayerCurrentSpeedSO.Value = PlayerCurrentSpeedSO.InitialValue;
 
             if (WhiteFadeIn != null)
