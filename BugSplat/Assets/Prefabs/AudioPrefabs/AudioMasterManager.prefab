@@ -1748,6 +1748,7 @@ GameObject:
   - component: {fileID: 6063313712825280198}
   - component: {fileID: 7800986767393888800}
   - component: {fileID: 6739134428487652935}
+  - component: {fileID: 8710263321301275699}
   m_Layer: 0
   m_Name: HeavyAuido
   m_TagString: Untagged
@@ -1785,6 +1786,11 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 3ae0a3a7b16524acabb302d18516266c,
+      type: 2}
+  FootstepLight:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: c6804ede287c84e92b39c84e0c577338,
       type: 2}
   Attack:
     idInternal: 0
@@ -1919,6 +1925,35 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5959220859600176160}
         m_MethodName: FootStepEvent
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &8710263321301275699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9174410380775275465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: e4fa24571b08647e1b124ef6c7c771a6, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5959220859600176160}
+        m_MethodName: FootStepLightEvent
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
