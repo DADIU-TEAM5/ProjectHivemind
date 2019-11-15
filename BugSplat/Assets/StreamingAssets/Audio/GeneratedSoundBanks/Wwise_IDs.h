@@ -60,6 +60,7 @@ namespace AK
         static const AkUniqueID PLAYER_FOLEY_FOOTSTEPEVENT = 954324369U;
         static const AkUniqueID PLAYER_FOLEY_HIT = 830213708U;
         static const AkUniqueID PLAYER_FOLEY_KILLED = 3187150534U;
+        static const AkUniqueID PLAYER_PICKUP = 1627434233U;
     } // namespace EVENTS
 
     namespace STATES

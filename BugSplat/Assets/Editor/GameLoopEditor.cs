@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System;
 
 
 
@@ -13,7 +14,8 @@ public class GameLoopEditor : Editor
     GameLoopParticipant loopDeLoop;
 
 
-     List<GameLoop> GameLoops;
+    List<GameLoop> GameLoops;
+
     GameLoop[] gameLoopArray;
 
 
@@ -30,35 +32,15 @@ public class GameLoopEditor : Editor
         for (int i = 0; i < gameLoopArray.Length; i++)
         {
 
-            if(!gameLoopArray[i].IsPaticipant)
+            if(gameLoopArray[i].isActiveAndEnabled && !gameLoopArray[i].IsPaticipant)
             {
                 GameLoops.Add(gameLoopArray[i]);
             }
 
         }
 
-        gameLoopArray = new GameLoop[GameLoops.Count];
-
-        for (int i = 0; i < GameLoops.Count; i++)
-        {
-            gameLoopArray[i] = GameLoops[i];
-
-        }
-
+        gameLoopArray = GameLoops.ToArray();
 
         loopDeLoop.GameLoops = gameLoopArray;
-
-
     }
-
-    /*
-    public override void OnInspectorGUI()
-    {
-
-        DrawDefaultInspector();
-
-
-    }
-    */
-
 }

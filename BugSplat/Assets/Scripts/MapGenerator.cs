@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
-
-    
     public IntVariable EnemySpawnerCount;
 
     public bool UseRandomSeed;
@@ -52,7 +50,8 @@ public class MapGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (Levels.LevelTierPicker[CurrentLevel.Value].IsGauntlet)
+        var isGauntlet = Levels.LevelTierPicker[CurrentLevel.Value].IsGauntlet;
+        if (isGauntlet)
         {
             Hexagons = GauntletHexagons;
             CenterHexagons = GauntletCenterHexagons;
@@ -119,7 +118,7 @@ public class MapGenerator : MonoBehaviour
 
         GameObject hex = Instantiate(getRandomCenterHexagon());
         Hexagon hexHex= hex.GetComponent<Hexagon>();
-        hexHex.RotateTile(Random.Range(0, 5));
+        //hexHex.RotateTile(Random.Range(0, 5));
         hexHex.IsaccesibleFromMiddle = true;
 
         hex.name = "middle";
@@ -130,8 +129,9 @@ public class MapGenerator : MonoBehaviour
         _hexagonsTiles.Add(hex);
 
 
-
         StartCoroutine(GeneratAllTheRings());
+
+        _hexagonsTiles.Remove(hex);
 
         StartCoroutine(RotateTilesToMakeMostPossibleConnections());
 
@@ -217,9 +217,6 @@ public class MapGenerator : MonoBehaviour
     public void GenrateAroundTile(GameObject tile)
     {
         StartCoroutine(GenrateRingAroundHex(tile));
-
-
-        
 
         UpdateAllTheNeighbours();
 
