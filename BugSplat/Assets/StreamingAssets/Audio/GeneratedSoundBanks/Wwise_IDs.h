@@ -62,6 +62,22 @@ namespace AK
         static const AkUniqueID PLAYER_FOLEY_KILLED = 3187150534U;
     } // namespace EVENTS
 
+    namespace STATES
+    {
+        namespace STATE_SCENE
+        {
+            static const AkUniqueID GROUP = 2072924777U;
+
+            namespace STATE
+            {
+                static const AkUniqueID STATE_ARENA = 1124786752U;
+                static const AkUniqueID STATE_HUB = 324041644U;
+                static const AkUniqueID STATE_SHOP = 238388283U;
+            } // namespace STATE
+        } // namespace STATE_SCENE
+
+    } // namespace STATES
+
     namespace SWITCHES
     {
         namespace SWITCH_AMB
@@ -75,6 +91,18 @@ namespace AK
                 static const AkUniqueID SWITCH_AMB_SHOP = 3307969155U;
             } // namespace SWITCH
         } // namespace SWITCH_AMB
+
+        namespace SWITCH_MUSIC_SCENE
+        {
+            static const AkUniqueID GROUP = 693628484U;
+
+            namespace SWITCH
+            {
+                static const AkUniqueID SWITCH_MUSIC_SCENE_ARENA = 389115708U;
+                static const AkUniqueID SWITCH_MUSIC_SCENE_HUB = 1801485104U;
+                static const AkUniqueID SWITCH_MUSIC_SCENE_SHOP = 3910460951U;
+            } // namespace SWITCH
+        } // namespace SWITCH_MUSIC_SCENE
 
     } // namespace SWITCHES
 
@@ -97,23 +125,20 @@ namespace AK
 
     namespace BUSSES
     {
-        static const AkUniqueID AMBIENCE_CHANNEL = 655445U;
-        static const AkUniqueID CROWD_CHANNEL = 1944073392U;
         static const AkUniqueID DIALOGUE_BUS = 573466488U;
         static const AkUniqueID HDR_MAGIC_BUS = 2239254138U;
-        static const AkUniqueID HDR_REVERB_RTN = 228236773U;
         static const AkUniqueID MASTER_BUS = 1399649189U;
         static const AkUniqueID MASTER_OUT = 1330420139U;
         static const AkUniqueID MUSIC_BUS = 2680856269U;
-        static const AkUniqueID SFX_CHANNEL = 3990010218U;
+        static const AkUniqueID REVERB_RETURN = 358140370U;
         static const AkUniqueID SUMMER_BUS = 1348578857U;
     } // namespace BUSSES
 
     namespace AUX_BUSSES
     {
-        static const AkUniqueID HDR_REVERB_RECEIVE = 1172022782U;
-        static const AkUniqueID HDR_VERB_ARENA = 2679963831U;
-        static const AkUniqueID HDR_VERB_HUB = 1013890195U;
+        static const AkUniqueID REVERB_ARENA = 1569207989U;
+        static const AkUniqueID REVERB_HUB = 3119546469U;
+        static const AkUniqueID REVERB_SHOP = 788805620U;
     } // namespace AUX_BUSSES
 
     namespace AUDIO_DEVICES
