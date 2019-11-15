@@ -56,7 +56,7 @@ public class PlayerControlOverride : MonoBehaviour
                 ExitTargets[k].gameObject.SetActive(false);
             }
 
-            PlayerControlOverrideSO.Value = false;
+            //PlayerControlOverrideSO.Value = false;
         }
         else
         {
@@ -78,7 +78,7 @@ public class PlayerControlOverride : MonoBehaviour
     {
         if (Player != null)
         {
-            PlayerControlOverrideSO.Value = true;
+            //PlayerControlOverrideSO.Value = true;
             Vector3 heading = ExitTargets[ExitTargets.Length - 1].position - ExitTargets[0].position;
             PlayerDirectionSO.Value = new Vector3(heading.normalized.x, 0, heading.normalized.z);
             Debug.Log("Target: " + ExitTargets[0].position);
@@ -108,7 +108,7 @@ public class PlayerControlOverride : MonoBehaviour
     public void GoToTarget(Transform target)
     {
 
-        PlayerControlOverrideSO.Value = true;
+        //PlayerControlOverrideSO.Value = true;
         PlayerGraphics.localRotation = Quaternion.LookRotation(PlayerDirectionSO.Value, Vector3.up);
 
         //PlayerCurrentSpeedSO.Value = PlayerCurrentSpeedSO.InitialValue;
@@ -119,7 +119,7 @@ public class PlayerControlOverride : MonoBehaviour
 
     public void ResetPlayerControl()
     {
-        PlayerControlOverrideSO.Value = false;
+        //PlayerControlOverrideSO.Value = false;
 
         Time.timeScale = 1f;
 
