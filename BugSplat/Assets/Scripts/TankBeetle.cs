@@ -84,7 +84,7 @@ public class TankBeetle : Enemy
         
             if (!PlayerDetected)
             {
-                Renderer.material.color = SetColor(Color.blue);
+                //Renderer.material.color = SetColor(Color.blue);
                 DetectThePlayer();
             }
             else if (playerInChargeRange() || _attacking)
@@ -93,21 +93,21 @@ public class TankBeetle : Enemy
                 if (_attackCooldown <= 0)
                 {
 
-                    Renderer.material.color = SetColor(Color.red);
+                  //  Renderer.material.color = SetColor(Color.red);
                     Attack(deltaTime);
 
 
                 }
                 else
                 {
-                    Renderer.material.color = SetColor(Color.yellow);
+                  //  Renderer.material.color = SetColor(Color.yellow);
                     MoveTowardsThePlayer(deltaTime);
                 }
 
             }
             else
             {
-                Renderer.material.color = SetColor(Color.yellow);
+              //  Renderer.material.color = SetColor(Color.yellow);
                 MoveTowardsThePlayer(deltaTime);
             }
         
