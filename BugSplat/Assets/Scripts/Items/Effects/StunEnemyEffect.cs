@@ -2,17 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StunEnemy : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
+[CreateAssetMenu(menuName = "Effects/Stun Enemy")]
+public class StunEnemy : Effect
+{   
+    public float Duration = 3;
+
+    private EmptyMono CoroutineBoy;
+
+    public override void Init()
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Trigger(GameObject target = null)
     {
-        
+        var enemy = target?.GetComponent<Enemy>();
+        if (enemy == null) return;
+
+        enemy.Stun(Duration);
     }
 }
