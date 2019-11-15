@@ -85,7 +85,7 @@ public class Boomer : Enemy
 
         if (!PlayerDetected)
         {
-            Renderer.material.color = SetColor( Color.blue);
+            //Renderer.material.color = SetColor( Color.blue);
             DetectThePlayer();
         }
         else if (playerInCustomAttackRange(_boomerStats.AttackRangeTrigger) || _attacking)
@@ -94,19 +94,19 @@ public class Boomer : Enemy
             {
                 
 
-                Renderer.material.color = SetColor(Color.red);
+                //Renderer.material.color = SetColor(Color.red);
                 Attack();
             }
             else
             {
-                Renderer.material.color = SetColor(Color.yellow);
+                //Renderer.material.color = SetColor(Color.yellow);
             }
             MoveTowardsThePlayer(deltaTime);
 
         }
         else
         {
-            Renderer.material.color = SetColor(Color.yellow);
+            //Renderer.material.color = SetColor(Color.yellow);
             MoveTowardsThePlayer(deltaTime);
         }
 
