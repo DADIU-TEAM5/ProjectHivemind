@@ -29,7 +29,7 @@ public class ParticleController : MonoBehaviour
 
     public void InstantiateAfterParts() {
         if (AfterParts == null) return;
-        var gameO = Instantiate(AfterParts, this.transform.position, this.transform.rotation);
+        var gameO = Instantiate(AfterParts, this.transform.position, this.transform.rotation * Quaternion.Euler(0, 180, 0));
         gameO.SetActive(true);
     }
 }
