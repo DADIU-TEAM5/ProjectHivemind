@@ -79,7 +79,7 @@ public class ModifiersHUD : MonoBehaviour
 
         if (PlayerIventory.Items.Count > i+index)
         {
-            GameObject prefab = PlayerIventory.Items[i].Info.ItemPrefab;
+            GameObject prefab = PlayerIventory.Items[i+index].Info.ItemPrefab;
             GameObject item = Instantiate(prefab);
             item.SetActive(true);
             item.transform.SetParent(model);
