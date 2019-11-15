@@ -31,6 +31,7 @@ public class ItemInvoker : MonoBehaviour
     private void LoadInventory() {
         for (var i = 0; i < Inventory.Items.Count; i++) {
             var item = Inventory.Items[i];
+            if (item == null) continue;
 
             for (var j = 0; j < item.Effects.Length; j++) {
                 var effect = item.Effects[j];
