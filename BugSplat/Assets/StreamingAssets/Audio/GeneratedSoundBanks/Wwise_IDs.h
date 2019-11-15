@@ -61,6 +61,9 @@ namespace AK
         static const AkUniqueID PLAYER_FOLEY_HIT = 830213708U;
         static const AkUniqueID PLAYER_FOLEY_KILLED = 3187150534U;
         static const AkUniqueID PLAYER_PICKUP = 1627434233U;
+        static const AkUniqueID SPIKETRAP_CHARGE = 4263442935U;
+        static const AkUniqueID SPIKETRAP_IMPACT = 2179537273U;
+        static const AkUniqueID SPIKETRAP_STAB = 2700540079U;
     } // namespace EVENTS
 
     namespace STATES
@@ -133,6 +136,7 @@ namespace AK
         static const AkUniqueID MUSIC_BUS = 2680856269U;
         static const AkUniqueID REVERB_RETURN = 358140370U;
         static const AkUniqueID SUMMER_BUS = 1348578857U;
+        static const AkUniqueID UI_NONDIEGETIC_BUS = 1826390690U;
     } // namespace BUSSES
 
     namespace AUX_BUSSES
