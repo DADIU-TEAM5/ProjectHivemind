@@ -14,6 +14,9 @@ public class ShopItemSlot : ShopSlot
     [SerializeField]
     private Item Item;
 
+    [SerializeField]
+    private int _previousLevel = -1;
+
 
     public override bool OnPurchase()
     {
@@ -62,8 +65,12 @@ public class ShopItemSlot : ShopSlot
 
     public override void Init()
     {
-        
-        GetItemFromItemPool();
+        if (_previousLevel != CurrentLevel.Value) {
+            if (Item != null) Reset();
+            GetItemFromItemPool();
+        }
+
+        _previousLevel = CurrentLevel.Value;
     }
 
     public override void Reset()
