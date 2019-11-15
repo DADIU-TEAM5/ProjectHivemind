@@ -12,11 +12,15 @@ public class LocaleChooser : MonoBehaviour
 
     public LocaleVariable CurrentLocale;
 
+    public GameText[] gameTexts;
+
+    public List<TMPro.TextMeshPro> AllTM;
 
     private int index = 0;
 
     void Start() {
         index = Array.IndexOf(Locales, CurrentLocale.Value);
+        TextMeshSetup();
     }
 
     public void NextLocale() {
@@ -28,4 +32,9 @@ public class LocaleChooser : MonoBehaviour
         Manager.SetLocale(Locales[index]);
     }
     
+    void TextMeshSetup()
+    {
+
+    }
+
 }
