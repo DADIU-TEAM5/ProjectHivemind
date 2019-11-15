@@ -44,7 +44,7 @@ public class cannonFodder : Enemy
 
         if (!PlayerDetected)
         {
-            Renderer.material.color = SetColor(Color.blue);
+            //Renderer.material.color = SetColor(Color.blue);
             DetectThePlayer();
         }
         else if ( playerInAttackRange() || _attacking)
@@ -54,12 +54,12 @@ public class cannonFodder : Enemy
                 if (NavMeshAgent.destination != transform.position)
                     NavMeshAgent.destination = transform.position;
 
-                Renderer.material.color = SetColor(Color.red);
+                //Renderer.material.color = SetColor(Color.red);
                 Attack();
             }
             else
             {
-                Renderer.material.color = SetColor(Color.yellow);
+               // Renderer.material.color = SetColor(Color.yellow);
                 MoveTowardsThePlayer();
             }
         }
