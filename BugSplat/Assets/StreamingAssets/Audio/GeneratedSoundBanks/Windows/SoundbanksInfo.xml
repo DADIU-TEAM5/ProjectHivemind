@@ -774,6 +774,7 @@
 				<Event Id="954324369" Name="player_foley_footstepEvent" ObjectPath="\Events\PlayerCharacterEvents\Foley\player_foley_footstepEvent" DurationType="OneShot" DurationMin="0.338565" DurationMax="0.504824"/>
 				<Event Id="830213708" Name="player_foley_hit" ObjectPath="\Events\PlayerCharacterEvents\Foley\player_foley_hit" DurationType="OneShot" DurationMin="0.433510" DurationMax="0.433510"/>
 				<Event Id="3187150534" Name="player_foley_killed" ObjectPath="\Events\PlayerCharacterEvents\Foley\player_foley_killed" DurationType="OneShot" DurationMin="2.122885" DurationMax="2.122885"/>
+				<Event Id="1627434233" Name="player_pickup" ObjectPath="\Events\PlayerCharacterEvents\player_pickup" DurationType="OneShot" DurationMin="0.500000" DurationMax="0.500000"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
 				<File Id="21209393" Language="SFX">
@@ -784,9 +785,17 @@
 					<ShortName>player_footsteps_layer1_04.wav</ShortName>
 					<Path>SFX/player_footsteps_layer1_04_8EDF57DD.wem</Path>
 				</File>
+				<File Id="86083034" Language="SFX">
+					<ShortName>pickup_flop_05.wav</ShortName>
+					<Path>SFX/pickup_flop_05_8EDF57DD.wem</Path>
+				</File>
 				<File Id="115522779" Language="SFX">
 					<ShortName>Human, Male, Scream, Pain 4 SND23409.wav</ShortName>
 					<Path>SFX/Human, Male, Scream, Pain 4 SND23409_8EDF57DD.wem</Path>
+				</File>
+				<File Id="141951328" Language="SFX">
+					<ShortName>pickup_flop_03.wav</ShortName>
+					<Path>SFX/pickup_flop_03_8EDF57DD.wem</Path>
 				</File>
 				<File Id="169910416" Language="SFX">
 					<ShortName>player_attack_swing_01.wav</ShortName>
@@ -796,21 +805,65 @@
 					<ShortName>player_footsteps_layer1_01.wav</ShortName>
 					<Path>SFX/player_footsteps_layer1_01_8EDF57DD.wem</Path>
 				</File>
+				<File Id="194834046" Language="SFX">
+					<ShortName>pickup_flop_10.wav</ShortName>
+					<Path>SFX/pickup_flop_10_8EDF57DD.wem</Path>
+				</File>
 				<File Id="216994291" Language="SFX">
 					<ShortName>player_footsteps_layer2_03.wav</ShortName>
 					<Path>SFX/player_footsteps_layer2_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="280314429" Language="SFX">
+					<ShortName>pickup_sheperdclaves_10.wav</ShortName>
+					<Path>SFX/pickup_sheperdclaves_10_8EDF57DD.wem</Path>
+				</File>
+				<File Id="294329244" Language="SFX">
+					<ShortName>pickup_flop_04.wav</ShortName>
+					<Path>SFX/pickup_flop_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="345840530" Language="SFX">
+					<ShortName>pickup_sheperdclaves_09.wav</ShortName>
+					<Path>SFX/pickup_sheperdclaves_09_8EDF57DD.wem</Path>
+				</File>
+				<File Id="372828274" Language="SFX">
+					<ShortName>pickup_gore_08.wav</ShortName>
+					<Path>SFX/pickup_gore_08_8EDF57DD.wem</Path>
 				</File>
 				<File Id="403040303" Language="SFX">
 					<ShortName>player_footsteps_layer1_06.wav</ShortName>
 					<Path>SFX/player_footsteps_layer1_06_8EDF57DD.wem</Path>
 				</File>
+				<File Id="403721275" Language="SFX">
+					<ShortName>pickup_sheperdclaves_03.wav</ShortName>
+					<Path>SFX/pickup_sheperdclaves_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="414592383" Language="SFX">
+					<ShortName>pickup_gore_05.wav</ShortName>
+					<Path>SFX/pickup_gore_05_8EDF57DD.wem</Path>
+				</File>
+				<File Id="414859925" Language="SFX">
+					<ShortName>pickup_flop_02.wav</ShortName>
+					<Path>SFX/pickup_flop_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="437158742" Language="SFX">
+					<ShortName>pickup_gore_06.wav</ShortName>
+					<Path>SFX/pickup_gore_06_8EDF57DD.wem</Path>
+				</File>
 				<File Id="437305237" Language="SFX">
 					<ShortName>player_attack_swing_02.wav</ShortName>
 					<Path>SFX/player_attack_swing_02_8EDF57DD.wem</Path>
 				</File>
+				<File Id="440259285" Language="SFX">
+					<ShortName>pickup_flop_07.wav</ShortName>
+					<Path>SFX/pickup_flop_07_8EDF57DD.wem</Path>
+				</File>
 				<File Id="442842554" Language="SFX">
 					<ShortName>player_footsteps_layer1_03.wav</ShortName>
 					<Path>SFX/player_footsteps_layer1_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="482577767" Language="SFX">
+					<ShortName>pickup_sheperdclaves_01.wav</ShortName>
+					<Path>SFX/pickup_sheperdclaves_01_8EDF57DD.wem</Path>
 				</File>
 				<File Id="489887477" Language="SFX">
 					<ShortName>player_footsteps_layer1_02.wav</ShortName>
@@ -820,25 +873,61 @@
 					<ShortName>player_footsteps_layer2_04.wav</ShortName>
 					<Path>SFX/player_footsteps_layer2_04_8EDF57DD.wem</Path>
 				</File>
+				<File Id="509191122" Language="SFX">
+					<ShortName>pickup_flop_01.wav</ShortName>
+					<Path>SFX/pickup_flop_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="534700570" Language="SFX">
+					<ShortName>pickup_sheperdclaves_05.wav</ShortName>
+					<Path>SFX/pickup_sheperdclaves_05_8EDF57DD.wem</Path>
+				</File>
+				<File Id="545764476" Language="SFX">
+					<ShortName>pickup_gore_03.wav</ShortName>
+					<Path>SFX/pickup_gore_03_8EDF57DD.wem</Path>
+				</File>
 				<File Id="563002238" Language="SFX">
 					<ShortName>Human, Vocal, Male, Grunt, Ouch, Pain 2 SND23309.wav</ShortName>
 					<Path>SFX/Human, Vocal, Male, Grunt, Ouch, Pain 2 SND23309_8EDF57DD.wem</Path>
+				</File>
+				<File Id="565473138" Language="SFX">
+					<ShortName>pickup_gore_02.wav</ShortName>
+					<Path>SFX/pickup_gore_02_8EDF57DD.wem</Path>
 				</File>
 				<File Id="680450465" Language="SFX">
 					<ShortName>player_footsteps_layer2_02.wav</ShortName>
 					<Path>SFX/player_footsteps_layer2_02_8EDF57DD.wem</Path>
 				</File>
+				<File Id="681999255" Language="SFX">
+					<ShortName>pickup_flop_09.wav</ShortName>
+					<Path>SFX/pickup_flop_09_8EDF57DD.wem</Path>
+				</File>
 				<File Id="729234363" Language="SFX">
 					<ShortName>player_foley_PhDash.wav</ShortName>
 					<Path>SFX/player_foley_PhDash_8EDF57DD.wem</Path>
+				</File>
+				<File Id="740970673" Language="SFX">
+					<ShortName>pickup_sheperdclaves_07.wav</ShortName>
+					<Path>SFX/pickup_sheperdclaves_07_8EDF57DD.wem</Path>
+				</File>
+				<File Id="755504567" Language="SFX">
+					<ShortName>pickup_flop_08.wav</ShortName>
+					<Path>SFX/pickup_flop_08_8EDF57DD.wem</Path>
 				</File>
 				<File Id="769135946" Language="SFX">
 					<ShortName>player_footsteps_layer1_07.wav</ShortName>
 					<Path>SFX/player_footsteps_layer1_07_8EDF57DD.wem</Path>
 				</File>
+				<File Id="790727847" Language="SFX">
+					<ShortName>pickup_sheperdclaves_02.wav</ShortName>
+					<Path>SFX/pickup_sheperdclaves_02_8EDF57DD.wem</Path>
+				</File>
 				<File Id="820134146" Language="SFX">
 					<ShortName>player_footsteps_layer1_05.wav</ShortName>
 					<Path>SFX/player_footsteps_layer1_05_8EDF57DD.wem</Path>
+				</File>
+				<File Id="829006442" Language="SFX">
+					<ShortName>pickup_flop_06.wav</ShortName>
+					<Path>SFX/pickup_flop_06_8EDF57DD.wem</Path>
 				</File>
 				<File Id="857603566" Language="SFX">
 					<ShortName>player_footsteps_layer1_08.wav</ShortName>
@@ -848,6 +937,14 @@
 					<ShortName>player_attack_swing_03.wav</ShortName>
 					<Path>SFX/player_attack_swing_03_8EDF57DD.wem</Path>
 				</File>
+				<File Id="894389888" Language="SFX">
+					<ShortName>pickup_gore_07.wav</ShortName>
+					<Path>SFX/pickup_gore_07_8EDF57DD.wem</Path>
+				</File>
+				<File Id="896414305" Language="SFX">
+					<ShortName>pickup_sheperdclaves_08.wav</ShortName>
+					<Path>SFX/pickup_sheperdclaves_08_8EDF57DD.wem</Path>
+				</File>
 				<File Id="905814177" Language="SFX">
 					<ShortName>player_attack_swing_04.wav</ShortName>
 					<Path>SFX/player_attack_swing_04_8EDF57DD.wem</Path>
@@ -856,13 +953,29 @@
 					<ShortName>player_footsteps_layer2_01.wav</ShortName>
 					<Path>SFX/player_footsteps_layer2_01_8EDF57DD.wem</Path>
 				</File>
+				<File Id="930543282" Language="SFX">
+					<ShortName>pickup_sheperdclaves_04.wav</ShortName>
+					<Path>SFX/pickup_sheperdclaves_04_8EDF57DD.wem</Path>
+				</File>
 				<File Id="969225261" Language="SFX">
 					<ShortName>player_footsteps_layer2_06.wav</ShortName>
 					<Path>SFX/player_footsteps_layer2_06_8EDF57DD.wem</Path>
 				</File>
+				<File Id="1015637353" Language="SFX">
+					<ShortName>pickup_sheperdclaves_06.wav</ShortName>
+					<Path>SFX/pickup_sheperdclaves_06_8EDF57DD.wem</Path>
+				</File>
+				<File Id="1022319066" Language="SFX">
+					<ShortName>pickup_gore_01.wav</ShortName>
+					<Path>SFX/pickup_gore_01_8EDF57DD.wem</Path>
+				</File>
 				<File Id="1052881731" Language="SFX">
 					<ShortName>player_footsteps_layer2_0.wav</ShortName>
 					<Path>SFX/player_footsteps_layer2_0_8EDF57DD.wem</Path>
+				</File>
+				<File Id="1069892010" Language="SFX">
+					<ShortName>pickup_gore_04.wav</ShortName>
+					<Path>SFX/pickup_gore_04_8EDF57DD.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
