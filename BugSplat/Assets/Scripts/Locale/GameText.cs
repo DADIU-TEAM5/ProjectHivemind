@@ -8,7 +8,7 @@ public class GameText : ScriptableObject
 {
     public List<TextVariation> TextVariations;
 
-    public LocaleVariable CurrentLocale; 
+    public LocaleVariable CurrentLocale;
 
     public string GetText() {
         var variation = TextVariations.FirstOrDefault(x => x.Locale == CurrentLocale.Value);
@@ -19,6 +19,8 @@ public class GameText : ScriptableObject
     [System.Serializable]
     public class TextVariation {
         public Locale Locale;
+
+        [TextArea(3,8)]
         public string Text;
     }
 }
