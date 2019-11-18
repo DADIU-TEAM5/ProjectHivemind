@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
+using UnityEngine.UI;
 
-public class DialogueUI : MonoBehaviour
+public class DialogueUI : MonoBehaviour 
 {
     public DialoguePool Pool;
 
@@ -11,12 +12,17 @@ public class DialogueUI : MonoBehaviour
 
     private GameText _dialogue;
 
+    void Start() {
+        var image = GetComponent<Image>();
+    }
+
     public void GetDialogue() {
         _dialogue = Pool.GetDialogue();
     }
 
     public void DisplayDialogue() {
         StopAllCoroutines();
+
         Text.text = _dialogue?.GetText() ?? "";
 
         Destroy(gameObject, 5);
@@ -24,6 +30,7 @@ public class DialogueUI : MonoBehaviour
 
     public void AnimatedDisplayDialogue() {
        StopAllCoroutines();
+
        StartCoroutine(LetterAtATime());
     }
 
@@ -38,10 +45,32 @@ public class DialogueUI : MonoBehaviour
 
             Text.text = builder.ToString();
 
-            var waitSeconds = Random.Range(Time.deltaTime * 4, Time.deltaTime * 8);
+            var waitSeconds = Random.Range(Time.deltaTime, Time.deltaTime * 3);
             yield return new WaitForSeconds(waitSeconds);
         }
 
         Destroy(gameObject, 3);
     }
+
+    private IEnumerator WordAtATime() {
+        var dialogueText = _dialogue?.GetText();
+        if (dialogueText == null) yield break;
+
+        var builder = new StringBuilder();
+
+        var words = dialogueText.Split(null);
+
+        foreach(var word in words) {
+            builder.Append(word);
+            builder.Append(' ');
+
+            Text.text = builder.ToString();
+
+            var waitSeconds = Random.Range(Time.deltaTime * 4, Time.deltaTime * 15);
+            yield return new WaitForSeconds(waitSeconds);
+        }
+
+        Destroy(gameObject, 3);
+    }
+
 }
