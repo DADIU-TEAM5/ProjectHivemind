@@ -19,7 +19,11 @@ public class TestToolMenu : MonoBehaviour
     public List<GameEvent> GameEvents = new List<GameEvent>();
 
     public GameObject ScrollView;
+    
+    public GameObject ItemScrollView;
+    public ItemPool AllItems;
 
+    public GameObject ItemButton;
     public GameObject Togglebutton;
     public GameObject EventButton;
     public GameObject ScenButton;
@@ -29,6 +33,20 @@ public class TestToolMenu : MonoBehaviour
 
     public void CreateUIElements()
     {
+        if(AllItems.Items.Count > 0)
+        {
+            for (int i = 0; i < AllItems.Items.Count; i++)
+            {
+                GameObject newGO = (GameObject)GameObject.Instantiate(ItemButton);
+                newGO.transform.SetParent(ItemScrollView.transform, false);
+                newGO.SetActive(true);
+
+                //TestToggleButton toggleButton = newGO.GetComponent<TestToggleButton>();
+                //toggleButton.Setup(Boolvariables[i]);
+
+            }
+        }
+
         if (Boolvariables.Count > 0)
             for (int i = 0; i < Boolvariables.Count; i++)
             {
