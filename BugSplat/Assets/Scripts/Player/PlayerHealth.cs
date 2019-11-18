@@ -74,10 +74,14 @@ public class PlayerHealth : GameLoop
 
     public override void LoopLateUpdate(float deltaTime)
     {
-
     }
     public override void LoopUpdate(float deltaTime)
     {
+        // Health sanitizing
+        if (CurrentHealth.Value > MaxHealth.Value) {
+            CurrentHealth.Value = MaxHealth.Value;
+        }
+
         if (_stunTimer > 0)
         {
             _stunTimer -= deltaTime;
