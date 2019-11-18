@@ -18,6 +18,8 @@ namespace AK
         static const AkUniqueID AMB_HUB_MAINEVENT = 1797197367U;
         static const AkUniqueID AMB_SHOP_MAINEVENT = 3126464902U;
         static const AkUniqueID CHEER_WIIN = 4294382858U;
+        static const AkUniqueID DOOR_ARENAGATE_HINGE = 4263565388U;
+        static const AkUniqueID DOOR_ARENAGATE_SLAM = 3389469668U;
         static const AkUniqueID MUSIC_BATTLE = 3782024871U;
         static const AkUniqueID MUSIC_HUB = 2615423034U;
         static const AkUniqueID MUSIC_INTRO = 984952705U;

@@ -6,6 +6,7 @@ public class slidingDoor : MonoBehaviour
 {
     [Header("Wwise events")]
     public AK.Wwise.Event slidingDoorEvent;
+    public AK.Wwise.Event arenaGate;
 
 
 
@@ -14,5 +15,8 @@ public class slidingDoor : MonoBehaviour
         slidingDoorEvent.Post(source);
     }
 
-
+    public void ArenaGateOpen(GameObject source)
+    {
+        arenaGate.Post(source);
+    }
 }
