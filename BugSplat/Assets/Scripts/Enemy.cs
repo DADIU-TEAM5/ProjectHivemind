@@ -5,6 +5,10 @@ using UnityEngine.AI;
 
 public abstract class Enemy : GameLoop
 {
+    [HideInInspector]
+    public bool SpawnedEnemy;
+
+
     public int difficultyValue = 1;
     public AnimationCurve AttackCurve;
 
@@ -150,6 +154,14 @@ public abstract class Enemy : GameLoop
 
     public override void LoopUpdate(float deltaTime)
     {
+
+        if (SpawnedEnemy)
+        {
+            NavMeshAgent.ResetPath();
+            SpawnedEnemy = false;
+        }
+
+
         if (_stunTime > 0)
         {
             _stunTime -= deltaTime;

@@ -85,6 +85,10 @@ public class Spitter : Enemy
 
     public override void TakeDamageBehaviour(float damage)
     {
+        if (FullyUnderground)
+        {
+            _currentHealth += damage;
+        }
 
         if(_currentHealth < _spitterStats.FleeThreshold)
         {
