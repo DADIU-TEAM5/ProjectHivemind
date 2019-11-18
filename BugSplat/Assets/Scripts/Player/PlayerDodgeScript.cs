@@ -53,6 +53,8 @@ public class PlayerDodgeScript : GameLoop
 
         if (_dashCooldownActive)
         {
+            Debug.Log("DASHCOOLDOWN ON: " + _dashCooldownActive);
+
             DashCooldownSO.Value = _diffTime;
 
             if (_diffTime > DashCooldownSO.InitialValue)

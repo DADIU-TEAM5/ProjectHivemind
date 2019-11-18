@@ -33,19 +33,19 @@ public class TestToolMenu : MonoBehaviour
 
     public void CreateUIElements()
     {
-        if(AllItems.Items.Count > 0)
-        {
-            for (int i = 0; i < AllItems.Items.Count; i++)
-            {
-                GameObject newGO = (GameObject)GameObject.Instantiate(ItemButton);
-                newGO.transform.SetParent(ItemScrollView.transform, false);
-                newGO.SetActive(true);
+        //if(AllItems.Items.Count > 0)
+        //{
+        //    for (int i = 0; i < AllItems.Items.Count; i++)
+        //    {
+        //        GameObject newGO = (GameObject)GameObject.Instantiate(ItemButton);
+        //        newGO.transform.SetParent(ItemScrollView.transform, false);
+        //        newGO.SetActive(true);
 
-                //TestToggleButton toggleButton = newGO.GetComponent<TestToggleButton>();
-                //toggleButton.Setup(Boolvariables[i]);
+        //        //TestToggleButton toggleButton = newGO.GetComponent<TestToggleButton>();
+        //        //toggleButton.Setup(Boolvariables[i]);
 
-            }
-        }
+        //    }
+        //}
 
         if (Boolvariables.Count > 0)
             for (int i = 0; i < Boolvariables.Count; i++)
