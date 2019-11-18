@@ -31,7 +31,7 @@ public class DialogueUI : MonoBehaviour
     public void AnimatedDisplayDialogue() {
        StopAllCoroutines();
 
-       StartCoroutine(WordAtATime());
+       StartCoroutine(LetterAtATime());
     }
 
     private IEnumerator LetterAtATime() {
@@ -45,7 +45,7 @@ public class DialogueUI : MonoBehaviour
 
             Text.text = builder.ToString();
 
-            var waitSeconds = Random.Range(Time.deltaTime * 4, Time.deltaTime * 8);
+            var waitSeconds = Random.Range(Time.deltaTime, Time.deltaTime * 3);
             yield return new WaitForSeconds(waitSeconds);
         }
 
@@ -66,7 +66,7 @@ public class DialogueUI : MonoBehaviour
 
             Text.text = builder.ToString();
 
-            var waitSeconds = Random.Range(Time.deltaTime * 8, Time.deltaTime * 32);
+            var waitSeconds = Random.Range(Time.deltaTime * 4, Time.deltaTime * 15);
             yield return new WaitForSeconds(waitSeconds);
         }
 
