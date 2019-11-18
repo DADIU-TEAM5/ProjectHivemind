@@ -36,6 +36,7 @@ public class SceneHandlerEditor : Editor
         EditorGUILayout.Space();
         EditorGUILayout.PropertyField(serializedObject.FindProperty("SelectedScene"), true);
         EditorGUILayout.PropertyField(serializedObject.FindProperty("SelectedSceneGuid"), true);
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("LastSceneSO"), true);
         //EditorGUILayout.PropertyField(serializedObject.FindProperty("SelectedSceneIndex"), true);
 
         GUILayout.Space(20f);

@@ -5,6 +5,10 @@ using UnityEngine;
 public class volumeControl : MonoBehaviour
 {
 
+    [Header("Wwise events")]
+    public AK.Wwise.Event select;
+    public AK.Wwise.Event back;
+
     [Header("Wwise parameters")]
     public AK.Wwise.RTPC SFXVolume;
     public AK.Wwise.RTPC MusicVolume;
