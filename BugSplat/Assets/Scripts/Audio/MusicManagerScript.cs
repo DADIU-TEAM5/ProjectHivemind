@@ -6,10 +6,10 @@ public class MusicManagerScript : MonoBehaviour
 {
 
     [Header("Wwise events")]
-    public AK.Wwise.Event MainScore;
-
-    [Header("Wwise states")]
-    public AK.Wwise.State Test;
+    public AK.Wwise.Event IntroMusic;
+    public AK.Wwise.Event BattleMusic;
+    public AK.Wwise.Event HubMusic;
+    public AK.Wwise.Event ShopMusic;
 
     [Header("Variables")]
     public IntVariable EnemiesLeft;
@@ -22,16 +22,27 @@ public class MusicManagerScript : MonoBehaviour
     public float IntenseOMeter;
     public float IntensityOffset;
 
+    [Header("Gameobjects")]
+    public GameObject FrogShop;
 
     void Start()
     {
-        MainScore.Post(this.gameObject);
+        IntroMusic.Post(this.gameObject);
     }
-
 
     void Update()
     {
-        IntenseOMeter = EnemiesAgroed.Value - CurrentHealth.Value;
+        IntenseOMeter = (EnemiesAgroed.Value - CurrentHealth.Value)+IntensityOffset;
     }
 
+    public void ArenaLoad()
+    {
+        BattleMusic.Post(this.gameObject);
+    }
+
+    public void HubLoad()
+    {
+        HubMusic.Post(this.gameObject);
+        ShopMusic.Post(FrogShop);
+    }
 }

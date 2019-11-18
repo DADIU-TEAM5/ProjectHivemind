@@ -51,6 +51,11 @@ public class NewHealthUI : GameLoop
 
     private void UpdateHealthBar()
     {
+        for (int i = 0; i < HealthIcons.Count; i++)
+        {
+            HealthIcons[i].enabled = true;
+            HealthIcons[i].transform.localScale = new Vector3(1, 1, 1);
+        }
 
         float currentHP = CurrentHealth.Value;
         int fullHearts = (int)(currentHP / HealthPerIcon.Value);

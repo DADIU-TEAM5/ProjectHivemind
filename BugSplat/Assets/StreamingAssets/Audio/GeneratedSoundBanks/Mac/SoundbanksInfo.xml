@@ -23,6 +23,7 @@
 			<IncludedEvents>
 				<Event Id="4090897946" Name="amb_arena_01_start" ObjectPath="\Events\ArenaEvents\ArenaAmbience\amb_arena_01_start" DurationType="Infinite"/>
 				<Event Id="3018226098" Name="amb_arena_01_stop" ObjectPath="\Events\ArenaEvents\ArenaAmbience\amb_arena_01_stop" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="4294382858" Name="cheer_wiin" ObjectPath="\Events\ArenaEvents\Cheer\cheer_wiin" DurationType="OneShot" DurationMin="10.500000" DurationMax="10.500000"/>
 				<Event Id="4263442935" Name="spiketrap_charge" ObjectPath="\Events\ArenaEvents\Traps\spiketrap\spiketrap_charge" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.721927" DurationMax="1.000000"/>
 				<Event Id="2179537273" Name="spiketrap_impact" ObjectPath="\Events\ArenaEvents\Traps\spiketrap\spiketrap_impact" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.595011" DurationMax="0.676009"/>
 				<Event Id="2700540079" Name="spiketrap_stab" ObjectPath="\Events\ArenaEvents\Traps\spiketrap\spiketrap_stab" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.310295" DurationMax="0.573719"/>
@@ -64,6 +65,10 @@
 					<ShortName>spiketrap_impact_05.wav</ShortName>
 					<Path>SFX/spiketrap_impact_05_7EC2BD1A.wem</Path>
 				</File>
+				<File Id="548579579" Language="SFX">
+					<ShortName>BugCheering_01.wav</ShortName>
+					<Path>SFX/BugCheering_01_8EDF57DD.wem</Path>
+				</File>
 				<File Id="554419865" Language="SFX">
 					<ShortName>DivorceBeach.wav</ShortName>
 					<Path>Plugins/Wwise Convolution Reverb/DivorceBeach_6480C31C.wem</Path>
@@ -95,8 +100,21 @@
 			<ShortName>sb_music</ShortName>
 			<Path>sb_music.bnk</Path>
 			<IncludedEvents>
-				<Event Id="1125500713" Name="Intro" ObjectPath="\Events\MusicEvents\Placeholder\Intro" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="3782024871" Name="music_battle" ObjectPath="\Events\MusicEvents\music_battle" DurationType="Infinite"/>
+				<Event Id="2615423034" Name="music_hub" ObjectPath="\Events\MusicEvents\music_hub" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="984952705" Name="music_intro" ObjectPath="\Events\MusicEvents\music_intro" DurationType="Infinite"/>
+				<Event Id="3229152761" Name="music_shop" ObjectPath="\Events\MusicEvents\music_shop" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="502406035" Language="SFX">
+					<ShortName>bugbeatsTest2.wav</ShortName>
+					<Path>SFX/bugbeatsTest2_EBC987A4.wem</Path>
+				</File>
+				<File Id="592950780" Language="SFX">
+					<ShortName>battlemusictest_01_i1.wav</ShortName>
+					<Path>SFX/battlemusictest_01_i1_EBC987A4.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
 		</SoundBank>
 		<SoundBank Id="1262967946" Language="SFX">
 			<ObjectPath>\SoundBanks\Default Work Unit\sb_hub</ObjectPath>
@@ -130,7 +148,7 @@
 			<IncludedEvents>
 				<Event Id="592638112" Name="npc_boomer_attack" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_attack" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="4.122245" DurationMax="4.122245"/>
 				<Event Id="1929315744" Name="npc_boomer_charge" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_charge" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="2.754785" DurationMax="2.754785"/>
-				<Event Id="1879848174" Name="npc_boomer_dead" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_dead" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="1879848174" Name="npc_boomer_dead" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_dead" DurationType="OneShot" DurationMin="1.250000" DurationMax="2.130431"/>
 				<Event Id="852176873" Name="npc_boomer_detect" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_detect" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.710403" DurationMax="1.784024"/>
 				<Event Id="199898249" Name="npc_boomer_footsteps" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_footsteps" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.377227" DurationMax="0.604751"/>
 				<Event Id="3079577491" Name="npc_boomer_hit" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_hit" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="1.450000" DurationMax="2.330431"/>
@@ -139,7 +157,7 @@
 				<Event Id="81359797" Name="npc_boomer_specialAttack" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_specialAttack" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 				<Event Id="1529994500" Name="npc_fodder_attack" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_attack" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.414320" DurationMax="0.576782"/>
 				<Event Id="3201101332" Name="npc_fodder_charge" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_charge" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
-				<Event Id="2985061994" Name="npc_fodder_dead" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_dead" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.532272" DurationMax="0.992047"/>
+				<Event Id="2985061994" Name="npc_fodder_dead" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_dead" DurationType="OneShot" DurationMin="1.071231" DurationMax="1.979401"/>
 				<Event Id="1205968901" Name="npc_fodder_detect" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_detect" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.609705" DurationMax="1.124989"/>
 				<Event Id="3043968597" Name="npc_fodder_footsteps" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_footsteps" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.314967" DurationMax="0.583161"/>
 				<Event Id="1374986823" Name="npc_fodder_hit" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_hit" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.800000" DurationMax="1.192047"/>
@@ -147,7 +165,7 @@
 				<Event Id="6383691" Name="npc_fodder_scream" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_scream" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 				<Event Id="2078456833" Name="npc_fodder_specialAttack" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_specialAttack" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 				<Event Id="3679048617" Name="npc_heavy_attack" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_attack" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.648028" DurationMax="2.314713"/>
-				<Event Id="2658157895" Name="npc_heavy_dead" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_dead" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="2658157895" Name="npc_heavy_dead" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_dead" DurationType="OneShot" DurationMin="1.071231" DurationMax="1.979401"/>
 				<Event Id="4074057964" Name="npc_heavy_detect" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_detect" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.801885" DurationMax="2.314713"/>
 				<Event Id="620102210" Name="npc_heavy_footstep_light" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_footstep_light" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.685391" DurationMax="1.046689"/>
 				<Event Id="198238650" Name="npc_heavy_footsteps" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_footsteps" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.685391" DurationMax="1.046689"/>
@@ -159,7 +177,7 @@
 				<Event Id="1630111423" Name="npc_spitter_attack" ObjectPath="\Events\EnemyInsectEvents\Spitter\npc_spitter_attack" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.685397" DurationMax="0.863152"/>
 				<Event Id="141041902" Name="npc_spitter_burrow" ObjectPath="\Events\EnemyInsectEvents\Spitter\npc_spitter_burrow" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="1.154897" DurationMax="1.812896"/>
 				<Event Id="2415521115" Name="npc_spitter_charge" ObjectPath="\Events\EnemyInsectEvents\Spitter\npc_spitter_charge" MaxAttenuation="100.000000" DurationType="Infinite"/>
-				<Event Id="1581237869" Name="npc_spitter_dead" ObjectPath="\Events\EnemyInsectEvents\Spitter\npc_spitter_dead" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="1581237869" Name="npc_spitter_dead" ObjectPath="\Events\EnemyInsectEvents\Spitter\npc_spitter_dead" DurationType="OneShot" DurationMin="1.071231" DurationMax="1.979401"/>
 				<Event Id="2631762934" Name="npc_spitter_detect" ObjectPath="\Events\EnemyInsectEvents\Spitter\npc_spitter_detect" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.750000" DurationMax="1.204308"/>
 				<Event Id="3732201856" Name="npc_spitter_footsteps" ObjectPath="\Events\EnemyInsectEvents\Spitter\npc_spitter_footsteps" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 				<Event Id="2546983038" Name="npc_spitter_hit" ObjectPath="\Events\EnemyInsectEvents\Spitter\npc_spitter_hit" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="1.022041" DurationMax="1.150000"/>
@@ -255,6 +273,10 @@
 				<File Id="133126319" Language="SFX">
 					<ShortName>fodder_footstep_spuirm_08.wav</ShortName>
 					<Path>SFX/fodder_footstep_spuirm_08_8EDF57DD.wem</Path>
+				</File>
+				<File Id="152176770" Language="SFX">
+					<ShortName>deathsplat_02.wav</ShortName>
+					<Path>SFX/deathsplat_02_8EDF57DD.wem</Path>
 				</File>
 				<File Id="152809177" Language="SFX">
 					<ShortName>heavy_hit_rockdrag_04.wav</ShortName>
@@ -536,6 +558,10 @@
 					<ShortName>heavy_grunt_07.wav</ShortName>
 					<Path>SFX/heavy_grunt_07_8EDF57DD.wem</Path>
 				</File>
+				<File Id="621889251" Language="SFX">
+					<ShortName>deathsplat_03.wav</ShortName>
+					<Path>SFX/deathsplat_03_8EDF57DD.wem</Path>
+				</File>
 				<File Id="623083583" Language="SFX">
 					<ShortName>spitter_spitlayer2_01.wav</ShortName>
 					<Path>SFX/spitter_spitlayer2_01_8EDF57DD.wem</Path>
@@ -667,6 +693,10 @@
 				<File Id="810714271" Language="SFX">
 					<ShortName>heavy_footstep_top_01.wav</ShortName>
 					<Path>SFX/heavy_footstep_top_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="812659939" Language="SFX">
+					<ShortName>deathsplat_01.wav</ShortName>
+					<Path>SFX/deathsplat_01_8EDF57DD.wem</Path>
 				</File>
 				<File Id="836029098" Language="SFX">
 					<ShortName>heavy_grunt_detect_02.wav</ShortName>

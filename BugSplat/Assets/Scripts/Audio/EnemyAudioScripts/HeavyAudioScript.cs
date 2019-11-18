@@ -13,10 +13,6 @@ public class HeavyAudioScript : MonoBehaviour
     public AK.Wwise.Event DeathSplat;
     public AK.Wwise.Event Charge;
 
-    // Skal bruges til voldsommere footsteps, måske skal det ske igennem events, eg. charge event sætter chargestate,
-    //og hit eller time run out sets state back
-    // private AK.Wwise.State ChargingState;
-
 
     public void FootStepEvent(GameObject source)
     {
