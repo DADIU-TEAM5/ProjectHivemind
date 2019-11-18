@@ -55,6 +55,10 @@ public class PlayerTrajectory : GameLoop
     private Dictionary<string, Transform> _skeletonJoints = new Dictionary<string, Transform>();
     private float _scale;
 
+
+    [Header("Events")]
+    [SerializeField]
+    private GameEvent FootStep;
     //i can't believe it is too long
     void Start()
     {
@@ -93,6 +97,12 @@ public class PlayerTrajectory : GameLoop
                 UpdateWithBlend(thisClip, thisClipNum, rotationPlayer);
             else
                 UpdateWithoutBlend(thisClip, thisClipNum, rotationPlayer);
+
+        if (Results.AnimClipIndex == 0 &&
+            (Results.FrameNum == 0 || Results.FrameNum == 13
+            || Results.FrameNum == 28))
+            IsFootStep();
+
         if (_tempMoMaTime < 0)
         {
             _isDead = false;
@@ -112,6 +122,16 @@ public class PlayerTrajectory : GameLoop
             PlayAnimationByIndex(3);
         else
             PlayAnimationByIndex(6);
+    }
+
+    public void debugFootStep()
+    {
+        Debug.Log("foot");
+    }
+
+    public void IsFootStep()
+    {
+        FootStep.Raise();
     }
 
     //todo add attack motion
