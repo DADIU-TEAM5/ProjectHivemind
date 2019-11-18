@@ -66,6 +66,7 @@ namespace AK
         static const AkUniqueID PLAYER_FOLEY_HIT = 830213708U;
         static const AkUniqueID PLAYER_FOLEY_KILLED = 3187150534U;
         static const AkUniqueID PLAYER_PICKUP = 1627434233U;
+        static const AkUniqueID SLIDINGDOOR = 27167321U;
         static const AkUniqueID SPIKETRAP_CHARGE = 4263442935U;
         static const AkUniqueID SPIKETRAP_IMPACT = 2179537273U;
         static const AkUniqueID SPIKETRAP_STAB = 2700540079U;
