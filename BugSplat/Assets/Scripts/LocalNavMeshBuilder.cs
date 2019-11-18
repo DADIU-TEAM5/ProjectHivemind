@@ -24,6 +24,7 @@ public class LocalNavMeshBuilder : MonoBehaviour
         while (true)
         {
             UpdateNavMesh(true);
+
             yield return m_Operation;
         }
     }
@@ -34,7 +35,10 @@ public class LocalNavMeshBuilder : MonoBehaviour
         m_NavMesh = new NavMeshData();
         m_Instance = NavMesh.AddNavMeshData(m_NavMesh);
         if (m_Tracked == null)
+        {
             m_Tracked = transform;
+        }
+
         UpdateNavMesh(false);
     }
 

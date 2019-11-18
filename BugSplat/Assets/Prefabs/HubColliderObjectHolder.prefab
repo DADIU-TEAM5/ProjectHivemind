@@ -9,9 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6389640480849357}
-  - component: {fileID: 6389640480849330}
   - component: {fileID: 6389640480849356}
-  - component: {fileID: 6389640480849359}
   m_Layer: 0
   m_Name: HubColliderObjectHolder
   m_TagString: Untagged
@@ -30,23 +28,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 3058779227548312686}
   - {fileID: 8219522893717934191}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6389640480849330
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6389640480849331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ad8b6dd3cbc04f44afead1c52e42ed7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerControlOverride: {fileID: 8219522893717934178}
 --- !u!114 &6389640480849356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,32 +62,36 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
---- !u!114 &6389640480849359
-MonoBehaviour:
+--- !u!1 &6476622029923735649
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6389640480849331}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7693cffe6639f841b7651cd5c429e07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnterColliders: []
-  ExitTargets:
-  - {fileID: 8219522893717934191}
-  IsAreaOpenSO: {fileID: 11400000, guid: 83ac4ffa1a2c5b74192db100303dd557, type: 2}
-  IsExitingScene: {fileID: 11400000, guid: b40b65626e6e1174aab2bc7bc911ece3, type: 2}
-  Player: {fileID: 0}
-  PlayerCurrentSpeedSO: {fileID: 11400000, guid: dbd0aac2d5b26704bbdf49f8d6657a38,
-    type: 2}
-  PlayerControlOverrideSO: {fileID: 11400000, guid: 6c60755199019534381ecc8c862bb419,
-    type: 2}
-  TimeScale: 0.25
-  PlayerDirectionSO: {fileID: 11400000, guid: 857036471d8e63b46b304293dca2794e, type: 2}
-  PlayerGraphics: {fileID: 0}
-  WhiteFadeIn: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3058779227548312686}
+  m_Layer: 0
+  m_Name: Initialize
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3058779227548312686
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6476622029923735649}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6389640480849357}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8727958701102097634
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -157,7 +147,7 @@ PrefabInstance:
     - target: {fileID: 796693721457882253, guid: 1bcb1ab014d24a84a9daff48dc8c5f8b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 796693721457882253, guid: 1bcb1ab014d24a84a9daff48dc8c5f8b,
         type: 3}
@@ -340,6 +330,16 @@ PrefabInstance:
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 796693719655199369, guid: 1bcb1ab014d24a84a9daff48dc8c5f8b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4703886767176993423, guid: 1bcb1ab014d24a84a9daff48dc8c5f8b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 796693720332428868, guid: 1bcb1ab014d24a84a9daff48dc8c5f8b,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -405,22 +405,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 796693719655199369, guid: 1bcb1ab014d24a84a9daff48dc8c5f8b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 796693719984945737, guid: 1bcb1ab014d24a84a9daff48dc8c5f8b,
         type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 796693720332428869, guid: 1bcb1ab014d24a84a9daff48dc8c5f8b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4703886767176993423, guid: 1bcb1ab014d24a84a9daff48dc8c5f8b,
         type: 3}
       propertyPath: m_IsActive
       value: 0
