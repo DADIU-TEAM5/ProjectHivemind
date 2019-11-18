@@ -22,6 +22,9 @@ public class SceneHandler : MonoBehaviour
     [SerializeField]
     public string SelectedSceneGuid;
 
+    [SerializeField]
+    public StringVariable LastSceneSO;
+
     private void OnEnable()
     {
         int _sceneCount = SceneManager.sceneCount;
@@ -32,6 +35,7 @@ public class SceneHandler : MonoBehaviour
 
     public void ChangeScene(string sceneName)
     {
+        LastSceneSO.Value = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(sceneName);
     }
 

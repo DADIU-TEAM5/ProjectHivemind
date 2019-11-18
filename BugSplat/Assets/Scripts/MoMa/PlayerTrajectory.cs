@@ -23,6 +23,7 @@ public class PlayerTrajectory : GameLoop
     public Vector3Variable Velocity;
     public FloatVariable PlayerCurrentSpeedSO;
     public FloatVariable AttackAngle;
+    public GameObject PlayerGraphics;
 
 
 
@@ -131,7 +132,7 @@ public class PlayerTrajectory : GameLoop
 
     public void IsFootStep()
     {
-        FootStep.Raise();
+        FootStep.Raise(PlayerGraphics);
     }
 
     //todo add attack motion
