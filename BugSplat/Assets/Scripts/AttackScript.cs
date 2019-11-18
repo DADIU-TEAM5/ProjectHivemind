@@ -218,7 +218,7 @@ public class AttackScript : GameLoop
             RaycastHit hit;
             if (Physics.Raycast(PlayerGraphics.position, potentialTargets[i].transform.position - transform.position, out hit, AttackLength.Value, layer))
             {
-                Debug.DrawRay(transform.position, potentialTargets[i].transform.position - transform.position , Color.red, 4);
+                Debug.DrawRay(PlayerGraphics.position,( potentialTargets[i].transform.position - transform.position ) * AttackLength.Value, Color.red,5);
                 if (hit.collider.gameObject.layer == 8)
                 {
                     //print(Vector3.Angle(PlayerGraphics.position + transform.forward, potentialTargets[i].transform.position - PlayerGraphics.position));
