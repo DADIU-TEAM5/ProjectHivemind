@@ -11,7 +11,7 @@ public class TouchControls : GameLoop
     public Vector3Variable MoveDirectionSO;
 
     public GameEvent DashInitiatedSO;
-    public GameEvent AttackInitiatedSO;
+    public GameEvent AttackTapSO;
     public FloatVariable InputMoveMinThresholdSO;
     public FloatVariable InputMoveMaxThresholdSO;
     public FloatVariable InputSwipeTapTimeSO;
@@ -264,7 +264,7 @@ public class TouchControls : GameLoop
             if (endTime < InputSwipeTapTimeSO.Value)
             {
                 //DebugText.text = "ATTACKED!";
-                AttackInitiatedSO.Raise(PlayerGraphics);
+                AttackTapSO.Raise(PlayerGraphics);
             }
         }
         // Check if SWIPE has happened

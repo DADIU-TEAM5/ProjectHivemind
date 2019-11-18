@@ -251,8 +251,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 796693719773917382}
   m_LocalRotation: {x: -0, y: 0.51766425, z: -0, w: 0.8555839}
-  m_LocalPosition: {x: 2.12, y: -0.93, z: 2.97}
-  m_LocalScale: {x: 10.988378, y: 3.9373574, z: 3.9373574}
+  m_LocalPosition: {x: 3.91, y: -0.93, z: -0.47}
+  m_LocalScale: {x: 3.4645257, y: 3.9373574, z: 3.9373574}
   m_Children: []
   m_Father: {fileID: 796693721457882253}
   m_RootOrder: 1
@@ -699,7 +699,8 @@ MonoBehaviour:
   - {fileID: 796693719984945736}
   - {fileID: 796693720332428868}
   IsAreaOpenSO: {fileID: 11400000, guid: 83ac4ffa1a2c5b74192db100303dd557, type: 2}
-  IsExitingScene: {fileID: 11400000, guid: b40b65626e6e1174aab2bc7bc911ece3, type: 2}
+  IsExitingScene: 
+  LastSceneSO: {fileID: 0}
   Player: {fileID: 0}
   PlayerCurrentSpeedSO: {fileID: 11400000, guid: dbd0aac2d5b26704bbdf49f8d6657a38,
     type: 2}
@@ -796,6 +797,72 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2.4329615
       objectReference: {fileID: 0}
+    - target: {fileID: 8516260075238119321, guid: e185d3beb72f075458c815d5c96a04ff,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516260075238119314, guid: e185d3beb72f075458c815d5c96a04ff,
+        type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516260075238119314, guid: e185d3beb72f075458c815d5c96a04ff,
+        type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: Hub Scene
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516260075238119314, guid: e185d3beb72f075458c815d5c96a04ff,
+        type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: ArenaGeneration
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516260075238119314, guid: e185d3beb72f075458c815d5c96a04ff,
+        type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516260075238119314, guid: e185d3beb72f075458c815d5c96a04ff,
+        type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516260075238119314, guid: e185d3beb72f075458c815d5c96a04ff,
+        type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516260075238119314, guid: e185d3beb72f075458c815d5c96a04ff,
+        type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: ChangeScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516260075238119314, guid: e185d3beb72f075458c815d5c96a04ff,
+        type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516260075238119314, guid: e185d3beb72f075458c815d5c96a04ff,
+        type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: 7ccab12c744825340b00517feda72de3,
+        type: 2}
+    - target: {fileID: 8516260075238119314, guid: e185d3beb72f075458c815d5c96a04ff,
+        type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Increase
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516260075238119314, guid: e185d3beb72f075458c815d5c96a04ff,
+        type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8516260075238119314, guid: e185d3beb72f075458c815d5c96a04ff,
+        type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8864322768642168687, guid: e185d3beb72f075458c815d5c96a04ff,
         type: 3}
       propertyPath: SceneList.Array.size
@@ -841,95 +908,17 @@ PrefabInstance:
       propertyPath: SelectedSceneGuid
       value: 22b3d8cfdb8d1c048bb62aaa9b790d32
       objectReference: {fileID: 0}
-    - target: {fileID: 8516260075238119321, guid: e185d3beb72f075458c815d5c96a04ff,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516260075238119314, guid: e185d3beb72f075458c815d5c96a04ff,
-        type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516260075238119314, guid: e185d3beb72f075458c815d5c96a04ff,
-        type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
-      value: Hub Scene
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516260075238119314, guid: e185d3beb72f075458c815d5c96a04ff,
-        type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: ArenaGeneration
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516260075238119314, guid: e185d3beb72f075458c815d5c96a04ff,
-        type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516260075238119314, guid: e185d3beb72f075458c815d5c96a04ff,
-        type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516260075238119314, guid: e185d3beb72f075458c815d5c96a04ff,
-        type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 8073276416545289548}
-    - target: {fileID: 8516260075238119314, guid: e185d3beb72f075458c815d5c96a04ff,
-        type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ChangeScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516260075238119314, guid: e185d3beb72f075458c815d5c96a04ff,
-        type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516260075238119314, guid: e185d3beb72f075458c815d5c96a04ff,
-        type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 11400000, guid: 7ccab12c744825340b00517feda72de3,
-        type: 2}
-    - target: {fileID: 8516260075238119314, guid: e185d3beb72f075458c815d5c96a04ff,
-        type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Increase
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516260075238119314, guid: e185d3beb72f075458c815d5c96a04ff,
-        type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516260075238119314, guid: e185d3beb72f075458c815d5c96a04ff,
-        type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e185d3beb72f075458c815d5c96a04ff, type: 3}
---- !u!1 &4703886767176993423 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5353087396765526188, guid: e185d3beb72f075458c815d5c96a04ff,
-    type: 3}
-  m_PrefabInstance: {fileID: 796693720327692835}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8073276416545289548 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8864322768642168687, guid: e185d3beb72f075458c815d5c96a04ff,
-    type: 3}
-  m_PrefabInstance: {fileID: 796693720327692835}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5268c09d869d63468cf1e773906b0a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &8513304200594490121 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9019366068559028522, guid: e185d3beb72f075458c815d5c96a04ff,
+    type: 3}
+  m_PrefabInstance: {fileID: 796693720327692835}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4703886767176993423 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5353087396765526188, guid: e185d3beb72f075458c815d5c96a04ff,
     type: 3}
   m_PrefabInstance: {fileID: 796693720327692835}
   m_PrefabAsset: {fileID: 0}
