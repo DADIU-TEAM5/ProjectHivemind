@@ -23,6 +23,7 @@ public class AttackScript : GameLoop
     public GameObjectVariable CurrentEnemySO;
 
     public GameEvent AttackOnHit;
+    public GameEvent AttackInitiated;
 
     NavMeshAgent _navMeshAgent;
     Vector3 _nearstTarget;
@@ -75,6 +76,7 @@ public class AttackScript : GameLoop
     public void AttackNearestTarget()
     {
         if (!_canAttack) return;
+        AttackInitiated.Raise(PlayerGraphics.gameObject);
         StartCoroutine(StartAttackCooldown());
 
         PlayerDirectionSO.Value =  PlayerGraphics.forward;

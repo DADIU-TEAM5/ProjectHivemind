@@ -59,6 +59,7 @@ public class PlayerDodgeScript : GameLoop
             {
                 // DashPower Edit
                 float curveTime = 0; DashAnimationCurve.Evaluate(_diffTime / DashSpeedSO.Value);
+                Debug.Log("TESTING: " + DashAnimationCurve.Evaluate(_diffTime / DashSpeedSO.Value));
 
                 float curveCounter = 0;
 
