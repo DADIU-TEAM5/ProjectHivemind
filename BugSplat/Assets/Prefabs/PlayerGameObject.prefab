@@ -48,6 +48,7 @@ MonoBehaviour:
   PlayerCurrentSpeedSO: {fileID: 11400000, guid: dbd0aac2d5b26704bbdf49f8d6657a38,
     type: 2}
   AttackAngle: {fileID: 11400000, guid: c4842e0c6a01e0447ae8f5fb780f7277, type: 2}
+  PlayerGraphics: {fileID: 2700275941276276989}
   AnimationTrajectories: {fileID: 11400000, guid: ad8861046fac4c14db3ff40a26b67c4e,
     type: 2}
   AnimationClips: {fileID: 11400000, guid: bad7ed82238c1ab0abf1a90de77648f3, type: 2}
@@ -57,6 +58,7 @@ MonoBehaviour:
   PlayerTrajectoryCapusule: {fileID: 11400000, guid: 338b6842abe87f74a8f87f95380567b8,
     type: 2}
   AttackMotions: {fileID: 11400000, guid: 3f38a04126d893442b04f756d0ca68d3, type: 2}
+  FootStep: {fileID: 11400000, guid: 8ee79a55d80494fb184472e83bf93ef0, type: 2}
 --- !u!114 &3566907687900676609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,6 +152,7 @@ GameObject:
   - component: {fileID: 1799847258}
   - component: {fileID: 282145137683011156}
   - component: {fileID: 5507652567450167358}
+  - component: {fileID: 3222249805075397779}
   m_Layer: 9
   m_Name: PlayerGameObject
   m_TagString: Player
@@ -240,7 +243,7 @@ MonoBehaviour:
   PlayerGraphics: {fileID: 2700275941276276989}
   MoveDirectionSO: {fileID: 11400000, guid: c1f170982022e2e4f8f993a769166f2b, type: 2}
   DashInitiatedSO: {fileID: 11400000, guid: a325fabc21f4650479d69a9c7bdd3d21, type: 2}
-  AttackInitiatedSO: {fileID: 11400000, guid: 4cf9a708d5633f04bbbc56776410d56d, type: 2}
+  AttackTapSO: {fileID: 11400000, guid: 054062f3758a0e34a81b32c3653d5151, type: 2}
   InputMoveMinThresholdSO: {fileID: 11400000, guid: 06f2711f3ca5c4d4eba7f5b9b751f4c3,
     type: 2}
   InputMoveMaxThresholdSO: {fileID: 11400000, guid: 3a574945138cf2f42a0ef6793136ece4,
@@ -251,7 +254,7 @@ MonoBehaviour:
     type: 2}
   PlayerControlOverrideSO: {fileID: 11400000, guid: 6c60755199019534381ecc8c862bb419,
     type: 2}
-  IsStunned: {fileID: 0}
+  IsStunned: {fileID: 11400000, guid: e206e2a2d0299224e8e9cfcc6ab47f33, type: 2}
   LockedTarget: {fileID: 11400000, guid: 10807b189a56cf444ac0120f9222ea9e, type: 2}
   UICanvas: {fileID: 0}
   UIMenuButton: {fileID: 0}
@@ -374,23 +377,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 4cf9a708d5633f04bbbc56776410d56d, type: 2}
+  Event: {fileID: 11400000, guid: 054062f3758a0e34a81b32c3653d5151, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5012523203288252738}
         m_MethodName: AttackNearestTarget
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1079554088562805781}
-        m_MethodName: GetAttack1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -448,6 +440,7 @@ MonoBehaviour:
   AutoAttackRange: {fileID: 11400000, guid: 19c4e000b50a1274693be77afb3b7bbb, type: 2}
   CurrentEnemySO: {fileID: 11400000, guid: f105a26415b393b4294e03ed33f33397, type: 2}
   AttackOnHit: {fileID: 11400000, guid: d77953f8e7f3605429ae2934b51a9a39, type: 2}
+  AttackInitiated: {fileID: 11400000, guid: 4cf9a708d5633f04bbbc56776410d56d, type: 2}
 --- !u!114 &8831838245759697901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -561,6 +554,35 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1079554088562805781}
         m_MethodName: PlayDeadAnim
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &3222249805075397779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5788987755461925658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 4cf9a708d5633f04bbbc56776410d56d, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1079554088562805781}
+        m_MethodName: GetAttack1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3228,6 +3250,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2843aac6bf41fa48a0e3822c0332f4b, type: 3}
+--- !u!95 &9054509797827413908 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: -6057140222963153312, guid: a2843aac6bf41fa48a0e3822c0332f4b,
+    type: 3}
+  m_PrefabInstance: {fileID: 6221902926437220852}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2700275941276276989 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: a2843aac6bf41fa48a0e3822c0332f4b,
@@ -3237,12 +3265,6 @@ GameObject:
 --- !u!4 &1378690212658981614 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: a2843aac6bf41fa48a0e3822c0332f4b,
-    type: 3}
-  m_PrefabInstance: {fileID: 6221902926437220852}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &9054509797827413908 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: -6057140222963153312, guid: a2843aac6bf41fa48a0e3822c0332f4b,
     type: 3}
   m_PrefabInstance: {fileID: 6221902926437220852}
   m_PrefabAsset: {fileID: 0}

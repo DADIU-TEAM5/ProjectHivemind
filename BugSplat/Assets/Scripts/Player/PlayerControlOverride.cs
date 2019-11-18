@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class PlayerControlOverride : MonoBehaviour
 {
@@ -15,7 +16,9 @@ public class PlayerControlOverride : MonoBehaviour
     private BoolVariable IsAreaOpenSO;
 
     [SerializeField]
-    private BoolVariable IsExitingScene;
+    private string IsExitingScene;
+
+    public StringVariable LastSceneSO;
 
     public Transform Player;
     public FloatVariable PlayerCurrentSpeedSO;
@@ -29,6 +32,13 @@ public class PlayerControlOverride : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        // SHOULD ONLY BE NECESSARY UNTIL BUILD
+        if (SceneManager.GetActiveScene().name == "ArenaGeneration")
+        {
+            LastSceneSO.Value = "Hub Scene";
+        }
+
         if (IsAreaOpenSO != null)
         {
             if (IsAreaOpenSO == true)
@@ -44,7 +54,7 @@ public class PlayerControlOverride : MonoBehaviour
 
     private void LoadColliders()
     {
-        if (IsExitingScene.Value != true)
+        if (IsExitingScene != LastSceneSO.Value)
         {
             for (int i = EnterColliders.Length - 1; i >= 0; i--)
             {
@@ -96,12 +106,13 @@ public class PlayerControlOverride : MonoBehaviour
 
     public void EnterArea()
     {
-        IsExitingScene.Value = true;
+        //IsExitingScene.Value = true;
+        //LastSceneSO.Value = SceneManager.GetActiveScene().name;
     }
 
     public void ExitArea()
     {
-        IsExitingScene.Value = false;
+        //IsExitingScene.Value = false;
     }
 
     public void GoToTarget(Transform target)
