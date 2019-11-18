@@ -22,6 +22,7 @@ public class PlayerTrajectory : GameLoop
     public Vector3Variable Direction;
     public Vector3Variable Velocity;
     public FloatVariable PlayerCurrentSpeedSO;
+    public FloatVariable AttackAngle;
 
 
 
@@ -103,7 +104,14 @@ public class PlayerTrajectory : GameLoop
 
     public void GetAttack1()
     {
-        _attack = "Attack03_L";
+        if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.25)
+            PlayAnimationByIndex(4);
+        else if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.5)
+            PlayAnimationByIndex(5);
+        else if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.75)
+            PlayAnimationByIndex(3);
+        else
+            PlayAnimationByIndex(6);
     }
 
     //todo add attack motion
@@ -365,7 +373,10 @@ public class PlayerTrajectory : GameLoop
         }
     }
 
-
+    public void PlayAnimationByIndex(int animIndex)
+    {
+        StartCoroutine(PlayOneWholeAnimation(AnimationClips.AnimClips[animIndex]));
+    }
 
     public void PlayDeadAnim()
     {
