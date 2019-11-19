@@ -14,7 +14,7 @@ public class RandomEffect : Effect
         }
     }
 
-    public override void Trigger(GameObject target = null)
+    public override void DoEffect(GameObject target = null)
     {
         if (Effects.Count == 0) return;
 

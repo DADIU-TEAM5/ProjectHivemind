@@ -15,7 +15,7 @@ public class MarkEffect : Effect
     {
         MarkedEnemies = new List<Enemy>();
 
-        if (MarkedParticles.Count > 0) {
+        if (MarkedParticles?.Count > 0) {
             for (var i = 0; i < MarkedParticles.Count; i++) {
                 var mp = MarkedParticles[i];
                 if (mp.isActiveAndEnabled) {
@@ -27,7 +27,7 @@ public class MarkEffect : Effect
         MarkedParticles = new List<ParticleController>();
     }
 
-    public override void Trigger(GameObject target = null)
+    public override void DoEffect(GameObject target = null)
     {
         var enemy = target?.GetComponent<Enemy>();
 
@@ -38,6 +38,7 @@ public class MarkEffect : Effect
 
             // Visual
             var particleController = Instantiate(MarkParticleEffect, enemy.transform);
+            MarkedParticles.Add(particleController);
             particleController.transform.localPosition = Vector3.zero;
             particleController.Play();
         }

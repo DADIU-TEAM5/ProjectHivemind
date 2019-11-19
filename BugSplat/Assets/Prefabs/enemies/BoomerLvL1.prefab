@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 2864561453518583343}
   - component: {fileID: 1095087460058340077}
   m_Layer: 8
-  m_Name: BoomerBug
+  m_Name: BoomerLvL1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -143,7 +143,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 5670815784686502453}
+  - {fileID: 4761441676920842019}
   - {fileID: 1792283365478370725}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -212,6 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPaticipant: 0
+  SpawnedEnemy: 0
   difficultyValue: 3
   AttackCurve:
     serializedVersion: 2
@@ -242,8 +243,8 @@ MonoBehaviour:
   bodyPart: {fileID: 7324468612011702487, guid: 862620230bd5167459723c1fe51d3192,
     type: 3}
   DeadCutout: {fileID: 3351841274930462646}
-  Graphics: {fileID: 8712654597513818150}
-  RenderGraphics: {fileID: 1797481190374441702}
+  Graphics: {fileID: 4761441676920846297}
+  RenderGraphics: {fileID: 4761441676920843548}
   EnemyList: {fileID: 11400000, guid: 73fb98983f89ab9418a547ca2aa08854, type: 2}
   LockedTarget: {fileID: 11400000, guid: 10807b189a56cf444ac0120f9222ea9e, type: 2}
   CurrentEnemySO: {fileID: 11400000, guid: f105a26415b393b4294e03ed33f33397, type: 2}
@@ -280,7 +281,7 @@ MonoBehaviour:
   AttackEvent: {fileID: 11400000, guid: dcce94e6134ba804dab215078510648f, type: 2}
   AttackChargingEvent: {fileID: 11400000, guid: 32207daa8197d9e4a825d46020af0760,
     type: 2}
-  BoomerAnimator: {fileID: 2321828983236095823}
+  BoomerAnimator: {fileID: 4761441676920827829}
   ChargeClip: {fileID: 1827226128182048838, guid: b45a74089d095cb4e9a394a199a9cc9a,
     type: 3}
 --- !u!114 &6451903771742751782
@@ -399,7 +400,7 @@ PrefabInstance:
     - target: {fileID: 911628263740259300, guid: 64fb767d1ba38a94886708cc64001df8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.986
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 911628263740259300, guid: 64fb767d1ba38a94886708cc64001df8,
         type: 3}
@@ -458,25 +459,25 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 8c5680d92968406448ad20273c09331b, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64fb767d1ba38a94886708cc64001df8, type: 3}
---- !u!4 &5670815784686502453 stripped
+--- !u!4 &4761441676920842019 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 911628263740259300, guid: 64fb767d1ba38a94886708cc64001df8,
     type: 3}
   m_PrefabInstance: {fileID: 4761441676920846801}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &2321828983236095823 stripped
+--- !u!95 &4761441676920827829 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7074243325202863774, guid: 64fb767d1ba38a94886708cc64001df8,
     type: 3}
   m_PrefabInstance: {fileID: 4761441676920846801}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1797481190374441702 stripped
+--- !u!1 &4761441676920843548 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6549894553894943543, guid: 64fb767d1ba38a94886708cc64001df8,
     type: 3}
   m_PrefabInstance: {fileID: 4761441676920846801}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8712654597513818150 stripped
+--- !u!1 &4761441676920846297 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4250721623183149559, guid: 64fb767d1ba38a94886708cc64001df8,
     type: 3}

@@ -118,10 +118,7 @@ public abstract class Enemy : GameLoop
             Renderer = RenderGraphics.GetComponent<Renderer>();
         }
 
-       
-        
-
-        
+                
         NavMeshAgent = GetComponent<NavMeshAgent>();
 
         if (NavMeshAgent != null)
@@ -223,8 +220,8 @@ public abstract class Enemy : GameLoop
              
             DeathEvent.Raise(this.gameObject);
 
-            if(EnemyDied != null)
-            EnemyDied.Raise(gameObject);
+            EnemyDied?.Raise(gameObject);
+            
 
             Destroy(Cone);
             Destroy(Outline);
@@ -325,8 +322,11 @@ public abstract class Enemy : GameLoop
     private void OnDisable()
     {
         if(EnemyList != null)
+            EnemyList.Remove(this);
 
-        EnemyList.Remove(this);
+        // This is to fix the bug where the Enemy Graphics would stay even after they have died
+        CurrentEnemyGraphic.Value.SetActive(false);
+        CurrentEnemySO.Value = null;
     }
 
     public void RemoveFromLockedTargetIfNotVisible()

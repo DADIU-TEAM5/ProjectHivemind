@@ -30,7 +30,8 @@ public class TankStats : EnemyStats
     public int Repeat;
     public float CooldownBetweenBehaviour;
     public float WayPointSpeed;
-    
+    public float waypointOverShoot;
+    public AnimationCurve ChargeCurve;
 
 
 

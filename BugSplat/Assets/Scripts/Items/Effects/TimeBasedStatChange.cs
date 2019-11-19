@@ -23,7 +23,7 @@ public class TimeBasedStatChange : Effect
         CoroutineBoy.gameObject.name = "TimeBasedStatChange_CoroutineBoy";
     }
 
-    public override void Trigger(GameObject target = null)
+    public override void DoEffect(GameObject target = null)
     {
         CoroutineBoy.StartCoroutine(EffectCountdown());
     }

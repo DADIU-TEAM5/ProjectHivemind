@@ -18,7 +18,7 @@ public class SlowEnemyEffect : Effect
         CoroutineBoy.name = "CoroutineBoy - SlowEnemyEffect";
     }
 
-    public override void Trigger(GameObject target = null)
+    public override void DoEffect(GameObject target = null)
     {
         var navmeshagent = target?.GetComponent<NavMeshAgent>();
         if (navmeshagent == null) return;
