@@ -10,7 +10,7 @@ public class DashCollide : Effect
     {
     }
 
-    public override void Trigger(GameObject target = null)
+    public override void DoEffect(GameObject target = null)
     {
         // TODO: Check if collided
     }

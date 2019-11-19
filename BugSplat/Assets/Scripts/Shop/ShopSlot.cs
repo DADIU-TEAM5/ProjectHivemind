@@ -21,9 +21,8 @@ public abstract class ShopSlot : ScriptableObject
             return;            
         }
 
-        PlayerCurrency.Value -= price;
-
         if (OnPurchase()) {
+            PlayerCurrency.Value -= price;
             PurchasedItem.Raise();
         } 
     }

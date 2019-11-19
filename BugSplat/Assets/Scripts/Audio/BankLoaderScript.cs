@@ -49,6 +49,7 @@ public class BankLoaderScript : MonoBehaviour
     public void EnterHub()
     {
         AreaHub.Load(false, false);
+        AreaShop.Load(false, false);
     }
 
     public void EnterShop()

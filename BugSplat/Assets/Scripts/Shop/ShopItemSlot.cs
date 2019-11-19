@@ -28,6 +28,11 @@ public class ShopItemSlot : ShopSlot
             return false;
         }
 
+        if (!Item.Purchasable()) {
+            Debug.Log("Item is not purchasable, as none of its effects can be applied");
+            return false;
+        }
+
         PlayerInventory.AddItem(Item);
 
         Item = null;

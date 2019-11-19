@@ -25,7 +25,7 @@ public class ProjectileEffect : Effect
         _particleController = Instantiate(ProjectileSplash);
     }
 
-    public override void Trigger(GameObject effectTarget = null)
+    public override void DoEffect(GameObject effectTarget = null)
     {
         if (effectTarget == null) {
             Debug.Log("Target was null - ProjectileEffect");
