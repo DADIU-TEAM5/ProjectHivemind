@@ -5,16 +5,37 @@ using UnityEngine.SceneManagement;
 
 public class InGameHUDController : MonoBehaviour
 {
-    public GameObject OptionsPanel;
+    public GameObject OptionsMenu;
+    public GameObject MainMenu;
+    public GameObject ModifiersMenu;
+    public GameObject PauseMenu;
+    public GameObject InGameHUD;
+
+    public BoolVariable InMenu;
+    public SceneHandler SH;
+
+
+    //public GameObject OptionsPanel;
     public BoolVariable GameIsPaused;
 
     GameObject uM;
 
     public void OnEnable()
     {
+
+        string sceneName = SceneManager.GetActiveScene().name;
+        Debug.Log("SceneName: " + sceneName);
+        InMenu.Value = sceneName.Contains("Menu");
+
         uM = GameObject.Find("UpdateManager");
         SetupAnimators(this.gameObject);
-       
+
+        if (InMenu.Value)
+            EnterMainMenu();
+        else
+            EnterInGameHUD();
+
+
     }
 
 
@@ -51,6 +72,62 @@ public class InGameHUDController : MonoBehaviour
     {
         Unpause();
         SceneManager.LoadScene("MainMenu");
+    }
+
+    // TrashCode
+    public void NewGame()
+    {
+        InMenu.Value = false;
+        SH.ChangeScene("ArenaGeneration");
+    }
+
+    public void BackButton()
+    {
+        if (InMenu.Value)
+            EnterMainMenu();
+    }
+
+    // Change Menu
+    public void EnterMainMenu()
+    {
+        MainMenu.SetActive(true);
+        OptionsMenu.SetActive(false);
+        ModifiersMenu.SetActive(false);
+        PauseMenu.SetActive(false);
+        InGameHUD.SetActive(false);
+    }
+    public void EnterOptionsMenu()
+    {
+        MainMenu.SetActive(false);
+        OptionsMenu.SetActive(true);
+        ModifiersMenu.SetActive(false);
+        PauseMenu.SetActive(false);
+        InGameHUD.SetActive(false);
+    }
+    public void EnterModifiersMenu()
+    {
+        MainMenu.SetActive(false);
+        OptionsMenu.SetActive(false);
+        ModifiersMenu.SetActive(true);
+        PauseMenu.SetActive(false);
+        InGameHUD.SetActive(false);
+    }
+    public void EnterPauseMenu()
+    {
+        MainMenu.SetActive(false);
+        OptionsMenu.SetActive(false);
+        ModifiersMenu.SetActive(false);
+        PauseMenu.SetActive(true);
+        InGameHUD.SetActive(false);
+    }
+
+    public void EnterInGameHUD()
+    {
+        MainMenu.SetActive(false);
+        OptionsMenu.SetActive(false);
+        ModifiersMenu.SetActive(false);
+        PauseMenu.SetActive(false);
+        InGameHUD.SetActive(true);
     }
 
 }
