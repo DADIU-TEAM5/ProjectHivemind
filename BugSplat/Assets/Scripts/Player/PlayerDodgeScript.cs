@@ -27,6 +27,7 @@ public class PlayerDodgeScript : MonoBehaviour
 
     public GameObject PlayerGraphics;
 
+    public GameEvent DashInitiated;
     public GameEvent DashDoneEvent;
 
     public GameEvent DashCollideEvent;
@@ -65,6 +66,8 @@ public class PlayerDodgeScript : MonoBehaviour
     private IEnumerator Dash() {
         IsDodgingSO.Value = true;
         IsInvulnerableSO.Value = true;
+
+        DashInitiated.Raise(PlayerGraphics);
 
         _initialPos = transform.position;
         _dashDirection = PlayerDirectionSO.Value;

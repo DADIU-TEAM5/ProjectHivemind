@@ -24,7 +24,7 @@ public class StaminaController : GameLoop
     {
         if (Stamina.Value < MaxStamina.Value)
         {
-            Stamina.Value = Mathf.Min(MaxStamina.Value, Stamina.Value + StaminaRegen.Value);
+            Stamina.Value = Mathf.Min(MaxStamina.Value, Stamina.Value + StaminaRegen.Value * deltaTime);
         }
 
         float dashPower = Stamina.Value / MaxStamina.Value;
@@ -45,7 +45,6 @@ public class StaminaController : GameLoop
 
     public void OnDash()
     {
-        
         if (Stamina.Value >= DashCost.Value)
             Stamina.Value = Mathf.Max(Stamina.Value - DashCost.Value, 0);
     }
