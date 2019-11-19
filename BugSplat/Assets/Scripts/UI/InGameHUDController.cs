@@ -40,8 +40,8 @@ public class InGameHUDController : MonoBehaviour
         uM = GameObject.Find("UpdateManager");
         SetupAnimators(this.gameObject);
         SetupColors(InGameHUD);
-       
-       
+
+
         if (InMainMenu.Value)
         {
             Debug.Log("Im Not null.....");
@@ -70,10 +70,12 @@ public class InGameHUDController : MonoBehaviour
 
     public void SetupColors(GameObject go)
     {
-        for (int i = 0; i < go.transform.childCount; i++)
-        {
-            SetupColors(go.transform.GetChild(i).gameObject);
-        }
+        if (go.transform.childCount > 0)
+            for (int i = 0; i < go.transform.childCount; i++)
+            {
+
+                SetupColors(go.transform.GetChild(i).gameObject);
+            }
 
         foreach (Image img in go.GetComponentsInChildren<Image>())
         {
@@ -108,7 +110,7 @@ public class InGameHUDController : MonoBehaviour
         {
 
             text.font = TextFont;
-            
+
         }
     }
 
