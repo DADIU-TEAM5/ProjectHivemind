@@ -126,15 +126,38 @@ public class EnemySpawner : GameLoop
         if (LevelBudget+budget >=SmallestValue)
         {
 
-            int extraBudget =0;
-            if (LevelBudget > SmallestValue)
+            
+            GameObject ChosenGuy = enemies[Random.Range(0, enemies.Count)];
+            int FirsTValueToget = ChosenGuy.GetComponent<Enemy>().difficultyValue;
+
+            if (LevelBudget > FirsTValueToget)
             {
-                LevelBudget -= SmallestValue;
-                extraBudget = SmallestValue;
+                LevelBudget -= FirsTValueToget;
+                
+
+                GameObject spawnedEnemy = Instantiate(ChosenGuy, transform);
+
+                spawnedEnemy.name = "Slightly Bigger Fucker";
+                spawnedEnemy.transform.parent = null;
+
+                Vector3 spawnPoint = transform.position;
+                spawnPoint.y = 0;
+
+                /*
+                NavMeshHit hit;
+
+
+                NavMesh.SamplePosition(transform.position, out hit, 3, NavMesh.AllAreas);
+                */
+                spawnedEnemy.transform.position = spawnPoint;
+
+
             }
                 
-            budget += extraBudget;
+           
 
+
+            
             while (budget > 0)
             {
                 if (SmallestValue > budget)
@@ -165,7 +188,7 @@ public class EnemySpawner : GameLoop
 
                 GameObject spawnedEnemy = Instantiate(enemies[index], transform);
 
-                spawnedEnemy.name = "Little fucker";
+                spawnedEnemy.name = "Little Fucker";
                 spawnedEnemy.transform.parent = null;
 
                 Vector3 spawnPoint = transform.position;
