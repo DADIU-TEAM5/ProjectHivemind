@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class InGameHUDController : MonoBehaviour
 {
+
+    public Color ImageColor;
     public GameObject OptionsMenu;
     public GameObject MainMenu;
     public GameObject ModifiersMenu;
     public GameObject PauseMenu;
     public GameObject InGameHUD;
 
-    public BoolVariable InMenu;
+    public BoolVariable InMainMenu;
     public SceneHandler SH;
 
 
@@ -22,6 +25,14 @@ public class InGameHUDController : MonoBehaviour
 
     public void OnEnable()
     {
+        Debug.Log("InMainMenu Value: " + InMainMenu.Value);
+        string sceneName = "";
+        if (SceneManager.GetActiveScene() != null)
+        {
+            sceneName = SceneManager.GetActiveScene().name;
+        }
+        Debug.Log("InMainMenu Value: " + InMainMenu.Value);
+        InMainMenu.Value = sceneName.Contains("Menu");
 
         string sceneName = SceneManager.GetActiveScene().name;
         Debug.Log("SceneName: " + sceneName);
@@ -29,9 +40,14 @@ public class InGameHUDController : MonoBehaviour
 
         uM = GameObject.Find("UpdateManager");
         SetupAnimators(this.gameObject);
+        SetupColors(InGameHUD);
+        Debug.Log("InMainMenu Value: " + InMainMenu.Value);
 
-        if (InMenu.Value)
+        if (InMainMenu.Value)
+        {
+            Debug.Log("Im Not null.....");
             EnterMainMenu();
+        }
         else
             EnterInGameHUD();
 
@@ -53,18 +69,32 @@ public class InGameHUDController : MonoBehaviour
         uM.SetActive(true);
     }
 
+    public void SetupColors(GameObject go)
+    {
+        for (int i = 0; i < go.transform.childCount; i++)
+        {
+            SetupAnimators(go.transform.GetChild(i).gameObject);
+        }
+
+        foreach (Image img in go.GetComponentsInChildren<Image>())
+        {
+
+            img.color = ImageColor;
+            Debug.Log("Found Image");
+        }
+    }
     public void SetupAnimators(GameObject go)
     {
         for (int i = 0; i < go.transform.childCount; i++)
         {
             SetupAnimators(go.transform.GetChild(i).gameObject);
         }
-            
-            foreach (Animator anim in go.GetComponentsInChildren<Animator>())
-            {
-                
-                anim.updateMode = AnimatorUpdateMode.UnscaledTime;
-                Debug.Log("Found animator: Updatemode = " + anim.updateMode);
+
+        foreach (Animator anim in go.GetComponentsInChildren<Animator>())
+        {
+
+            anim.updateMode = AnimatorUpdateMode.UnscaledTime;
+            Debug.Log("Found animator: Updatemode = " + anim.updateMode);
         }
     }
 
@@ -77,13 +107,13 @@ public class InGameHUDController : MonoBehaviour
     // TrashCode
     public void NewGame()
     {
-        InMenu.Value = false;
+        InMainMenu.Value = false;
         SH.ChangeScene("ArenaGeneration");
     }
 
     public void BackButton()
     {
-        if (InMenu.Value)
+        if (InMainMenu.Value)
             EnterMainMenu();
     }
 

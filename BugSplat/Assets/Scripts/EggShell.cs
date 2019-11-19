@@ -49,10 +49,11 @@ public class EggShell : MonoBehaviour
         whole.SetActive(false);
         broken.SetActive(true);
 
-        GameObject baby = Instantiate(BabyToSpawn);
+        GameObject baby = Instantiate(BabyToSpawn,transform);
 
         baby.GetComponent<Enemy>().SpawnedEnemy = true;
 
+        baby.transform.parent = null;
         Vector3 spawnPoint = transform.position;
 
         spawnPoint.y = 0;
