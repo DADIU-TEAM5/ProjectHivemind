@@ -21,6 +21,7 @@ public class GameLoopEditor : Editor
 
     private void OnEnable()
     {
+        /*
         loopDeLoop = (GameLoopParticipant)target;
         loopDeLoop.IsPaticipant = true;
 
@@ -42,5 +43,6 @@ public class GameLoopEditor : Editor
         gameLoopArray = GameLoops.ToArray();
 
         loopDeLoop.GameLoops = gameLoopArray;
+        */
     }
 }
