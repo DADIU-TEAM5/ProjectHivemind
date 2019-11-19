@@ -16,6 +16,11 @@ public class ShopAbilitySlot : ShopSlot
 
     public override bool OnPurchase()
     {
+        if (!Ability.CanBeApplied()) {
+            Debug.Log("Consumable cannot be bought, as its effect cannot be applied");
+            return false;
+        }
+
         Ability?.Trigger();
         return true;
     }
