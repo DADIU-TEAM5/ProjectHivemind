@@ -63,6 +63,7 @@ public class TankBeetle : Enemy
 
         _failSafe = SetNeedNewWayPointToTrue();
 
+        NavMeshAgent.acceleration = 99999;
     }
 
     
@@ -409,11 +410,10 @@ public class TankBeetle : Enemy
         AttackInCone();
 
 
-        
 
 
 
-        NavMeshAgent.speed = TankStats.WayPointSpeed;
+        NavMeshAgent.speed =1+( TankStats.ChargeCurve.Evaluate(NavMeshAgent.remainingDistance)* TankStats.WayPointSpeed);
         NavMeshAgent.angularSpeed = 100*TankStats.TurnSpeed;
 
         
@@ -424,11 +424,21 @@ public class TankBeetle : Enemy
             Vector3 temPlayerPos = PlayerTransform.position;
             temPlayerPos.y = transform.position.y;
 
+            Vector3 overshoot = temPlayerPos - transform.position ;
 
+            overshoot = overshoot.normalized;
+            overshoot *= TankStats.waypointOverShoot;
+            temPlayerPos += overshoot;
+
+            NavMeshHit hit;
+
+            NavMesh.Raycast(transform.position, temPlayerPos, out hit, -1);
+
+            temPlayerPos = hit.position;
 
            // _WayPointsCleared++;
 
-            print("waypoiints cleared "+_WayPointsCleared);
+           // print("waypoiints cleared "+_WayPointsCleared);
 
 
             _currentWayPoint = temPlayerPos;
