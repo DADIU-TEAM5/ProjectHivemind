@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class InGameHUDController : MonoBehaviour
 {
-
+    public TMPro.TMP_FontAsset TextFont;
     public Color ImageColor;
     public GameObject OptionsMenu;
     public GameObject MainMenu;
@@ -31,18 +31,18 @@ public class InGameHUDController : MonoBehaviour
         {
             sceneName = SceneManager.GetActiveScene().name;
         }
-        Debug.Log("InMainMenu Value: " + InMainMenu.Value);
-        InMainMenu.Value = sceneName.Contains("Menu");
-
         sceneName = SceneManager.GetActiveScene().name;
         Debug.Log("SceneName: " + sceneName);
-        InMainMenu.Value = sceneName.Contains("Hub");
+
+        // sceneName.Contains("Hub")
+        InMainMenu.Value = (sceneName.Contains("Menu"));
 
         uM = GameObject.Find("UpdateManager");
         SetupAnimators(this.gameObject);
         SetupColors(InGameHUD);
         Debug.Log("InMainMenu Value: " + InMainMenu.Value);
 
+       
         if (InMainMenu.Value)
         {
             Debug.Log("Im Not null.....");
@@ -73,7 +73,7 @@ public class InGameHUDController : MonoBehaviour
     {
         for (int i = 0; i < go.transform.childCount; i++)
         {
-            SetupAnimators(go.transform.GetChild(i).gameObject);
+            SetupColors(go.transform.GetChild(i).gameObject);
         }
 
         foreach (Image img in go.GetComponentsInChildren<Image>())
@@ -98,6 +98,21 @@ public class InGameHUDController : MonoBehaviour
         }
     }
 
+    public void SetupFonts(GameObject go)
+    {
+        for (int i = 0; i < go.transform.childCount; i++)
+        {
+            SetupFonts(go.transform.GetChild(i).gameObject);
+        }
+
+        foreach (TMPro.TextMeshPro text in go.GetComponentsInChildren<TMPro.TextMeshPro>())
+        {
+
+            text.font = TextFont;
+            
+        }
+    }
+
     public void QuitButton()
     {
         Unpause();
@@ -108,6 +123,7 @@ public class InGameHUDController : MonoBehaviour
     public void NewGame()
     {
         InMainMenu.Value = false;
+        EnterInGameHUD();
         SH.ChangeScene("ArenaGeneration");
     }
 
@@ -115,6 +131,8 @@ public class InGameHUDController : MonoBehaviour
     {
         if (InMainMenu.Value)
             EnterMainMenu();
+        else
+            EnterPauseMenu();
     }
 
     // Change Menu
