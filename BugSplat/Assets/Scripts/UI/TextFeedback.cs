@@ -14,6 +14,10 @@ public class TextFeedback : MonoBehaviour
         Title.TextComponent.text = title;
     }
 
+    public void SetLevelTitle(IntVariable level) {
+        Title.TextComponent.text = $"Level {level.Value}";
+    }
+
     public void SetSubtitle(string subtitle) {
         Subtitle.TextComponent.text = subtitle;
     }
