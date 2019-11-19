@@ -10,7 +10,7 @@ public class TouchControls : GameLoop
     // Setup ScriptableObjects for holding the PlayerMovementInfo
     public Vector3Variable MoveDirectionSO;
 
-    public GameEvent DashInitiatedSO;
+    public GameEvent Swipe;
     public GameEvent AttackTapSO;
     public FloatVariable InputMoveMinThresholdSO;
     public FloatVariable InputMoveMaxThresholdSO;
@@ -271,7 +271,7 @@ public class TouchControls : GameLoop
         else if (Vector3.Distance(_currentInputPosition[0], _currentInputPosition[_inputFrames]) > _inputSwipeThreshold)
         {
             //DebugText.text = "DODGED!";
-            DashInitiatedSO.Raise(PlayerGraphics);
+            Swipe.Raise(PlayerGraphics);
         }
 
         // Check if MOVE has happened
