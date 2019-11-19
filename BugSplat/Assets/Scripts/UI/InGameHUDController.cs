@@ -25,23 +25,22 @@ public class InGameHUDController : MonoBehaviour
 
     public void OnEnable()
     {
-        Debug.Log("InMainMenu Value: " + InMainMenu.Value);
-        string sceneName = "";
-        if (SceneManager.GetActiveScene() != null)
-        {
-            sceneName = SceneManager.GetActiveScene().name;
-        }
-        sceneName = SceneManager.GetActiveScene().name;
-        Debug.Log("SceneName: " + sceneName);
+        //Debug.Log("InMainMenu Value: " + InMainMenu.Value);
+        //string sceneName = "";
+        //if (SceneManager.GetActiveScene() != null)
+        //{
+        //    sceneName = SceneManager.GetActiveScene().name;
+        //}
+        //sceneName = SceneManager.GetActiveScene().name;
+        //Debug.Log("SceneName: " + sceneName);
 
-        // sceneName.Contains("Hub")
-        InMainMenu.Value = (sceneName.Contains("Menu"));
+        //// sceneName.Contains("Hub")
+        //InMainMenu.Value = (sceneName.Contains("Menu"));
 
         uM = GameObject.Find("UpdateManager");
         SetupAnimators(this.gameObject);
         SetupColors(InGameHUD);
-        Debug.Log("InMainMenu Value: " + InMainMenu.Value);
-
+       
        
         if (InMainMenu.Value)
         {
