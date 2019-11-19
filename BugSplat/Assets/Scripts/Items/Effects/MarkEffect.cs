@@ -15,7 +15,7 @@ public class MarkEffect : Effect
     {
         MarkedEnemies = new List<Enemy>();
 
-        if (MarkedParticles.Count > 0) {
+        if (MarkedParticles?.Count > 0) {
             for (var i = 0; i < MarkedParticles.Count; i++) {
                 var mp = MarkedParticles[i];
                 if (mp.isActiveAndEnabled) {
