@@ -104,7 +104,7 @@ public class TankBeetle : Enemy
             //Renderer.material.color = SetColor(Color.blue);
             DetectThePlayer();
             }
-            else if(_coolDown <=0)
+            else if(_coolDown <=0 && TankStats.Repeat >0)
             {
 
                 MoveToWayPoint(deltaTime);
