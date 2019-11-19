@@ -32,11 +32,7 @@ public class InGameHUDController : MonoBehaviour
             sceneName = SceneManager.GetActiveScene().name;
         }
         Debug.Log("InMainMenu Value: " + InMainMenu.Value);
-        InMainMenu.Value = sceneName.Contains("Menu");
-
-        string sceneName = SceneManager.GetActiveScene().name;
-        Debug.Log("SceneName: " + sceneName);
-        InMenu.Value = sceneName.Contains("Hub");
+        InMainMenu.Value = sceneName.Contains("Hub");
 
         uM = GameObject.Find("UpdateManager");
         SetupAnimators(this.gameObject);
