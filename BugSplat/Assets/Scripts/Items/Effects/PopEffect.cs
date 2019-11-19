@@ -25,11 +25,10 @@ public class PopEffect : Effect
             // Only pop the enemies, if the enemy that died was marked
             if (deadEnemy == null || !Mark.MarkedEnemies.Contains(deadEnemy)) return;
 
-
             _poppingOff = true;
 
             foreach (var enemy in Mark.MarkedEnemies) {
-                if (enemy.isActiveAndEnabled) {
+                if (enemy.enabled) {
                     Pop.Trigger(enemy.gameObject);
                 }
             }

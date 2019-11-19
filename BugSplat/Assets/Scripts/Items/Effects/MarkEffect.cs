@@ -38,6 +38,7 @@ public class MarkEffect : Effect
 
             // Visual
             var particleController = Instantiate(MarkParticleEffect, enemy.transform);
+            MarkedParticles.Add(particleController);
             particleController.transform.localPosition = Vector3.zero;
             particleController.Play();
         }
