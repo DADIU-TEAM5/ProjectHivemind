@@ -93,7 +93,7 @@ public class PlayerTrajectory : GameLoop
         GetRelativeTrajectory(Velocity.Value);
 
 
-        if(!_isDead)
+        if (!_isDead)
             if (Blend)
                 UpdateWithBlend(thisClip, thisClipNum, rotationPlayer);
             else
@@ -124,6 +124,54 @@ public class PlayerTrajectory : GameLoop
         else
             PlayAnimationByIndex(6);
     }
+
+
+
+    //public void AttackComBo()
+    //{
+    //    if (firsttime)
+    //    {
+    //        _attacktime = _AttackTime;
+    //        GetAttack1();
+    //        firsttime = false;
+    //    }
+    //    else
+    //    {
+    //        if (_AttackTime - _attacktime > 0 && _AttackTime - _attacktime < 0.7)
+    //            GetAttack2();
+    //        else
+    //            GetAttack1();
+    //    }
+    //}
+
+    //public void GetComboAttack1()
+    //{
+    //    if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.25)
+    //        PlayAttackAnimationByIndex(3);
+    //    else if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.5)
+    //        PlayAttackAnimationByIndex(4);
+    //    else if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.75)
+    //        PlayAttackAnimationByIndex(5);
+    //    else
+    //        PlayAttackAnimationByIndex(6);
+    //}
+
+    //public void GetAttack2()
+    //{
+    //    if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.25)
+    //        PlayAttackAnimationByIndex(3);
+    //    else if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.5)
+    //        PlayAttackAnimationByIndex(0);
+    //    else if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.75)
+    //        PlayAttackAnimationByIndex(1);
+    //    else
+    //        PlayAttackAnimationByIndex(2);
+    //}
+    //public void PlayAttackAnimationByIndex(int animIndex)
+    //{
+    //    StartCoroutine(PlayOneWholeAnimation(AttackAnims.AnimClips[animIndex]));
+    //}
+
 
     public void debugFootStep()
     {
@@ -399,6 +447,7 @@ public class PlayerTrajectory : GameLoop
         StartCoroutine(PlayOneWholeAnimation(AnimationClips.AnimClips[animIndex]));
     }
 
+
     public void PlayDeadAnim()
     {
         _isDead = true;
@@ -461,7 +510,7 @@ public class PlayerTrajectory : GameLoop
     private void ApplyJointPointToJoint(AnimationJointPoint jointPoint, Transform joint)
     {
         joint.rotation = transform.rotation * jointPoint.Rotation;
-        joint.position = transform.TransformDirection(jointPoint.Position* _scale) + transform.position;
+        joint.position = transform.TransformDirection(jointPoint.Position * _scale) + transform.position;
     }
 
 
