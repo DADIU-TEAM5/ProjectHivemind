@@ -143,7 +143,8 @@ public class PlayerControlOverride : MonoBehaviour
         {
             ExitTargets[k].gameObject.SetActive(false);
         }
-
+        Player.GetComponent<NavMeshAgent>().enabled = false;
+        Player.GetComponent<NavMeshAgent>().enabled = true;
         Player.GetComponent<NavMeshAgent>().ResetPath();
 
         PlayerCurrentSpeedSO.Value = 0f;
