@@ -12,6 +12,7 @@ public class InGameHUDController : MonoBehaviour
     public GameObject InGameHUD;
 
     public BoolVariable InMenu;
+    public SceneHandler SH;
 
 
     //public GameObject OptionsPanel;
@@ -21,6 +22,11 @@ public class InGameHUDController : MonoBehaviour
 
     public void OnEnable()
     {
+
+        string sceneName = SceneManager.GetActiveScene().name;
+        Debug.Log("SceneName: " + sceneName);
+        InMenu.Value = sceneName.Contains("Menu");
+
         uM = GameObject.Find("UpdateManager");
         SetupAnimators(this.gameObject);
 
@@ -68,10 +74,11 @@ public class InGameHUDController : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+    // TrashCode
     public void NewGame()
     {
         InMenu.Value = false;
-        
+        SH.ChangeScene("ArenaGeneration");
     }
 
     public void BackButton()
