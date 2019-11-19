@@ -27,7 +27,7 @@ public class MarkEffect : Effect
         MarkedParticles = new List<ParticleController>();
     }
 
-    public override void Trigger(GameObject target = null)
+    public override void DoEffect(GameObject target = null)
     {
         var enemy = target?.GetComponent<Enemy>();
 

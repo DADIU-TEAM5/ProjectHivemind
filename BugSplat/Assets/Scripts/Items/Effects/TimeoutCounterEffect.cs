@@ -16,7 +16,7 @@ public class TimeoutCounterEffect : CounterEffect
         CoroutineBoy.name = "TimeoutCounterEffect_CoroutineBoy";
     }
 
-    public override void Trigger(GameObject target = null) {
+    public override void DoEffect(GameObject target = null) {
         base.Trigger();
 
         CoroutineBoy.StopAllCoroutines();

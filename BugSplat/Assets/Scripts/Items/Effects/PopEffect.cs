@@ -17,11 +17,8 @@ public class PopEffect : Effect
         Pop.Init();
     }
 
-    public override void Trigger(GameObject target = null)
+    public override void DoEffect(GameObject target = null)
     {
-        Debug.Log("POPPING OFF YO");
-
-        
         if (!_poppingOff) {
             var deadEnemy = target?.GetComponent<Enemy>();
 
