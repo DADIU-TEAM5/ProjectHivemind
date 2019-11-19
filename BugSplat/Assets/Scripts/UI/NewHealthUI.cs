@@ -49,20 +49,14 @@ public class NewHealthUI : GameLoop
         UpdateHealthBar();
     }
 
-    private void ChangeMaxHealth()
-    {
-        float hearts = Mathf.Max(MaxHealth.Value / HealthPerIcon.Value, 1);
-        _activeIcons = (int)hearts;
-
-        for (int i = 0; i < HealthIcons.Count; i++)
-        {
-            if (_activeIcons <= i)
-                HealthIcons[i].enabled = false;              
-        }
-    }
-
     private void UpdateHealthBar()
     {
+        for (int i = 0; i < HealthIcons.Count; i++)
+        {
+            HealthIcons[i].enabled = true;
+            HealthIcons[i].transform.localScale = new Vector3(1, 1, 1);
+        }
+
         float currentHP = CurrentHealth.Value;
         int fullHearts = (int)(currentHP / HealthPerIcon.Value);
 
@@ -75,16 +69,12 @@ public class NewHealthUI : GameLoop
         {
             HealthIcons[i].enabled = false;
         }
+
+        if(currentHP <= 0)
+        {
+            HealthIcons[0].enabled = false;
+        }
         
     }
 
-    private void CalculateHealthRatio()
-    {
-        var healthRatio = CurrentHealth.Value / MaxHealth.Value;
-        // Normalize it
-        if (healthRatio < 0) healthRatio = 0f;
-        if (healthRatio > 1) healthRatio = 1f;
-
-        // _healthRatio = healthRatio;
-    }
 }

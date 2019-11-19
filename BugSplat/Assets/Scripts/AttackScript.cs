@@ -23,6 +23,7 @@ public class AttackScript : GameLoop
     public GameObjectVariable CurrentEnemySO;
 
     public GameEvent AttackOnHit;
+    public GameEvent AttackInitiated;
 
     NavMeshAgent _navMeshAgent;
     Vector3 _nearstTarget;
@@ -75,6 +76,7 @@ public class AttackScript : GameLoop
     public void AttackNearestTarget()
     {
         if (!_canAttack) return;
+        AttackInitiated.Raise(PlayerGraphics.gameObject);
         StartCoroutine(StartAttackCooldown());
 
         PlayerDirectionSO.Value =  PlayerGraphics.forward;
@@ -214,9 +216,9 @@ public class AttackScript : GameLoop
         for (int i = 0; i < potentialTargets.Length; i++)
         {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, potentialTargets[i].transform.position - transform.position, out hit, AttackLength.Value, layer))
+            if (Physics.Raycast(PlayerGraphics.position, potentialTargets[i].transform.position - transform.position, out hit, AttackLength.Value, layer))
             {
-                Debug.DrawRay(transform.position, potentialTargets[i].transform.position - transform.position , Color.red, 4);
+                Debug.DrawRay(PlayerGraphics.position,( potentialTargets[i].transform.position - transform.position ) * AttackLength.Value, Color.red,5);
                 if (hit.collider.gameObject.layer == 8)
                 {
                     //print(Vector3.Angle(PlayerGraphics.position + transform.forward, potentialTargets[i].transform.position - PlayerGraphics.position));

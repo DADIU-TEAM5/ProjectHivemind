@@ -22,6 +22,8 @@ public class PlayerTrajectory : GameLoop
     public Vector3Variable Direction;
     public Vector3Variable Velocity;
     public FloatVariable PlayerCurrentSpeedSO;
+    public FloatVariable AttackAngle;
+    public GameObject PlayerGraphics;
 
 
 
@@ -44,6 +46,7 @@ public class PlayerTrajectory : GameLoop
     private bool _blendFlag = false;
     private int _forBlendPlay = 0;
     private string _attack = null;
+    private bool _isDead = false;
 
     //for test
     private int _beginFrame;
@@ -53,6 +56,10 @@ public class PlayerTrajectory : GameLoop
     private Dictionary<string, Transform> _skeletonJoints = new Dictionary<string, Transform>();
     private float _scale;
 
+
+    [Header("Events")]
+    [SerializeField]
+    private GameEvent FootStep;
     //i can't believe it is too long
     void Start()
     {
@@ -86,18 +93,46 @@ public class PlayerTrajectory : GameLoop
         GetRelativeTrajectory(Velocity.Value);
 
 
+        if(!_isDead)
+            if (Blend)
+                UpdateWithBlend(thisClip, thisClipNum, rotationPlayer);
+            else
+                UpdateWithoutBlend(thisClip, thisClipNum, rotationPlayer);
 
-        if (Blend)
-            UpdateWithBlend(thisClip, thisClipNum, rotationPlayer);
-        else
-            UpdateWithoutBlend(thisClip, thisClipNum, rotationPlayer);
+        if (Results.AnimClipIndex == 0 &&
+            (Results.FrameNum == 0 || Results.FrameNum == 13
+            || Results.FrameNum == 28))
+            IsFootStep();
+
+        if (_tempMoMaTime < 0)
+        {
+            _isDead = false;
+            _tempMoMaTime = 0;
+        }
 
     }
 
 
     public void GetAttack1()
     {
-        _attack = "Attack03_L";
+        if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.25)
+            PlayAnimationByIndex(4);
+        else if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.5)
+            PlayAnimationByIndex(5);
+        else if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.75)
+            PlayAnimationByIndex(3);
+        else
+            PlayAnimationByIndex(6);
+    }
+
+    public void debugFootStep()
+    {
+        Debug.Log("foot");
+    }
+
+    public void IsFootStep()
+    {
+        FootStep.Raise(PlayerGraphics);
     }
 
     //todo add attack motion
@@ -120,8 +155,12 @@ public class PlayerTrajectory : GameLoop
 
     private void UpdateWithoutBlend(int thisClip, int thisClipNum, Vector3 rotationPlayer)
     {
+        //change it to more safety way
         if (_tempMoMaTime < 0)
+        {
+            _isDead = false;
             _tempMoMaTime = 0;
+        }
 
         if (_tempMoMaTime > MoMaUpdateTime)
         {
@@ -281,6 +320,7 @@ public class PlayerTrajectory : GameLoop
 
     private void InitializeTrajectory()
     {
+        _isDead = false;
         while (_history.Count < SaveInSecond)
         {
             _history.Enqueue(transform.localPosition);
@@ -354,10 +394,14 @@ public class PlayerTrajectory : GameLoop
         }
     }
 
-
+    public void PlayAnimationByIndex(int animIndex)
+    {
+        StartCoroutine(PlayOneWholeAnimation(AnimationClips.AnimClips[animIndex]));
+    }
 
     public void PlayDeadAnim()
     {
+        _isDead = true;
         var deadAnimIndex = Random.Range(0, DeadAnimationClips.AnimClips.Count - 1);
         StartCoroutine(PlayOneWholeAnimation(DeadAnimationClips.AnimClips[deadAnimIndex]));
     }

@@ -74,10 +74,14 @@ public class PlayerHealth : GameLoop
 
     public override void LoopLateUpdate(float deltaTime)
     {
-
     }
     public override void LoopUpdate(float deltaTime)
     {
+        // Health sanitizing
+        if (CurrentHealth.Value > MaxHealth.Value) {
+            CurrentHealth.Value = MaxHealth.Value;
+        }
+
         if (_stunTimer > 0)
         {
             _stunTimer -= deltaTime;
@@ -110,7 +114,7 @@ public class PlayerHealth : GameLoop
             Destroy(HexMapParent.Value);
 
             EnemyList.Items = new List<Enemy>();
-            Invoke("LoadDeadScene", 1f);
+            Invoke("LoadDeadScene", 2f);
         }
     }
 

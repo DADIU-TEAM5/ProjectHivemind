@@ -5,6 +5,10 @@ using UnityEngine.AI;
 
 public abstract class Enemy : GameLoop
 {
+    [HideInInspector]
+    public bool SpawnedEnemy;
+
+
     public int difficultyValue = 1;
     public AnimationCurve AttackCurve;
 
@@ -102,7 +106,7 @@ public abstract class Enemy : GameLoop
         //Debug.Log(name + " spawned");
 
 
-
+        if(EnemyList != null)
         EnemyList.Add(this);
 
         if (RenderGraphics == null)
@@ -114,33 +118,47 @@ public abstract class Enemy : GameLoop
             Renderer = RenderGraphics.GetComponent<Renderer>();
         }
 
-
-        StartColor = Renderer.material.color;
-
+                
         NavMeshAgent = GetComponent<NavMeshAgent>();
-        NavMeshAgent.speed = stats.MoveSpeed;
+
+        if (NavMeshAgent != null)
+            NavMeshAgent.speed = stats.MoveSpeed;
 
         _currentHealth = stats.HitPoints;
 
         Initialize(_currentHealth);
 
+        if (ConeMaterial != null)
+        {
+            CreateCone();
+            CreateOutline();
+            ConeRenderer.material = ConeMaterial;
+            OutlineRenderer.material = ConeMaterial;
 
-        CreateCone();
-        CreateOutline();
-        ConeRenderer.material = ConeMaterial;
-        OutlineRenderer.material = ConeMaterial;
+            OutlineRenderer.material.color = ConeEmptyColor;
 
-        OutlineRenderer.material.color = ConeEmptyColor;
+        }
 
-        if (NavMeshAgent.isOnNavMesh)
+        if (NavMeshAgent != null && NavMeshAgent.isOnNavMesh)
         {
             NavMeshAgent.destination = transform.position + (new Vector3(Random.Range(-2, 2), 0, Random.Range(-2, 2)));
         }
+
+
+
     }
 
 
     public override void LoopUpdate(float deltaTime)
     {
+
+        if (SpawnedEnemy)
+        {
+            NavMeshAgent.ResetPath();
+            SpawnedEnemy = false;
+        }
+
+
         if (_stunTime > 0)
         {
             _stunTime -= deltaTime;
@@ -152,7 +170,7 @@ public abstract class Enemy : GameLoop
         }
         else
         {
-            Renderer.material.color = SetColor(Color.blue);
+          //  Renderer.material.color = SetColor(Color.blue);
         }
     }
 
@@ -199,9 +217,11 @@ public abstract class Enemy : GameLoop
                 DeadCutout.transform.SetParent(null);
                 DeadCutout.SetActive(true);
             }
-
+             
             DeathEvent.Raise(this.gameObject);
-            EnemyDied.Raise(gameObject);
+
+            EnemyDied?.Raise(gameObject);
+            
 
             Destroy(Cone);
             Destroy(Outline);
@@ -301,7 +321,12 @@ public abstract class Enemy : GameLoop
 
     private void OnDisable()
     {
-        EnemyList.Remove(this);
+        if(EnemyList != null)
+            EnemyList.Remove(this);
+
+        // This is to fix the bug where the Enemy Graphics would stay even after they have died
+        CurrentEnemyGraphic.Value.SetActive(false);
+        CurrentEnemySO.Value = null;
     }
 
     public void RemoveFromLockedTargetIfNotVisible()

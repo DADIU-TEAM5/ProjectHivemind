@@ -17,7 +17,14 @@ namespace AK
         static const AkUniqueID AMB_ARENA_01_STOP = 3018226098U;
         static const AkUniqueID AMB_HUB_MAINEVENT = 1797197367U;
         static const AkUniqueID AMB_SHOP_MAINEVENT = 3126464902U;
-        static const AkUniqueID INTRO = 1125500713U;
+        static const AkUniqueID CHEER_WIIN = 4294382858U;
+        static const AkUniqueID DOOR_ARENAGATE_HINGE = 4263565388U;
+        static const AkUniqueID DOOR_ARENAGATE_SLAM = 3389469668U;
+        static const AkUniqueID EGG = 680725036U;
+        static const AkUniqueID MUSIC_BATTLE = 3782024871U;
+        static const AkUniqueID MUSIC_HUB = 2615423034U;
+        static const AkUniqueID MUSIC_INTRO = 984952705U;
+        static const AkUniqueID MUSIC_SHOP = 3229152761U;
         static const AkUniqueID NPC_BOOMER_ATTACK = 592638112U;
         static const AkUniqueID NPC_BOOMER_CHARGE = 1929315744U;
         static const AkUniqueID NPC_BOOMER_DEAD = 1879848174U;
@@ -39,6 +46,7 @@ namespace AK
         static const AkUniqueID NPC_HEAVY_ATTACK = 3679048617U;
         static const AkUniqueID NPC_HEAVY_DEAD = 2658157895U;
         static const AkUniqueID NPC_HEAVY_DETECT = 4074057964U;
+        static const AkUniqueID NPC_HEAVY_FOOTSTEP_LIGHT = 620102210U;
         static const AkUniqueID NPC_HEAVY_FOOTSTEPS = 198238650U;
         static const AkUniqueID NPC_HEAVY_HIT = 78903020U;
         static const AkUniqueID NPC_HEAVY_HIT_FRONT = 3339782068U;
@@ -60,10 +68,24 @@ namespace AK
         static const AkUniqueID PLAYER_FOLEY_FOOTSTEPEVENT = 954324369U;
         static const AkUniqueID PLAYER_FOLEY_HIT = 830213708U;
         static const AkUniqueID PLAYER_FOLEY_KILLED = 3187150534U;
+        static const AkUniqueID PLAYER_PICKUP = 1627434233U;
+        static const AkUniqueID SLIDINGDOOR = 27167321U;
+        static const AkUniqueID SPIKETRAP_CHARGE = 4263442935U;
+        static const AkUniqueID SPIKETRAP_IMPACT = 2179537273U;
+        static const AkUniqueID SPIKETRAP_STAB = 2700540079U;
     } // namespace EVENTS
 
     namespace STATES
     {
+        namespace STATE_BATTLEMUSIC
+        {
+            static const AkUniqueID GROUP = 2337794614U;
+
+            namespace STATE
+            {
+            } // namespace STATE
+        } // namespace STATE_BATTLEMUSIC
+
         namespace STATE_SCENE
         {
             static const AkUniqueID GROUP = 2072924777U;
@@ -108,6 +130,8 @@ namespace AK
 
     namespace GAME_PARAMETERS
     {
+        static const AkUniqueID MANAGE_MUSICMAIN_LEVEL = 724781984U;
+        static const AkUniqueID MANAGE_SFXMAIN_LEVEL = 429852744U;
         static const AkUniqueID PLAYERSPEED = 1493153371U;
     } // namespace GAME_PARAMETERS
 
@@ -132,6 +156,7 @@ namespace AK
         static const AkUniqueID MUSIC_BUS = 2680856269U;
         static const AkUniqueID REVERB_RETURN = 358140370U;
         static const AkUniqueID SUMMER_BUS = 1348578857U;
+        static const AkUniqueID UI_NONDIEGETIC_BUS = 1826390690U;
     } // namespace BUSSES
 
     namespace AUX_BUSSES

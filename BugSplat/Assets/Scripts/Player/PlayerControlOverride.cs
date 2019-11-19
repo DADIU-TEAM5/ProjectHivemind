@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class PlayerControlOverride : MonoBehaviour
 {
@@ -15,7 +16,9 @@ public class PlayerControlOverride : MonoBehaviour
     private BoolVariable IsAreaOpenSO;
 
     [SerializeField]
-    private BoolVariable IsExitingScene;
+    private string IsExitingScene;
+
+    public StringVariable LastSceneSO;
 
     public Transform Player;
     public FloatVariable PlayerCurrentSpeedSO;
@@ -29,6 +32,13 @@ public class PlayerControlOverride : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        // SHOULD ONLY BE NECESSARY UNTIL BUILD
+        if (SceneManager.GetActiveScene().name == "ArenaGeneration")
+        {
+            LastSceneSO.Value = "Hub Scene";
+        }
+
         if (IsAreaOpenSO != null)
         {
             if (IsAreaOpenSO == true)
@@ -44,7 +54,7 @@ public class PlayerControlOverride : MonoBehaviour
 
     private void LoadColliders()
     {
-        if (IsExitingScene.Value != true)
+        if (IsExitingScene != LastSceneSO.Value)
         {
             for (int i = EnterColliders.Length - 1; i >= 0; i--)
             {
@@ -74,31 +84,35 @@ public class PlayerControlOverride : MonoBehaviour
         }
     }
 
-    private void LoadPlayerPos()
+    public void LoadPlayerPos()
     {
-        PlayerControlOverrideSO.Value = true;
-        Vector3 heading = ExitTargets[ExitTargets.Length - 1].position - ExitTargets[0].position;
-        PlayerDirectionSO.Value = new Vector3(heading.normalized.x, 0, heading.normalized.z);
-
-        Player.GetComponent<NavMeshAgent>().enabled = false;
-        Player.position = ExitTargets[0].position;
-        Player.GetComponent<NavMeshAgent>().enabled = true;
-        PlayerCurrentSpeedSO.Value = PlayerCurrentSpeedSO.InitialValue;
-
-        if (WhiteFadeIn != null)
+        if (Player != null)
         {
-            WhiteFadeIn.SetActive(true);
+            PlayerControlOverrideSO.Value = true;
+            Vector3 heading = ExitTargets[ExitTargets.Length - 1].position - ExitTargets[0].position;
+            PlayerDirectionSO.Value = new Vector3(heading.normalized.x, 0, heading.normalized.z);
+            Debug.Log("Target: " + ExitTargets[0].position);
+            Player.GetComponent<NavMeshAgent>().enabled = false;
+            Player.position = ExitTargets[0].position;
+            Player.GetComponent<NavMeshAgent>().enabled = true;
+            PlayerCurrentSpeedSO.Value = PlayerCurrentSpeedSO.InitialValue;
+
+            if (WhiteFadeIn != null)
+            {
+                WhiteFadeIn.SetActive(true);
+            }
         }
     }
 
     public void EnterArea()
     {
-        IsExitingScene.Value = true;
+        //IsExitingScene.Value = true;
+        //LastSceneSO.Value = SceneManager.GetActiveScene().name;
     }
 
     public void ExitArea()
     {
-        IsExitingScene.Value = false;
+        //IsExitingScene.Value = false;
     }
 
     public void GoToTarget(Transform target)
@@ -107,7 +121,7 @@ public class PlayerControlOverride : MonoBehaviour
         PlayerControlOverrideSO.Value = true;
         PlayerGraphics.localRotation = Quaternion.LookRotation(PlayerDirectionSO.Value, Vector3.up);
 
-        //PlayerCurrentSpeedSO.Value = PlayerCurrentSpeedSO.InitialValue;
+        PlayerCurrentSpeedSO.Value = PlayerCurrentSpeedSO.InitialValue;
 
         Player.GetComponent<NavMeshAgent>().SetDestination(target.position);
         Player.GetComponent<NavMeshAgent>().updateRotation = false;

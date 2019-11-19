@@ -6,23 +6,28 @@ using UnityEngine.AI;
 public class TankBeetle : Enemy
 
 {
-    
-    
 
-   
+
+
+    bool NeedNewWayPoint = true;
     
     TankStats TankStats;
    
     bool _attacking;
     float _attackCharge;
 
-    
+    int _WayPointsCleared =  -1;
+
+    float _coolDown;
+
 
     float _attackCooldown = 0;
 
 
 
-    
+    Vector3 _currentWayPoint;
+
+
 
     bool _Chargeing;
 
@@ -37,6 +42,7 @@ public class TankBeetle : Enemy
 
     public Animator Anim;
 
+    IEnumerator _failSafe;
 
 
     [Header("Events")]
@@ -53,8 +59,11 @@ public class TankBeetle : Enemy
         TankStats = (TankStats)stats;
         ConeRenderer.material.color = Color.red;
 
-        
+        _currentWayPoint = Vector3.zero;
 
+        _failSafe = SetNeedNewWayPointToTrue();
+
+        NavMeshAgent.acceleration = 99999;
     }
 
     
@@ -67,10 +76,7 @@ public class TankBeetle : Enemy
     public override void LoopBehaviour(float deltaTime)
     {
 
-        if (NavMeshAgent.isOnNavMesh)
-        {
-            NavMeshAgent.ResetPath();
-        }
+       
 
 
         if (_attackCooldown > 0)
@@ -84,37 +90,78 @@ public class TankBeetle : Enemy
         
             if (!PlayerDetected)
             {
-                Renderer.material.color = SetColor(Color.blue);
-                DetectThePlayer();
+
+            if (NavMeshAgent.isOnNavMesh)
+            {
+                NavMeshAgent.ResetPath();
+            }
+            //Renderer.material.color = SetColor(Color.blue);
+            DetectThePlayer();
+            }
+            else if( _WayPointsCleared < TankStats.Repeat)
+            {
+
+                MoveToWayPoint(deltaTime);
+
+
             }
             else if (playerInChargeRange() || _attacking)
             {
+            BehaviourCooldown(deltaTime);
 
-                if (_attackCooldown <= 0)
+
+            if (NavMeshAgent.isOnNavMesh)
+            {
+                NavMeshAgent.ResetPath();
+            }
+
+
+            if (_attackCooldown <= 0)
                 {
 
-                    Renderer.material.color = SetColor(Color.red);
+                  //  Renderer.material.color = SetColor(Color.red);
                     Attack(deltaTime);
 
 
                 }
                 else
                 {
-                    Renderer.material.color = SetColor(Color.yellow);
+                  //  Renderer.material.color = SetColor(Color.yellow);
                     MoveTowardsThePlayer(deltaTime);
                 }
 
             }
             else
             {
-                Renderer.material.color = SetColor(Color.yellow);
-                MoveTowardsThePlayer(deltaTime);
+            if (NavMeshAgent.isOnNavMesh)
+            {
+                NavMeshAgent.ResetPath();
             }
-        
+            //  Renderer.material.color = SetColor(Color.yellow);
+            MoveTowardsThePlayer(deltaTime);
+            BehaviourCooldown(deltaTime);
+
+
+        }
+
+
+      
 
 
 
+    }
 
+    void BehaviourCooldown(float deltaTime)
+    {
+        if (_coolDown <= 0 && !_Chargeing)
+        {
+            _WayPointsCleared = -1;
+            NeedNewWayPoint = true;
+
+        }
+
+        if (_coolDown > 0)
+            _coolDown -= deltaTime;
     }
 
     public override void LoopLateUpdate(float deltaTime)
@@ -191,8 +238,7 @@ public class TankBeetle : Enemy
 
 
             Outline.transform.parent = null;
-            DrawCone(10, ConeMesh, true, 0);
-            ConeRenderer.material.color = new Color(1, 0, 0, .4f);
+            
 
             _chargeDuration += deltaTime;
 
@@ -242,60 +288,44 @@ public class TankBeetle : Enemy
                 
             }
 
+            AttackInCone();
+        }
+        else
+        {
+            DrawChargeTrajectory();
+            ChargeFillup();
+            ConeRenderer.material.color = Color.Lerp(new Color(0, 1, 0, 0.5f), new Color(1, 0, 0, 0.5f), _attackCharge / stats.AttackChargeUpTime);
+            _chargeDistance = DistanceToChargeEndPos()-TankStats.AttackRange;
+        }
 
-            Collider[] potentialTargets = Physics.OverlapSphere(transform.position, TankStats.AttackRange, LayerMask.GetMask("Player"));
+
+
+    }
+
+
+    void AttackInCone()
+    {
+        DrawCone(10, ConeMesh, true, 0);
+        ConeRenderer.material.color = new Color(1, 0, 0, .4f);
+        Collider[] potentialTargets = Physics.OverlapSphere(transform.position, TankStats.AttackRange, LayerMask.GetMask("Player"));
 
 
 
 
 
-            for (int i = 0; i < potentialTargets.Length; i++)
+        for (int i = 0; i < potentialTargets.Length; i++)
+        {
+
+            //Debug.DrawRay(transform.position, potentialTargets[i].transform.position- transform.position ,Color.red);
+
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, potentialTargets[i].transform.position - transform.position, out hit, 10, LayerMask.GetMask("Player")))
             {
-
-                //Debug.DrawRay(transform.position, potentialTargets[i].transform.position- transform.position ,Color.red);
-
-                RaycastHit hit;
-                if (Physics.Raycast(transform.position, potentialTargets[i].transform.position - transform.position, out hit, 10, LayerMask.GetMask("Player")))
+                if (hit.collider.gameObject.layer == 9)
                 {
-                    if (hit.collider.gameObject.layer == 9)
-                    {
 
-                        //print(Vector3.Angle(transform.position + transform.forward, potentialTargets[i].transform.position - transform.position));
-                        //if()
-                        Vector3 temp = potentialTargets[i].transform.position;
-                        temp.y = transform.position.y;
-
-
-                        //print( Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp));
-                        if (Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp) < TankStats.AttackAngle)
-                        {
-                            PlayerHealth playerHealth = potentialTargets[i].GetComponent<PlayerHealth>();
-                            //apply damage to the player
-                            if (playerHealth != null)
-                            {
-                                Vector3 directionToPush = potentialTargets[i].gameObject.transform.position - transform.position;
-                                directionToPush.y = 0;
-                                directionToPush = Vector3.Normalize(directionToPush);
-
-                                AttackEvent.Raise(gameObject);
-                                playerHealth.KnockBackDamage(directionToPush, TankStats.PushLength, TankStats.AttackDamage);
-                                playerHealth.StunPlayer(TankStats.PlayerStunDuration);
-
-                                EndCharge();
-                            }
-                            else
-                            {
-                                Debug.LogError("target of " + gameObject.name + " attack got no health");
-                            }
-                        }
-                    }
-                    else
-                        print("attack blocked by terrain or something");
-
-                }
-                else
-                {
-                    Debug.LogError("this should never show i guess");
+                    //print(Vector3.Angle(transform.position + transform.forward, potentialTargets[i].transform.position - transform.position));
+                    //if()
                     Vector3 temp = potentialTargets[i].transform.position;
                     temp.y = transform.position.y;
 
@@ -311,8 +341,10 @@ public class TankBeetle : Enemy
                             directionToPush.y = 0;
                             directionToPush = Vector3.Normalize(directionToPush);
 
+                            AttackEvent.Raise(gameObject);
                             playerHealth.KnockBackDamage(directionToPush, TankStats.PushLength, TankStats.AttackDamage);
                             playerHealth.StunPlayer(TankStats.PlayerStunDuration);
+
                             EndCharge();
                         }
                         else
@@ -320,23 +352,157 @@ public class TankBeetle : Enemy
                             Debug.LogError("target of " + gameObject.name + " attack got no health");
                         }
                     }
+                }
+                else
+                    print("attack blocked by terrain or something");
 
+            }
+            else
+            {
+                Debug.LogError("this should never show i guess");
+                Vector3 temp = potentialTargets[i].transform.position;
+                temp.y = transform.position.y;
+
+
+                //print( Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp));
+                if (Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp) < TankStats.AttackAngle)
+                {
+                    PlayerHealth playerHealth = potentialTargets[i].GetComponent<PlayerHealth>();
+                    //apply damage to the player
+                    if (playerHealth != null)
+                    {
+                        Vector3 directionToPush = potentialTargets[i].gameObject.transform.position - transform.position;
+                        directionToPush.y = 0;
+                        directionToPush = Vector3.Normalize(directionToPush);
+
+                        playerHealth.KnockBackDamage(directionToPush, TankStats.PushLength, TankStats.AttackDamage);
+                        playerHealth.StunPlayer(TankStats.PlayerStunDuration);
+                        EndCharge();
+                    }
+                    else
+                    {
+                        Debug.LogError("target of " + gameObject.name + " attack got no health");
+                    }
                 }
 
             }
+
         }
-        else
+    }
+
+    Vector3 oldDestination = Vector3.zero;
+
+    void MoveToWayPoint(float deltaTime)
+    {
+
+        //_coolDown = TankStats.CooldownBetweenBehaviour;
+
+        EndCharge();
+
+        if (Anim.GetBool("Attacking") == false)
         {
-            DrawChargeTrajectory();
-            ChargeFillup();
-            ConeRenderer.material.color = Color.Lerp(new Color(0, 1, 0, 0.5f), new Color(1, 0, 0, 0.5f), _attackCharge / stats.AttackChargeUpTime);
-            _chargeDistance = DistanceToChargeEndPos()-TankStats.AttackRange;
+
+            Anim.SetBool("Attacking", true);
+
         }
+
+        Cone.SetActive(true);
+        AttackInCone();
+
+
+
+
+
+        NavMeshAgent.speed =1+( TankStats.ChargeCurve.Evaluate(NavMeshAgent.remainingDistance)* TankStats.WayPointSpeed);
+        NavMeshAgent.angularSpeed = 100*TankStats.TurnSpeed;
+
+        
+        
+
+        if (NeedNewWayPoint)
+        {
+            Vector3 temPlayerPos = PlayerTransform.position;
+            temPlayerPos.y = transform.position.y;
+
+            Vector3 overshoot = temPlayerPos - transform.position ;
+
+            overshoot = overshoot.normalized;
+            overshoot *= TankStats.waypointOverShoot;
+            temPlayerPos += overshoot;
+
+            NavMeshHit hit;
+
+            NavMesh.Raycast(transform.position, temPlayerPos, out hit, -1);
+
+            temPlayerPos = hit.position;
+
+           // _WayPointsCleared++;
+
+           // print("waypoiints cleared "+_WayPointsCleared);
+
+
+            _currentWayPoint = temPlayerPos;
+
+            NavMeshAgent.SetDestination(_currentWayPoint);
+            NeedNewWayPoint = false;
+        }
+
+
+
+        if(NavMeshAgent.path.corners[NavMeshAgent.path.corners.Length-1] != oldDestination)
+        {
+            _WayPointsCleared++;
+            oldDestination = NavMeshAgent.path.corners[NavMeshAgent.path.corners.Length - 1];
+
+           
+            //print("way points cleared " + _WayPointsCleared);
+        }
+
+
+        if (NavMeshAgent.remainingDistance <= 0 )
+        {
+
+
+            NeedNewWayPoint = true;
+        }
+
+
+
+
+        if (_WayPointsCleared == TankStats.Repeat - 1)
+        {
+            EndWayPointing();
+        }
+
 
 
 
     }
 
+    void EndWayPointing()
+    {
+        Cone.SetActive(false);
+        Anim.SetBool("Attacking", false);
+        _coolDown = TankStats.CooldownBetweenBehaviour;
+
+        NavMeshAgent.speed = 0;
+        NavMeshAgent.angularSpeed = 0;
+        NeedNewWayPoint = true;
+
+
+        NavMeshAgent.ResetPath();
+    }
+
+    IEnumerator SetNeedNewWayPointToTrue()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Debug.Log("getting new waypoint");
+        NeedNewWayPoint = true;
+
+        
+        
+
+    }
 
     void EndCharge()
     {
@@ -510,33 +676,16 @@ public class TankBeetle : Enemy
         {
 
             Anim.SetBool("Idle", false);
+
+            EndWayPointing();
         }
 
-        /*
-        Vector3 adjustedPlayerPos = _playerTransform.position;
-
-        adjustedPlayerPos.y = transform.position.y;
-
-        transform.LookAt(adjustedPlayerPos);
-
-        transform.Translate(Vector3.forward * stats.MoveSpeed * Time.deltaTime);
-        */
-
+       
 
         Vector3 temp = PlayerTransform.position;
         temp.y = transform.position.y;
 
 
-        //print( Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp));
-        /*if (Vector3.Angle(transform.position - (transform.position + transform.forward), transform.position - temp) < TankStats.AttackAngle)
-        {
-            
-            NavMeshAgent.Move(transform.forward * deltaTime * TankStats.ChargeSpeed);
-        }
-        else
-        {
-            
-        }*/
         NavMeshAgent.Move(transform.forward * deltaTime * TankStats.MoveSpeed);
 
 
@@ -555,16 +704,7 @@ public class TankBeetle : Enemy
             tempPathPos = temPlayerPos;
 
         tempPathPos.y = transform.position.y;
-        /*
-        for (int i = 0; i < pathToPlayer.corners.Length; i++)
-        {
-            Debug.DrawLine(transform.position, pathToPlayer.corners[i], Color.red);
-        }
-        */
-        
-
-        //print(tempPathPos);
-
+       
         Quaternion targetRotation = Quaternion.LookRotation(tempPathPos - transform.position );
 
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, TankStats.TurnSpeed * deltaTime);
