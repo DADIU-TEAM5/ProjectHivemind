@@ -41,9 +41,12 @@ public class PlayerControlOverride : MonoBehaviour
 
         if (IsAreaOpenSO != null)
         {
-            if (IsAreaOpenSO == true)
+            if (IsAreaOpenSO.Value == true)
             {
                 LoadColliders();
+            } else
+            {
+
             }
         }
         else
