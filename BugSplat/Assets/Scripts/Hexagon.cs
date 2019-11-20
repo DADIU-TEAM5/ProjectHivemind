@@ -20,14 +20,35 @@ public class Hexagon : MonoBehaviour
 
     public bool IsaccesibleFromMiddle;
 
+    public GameObject[] Corners;
+    Vector3[] CornerPositions;
+
+
     public Hexagon[] Neighbours;
     // Start is called before the first frame update
     private void OnEnable()
     {
         
         
-
+        if(Neighbours.Length != 6)
         Neighbours = new Hexagon[6];
+
+
+        Corners = new GameObject[6];
+
+        
+
+
+    }
+    void InitilizeCornerPositions()
+    {
+        CornerPositions = new Vector3[6];
+        CornerPositions[0] = mapGen.Vertices[3] * 35;
+        CornerPositions[1] = mapGen.Vertices[5] * 35;
+        CornerPositions[2] = mapGen.Vertices[1] * 35;
+        CornerPositions[3] = mapGen.Vertices[2] * 35;
+        CornerPositions[4] = mapGen.Vertices[0] * 35;
+        CornerPositions[5] = mapGen.Vertices[4] * 35;
     }
     
     public void DistributeBudget()
@@ -191,7 +212,7 @@ public class Hexagon : MonoBehaviour
 
     public void RemoveOuterWalls()
     {
-
+        //WallsRemoved = true;
         for (int i = 0; i < Neighbours.Length; i++)
         {
             if(Neighbours[i] == null)
@@ -199,8 +220,104 @@ public class Hexagon : MonoBehaviour
                 if(Walls[i] != null)
                 Walls[i].SetActive(false);
             }
+            else
+            {
+                if (Neighbours[i].Walls[(i + 3) % 6] != null)
+                {
+                    if (Neighbours[i].Walls[(i + 3) % 6].activeSelf)
+                    {
+                        Walls[i].SetActive(false);
+                    }
+                }
+            }
         }
     }
 
+    public void CreateConnectors()
+    {
+        InitilizeCornerPositions();
+
+        GameObject connector;
+
+        GameObject WallConnector = mapGen.WallConnector;
+        GameObject OuterWallConnector = mapGen.SideWallConnector;
+
+        for (int i = 0; i < 6; i++)
+        {
+            if (HasWallsOnEdges(i, (i+1)%6))
+            {
+                bool RotateAfter = false;
+
+                if (CornerIsOuter(i, (i + 1) % 6))
+                    connector = Instantiate(WallConnector, transform);
+                else
+                {
+                    connector = Instantiate(OuterWallConnector, transform);
+                    RotateAfter = true;
+                }
+
+                connector.transform.position = connector.transform.position + CornerPositions[i];
+                connector.name = ""+i;
+                Corners[i] = connector;
+
+                if (RotateAfter)
+                {
+                    int closedNeightbour = GetClosedEdge(i, (i + 1) % 6);
+                    if(closedNeightbour != i)
+                    {
+                        connector.transform.LookAt(transform.position + CornerPositions[(i + 1) % 6]);
+                    }
+                    else
+                    {
+                        connector.transform.LookAt(transform.position + CornerPositions[(i + 5) % 6]);
+                    }
+                    
+                }
+            }
+        }
+        
+
+    }
+
+    int GetClosedEdge(int edge1, int edge2)
+    {
+        if (Neighbours[edge1] != null)
+            return edge1;
+        else
+            return edge2;
+    }
+
+    bool CornerIsOuter(int edge1, int edge2)
+    {
+        bool bolean = true;
+
+        if(Neighbours[edge1] == null|| Neighbours[edge2] == null)
+        {
+            bolean = false;
+        }
+
+        return bolean;
+    }
+    bool HasWallsOnEdges(int edge1, int edge2)
+    {
+        bool bolean = false;
+        if(Walls[edge1] != null)
+        {
+            if (Walls[edge1].activeSelf)
+            {
+                bolean = true;
+            }
+        }
+
+        if (Walls[edge2] != null)
+        {
+            if (Walls[edge2].activeSelf)
+            {
+                bolean = true;
+            }
+        }
+
+        return bolean;
+    }
    
 }
