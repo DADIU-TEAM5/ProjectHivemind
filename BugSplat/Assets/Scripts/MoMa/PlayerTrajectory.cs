@@ -30,6 +30,7 @@ public class PlayerTrajectory : GameLoop
     public AnimationCapsules AnimationTrajectories;
     public AnimationClips AnimationClips;
     public AnimationClips DeadAnimationClips;
+    public AnimationClips AttackAnimations;
     public Result Results;
     public bool Blend = false;
     //it is okay for static?
@@ -57,6 +58,11 @@ public class PlayerTrajectory : GameLoop
     private float _scale;
 
 
+    //for Attacktion Combom
+    private bool _firstTime;
+    private float _attackTime;
+    private float _realTime;
+
     [Header("Events")]
     [SerializeField]
     private GameEvent FootStep;
@@ -71,8 +77,10 @@ public class PlayerTrajectory : GameLoop
 
         _timer = 0;
         _tempMoMaTime = 0;
+        _realTime = 0;
         Results.FrameNum = 9;
         Results.AnimClipIndex = 1;
+        _firstTime = false;
         _scale = transform.lossyScale.x;
     }
 
@@ -81,6 +89,11 @@ public class PlayerTrajectory : GameLoop
     {
         _timer += deltaTime;
         _tempMoMaTime += deltaTime;
+        _realTime += deltaTime;
+        if (_realTime - _attackTime > 1)
+            _firstTime = true;
+
+
         _scale = transform.lossyScale.x;
 
         int thisClip = Results.AnimClipIndex;
@@ -108,6 +121,7 @@ public class PlayerTrajectory : GameLoop
         {
             _isDead = false;
             _tempMoMaTime = 0;
+            _realTime = 0;
         }
 
     }
@@ -127,53 +141,51 @@ public class PlayerTrajectory : GameLoop
 
 
 
-    //public void AttackComBo()
-    //{
-    //    if (firsttime)
-    //    {
-    //        _attacktime = _AttackTime;
-    //        GetAttack1();
-    //        firsttime = false;
-    //    }
-    //    else
-    //    {
-    //        if (_AttackTime - _attacktime > 0 && _AttackTime - _attacktime < 0.7)
-    //            GetAttack2();
-    //        else
-    //            GetAttack1();
-    //    }
-    //}
+    public void AttackComBo()
+    {
+        if (_firstTime)
+        {
+            _attackTime = _realTime;
+            GetComboAttack1();
+            _firstTime = false;
+        }
+        else
+        {
+            if (_realTime - _attackTime > 0 && _realTime - _attackTime < 0.7)
+                GetComboAttack2();
+            else
+                GetComboAttack1();
+        }
+    }
 
-    //public void GetComboAttack1()
-    //{
-    //    if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.25)
-    //        PlayAttackAnimationByIndex(3);
-    //    else if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.5)
-    //        PlayAttackAnimationByIndex(4);
-    //    else if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.75)
-    //        PlayAttackAnimationByIndex(5);
-    //    else
-    //        PlayAttackAnimationByIndex(6);
-    //}
+    public void GetComboAttack1()
+    {
+        if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.25)
+            PlayAttackAnimationByIndex(7);
+        else if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.5)
+            PlayAttackAnimationByIndex(1);
+        else if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.75)
+            PlayAttackAnimationByIndex(3);
+        else
+            PlayAttackAnimationByIndex(2);
+    }
 
-    //public void GetAttack2()
-    //{
-    //    if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.25)
-    //        PlayAttackAnimationByIndex(3);
-    //    else if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.5)
-    //        PlayAttackAnimationByIndex(0);
-    //    else if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.75)
-    //        PlayAttackAnimationByIndex(1);
-    //    else
-    //        PlayAttackAnimationByIndex(2);
-    //}
-    //public void PlayAttackAnimationByIndex(int animIndex)
-    //{
-    //    StartCoroutine(PlayOneWholeAnimation(AttackAnims.AnimClips[animIndex]));
-    //}
+    public void GetComboAttack2()
+    {
+        if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.25)
+            PlayAttackAnimationByIndex(6);
+        else if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.5)
+            PlayAttackAnimationByIndex(0);
+        else if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.75)
+            PlayAttackAnimationByIndex(5);
+        else
+            PlayAttackAnimationByIndex(4);
+    }
+    public void PlayAttackAnimationByIndex(int animIndex)
+    {
+        StartCoroutine(PlayOneWholeAnimation(AttackAnimations.AnimClips[animIndex]));
+    }
 
-
-    
     public void PlayAnimByAnimClip(AnimClip anim)
     {
         StartCoroutine(PlayOneWholeAnimation(anim));
@@ -214,6 +226,7 @@ public class PlayerTrajectory : GameLoop
         {
             _isDead = false;
             _tempMoMaTime = 0;
+            _realTime = 0;
         }
 
         if (_tempMoMaTime > MoMaUpdateTime)
