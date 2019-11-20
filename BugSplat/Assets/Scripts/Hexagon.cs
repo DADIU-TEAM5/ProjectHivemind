@@ -48,7 +48,7 @@ public class Hexagon : MonoBehaviour
 
     public void GetNeighbours()
     {
-
+        print("I was called i think");
 
 
 
@@ -185,6 +185,21 @@ public class Hexagon : MonoBehaviour
                  
         }
         print("no availble neighbours to open");
+    }
+
+
+
+    public void RemoveOuterWalls()
+    {
+
+        for (int i = 0; i < Neighbours.Length; i++)
+        {
+            if(Neighbours[i] == null)
+            {
+                if(Walls[i] != null)
+                Walls[i].SetActive(false);
+            }
+        }
     }
 
    
