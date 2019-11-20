@@ -475,7 +475,7 @@ public class TankBeetle : Enemy
 
         NavMeshAgent.Move(-transform.position + Vector3.Lerp(_lerpStart, _lerpPoint,TankStats.ChargeCurve.Evaluate( _lerp)));
 
-        print(_lerp);
+        //print(_lerp);
 
         if (_lerp < 1)
         {
@@ -485,7 +485,7 @@ public class TankBeetle : Enemy
 
         if (_lerp >= 1)
         {
-            print("New Way pint");
+           // print("New Way pint");
             if (_currentPath.corners.Length-1 > _currentCorner)
             {
                 _currentCorner++;
@@ -817,6 +817,7 @@ public class TankBeetle : Enemy
 
     private void OnDrawGizmos()
     {
+        /*
         Gizmos.color = Color.magenta;
         Gizmos.DrawSphere(_lerpPoint, .5f);
 
@@ -831,7 +832,7 @@ public class TankBeetle : Enemy
 
             }
         }
-
+        */
     }
 
 

@@ -160,8 +160,20 @@ public class MapGenerator : MonoBehaviour
                     hexScript.OpenAndRotateNeighbour();
                     RotateAllPossibleSolutions();
                 }
+                
+            }
+
+            for (int i = 0; i < _hexagonsTiles.Count; i++)
+            {
+                Hexagon hexScript = _hexagonsTiles[i].GetComponent<Hexagon>();
+
+
+                hexScript.RemoveOuterWalls();
+                //print(hexScript.name + " nieghbour 0 " + (hexScript.Neighbours[0] != null));
 
             }
+
+
         }
         _Parent.SetActive(false);
         _Parent.transform.Rotate(0, 90, 0);
@@ -170,7 +182,12 @@ public class MapGenerator : MonoBehaviour
         for (int i = 0; i < _hexagonsTiles.Count; i++)
         {
             Hexagon hexScript = _hexagonsTiles[i].GetComponent<Hexagon>();
+
+           
+
             hexScript.DistributeBudget();
+
+            
         }
 
         if(DoneGenerating != null)
@@ -193,12 +210,17 @@ public class MapGenerator : MonoBehaviour
             for (int i = 0; i < _hexagonsTiles.Count; i++)
             {
                 Hexagon hexagonScript = _hexagonsTiles[i].GetComponent<Hexagon>();
+
+                
+
                 if (hexagonScript.HasAMiddleConnectedNeighbourWithAnOpenSideTowardsThisTile() && !hexagonScript.IsaccesibleFromMiddle)
                 {
                     noSolution = false;
 
                     hexagonScript.RotateToFitMiddleConnectedNeighbour();
                 }
+                //print(hexagonScript.name + " nieghbour 0 " + (hexagonScript.Neighbours[0] != null));
+
             }
 
 
@@ -266,12 +288,19 @@ public class MapGenerator : MonoBehaviour
 
     void UpdateAllTheNeighbours()
     {
+
+
+
         for (int i = 0; i < _hexagonsTiles.Count; i++)
         {
             Hexagon hexScript = _hexagonsTiles[i].GetComponent<Hexagon>();
 
+            //print(hexScript.name + " nieghbour 0 " +( hexScript.Neighbours[0] != null));
+
             hexScript.LabelNeighbourAccesibility();
             hexScript.GetNeighbours();
+
+            //print(hexScript.name + " second check nieghbour 0 " + (hexScript.Neighbours[0] != null));
         }
 
 
