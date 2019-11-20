@@ -77,6 +77,9 @@ namespace AK
         static const AkUniqueID SPIKETRAP_CHARGE = 4263442935U;
         static const AkUniqueID SPIKETRAP_IMPACT = 2179537273U;
         static const AkUniqueID SPIKETRAP_STAB = 2700540079U;
+        static const AkUniqueID TOAD_ACCEPT = 2496063080U;
+        static const AkUniqueID TOAD_DENY = 771050566U;
+        static const AkUniqueID TOAD_DIALOGUEBLIP = 1388225139U;
     } // namespace EVENTS
 
     namespace STATES
