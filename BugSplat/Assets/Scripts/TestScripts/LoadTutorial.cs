@@ -11,7 +11,7 @@ public class LoadTutorial : MonoBehaviour
     public Transform Player;
     public GameObject Cage;
 
-    void OnEnabled()
+    void Start()
     {
         if(TutorialIsActive.Value == false)
         {
@@ -19,6 +19,7 @@ public class LoadTutorial : MonoBehaviour
             Player.GetComponent<NavMeshAgent>().enabled = true;
         } else
         {
+
             Cage.SetActive(true);
         }
     }
