@@ -11,8 +11,7 @@ public class LoadTutorial : MonoBehaviour
     public Transform Player;
     public GameObject Cage;
 
-    // Start is called before the first frame update
-    void Start()
+    void OnEnabled()
     {
         if(TutorialIsActive.Value == false)
         {
