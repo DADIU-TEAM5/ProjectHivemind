@@ -125,7 +125,7 @@ public class InGameHUDController : MonoBehaviour
     {
         InMainMenu.Value = false;
         EnterInGameHUD();
-        SH.ChangeScene("ArenaGeneration");
+        //SH.ChangeScene("ArenaGeneration");
     }
 
     public void BackButton()
