@@ -23,7 +23,7 @@ public class MotionMatcher
         }
 
         var bestFrame = animationCapsules.FrameCapsules[bestCapsuleIndex];
-        bool isSameLocation = (bestCapsuleIndex == result.CapsuleNum)
+        bool isSameLocation = ((bestCapsuleIndex == result.CapsuleNum)&& (bestFrame.AnimClipIndex == result.AnimClipIndex))
                                 || ((bestFrame.AnimClipIndex == result.AnimClipIndex)
                                 && (Mathf.Abs(bestFrame.FrameNum - result.FrameNum) < differentClipLength));
 
