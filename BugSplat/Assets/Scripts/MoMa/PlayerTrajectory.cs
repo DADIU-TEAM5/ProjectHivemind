@@ -165,7 +165,7 @@ public class PlayerTrajectory : GameLoop
         else if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.5)
             PlayAttackAnimationByIndex(1);
         else if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.75)
-            PlayAttackAnimationByIndex(5);
+            PlayAttackAnimationByIndex(3);
         else
             PlayAttackAnimationByIndex(2);
     }
@@ -177,7 +177,7 @@ public class PlayerTrajectory : GameLoop
         else if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.5)
             PlayAttackAnimationByIndex(0);
         else if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.75)
-            PlayAttackAnimationByIndex(3);
+            PlayAttackAnimationByIndex(5);
         else
             PlayAttackAnimationByIndex(4);
     }
@@ -226,6 +226,7 @@ public class PlayerTrajectory : GameLoop
         {
             _isDead = false;
             _tempMoMaTime = 0;
+            _realTime = 0;
         }
 
         if (_tempMoMaTime > MoMaUpdateTime)
