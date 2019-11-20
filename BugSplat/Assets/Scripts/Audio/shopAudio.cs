@@ -9,6 +9,7 @@ public class shopAudio : MonoBehaviour
     public AK.Wwise.Event putBackItem;
     public AK.Wwise.Event purchaseItem;
     public AK.Wwise.Event insufficientFunds;
+    public AK.Wwise.Event toadSpeak;
 
     public void InspectItemEvent()
     {
@@ -28,5 +29,10 @@ public class shopAudio : MonoBehaviour
     public void InsufficientFundsEvent()
     {
         insufficientFunds.Post(this.gameObject);
+    }
+
+    public void EnterShopEvent()
+    {
+        toadSpeak.Post(this.gameObject);
     }
 }
