@@ -241,7 +241,7 @@ MonoBehaviour:
   IsPaticipant: 0
   PlayerGraphics: {fileID: 2700275941276276989}
   MoveDirectionSO: {fileID: 11400000, guid: c1f170982022e2e4f8f993a769166f2b, type: 2}
-  DashInitiatedSO: {fileID: 11400000, guid: a325fabc21f4650479d69a9c7bdd3d21, type: 2}
+  Swipe: {fileID: 11400000, guid: 60970d5ec9567e2409fadb3f56b3fb10, type: 2}
   AttackTapSO: {fileID: 11400000, guid: 054062f3758a0e34a81b32c3653d5151, type: 2}
   InputMoveMinThresholdSO: {fileID: 11400000, guid: 06f2711f3ca5c4d4eba7f5b9b751f4c3,
     type: 2}
@@ -279,7 +279,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f667abb4971be8f42af0fd96229336c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsPaticipant: 0
   IsDodgingSO: {fileID: 11400000, guid: 046d32af02590954e84257844646064e, type: 2}
   IsInvulnerableSO: {fileID: 11400000, guid: 3e721a80afd6d0643a68ebff8a1d86d0, type: 2}
   DashInvulnerabilityTimeSO: {fileID: 11400000, guid: c5895a72cdae65c4f8c8fc44440eb977,
@@ -313,12 +312,15 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  StaminaIsActive: 0
+  StaminaIsActive: 1
   DashPower: {fileID: 11400000, guid: 4deec6bed9728f54682a860cf51f027d, type: 2}
   DashCost: {fileID: 11400000, guid: 1bdadc0e69512694ba4aff20b1ce4cb0, type: 2}
   Stamina: {fileID: 11400000, guid: ad4b6cdec9268694ea29b7595e707f61, type: 2}
+  DashDamage: {fileID: 11400000, guid: 6318f006fb6c1f3459f4d20710052b18, type: 2}
   PlayerGraphics: {fileID: 2700275941276276989}
+  DashInitiated: {fileID: 11400000, guid: a325fabc21f4650479d69a9c7bdd3d21, type: 2}
   DashDoneEvent: {fileID: 11400000, guid: f52db6c548489134587267cd10b1afc9, type: 2}
+  DashCollideEvent: {fileID: 11400000, guid: 56fc2bc5c795b1d40b2f0dd1d5c56f12, type: 2}
 --- !u!54 &5788987755461925663
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -347,7 +349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: a325fabc21f4650479d69a9c7bdd3d21, type: 2}
+  Event: {fileID: 11400000, guid: 60970d5ec9567e2409fadb3f56b3fb10, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
@@ -708,16 +710,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5788987755461925660}
     m_Modifications:
-    - target: {fileID: 623513609571133943, guid: 21fda503c8a62e3428df8cb40d920a27,
-        type: 3}
-      propertyPath: m_Name
-      value: PlayerLighting
-      objectReference: {fileID: 0}
-    - target: {fileID: 623513609571133943, guid: 21fda503c8a62e3428df8cb40d920a27,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 623513609571133942, guid: 21fda503c8a62e3428df8cb40d920a27,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -773,6 +765,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 623513609571133943, guid: 21fda503c8a62e3428df8cb40d920a27,
+        type: 3}
+      propertyPath: m_Name
+      value: PlayerLighting
+      objectReference: {fileID: 0}
+    - target: {fileID: 623513609571133943, guid: 21fda503c8a62e3428df8cb40d920a27,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4232264239708375680, guid: 21fda503c8a62e3428df8cb40d920a27,
         type: 3}
       propertyPath: m_IsActive
@@ -793,36 +795,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5788987755461925660}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: a2843aac6bf41fa48a0e3822c0332f4b,
-        type: 3}
-      propertyPath: m_Name
-      value: MainCharacter_Tpose_Unwrap
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: a2843aac6bf41fa48a0e3822c0332f4b,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: a2843aac6bf41fa48a0e3822c0332f4b,
-        type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: -2801261897168740559, guid: a2843aac6bf41fa48a0e3822c0332f4b,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 3236772013987491121, guid: a2843aac6bf41fa48a0e3822c0332f4b,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: -7943378556525867576, guid: a2843aac6bf41fa48a0e3822c0332f4b,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: a2843aac6bf41fa48a0e3822c0332f4b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -892,6 +864,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: a2843aac6bf41fa48a0e3822c0332f4b,
+        type: 3}
+      propertyPath: m_Name
+      value: MainCharacter_Tpose_Unwrap
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: a2843aac6bf41fa48a0e3822c0332f4b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: a2843aac6bf41fa48a0e3822c0332f4b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: -2801261897168740559, guid: a2843aac6bf41fa48a0e3822c0332f4b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3236772013987491121, guid: a2843aac6bf41fa48a0e3822c0332f4b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -7943378556525867576, guid: a2843aac6bf41fa48a0e3822c0332f4b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -4431429744085825124, guid: a2843aac6bf41fa48a0e3822c0332f4b,
         type: 3}
