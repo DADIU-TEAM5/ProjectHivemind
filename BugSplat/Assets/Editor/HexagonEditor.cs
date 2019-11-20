@@ -35,8 +35,14 @@ public class HexagonEditor : Editor
         {
             hex.OpenAndRotateNeighbour();
         }
-       
-       
+        if (GUILayout.Button("Create Connectors"))
+        {
+            hex.CreateConnectors();
+        }
+        if (GUILayout.Button("Remove OuterWalls"))
+        {
+            hex.RemoveOuterWalls();
+        }
 
         DrawDefaultInspector();
 
