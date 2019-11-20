@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1965015718377449177}
   - component: {fileID: 1401582755443858811}
   - component: {fileID: 2875322531820035088}
+  - component: {fileID: 4904092712629286686}
   m_Layer: 0
   m_Name: ShopAudioManager
   m_TagString: Untagged
@@ -66,6 +67,11 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: e48cbd3c2b03c491a8e5abfab6bc64b5,
       type: 2}
+  toadSpeak:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 50ca614a7472142339740db11706e160,
+      type: 2}
 --- !u!114 &1401582755443858811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,6 +119,35 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1965015718377449177}
         m_MethodName: InsufficientFundsEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &4904092712629286686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275682528968942918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 28858f3f143896a48867dd7b51ec2095, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1965015718377449177}
+        m_MethodName: EnterShopEvent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
