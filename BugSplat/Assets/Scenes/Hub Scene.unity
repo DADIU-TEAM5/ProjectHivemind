@@ -191,7 +191,7 @@ MonoBehaviour:
   ExitTargets:
   - {fileID: 84952607}
   IsAreaOpenSO: {fileID: 0}
-  IsExitingScene: FirstRun
+  IsExitingScene: 
   LastSceneSO: {fileID: 11400000, guid: 5009c1709f3cffb49a0c239d47e4d46b, type: 2}
   Player: {fileID: 1209097220}
   PlayerCurrentSpeedSO: {fileID: 11400000, guid: dbd0aac2d5b26704bbdf49f8d6657a38,
@@ -220,6 +220,8 @@ MonoBehaviour:
   PlayerCurrentSpeedSO: {fileID: 11400000, guid: dbd0aac2d5b26704bbdf49f8d6657a38,
     type: 2}
   PlayerDirectionSO: {fileID: 11400000, guid: 857036471d8e63b46b304293dca2794e, type: 2}
+  PlayerControlOverrideSO: {fileID: 11400000, guid: 6c60755199019534381ecc8c862bb419,
+    type: 2}
 --- !u!114 &84952610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1169,6 +1171,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &339000142
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 339000144}
+  - component: {fileID: 339000143}
+  m_Layer: 0
+  m_Name: CageActivator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &339000143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339000142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9e4f0ce99a532d4a8ce65c8167ca8a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TutorialIsActive: {fileID: 11400000, guid: dd67718f3893f3c489f56b21972b38cf, type: 2}
+  PlayerControlOverrideSO: {fileID: 11400000, guid: 6c60755199019534381ecc8c862bb419,
+    type: 2}
+  Player: {fileID: 1209097220}
+  Cage: {fileID: 1744688222}
+--- !u!4 &339000144
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339000142}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 29.91, y: 0.25, z: -22.41}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &342810199
 GameObject:
   m_ObjectHideFlags: 0
@@ -5103,13 +5153,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1448077798}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: 0.29311243, z: -0, w: 0.95607793}
   m_LocalPosition: {x: -1.99, y: -0.068, z: -1.05}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 9.3829, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 739516420}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 34.089, z: 0}
 --- !u!114 &1448077800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5669,14 +5719,13 @@ GameObject:
   - component: {fileID: 1744688223}
   - component: {fileID: 1744688226}
   - component: {fileID: 1744688227}
-  - component: {fileID: 1744688228}
   m_Layer: 0
   m_Name: Cage_P
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &1744688223
 Animator:
   serializedVersion: 3
@@ -5753,23 +5802,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AnimatorObject: {fileID: 1744688223}
---- !u!114 &1744688228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1744688222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9e4f0ce99a532d4a8ce65c8167ca8a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TutorialIsActive: {fileID: 11400000, guid: dd67718f3893f3c489f56b21972b38cf, type: 2}
-  PlayerControlOverrideSO: {fileID: 11400000, guid: 6c60755199019534381ecc8c862bb419,
-    type: 2}
-  Player: {fileID: 1209097220}
-  Cage: {fileID: 1744688222}
 --- !u!1 &1776050696
 GameObject:
   m_ObjectHideFlags: 0

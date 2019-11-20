@@ -9,6 +9,7 @@ public class FreezePlayerPositionToPoint : MonoBehaviour
     public Transform TargetPosition;
     public FloatVariable PlayerCurrentSpeedSO;
     public Vector3Variable PlayerDirectionSO;
+    public BoolVariable PlayerControlOverrideSO;
      
 
     // Update is called once per frame
@@ -16,6 +17,7 @@ public class FreezePlayerPositionToPoint : MonoBehaviour
     {
         if(TutorialIsActive.Value == true)
         {
+            PlayerControlOverrideSO.Value = true;
             PlayerCurrentSpeedSO.Value = 0;
             PlayerDirectionSO.Value = Vector3.zero;
             PlayerGameObject.position = TargetPosition.position;
