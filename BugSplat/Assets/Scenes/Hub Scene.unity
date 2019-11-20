@@ -216,6 +216,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerGameObject: {fileID: 1209097220}
   TargetPosition: {fileID: 84952607}
+  PlayerCurrentSpeedSO: {fileID: 11400000, guid: dbd0aac2d5b26704bbdf49f8d6657a38,
+    type: 2}
+  PlayerDirectionSO: {fileID: 11400000, guid: 857036471d8e63b46b304293dca2794e, type: 2}
 --- !u!114 &84952610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2621,6 +2624,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerGameObject
       objectReference: {fileID: 0}
+    - target: {fileID: 1378690212658981614, guid: ce93dae90c32b234eb5aa37ebcaa5582,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.99383587
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378690212658981614, guid: ce93dae90c32b234eb5aa37ebcaa5582,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.11086183
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378690212658981614, guid: ce93dae90c32b234eb5aa37ebcaa5582,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -167.27
+      objectReference: {fileID: 0}
     - target: {fileID: 5788987755461925661, guid: ce93dae90c32b234eb5aa37ebcaa5582,
         type: 3}
       propertyPath: TouchCanvas
@@ -4265,7 +4283,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1086207367
 Transform:
   m_ObjectHideFlags: 0
@@ -4351,8 +4369,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 84952605}
-        m_MethodName: SetActive
+      - m_Target: {fileID: 84952609}
+        m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4411,6 +4429,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5593277248082768325, guid: c4eef647f6f45634695bc899e5b41532,
+        type: 3}
+      propertyPath: m_Name
+      value: UI_Tutorial
+      objectReference: {fileID: 0}
+    - target: {fileID: 5593277248082768325, guid: c4eef647f6f45634695bc899e5b41532,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1999414990594131588, guid: c4eef647f6f45634695bc899e5b41532,
         type: 3}
       propertyPath: m_Name
@@ -4559,16 +4587,6 @@ PrefabInstance:
     - target: {fileID: 5593277248082768324, guid: c4eef647f6f45634695bc899e5b41532,
         type: 3}
       propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5593277248082768325, guid: c4eef647f6f45634695bc899e5b41532,
-        type: 3}
-      propertyPath: m_Name
-      value: UI_Tutorial
-      objectReference: {fileID: 0}
-    - target: {fileID: 5593277248082768325, guid: c4eef647f6f45634695bc899e5b41532,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -5222,7 +5240,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1448077799
 Transform:
   m_ObjectHideFlags: 0
@@ -5906,7 +5924,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1744688222}
   m_LocalRotation: {x: -0, y: 0.70710677, z: -0, w: 0.7071069}
-  m_LocalPosition: {x: 31.96082, y: 17.89, z: -21.438433}
+  m_LocalPosition: {x: 31.96082, y: 18, z: -21.438433}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5006512736261053324}
@@ -6436,7 +6454,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &2090943693
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6486,6 +6504,17 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: OpenCage
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 84952609}
+        m_MethodName: Reset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
