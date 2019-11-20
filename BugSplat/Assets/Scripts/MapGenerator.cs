@@ -33,10 +33,15 @@ public class MapGenerator : MonoBehaviour
     public GameObject BaseHexagon;
     public GameObject EdgeWall;
 
-    float _hexLength;
-    float _hexHeight;
+    [HideInInspector]
+    public float HexLength;
+    [HideInInspector]
+    public float HexHeight;
+
     Vector3 _lastHexPos = Vector3.zero;
-    Vector3[] _vertices;
+
+    [HideInInspector]
+    public Vector3[] Vertices;
 
     bool _allTilesGenerated;
 
@@ -49,97 +54,108 @@ public class MapGenerator : MonoBehaviour
 
     Mesh hexMesh;
 
+    public GameObject WallConnector;
+    public GameObject SideWallConnector;
+
+
+    public bool DontGenerate;
+
     // Start is called before the first frame update
     void Start()
     {
-        var isGauntlet = Levels.LevelTierPicker[CurrentLevel.Value].IsGauntlet;
-        if (isGauntlet)
-        {
-            Hexagons = GauntletHexagons;
-            CenterHexagons = GauntletCenterHexagons;
-        }
-
-
-        EnemySpawnerCount.Value = 0;
-        Debug.Log("THE MAPGEN SET UP THE VALUES!!");
-        EnemySpawner.LevelBudget = Levels.LevelTierPicker[CurrentLevel.Value].budget;
-        print("spawner budget set to "+ EnemySpawner.LevelBudget);
-        print("spawner budget should be set to " + Levels.LevelTierPicker[CurrentLevel.Value].budget);
-
-        SortedHexagons = new List<List<GameObject>>();
-        availableTiers = new List<Tier>();
-
-
-
-        for (int i = 0; i < Hexagons.Length; i++)
-        {
-          Tier tier =   Hexagons[i].GetComponent<Hexagon>().difficultyLevel;
-            if (!availableTiers.Contains(tier))
-            {
-                availableTiers.Add(tier);
-            }
-           int tierIndex = availableTiers.IndexOf(tier);
-            if (SortedHexagons.Count < tierIndex + 1)
-            {
-                SortedHexagons.Add(new List<GameObject>());
-            }
-
-            SortedHexagons[tierIndex].Add(Hexagons[i]);
-
-        }
-        //print("hexagons have been sorted "+ SortedHexagons.Count);
-
-
-
-        if(hexmapParent.Value != null)
-        {
-            Destroy(hexmapParent.Value);
-        }
-
-        if(!UseRandomSeed)
-        Random.InitState(Seed);
-
-        Hexagon.mapGen = this;
-
-        _Parent = new GameObject();
-        _Parent.name = "Hex Map";
-
-        _hexagonsTiles = new List<GameObject>();
-
-        hexMesh = BaseHexagon.GetComponent<MeshFilter>().sharedMesh;
-
-        _vertices = hexMesh.vertices;
-
-
-        _hexLength = Mathf.Abs(_vertices[2].z) + Mathf.Abs(_vertices[4].z);
-        _hexHeight = Mathf.Abs(_vertices[0].x) + Mathf.Abs(_vertices[5].x);
-
-        _hexHeight *= BaseHexagon.transform.localScale.z;
-        _hexLength *= BaseHexagon.transform.localScale.x;
-
-
-        GameObject hex = Instantiate(getRandomCenterHexagon());
-        Hexagon hexHex= hex.GetComponent<Hexagon>();
-        //hexHex.RotateTile(Random.Range(0, 5));
-        hexHex.IsaccesibleFromMiddle = true;
-
-        hex.name = "middle";
-        hex.transform.position = Vector3.zero;
-
-        hex.transform.parent = _Parent.transform;
-
-        _hexagonsTiles.Add(hex);
-
-
-        StartCoroutine(GeneratAllTheRings());
-
-        _hexagonsTiles.Remove(hex);
-
-
         
-        StartCoroutine(RotateTilesToMakeMostPossibleConnections());
 
-        hexmapParent.Value = _Parent;
+            var isGauntlet = Levels.LevelTierPicker[CurrentLevel.Value].IsGauntlet;
+            if (isGauntlet)
+            {
+                Hexagons = GauntletHexagons;
+                CenterHexagons = GauntletCenterHexagons;
+            }
+
+
+            EnemySpawnerCount.Value = 0;
+            Debug.Log("THE MAPGEN SET UP THE VALUES!!");
+            EnemySpawner.LevelBudget = Levels.LevelTierPicker[CurrentLevel.Value].budget;
+            print("spawner budget set to " + EnemySpawner.LevelBudget);
+            print("spawner budget should be set to " + Levels.LevelTierPicker[CurrentLevel.Value].budget);
+
+            SortedHexagons = new List<List<GameObject>>();
+            availableTiers = new List<Tier>();
+
+
+
+            for (int i = 0; i < Hexagons.Length; i++)
+            {
+                Tier tier = Hexagons[i].GetComponent<Hexagon>().difficultyLevel;
+                if (!availableTiers.Contains(tier))
+                {
+                    availableTiers.Add(tier);
+                }
+                int tierIndex = availableTiers.IndexOf(tier);
+                if (SortedHexagons.Count < tierIndex + 1)
+                {
+                    SortedHexagons.Add(new List<GameObject>());
+                }
+
+                SortedHexagons[tierIndex].Add(Hexagons[i]);
+
+            }
+            //print("hexagons have been sorted "+ SortedHexagons.Count);
+
+
+
+            if (hexmapParent.Value != null)
+            {
+                Destroy(hexmapParent.Value);
+            }
+
+            if (!UseRandomSeed)
+                Random.InitState(Seed);
+
+            Hexagon.mapGen = this;
+
+            _Parent = new GameObject();
+            _Parent.name = "Hex Map";
+
+            _hexagonsTiles = new List<GameObject>();
+
+            hexMesh = BaseHexagon.GetComponent<MeshFilter>().sharedMesh;
+
+            Vertices = hexMesh.vertices;
+
+
+            HexLength = Mathf.Abs(Vertices[2].z) + Mathf.Abs(Vertices[4].z);
+            HexHeight = Mathf.Abs(Vertices[0].x) + Mathf.Abs(Vertices[5].x);
+
+            HexHeight *= BaseHexagon.transform.localScale.z;
+            HexLength *= BaseHexagon.transform.localScale.x;
+
+        if (!DontGenerate)
+        {
+
+            GameObject hex = Instantiate(getRandomCenterHexagon());
+            Hexagon hexHex = hex.GetComponent<Hexagon>();
+            //hexHex.RotateTile(Random.Range(0, 5));
+            hexHex.IsaccesibleFromMiddle = true;
+
+            hex.name = "middle";
+            hex.transform.position = Vector3.zero;
+
+            hex.transform.parent = _Parent.transform;
+
+            _hexagonsTiles.Add(hex);
+
+
+            StartCoroutine(GeneratAllTheRings());
+
+            _hexagonsTiles.Remove(hex);
+
+
+
+            StartCoroutine(RotateTilesToMakeMostPossibleConnections());
+
+            hexmapParent.Value = _Parent;
+        }
     }
 
     IEnumerator RotateTilesToMakeMostPossibleConnections()
@@ -169,6 +185,19 @@ public class MapGenerator : MonoBehaviour
 
 
                 hexScript.RemoveOuterWalls();
+
+                
+                //print(hexScript.name + " nieghbour 0 " + (hexScript.Neighbours[0] != null));
+
+            }
+            for (int i = 0; i < _hexagonsTiles.Count; i++)
+            {
+                Hexagon hexScript = _hexagonsTiles[i].GetComponent<Hexagon>();
+
+
+                
+
+                hexScript.CreateConnectors();
                 //print(hexScript.name + " nieghbour 0 " + (hexScript.Neighbours[0] != null));
 
             }
@@ -394,7 +423,7 @@ public class MapGenerator : MonoBehaviour
 
         float multiplierLength = 0;
         float multiplierHeight = 0;
-        for (int i = 0; i < _vertices.Length; i++)
+        for (int i = 0; i < Vertices.Length; i++)
         {
 
             if ((i - 2) % 3 == 0)
@@ -474,8 +503,8 @@ public class MapGenerator : MonoBehaviour
 
             Vector3 positionToPlaceHex = startHexagon.transform.position;
 
-            float hexStepLength = _hexLength * 0.5f;
-            float hexStepHeight = _hexHeight * 0.75f;
+            float hexStepLength = HexLength * 0.5f;
+            float hexStepHeight = HexHeight * 0.75f;
 
 
             
