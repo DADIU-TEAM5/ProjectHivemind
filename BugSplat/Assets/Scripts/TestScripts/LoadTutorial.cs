@@ -11,7 +11,6 @@ public class LoadTutorial : MonoBehaviour
     public Transform Player;
     public GameObject Cage;
 
-    // Start is called before the first frame update
     void Start()
     {
         if(TutorialIsActive.Value == false)
@@ -20,6 +19,7 @@ public class LoadTutorial : MonoBehaviour
             Player.GetComponent<NavMeshAgent>().enabled = true;
         } else
         {
+
             Cage.SetActive(true);
         }
     }

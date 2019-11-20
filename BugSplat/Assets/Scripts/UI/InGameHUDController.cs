@@ -13,6 +13,7 @@ public class InGameHUDController : MonoBehaviour
     public GameObject ModifiersMenu;
     public GameObject PauseMenu;
     public GameObject InGameHUD;
+    public StringVariable LastSceneSO;
 
     public BoolVariable InMainMenu;
     public SceneHandler SH;
@@ -42,9 +43,9 @@ public class InGameHUDController : MonoBehaviour
         SetupColors(InGameHUD);
 
 
-        if (InMainMenu.Value)
+        if (LastSceneSO.Value == "")
         {
-            Debug.Log("Im Not null.....");
+            //Debug.Log("Im Not null.....");
             EnterMainMenu();
         }
         else
