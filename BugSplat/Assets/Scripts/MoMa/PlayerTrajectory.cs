@@ -71,8 +71,8 @@ public class PlayerTrajectory : GameLoop
 
         _timer = 0;
         _tempMoMaTime = 0;
-        Results.FrameNum = 0;
-        Results.AnimClipIndex = 0;
+        Results.FrameNum = 9;
+        Results.AnimClipIndex = 1;
         _scale = transform.lossyScale.x;
     }
 
@@ -172,6 +172,12 @@ public class PlayerTrajectory : GameLoop
     //    StartCoroutine(PlayOneWholeAnimation(AttackAnims.AnimClips[animIndex]));
     //}
 
+
+    
+    public void PlayAnimByAnimClip(AnimClip anim)
+    {
+        StartCoroutine(PlayOneWholeAnimation(anim));
+    }
 
     public void debugFootStep()
     {
