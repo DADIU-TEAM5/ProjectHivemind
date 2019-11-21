@@ -69,10 +69,17 @@ namespace AK
         static const AkUniqueID PLAYER_FOLEY_HIT = 830213708U;
         static const AkUniqueID PLAYER_FOLEY_KILLED = 3187150534U;
         static const AkUniqueID PLAYER_PICKUP = 1627434233U;
+        static const AkUniqueID SHOP_INSPECTITEM = 1339011789U;
+        static const AkUniqueID SHOP_INSUFFICIENTFUNDS = 154430615U;
+        static const AkUniqueID SHOP_PURCHASE = 3988221669U;
+        static const AkUniqueID SHOP_PUTDOWN = 2486007151U;
         static const AkUniqueID SLIDINGDOOR = 27167321U;
         static const AkUniqueID SPIKETRAP_CHARGE = 4263442935U;
         static const AkUniqueID SPIKETRAP_IMPACT = 2179537273U;
         static const AkUniqueID SPIKETRAP_STAB = 2700540079U;
+        static const AkUniqueID TOAD_ACCEPT = 2496063080U;
+        static const AkUniqueID TOAD_DENY = 771050566U;
+        static const AkUniqueID TOAD_DIALOGUEBLIP = 1388225139U;
     } // namespace EVENTS
 
     namespace STATES

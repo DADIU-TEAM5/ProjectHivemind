@@ -30,6 +30,7 @@ public class PlayerTrajectory : GameLoop
     public AnimationCapsules AnimationTrajectories;
     public AnimationClips AnimationClips;
     public AnimationClips DeadAnimationClips;
+    public AnimationClips AttackAnimations;
     public Result Results;
     public bool Blend = false;
     //it is okay for static?
@@ -57,6 +58,11 @@ public class PlayerTrajectory : GameLoop
     private float _scale;
 
 
+    //for Attacktion Combom
+    private bool _firstTime;
+    private float _attackTime;
+    private float _realTime;
+
     [Header("Events")]
     [SerializeField]
     private GameEvent FootStep;
@@ -71,8 +77,10 @@ public class PlayerTrajectory : GameLoop
 
         _timer = 0;
         _tempMoMaTime = 0;
-        Results.FrameNum = 0;
-        Results.AnimClipIndex = 0;
+        _realTime = 0;
+        Results.FrameNum = 9;
+        Results.AnimClipIndex = 1;
+        _firstTime = false;
         _scale = transform.lossyScale.x;
     }
 
@@ -81,6 +89,11 @@ public class PlayerTrajectory : GameLoop
     {
         _timer += deltaTime;
         _tempMoMaTime += deltaTime;
+        _realTime += deltaTime;
+        if (_realTime - _attackTime > 1)
+            _firstTime = true;
+
+
         _scale = transform.lossyScale.x;
 
         int thisClip = Results.AnimClipIndex;
@@ -93,7 +106,7 @@ public class PlayerTrajectory : GameLoop
         GetRelativeTrajectory(Velocity.Value);
 
 
-        if(!_isDead)
+        if (!_isDead)
             if (Blend)
                 UpdateWithBlend(thisClip, thisClipNum, rotationPlayer);
             else
@@ -108,6 +121,7 @@ public class PlayerTrajectory : GameLoop
         {
             _isDead = false;
             _tempMoMaTime = 0;
+            _realTime = 0;
         }
 
     }
@@ -123,6 +137,58 @@ public class PlayerTrajectory : GameLoop
             PlayAnimationByIndex(3);
         else
             PlayAnimationByIndex(6);
+    }
+
+
+
+    public void AttackComBo()
+    {
+        if (_firstTime)
+        {
+            _attackTime = _realTime;
+            GetComboAttack1();
+            _firstTime = false;
+        }
+        else
+        {
+            if (_realTime - _attackTime > 0 && _realTime - _attackTime < 0.7)
+                GetComboAttack2();
+            else
+                GetComboAttack1();
+        }
+    }
+
+    public void GetComboAttack1()
+    {
+        if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.25)
+            PlayAttackAnimationByIndex(7);
+        else if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.5)
+            PlayAttackAnimationByIndex(1);
+        else if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.75)
+            PlayAttackAnimationByIndex(3);
+        else
+            PlayAttackAnimationByIndex(2);
+    }
+
+    public void GetComboAttack2()
+    {
+        if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.25)
+            PlayAttackAnimationByIndex(6);
+        else if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.5)
+            PlayAttackAnimationByIndex(0);
+        else if (AttackAngle.Value < (AttackAngle.Max - AttackAngle.Min) * 0.75)
+            PlayAttackAnimationByIndex(5);
+        else
+            PlayAttackAnimationByIndex(4);
+    }
+    public void PlayAttackAnimationByIndex(int animIndex)
+    {
+        StartCoroutine(PlayOneWholeAnimation(AttackAnimations.AnimClips[animIndex]));
+    }
+
+    public void PlayAnimByAnimClip(AnimClip anim)
+    {
+        StartCoroutine(PlayOneWholeAnimation(anim));
     }
 
     public void debugFootStep()
@@ -160,6 +226,7 @@ public class PlayerTrajectory : GameLoop
         {
             _isDead = false;
             _tempMoMaTime = 0;
+            _realTime = 0;
         }
 
         if (_tempMoMaTime > MoMaUpdateTime)
@@ -399,6 +466,7 @@ public class PlayerTrajectory : GameLoop
         StartCoroutine(PlayOneWholeAnimation(AnimationClips.AnimClips[animIndex]));
     }
 
+
     public void PlayDeadAnim()
     {
         _isDead = true;
@@ -461,7 +529,7 @@ public class PlayerTrajectory : GameLoop
     private void ApplyJointPointToJoint(AnimationJointPoint jointPoint, Transform joint)
     {
         joint.rotation = transform.rotation * jointPoint.Rotation;
-        joint.position = transform.TransformDirection(jointPoint.Position* _scale) + transform.position;
+        joint.position = transform.TransformDirection(jointPoint.Position * _scale) + transform.position;
     }
 
 

@@ -12,8 +12,18 @@ public class StatChangeEffect : Effect
     {
     }
 
-    public override void Trigger(GameObject effectTarget = null)
+    public override void DoEffect(GameObject effectTarget = null)
     {
         Stat.SetValue(Stat.Value + Change);
+    }
+
+    public override int CanBeApplied() {
+        if (Change < 0) return 0;
+
+        if (Stat.Value == Stat.Max) {
+            return -1;
+        }
+
+        return 1;
     }
 }

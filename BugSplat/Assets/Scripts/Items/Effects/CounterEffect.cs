@@ -18,7 +18,7 @@ public class CounterEffect : Effect
         _counter = 0;
     }
 
-    public override void Trigger(GameObject target = null)
+    public override void DoEffect(GameObject target)
     {
         _counter += CountTick;
         Debug.Log(_counter);

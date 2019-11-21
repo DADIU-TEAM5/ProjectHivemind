@@ -16,6 +16,11 @@ public class ShopAbilitySlot : ShopSlot
 
     public override bool OnPurchase()
     {
+        if (Ability.CanBeApplied() > 0) {
+            Debug.Log("Consumable cannot be bought, as its effect cannot be applied");
+            return false;
+        }
+
         Ability?.Trigger();
         return true;
     }
@@ -31,4 +36,8 @@ public class ShopAbilitySlot : ShopSlot
     public override string GetTitle() => Ability?.name;
 
     public override string GetDescription() => Info?.Description;
+
+    public override void Reroll()
+    {
+    }
 }

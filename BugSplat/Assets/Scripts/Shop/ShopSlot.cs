@@ -12,6 +12,8 @@ public abstract class ShopSlot : ScriptableObject
     
     [SerializeField]
     private GameEvent PurchasedItem;
+
+    public bool ConsumeReroll = false;
  
     public void Buy() {
         var price = GetPrice();
@@ -21,9 +23,8 @@ public abstract class ShopSlot : ScriptableObject
             return;            
         }
 
-        PlayerCurrency.Value -= price;
-
         if (OnPurchase()) {
+            PlayerCurrency.Value -= price;
             PurchasedItem.Raise();
         } 
     }
@@ -41,4 +42,6 @@ public abstract class ShopSlot : ScriptableObject
     public abstract string GetDescription();
 
     public abstract int GetPrice();
+
+    public abstract void Reroll();
 }

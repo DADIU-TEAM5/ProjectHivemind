@@ -27,7 +27,7 @@ public class DashMeshEffect : Effect
         CoroutineBoy.name = "Coroutineboy - DashMeshEffect";
     }
 
-    public override void Trigger(GameObject target = null)
+    public override void DoEffect(GameObject target = null)
     {
         if (target == null) return;
 

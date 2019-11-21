@@ -5,12 +5,16 @@ using UnityEngine.AI;
 
 public class EnemySpawner : GameLoop
 {
-
+    public GameEvent SpawnAllEnemies;
 
     public static int LevelBudget;
 
+    public static bool SingleEnemySpawned;
+
     public static List<IEnumerator> QueuedSpawns;
 
+
+    public float SpawnCD = 2;
 
 
     bool startedSpawning = false;
@@ -36,6 +40,8 @@ public class EnemySpawner : GameLoop
 
     private void OnEnable()
     {
+        SingleEnemySpawned = false;
+
         budget = 0;
 
         //Debug.Log(name + " start budget " + budget);
@@ -97,12 +103,20 @@ public class EnemySpawner : GameLoop
 
         if (startedSpawning)
         {
-            _timer += deltaTime;
-            SpawnEnemiesRoutine();
+            if (_timer > 0)
+                _timer -= deltaTime;
+
+
+            if (_timer <= 0)
+            {
+                SpawnEnemiesRoutine();
+                _timer = SpawnCD;
+            }
         }
 
-        if(_timer > 1.5)
+        if(startedSpawning && LevelBudget <= 0)
         {
+            print("No more enemies to spawn removeing spawners");
             Destroy(gameObject);
         }
 
@@ -115,6 +129,53 @@ public class EnemySpawner : GameLoop
 
     }
 
+    public void SpawnFirstEnemy()
+    {
+        if (!SingleEnemySpawned && SmallestValue <LevelBudget)
+        {
+            SingleEnemySpawned = true;
+
+            GameObject ChosenGuy = enemies[Random.Range(0, enemies.Count)];
+            int FirsTValueToget = ChosenGuy.GetComponent<Enemy>().difficultyValue;
+            while(FirsTValueToget > LevelBudget)
+            {
+                ChosenGuy = enemies[Random.Range(0, enemies.Count)];
+                FirsTValueToget = ChosenGuy.GetComponent<Enemy>().difficultyValue;
+            }
+
+
+            if (LevelBudget > FirsTValueToget)
+            {
+                LevelBudget -= FirsTValueToget;
+
+
+                GameObject spawnedEnemy = Instantiate(ChosenGuy, transform);
+                spawnedEnemy.GetComponent<Enemy>().SpecialAggroEvent = SpawnAllEnemies;
+
+                spawnedEnemy.name = "Slightly Bigger Fucker";
+                spawnedEnemy.transform.parent = null;
+
+                Vector3 spawnPoint = transform.position;
+                spawnPoint.y = 0;
+
+                /*
+                NavMeshHit hit;
+
+
+                NavMesh.SamplePosition(transform.position, out hit, 3, NavMesh.AllAreas);
+                */
+                spawnedEnemy.transform.position = spawnPoint;
+
+
+            }
+
+
+        }
+
+
+    }
+
+
    
 
     void SpawnEnemiesRoutine()
@@ -126,15 +187,38 @@ public class EnemySpawner : GameLoop
         if (LevelBudget+budget >=SmallestValue)
         {
 
-            int extraBudget =0;
-            if (LevelBudget > SmallestValue)
+            
+            GameObject ChosenGuy = enemies[Random.Range(0, enemies.Count)];
+            int FirsTValueToget = ChosenGuy.GetComponent<Enemy>().difficultyValue;
+
+            if (LevelBudget > FirsTValueToget)
             {
-                LevelBudget -= SmallestValue;
-                extraBudget = SmallestValue;
+                LevelBudget -= FirsTValueToget;
+                
+
+                GameObject spawnedEnemy = Instantiate(ChosenGuy, transform);
+
+                spawnedEnemy.name = "Slightly Bigger Fucker";
+                spawnedEnemy.transform.parent = null;
+
+                Vector3 spawnPoint = transform.position;
+                spawnPoint.y = 0;
+
+                /*
+                NavMeshHit hit;
+
+
+                NavMesh.SamplePosition(transform.position, out hit, 3, NavMesh.AllAreas);
+                */
+                spawnedEnemy.transform.position = spawnPoint;
+
+
             }
                 
-            budget += extraBudget;
+           
 
+
+            
             while (budget > 0)
             {
                 if (SmallestValue > budget)
@@ -165,7 +249,7 @@ public class EnemySpawner : GameLoop
 
                 GameObject spawnedEnemy = Instantiate(enemies[index], transform);
 
-                spawnedEnemy.name = "Little fucker";
+                spawnedEnemy.name = "Little Fucker";
                 spawnedEnemy.transform.parent = null;
 
                 Vector3 spawnPoint = transform.position;

@@ -28,6 +28,11 @@ public class ShopItemSlot : ShopSlot
             return false;
         }
 
+        if (!Item.Purchasable()) {
+            Debug.Log("Item is not purchasable, as none of its effects can be applied");
+            return false;
+        }
+
         PlayerInventory.AddItem(Item);
 
         Item = null;
@@ -37,27 +42,24 @@ public class ShopItemSlot : ShopSlot
 
     public void GetItemFromItemPool()
     {
-        if (Item != null)
-        {
-            return;
-        }
+        if (Item != null) return;
 
         var shopLevel = ShopLevels.LevelTierPicker[CurrentLevel.Value];
-        var decidedTier = shopLevel.ChooseTier();
-        var decidedItem = Pool.GetItem(decidedTier);
+        var firstTier = shopLevel.ChooseTier();
+        var tier = firstTier;
+        Item decidedItem = null;
+        do
+        {
+            decidedItem = Pool.GetItem(tier);
+            if (decidedItem == null) {
+                tier = shopLevel.NextTier();
+            } else break;
+        } while (firstTier != tier);
 
         Item = decidedItem;
     }
 
     public Item GetItem() => Item;
-
-    void OnDisable()
-    {
-        if (Item != null)
-        {
-            Reset();
-        }
-    }
 
     public override GameObject GetItemPrefab() => Item?.Info?.ItemPrefab;
 
@@ -65,6 +67,7 @@ public class ShopItemSlot : ShopSlot
 
     public override void Init()
     {
+        Debug.Log($"Previous level: {_previousLevel}, Current: {CurrentLevel.Value}");
         if (_previousLevel != CurrentLevel.Value) {
             if (Item != null) Reset();
             GetItemFromItemPool();
@@ -82,4 +85,17 @@ public class ShopItemSlot : ShopSlot
     public override string GetTitle() => Item.name;
 
     public override string GetDescription() => Item?.Info?.Description;
+
+    public override void Reroll()
+    {
+        if (Item != null) {
+            var temp = Item;
+            GetItemFromItemPool();
+            Pool.ReplenishOnce(temp);
+        } else {
+            if (!ConsumeReroll) {
+                GetItemFromItemPool();
+            }
+        }
+    }
 }

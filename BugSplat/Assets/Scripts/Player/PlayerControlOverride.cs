@@ -41,9 +41,12 @@ public class PlayerControlOverride : MonoBehaviour
 
         if (IsAreaOpenSO != null)
         {
-            if (IsAreaOpenSO == true)
+            if (IsAreaOpenSO.Value == true)
             {
                 LoadColliders();
+            } else
+            {
+
             }
         }
         else
@@ -66,7 +69,7 @@ public class PlayerControlOverride : MonoBehaviour
                 ExitTargets[k].gameObject.SetActive(false);
             }
 
-            PlayerControlOverrideSO.Value = false;
+            //PlayerControlOverrideSO.Value = false;
         }
         else
         {
@@ -88,6 +91,7 @@ public class PlayerControlOverride : MonoBehaviour
     {
         if (Player != null)
         {
+            Debug.Log("TEST");
             PlayerControlOverrideSO.Value = true;
             Vector3 heading = ExitTargets[ExitTargets.Length - 1].position - ExitTargets[0].position;
             PlayerDirectionSO.Value = new Vector3(heading.normalized.x, 0, heading.normalized.z);
@@ -142,7 +146,8 @@ public class PlayerControlOverride : MonoBehaviour
         {
             ExitTargets[k].gameObject.SetActive(false);
         }
-
+        Player.GetComponent<NavMeshAgent>().enabled = false;
+        Player.GetComponent<NavMeshAgent>().enabled = true;
         Player.GetComponent<NavMeshAgent>().ResetPath();
 
         PlayerCurrentSpeedSO.Value = 0f;

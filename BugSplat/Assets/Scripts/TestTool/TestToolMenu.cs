@@ -38,7 +38,8 @@ public class TestToolMenu : MonoBehaviour
             string lastItemName = "";
             for (int i = 0; i < AllItems.Items.Count; i++)
             {
-                if(lastItemName == AllItems.Items[i].name)
+                
+                if (AllItems.Items[i] == null || lastItemName == AllItems.Items[i].name)
                 {
                     continue;
                 }

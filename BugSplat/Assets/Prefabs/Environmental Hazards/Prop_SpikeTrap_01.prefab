@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 4737783117663815940}
   - component: {fileID: 1295493978990559502}
   - component: {fileID: 1966632133883225549}
-  - component: {fileID: 4884317063103840480}
-  - component: {fileID: 5646382323889734095}
-  m_Layer: 12
+  - component: {fileID: 3496061617980928425}
+  - component: {fileID: 2804448381183472440}
+  m_Layer: 14
   m_Name: Prop_SpikeTrap_01_Spikes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.0480487, y: 0.82, z: 2.0913844}
   m_Center: {x: -0.0037041903, y: -0.78021276, z: 0.093360454}
---- !u!114 &4884317063103840480
+--- !u!114 &3496061617980928425
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -103,27 +103,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 3065872086269469392}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 694594274947d0748b14d13cb05e5c2b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5305fabf0ecaa1642bb18f361eed8fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnterEvent: {fileID: 11400000, guid: 433deb5274bb75b44abc64496ddbd7da, type: 2}
-  ExitEvent: {fileID: 0}
-  StayEvent: {fileID: 0}
---- !u!114 &5646382323889734095
-MonoBehaviour:
+  PlayerDamage: 20
+  EnemyDamage: 40
+  OnDamageEvent: {fileID: 11400000, guid: 433deb5274bb75b44abc64496ddbd7da, type: 2}
+--- !u!54 &2804448381183472440
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3065872086269469392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 694594274947d0748b14d13cb05e5c2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnterEvent: {fileID: 11400000, guid: a7269a05022ef469c883eb9a01dab7af, type: 2}
-  ExitEvent: {fileID: 0}
-  StayEvent: {fileID: 0}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4517321744158642272
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,9 +137,8 @@ GameObject:
   - component: {fileID: 8480453293038934085}
   - component: {fileID: 2777619525677049020}
   - component: {fileID: 5589298259913476042}
-  - component: {fileID: 5248815483668724163}
   - component: {fileID: 6504248002077245429}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Prop_SpikeTrap_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,36 +225,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5248815483668724163
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4517321744158642272}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 433deb5274bb75b44abc64496ddbd7da, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 282145137683011156, guid: ce93dae90c32b234eb5aa37ebcaa5582,
-          type: 3}
-        m_MethodName: TakeDamage
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 4
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
 --- !u!114 &6504248002077245429
 MonoBehaviour:
   m_ObjectHideFlags: 0

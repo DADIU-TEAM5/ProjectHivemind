@@ -7,25 +7,29 @@ public class TankBeetle : Enemy
 
 {
 
+    float _wayPointCD;
 
 
-    bool NeedNewWayPoint = true;
+    float _lerp;
+    
+    Vector3 _lerpPoint;
+    Vector3 _lerpStart;
+    
     
     TankStats TankStats;
    
     bool _attacking;
     float _attackCharge;
 
-    int _WayPointsCleared =  -1;
+    int _currentWayPath =  0;
 
     float _coolDown;
 
 
     float _attackCooldown = 0;
 
+    Vector3 [] _wayPoints;
 
-
-    Vector3 _currentWayPoint;
 
 
 
@@ -33,6 +37,8 @@ public class TankBeetle : Enemy
 
     float _chargeDuration;
 
+    float _WaySpeed;
+    bool _Acellerate = true;
 
 
     Vector3 _playerAttackPos;
@@ -42,7 +48,6 @@ public class TankBeetle : Enemy
 
     public Animator Anim;
 
-    IEnumerator _failSafe;
 
 
     [Header("Events")]
@@ -59,11 +64,9 @@ public class TankBeetle : Enemy
         TankStats = (TankStats)stats;
         ConeRenderer.material.color = Color.red;
 
-        _currentWayPoint = Vector3.zero;
+        
+        _wayPoints = new Vector3[TankStats.Repeat];
 
-        _failSafe = SetNeedNewWayPointToTrue();
-
-        NavMeshAgent.acceleration = 99999;
     }
 
     
@@ -82,7 +85,10 @@ public class TankBeetle : Enemy
         if (_attackCooldown > 0)
             _attackCooldown -= deltaTime;
 
-        
+        if (_coolDown > 0 && !_Chargeing)
+            _coolDown -= deltaTime;
+
+
 
         RemoveFromLockedTargetIfNotVisible();
 
@@ -98,7 +104,7 @@ public class TankBeetle : Enemy
             //Renderer.material.color = SetColor(Color.blue);
             DetectThePlayer();
             }
-            else if( _WayPointsCleared < TankStats.Repeat)
+            else if(_coolDown <=0 && TankStats.Repeat >0)
             {
 
                 MoveToWayPoint(deltaTime);
@@ -107,7 +113,7 @@ public class TankBeetle : Enemy
             }
             else if (playerInChargeRange() || _attacking)
             {
-            BehaviourCooldown(deltaTime);
+            
 
 
             if (NavMeshAgent.isOnNavMesh)
@@ -139,7 +145,7 @@ public class TankBeetle : Enemy
             }
             //  Renderer.material.color = SetColor(Color.yellow);
             MoveTowardsThePlayer(deltaTime);
-            BehaviourCooldown(deltaTime);
+            
 
 
         }
@@ -151,18 +157,7 @@ public class TankBeetle : Enemy
 
     }
 
-    void BehaviourCooldown(float deltaTime)
-    {
-        if (_coolDown <= 0 && !_Chargeing)
-        {
-            _WayPointsCleared = -1;
-            NeedNewWayPoint = true;
-
-        }
-
-        if (_coolDown > 0)
-            _coolDown -= deltaTime;
-    }
+    
 
     public override void LoopLateUpdate(float deltaTime)
     {
@@ -392,8 +387,17 @@ public class TankBeetle : Enemy
 
     Vector3 oldDestination = Vector3.zero;
 
+
+    NavMeshPath _currentPath;
+
+
+
+    int _currentCorner = 0;
     void MoveToWayPoint(float deltaTime)
     {
+
+        if (_wayPointCD > 0)
+            _wayPointCD -= deltaTime;
 
         //_coolDown = TankStats.CooldownBetweenBehaviour;
 
@@ -411,71 +415,116 @@ public class TankBeetle : Enemy
 
 
 
+        //NavMeshAgent.Move(transform.forward * deltaTime * TankStats.MoveSpeed);
+        //print(_wayPoints[_currentWayPath]);
 
-
-        NavMeshAgent.speed =1+( TankStats.ChargeCurve.Evaluate(NavMeshAgent.remainingDistance)* TankStats.WayPointSpeed);
-        NavMeshAgent.angularSpeed = 100*TankStats.TurnSpeed;
-
-        
-        
-
-        if (NeedNewWayPoint)
+        if (_wayPoints[_currentWayPath] == Vector3.zero)
         {
+
+            print("fuck you all");
+
             Vector3 temPlayerPos = PlayerTransform.position;
             temPlayerPos.y = transform.position.y;
+            _wayPoints[_currentWayPath] = temPlayerPos;
 
-            Vector3 overshoot = temPlayerPos - transform.position ;
+            _currentPath = new NavMeshPath();
+            NavMeshAgent.CalculatePath(_wayPoints[_currentWayPath], _currentPath);
 
-            overshoot = overshoot.normalized;
-            overshoot *= TankStats.waypointOverShoot;
-            temPlayerPos += overshoot;
+            if (_currentPath.corners.Length > 1)
+            {
+                Vector3 newEndCorner = _currentPath.corners[_currentPath.corners.Length - 1] - _currentPath.corners[_currentPath.corners.Length - 2];
 
-            NavMeshHit hit;
+                newEndCorner = newEndCorner.normalized;
+                newEndCorner *= TankStats.waypointOverShoot;
 
-            NavMesh.Raycast(transform.position, temPlayerPos, out hit, -1);
+                newEndCorner = _currentPath.corners[_currentPath.corners.Length - 1] + newEndCorner;
 
-            temPlayerPos = hit.position;
+                _currentPath.corners[_currentPath.corners.Length - 1] = newEndCorner;
+                _currentCorner = 1;
 
-           // _WayPointsCleared++;
+            }
+            else
+            {
+                Vector3 newEndCorner = _currentPath.corners[_currentPath.corners.Length - 1] - transform.position;
 
-           // print("waypoiints cleared "+_WayPointsCleared);
+                newEndCorner = newEndCorner.normalized;
+                newEndCorner *= TankStats.waypointOverShoot;
 
+                newEndCorner = _currentPath.corners[_currentPath.corners.Length - 1] + newEndCorner;
 
-            _currentWayPoint = temPlayerPos;
+                _currentPath.corners[_currentPath.corners.Length - 1] = newEndCorner;
 
-            NavMeshAgent.SetDestination(_currentWayPoint);
-            NeedNewWayPoint = false;
+                _currentCorner = 0;
+
+            }
+
         }
 
 
 
-        if(NavMeshAgent.path.corners[NavMeshAgent.path.corners.Length-1] != oldDestination)
+        if(_lerpPoint != _currentPath.corners[_currentCorner])
         {
-            _WayPointsCleared++;
-            oldDestination = NavMeshAgent.path.corners[NavMeshAgent.path.corners.Length - 1];
 
-           
-            //print("way points cleared " + _WayPointsCleared);
+            print("new lerp point");
+            _lerpPoint = _currentPath.corners[_currentCorner];
+            _lerpStart = transform.position;
+            _lerp = 0;
         }
 
+        //transform.position = Vector3.Lerp(_lerpStart, _lerpPoint, _lerp);
 
-        if (NavMeshAgent.remainingDistance <= 0 )
+        NavMeshAgent.Move(-transform.position + Vector3.Lerp(_lerpStart, _lerpPoint,TankStats.ChargeCurve.Evaluate( _lerp)));
+
+        //print(_lerp);
+
+        if (_lerp < 1)
         {
-
-
-            NeedNewWayPoint = true;
+            _lerp += (deltaTime/Vector3.Distance(_lerpStart,_lerpPoint))* TankStats.WayPointSpeed;
         }
 
 
-
-
-        if (_WayPointsCleared == TankStats.Repeat - 1)
+        if (_lerp >= 1)
         {
-            EndWayPointing();
+           // print("New Way pint");
+            if (_currentPath.corners.Length-1 > _currentCorner)
+            {
+                _currentCorner++;
+
+
+                _lerpPoint = _currentPath.corners[_currentCorner];
+                _lerpStart = transform.position;
+                _lerp = 0;
+            }
+            else
+            {
+                _currentWayPath++;
+                if (_currentWayPath == TankStats.Repeat)
+                    EndWayPointing();
+            }
+
+
+           // _currentWayPath++;
         }
 
 
+       Quaternion targetRotation = Quaternion.LookRotation(_currentPath.corners[_currentCorner] - transform.position);
 
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, TankStats.TurnSpeed * deltaTime);
+
+
+        /*
+        if(Vector3.Distance(transform.position, _wayPoints[_currentWayPath]) < 0.1f)
+        {
+            _currentWayPath++;
+
+            if(_currentWayPath >= TankStats.Repeat)
+            {
+                
+                EndWayPointing();
+            }
+        }
+        */
+        
 
     }
 
@@ -484,25 +533,20 @@ public class TankBeetle : Enemy
         Cone.SetActive(false);
         Anim.SetBool("Attacking", false);
         _coolDown = TankStats.CooldownBetweenBehaviour;
-
-        NavMeshAgent.speed = 0;
-        NavMeshAgent.angularSpeed = 0;
-        NeedNewWayPoint = true;
+        _currentWayPath = 0;
 
 
-        NavMeshAgent.ResetPath();
-    }
+        _wayPoints = new Vector3[TankStats.Repeat];
+        for (int i = 0; i < _wayPoints.Length; i++)
+        {
+            _wayPoints[i] = Vector3.zero;
+        }
 
-    IEnumerator SetNeedNewWayPointToTrue()
-    {
-        yield return new WaitForSeconds(0.5f);
-        Debug.Log("getting new waypoint");
-        NeedNewWayPoint = true;
-
-        
         
 
     }
+
+  
 
     void EndCharge()
     {
@@ -771,7 +815,25 @@ public class TankBeetle : Enemy
     }
 
 
+    private void OnDrawGizmos()
+    {
+        /*
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawSphere(_lerpPoint, .5f);
 
+
+        if(_currentPath != null)
+        {
+            for (int i = 0; i < _currentPath.corners.Length; i++)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawSphere(_currentPath.corners[i], 0.3f);
+
+
+            }
+        }
+        */
+    }
 
 
 }

@@ -38,7 +38,9 @@ public class ItemPool : ScriptableObject
             if (!Bought[i]) {
                 var item = Items[i];
 
-                if (item.Info.Tier == tier) {
+                if (item == null) continue;
+
+                if (item.Info.Tier == tier && item.Purchasable()) {
                     result.Add(i);
                 }
             }
@@ -49,6 +51,8 @@ public class ItemPool : ScriptableObject
 
     // If the item exists in the pool and has been bought. Set it to not bought.
     public void ReplenishOnce(Item itemToReplenish) {
+        if (itemToReplenish == null) return;
+        
         for (var i = 0; i < Items.Count; i++) {
             var item = Items[i];
 
