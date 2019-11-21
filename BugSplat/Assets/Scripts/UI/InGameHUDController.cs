@@ -8,6 +8,12 @@ public class InGameHUDController : MonoBehaviour
 {
     public TMPro.TMP_FontAsset TextFont;
     public Color ImageColor;
+    [Header("Color Objects")]
+    public GameObject HealthBar;
+    public GameObject MenuIcon;
+    public GameObject CurrencyIcon;
+    public GameObject KilledIcon;
+
     public GameObject OptionsMenu;
     public GameObject MainMenu;
     public GameObject ModifiersMenu;
@@ -40,7 +46,13 @@ public class InGameHUDController : MonoBehaviour
 
         uM = GameObject.Find("UpdateManager");
         SetupAnimators(this.gameObject);
-        SetupColors(InGameHUD);
+
+
+
+        SetupColors(HealthBar);
+        SetupColors(MenuIcon);
+        SetupColors(CurrencyIcon);
+        SetupColors(KilledIcon);
 
 
         if (InMainMenu.Value)

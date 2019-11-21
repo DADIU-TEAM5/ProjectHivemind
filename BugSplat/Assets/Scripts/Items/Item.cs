@@ -9,5 +9,5 @@ public class Item : ScriptableObject
     public ItemInfo Info;
     public Effect[] Effects;
 
-    public bool Purchasable() => Effects.Any(x => x.CanBeApplied());
+    public bool Purchasable() => Effects.Sum(x => x.CanBeApplied()) > 0;
 }
