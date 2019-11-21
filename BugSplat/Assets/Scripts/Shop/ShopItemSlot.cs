@@ -56,20 +56,13 @@ public class ShopItemSlot : ShopSlot
 
     public Item GetItem() => Item;
 
-    void OnDisable()
-    {
-        if (Item != null)
-        {
-            Reset();
-        }
-    }
-
     public override GameObject GetItemPrefab() => Item?.Info?.ItemPrefab;
 
     public override int GetPrice() => Item?.Info?.Price ?? 0;
 
     public override void Init()
     {
+        Debug.Log($"Previous level: {_previousLevel}, Current: {CurrentLevel.Value}");
         if (_previousLevel != CurrentLevel.Value) {
             if (Item != null) Reset();
             GetItemFromItemPool();

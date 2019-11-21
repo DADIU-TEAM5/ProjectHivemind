@@ -11,6 +11,7 @@ public class SpitterStats : EnemyStats
 
 
     public bool ShootEggs;
+    public float ChanceToShootEgg;
 
     public float FleeTime;
     public float FleeThreshold;
