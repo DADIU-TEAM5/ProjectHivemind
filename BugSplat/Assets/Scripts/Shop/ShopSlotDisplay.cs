@@ -52,6 +52,7 @@ public class ShopSlotDisplay : MonoBehaviour
         }
 
         SlotItemInst = Instantiate(SlotObject, SlotPlaceholder);
+        SlotItemInst.transform.localPosition = Vector3.zero;
         PriceText.text = Slot?.GetPrice().ToString();
 
         StartPos = SlotItemInst.transform.position;
