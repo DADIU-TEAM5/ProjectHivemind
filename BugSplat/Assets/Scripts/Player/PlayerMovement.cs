@@ -16,6 +16,9 @@ public class PlayerMovement : GameLoop
     public Vector3Variable PlayerPosition;
     public Vector3Variable PlayerVelocity;
 
+    public BoolVariable Attacking;
+    public BoolVariable Dodgeing;
+
     public AnimationCurve RampUpMovespeed;
 
 
@@ -70,7 +73,11 @@ public class PlayerMovement : GameLoop
             {
                 if (!_navMeshAgent.hasPath)
                 {
-                    _navMeshAgent.Move(PlayerVelocity.Value * Time.deltaTime);
+                    if (!Attacking.Value && !Dodgeing.Value)
+
+                    {
+                        _navMeshAgent.Move(PlayerVelocity.Value * Time.deltaTime);
+                    }
                 }
             }
     }
