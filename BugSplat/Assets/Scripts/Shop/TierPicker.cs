@@ -13,6 +13,8 @@ public class TierPicker : ScriptableObject
 
     private float _max;
 
+    private int _selectedTier = -1;
+
     public void OnEnable() {
         _max = 0f;
 
@@ -28,6 +30,7 @@ public class TierPicker : ScriptableObject
             var tp = TierPercents[i];
 
             if (tp.Percent >= number) {
+                _selectedTier = i;
                 return tp.Tier;
             }
 
@@ -37,6 +40,12 @@ public class TierPicker : ScriptableObject
         Assert.IsTrue(0f >= number);
 
         return null;
+    }
+
+    public Tier NextTier() {
+        var nextTier = (_selectedTier + 1) % TierPercents.Length;
+
+        return TierPercents[nextTier].Tier;
     }
 
     [System.Serializable]

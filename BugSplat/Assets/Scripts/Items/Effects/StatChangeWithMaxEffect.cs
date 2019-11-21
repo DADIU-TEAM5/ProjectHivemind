@@ -8,11 +8,12 @@ public class StatChangeWithMaxEffect : StatChangeEffect
 {
     public FloatVariable MaxStat;
 
-    public override bool CanBeApplied() {
+    public override int CanBeApplied() {
+        if (Change < 0) return 0;
         if (Stat.Value == MaxStat.Value) {
-            return false;
+            return -1;
         }
 
-        return true;
+        return 1;
     }
 }
