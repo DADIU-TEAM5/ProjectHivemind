@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Hexagon : MonoBehaviour
 {
+
+   
+
     public static MapGenerator mapGen;
 
     public bool[] OpenEdges;
@@ -36,6 +39,10 @@ public class Hexagon : MonoBehaviour
 
         Corners = new GameObject[6];
 
+        for (int i = 0; i < EnemySpawners.Length; i++)
+        {
+            EnemySpawners[i].hex = this;
+        }
         
 
 
@@ -55,12 +62,22 @@ public class Hexagon : MonoBehaviour
     {
         if (EnemySpawners.Length > 0)
         {
+            for (int i = 0; i < EnemySpawners.Length; i++)
+            {
+                if (EnemySpawners[i].SmallestValue <= MinBudget)
+                {
+                    EnemySpawners[i].budget += MinBudget;
 
-            EnemySpawners[Random.Range(0, EnemySpawners.Length)].budget += MinBudget;
+                    MinBudget = 0;
+                }
+            }
+
+
+            
 
 
 
-            MinBudget = 0;
+           
 
 
         }
@@ -320,4 +337,15 @@ public class Hexagon : MonoBehaviour
         return bolean;
     }
    
+
+
+
+    public void SpawnEnemies()
+    {
+        for (int i = 0; i < EnemySpawners.Length; i++)
+        {
+            EnemySpawners[i].SpawnEnemies();
+        }
+    }
+
 }
