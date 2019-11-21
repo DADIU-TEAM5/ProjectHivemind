@@ -8,7 +8,7 @@ public class AmbienceManagerScript : MonoBehaviour
     [Header("Wwise ambience events")]
     public AK.Wwise.Event arenaAmbience;
     public AK.Wwise.Event hubAmbience;
-    public AK.Wwise.Event shopAmbience;
+
 
     [Header("Wwise reverb states")]
     public AK.Wwise.State Arenaverb;
@@ -29,11 +29,7 @@ public class AmbienceManagerScript : MonoBehaviour
         Hubverb.SetValue();
     }
 
-    public void ShopSceneLoad()
-    {
-        shopAmbience.Post(this.gameObject);
-        Shopverb.SetValue();
-    }
+ 
 
     public void SceneChange()
     {
