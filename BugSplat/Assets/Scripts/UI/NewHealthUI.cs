@@ -69,14 +69,14 @@ public class NewHealthUI : GameLoop
         int fullHearts = (int)(currentHP / HealthPerIcon.Value);
         int maxHearts = (int)((1+MaxHealth.Value) / HealthPerIcon.Value);
 
-        Debug.Log("Max HP: " + MaxHealth.Value + ", HealthPrIcon: " +HealthPerIcon.Value +", maxHearts: " + maxHearts);
+        //Debug.Log("Max HP: " + MaxHealth.Value + ", HealthPrIcon: " +HealthPerIcon.Value +", maxHearts: " + maxHearts);
 
         float scale = (currentHP % HealthPerIcon.Value)/ HealthPerIcon.Value;
 
         if (scale > 0 && scale < 0.9f)
             scale = 0.5f;
 
-        Debug.Log("HP SCALE: " + scale);
+        //Debug.Log("HP SCALE: " + scale);
         HealthIcons[fullHearts].transform.localScale = new Vector3(scale, scale, scale);
 
 
