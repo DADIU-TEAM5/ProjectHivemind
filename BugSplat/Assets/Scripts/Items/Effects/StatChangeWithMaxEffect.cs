@@ -9,7 +9,8 @@ public class StatChangeWithMaxEffect : StatChangeEffect
     public FloatVariable MaxStat;
 
     public override int CanBeApplied() {
-        if (Change < 0) return 0;
+        if (Change < 0 || ApplicableIgnore) return 0;
+        
         if (Stat.Value == MaxStat.Value) {
             return 0;
         }

@@ -8,6 +8,8 @@ public class StatChangeEffect : Effect
     public FloatVariable Stat;
     public float Change;
 
+    public bool ApplicableIgnore = false;
+
     public override void Init()
     {
     }
@@ -18,7 +20,7 @@ public class StatChangeEffect : Effect
     }
 
     public override int CanBeApplied() {
-        if (Change < 0) return 0;
+        if (Change < 0 || ApplicableIgnore) return 0;
 
         if (Stat.Value == Stat.Max) {
             return 0;
