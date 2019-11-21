@@ -85,7 +85,7 @@ public class NewHealthUI : GameLoop
             HealthIcons[i].enabled = false;
         }
 
-        for (int i = maxHearts+1; i < HealthIcons.Count; i++)
+        for (int i = maxHearts; i < HealthIcons.Count; i++)
         {
             MaxHealthIcons[i].enabled = false;
         }
