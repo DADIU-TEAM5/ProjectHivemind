@@ -43,7 +43,7 @@ public class InGameHUDController : MonoBehaviour
         SetupColors(InGameHUD);
 
 
-        if (LastSceneSO.Value == "")
+        if (InMainMenu.Value)
         {
             //Debug.Log("Im Not null.....");
             EnterMainMenu();
@@ -51,6 +51,7 @@ public class InGameHUDController : MonoBehaviour
         else
             EnterInGameHUD();
 
+        Debug.Log("OnEnable Done");
 
     }
 
@@ -140,6 +141,7 @@ public class InGameHUDController : MonoBehaviour
     // Change Menu
     public void EnterMainMenu()
     {
+        Debug.Log("Enter Main Menu");
         MainMenu.SetActive(true);
         OptionsMenu.SetActive(false);
         ModifiersMenu.SetActive(false);
@@ -164,6 +166,7 @@ public class InGameHUDController : MonoBehaviour
     }
     public void EnterPauseMenu()
     {
+        Debug.Log("Enter Pause Menu");
         MainMenu.SetActive(false);
         OptionsMenu.SetActive(false);
         ModifiersMenu.SetActive(false);
