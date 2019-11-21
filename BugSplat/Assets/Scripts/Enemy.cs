@@ -7,6 +7,7 @@ public abstract class Enemy : GameLoop
 {
     [HideInInspector]
     public bool SpawnedEnemy;
+    public GameEvent EnemySpawnedEvent;
 
     public bool IsUnderground = true;
     
@@ -178,6 +179,17 @@ public abstract class Enemy : GameLoop
             {
                 //  Renderer.material.color = SetColor(Color.blue);
             }
+        } else
+        {
+            DetectThePlayer();
+            
+            if (PlayerDetected)
+            {
+                if (EnemySpawnedEvent != null)
+                {
+                    EnemySpawnedEvent.Raise();
+                }
+            } 
         }
     }
 
