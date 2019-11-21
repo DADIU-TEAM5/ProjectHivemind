@@ -49,7 +49,7 @@ public class InGameHUDController : MonoBehaviour
 
 
 
-        SetupColors(HealthBar);
+        //SetupColors(HealthBar);
         SetupColors(MenuIcon);
         SetupColors(CurrencyIcon);
         SetupColors(KilledIcon);
