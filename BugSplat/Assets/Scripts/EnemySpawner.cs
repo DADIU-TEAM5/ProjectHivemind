@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class EnemySpawner : GameLoop
 {
-
+    public GameEvent SpawnAllEnemies;
 
     public static int LevelBudget;
 
@@ -150,6 +150,7 @@ public class EnemySpawner : GameLoop
 
 
                 GameObject spawnedEnemy = Instantiate(ChosenGuy, transform);
+                spawnedEnemy.GetComponent<Enemy>().SpecialAggroEvent = SpawnAllEnemies;
 
                 spawnedEnemy.name = "Slightly Bigger Fucker";
                 spawnedEnemy.transform.parent = null;
