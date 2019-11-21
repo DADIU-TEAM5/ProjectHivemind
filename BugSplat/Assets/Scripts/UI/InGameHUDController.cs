@@ -8,6 +8,12 @@ public class InGameHUDController : MonoBehaviour
 {
     public TMPro.TMP_FontAsset TextFont;
     public Color ImageColor;
+    [Header("Color Objects")]
+    public GameObject HealthBar;
+    public GameObject MenuIcon;
+    public GameObject CurrencyIcon;
+    public GameObject KilledIcon;
+
     public GameObject OptionsMenu;
     public GameObject MainMenu;
     public GameObject ModifiersMenu;
@@ -40,10 +46,16 @@ public class InGameHUDController : MonoBehaviour
 
         uM = GameObject.Find("UpdateManager");
         SetupAnimators(this.gameObject);
-        SetupColors(InGameHUD);
 
 
-        if (LastSceneSO.Value == "")
+
+        SetupColors(HealthBar);
+        SetupColors(MenuIcon);
+        SetupColors(CurrencyIcon);
+        SetupColors(KilledIcon);
+
+
+        if (InMainMenu.Value)
         {
             //Debug.Log("Im Not null.....");
             EnterMainMenu();
@@ -51,6 +63,7 @@ public class InGameHUDController : MonoBehaviour
         else
             EnterInGameHUD();
 
+        Debug.Log("OnEnable Done");
 
     }
 
@@ -140,6 +153,7 @@ public class InGameHUDController : MonoBehaviour
     // Change Menu
     public void EnterMainMenu()
     {
+        Debug.Log("Enter Main Menu");
         MainMenu.SetActive(true);
         OptionsMenu.SetActive(false);
         ModifiersMenu.SetActive(false);
@@ -164,6 +178,7 @@ public class InGameHUDController : MonoBehaviour
     }
     public void EnterPauseMenu()
     {
+        Debug.Log("Enter Pause Menu");
         MainMenu.SetActive(false);
         OptionsMenu.SetActive(false);
         ModifiersMenu.SetActive(false);

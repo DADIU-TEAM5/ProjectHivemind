@@ -7,7 +7,7 @@ public abstract class Effect : ScriptableObject
     public EffectType EffectType;
 
     public void Trigger(GameObject target = null) {
-        if (CanBeApplied()) {
+        if (CanBeApplied() >= 0) {
             DoEffect(target);
         }
     }
@@ -16,7 +16,7 @@ public abstract class Effect : ScriptableObject
 
     public abstract void Init();
 
-    public virtual bool CanBeApplied() => true;
+    public virtual int CanBeApplied() => 1;
 
     protected static EmptyMono MakeCoroutineObject() {
         var coroutineObject = new GameObject();

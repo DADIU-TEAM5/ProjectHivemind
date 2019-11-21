@@ -2744,7 +2744,7 @@ PrefabInstance:
     - target: {fileID: 8831838245759697901, guid: ce93dae90c32b234eb5aa37ebcaa5582,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8708014117340893829, guid: ce93dae90c32b234eb5aa37ebcaa5582,
         type: 3}
@@ -3600,6 +3600,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.9430446
+      objectReference: {fileID: 0}
+    - target: {fileID: 6082407310782214922, guid: ce93dae90c32b234eb5aa37ebcaa5582,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 771227558, guid: ce93dae90c32b234eb5aa37ebcaa5582, type: 3}
@@ -4478,11 +4483,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c11237475764ebb4a8a1bf961c4b40e4, type: 3}
---- !u!114 &863542469 stripped
+--- !u!114 &863542469
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6499693330658036423, guid: c11237475764ebb4a8a1bf961c4b40e4,
-    type: 3}
-  m_PrefabInstance: {fileID: 863542466}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -4490,6 +4495,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d5159b0b2983b44eb6ebfe97af915a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsPaticipant: 0
+  SpawnedEnemy: 0
+  IsUnderground: 1
+  SpecialAggroEvent: {fileID: 0}
+  difficultyValue: 1
+  AttackCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  ConeMaterial: {fileID: 0}
+  stats: {fileID: 0}
+  bodyPart: {fileID: 0}
+  DeadCutout: {fileID: 0}
+  Graphics: {fileID: 0}
+  RenderGraphics: {fileID: 0}
+  EnemyList: {fileID: 0}
+  LockedTarget: {fileID: 0}
+  CurrentEnemySO: {fileID: 0}
+  CurrentEnemyGraphic: {fileID: 0}
+  TargetGraphic: {fileID: 0}
+  NoVisibleEnemies: {fileID: 0}
+  HealthBarWidth: 150
+  HealthBarHeight: 20
+  HealthBarOffsetX: -50
+  HealthBarOffsetY: -200
+  NavMeshAgent: {fileID: 0}
+  StartColor: {r: 0, g: 0, b: 0, a: 0}
+  Renderer: {fileID: 0}
+  Cone: {fileID: 0}
+  ConeRenderer: {fileID: 0}
+  ConeMesh: {fileID: 0}
+  Outline: {fileID: 0}
+  OutlineRenderer: {fileID: 0}
+  OutlineMesh: {fileID: 0}
+  ConeInitColor: {r: 0, g: 1, b: 0, a: 1}
+  ConeEndColor: {r: 1, g: 0, b: 0, a: 1}
+  ConeEmptyColor: {r: 0.2, g: 0.2, b: 0.2, a: 0.1}
+  AggroEvent: {fileID: 0}
+  DefaultAggroEvent: {fileID: 0}
+  TakeDamageEvent: {fileID: 0}
+  DeathEvent: {fileID: 0}
+  EnemyDied: {fileID: 0}
+  PlayerDetected: 0
+  PlayerTransform: {fileID: 0}
+  IsAlly: 0
+  _currentHealth: 0
+  _stunTime: 0
+  Anim: {fileID: 0}
+  AttackEvent: {fileID: 0}
+  AttackChargingEvent: {fileID: 0}
 --- !u!1001 &865088093
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4842,6 +4899,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5597788337614764682, guid: 5c3bf23d217bac04a835a6ddca0ddf05,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c3bf23d217bac04a835a6ddca0ddf05, type: 3}
@@ -7016,7 +7078,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1724636423}
   m_Father: {fileID: 1121402195}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7114,21 +7177,21 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1623092386}
-    characterCount: 28
+    characterCount: 29
     spriteCount: 0
     spaceCount: 5
     wordCount: 6
     linkCount: 0
     lineCount: 2
     pageCount: 1
-    materialCount: 1
+    materialCount: 2
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1724636424}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -7246,6 +7309,80 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 1d728a361b470a24c9bea11f5c5863e9, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f7aee45645d3b049917fa80e47f5810, type: 3}
+--- !u!1 &1724636422
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1724636423}
+  - component: {fileID: 1724636425}
+  - component: {fileID: 1724636424}
+  m_Layer: 5
+  m_Name: TMP SubMeshUI [LiberationSans SDF Material + LiberationSans SDF Atlas]
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1724636423
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724636422}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1623092385}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1724636424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724636422}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_spriteAsset: {fileID: 0}
+  m_material: {fileID: 0}
+  m_sharedMaterial: {fileID: 0}
+  m_isDefaultMaterial: 0
+  m_padding: 3.545
+  m_canvasRenderer: {fileID: 1724636425}
+  m_TextComponent: {fileID: 1623092386}
+  m_materialReferenceIndex: 1
+--- !u!222 &1724636425
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724636422}
+  m_CullTransparentMesh: 0
 --- !u!1 &1744688222
 GameObject:
   m_ObjectHideFlags: 0

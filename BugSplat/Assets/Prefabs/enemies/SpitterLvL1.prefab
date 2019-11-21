@@ -63,6 +63,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsPaticipant: 0
   SpawnedEnemy: 0
+  SpecialAggroEvent: {fileID: 0}
   difficultyValue: 2
   AttackCurve:
     serializedVersion: 2
@@ -246,6 +247,61 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 416692183153541871, guid: dacb07a024f02594b854081d6248cc84,
+        type: 3}
+      propertyPath: enableTime
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 282015984711394081, guid: dacb07a024f02594b854081d6248cc84,
+        type: 3}
+      propertyPath: enableTime
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822555312846776269, guid: dacb07a024f02594b854081d6248cc84,
+        type: 3}
+      propertyPath: enableTime
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1367288876499784695, guid: dacb07a024f02594b854081d6248cc84,
+        type: 3}
+      propertyPath: enableTime
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1439351097270200307, guid: dacb07a024f02594b854081d6248cc84,
+        type: 3}
+      propertyPath: enableTime
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2589982113787622832, guid: dacb07a024f02594b854081d6248cc84,
+        type: 3}
+      propertyPath: enableTime
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3795867223654269671, guid: dacb07a024f02594b854081d6248cc84,
+        type: 3}
+      propertyPath: enableTime
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5603028605326098707, guid: dacb07a024f02594b854081d6248cc84,
+        type: 3}
+      propertyPath: enableTime
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5187628674193070429, guid: dacb07a024f02594b854081d6248cc84,
+        type: 3}
+      propertyPath: enableTime
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5152525274259933869, guid: dacb07a024f02594b854081d6248cc84,
+        type: 3}
+      propertyPath: enableTime
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4737907824548854103, guid: dacb07a024f02594b854081d6248cc84,
+        type: 3}
+      propertyPath: enableTime
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dacb07a024f02594b854081d6248cc84, type: 3}
 --- !u!1 &6293308669352583311 stripped
@@ -267,15 +323,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6935001282969472289}
     m_Modifications:
-    - target: {fileID: 8070494227835517297, guid: 81634ae774af43e498268fd34d313802,
-        type: 3}
-      propertyPath: m_Name
-      value: Spit
-      objectReference: {fileID: 0}
     - target: {fileID: 8070494227835517300, guid: 81634ae774af43e498268fd34d313802,
         type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8070494227835517297, guid: 81634ae774af43e498268fd34d313802,
+        type: 3}
+      propertyPath: m_Name
+      value: Spit
       objectReference: {fileID: 0}
     - target: {fileID: 8070494227835517302, guid: 81634ae774af43e498268fd34d313802,
         type: 3}
@@ -353,11 +409,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 259376843090518274}
     m_Modifications:
-    - target: {fileID: 6370996069230056297, guid: 600ae753c98b4144b85476c02b8a1f86,
-        type: 3}
-      propertyPath: m_Name
-      value: Projectile_worm (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 7940139658640941434, guid: 600ae753c98b4144b85476c02b8a1f86,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -413,6 +464,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6370996069230056297, guid: 600ae753c98b4144b85476c02b8a1f86,
+        type: 3}
+      propertyPath: m_Name
+      value: Projectile_worm (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4441251014375067862, guid: 600ae753c98b4144b85476c02b8a1f86,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 30981db847e27aa4cb56ea6ec8821006, type: 2}
     - target: {fileID: 5502828656089752264, guid: 600ae753c98b4144b85476c02b8a1f86,
         type: 3}
       propertyPath: m_IsActive
@@ -423,6 +484,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5618208425426714170, guid: 600ae753c98b4144b85476c02b8a1f86,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 30981db847e27aa4cb56ea6ec8821006, type: 2}
+    - target: {fileID: 1443583701658699123, guid: 600ae753c98b4144b85476c02b8a1f86,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 30981db847e27aa4cb56ea6ec8821006, type: 2}
+    - target: {fileID: 2036408982479158284, guid: 600ae753c98b4144b85476c02b8a1f86,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 30981db847e27aa4cb56ea6ec8821006, type: 2}
+    - target: {fileID: 432329377320792053, guid: 600ae753c98b4144b85476c02b8a1f86,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 30981db847e27aa4cb56ea6ec8821006, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 600ae753c98b4144b85476c02b8a1f86, type: 3}
 --- !u!1 &3170866328619843026 stripped

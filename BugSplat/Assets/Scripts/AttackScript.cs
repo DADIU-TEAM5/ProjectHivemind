@@ -40,9 +40,20 @@ public class AttackScript : GameLoop
     private bool _canAttack = true;
 
 
+    float _attackingTimer;
+
+
+    public FloatVariable AttackTime;
+    public BoolVariable Attacking;
+
+
     // Start is called before the first frame update
     void Start()
     {
+
+        
+
+
 
         _cone = new GameObject();
 
@@ -57,6 +68,18 @@ public class AttackScript : GameLoop
 
     public override void LoopUpdate(float deltaTime)
     {
+
+
+        if (_attackingTimer <= 0)
+        {
+            Attacking.Value = false;
+        }
+        else
+        {
+            _attackingTimer -= deltaTime;
+        }
+
+
         //Debug.DrawLine(PlayerGraphics.position, (_nearstTarget - PlayerGraphics.position), Color.red);
         _coneHideTimer += deltaTime;
         if (_coneHideTimer > 0.5f)
@@ -75,8 +98,13 @@ public class AttackScript : GameLoop
 
     public void AttackNearestTarget()
     {
+
+
         if (!_canAttack) return;
         AttackInitiated.Raise(PlayerGraphics.gameObject);
+
+        Attacking.Value = true;
+        _attackingTimer = AttackTime.Value;
         StartCoroutine(StartAttackCooldown());
 
         PlayerDirectionSO.Value =  PlayerGraphics.forward;

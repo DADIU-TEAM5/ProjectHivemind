@@ -9,6 +9,9 @@ public abstract class Enemy : GameLoop
     public bool SpawnedEnemy;
 
     public bool IsUnderground = true;
+    
+    [HideInInspector]
+    public GameEvent SpecialAggroEvent;
 
     public int difficultyValue = 1;
     public AnimationCurve AttackCurve;
@@ -74,7 +77,7 @@ public abstract class Enemy : GameLoop
     public Color ConeEndColor = new Color(1f, 0f, 0f, 1f);
     public Color ConeEmptyColor = new Color(.2f, .2f, .2f, .1f);
 
-    
+
 
     public GameEvent AggroEvent;
     public GameEvent DefaultAggroEvent;
@@ -119,7 +122,7 @@ public abstract class Enemy : GameLoop
             Renderer = RenderGraphics.GetComponent<Renderer>();
         }
 
-                
+
         NavMeshAgent = GetComponent<NavMeshAgent>();
 
         if (NavMeshAgent != null)
@@ -213,7 +216,7 @@ public abstract class Enemy : GameLoop
 
                     part.transform.position = transform.position +(( Vector3.up*i)*0.5f);
                 }
-                
+
             }
             else
             {
@@ -221,11 +224,11 @@ public abstract class Enemy : GameLoop
                 DeadCutout.transform.SetParent(null);
                 DeadCutout.SetActive(true);
             }
-             
+
             DeathEvent.Raise(this.gameObject);
 
             EnemyDied?.Raise(gameObject);
-            
+
 
             Destroy(Cone);
             Destroy(Outline);
@@ -329,7 +332,10 @@ public abstract class Enemy : GameLoop
             EnemyList.Remove(this);
 
         // This is to fix the bug where the Enemy Graphics would stay even after they have died
+
+        if(CurrentEnemyGraphic != null && CurrentEnemyGraphic.Value != null)
         CurrentEnemyGraphic.Value.SetActive(false);
+
         CurrentEnemySO.Value = null;
     }
 
@@ -520,7 +526,7 @@ public abstract class Enemy : GameLoop
 
         float stepSize = 1f / ((float)points - 1);
         int step = 0;
-        
+
 
         for (int i = 1; i < points; i++)
         {
@@ -586,6 +592,10 @@ public abstract class Enemy : GameLoop
                     PlayerTransform = potentialTargets[0].gameObject.transform;
 
                     IsAlly = true;
+
+                    if (SpecialAggroEvent != null)
+                        SpecialAggroEvent.Raise();
+
 
                     DetectAllies();
                 }

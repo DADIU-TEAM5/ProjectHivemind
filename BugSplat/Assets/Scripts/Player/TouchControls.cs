@@ -22,19 +22,18 @@ public class TouchControls : GameLoop
     public GameObjectVariable LockedTarget;
     public GameObject UICanvas;
     public RectTransform UIMenuButton;
-    private bool _uiActivated = false;
-    private Vector2 _uiOffset;
+    private Vector2 _uiOffset = new Vector2(0, 0);
 
     // Setup the private variables needed for the calculations in the current script
-    private Vector3 _inputTouch;
-    private bool _recordPosition = true;
-    private Vector3 _recordedInputPosition;
-    public Vector3[] _currentInputPosition;
-    private bool _inputMoved;
-    private float _inputTime;
+   // private Vector3 _inputTouch;
+    private bool[] _recordPositions = { true, true, true, true };
+    private Vector3[] _recordedInputPositions;
+    public Vector3[][] _currentInputPosition;
+    private bool[] _inputMoved;
+    private float[] _inputTime;
     private float _runtimeInputMax;
     private float _runtimeInputMin;
-    private int _inputFrames;
+    private int[] _inputFrames;
     private int _inputSwipeThreshold;
 
     // Debug UI stuff
@@ -44,24 +43,48 @@ public class TouchControls : GameLoop
     public GameObject TouchUIDotRecorded;
     public Transform TouchCanvas;
 
-    private GameObject _uiRecord;
-    private GameObject _uiCurrent;
+    private GameObject[] _uiRecord;
+    private GameObject[] _uiCurrent;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        _recordedInputPositions = new Vector3[4];
+        _inputTime = new float[4];
+        _uiRecord = new GameObject[4];
+        _uiCurrent = new GameObject[4];
+        _inputMoved = new bool[4];
+
+        _inputFrames = new int[4];
+
+
+
         MoveDirectionSO.Value = Vector3.zero;
         // Disable Multitouch for the phone touch to fix problems with multiple touches. However, multiple touches should be implemented at a later stage.
-        Input.multiTouchEnabled = false;
+        Input.multiTouchEnabled = true;
 
-        _inputFrames = Mathf.RoundToInt(InputSwipeTapTimeSO.Value);
-        _currentInputPosition = new Vector3[_inputFrames];
-        _inputFrames--;
+        
+
+        _currentInputPosition = new Vector3[4][];
+        for (int i = 0; i < 4; i++)
+        {
+
+            _inputFrames[i] = Mathf.RoundToInt(InputSwipeTapTimeSO.Value);
+
+            _currentInputPosition[i] = new Vector3[_inputFrames[i]];
+
+            _inputFrames[i]--;
+
+        }
+
+
+        
+        
 
         _inputSwipeThreshold = Mathf.RoundToInt(Screen.width * (InputSwipeThresholdSO.Value / 100));
 
-        _inputTouch = new Vector3();
+       // _inputTouch = new Vector3();
 
         _runtimeInputMax = Screen.width * (InputMoveMaxThresholdSO.Value / 100);
         _runtimeInputMin = Screen.width * (InputMoveMinThresholdSO.Value / 100);
@@ -70,16 +93,12 @@ public class TouchControls : GameLoop
         {
         }
 
-        if (UICanvas != null)
+        if (UIMenuButton != null)
         {
-            _uiActivated = UICanvas.activeSelf;
-
-            _uiOffset = new Vector2(UIMenuButton.offsetMax.x, UIMenuButton.offsetMax.y);
-        } else
-        {
-            _uiActivated = false;
-            _uiOffset = new Vector2(0, 0);
-        }
+          
+            _uiOffset = new Vector2(UIMenuButton.position.x, UIMenuButton.position.y);
+            Debug.Log("UI Position: " + _uiOffset);
+        } 
     }
 
 
@@ -90,31 +109,34 @@ public class TouchControls : GameLoop
             if (IsStunned.Value == false)
             {
                 // Detect Touch
-                if (Input.touchCount > 0)
+                if (Input.touchCount <= _recordPositions.Length)
                 {
-                    Touch touch0 = Input.GetTouch(0);
-
-                    if (touch0.fingerId == 0)
+                    for (int i = 0; i < Input.touchCount; i++)
                     {
-                        Vector3 touchPosition = touch0.position;
+                        Touch touch = Input.GetTouch(i);
 
-                        if (_uiActivated == false)
-                        {
+
+                        Vector3 touchPosition = touch.position;
+
+                      
                             if (touchPosition.x > _uiOffset.x || touchPosition.y > _uiOffset.y)
                             {
-                                switch (touch0.phase)
+                                switch (touch.phase)
                                 {
                                     case TouchPhase.Moved:
-                                        BeginMove(touchPosition);
+                                        BeginMove(touchPosition, i);
                                         break;
                                     case TouchPhase.Ended:
-                                        EndMove(touchPosition);
+                                        EndMove(touchPosition, i);
                                         break;
                                 }
                             }
-                        }
+                       
+
                     }
                 }
+
+               
 
 
                 // Simulate touch with mouse, if mouse present
@@ -124,31 +146,29 @@ public class TouchControls : GameLoop
 
                     if (Input.GetMouseButton(0))
                     {
-                        if (_uiActivated == false)
-                        {
+                        
                             if (inputPosition.x > _uiOffset.x || inputPosition.y > _uiOffset.y)
                             {
-                                BeginMove(inputPosition);
+                                BeginMove(inputPosition,0);
                             }
-                        }
+                       
 
                     }
                     if (Input.GetMouseButtonUp(0))
                     {
-                        if (_uiActivated == false)
-                        {
+                        
                             if (inputPosition.x > _uiOffset.x || inputPosition.y > _uiOffset.y)
                             {
-                                EndMove(Input.mousePosition);
+                                EndMove(Input.mousePosition,0);
                             }
-                        }
+                        
                     }
                 }
             }
         }
         else
         {
-            ClearInputUI();
+            ClearInputUI(0);
         }
     }
 
@@ -158,35 +178,39 @@ public class TouchControls : GameLoop
  
     }
 
-    private void PopulatePositionIndex(Vector3[] inputArray)
+    private void PopulatePositionIndex(Vector3[] inputArray,int index)
     {
-        for (int i = 0; i < _inputFrames; i++)
+        for (int i = 0; i < _inputFrames[index]; i++)
         {
             inputArray[i] = inputArray[i+1];
         }
     }
 
 
-    private void BeginMove(Vector3 inputPosition)
+    private void BeginMove(Vector3 inputPosition, int index)
     {
-        PopulatePositionIndex(_currentInputPosition); // Move old positions one frame backwards in array
+        PopulatePositionIndex(_currentInputPosition[index], index); // Move old positions one frame backwards in array
 
-        ReturnInputPosition(inputPosition); // Record Start Pos
+        if(inputPosition.x < _uiOffset.x || inputPosition.y > _uiOffset.y)
+        {
+            ReturnInputPosition(inputPosition, index); // Record Start Pos
 
-        ReturnInputPosition(inputPosition); // Recording Current Pos
+            ReturnInputPosition(inputPosition, index); // Recording Current Pos
+        }
+       
 
         //DebugText.text = "MOVING!";
 
-        _inputMoved = true;
+        _inputMoved[index] = true;
 
 
-        if (Vector3.Distance(_currentInputPosition[_inputFrames],_recordedInputPosition) > InputMoveMinThresholdSO.Value)
+        if (Vector3.Distance(_currentInputPosition[index][_inputFrames[index]],_recordedInputPositions[index]) > InputMoveMinThresholdSO.Value)
         {
             Vector3 heading;
             float distance;
             Vector3 direction;
 
-            heading = _currentInputPosition[_inputFrames] - _recordedInputPosition;
+            heading = _currentInputPosition[index][_inputFrames[index]] - _recordedInputPositions[index];
 
             // Calculates the outer rim position of the "joystick" if the player moves the finger beyond the borders of the designated joystick space
             float x = 0f;
@@ -214,7 +238,7 @@ public class TouchControls : GameLoop
             direction = heading.normalized;
 
             // UI debug stuff
-            _uiCurrent.transform.localPosition = new Vector3(x, y);
+            _uiCurrent[index].transform.localPosition = new Vector3(x, y);
 
             // Export direction and speed vector to the PlayerSpeedDirectionSO
             MoveDirectionSO.Value.x = direction.x;
@@ -223,43 +247,43 @@ public class TouchControls : GameLoop
     }
 
 
-    private void ReturnInputPosition(Vector3 touchPos)
+    private void ReturnInputPosition(Vector3 touchPos,int index)
     {
-        if(_recordPosition) // Record first position of touch
+        if(_recordPositions[index]) // Record first position of touch
         {
-            _recordedInputPosition = touchPos;
-            _inputTime = Time.time;
-            _recordPosition = false;
+            _recordedInputPositions[index] = touchPos;
+            _inputTime[index] = Time.time;
+            _recordPositions[index] = false;
 
             // UI Debug Stuff
-            _uiRecord = Instantiate(TouchUIDotRecorded, TouchCanvas);
-            _uiRecord.transform.position = touchPos;
+            _uiRecord[index] = Instantiate(TouchUIDotRecorded, TouchCanvas);
+            _uiRecord[index].transform.position = touchPos;
         }
         else
         {
-            _currentInputPosition[_inputFrames] = touchPos;
+            _currentInputPosition[index][_inputFrames[index]] = touchPos;
         }
 
-        // UI Debug Stuff
-        if (_uiCurrent == null)
+        // UI Debug Stuffv
+        if (_uiCurrent[index] == null)
         {
-            _uiCurrent = Instantiate(TouchUIDotCurrent, _uiRecord.transform.position, Quaternion.identity, _uiRecord.transform);
+            _uiCurrent[index] = Instantiate(TouchUIDotCurrent, _uiRecord[index].transform.position, Quaternion.identity, _uiRecord[index].transform);
         }
         else
         {
-            _uiCurrent.transform.position = _uiRecord.transform.position;
+            _uiCurrent[index].transform.position = _uiRecord[index].transform.position;
         }
     }
 
 
-    private void EndMove(Vector3 touchPosition)
+    private void EndMove(Vector3 touchPosition, int index)
     {
-        ClearInputUI();
+        ClearInputUI(index);
 
         // Check if TAP has happened
-        if (Vector3.Distance(_currentInputPosition[_inputFrames], _recordedInputPosition) < _runtimeInputMin)
+        if (Vector3.Distance(_currentInputPosition[index][_inputFrames[index]], _recordedInputPositions[index]) < _runtimeInputMin)
         {
-            float endTime = Time.time - _inputTime;
+            float endTime = Time.time - _inputTime[index];
 
             if (endTime < InputSwipeTapTimeSO.Value)
             {
@@ -268,36 +292,37 @@ public class TouchControls : GameLoop
             }
         }
         // Check if SWIPE has happened
-        else if (Vector3.Distance(_currentInputPosition[0], _currentInputPosition[_inputFrames]) > _inputSwipeThreshold)
+        else if (Vector3.Distance(_currentInputPosition[index][0], _currentInputPosition[index][_inputFrames[index]]) > _inputSwipeThreshold)
         {
             //DebugText.text = "DODGED!";
             Swipe.Raise(PlayerGraphics);
         }
 
         // Check if MOVE has happened
-        if (_inputMoved)
+        if (_inputMoved[index])
         {
             //DebugText.text = "MOVED!";
         }
 
         MoveDirectionSO.Value = Vector3.zero;
-        _inputMoved = false;
-        _recordPosition = true;
-        _inputFrames = Mathf.RoundToInt(InputSwipeTapTimeSO.Value);
-        _currentInputPosition = new Vector3[_inputFrames + 1];
+        _inputMoved[index] = false;
+        _recordPositions[index] = true;
+        _inputFrames[index] = Mathf.RoundToInt(InputSwipeTapTimeSO.Value);
+        _currentInputPosition[index] = new Vector3[_inputFrames[index] + 1];
     }
 
-    private void ClearInputUI()
+    private void ClearInputUI(int index)
     {
         // UI Debug Stuff
-        if (_uiRecord != null)
+        if (_uiRecord[index] != null)
         {
-            Destroy(_uiRecord);
+            Destroy(_uiRecord[index]);
         }
 
-        if (_uiCurrent != null)
+        if (_uiCurrent[index] != null)
         {
-            Destroy(_uiCurrent);
+            Destroy(_uiCurrent[index]);
         }
     }
+
 }
