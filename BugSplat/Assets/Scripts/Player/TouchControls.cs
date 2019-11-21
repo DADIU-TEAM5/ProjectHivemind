@@ -22,8 +22,7 @@ public class TouchControls : GameLoop
     public GameObjectVariable LockedTarget;
     public GameObject UICanvas;
     public RectTransform UIMenuButton;
-    private bool _uiActivated = false;
-    private Vector2 _uiOffset;
+    private Vector2 _uiOffset = new Vector2(0, 0);
 
     // Setup the private variables needed for the calculations in the current script
    // private Vector3 _inputTouch;
@@ -94,16 +93,12 @@ public class TouchControls : GameLoop
         {
         }
 
-        if (UICanvas != null)
+        if (UIMenuButton != null)
         {
-            _uiActivated = UICanvas.activeSelf;
-
-            _uiOffset = new Vector2(UIMenuButton.offsetMax.x, UIMenuButton.offsetMax.y);
-        } else
-        {
-            _uiActivated = false;
-            _uiOffset = new Vector2(0, 0);
-        }
+          
+            _uiOffset = new Vector2(UIMenuButton.position.x, UIMenuButton.position.y);
+            Debug.Log("UI Position: " + _uiOffset);
+        } 
     }
 
 
@@ -123,8 +118,7 @@ public class TouchControls : GameLoop
 
                         Vector3 touchPosition = touch.position;
 
-                        if (_uiActivated == false)
-                        {
+                      
                             if (touchPosition.x > _uiOffset.x || touchPosition.y > _uiOffset.y)
                             {
                                 switch (touch.phase)
@@ -137,7 +131,7 @@ public class TouchControls : GameLoop
                                         break;
                                 }
                             }
-                        }
+                       
 
                     }
                 }
@@ -152,24 +146,22 @@ public class TouchControls : GameLoop
 
                     if (Input.GetMouseButton(0))
                     {
-                        if (_uiActivated == false)
-                        {
+                        
                             if (inputPosition.x > _uiOffset.x || inputPosition.y > _uiOffset.y)
                             {
                                 BeginMove(inputPosition,0);
                             }
-                        }
+                       
 
                     }
                     if (Input.GetMouseButtonUp(0))
                     {
-                        if (_uiActivated == false)
-                        {
+                        
                             if (inputPosition.x > _uiOffset.x || inputPosition.y > _uiOffset.y)
                             {
                                 EndMove(Input.mousePosition,0);
                             }
-                        }
+                        
                     }
                 }
             }
@@ -199,9 +191,13 @@ public class TouchControls : GameLoop
     {
         PopulatePositionIndex(_currentInputPosition[index], index); // Move old positions one frame backwards in array
 
-        ReturnInputPosition(inputPosition,index); // Record Start Pos
+        if(inputPosition.x < _uiOffset.x || inputPosition.y > _uiOffset.y)
+        {
+            ReturnInputPosition(inputPosition, index); // Record Start Pos
 
-        ReturnInputPosition(inputPosition, index); // Recording Current Pos
+            ReturnInputPosition(inputPosition, index); // Recording Current Pos
+        }
+       
 
         //DebugText.text = "MOVING!";
 
@@ -328,4 +324,5 @@ public class TouchControls : GameLoop
             Destroy(_uiCurrent[index]);
         }
     }
+
 }
