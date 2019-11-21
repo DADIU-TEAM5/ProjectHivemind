@@ -325,7 +325,10 @@ public abstract class Enemy : GameLoop
             EnemyList.Remove(this);
 
         // This is to fix the bug where the Enemy Graphics would stay even after they have died
+
+        if(CurrentEnemyGraphic != null && CurrentEnemyGraphic.Value != null)
         CurrentEnemyGraphic.Value.SetActive(false);
+
         CurrentEnemySO.Value = null;
     }
 
