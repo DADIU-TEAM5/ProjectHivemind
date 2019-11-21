@@ -270,8 +270,9 @@ public class Spitter : Enemy
 
             AttackEvent.Raise(gameObject);
 
+            float roll = Random.Range(0, 100);
 
-            if (_spitterStats.ShootEggs)
+            if (_spitterStats.ShootEggs && roll<_spitterStats.ChanceToShootEgg)
             {
                 GameObject egg = Instantiate(EggProjectile,Spit.transform);
 
