@@ -8,6 +8,8 @@ public abstract class Enemy : GameLoop
     [HideInInspector]
     public bool SpawnedEnemy;
 
+    [HideInInspector]
+    public GameEvent SpecialAggroEvent;
 
     public int difficultyValue = 1;
     public AnimationCurve AttackCurve;
@@ -585,6 +587,10 @@ public abstract class Enemy : GameLoop
                     PlayerTransform = potentialTargets[0].gameObject.transform;
 
                     IsAlly = true;
+
+                    if (SpecialAggroEvent != null)
+                        SpecialAggroEvent.Raise();
+
 
                     DetectAllies();
                 }
