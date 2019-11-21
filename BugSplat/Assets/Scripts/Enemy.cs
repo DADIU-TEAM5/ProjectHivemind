@@ -8,6 +8,8 @@ public abstract class Enemy : GameLoop
     [HideInInspector]
     public bool SpawnedEnemy;
 
+    [HideInInspector]
+    public GameEvent SpecialAggroEvent;
 
     public int difficultyValue = 1;
     public AnimationCurve AttackCurve;
@@ -325,7 +327,10 @@ public abstract class Enemy : GameLoop
             EnemyList.Remove(this);
 
         // This is to fix the bug where the Enemy Graphics would stay even after they have died
+
+        if(CurrentEnemyGraphic != null && CurrentEnemyGraphic.Value != null)
         CurrentEnemyGraphic.Value.SetActive(false);
+
         CurrentEnemySO.Value = null;
     }
 
@@ -582,6 +587,10 @@ public abstract class Enemy : GameLoop
                     PlayerTransform = potentialTargets[0].gameObject.transform;
 
                     IsAlly = true;
+
+                    if (SpecialAggroEvent != null)
+                        SpecialAggroEvent.Raise();
+
 
                     DetectAllies();
                 }

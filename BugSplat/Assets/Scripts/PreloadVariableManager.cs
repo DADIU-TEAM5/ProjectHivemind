@@ -6,12 +6,14 @@ public class PreloadVariableManager : MonoBehaviour
 {
     public BoolVariable InMainMenu;
     public BoolVariable TutorialEnabled;
+    public StringVariable LastScene;
   
     // Lets Hardcode some variables... 
     void OnEnable()
     {
-        TutorialEnabled.Value = false;
         InMainMenu.Value = true;
+        TutorialEnabled.Value = true;
+        LastScene.Value = "";
     }
 
 
