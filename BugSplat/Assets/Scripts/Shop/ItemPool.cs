@@ -40,7 +40,7 @@ public class ItemPool : ScriptableObject
 
                 if (item == null) continue;
 
-                if (item.Info.Tier == tier) {
+                if (item.Info.Tier == tier && item.Purchasable()) {
                     result.Add(i);
                 }
             }

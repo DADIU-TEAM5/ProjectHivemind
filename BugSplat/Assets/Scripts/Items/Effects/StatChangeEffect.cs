@@ -17,11 +17,13 @@ public class StatChangeEffect : Effect
         Stat.SetValue(Stat.Value + Change);
     }
 
-    public override bool CanBeApplied() {
+    public override int CanBeApplied() {
+        if (Change < 0) return 0;
+
         if (Stat.Value == Stat.Max) {
-            return false;
+            return -1;
         }
 
-        return true;
+        return 1;
     }
 }
