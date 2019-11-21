@@ -2,36 +2,37 @@
 using System.Collections.Generic;
 using BrunoMikoski.TextJuicer;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class TextFeedback : MonoBehaviour
 {
-    public JuicedText Title, Subtitle;
+    public TMPro.TextMeshProUGUI Title, Subtitle;
+
+    public UnityEvent Play, Stop;
 
     public float TimeoutTime = 5;
 
     public void SetTitle(string title) {
-        Title.TextComponent.text = title;
+        Title.text = title;
     }
 
     public void SetLevelTitle(IntVariable level) {
-        Title.TextComponent.text = $"Level {level.Value}";
+        Title.text = $"Level {level.Value}";
     }
 
     public void SetSubtitle(string subtitle) {
-        Subtitle.TextComponent.text = subtitle;
+        Subtitle.text = subtitle;
     }
 
     public void SetFeedbackActive(bool active) {
-        Title.gameObject.SetActive(active);
-        Subtitle.gameObject.SetActive(active);
-
-        StartCoroutine(Timeout(TimeoutTime));
+        Play.Invoke();
+        StartCoroutine(Timeout());
     }
 
-    private IEnumerator Timeout(float timeoutTime) {
-        yield return new WaitForSeconds(timeoutTime);
+    private IEnumerator Timeout() {
+        yield return new WaitForSeconds(TimeoutTime);
 
-        SetFeedbackActive(false);
+        Stop.Invoke();
     }
 }
