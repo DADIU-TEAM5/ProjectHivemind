@@ -12,9 +12,11 @@ public class NewHealthUI : GameLoop
 
     public Image HealthBar;
     public GameObject Bar;
+    public GameObject MaxBar;
 
     List<Image> HealthIcons;
-    int _activeIcons;
+    List<Image> MaxHealthIcons;
+
 
     public void Awake()
     {
@@ -23,6 +25,10 @@ public class NewHealthUI : GameLoop
         foreach (Image img in Bar.GetComponentsInChildren<Image>())
             HealthIcons.Add(img);
 
+        MaxHealthIcons = new List<Image>();
+        foreach (Image img in MaxBar.GetComponentsInChildren<Image>())
+            MaxHealthIcons.Add(img);
+
         if (HealthIcons.Count == 0)
             Debug.LogError("No Health Icons Found");
         else
@@ -30,7 +36,7 @@ public class NewHealthUI : GameLoop
             //ChangeMaxHealth();
             UpdateHealthBar();
 
-            Debug.Log("Active Hearts = " + _activeIcons);
+           
            
         }
             
@@ -53,15 +59,24 @@ public class NewHealthUI : GameLoop
     {
         for (int i = 0; i < HealthIcons.Count; i++)
         {
+            MaxHealthIcons[i].enabled = true;
+            MaxHealthIcons[i].transform.localScale = new Vector3(1, 1, 1);
             HealthIcons[i].enabled = true;
             HealthIcons[i].transform.localScale = new Vector3(1, 1, 1);
         }
 
         float currentHP = CurrentHealth.Value;
         int fullHearts = (int)(currentHP / HealthPerIcon.Value);
+        int maxHearts = (int)((1+MaxHealth.Value) / HealthPerIcon.Value);
+
+        //Debug.Log("Max HP: " + MaxHealth.Value + ", HealthPrIcon: " +HealthPerIcon.Value +", maxHearts: " + maxHearts);
 
         float scale = (currentHP % HealthPerIcon.Value)/ HealthPerIcon.Value;
 
+        if (scale > 0 && scale < 0.9f)
+            scale = 0.5f;
+
+        //Debug.Log("HP SCALE: " + scale);
         HealthIcons[fullHearts].transform.localScale = new Vector3(scale, scale, scale);
 
 
@@ -70,7 +85,12 @@ public class NewHealthUI : GameLoop
             HealthIcons[i].enabled = false;
         }
 
-        if(currentHP <= 0)
+        for (int i = maxHearts; i < HealthIcons.Count; i++)
+        {
+            MaxHealthIcons[i].enabled = false;
+        }
+
+        if (currentHP <= 0)
         {
             HealthIcons[0].enabled = false;
         }

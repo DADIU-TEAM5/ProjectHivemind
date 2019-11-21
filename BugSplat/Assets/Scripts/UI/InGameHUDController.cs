@@ -49,7 +49,7 @@ public class InGameHUDController : MonoBehaviour
 
 
 
-        SetupColors(HealthBar);
+        //SetupColors(HealthBar);
         SetupColors(MenuIcon);
         SetupColors(CurrencyIcon);
         SetupColors(KilledIcon);
@@ -95,7 +95,7 @@ public class InGameHUDController : MonoBehaviour
         {
 
             img.color = ImageColor;
-            Debug.Log("Found Image");
+            //Debug.Log("Found Image");
         }
     }
     public void SetupAnimators(GameObject go)
@@ -109,7 +109,7 @@ public class InGameHUDController : MonoBehaviour
         {
 
             anim.updateMode = AnimatorUpdateMode.UnscaledTime;
-            Debug.Log("Found animator: Updatemode = " + anim.updateMode);
+            //Debug.Log("Found animator: Updatemode = " + anim.updateMode);
         }
     }
 
