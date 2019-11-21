@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: TankLvL1HordeStats
   m_EditorClassIdentifier: 
   MoveSpeed: 2
-  HitPoints: 60
+  HitPoints: 500
   AttackSpeed: 2
   AttackRange: 2.5
   AttackAngle: 80
   SpotDistance: 1000
   AllySpotDistance: 1000
   AttackChargeUpTime: 1.5
-  AttackDamage: 4
+  AttackDamage: 20
   minPartsToDrop: 20
   maxPartsToDrop: 30
   ChargeSpeed: 25
@@ -32,6 +32,31 @@ MonoBehaviour:
   MoveBackDistance: 4
   StunDuration: 5
   PlayerStunDuration: 0.8
-  Repeat: 5
-  CooldownBetweenBehaviour: 25
-  WayPointSpeed: 6
+  Repeat: 9999
+  CooldownBetweenBehaviour: 15
+  WayPointSpeed: 3
+  waypointOverShoot: 10
+  ChargeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.7
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
