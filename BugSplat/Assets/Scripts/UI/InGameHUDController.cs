@@ -14,6 +14,8 @@ public class InGameHUDController : MonoBehaviour
     public GameObject CurrencyIcon;
     public GameObject KilledIcon;
 
+    public Animator[] HpAnimations;
+
     public GameObject OptionsMenu;
     public GameObject MainMenu;
     public GameObject ModifiersMenu;
@@ -195,4 +197,14 @@ public class InGameHUDController : MonoBehaviour
         InGameHUD.SetActive(true);
     }
 
+    public void PlayHPAnimation()
+    {
+        //for (int i = 0; i < HpAnimations.Length; i++)
+        //{
+        //    HpAnimations[i].Play("TakeDamage");
+        //}
+
+        HealthBar.SetActive(false);
+        HealthBar.SetActive(true);
+    }
 }
