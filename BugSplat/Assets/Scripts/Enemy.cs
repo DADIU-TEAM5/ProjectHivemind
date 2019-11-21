@@ -11,7 +11,7 @@ public abstract class Enemy : GameLoop
     public bool IsUnderground = true;
     
     [HideInInspector]
-    public GameEvent SpecialAggroEvent;
+    public Hexagon hex;
 
     public int difficultyValue = 1;
     public AnimationCurve AttackCurve;
@@ -593,8 +593,8 @@ public abstract class Enemy : GameLoop
 
                     IsAlly = true;
 
-                    if (SpecialAggroEvent != null)
-                        SpecialAggroEvent.Raise();
+                    if (hex != null)
+                        hex.SpawnEnemies();
 
 
                     DetectAllies();

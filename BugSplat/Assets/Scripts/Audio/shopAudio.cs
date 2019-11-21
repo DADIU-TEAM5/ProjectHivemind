@@ -10,6 +10,10 @@ public class shopAudio : MonoBehaviour
     public AK.Wwise.Event purchaseItem;
     public AK.Wwise.Event insufficientFunds;
     public AK.Wwise.Event toadSpeak;
+    public AK.Wwise.Event shopAmbience;
+
+    [Header("Location")]
+    public GameObject shoplocation;
 
     public void InspectItemEvent()
     {
@@ -34,5 +38,17 @@ public class shopAudio : MonoBehaviour
     public void EnterShopEvent()
     {
         toadSpeak.Post(this.gameObject);
+    }
+
+    public void shopAmbienceTrigger()
+    {
+        StartCoroutine(waiter());
+    }
+
+    IEnumerator waiter()
+    {
+        yield return new WaitForSeconds(2);
+        shopAmbience.Post(shoplocation);
+
     }
 }

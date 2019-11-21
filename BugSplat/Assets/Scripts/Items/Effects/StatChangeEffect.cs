@@ -21,7 +21,7 @@ public class StatChangeEffect : Effect
         if (Change < 0) return 0;
 
         if (Stat.Value == Stat.Max) {
-            return -1;
+            return 0;
         }
 
         return 1;

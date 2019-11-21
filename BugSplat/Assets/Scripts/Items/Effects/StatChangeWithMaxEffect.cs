@@ -11,7 +11,7 @@ public class StatChangeWithMaxEffect : StatChangeEffect
     public override int CanBeApplied() {
         if (Change < 0) return 0;
         if (Stat.Value == MaxStat.Value) {
-            return -1;
+            return 0;
         }
 
         return 1;

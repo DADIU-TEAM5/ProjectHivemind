@@ -4825,7 +4825,6 @@ GameObject:
   - component: {fileID: 1009012231196895692}
   - component: {fileID: 4542368894373246430}
   - component: {fileID: 1815250109353792845}
-  - component: {fileID: 3643527630228565967}
   m_Layer: 0
   m_Name: Wall_TileEdge_Gate_01
   m_TagString: Untagged
@@ -4985,24 +4984,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b83feb8908e4989439564ec1924488b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3643527630228565967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4401942231370745326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 0}
-  Response:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
 --- !u!1 &7684140620518413761
 GameObject:
   m_ObjectHideFlags: 0
@@ -5014,6 +4995,7 @@ GameObject:
   - component: {fileID: 3119464287098702951}
   - component: {fileID: 4067449541679351582}
   - component: {fileID: 1336691349515895445}
+  - component: {fileID: 1164761952998553482}
   m_Layer: 0
   m_Name: Wall_TileEdge_Gate_01_Gate
   m_TagString: Untagged
@@ -5080,3 +5062,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!208 &1164761952998553482
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7684140620518413761}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.5, y: 1.2, z: 0.43800002}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 1.2, z: 0}
+  m_TimeToStationary: 0.5

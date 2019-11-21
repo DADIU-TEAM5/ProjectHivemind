@@ -37,10 +37,18 @@ public class EnemySpawner : GameLoop
     public int SmallestValue;
 
     float _timer;
+    [HideInInspector]
+    public Hexagon hex;
+
+    bool SpawningEnemiesToSpawn;
+
+    List<GameObject> EnemiesToSpawn = new List<GameObject>();
+
 
     private void OnEnable()
     {
         SingleEnemySpawned = false;
+        SpawningEnemiesToSpawn = false;
 
         budget = 0;
 
@@ -103,34 +111,39 @@ public class EnemySpawner : GameLoop
 
         if (startedSpawning)
         {
+
+            SpawnEnemiesRoutine();
+
+
             if (_timer > 0)
                 _timer -= deltaTime;
 
 
             if (_timer <= 0)
             {
-                SpawnEnemiesRoutine();
+                SpawnQueuedEnemies();
                 _timer = SpawnCD;
             }
         }
 
-        if(startedSpawning && LevelBudget <= 0)
-        {
-            print("No more enemies to spawn removeing spawners");
-            Destroy(gameObject);
-        }
+        
 
     }
 
     public void SpawnEnemies()
     {
-        startedSpawning = true;
+
+        SpawningEnemiesToSpawn = true;
+        
 
 
     }
 
     public void SpawnFirstEnemy()
     {
+        startedSpawning = true;
+        //SpawnEnemies();
+        /*
         if (!SingleEnemySpawned && SmallestValue <LevelBudget)
         {
             SingleEnemySpawned = true;
@@ -163,7 +176,7 @@ public class EnemySpawner : GameLoop
 
 
                 NavMesh.SamplePosition(transform.position, out hit, 3, NavMesh.AllAreas);
-                */
+                
                 spawnedEnemy.transform.position = spawnPoint;
 
 
@@ -171,12 +184,45 @@ public class EnemySpawner : GameLoop
 
 
         }
+*/
 
 
     }
 
 
    
+
+    void SpawnQueuedEnemies()
+    {
+
+        if (SpawningEnemiesToSpawn)
+        {
+            int count = EnemiesToSpawn.Count;
+
+            for (int i = 0; i < count; i++)
+            {
+                GameObject spawnedEnemy = Instantiate(EnemiesToSpawn[0], transform);
+
+                spawnedEnemy.name = "Delayed Fucker";
+                spawnedEnemy.transform.parent = null;
+
+                Vector3 spawnPoint = transform.position;
+                spawnPoint.y = 0;
+
+                /*
+                NavMeshHit hit;
+
+
+                NavMesh.SamplePosition(transform.position, out hit, 3, NavMesh.AllAreas);
+                */
+                spawnedEnemy.transform.position = spawnPoint;
+
+                EnemiesToSpawn.Remove(EnemiesToSpawn[0]);
+
+            }
+        }
+    }
+
 
     void SpawnEnemiesRoutine()
     {
@@ -194,24 +240,9 @@ public class EnemySpawner : GameLoop
             if (LevelBudget > FirsTValueToget)
             {
                 LevelBudget -= FirsTValueToget;
-                
-
-                GameObject spawnedEnemy = Instantiate(ChosenGuy, transform);
-
-                spawnedEnemy.name = "Slightly Bigger Fucker";
-                spawnedEnemy.transform.parent = null;
-
-                Vector3 spawnPoint = transform.position;
-                spawnPoint.y = 0;
-
-                /*
-                NavMeshHit hit;
 
 
-                NavMesh.SamplePosition(transform.position, out hit, 3, NavMesh.AllAreas);
-                */
-                spawnedEnemy.transform.position = spawnPoint;
-
+                EnemiesToSpawn.Add(ChosenGuy);
 
             }
                 
@@ -249,7 +280,9 @@ public class EnemySpawner : GameLoop
 
                 GameObject spawnedEnemy = Instantiate(enemies[index], transform);
 
-                spawnedEnemy.name = "Little Fucker";
+
+                spawnedEnemy.GetComponent<Enemy>().hex = hex;
+                spawnedEnemy.name = "Initial Fucker";
                 spawnedEnemy.transform.parent = null;
 
                 Vector3 spawnPoint = transform.position;

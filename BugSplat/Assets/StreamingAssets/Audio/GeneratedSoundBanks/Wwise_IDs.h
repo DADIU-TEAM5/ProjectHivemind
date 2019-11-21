@@ -161,6 +161,7 @@ namespace AK
         static const AkUniqueID MASTER_BUS = 1399649189U;
         static const AkUniqueID MASTER_OUT = 1330420139U;
         static const AkUniqueID MUSIC_BUS = 2680856269U;
+        static const AkUniqueID MUSIC_SHOP_BUS = 1145691870U;
         static const AkUniqueID REVERB_RETURN = 358140370U;
         static const AkUniqueID SUMMER_BUS = 1348578857U;
         static const AkUniqueID UI_NONDIEGETIC_BUS = 1826390690U;
