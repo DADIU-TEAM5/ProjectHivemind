@@ -38,11 +38,22 @@ public class MusicManagerScript : MonoBehaviour
     public void ArenaLoad()
     {
         BattleMusic.Post(this.gameObject);
+        ShopMusic.Stop(FrogShop);
     }
 
     public void HubLoad()
     {
         HubMusic.Post(this.gameObject);
+
+    }
+
+    public void playShopMusic()
+    {
+        //Make sure no duplicates
+        ShopMusic.Stop(FrogShop);
+
+        //post event
         ShopMusic.Post(FrogShop);
     }
+
 }

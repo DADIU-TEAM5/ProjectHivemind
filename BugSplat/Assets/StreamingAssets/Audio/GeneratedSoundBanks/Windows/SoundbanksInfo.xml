@@ -129,16 +129,76 @@
 				<Event Id="3782024871" Name="music_battle" ObjectPath="\Events\MusicEvents\music_battle" DurationType="Infinite"/>
 				<Event Id="2615423034" Name="music_hub" ObjectPath="\Events\MusicEvents\music_hub" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 				<Event Id="984952705" Name="music_intro" ObjectPath="\Events\MusicEvents\music_intro" DurationType="Infinite"/>
-				<Event Id="3229152761" Name="music_shop" ObjectPath="\Events\MusicEvents\music_shop" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="3229152761" Name="music_shop" ObjectPath="\Events\MusicEvents\music_shop" MaxAttenuation="100.000000" DurationType="Infinite"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
+				<File Id="123497996" Language="SFX">
+					<ShortName>toadmusic_koto_02.wav</ShortName>
+					<Path>SFX/toadmusic_koto_02_ADF7B7FB.wem</Path>
+				</File>
+				<File Id="317987949" Language="SFX">
+					<ShortName>toadmusic_tabla_03.wav</ShortName>
+					<Path>SFX/toadmusic_tabla_03_ADF7B7FB.wem</Path>
+				</File>
+				<File Id="421490600" Language="SFX">
+					<ShortName>toadmusic_shaker_01.wav</ShortName>
+					<Path>SFX/toadmusic_shaker_01_ADF7B7FB.wem</Path>
+				</File>
 				<File Id="502406035" Language="SFX">
 					<ShortName>bugbeatsTest2.wav</ShortName>
 					<Path>SFX/bugbeatsTest2_EBC987A4.wem</Path>
 				</File>
+				<File Id="581058648" Language="SFX">
+					<ShortName>toadmusic_koto_01.wav</ShortName>
+					<Path>SFX/toadmusic_koto_01_ADF7B7FB.wem</Path>
+				</File>
+				<File Id="585541463" Language="SFX">
+					<ShortName>toadmusic_kntkGtr_01.wav</ShortName>
+					<Path>SFX/toadmusic_kntkGtr_01_EBC987A4.wem</Path>
+				</File>
 				<File Id="592950780" Language="SFX">
 					<ShortName>battlemusictest_01_i1.wav</ShortName>
 					<Path>SFX/battlemusictest_01_i1_EBC987A4.wem</Path>
+				</File>
+				<File Id="745185129" Language="SFX">
+					<ShortName>toadmusic_tabla_02.wav</ShortName>
+					<Path>SFX/toadmusic_tabla_02_ADF7B7FB.wem</Path>
+				</File>
+				<File Id="781739501" Language="SFX">
+					<ShortName>toadmusic_tabla_04.wav</ShortName>
+					<Path>SFX/toadmusic_tabla_04_ADF7B7FB.wem</Path>
+				</File>
+				<File Id="814768109" Language="SFX">
+					<ShortName>toadmusic_bongo_01.wav</ShortName>
+					<Path>SFX/toadmusic_bongo_01_ADF7B7FB.wem</Path>
+				</File>
+				<File Id="923759512" Language="SFX">
+					<ShortName>toadmusic_sitar_02.wav</ShortName>
+					<Path>SFX/toadmusic_sitar_02_EBC987A4.wem</Path>
+				</File>
+				<File Id="945432591" Language="SFX">
+					<ShortName>toadmusic_sitar_04.wav</ShortName>
+					<Path>SFX/toadmusic_sitar_04_EBC987A4.wem</Path>
+				</File>
+				<File Id="961919514" Language="SFX">
+					<ShortName>toadmusic_tabla_01.wav</ShortName>
+					<Path>SFX/toadmusic_tabla_01_ADF7B7FB.wem</Path>
+				</File>
+				<File Id="963099816" Language="SFX">
+					<ShortName>toadmusic_kntkGtr_02.wav</ShortName>
+					<Path>SFX/toadmusic_kntkGtr_02_EBC987A4.wem</Path>
+				</File>
+				<File Id="999345760" Language="SFX">
+					<ShortName>toadmusic_sitar_03.wav</ShortName>
+					<Path>SFX/toadmusic_sitar_03_EBC987A4.wem</Path>
+				</File>
+				<File Id="1003944722" Language="SFX">
+					<ShortName>toadmusic_antlerbow_01.wav</ShortName>
+					<Path>SFX/toadmusic_antlerbow_01_EBC987A4.wem</Path>
+				</File>
+				<File Id="1030702101" Language="SFX">
+					<ShortName>toadmusic_sitar_01.wav</ShortName>
+					<Path>SFX/toadmusic_sitar_01_EBC987A4.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
@@ -148,11 +208,143 @@
 			<Path>sb_hub.bnk</Path>
 			<IncludedEvents>
 				<Event Id="1797197367" Name="amb_hub_mainEvent" ObjectPath="\Events\HubEvents\HubAmbience\amb_hub_mainEvent" DurationType="Infinite"/>
+				<Event Id="3126464902" Name="amb_shop_mainEvent" ObjectPath="\Events\ShopEvents\ShopAmbience\amb_shop_mainEvent" MaxAttenuation="100.000000" DurationType="Infinite"/>
+				<Event Id="1339011789" Name="shop_inspectItem" ObjectPath="\Events\ShopEvents\ShopInteraction\shop_inspectItem" DurationType="OneShot" DurationMin="0.170678" DurationMax="0.285026"/>
+				<Event Id="154430615" Name="shop_insufficientFunds" ObjectPath="\Events\ShopEvents\ShopInteraction\shop_insufficientFunds" DurationType="OneShot" DurationMin="0.506438" DurationMax="0.723361"/>
+				<Event Id="3988221669" Name="shop_purchase" ObjectPath="\Events\ShopEvents\ShopInteraction\shop_purchase" DurationType="OneShot" DurationMin="4.232290" DurationMax="4.337211"/>
+				<Event Id="2486007151" Name="shop_putDown" ObjectPath="\Events\ShopEvents\ShopInteraction\shop_putDown" DurationType="OneShot" DurationMin="0.262872" DurationMax="0.388548"/>
+				<Event Id="2496063080" Name="toad_accept" ObjectPath="\Events\ShopEvents\Toad\toad_accept" DurationType="OneShot" DurationMin="0.778526" DurationMax="1.311451"/>
+				<Event Id="771050566" Name="toad_deny" ObjectPath="\Events\ShopEvents\Toad\toad_deny" DurationType="OneShot" DurationMin="0.789456" DurationMax="1.458912"/>
+				<Event Id="1388225139" Name="toad_dialogueBlip" ObjectPath="\Events\ShopEvents\Toad\toad_dialogueBlip" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
+				<File Id="44842512" Language="SFX">
+					<ShortName>toad_deny_02.wav</ShortName>
+					<Path>SFX/toad_deny_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="92687332" Language="SFX">
+					<ShortName>shop_putDownPlate_01.wav</ShortName>
+					<Path>SFX/shop_putDownPlate_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="99765881" Language="SFX">
+					<ShortName>ambsource_drip_05.wav</ShortName>
+					<Path>SFX/ambsource_drip_05_8EDF57DD.wem</Path>
+				</File>
+				<File Id="146395160" Language="SFX">
+					<ShortName>toad_accept_03.wav</ShortName>
+					<Path>SFX/toad_accept_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="203083876" Language="SFX">
+					<ShortName>toad_accept_01.wav</ShortName>
+					<Path>SFX/toad_accept_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="207081043" Language="SFX">
+					<ShortName>toad_accept_05.wav</ShortName>
+					<Path>SFX/toad_accept_05_8EDF57DD.wem</Path>
+				</File>
+				<File Id="211526328" Language="SFX">
+					<ShortName>shop_purchase_03.wav</ShortName>
+					<Path>SFX/shop_purchase_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="261162090" Language="SFX">
+					<ShortName>shop_inspect_plate_03.wav</ShortName>
+					<Path>SFX/shop_inspect_plate_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="270570416" Language="SFX">
+					<ShortName>shop_putDownPlate_02.wav</ShortName>
+					<Path>SFX/shop_putDownPlate_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="323491498" Language="SFX">
+					<ShortName>shop_purchase_01.wav</ShortName>
+					<Path>SFX/shop_purchase_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="338717862" Language="SFX">
+					<ShortName>toad_deny_03.wav</ShortName>
+					<Path>SFX/toad_deny_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="388926070" Language="SFX">
+					<ShortName>shop_purchase_02.wav</ShortName>
+					<Path>SFX/shop_purchase_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="420773879" Language="SFX">
+					<ShortName>ambsource_drip_02.wav</ShortName>
+					<Path>SFX/ambsource_drip_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="477738590" Language="SFX">
+					<ShortName>shop_inspect_plate_01.wav</ShortName>
+					<Path>SFX/shop_inspect_plate_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="479007248" Language="SFX">
+					<ShortName>toad_accept_07.wav</ShortName>
+					<Path>SFX/toad_accept_07_8EDF57DD.wem</Path>
+				</File>
+				<File Id="506912683" Language="SFX">
+					<ShortName>shop_inspect_plate_02.wav</ShortName>
+					<Path>SFX/shop_inspect_plate_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="520312807" Language="SFX">
+					<ShortName>toad_deny_04.wav</ShortName>
+					<Path>SFX/toad_deny_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="569537801" Language="SFX">
+					<ShortName>shop_putDownPlate_04.wav</ShortName>
+					<Path>SFX/shop_putDownPlate_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="600179770" Language="SFX">
+					<ShortName>ambsource_drip_06.wav</ShortName>
+					<Path>SFX/ambsource_drip_06_8EDF57DD.wem</Path>
+				</File>
+				<File Id="654805538" Language="SFX">
+					<ShortName>ambsource_drip_01.wav</ShortName>
+					<Path>SFX/ambsource_drip_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="672876930" Language="SFX">
+					<ShortName>ambsource_drip_07.wav</ShortName>
+					<Path>SFX/ambsource_drip_07_8EDF57DD.wem</Path>
+				</File>
+				<File Id="682958209" Language="SFX">
+					<ShortName>toad_accept_02.wav</ShortName>
+					<Path>SFX/toad_accept_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="710111305" Language="SFX">
+					<ShortName>toad_accept_06.wav</ShortName>
+					<Path>SFX/toad_accept_06_8EDF57DD.wem</Path>
+				</File>
+				<File Id="728931627" Language="SFX">
+					<ShortName>ambsource_drip_03.wav</ShortName>
+					<Path>SFX/ambsource_drip_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="742953182" Language="SFX">
+					<ShortName>ambsource_drip_04.wav</ShortName>
+					<Path>SFX/ambsource_drip_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="752146179" Language="SFX">
+					<ShortName>ambsource_drip_08.wav</ShortName>
+					<Path>SFX/ambsource_drip_08_8EDF57DD.wem</Path>
+				</File>
+				<File Id="759281619" Language="SFX">
+					<ShortName>toad_deny_01.wav</ShortName>
+					<Path>SFX/toad_deny_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="790088374" Language="SFX">
+					<ShortName>shop_tooBad_pouch_02.wav</ShortName>
+					<Path>SFX/shop_tooBad_pouch_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="869392472" Language="SFX">
+					<ShortName>shop_tooBad_pouch_01.wav</ShortName>
+					<Path>SFX/shop_tooBad_pouch_01_8EDF57DD.wem</Path>
+				</File>
 				<File Id="887260266" Language="SFX">
 					<ShortName>amb_hub_01.wav</ShortName>
 					<Path>SFX/amb_hub_01_ADF7B7FB.wem</Path>
+				</File>
+				<File Id="950621225" Language="SFX">
+					<ShortName>shop_tooBad_pouch_03.wav</ShortName>
+					<Path>SFX/shop_tooBad_pouch_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="1005798303" Language="SFX">
+					<ShortName>toad_accept_04.wav</ShortName>
+					<Path>SFX/toad_accept_04_8EDF57DD.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
@@ -838,146 +1030,6 @@
 			<ObjectPath>\SoundBanks\Default Work Unit\sb_shop</ObjectPath>
 			<ShortName>sb_shop</ShortName>
 			<Path>sb_shop.bnk</Path>
-			<IncludedEvents>
-				<Event Id="3126464902" Name="amb_shop_mainEvent" ObjectPath="\Events\ShopEvents\ShopAmbience\amb_shop_mainEvent" DurationType="Infinite"/>
-				<Event Id="1339011789" Name="shop_inspectItem" ObjectPath="\Events\ShopEvents\ShopInteraction\shop_inspectItem" DurationType="OneShot" DurationMin="0.170678" DurationMax="0.285026"/>
-				<Event Id="154430615" Name="shop_insufficientFunds" ObjectPath="\Events\ShopEvents\ShopInteraction\shop_insufficientFunds" DurationType="OneShot" DurationMin="0.506438" DurationMax="0.723361"/>
-				<Event Id="3988221669" Name="shop_purchase" ObjectPath="\Events\ShopEvents\ShopInteraction\shop_purchase" DurationType="OneShot" DurationMin="4.232290" DurationMax="4.337211"/>
-				<Event Id="2486007151" Name="shop_putDown" ObjectPath="\Events\ShopEvents\ShopInteraction\shop_putDown" DurationType="OneShot" DurationMin="0.262872" DurationMax="0.388548"/>
-				<Event Id="2496063080" Name="toad_accept" ObjectPath="\Events\ShopEvents\Toad\toad_accept" DurationType="OneShot" DurationMin="0.778526" DurationMax="1.311451"/>
-				<Event Id="771050566" Name="toad_deny" ObjectPath="\Events\ShopEvents\Toad\toad_deny" DurationType="OneShot" DurationMin="0.789456" DurationMax="1.458912"/>
-				<Event Id="1388225139" Name="toad_dialogueBlip" ObjectPath="\Events\ShopEvents\Toad\toad_dialogueBlip" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
-			</IncludedEvents>
-			<IncludedMemoryFiles>
-				<File Id="7418491" Language="SFX">
-					<ShortName>amb_shop_01.wav</ShortName>
-					<Path>SFX/amb_shop_01_ADF7B7FB.wem</Path>
-				</File>
-				<File Id="44842512" Language="SFX">
-					<ShortName>toad_deny_02.wav</ShortName>
-					<Path>SFX/toad_deny_02_8EDF57DD.wem</Path>
-				</File>
-				<File Id="92687332" Language="SFX">
-					<ShortName>shop_putDownPlate_01.wav</ShortName>
-					<Path>SFX/shop_putDownPlate_01_8EDF57DD.wem</Path>
-				</File>
-				<File Id="99765881" Language="SFX">
-					<ShortName>ambsource_drip_05.wav</ShortName>
-					<Path>SFX/ambsource_drip_05_8EDF57DD.wem</Path>
-				</File>
-				<File Id="146395160" Language="SFX">
-					<ShortName>toad_accept_03.wav</ShortName>
-					<Path>SFX/toad_accept_03_8EDF57DD.wem</Path>
-				</File>
-				<File Id="203083876" Language="SFX">
-					<ShortName>toad_accept_01.wav</ShortName>
-					<Path>SFX/toad_accept_01_8EDF57DD.wem</Path>
-				</File>
-				<File Id="207081043" Language="SFX">
-					<ShortName>toad_accept_05.wav</ShortName>
-					<Path>SFX/toad_accept_05_8EDF57DD.wem</Path>
-				</File>
-				<File Id="211526328" Language="SFX">
-					<ShortName>shop_purchase_03.wav</ShortName>
-					<Path>SFX/shop_purchase_03_8EDF57DD.wem</Path>
-				</File>
-				<File Id="261162090" Language="SFX">
-					<ShortName>shop_inspect_plate_03.wav</ShortName>
-					<Path>SFX/shop_inspect_plate_03_8EDF57DD.wem</Path>
-				</File>
-				<File Id="270570416" Language="SFX">
-					<ShortName>shop_putDownPlate_02.wav</ShortName>
-					<Path>SFX/shop_putDownPlate_02_8EDF57DD.wem</Path>
-				</File>
-				<File Id="323491498" Language="SFX">
-					<ShortName>shop_purchase_01.wav</ShortName>
-					<Path>SFX/shop_purchase_01_8EDF57DD.wem</Path>
-				</File>
-				<File Id="338717862" Language="SFX">
-					<ShortName>toad_deny_03.wav</ShortName>
-					<Path>SFX/toad_deny_03_8EDF57DD.wem</Path>
-				</File>
-				<File Id="388926070" Language="SFX">
-					<ShortName>shop_purchase_02.wav</ShortName>
-					<Path>SFX/shop_purchase_02_8EDF57DD.wem</Path>
-				</File>
-				<File Id="420773879" Language="SFX">
-					<ShortName>ambsource_drip_02.wav</ShortName>
-					<Path>SFX/ambsource_drip_02_8EDF57DD.wem</Path>
-				</File>
-				<File Id="477738590" Language="SFX">
-					<ShortName>shop_inspect_plate_01.wav</ShortName>
-					<Path>SFX/shop_inspect_plate_01_8EDF57DD.wem</Path>
-				</File>
-				<File Id="479007248" Language="SFX">
-					<ShortName>toad_accept_07.wav</ShortName>
-					<Path>SFX/toad_accept_07_8EDF57DD.wem</Path>
-				</File>
-				<File Id="506912683" Language="SFX">
-					<ShortName>shop_inspect_plate_02.wav</ShortName>
-					<Path>SFX/shop_inspect_plate_02_8EDF57DD.wem</Path>
-				</File>
-				<File Id="520312807" Language="SFX">
-					<ShortName>toad_deny_04.wav</ShortName>
-					<Path>SFX/toad_deny_04_8EDF57DD.wem</Path>
-				</File>
-				<File Id="569537801" Language="SFX">
-					<ShortName>shop_putDownPlate_04.wav</ShortName>
-					<Path>SFX/shop_putDownPlate_04_8EDF57DD.wem</Path>
-				</File>
-				<File Id="600179770" Language="SFX">
-					<ShortName>ambsource_drip_06.wav</ShortName>
-					<Path>SFX/ambsource_drip_06_8EDF57DD.wem</Path>
-				</File>
-				<File Id="654805538" Language="SFX">
-					<ShortName>ambsource_drip_01.wav</ShortName>
-					<Path>SFX/ambsource_drip_01_8EDF57DD.wem</Path>
-				</File>
-				<File Id="672876930" Language="SFX">
-					<ShortName>ambsource_drip_07.wav</ShortName>
-					<Path>SFX/ambsource_drip_07_8EDF57DD.wem</Path>
-				</File>
-				<File Id="682958209" Language="SFX">
-					<ShortName>toad_accept_02.wav</ShortName>
-					<Path>SFX/toad_accept_02_8EDF57DD.wem</Path>
-				</File>
-				<File Id="710111305" Language="SFX">
-					<ShortName>toad_accept_06.wav</ShortName>
-					<Path>SFX/toad_accept_06_8EDF57DD.wem</Path>
-				</File>
-				<File Id="728931627" Language="SFX">
-					<ShortName>ambsource_drip_03.wav</ShortName>
-					<Path>SFX/ambsource_drip_03_8EDF57DD.wem</Path>
-				</File>
-				<File Id="742953182" Language="SFX">
-					<ShortName>ambsource_drip_04.wav</ShortName>
-					<Path>SFX/ambsource_drip_04_8EDF57DD.wem</Path>
-				</File>
-				<File Id="752146179" Language="SFX">
-					<ShortName>ambsource_drip_08.wav</ShortName>
-					<Path>SFX/ambsource_drip_08_8EDF57DD.wem</Path>
-				</File>
-				<File Id="759281619" Language="SFX">
-					<ShortName>toad_deny_01.wav</ShortName>
-					<Path>SFX/toad_deny_01_8EDF57DD.wem</Path>
-				</File>
-				<File Id="790088374" Language="SFX">
-					<ShortName>shop_tooBad_pouch_02.wav</ShortName>
-					<Path>SFX/shop_tooBad_pouch_02_8EDF57DD.wem</Path>
-				</File>
-				<File Id="869392472" Language="SFX">
-					<ShortName>shop_tooBad_pouch_01.wav</ShortName>
-					<Path>SFX/shop_tooBad_pouch_01_8EDF57DD.wem</Path>
-				</File>
-				<File Id="950621225" Language="SFX">
-					<ShortName>shop_tooBad_pouch_03.wav</ShortName>
-					<Path>SFX/shop_tooBad_pouch_03_8EDF57DD.wem</Path>
-				</File>
-				<File Id="1005798303" Language="SFX">
-					<ShortName>toad_accept_04.wav</ShortName>
-					<Path>SFX/toad_accept_04_8EDF57DD.wem</Path>
-				</File>
-			</IncludedMemoryFiles>
 		</SoundBank>
 		<SoundBank Id="2688509691" Language="SFX">
 			<ObjectPath>\SoundBanks\Default Work Unit\sb_playerCharacter</ObjectPath>

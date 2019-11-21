@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1401582755443858811}
   - component: {fileID: 2875322531820035088}
   - component: {fileID: 4904092712629286686}
+  - component: {fileID: 2919988749379521876}
   m_Layer: 0
   m_Name: ShopAudioManager
   m_TagString: Untagged
@@ -32,6 +33,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1303501548919719502}
+  - {fileID: 1501492865203878330}
   m_Father: {fileID: 3963921505665548280}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -72,6 +74,12 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 50ca614a7472142339740db11706e160,
       type: 2}
+  shopAmbience:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: cf31d3cab97334d6989f1d338054d6e7,
+      type: 2}
+  shoplocation: {fileID: 3405690160217765971}
 --- !u!114 &1401582755443858811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,6 +156,35 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1965015718377449177}
         m_MethodName: EnterShopEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &2919988749379521876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275682528968942918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: c4ce3a3220defeb48aa82db2783310a7, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1965015718377449177}
+        m_MethodName: shopAmbienceTrigger
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -657,6 +694,7 @@ GameObject:
   - component: {fileID: 1332339510383810433}
   - component: {fileID: 7544980740689446506}
   - component: {fileID: 456673822063519648}
+  - component: {fileID: 3077065323782680499}
   m_Layer: 0
   m_Name: MusicManager
   m_TagString: Untagged
@@ -716,7 +754,7 @@ MonoBehaviour:
   CurrentHealth: {fileID: 11400000, guid: d980b5989185a2948b70c02cdfccf718, type: 2}
   IntenseOMeter: 0
   IntensityOffset: 0
-  FrogShop: {fileID: 0}
+  FrogShop: {fileID: 3405690160217765971}
 --- !u!114 &7544980740689446506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -764,6 +802,35 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1332339510383810433}
         m_MethodName: HubLoad
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &3077065323782680499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696792192367085575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 23c31f1f7de3a40ef9210ef1fc57121c, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1332339510383810433}
+        m_MethodName: playShopMusic
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1100,6 +1167,36 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!1 &3405690160217765971
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1501492865203878330}
+  m_Layer: 0
+  m_Name: ShopLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1501492865203878330
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3405690160217765971}
+  m_LocalRotation: {x: 0.000000021453209, y: 0.19102916, z: -0.0000000041750754, w: 0.98158437}
+  m_LocalPosition: {x: 17.46, y: -0, z: -6.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3867229615408854479}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 22.026001, z: 0}
 --- !u!1 &3576034458127045108
 GameObject:
   m_ObjectHideFlags: 0
@@ -1977,7 +2074,6 @@ GameObject:
   - component: {fileID: 4466324516886727042}
   - component: {fileID: 419331822851459515}
   - component: {fileID: 8233037482780601946}
-  - component: {fileID: 6658433440886948361}
   m_Layer: 0
   m_Name: AmbienceManager
   m_TagString: Untagged
@@ -2024,8 +2120,7 @@ MonoBehaviour:
   shopAmbience:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: cf31d3cab97334d6989f1d338054d6e7,
-      type: 2}
+    WwiseObjectReference: {fileID: 0}
   Arenaverb:
     idInternal: 0
     valueGuidInternal: 
@@ -2045,8 +2140,7 @@ MonoBehaviour:
     valueGuidInternal: 
     groupIdInternal: 0
     groupGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: c9419f3e42d544ab39d942a99ecb8be4,
-      type: 2}
+    WwiseObjectReference: {fileID: 0}
 --- !u!114 &4466324516886727042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2123,35 +2217,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4335405448226846213}
         m_MethodName: HubSceneLoad
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
---- !u!114 &6658433440886948361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5767124523087305666}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 5fcf023afa3ee9346a11146b3bb87101, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4335405448226846213}
-        m_MethodName: ShopSceneLoad
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
