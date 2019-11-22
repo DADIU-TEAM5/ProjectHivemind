@@ -6,46 +6,54 @@ namespace Cinemachine.Examples
 {
     public class CameraSwitcher : MonoBehaviour
     {
-        public List<CinemachineVirtualCamera> VirtualCameras;
-        public GameObjectVariable CurrentEnemySO;
+        //public List<CinemachineVirtualCamera> VirtualCameras;
+        //public GameObjectVariable CurrentEnemySO;
         //public FloatVariable PlayerCurrentSpeedSO;
         //public Vector3Variable PlayerDirectionSO;
-        private bool _activate = true;
-        private bool _deactivate = false;
+        //private bool _activate = true;
+        //private bool _deactivate = false;
+        public CinemachineVirtualCamera ZoomCamera;
+        public float WaitInitTime = 1f;
+        public float SlowDownTimer = 1f;
+        public float SlowDownRate = 0.2f;
 
 
-        public void switchCamera(int cameraIndex)
+        public void switchCamera(GameObject target)
         {
-            VirtualCameras[cameraIndex].gameObject.SetActive(_activate);
 
-            for (int i = 0; i < VirtualCameras.Count; i++)
-            {
-                if (i != cameraIndex)
-                {
-                    VirtualCameras[i].gameObject.SetActive(_deactivate);
-                }
-            }
+            ZoomCamera.m_Follow = target.transform;
+            ZoomCamera.m_LookAt = target.transform;
+            StartCoroutine(WaitInit(WaitInitTime));
 
-            /*if (VirtualCameras[cameraIndex].name == "KillCam")
-            {
-                PlayerCurrentSpeedSO.Value = 0;
-                PlayerDirectionSO.Value = Vector3.zero;
-                Time.timeScale = 0.2f;
-                VirtualCameras[cameraIndex].m_LookAt = TankBeetle;
-
-                StartCoroutine(SlowDownTime(cameraIndex, 1f));
-
-            }*/
         }
 
-        private IEnumerator SlowDownTime(int cameraIndex, float WaitTime)
+        private IEnumerator WaitInit(float waitTime)
         {
-            yield return new WaitForSeconds(WaitTime);
+            yield return new WaitForSecondsRealtime(waitTime);
 
-            //Destroy(TankBeetle.gameObject);
+            StartCoroutine(SlowDownTime(ZoomCamera, SlowDownTimer, SlowDownRate));
+
+            yield return null;
+
+        }
+
+        private IEnumerator SlowDownTime(CinemachineVirtualCamera camera, float slowDownSec, float slowDown)
+        {
+            Time.timeScale = slowDown;
+
+            camera.gameObject.SetActive(true);
+
+            yield return new WaitForSecondsRealtime(slowDownSec);
+
+            camera.gameObject.SetActive(false);
+
             Time.timeScale = 1f;
-            VirtualCameras[0].gameObject.SetActive(_activate);
-            VirtualCameras[cameraIndex].gameObject.SetActive(_deactivate);
+
+            yield return null;
+
         }
+
+
+
     }
 }

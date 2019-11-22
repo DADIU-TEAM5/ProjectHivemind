@@ -8,8 +8,8 @@ public class SetBoolAnim : MonoBehaviour
 
     public void SetBool(string BoolName)
     {
-        Debug.Log(BoolName + " : " + AnimatorObject.GetBool(BoolName));
+        //Debug.Log(BoolName + " : " + AnimatorObject.GetBool(BoolName));
         AnimatorObject.SetBool(BoolName, !AnimatorObject.GetBool(BoolName));
-        Debug.Log(BoolName + " : " + AnimatorObject.GetBool(BoolName));
+        //Debug.Log(BoolName + " : " + AnimatorObject.GetBool(BoolName));
     }
 }
