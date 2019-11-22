@@ -213,7 +213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsPaticipant: 0
   SpawnedEnemy: 0
-  SpecialAggroEvent: {fileID: 0}
+  hex: {fileID: 0}
   difficultyValue: 3
   AttackCurve:
     serializedVersion: 2
@@ -272,6 +272,7 @@ MonoBehaviour:
   AggroEvent: {fileID: 11400000, guid: 2ac9344028b671e42a2b359f76a68452, type: 2}
   DefaultAggroEvent: {fileID: 11400000, guid: 63ffb2b788fa9bd4f9d9b37ee11c6c82, type: 2}
   TakeDamageEvent: {fileID: 11400000, guid: cbf2e11fe0927e4409ee5d4ea64352b8, type: 2}
+  TakeDamageAnyType: {fileID: 11400000, guid: bfdb7e4ca1edf6946b708ec51f5931c5, type: 2}
   DeathEvent: {fileID: 11400000, guid: 7096ff615eb02b7429ef21bfb2b5a162, type: 2}
   EnemyDied: {fileID: 11400000, guid: 7c00cca73073f0f4ba7412b0918a5c1b, type: 2}
   PlayerDetected: 0
@@ -388,6 +389,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4206919734979861738}
     m_Modifications:
+    - target: {fileID: 4250721623183149559, guid: 64fb767d1ba38a94886708cc64001df8,
+        type: 3}
+      propertyPath: m_Name
+      value: BoomerRigged
+      objectReference: {fileID: 0}
     - target: {fileID: 911628263740259300, guid: 64fb767d1ba38a94886708cc64001df8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -443,11 +449,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4250721623183149559, guid: 64fb767d1ba38a94886708cc64001df8,
-        type: 3}
-      propertyPath: m_Name
-      value: BoomerRigged
-      objectReference: {fileID: 0}
     - target: {fileID: 6985206054093138696, guid: 64fb767d1ba38a94886708cc64001df8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -496,6 +497,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4206919734979861738}
     m_Modifications:
+    - target: {fileID: 7464909239059892705, guid: 331ff33cfb50cfb4589f2d2b7a08d825,
+        type: 3}
+      propertyPath: m_Name
+      value: Boomer_cutup
+      objectReference: {fileID: 0}
+    - target: {fileID: 7464909239059892705, guid: 331ff33cfb50cfb4589f2d2b7a08d825,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5891824033923906546, guid: 331ff33cfb50cfb4589f2d2b7a08d825,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -549,16 +560,6 @@ PrefabInstance:
     - target: {fileID: 5891824033923906546, guid: 331ff33cfb50cfb4589f2d2b7a08d825,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7464909239059892705, guid: 331ff33cfb50cfb4589f2d2b7a08d825,
-        type: 3}
-      propertyPath: m_Name
-      value: Boomer_cutup
-      objectReference: {fileID: 0}
-    - target: {fileID: 7464909239059892705, guid: 331ff33cfb50cfb4589f2d2b7a08d825,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6519263995436467231, guid: 331ff33cfb50cfb4589f2d2b7a08d825,
