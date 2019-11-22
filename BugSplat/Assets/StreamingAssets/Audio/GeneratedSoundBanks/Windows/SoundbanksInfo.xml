@@ -23,7 +23,8 @@
 			<IncludedEvents>
 				<Event Id="4090897946" Name="amb_arena_01_start" ObjectPath="\Events\ArenaEvents\ArenaAmbience\amb_arena_01_start" DurationType="Infinite"/>
 				<Event Id="3018226098" Name="amb_arena_01_stop" ObjectPath="\Events\ArenaEvents\ArenaAmbience\amb_arena_01_stop" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
-				<Event Id="4294382858" Name="cheer_wiin" ObjectPath="\Events\ArenaEvents\Cheer\cheer_wiin" DurationType="OneShot" DurationMin="10.500000" DurationMax="10.500000"/>
+				<Event Id="2830818153" Name="cheer_init" ObjectPath="\Events\ArenaEvents\Cheer\cheer_init" DurationType="Infinite"/>
+				<Event Id="3469520088" Name="cheer_up" ObjectPath="\Events\ArenaEvents\Cheer\cheer_up" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 				<Event Id="4263565388" Name="door_arenaGate_hinge" ObjectPath="\Events\ArenaEvents\arenaProps\door_arenaGate_hinge" DurationType="OneShot" DurationMin="1.009547" DurationMax="1.931383"/>
 				<Event Id="3389469668" Name="door_arenaGate_slam" ObjectPath="\Events\ArenaEvents\arenaProps\door_arenaGate_slam" DurationType="OneShot" DurationMin="1.195306" DurationMax="1.304717"/>
 				<Event Id="4263442935" Name="spiketrap_charge" ObjectPath="\Events\ArenaEvents\Traps\spiketrap\spiketrap_charge" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.721927" DurationMax="1.000000"/>
@@ -42,6 +43,10 @@
 				<File Id="61277736" Language="SFX">
 					<ShortName>doors_arenaGate_impact_01.wav</ShortName>
 					<Path>SFX/doors_arenaGate_impact_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="144343695" Language="SFX">
+					<ShortName>angryinsects_loop.wav</ShortName>
+					<Path>SFX/angryinsects_loop_ADF7B7FB.wem</Path>
 				</File>
 				<File Id="162537136" Language="SFX">
 					<ShortName>doors_arenaGate_hinge_03.wav</ShortName>
@@ -63,6 +68,10 @@
 					<ShortName>spiketrap_impact_02.wav</ShortName>
 					<Path>SFX/spiketrap_impact_02_7EC2BD1A.wem</Path>
 				</File>
+				<File Id="296170351" Language="SFX">
+					<ShortName>hive_loop_01.wav</ShortName>
+					<Path>SFX/hive_loop_01_ADF7B7FB.wem</Path>
+				</File>
 				<File Id="321029664" Language="SFX">
 					<ShortName>spiketrap_charge_03.wav</ShortName>
 					<Path>SFX/spiketrap_charge_03_7EC2BD1A.wem</Path>
@@ -83,10 +92,6 @@
 					<ShortName>spiketrap_impact_05.wav</ShortName>
 					<Path>SFX/spiketrap_impact_05_7EC2BD1A.wem</Path>
 				</File>
-				<File Id="548579579" Language="SFX">
-					<ShortName>BugCheering_01.wav</ShortName>
-					<Path>SFX/BugCheering_01_8EDF57DD.wem</Path>
-				</File>
 				<File Id="554419865" Language="SFX">
 					<ShortName>DivorceBeach.wav</ShortName>
 					<Path>Plugins/Wwise Convolution Reverb/DivorceBeach_6480C31C.wem</Path>
@@ -99,6 +104,10 @@
 					<ShortName>doors_arenaGate_impact_02.wav</ShortName>
 					<Path>SFX/doors_arenaGate_impact_02_8EDF57DD.wem</Path>
 				</File>
+				<File Id="754897875" Language="SFX">
+					<ShortName>cheeringInsectsLaa_loop.wav</ShortName>
+					<Path>SFX/cheeringInsectsLaa_loop_ADF7B7FB.wem</Path>
+				</File>
 				<File Id="784871821" Language="SFX">
 					<ShortName>spiketrap_stab_02.wav</ShortName>
 					<Path>SFX/spiketrap_stab_02_7EC2BD1A.wem</Path>
@@ -107,6 +116,10 @@
 					<ShortName>spiketrap_charge_04.wav</ShortName>
 					<Path>SFX/spiketrap_charge_04_7EC2BD1A.wem</Path>
 				</File>
+				<File Id="984590440" Language="SFX">
+					<ShortName>cheeringInsects_loop.wav</ShortName>
+					<Path>SFX/cheeringInsects_loop_ADF7B7FB.wem</Path>
+				</File>
 				<File Id="995551519" Language="SFX">
 					<ShortName>spiketrap_stab_04.wav</ShortName>
 					<Path>SFX/spiketrap_stab_04_7EC2BD1A.wem</Path>
@@ -114,6 +127,10 @@
 				<File Id="1008029237" Language="SFX">
 					<ShortName>spiketrap_impact_03.wav</ShortName>
 					<Path>SFX/spiketrap_impact_03_7EC2BD1A.wem</Path>
+				</File>
+				<File Id="1051028617" Language="SFX">
+					<ShortName>bzzz_loop.wav</ShortName>
+					<Path>SFX/bzzz_loop_ADF7B7FB.wem</Path>
 				</File>
 				<File Id="1055989698" Language="SFX">
 					<ShortName>doors_arenaGate_impact_03.wav</ShortName>
@@ -212,7 +229,7 @@
 				<Event Id="1339011789" Name="shop_inspectItem" ObjectPath="\Events\ShopEvents\ShopInteraction\shop_inspectItem" DurationType="OneShot" DurationMin="0.170678" DurationMax="0.285026"/>
 				<Event Id="154430615" Name="shop_insufficientFunds" ObjectPath="\Events\ShopEvents\ShopInteraction\shop_insufficientFunds" DurationType="OneShot" DurationMin="0.506438" DurationMax="0.723361"/>
 				<Event Id="3988221669" Name="shop_purchase" ObjectPath="\Events\ShopEvents\ShopInteraction\shop_purchase" DurationType="OneShot" DurationMin="4.232290" DurationMax="4.337211"/>
-				<Event Id="2486007151" Name="shop_putDown" ObjectPath="\Events\ShopEvents\ShopInteraction\shop_putDown" DurationType="OneShot" DurationMin="0.262872" DurationMax="0.388548"/>
+				<Event Id="2486007151" Name="shop_putDown" ObjectPath="\Events\ShopEvents\ShopInteraction\shop_putDown" DurationType="OneShot" DurationMin="0.862872" DurationMax="0.988548"/>
 				<Event Id="2496063080" Name="toad_accept" ObjectPath="\Events\ShopEvents\Toad\toad_accept" DurationType="OneShot" DurationMin="0.778526" DurationMax="1.311451"/>
 				<Event Id="771050566" Name="toad_deny" ObjectPath="\Events\ShopEvents\Toad\toad_deny" DurationType="OneShot" DurationMin="0.789456" DurationMax="1.458912"/>
 				<Event Id="1388225139" Name="toad_dialogueBlip" ObjectPath="\Events\ShopEvents\Toad\toad_dialogueBlip" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
