@@ -10,6 +10,7 @@ public class MusicManagerScript : MonoBehaviour
     public AK.Wwise.Event BattleMusic;
     public AK.Wwise.Event HubMusic;
     public AK.Wwise.Event ShopMusic;
+    public AK.Wwise.Event StopBattleMusic;
 
     [Header("Variables")]
     public IntVariable EnemiesLeft;
@@ -54,6 +55,12 @@ public class MusicManagerScript : MonoBehaviour
 
         //post event
         ShopMusic.Post(FrogShop);
+    }
+
+    public void PlayerWonEvent()
+    {
+        StopBattleMusic.Post(this.gameObject);
+
     }
 
 }

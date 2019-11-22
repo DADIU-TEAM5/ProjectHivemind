@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Arrow : GameLoop
 {
@@ -16,8 +17,13 @@ public class Arrow : GameLoop
 
     private GameObject _arrow;
 
+    NavMeshAgent NavAgent;
+
+
     private void Start()
     {
+        NavAgent = GetComponent<NavMeshAgent>();
+
         _arrow = Instantiate(ArrowPrefab, transform);
 
         _arrow.gameObject.SetActive(true);
@@ -98,7 +104,18 @@ public class Arrow : GameLoop
 
     private void RotateArrow(GameObject enemy) {
         var targetPos = enemy.transform.position;
+        
+
+
+        NavMeshPath path = new NavMeshPath();
+        NavAgent.CalculatePath(enemy.transform.position, path);
+
+        if (path.corners.Length > 1)
+            targetPos = path.corners[1];
+        
+
         targetPos.y = _arrow.transform.position.y;
+
         _arrow.transform.LookAt(targetPos);
 
     }
