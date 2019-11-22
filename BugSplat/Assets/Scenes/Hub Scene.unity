@@ -264,7 +264,7 @@ MonoBehaviour:
   IsAreaOpenSO: {fileID: 0}
   IsExitingScene: 
   LastSceneSO: {fileID: 11400000, guid: 5009c1709f3cffb49a0c239d47e4d46b, type: 2}
-  Player: {fileID: 1540577003}
+  Player: {fileID: 1799847259}
   PlayerCurrentSpeedSO: {fileID: 11400000, guid: dbd0aac2d5b26704bbdf49f8d6657a38,
     type: 2}
   PlayerControlOverrideSO: {fileID: 11400000, guid: 6c60755199019534381ecc8c862bb419,
@@ -3732,9 +3732,45 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3767270951383289792, guid: 5c3bf23d217bac04a835a6ddca0ddf05,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3767270951383289792, guid: 5c3bf23d217bac04a835a6ddca0ddf05,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3767270951383289792, guid: 5c3bf23d217bac04a835a6ddca0ddf05,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3767270951383289792, guid: 5c3bf23d217bac04a835a6ddca0ddf05,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3767270951383289792, guid: 5c3bf23d217bac04a835a6ddca0ddf05,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: 6558ba6eba0b2504b990cc87a379eaba,
+        type: 2}
+    - target: {fileID: 3767270951383289792, guid: 5c3bf23d217bac04a835a6ddca0ddf05,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Raise
+      objectReference: {fileID: 0}
+    - target: {fileID: 3767270951383289792, guid: 5c3bf23d217bac04a835a6ddca0ddf05,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3767270951383289792, guid: 5c3bf23d217bac04a835a6ddca0ddf05,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1919273134}
     - target: {fileID: 6032450430230446424, guid: 5c3bf23d217bac04a835a6ddca0ddf05,
         type: 3}
       propertyPath: m_IsActive
@@ -4754,7 +4790,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5, z: 0.5}
+  m_Size: {x: 1, y: 0.5, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1118241804
 PrefabInstance:
@@ -5272,7 +5308,7 @@ PrefabInstance:
     - target: {fileID: 1227433653654076053, guid: 5023913939388ca4e8bed8304cc84665,
         type: 3}
       propertyPath: m_Name
-      value: FodderSpawnParticle
+      value: DustParticles
       objectReference: {fileID: 0}
     - target: {fileID: 1227433653654076053, guid: 5023913939388ca4e8bed8304cc84665,
         type: 3}
@@ -6613,12 +6649,6 @@ Transform:
   m_Father: {fileID: 1321479593}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 23.343, z: 0}
---- !u!4 &1540577003 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2576753921563373728, guid: ce93dae90c32b234eb5aa37ebcaa5582,
-    type: 3}
-  m_PrefabInstance: {fileID: 840415873}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1555677558
 GameObject:
   m_ObjectHideFlags: 0
@@ -7615,6 +7645,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 057cb6c1fc43bd0458499c20ef722640, type: 3}
+--- !u!1 &1919273134 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6032450428917174943, guid: 5c3bf23d217bac04a835a6ddca0ddf05,
+    type: 3}
+  m_PrefabInstance: {fileID: 865088093}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2035520985 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4738032803616903837, guid: 057cb6c1fc43bd0458499c20ef722640,
@@ -7852,6 +7888,7 @@ GameObject:
   - component: {fileID: 2090943693}
   - component: {fileID: 2090943695}
   - component: {fileID: 2090943694}
+  - component: {fileID: 2090943696}
   m_Layer: 0
   m_Name: TutorialCollider
   m_TagString: Untagged
@@ -7932,9 +7969,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 2090943696}
+        m_MethodName: DeParent
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7960,6 +7997,20 @@ MonoBehaviour:
   EnterEvent: {fileID: 11400000, guid: 6835e39149544964fad2b958d75a1b39, type: 2}
   ExitEvent: {fileID: 0}
   StayEvent: {fileID: 0}
+--- !u!114 &2090943696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090943692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a669d452592a2d49aa4c33939098f49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectChilds:
+  - {fileID: 1799847257}
 --- !u!1 &2117662621
 GameObject:
   m_ObjectHideFlags: 0
