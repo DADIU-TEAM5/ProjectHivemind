@@ -23,6 +23,7 @@ namespace AK
         static const AkUniqueID DOOR_ARENAGATE_SLAM = 3389469668U;
         static const AkUniqueID EGG = 680725036U;
         static const AkUniqueID MUSIC_BATTLE = 3782024871U;
+        static const AkUniqueID MUSIC_BATTLE_END = 2993131753U;
         static const AkUniqueID MUSIC_HUB = 2615423034U;
         static const AkUniqueID MUSIC_INTRO = 984952705U;
         static const AkUniqueID MUSIC_SHOP = 3229152761U;
