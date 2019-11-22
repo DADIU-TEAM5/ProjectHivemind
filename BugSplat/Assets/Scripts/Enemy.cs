@@ -8,6 +8,11 @@ public abstract class Enemy : GameLoop
     [HideInInspector]
     public bool SpawnedEnemy;
     public GameEvent EnemySpawnedEvent;
+    public GameEvent SpawnCamInit;
+    public BoolVariable SpawnFirstTime;
+    public GameEvent ZoomCamInit;
+    public IntVariable ZoomCamFrequency;
+    public FloatVariable PlayerCurrentSpeedSO;
 
     public bool IsUnderground = true;
     
@@ -182,12 +187,19 @@ public abstract class Enemy : GameLoop
         } else
         {
             DetectThePlayer();
-            
+
             if (PlayerDetected)
             {
                 if (EnemySpawnedEvent != null)
                 {
                     EnemySpawnedEvent.Raise();
+
+                    if (SpawnFirstTime.Value == true)
+                    {
+                        PlayerCurrentSpeedSO.Value = 0;
+                        SpawnCamInit.Raise(RenderGraphics);
+                        SpawnFirstTime.Value = false;
+                    }
                 }
             } 
         }
