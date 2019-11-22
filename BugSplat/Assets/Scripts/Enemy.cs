@@ -7,6 +7,14 @@ public abstract class Enemy : GameLoop
 {
     [HideInInspector]
     public bool SpawnedEnemy;
+    public GameEvent EnemySpawnedEvent;
+    public GameEvent SpawnCamInit;
+    public BoolVariable SpawnFirstTime;
+    public GameEvent ZoomCamInit;
+    public IntVariable ZoomCamFrequency;
+    public FloatVariable PlayerCurrentSpeedSO;
+
+    public bool IsUnderground = true;
 
     [HideInInspector]
     public Hexagon hex;
@@ -158,25 +166,46 @@ public abstract class Enemy : GameLoop
     public override void LoopUpdate(float deltaTime)
     {
 
-        if (SpawnedEnemy)
+        if (!IsUnderground)
         {
-            NavMeshAgent.ResetPath();
-            SpawnedEnemy = false;
-        }
+            if (SpawnedEnemy)
+            {
+                NavMeshAgent.ResetPath();
+                SpawnedEnemy = false;
+            }
 
 
-        if (_stunTime > 0)
-        {
-            _stunTime -= deltaTime;
-        }
+            if (_stunTime > 0)
+            {
+                _stunTime -= deltaTime;
+            }
 
-        if (_stunTime <= 0)
+            if (_stunTime <= 0)
+            {
+                LoopBehaviour(deltaTime);
+            }
+            else
+            {
+                //  Renderer.material.color = SetColor(Color.blue);
+            }
+        } else
         {
-            LoopBehaviour(deltaTime);
-        }
-        else
-        {
-            //  Renderer.material.color = SetColor(Color.blue);
+            DetectThePlayer();
+
+            if (PlayerDetected)
+            {
+                if (EnemySpawnedEvent != null)
+                {
+                    EnemySpawnedEvent.Raise();
+
+                    if (SpawnFirstTime.Value == true)
+                    {
+                        PlayerCurrentSpeedSO.Value = 0;
+                        SpawnCamInit.Raise(RenderGraphics);
+                        SpawnFirstTime.Value = false;
+                    }
+                }
+            }
         }
     }
 
