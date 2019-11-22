@@ -7,6 +7,8 @@ using UnityEngine.AI;
 public class PlayerHealth : GameLoop
 {
 
+    public GameObjectVariable ThePlayer;
+
     public BoolVariable IsStunned;
 
     public GameObject PlayerGraphics;
@@ -37,6 +39,12 @@ public class PlayerHealth : GameLoop
     [SerializeField]
     private GameEvent PlayerDiedEvent;
 
+
+
+    private void OnEnable()
+    {
+        ThePlayer.Value = gameObject;
+    }
     public void Start()
     {
         if(CurrentHealth.Value<=0)
