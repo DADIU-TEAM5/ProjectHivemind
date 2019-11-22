@@ -9,6 +9,13 @@ public class UpdateManager : MonoBehaviour
     public bool CappedFPS = true;
     private float _time;
 
+
+    private void OnEnable()
+    {
+        Screen.orientation = ScreenOrientation.Portrait;
+    }
+
+
     void Start() {
         if (CappedFPS) Application.targetFrameRate = 60;
     }
