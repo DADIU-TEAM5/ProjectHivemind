@@ -52,9 +52,9 @@ public class InGameHUDController : MonoBehaviour
 
 
         //SetupColors(HealthBar);
-        SetupColors(MenuIcon);
-        SetupColors(CurrencyIcon);
-        SetupColors(KilledIcon);
+        //SetupColors(MenuIcon);
+        //SetupColors(CurrencyIcon);
+        //SetupColors(KilledIcon);
 
 
         if (InMainMenu.Value)
