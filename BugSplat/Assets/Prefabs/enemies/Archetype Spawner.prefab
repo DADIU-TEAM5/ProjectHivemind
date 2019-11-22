@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8699067937053185685}
   - component: {fileID: 8736787503220063874}
   - component: {fileID: 5651105855825813662}
+  - component: {fileID: 5546803757900776663}
   m_Layer: 0
   m_Name: Archetype Spawner
   m_TagString: Untagged
@@ -47,6 +48,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsPaticipant: 0
   SpawnAllEnemies: {fileID: 11400000, guid: 7148a5dfb868c0e46847c564515076c5, type: 2}
+  ThePlayer: {fileID: 11400000, guid: 6ef2c6def1c492b48a3a665ba7a13c31, type: 2}
+  EnemiesLeftBeforeNewWave: {fileID: 11400000, guid: 6579adc557c62c44198ac2fe9f40c93c,
+    type: 2}
   SpawnCD: 2
   EnemylevelList: {fileID: 11400000, guid: d896f8fd9ddb7fe4bb68576a6b969063, type: 2}
   DisplayColor: {r: 0.036265016, g: 1, b: 0, a: 1}
@@ -54,6 +58,7 @@ MonoBehaviour:
   enemySpawnerCount: {fileID: 11400000, guid: 1785f0cf3e44b45408a5b497be1a2a96, type: 2}
   budget: 0
   SmallestValue: 0
+  hex: {fileID: 0}
 --- !u!114 &8736787503220063874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,6 +94,35 @@ MonoBehaviour:
       - m_Target: {fileID: 8699067937053185685}
         m_MethodName: SpawnFirstEnemy
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &5546803757900776663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3324044017679025862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 7c00cca73073f0f4ba7412b0918a5c1b, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8699067937053185685}
+        m_MethodName: RemoveEnemyFromWave
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
