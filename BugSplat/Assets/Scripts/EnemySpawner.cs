@@ -8,6 +8,7 @@ public class EnemySpawner : GameLoop
     public GameEvent SpawnAllEnemies;
     public GameObjectVariable ThePlayer;
 
+    public FloatVariable InitalAggroDelay;
     public IntVariable EnemiesLeftBeforeNewWave;
 
     public static int LevelBudget;
@@ -305,12 +306,23 @@ public class EnemySpawner : GameLoop
 
 
                 Enemy enemyScript = spawnedEnemy.GetComponent<Enemy>();
-
-                enemyScript.PlayerTransform = ThePlayer.Value.transform;
-                enemyScript.PlayerDetected = true;
-
                 spawnedEnemy.name = "Delayed Fucker";
                 spawnedEnemy.transform.parent = null;
+
+
+
+                if (IsWave && _currentWave == 0)
+                {
+                    StartCoroutine(WaitAndThenAggro(enemyScript));
+                }
+                else
+                {
+                    enemyScript.PlayerTransform = ThePlayer.Value.transform;
+                    enemyScript.PlayerDetected = true;
+                }
+
+
+                
 
                 Vector3 spawnPoint = transform.position;
                 spawnPoint.y = 0;
@@ -335,6 +347,20 @@ public class EnemySpawner : GameLoop
 
             }
         }
+    }
+
+
+    IEnumerator WaitAndThenAggro(Enemy enemyScript)
+    {
+        print("we doing a coroutine");
+
+        yield return new WaitForSeconds(InitalAggroDelay.Value);
+
+        print("we waited");
+        enemyScript.PlayerTransform = ThePlayer.Value.transform;
+        enemyScript.PlayerDetected = true;
+
+        yield return null;
     }
 
 
@@ -488,9 +514,20 @@ public class EnemySpawner : GameLoop
 
                 Enemy enemyScript = spawnedEnemy.GetComponent<Enemy>();
 
-                enemyScript.PlayerTransform = ThePlayer.Value.transform;
-                enemyScript.PlayerDetected = true;
+
                 
+
+                if (IsWave && _currentWave == 0)
+                {
+                    StartCoroutine(WaitAndThenAggro(enemyScript));
+                }
+                else
+                {
+                    enemyScript.PlayerTransform = ThePlayer.Value.transform;
+                    enemyScript.PlayerDetected = true;
+
+                }
+
 
 
 
