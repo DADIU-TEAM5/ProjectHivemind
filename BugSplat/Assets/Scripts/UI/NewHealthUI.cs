@@ -76,11 +76,11 @@ public class NewHealthUI : GameLoop
         if (scale > 0 && scale < 0.9f)
             scale = 0.5f;
 
-        //Debug.Log("HP SCALE: " + scale);
-        //HealthIcons[fullHearts].transform.localScale = new Vector3(scale, scale, scale);
+        Debug.Log("HP SCALE: " + scale);
+        HealthIcons[fullHearts].transform.localScale = new Vector3(scale, scale, scale);
 
 
-        for (int i = fullHearts+1; i < HealthIcons.Count; i++)
+        for (int i = fullHearts; i < HealthIcons.Count; i++)
         {
             HealthIcons[i].enabled = false;
         }
