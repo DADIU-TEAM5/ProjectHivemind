@@ -41,6 +41,10 @@ public class ShopSlotDisplay : MonoBehaviour
 
     public GameObject BuyButton;
 
+    [Header("Events for audio")]
+    public GameEvent itemSelectEvent;
+    public GameEvent itemDeselectEvent;
+
 
     public void Start() {
         Slot.Init();
@@ -108,6 +112,8 @@ public class ShopSlotDisplay : MonoBehaviour
         StartCoroutine(SelectItemRoutine(true));
 
         Select = true;
+
+        itemSelectEvent.Raise();
     }
 
     public void DeselectItem() {
@@ -119,6 +125,8 @@ public class ShopSlotDisplay : MonoBehaviour
         StartCoroutine(SelectItemRoutine(false));
 
         Select = false;
+
+        itemDeselectEvent.Raise();
     }
 
     public void ToggleItem() {
