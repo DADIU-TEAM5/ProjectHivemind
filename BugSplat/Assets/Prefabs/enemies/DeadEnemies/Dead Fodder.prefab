@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5738708870658880392}
   - component: {fileID: 5738708870658880395}
   - component: {fileID: 2262142827765078232}
+  - component: {fileID: 4790390458103800905}
   m_Layer: 0
   m_Name: CannonFooder_Cutup_05
   m_TagString: Untagged
@@ -60,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 11dc532885052144bbefc3e50eb2e4eb, type: 3}
+  - {fileID: 2100000, guid: 69f78a6c54cf84a4490eab1fbc62c914, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -127,13 +128,29 @@ MonoBehaviour:
   PickUpRange: 4
   BodyParts: {fileID: 11400000, guid: edbd17e7b39a2ca48a156317085c1551, type: 2}
   PickedUpEvent: {fileID: 11400000, guid: 4a6cc1010d7dcf241b3c2228a3b267ed, type: 2}
-  enableTime: 0.65
+  enableTime: 1.5
   PickUpSpeed: 7
-  ExplosionDistance: 50
-  ExplosionHeight: 50
-  minValue: 0
-  MaxValue: 0
+  ExplosionDistance: 10
+  ExplosionHeight: 20
+  minValue: 1
+  MaxValue: 3
   Collider: {fileID: 5738708870658880395}
+--- !u!114 &4790390458103800905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274817110435834749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8cd77b9a3fb574486a4a4a4ef4a938, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsPaticipant: 0
+  GameLoopHandler: {fileID: 11400000, guid: b20923f160198a245bcdd80c8342f9ac, type: 2}
+  GameLoops:
+  - {fileID: 2262142827765078232}
 --- !u!1 &1281359863683733371
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,6 +165,7 @@ GameObject:
   - component: {fileID: 5738708871510013909}
   - component: {fileID: 5738708871510013908}
   - component: {fileID: 453873199581288204}
+  - component: {fileID: 874837534223855931}
   m_Layer: 0
   m_Name: CannonFooder_Cutup_07
   m_TagString: Untagged
@@ -194,7 +212,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 11dc532885052144bbefc3e50eb2e4eb, type: 3}
+  - {fileID: 2100000, guid: 69f78a6c54cf84a4490eab1fbc62c914, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -261,13 +279,29 @@ MonoBehaviour:
   PickUpRange: 4
   BodyParts: {fileID: 11400000, guid: edbd17e7b39a2ca48a156317085c1551, type: 2}
   PickedUpEvent: {fileID: 11400000, guid: 4a6cc1010d7dcf241b3c2228a3b267ed, type: 2}
-  enableTime: 0.65
+  enableTime: 1.5
   PickUpSpeed: 7
-  ExplosionDistance: 50
-  ExplosionHeight: 50
-  minValue: 0
-  MaxValue: 0
+  ExplosionDistance: 10
+  ExplosionHeight: 20
+  minValue: 1
+  MaxValue: 3
   Collider: {fileID: 5738708871510013908}
+--- !u!114 &874837534223855931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281359863683733371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8cd77b9a3fb574486a4a4a4ef4a938, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsPaticipant: 0
+  GameLoopHandler: {fileID: 11400000, guid: b20923f160198a245bcdd80c8342f9ac, type: 2}
+  GameLoops:
+  - {fileID: 453873199581288204}
 --- !u!1 &1713362183312979904
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,6 +316,7 @@ GameObject:
   - component: {fileID: 5738708872379055975}
   - component: {fileID: 5738708872379055974}
   - component: {fileID: 7135687588814717397}
+  - component: {fileID: 1128018419244675232}
   m_Layer: 0
   m_Name: CannonFooder_Cutup_09
   m_TagString: Untagged
@@ -328,7 +363,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 11dc532885052144bbefc3e50eb2e4eb, type: 3}
+  - {fileID: 2100000, guid: 69f78a6c54cf84a4490eab1fbc62c914, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -395,13 +430,29 @@ MonoBehaviour:
   PickUpRange: 4
   BodyParts: {fileID: 11400000, guid: edbd17e7b39a2ca48a156317085c1551, type: 2}
   PickedUpEvent: {fileID: 11400000, guid: 4a6cc1010d7dcf241b3c2228a3b267ed, type: 2}
-  enableTime: 0.65
+  enableTime: 1.5
   PickUpSpeed: 7
-  ExplosionDistance: 50
-  ExplosionHeight: 50
-  minValue: 0
-  MaxValue: 0
+  ExplosionDistance: 10
+  ExplosionHeight: 20
+  minValue: 1
+  MaxValue: 3
   Collider: {fileID: 5738708872379055974}
+--- !u!114 &1128018419244675232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713362183312979904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8cd77b9a3fb574486a4a4a4ef4a938, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsPaticipant: 0
+  GameLoopHandler: {fileID: 11400000, guid: b20923f160198a245bcdd80c8342f9ac, type: 2}
+  GameLoops:
+  - {fileID: 7135687588814717397}
 --- !u!1 &2243509412173285890
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,6 +467,7 @@ GameObject:
   - component: {fileID: 5738708870580520445}
   - component: {fileID: 5738708870580520444}
   - component: {fileID: 448828449592625766}
+  - component: {fileID: 7134488274578455934}
   m_Layer: 0
   m_Name: CannonFooder_Cutup_02
   m_TagString: Untagged
@@ -462,7 +514,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 11dc532885052144bbefc3e50eb2e4eb, type: 3}
+  - {fileID: 2100000, guid: 69f78a6c54cf84a4490eab1fbc62c914, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -529,13 +581,29 @@ MonoBehaviour:
   PickUpRange: 4
   BodyParts: {fileID: 11400000, guid: edbd17e7b39a2ca48a156317085c1551, type: 2}
   PickedUpEvent: {fileID: 11400000, guid: 4a6cc1010d7dcf241b3c2228a3b267ed, type: 2}
-  enableTime: 0.65
+  enableTime: 1.5
   PickUpSpeed: 7
-  ExplosionDistance: 50
-  ExplosionHeight: 50
-  minValue: 0
-  MaxValue: 0
+  ExplosionDistance: 10
+  ExplosionHeight: 20
+  minValue: 1
+  MaxValue: 3
   Collider: {fileID: 5738708870580520444}
+--- !u!114 &7134488274578455934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2243509412173285890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8cd77b9a3fb574486a4a4a4ef4a938, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsPaticipant: 0
+  GameLoopHandler: {fileID: 11400000, guid: b20923f160198a245bcdd80c8342f9ac, type: 2}
+  GameLoops:
+  - {fileID: 448828449592625766}
 --- !u!1 &2258249327114904197
 GameObject:
   m_ObjectHideFlags: 0
@@ -550,6 +618,7 @@ GameObject:
   - component: {fileID: 5738708870280484854}
   - component: {fileID: 5738708870280484809}
   - component: {fileID: 1335007028889640082}
+  - component: {fileID: 4045066195939764825}
   m_Layer: 0
   m_Name: CannonFooder_Cutup_03
   m_TagString: Untagged
@@ -596,7 +665,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 11dc532885052144bbefc3e50eb2e4eb, type: 3}
+  - {fileID: 2100000, guid: 69f78a6c54cf84a4490eab1fbc62c914, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -663,13 +732,29 @@ MonoBehaviour:
   PickUpRange: 4
   BodyParts: {fileID: 11400000, guid: edbd17e7b39a2ca48a156317085c1551, type: 2}
   PickedUpEvent: {fileID: 11400000, guid: 4a6cc1010d7dcf241b3c2228a3b267ed, type: 2}
-  enableTime: 0.65
+  enableTime: 1.5
   PickUpSpeed: 7
-  ExplosionDistance: 50
-  ExplosionHeight: 50
-  minValue: 0
-  MaxValue: 0
+  ExplosionDistance: 10
+  ExplosionHeight: 20
+  minValue: 1
+  MaxValue: 3
   Collider: {fileID: 5738708870280484809}
+--- !u!114 &4045066195939764825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2258249327114904197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8cd77b9a3fb574486a4a4a4ef4a938, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsPaticipant: 0
+  GameLoopHandler: {fileID: 11400000, guid: b20923f160198a245bcdd80c8342f9ac, type: 2}
+  GameLoops:
+  - {fileID: 1335007028889640082}
 --- !u!1 &3016405715377883240
 GameObject:
   m_ObjectHideFlags: 0
@@ -684,6 +769,7 @@ GameObject:
   - component: {fileID: 5738708872366307271}
   - component: {fileID: 5738708872366307270}
   - component: {fileID: 220056217369275403}
+  - component: {fileID: 8089574537391618453}
   m_Layer: 0
   m_Name: CannonFooder_Cutup_04
   m_TagString: Untagged
@@ -730,7 +816,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 11dc532885052144bbefc3e50eb2e4eb, type: 3}
+  - {fileID: 2100000, guid: 69f78a6c54cf84a4490eab1fbc62c914, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -797,13 +883,29 @@ MonoBehaviour:
   PickUpRange: 4
   BodyParts: {fileID: 11400000, guid: edbd17e7b39a2ca48a156317085c1551, type: 2}
   PickedUpEvent: {fileID: 11400000, guid: 4a6cc1010d7dcf241b3c2228a3b267ed, type: 2}
-  enableTime: 0.65
+  enableTime: 1.5
   PickUpSpeed: 7
-  ExplosionDistance: 50
-  ExplosionHeight: 50
-  minValue: 0
-  MaxValue: 0
+  ExplosionDistance: 10
+  ExplosionHeight: 20
+  minValue: 1
+  MaxValue: 3
   Collider: {fileID: 5738708872366307270}
+--- !u!114 &8089574537391618453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3016405715377883240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8cd77b9a3fb574486a4a4a4ef4a938, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsPaticipant: 0
+  GameLoopHandler: {fileID: 11400000, guid: b20923f160198a245bcdd80c8342f9ac, type: 2}
+  GameLoops:
+  - {fileID: 220056217369275403}
 --- !u!1 &4360065284092291422
 GameObject:
   m_ObjectHideFlags: 0
@@ -827,7 +929,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4360065284092291422}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.66, y: 2.39, z: 3.41}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -858,6 +960,7 @@ GameObject:
   - component: {fileID: 5738708871280085499}
   - component: {fileID: 5738708871280085498}
   - component: {fileID: 5556779283569246669}
+  - component: {fileID: 6455902575838259846}
   m_Layer: 0
   m_Name: CannonFooder_Cutup_06
   m_TagString: Untagged
@@ -904,7 +1007,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 11dc532885052144bbefc3e50eb2e4eb, type: 3}
+  - {fileID: 2100000, guid: 69f78a6c54cf84a4490eab1fbc62c914, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -971,13 +1074,29 @@ MonoBehaviour:
   PickUpRange: 4
   BodyParts: {fileID: 11400000, guid: edbd17e7b39a2ca48a156317085c1551, type: 2}
   PickedUpEvent: {fileID: 11400000, guid: 4a6cc1010d7dcf241b3c2228a3b267ed, type: 2}
-  enableTime: 0.65
+  enableTime: 1.5
   PickUpSpeed: 7
-  ExplosionDistance: 50
-  ExplosionHeight: 50
-  minValue: 0
-  MaxValue: 0
+  ExplosionDistance: 10
+  ExplosionHeight: 20
+  minValue: 1
+  MaxValue: 3
   Collider: {fileID: 5738708871280085498}
+--- !u!114 &6455902575838259846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4415089339236805630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8cd77b9a3fb574486a4a4a4ef4a938, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsPaticipant: 0
+  GameLoopHandler: {fileID: 11400000, guid: b20923f160198a245bcdd80c8342f9ac, type: 2}
+  GameLoops:
+  - {fileID: 5556779283569246669}
 --- !u!1 &4893647491677414972
 GameObject:
   m_ObjectHideFlags: 0
@@ -992,6 +1111,7 @@ GameObject:
   - component: {fileID: 5738708871107968596}
   - component: {fileID: 5738708871107968599}
   - component: {fileID: 8892645930820655259}
+  - component: {fileID: 2895184636662122680}
   m_Layer: 0
   m_Name: CannonFooder_Cutup_010
   m_TagString: Untagged
@@ -1038,7 +1158,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 11dc532885052144bbefc3e50eb2e4eb, type: 3}
+  - {fileID: 2100000, guid: 69f78a6c54cf84a4490eab1fbc62c914, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1105,13 +1225,29 @@ MonoBehaviour:
   PickUpRange: 4
   BodyParts: {fileID: 11400000, guid: edbd17e7b39a2ca48a156317085c1551, type: 2}
   PickedUpEvent: {fileID: 11400000, guid: 4a6cc1010d7dcf241b3c2228a3b267ed, type: 2}
-  enableTime: 0.65
+  enableTime: 1.5
   PickUpSpeed: 7
-  ExplosionDistance: 50
-  ExplosionHeight: 50
-  minValue: 0
-  MaxValue: 0
+  ExplosionDistance: 10
+  ExplosionHeight: 20
+  minValue: 1
+  MaxValue: 3
   Collider: {fileID: 5738708871107968599}
+--- !u!114 &2895184636662122680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4893647491677414972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8cd77b9a3fb574486a4a4a4ef4a938, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsPaticipant: 0
+  GameLoopHandler: {fileID: 11400000, guid: b20923f160198a245bcdd80c8342f9ac, type: 2}
+  GameLoops:
+  - {fileID: 8892645930820655259}
 --- !u!1 &5936112966278237935
 GameObject:
   m_ObjectHideFlags: 0
@@ -1126,6 +1262,7 @@ GameObject:
   - component: {fileID: 5738708870283690883}
   - component: {fileID: 5738708870283690882}
   - component: {fileID: 1300356337438608342}
+  - component: {fileID: 5273525498495834745}
   m_Layer: 0
   m_Name: CannonFooder_Cutup_08
   m_TagString: Untagged
@@ -1172,7 +1309,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 11dc532885052144bbefc3e50eb2e4eb, type: 3}
+  - {fileID: 2100000, guid: 69f78a6c54cf84a4490eab1fbc62c914, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1239,13 +1376,29 @@ MonoBehaviour:
   PickUpRange: 4
   BodyParts: {fileID: 11400000, guid: edbd17e7b39a2ca48a156317085c1551, type: 2}
   PickedUpEvent: {fileID: 11400000, guid: 4a6cc1010d7dcf241b3c2228a3b267ed, type: 2}
-  enableTime: 0.65
+  enableTime: 1.5
   PickUpSpeed: 7
-  ExplosionDistance: 50
-  ExplosionHeight: 50
-  minValue: 0
-  MaxValue: 0
+  ExplosionDistance: 10
+  ExplosionHeight: 20
+  minValue: 1
+  MaxValue: 3
   Collider: {fileID: 5738708870283690882}
+--- !u!114 &5273525498495834745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5936112966278237935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8cd77b9a3fb574486a4a4a4ef4a938, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsPaticipant: 0
+  GameLoopHandler: {fileID: 11400000, guid: b20923f160198a245bcdd80c8342f9ac, type: 2}
+  GameLoops:
+  - {fileID: 1300356337438608342}
 --- !u!1 &8182151052902589812
 GameObject:
   m_ObjectHideFlags: 0
@@ -1260,6 +1413,7 @@ GameObject:
   - component: {fileID: 5738708871436734141}
   - component: {fileID: 5738708871436734140}
   - component: {fileID: 4254999180625798128}
+  - component: {fileID: 3963869747185234593}
   m_Layer: 0
   m_Name: CannonFooder_Cutup_01
   m_TagString: Untagged
@@ -1306,7 +1460,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 11dc532885052144bbefc3e50eb2e4eb, type: 3}
+  - {fileID: 2100000, guid: 69f78a6c54cf84a4490eab1fbc62c914, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1373,10 +1527,26 @@ MonoBehaviour:
   PickUpRange: 4
   BodyParts: {fileID: 11400000, guid: edbd17e7b39a2ca48a156317085c1551, type: 2}
   PickedUpEvent: {fileID: 11400000, guid: 4a6cc1010d7dcf241b3c2228a3b267ed, type: 2}
-  enableTime: 0.65
+  enableTime: 1.5
   PickUpSpeed: 7
-  ExplosionDistance: 50
-  ExplosionHeight: 50
-  minValue: 0
-  MaxValue: 0
+  ExplosionDistance: 10
+  ExplosionHeight: 20
+  minValue: 1
+  MaxValue: 3
   Collider: {fileID: 5738708871436734140}
+--- !u!114 &3963869747185234593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8182151052902589812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8cd77b9a3fb574486a4a4a4ef4a938, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsPaticipant: 0
+  GameLoopHandler: {fileID: 11400000, guid: b20923f160198a245bcdd80c8342f9ac, type: 2}
+  GameLoops:
+  - {fileID: 4254999180625798128}
