@@ -86,7 +86,7 @@ public class Hexagon : MonoBehaviour
 
     public void GetNeighbours()
     {
-        print("I was called i think");
+      //  print("I was called i think");
 
 
 
