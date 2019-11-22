@@ -181,6 +181,7 @@ public class InGameHUDController : MonoBehaviour
     public void EnterPauseMenu()
     {
         Debug.Log("Enter Pause Menu");
+        Pause();
         MainMenu.SetActive(false);
         OptionsMenu.SetActive(false);
         ModifiersMenu.SetActive(false);
@@ -190,6 +191,7 @@ public class InGameHUDController : MonoBehaviour
 
     public void EnterInGameHUD()
     {
+        Unpause();
         MainMenu.SetActive(false);
         OptionsMenu.SetActive(false);
         ModifiersMenu.SetActive(false);

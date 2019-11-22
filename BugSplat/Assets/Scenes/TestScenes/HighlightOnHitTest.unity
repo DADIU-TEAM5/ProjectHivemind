@@ -2040,7 +2040,7 @@ PrefabInstance:
     - target: {fileID: 7716702298372225565, guid: f77e46835b7f92f47b66849ae005410b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 25
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 7716702298372225565, guid: f77e46835b7f92f47b66849ae005410b,
         type: 3}
@@ -3516,12 +3516,12 @@ PrefabInstance:
     - target: {fileID: 6191203005818723497, guid: 5c3bf23d217bac04a835a6ddca0ddf05,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5597788337614764682, guid: 5c3bf23d217bac04a835a6ddca0ddf05,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1162982976695042984, guid: 5c3bf23d217bac04a835a6ddca0ddf05,
         type: 3}
@@ -4110,113 +4110,6 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 1346997900}
---- !u!1 &1245044815
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1245044818}
-  - component: {fileID: 1245044817}
-  - component: {fileID: 1245044819}
-  - component: {fileID: 1245044816}
-  m_Layer: 0
-  m_Name: HighlightManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1245044816
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1245044815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4f86f4c749fca94cb6e8bf50da14913, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HighlightTime: 0.2
-  WhiteMaterial: {fileID: 2100000, guid: 5df08817e5e99d243b4905ad10d7fb79, type: 2}
-  HighLightColor: {r: 1, g: 1, b: 1, a: 1}
-  PlayerObject: {fileID: 1590538033}
---- !u!114 &1245044817
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1245044815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: a7269a05022ef469c883eb9a01dab7af, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1245044816}
-        m_MethodName: HighLightPlayer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
---- !u!4 &1245044818
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1245044815}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 27
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1245044819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1245044815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: bfdb7e4ca1edf6946b708ec51f5931c5, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1245044816}
-        m_MethodName: HighLightEnemy
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
-    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
 --- !u!1 &1276848965
 GameObject:
   m_ObjectHideFlags: 0
@@ -4441,6 +4334,75 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 670104061}
+--- !u!1001 &1314050010
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3098972758067862525, guid: 6ca1adb9205d27748a61c307140d6af5,
+        type: 3}
+      propertyPath: m_Name
+      value: HighlightManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098972758067862496, guid: 6ca1adb9205d27748a61c307140d6af5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098972758067862496, guid: 6ca1adb9205d27748a61c307140d6af5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098972758067862496, guid: 6ca1adb9205d27748a61c307140d6af5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098972758067862496, guid: 6ca1adb9205d27748a61c307140d6af5,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098972758067862496, guid: 6ca1adb9205d27748a61c307140d6af5,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098972758067862496, guid: 6ca1adb9205d27748a61c307140d6af5,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098972758067862496, guid: 6ca1adb9205d27748a61c307140d6af5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098972758067862496, guid: 6ca1adb9205d27748a61c307140d6af5,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098972758067862496, guid: 6ca1adb9205d27748a61c307140d6af5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098972758067862496, guid: 6ca1adb9205d27748a61c307140d6af5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098972758067862496, guid: 6ca1adb9205d27748a61c307140d6af5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6ca1adb9205d27748a61c307140d6af5, type: 3}
 --- !u!1 &1346997899
 GameObject:
   m_ObjectHideFlags: 3
@@ -4992,12 +4954,6 @@ MonoBehaviour:
   DashCostSO: {fileID: 11400000, guid: 1bdadc0e69512694ba4aff20b1ce4cb0, type: 2}
   ActiveStaminaColor: {r: 1, g: 1, b: 1, a: 1}
   InactiveStaminaColor: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 1}
---- !u!1 &1590538033 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8841675752750935237, guid: ce93dae90c32b234eb5aa37ebcaa5582,
-    type: 3}
-  m_PrefabInstance: {fileID: 840415873}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1599878342 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5538139361798276831, guid: 26c99b7ded7505c4fa571828d61dc785,
@@ -5521,7 +5477,7 @@ PrefabInstance:
     - target: {fileID: 281622259071393249, guid: 6b562bd62d2192545ad0d4d63ac4a77f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 26
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 281622259071393249, guid: 6b562bd62d2192545ad0d4d63ac4a77f,
         type: 3}
