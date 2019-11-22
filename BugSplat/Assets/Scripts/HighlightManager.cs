@@ -18,18 +18,16 @@ public class HighlightManager : MonoBehaviour
 
     public void OnEnable()
     {
+        if(PlayerObject == null)
+        {
+            PlayerObject = GameObject.Find("Char_geo");
+        } 
         GetPlayerMaterial();
     }
 
     public void GetPlayerMaterial()
     {
         _playerMat = PlayerObject.GetComponent<Renderer>().material;
-    }
-
-    public void GetEnemyColor()
-    {
-        
-        _enemyMat = _enemy.GetComponentInChildren<Renderer>().material;
     }
 
 
@@ -39,30 +37,21 @@ public class HighlightManager : MonoBehaviour
         StartCoroutine(PlayerLerpColor(HighlightTime));
     }
 
+
     public void HighLightEnemy(GameObject enemy)
     {
-        if (!canHighlightEnemy)
-            return;
-        canHighlightEnemy = false;
-        Debug.Log("Highlight Enemy");
-        
-       
         _enemy = enemy;
 
         if (_enemy != null)
         {
-            Debug.Log("Enemy NOt null");
-            GetEnemyColor();
-            if (_enemyMat == null)
-                Debug.LogError("No Enemy Material found");
-            else
-                _enemy.GetComponentInChildren<Renderer>().material = WhiteMaterial;
-
-            StartCoroutine(EnemyLerpColor(HighlightTime));
-        } else
+            Enemy enemyScript = _enemy.GetComponent<Enemy>();
+            enemyScript.HighlightThisBitch();
+        }
+        else
             Debug.LogError("No Enemy From Event");
-    
+
     }
+
 
     private IEnumerator PlayerLerpColor(float lerpTime)
     {
@@ -75,14 +64,7 @@ public class HighlightManager : MonoBehaviour
         }
         
     }
-    private IEnumerator EnemyLerpColor(float lerpTime)
-    {
-        yield return new WaitForSeconds(lerpTime);
-        canHighlightEnemy = true;
-        if(_enemy != null)
-            _enemy.GetComponentInChildren<Renderer>().material = _enemyMat;
-        
-    }
+
 
 
 }
