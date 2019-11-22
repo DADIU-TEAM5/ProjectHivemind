@@ -70,14 +70,34 @@ public class MapGenerator : MonoBehaviour
             {
                 Hexagons = GauntletHexagons;
                 CenterHexagons = GauntletCenterHexagons;
-            }
+            EnemySpawner.IsWave = false;
+        }
+        else
+        {
+            EnemySpawner.IsWave = true;
+            
+        }
 
 
             EnemySpawnerCount.Value = 0;
-            Debug.Log("THE MAPGEN SET UP THE VALUES!!");
+           // Debug.Log("THE MAPGEN SET UP THE VALUES!!");
             EnemySpawner.LevelBudget = Levels.LevelTierPicker[CurrentLevel.Value].budget;
-            print("spawner budget set to " + EnemySpawner.LevelBudget);
-            print("spawner budget should be set to " + Levels.LevelTierPicker[CurrentLevel.Value].budget);
+
+        int[] MakeSureItsNotARef = new int[Levels.LevelTierPicker[CurrentLevel.Value].WaveBudgets.Length];
+
+        for (int i = 0; i < MakeSureItsNotARef.Length; i++)
+        {
+            MakeSureItsNotARef[i] = Levels.LevelTierPicker[CurrentLevel.Value].WaveBudgets[i];
+        }
+            
+            
+            
+            EnemySpawner.WaveLevelBudget = MakeSureItsNotARef;
+
+
+
+            //print("spawner budget set to " + EnemySpawner.LevelBudget);
+            //print("spawner budget should be set to " + Levels.LevelTierPicker[CurrentLevel.Value].budget);
 
             SortedHexagons = new List<List<GameObject>>();
             availableTiers = new List<Tier>();

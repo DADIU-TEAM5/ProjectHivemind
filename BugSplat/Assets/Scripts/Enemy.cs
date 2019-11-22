@@ -80,6 +80,7 @@ public abstract class Enemy : GameLoop
     public GameEvent AggroEvent;
     public GameEvent DefaultAggroEvent;
     public GameEvent TakeDamageEvent;
+    public GameEvent TakeDamageAnyType;
     public GameEvent DeathEvent;
     public GameEvent EnemyDied;
 
@@ -197,6 +198,7 @@ public abstract class Enemy : GameLoop
         _currentHealth -= damage;
         UpdateHealthBar(_currentHealth);
         TakeDamageEvent.Raise(this.gameObject);
+        TakeDamageAnyType.Raise(this.gameObject);
         TakeDamageBehaviour(damage);
 
 
@@ -653,5 +655,6 @@ public abstract class Enemy : GameLoop
 
         return Vector3.Distance(transform.position, adjustedPlayerPos) < stats.AttackRange * length;
     }
+
 
 }
