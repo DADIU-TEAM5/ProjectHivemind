@@ -5,49 +5,42 @@ using UnityEngine.AI;
 
 public class Spitter : Enemy
 {
-
-
     public GameObject EggProjectile;
-
     
-    public ParticleSystem Spit;
+    public ParticleController SpitParticles;
+    public ParticleController SpitParticleSplash;
 
+    public GameObject ProjectileLocation;
 
     public Animator WormAnimator;
     
+    private SpitterStats _spitterStats;
     
-    SpitterStats _spitterStats;
-    
-    bool _attacking;
-    float _attackCharge;
+    private bool _attacking;
+    private float _attackCharge;
 
     [HideInInspector]
     public bool FullyUnderground;
     
 
-    float _attackCooldown = 0;
+    private float _attackCooldown = 0;
 
-    
+    private float _fleeValue;
 
-    float _fleeValue;
+    private float _waitForPathCalc;
 
-    
-
-    float _waitForPathCalc;
-
-    Vector3 _playerAttackPos;
-
-    
+    private Vector3 _playerAttackPos;
 
     [Header("Events")]
-    
-    
     public GameEvent AttackEvent;
     
     public GameEvent AttackChargingEvent;
+
     public GameEvent BurrowEvent;
 
     public GameEvent EmergeEvent;
+
+    public GameEvent SpitCollideEvent;
 
 
     float _percentIncrease;
@@ -56,28 +49,16 @@ public class Spitter : Enemy
 
     public void Start()
     {
+        _spitterStats = (SpitterStats) stats;
 
-
-        _spitterStats = (SpitterStats)stats;
-
-        var spitSettings = Spit.main;
-        spitSettings.startSpeed = _spitterStats.ProjectileSpeed;
-        spitSettings.startLifetime = _spitterStats.AttackRange/_spitterStats.ProjectileSpeed ;
         _chargeCLipLength = ChargeAnimation.length;
 
-
         Burrow();
-
-        
 
         float Increase = _chargeCLipLength - stats.AttackChargeUpTime;
 
         float percenIncrease = Increase / stats.AttackChargeUpTime;
         _percentIncrease = percenIncrease;
-
-
-
-
     }
 
 
@@ -96,8 +77,6 @@ public class Spitter : Enemy
             EndAttack();
             
         }
-
-
     }
 
 
@@ -108,8 +87,6 @@ public class Spitter : Enemy
         {
             WormAnimator.SetBool("Underground", true);
             BurrowEvent.Raise(gameObject);
-            
-            
 
             NavMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
         }
@@ -118,11 +95,8 @@ public class Spitter : Enemy
     {
         if (FullyUnderground)
         {
-
             WormAnimator.SetBool("Underground", false);
             EmergeEvent.Raise(this.gameObject);
-            
-            
 
             NavMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
         }
@@ -131,19 +105,10 @@ public class Spitter : Enemy
 
     public override void LoopBehaviour(float deltaTime)
     {
-
-        
-
         if (_waitForPathCalc > 0)
             _waitForPathCalc -= deltaTime;
 
         RemoveFromLockedTargetIfNotVisible();
-
-        
-        
-
-       // print(_fleeValue);
-
 
         if (_fleeValue > 0)
             _fleeValue -= deltaTime;
@@ -206,10 +171,7 @@ public class Spitter : Enemy
 
         Quaternion diseredRotation= Quaternion.LookRotation(adjustedPlayerPos -transform.position );
 
-
         transform.rotation = Quaternion.Lerp(transform.rotation, diseredRotation, Time.deltaTime*5);
-
-
     }
     void Attack()
     {
@@ -224,15 +186,7 @@ public class Spitter : Enemy
             adjustedPlayerPos.y = transform.position.y;
             transform.LookAt(adjustedPlayerPos);
 
-
-
-
-
-
             _playerAttackPos = PlayerTransform.position;
-
-
-
 
             WormAnimator.speed = 1 + _percentIncrease;
 
@@ -260,13 +214,13 @@ public class Spitter : Enemy
 
         if (_attackCharge >= _spitterStats.AttackChargeUpTime)
         {
-            print("spit emittet");
+            //print("spit emittet");
 
             Vector3 temppos = _playerAttackPos;
-            temppos.y = Spit.transform.position.y;
+            //temppos.y = ProjectileLocation.transform.position.y;
 
 
-            Spit.transform.LookAt(temppos);
+            ProjectileLocation.transform.LookAt(temppos);
 
             AttackEvent.Raise(gameObject);
 
@@ -274,7 +228,7 @@ public class Spitter : Enemy
 
             if (_spitterStats.ShootEggs && roll<_spitterStats.ChanceToShootEgg)
             {
-                GameObject egg = Instantiate(EggProjectile,Spit.transform);
+                GameObject egg = Instantiate(EggProjectile, ProjectileLocation.transform);
 
                 egg.transform.parent = null;
 
@@ -288,7 +242,7 @@ public class Spitter : Enemy
             }
             else
             {
-                Spit.Emit(1);
+                var spit = MakeSpit();
             }
 
             _attackCooldown = _spitterStats.AttackSpeed;
@@ -328,16 +282,7 @@ public class Spitter : Enemy
 
             Vector3 destination = Vector3.zero;
 
-            
-
-
             destination = adjustedPlayerPos+((transform.position-adjustedPlayerPos).normalized*_spitterStats.AttackRange);
-
-
-            
-
-            //destination = hit.position;
-
 
             if (NavMeshAgent.destination != destination)
                 NavMeshAgent.destination = destination;
@@ -381,26 +326,15 @@ public class Spitter : Enemy
             }
         }
 
-
-
-
         Vector3[] vertices = new Vector3[4];
-
-
-
 
         float trajectoryWidt = 0.5f;
 
         vertices[0] =  Vector3.right * trajectoryWidt;
         vertices[1] =  Vector3.left * trajectoryWidt;
 
-
         vertices[2] =  (Vector3.right* trajectoryWidt) + (Vector3.forward * stats.AttackRange);
         vertices[3] =  (Vector3.left* trajectoryWidt) + (Vector3.forward * stats.AttackRange);
-
-
-        
-        
 
         OutlineMesh.vertices = vertices;
 
@@ -409,10 +343,6 @@ public class Spitter : Enemy
 
         if (OutlineMesh.normals != _normalsfotraj)
             OutlineMesh.normals = _normalsfotraj;
-
-
-
-
 
     }
 
@@ -448,13 +378,7 @@ public class Spitter : Enemy
             }
         }
 
-
-
-
         Vector3[] vertices = new Vector3[4];
-
-
-
 
         float trajectoryWidt = 0.5f;
 
@@ -465,12 +389,6 @@ public class Spitter : Enemy
         vertices[2] = (Vector3.right * trajectoryWidt) + (Vector3.forward * Mathf.Lerp(0, stats.AttackRange,_attackCharge/stats.AttackChargeUpTime));
         vertices[3] = (Vector3.left * trajectoryWidt) + (Vector3.forward * Mathf.Lerp(0, stats.AttackRange, _attackCharge / stats.AttackChargeUpTime));
 
-
-
-
-
-
-
         ConeMesh.vertices = vertices;
 
         if (ConeMesh.triangles != _trianglesfortraj)
@@ -478,12 +396,61 @@ public class Spitter : Enemy
 
         if (ConeMesh.normals != _normalsfotraj)
             ConeMesh.normals = _normalsfotraj;
-
-
-
-
-
     }
 
+    private ParticleController MakeSpit() {
+        var spitObj = Instantiate(SpitParticles, ProjectileLocation.transform.position, ProjectileLocation.transform.rotation);
 
+        var projectileCollide = spitObj.gameObject.AddComponent<SpitterProjectileCollide>();
+        projectileCollide.ParticleController = SpitParticleSplash;
+        projectileCollide.CollideEvent = SpitCollideEvent;
+        projectileCollide.Damage = _spitterStats.AttackDamage;
+        projectileCollide.Range = _spitterStats.AttackRange;
+        projectileCollide.Init();
+        Debug.Log("helloooo");
+
+        var spitRB = spitObj.GetComponent<Rigidbody>();
+        spitRB.velocity = this.transform.forward * _spitterStats.ProjectileSpeed;
+
+        return spitObj;
+    }
+
+    internal class SpitterProjectileCollide : MonoBehaviour {
+        internal GameEvent CollideEvent;
+
+        internal float Damage;
+
+        internal float Range = 1000f;
+
+        internal ParticleController ParticleController;
+
+        private ParticleController _particleController;
+
+        private Vector3 _startPos;
+
+        internal void Init() {
+            _particleController = Instantiate(ParticleController);
+        }
+
+        void Update() {
+            // Using square magnitude for optimizations purposes
+            if ((transform.position - _startPos).sqrMagnitude > Range * Range) {
+                Destroy(gameObject);
+            }
+        }
+
+        void OnCollisionEnter(Collision collision)
+        {
+            _particleController.MoveTo(gameObject);
+            _particleController.Play();
+            _particleController.InstantiateAfterParts();
+
+            var player = collision.gameObject.GetComponent<PlayerHealth>();
+            if (player != null) {
+                player.TakeDamage(Damage);
+            }
+
+            Destroy(gameObject);
+        }
+    }
 }

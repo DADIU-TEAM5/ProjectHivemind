@@ -6,15 +6,29 @@ using UnityEngine.AI;
 public class EnemySpawner : GameLoop
 {
     public GameEvent SpawnAllEnemies;
+    public GameObjectVariable ThePlayer;
+
+    public FloatVariable InitalAggroDelay;
+    public IntVariable EnemiesLeftBeforeNewWave;
 
     public static int LevelBudget;
 
+    public static int[] WaveLevelBudget;
+    public static bool IsWave;
+
     public static bool SingleEnemySpawned;
+
+    public static List<GameObject>[] EnemiesInWaves;
 
     public static List<IEnumerator> QueuedSpawns;
 
 
     public float SpawnCD = 2;
+
+    float _waveTimeDelay;
+
+
+    int _currentWave;
 
 
     bool startedSpawning = false;
@@ -45,8 +59,26 @@ public class EnemySpawner : GameLoop
     List<GameObject> EnemiesToSpawn = new List<GameObject>();
 
 
+    bool _waveBegun;
+
     private void OnEnable()
     {
+        _waveTimeDelay = 0;
+        _currentWave = 0;
+        _waveBegun = false;
+
+        if (IsWave && EnemiesInWaves  == null)
+        {
+            EnemiesInWaves = new List<GameObject>[WaveLevelBudget.Length];
+
+            for (int i = 0; i < EnemiesInWaves.Length; i++)
+            {
+                EnemiesInWaves[i] = new List<GameObject>();
+            }
+
+        }
+
+
         SingleEnemySpawned = false;
         SpawningEnemiesToSpawn = false;
 
@@ -101,6 +133,18 @@ public class EnemySpawner : GameLoop
     }
 
 
+    public void RemoveEnemyFromWave(GameObject enemy)
+    {
+        if (WaveLevelBudget == null || WaveLevelBudget.Length <= _currentWave)
+            return;
+
+
+        if (EnemiesInWaves[_currentWave].Contains(enemy))
+        {
+            EnemiesInWaves[_currentWave].Remove(enemy);
+        }
+    }
+
 
     public override void LoopLateUpdate(float deltaTime)
     {
@@ -108,11 +152,65 @@ public class EnemySpawner : GameLoop
     }
     public override void LoopUpdate(float deltaTime)
     {
+       // print(_waveTimeDelay);
+
+       // print("delta time" + deltaTime);
+
+       // print("current wave is " + _currentWave + " budget is " + WaveLevelBudget[_currentWave]+ " wave begun equal "+_waveBegun+" enemies in wave"+ EnemiesInWaves[_currentWave].Count);
+
+        //print("Enemies left in wave "+ EnemiesInWaves[_currentWave].Count);
+        //print("wave is active equals " + _waveBegun);
 
         if (startedSpawning)
         {
 
-            SpawnEnemiesRoutine();
+
+
+            if (IsWave)
+            {
+
+                if (_waveTimeDelay > 0)
+                    _waveTimeDelay -= deltaTime;
+
+
+                if (EnemiesInWaves.Length > _currentWave && EnemiesInWaves[_currentWave].Count > 0 && _waveBegun == false)
+                {
+
+                   // print("wave should have begun");
+                    _waveBegun = true;
+
+                    _waveTimeDelay = 3;
+                }
+
+                
+
+                SpawnWaves();
+
+
+                if(_waveBegun && _waveTimeDelay <= 0)
+                {
+                    print("nexy wave is Able TO begin");
+
+                    if(EnemiesInWaves[_currentWave].Count < EnemiesLeftBeforeNewWave.Value)
+                    {
+
+                        _currentWave++;
+                        _waveBegun = false;
+
+
+                    }
+
+                }
+
+            }
+            else
+            {
+
+                SpawnEnemiesRoutine();
+
+
+                
+            }
 
 
             if (_timer > 0)
@@ -124,8 +222,11 @@ public class EnemySpawner : GameLoop
                 SpawnQueuedEnemies();
                 _timer = SpawnCD;
             }
+
         }
 
+
+        
         
 
     }
@@ -195,7 +296,7 @@ public class EnemySpawner : GameLoop
     void SpawnQueuedEnemies()
     {
 
-        if (SpawningEnemiesToSpawn)
+        if (SpawningEnemiesToSpawn || IsWave)
         {
             int count = EnemiesToSpawn.Count;
 
@@ -203,8 +304,25 @@ public class EnemySpawner : GameLoop
             {
                 GameObject spawnedEnemy = Instantiate(EnemiesToSpawn[0], transform);
 
+
+                Enemy enemyScript = spawnedEnemy.GetComponent<Enemy>();
                 spawnedEnemy.name = "Delayed Fucker";
                 spawnedEnemy.transform.parent = null;
+
+
+
+                if (IsWave && _currentWave == 0)
+                {
+                    StartCoroutine(WaitAndThenAggro(enemyScript));
+                }
+                else
+                {
+                    enemyScript.PlayerTransform = ThePlayer.Value.transform;
+                    enemyScript.PlayerDetected = true;
+                }
+
+
+                
 
                 Vector3 spawnPoint = transform.position;
                 spawnPoint.y = 0;
@@ -217,10 +335,32 @@ public class EnemySpawner : GameLoop
                 */
                 spawnedEnemy.transform.position = spawnPoint;
 
+                if (IsWave && EnemiesInWaves.Length > _currentWave)
+                {
+
+                    print("we are waveing");
+                    spawnedEnemy.name += " " + _currentWave;
+                    EnemiesInWaves[_currentWave].Add(spawnedEnemy);
+                }
+
                 EnemiesToSpawn.Remove(EnemiesToSpawn[0]);
 
             }
         }
+    }
+
+
+    IEnumerator WaitAndThenAggro(Enemy enemyScript)
+    {
+        print("we doing a coroutine");
+
+        yield return new WaitForSeconds(InitalAggroDelay.Value);
+
+        print("we waited");
+        enemyScript.PlayerTransform = ThePlayer.Value.transform;
+        enemyScript.PlayerDetected = true;
+
+        yield return null;
     }
 
 
@@ -237,7 +377,7 @@ public class EnemySpawner : GameLoop
             GameObject ChosenGuy = enemies[Random.Range(0, enemies.Count)];
             int FirsTValueToget = ChosenGuy.GetComponent<Enemy>().difficultyValue;
 
-            if (LevelBudget > FirsTValueToget)
+            if (LevelBudget >= FirsTValueToget)
             {
                 LevelBudget -= FirsTValueToget;
 
@@ -310,6 +450,125 @@ public class EnemySpawner : GameLoop
         // Debug.Log(name + " is done");
 
         
+    }
+
+
+    void SpawnWaves()
+    {
+
+        if (WaveLevelBudget == null || WaveLevelBudget.Length <= _currentWave)
+            return;
+
+        
+
+        if (WaveLevelBudget[_currentWave] + budget >= SmallestValue)
+        {
+
+
+            GameObject ChosenGuy = enemies[Random.Range(0, enemies.Count)];
+            int FirsTValueToget = ChosenGuy.GetComponent<Enemy>().difficultyValue;
+
+            if (WaveLevelBudget[_currentWave] >= FirsTValueToget)
+            {
+                WaveLevelBudget[_currentWave] -= FirsTValueToget;
+
+
+                EnemiesToSpawn.Add(ChosenGuy);
+
+            }
+
+
+
+
+
+            while (budget > 0)
+            {
+                if (SmallestValue > budget)
+                {
+                    //Debug.Log("smallest value is bigger than budget");
+
+                    //LevelBudget.usedBudget -= budget;
+
+                    WaveLevelBudget[_currentWave] += budget;
+                    budget = 0;
+
+                    break;
+                }
+
+                //Debug.Log("curren budget "+ budget);
+                //Debug.Log("smallest value "+ _smallestValue);
+                float valueToGet = float.MaxValue;
+                int index = 0;
+                while (valueToGet > budget)
+                {
+                    index = Random.Range(0, enemies.Count);
+
+                    valueToGet = _values[index];
+
+
+                }
+                budget -= _values[index];
+
+                GameObject spawnedEnemy = Instantiate(enemies[index], transform);
+
+
+                Enemy enemyScript = spawnedEnemy.GetComponent<Enemy>();
+
+
+                
+
+                if (IsWave && _currentWave == 0)
+                {
+                    StartCoroutine(WaitAndThenAggro(enemyScript));
+                }
+                else
+                {
+                    enemyScript.PlayerTransform = ThePlayer.Value.transform;
+                    enemyScript.PlayerDetected = true;
+
+                }
+
+
+
+
+                spawnedEnemy.name = "Initial Fucker";
+                spawnedEnemy.transform.parent = null;
+
+                Vector3 spawnPoint = transform.position;
+                spawnPoint.y = 0;
+
+                /*
+                NavMeshHit hit;
+
+
+                NavMesh.SamplePosition(transform.position, out hit, 3, NavMesh.AllAreas);
+                */
+
+
+                if (IsWave && EnemiesInWaves.Length > _currentWave)
+                {
+                    spawnedEnemy.name += " " + _currentWave;
+                    EnemiesInWaves[_currentWave].Add(spawnedEnemy);
+                }
+
+                spawnedEnemy.transform.position = spawnPoint;
+
+
+            }
+
+
+
+        }
+        else if (budget > 0)
+        {
+            WaveLevelBudget[_currentWave] += budget;
+            budget = 0;
+        }
+        // Debug.Log(name + " is done");
+
+
+
+
     }
 
 
