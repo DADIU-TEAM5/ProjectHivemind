@@ -406,7 +406,6 @@ public class Spitter : Enemy
         projectileCollide.CollideEvent = SpitCollideEvent;
         projectileCollide.Damage = _spitterStats.AttackDamage;
         projectileCollide.Range = _spitterStats.AttackRange;
-        projectileCollide.Init();
         Debug.Log("helloooo");
 
         var spitRB = spitObj.GetComponent<Rigidbody>();
@@ -427,10 +426,7 @@ public class Spitter : Enemy
         private ParticleController _particleController;
 
         private Vector3 _startPos;
-
-        internal void Init() {
-            _particleController = Instantiate(ParticleController);
-        }
+        
 
         void Update() {
             // Using square magnitude for optimizations purposes
@@ -441,6 +437,7 @@ public class Spitter : Enemy
 
         void OnCollisionEnter(Collision collision)
         {
+            _particleController = Instantiate(ParticleController);
             _particleController.MoveTo(gameObject);
             _particleController.Play();
             _particleController.InstantiateAfterParts();
@@ -450,6 +447,7 @@ public class Spitter : Enemy
                 player.TakeDamage(Damage);
             }
 
+            Destroy(_particleController, 3);
             Destroy(gameObject);
         }
     }
