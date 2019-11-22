@@ -92,6 +92,10 @@ namespace AK
 
             namespace STATE
             {
+                static const AkUniqueID STATE_BATTLEMUSIC_ENGAGED = 1749272816U;
+                static const AkUniqueID STATE_BATTLEMUSIC_LOST = 1959379903U;
+                static const AkUniqueID STATE_BATTLEMUSIC_UNENGAGED = 3349524931U;
+                static const AkUniqueID STATE_BATTLEMUSIC_WON = 2766947299U;
             } // namespace STATE
         } // namespace STATE_BATTLEMUSIC
 

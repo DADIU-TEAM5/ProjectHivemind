@@ -15,7 +15,7 @@ public abstract class Enemy : GameLoop
     public FloatVariable PlayerCurrentSpeedSO;
 
     public bool IsUnderground = true;
-
+    
     [HideInInspector]
     public Hexagon hex;
 
@@ -205,7 +205,8 @@ public abstract class Enemy : GameLoop
                         SpawnFirstTime.Value = false;
                     }
                 }
-            }
+            } 
+            //  Renderer.material.color = SetColor(Color.blue);
         }
     }
 

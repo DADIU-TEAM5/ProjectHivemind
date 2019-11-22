@@ -14,7 +14,17 @@ public class ParticleController : MonoBehaviour
     private UnityEvent StopEvent;
 
     public void MoveTo(GameObject gameObject) {
-        var actualGO = gameObject.transform.GetChild(0);
+
+        Transform actualGO;
+
+        if (gameObject.tag == "Player")
+        {
+            actualGO = gameObject.transform.GetChild(0);
+        } else
+        {
+             actualGO = gameObject.transform;
+        }
+
         this.transform.position = new Vector3(actualGO.position.x, 0, actualGO.position.z);
         this.transform.rotation = actualGO.rotation;
     }
