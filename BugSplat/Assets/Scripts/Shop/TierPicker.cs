@@ -9,7 +9,11 @@ public class TierPicker : ScriptableObject
     public TierPercent[] TierPercents;
 
     public int budget;
+    
+
     public bool IsGauntlet;
+
+    public int[] WaveBudgets;
 
     private float _max;
 
