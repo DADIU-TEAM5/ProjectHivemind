@@ -12,12 +12,25 @@ public class MusicManagerScript : MonoBehaviour
     public AK.Wwise.Event ShopMusic;
     public AK.Wwise.Event StopBattleMusic;
 
+    [Header("Wwise states")]
+    public AK.Wwise.State BattleMusicUnengaged;
+    public AK.Wwise.State BattleMusicEngaged;
+    public AK.Wwise.State BattleMusicWon;
+    public AK.Wwise.State BattleMusicLost;
+
     [Header("Variables")]
     public IntVariable EnemiesLeft;
     public IntVariable EnemiesAgroed;
     public BoolVariable NoEnemiesOnScreen;
     public FloatVariable MaxHealth;
     public FloatVariable CurrentHealth;
+    public FloatVariable DistanceToClosestBug;
+
+    [Header("Wwise RTPCs")]
+    public AK.Wwise.RTPC EnemiesLeftRTPC;
+    public AK.Wwise.RTPC EnemiesAgroedRTPC;
+    public AK.Wwise.RTPC HealthRTPC;
+    public AK.Wwise.RTPC DistanceToClosestBugRTPCs;
 
     [Header("Parameters")]
     public float IntenseOMeter;
@@ -59,7 +72,9 @@ public class MusicManagerScript : MonoBehaviour
 
     public void PlayerWonEvent()
     {
-        StopBattleMusic.Post(this.gameObject);
+       // StopBattleMusic.Post(this.gameObject);
+        BattleMusicWon.SetValue();
+
 
     }
 
