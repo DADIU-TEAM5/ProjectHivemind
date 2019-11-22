@@ -27,7 +27,6 @@ public class ItemSelecter : GameLoop
             if (Physics.Raycast(ray, out hit, 100f)) {
                 var parent = hit.transform.parent;
 
-
                 if (parent == Slot1) {
                     ShopDisplay2.DeselectItem();
                     ShopDisplay3.DeselectItem();
@@ -53,7 +52,10 @@ public class ItemSelecter : GameLoop
 
                     Consumable.ToggleItem();
                 } else {
-                    Debug.Log("Raycast hit none of the above");
+                    ShopDisplay2.DeselectItem();
+                    ShopDisplay3.DeselectItem();
+                    ShopDisplay1.DeselectItem();
+                    Consumable.DeselectItem();
                 }
             }
         }

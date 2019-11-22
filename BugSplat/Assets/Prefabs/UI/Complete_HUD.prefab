@@ -5159,9 +5159,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -320, y: 320}
+  m_AnchoredPosition: {x: -170, y: 170}
   m_SizeDelta: {x: 300, y: 300}
-  m_Pivot: {x: -0.000000007450581, y: 1.0000001}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6866667551576039685
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16076,6 +16076,7 @@ GameObject:
   - component: {fileID: 4146286618025222279}
   - component: {fileID: 4146286618025222273}
   - component: {fileID: 4146286618025222272}
+  - component: {fileID: 4934663378348356993}
   m_Layer: 5
   m_Name: BugPartIcon
   m_TagString: Untagged
@@ -16140,6 +16141,25 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!95 &4934663378348356993
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4146286618025222278}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ef6d493ba9c0109458b9d341b063acad, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4146286618028249736
 GameObject:
   m_ObjectHideFlags: 0
@@ -24296,6 +24316,7 @@ GameObject:
   - component: {fileID: 1725740796555085497}
   - component: {fileID: 3234198107800186540}
   - component: {fileID: 3841623241296354715}
+  - component: {fileID: 282446516}
   m_Layer: 0
   m_Name: Complete_HUD
   m_TagString: Untagged
@@ -24465,6 +24486,46 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 4146286617971863804}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &282446516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7849268019656025243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 4a6cc1010d7dcf241b3c2228a3b267ed, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4146286619306334168}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4146286619306334168}
         m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
@@ -27100,15 +27161,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc40e5a1b68d4c848aa0b7a12405b376, type: 3}
---- !u!1 &6191203005818723496 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6191203006305586321, guid: bc40e5a1b68d4c848aa0b7a12405b376,
-    type: 3}
-  m_PrefabInstance: {fileID: 621482041}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &6191203005818723497 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6191203006305586320, guid: bc40e5a1b68d4c848aa0b7a12405b376,
+    type: 3}
+  m_PrefabInstance: {fileID: 621482041}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6191203005818723496 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6191203006305586321, guid: bc40e5a1b68d4c848aa0b7a12405b376,
     type: 3}
   m_PrefabInstance: {fileID: 621482041}
   m_PrefabAsset: {fileID: 0}

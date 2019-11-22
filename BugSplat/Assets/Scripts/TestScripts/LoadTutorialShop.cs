@@ -6,26 +6,28 @@ using UnityEngine.AI;
 public class LoadTutorialShop : MonoBehaviour
 {
 
-    public BoolVariable TutorialIsActive;
+    public BoolVariable TutorialIsActiveSO;
     public BoolVariable PlayerControlOverrideSO;
     public Transform Player;
     public GameObject Cage;
     public BoolVariable ShopIsOpenSO;
-    public IntVariable CurrentLevel;
+    public IntVariable CurrentLevelSO;
+    public StringVariable LastSceneSO;
 
     void Start()
     {
-        if (CurrentLevel.Value == 0)
+        if (CurrentLevelSO.Value == 0)
         {
             ShopIsOpenSO.Value = false;
-            TutorialIsActive.Value = true;
+            TutorialIsActiveSO.Value = true;
+            LastSceneSO.Value = "";
         } else
         {
             ShopIsOpenSO.Value = true;
-            TutorialIsActive.Value = false;
+            TutorialIsActiveSO.Value = false;
         }
 
-        if (TutorialIsActive.Value == false)
+        if (TutorialIsActiveSO.Value == false)
         {
             PlayerControlOverrideSO.Value = false;
             Player.GetComponent<NavMeshAgent>().enabled = true;
