@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 2875322531820035088}
   - component: {fileID: 4904092712629286686}
   - component: {fileID: 2919988749379521876}
+  - component: {fileID: 9077716119679342378}
+  - component: {fileID: 5085604619903012391}
   m_Layer: 0
   m_Name: ShopAudioManager
   m_TagString: Untagged
@@ -185,6 +187,64 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1965015718377449177}
         m_MethodName: shopAmbienceTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &9077716119679342378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275682528968942918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 41c0ac05be44f4f079766c989757bc82, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1965015718377449177}
+        m_MethodName: InspectItemEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &5085604619903012391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275682528968942918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: d988e6748698f48a19da9657a49d491e, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1965015718377449177}
+        m_MethodName: PutBackItemEvent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1241,6 +1301,7 @@ GameObject:
   - component: {fileID: 6762169736365978834}
   - component: {fileID: 8737138690087406722}
   - component: {fileID: 8850287523550918960}
+  - component: {fileID: 3641758805896021974}
   m_Layer: 0
   m_Name: CheeringAudioManager
   m_TagString: Untagged
@@ -1274,10 +1335,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 953f2f94368f6403e9d372ae552eb0f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WinningCheer:
+  CheerInit:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 3409324eaa6c148c2bc47163d81afb1f,
+      type: 2}
+  WinningCheer:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: bdaec3edc10c044a0a73b00850a500f1,
       type: 2}
   LosingCheer:
     idInternal: 0
@@ -1334,6 +1400,35 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6762169736365978834}
         m_MethodName: HasLost
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &3641758805896021974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3671286492580164633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 9ef0ca5d1936412449f6d6c0cba207ec, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6762169736365978834}
+        m_MethodName: InitializeCheerSquad
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2117,10 +2212,6 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 7df8bbd6e8ae8405cb5978ce760928a7,
       type: 2}
-  shopAmbience:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
   Arenaverb:
     idInternal: 0
     valueGuidInternal: 
