@@ -50,6 +50,9 @@ public abstract class Enemy : GameLoop
     private GradientColorKey[] _colorKey;
     private GradientAlphaKey[] _alphaKey;
     private bool _updateHealth;
+    private Material _enemyMat;
+    private float _enemyHighlightTime = 0.3f;
+    public Material WhiteMaterial;
 
     [HideInInspector]
     public NavMeshAgent NavMeshAgent;
@@ -75,11 +78,12 @@ public abstract class Enemy : GameLoop
     public Color ConeEndColor = new Color(1f, 0f, 0f, 1f);
     public Color ConeEmptyColor = new Color(.2f, .2f, .2f, .1f);
 
-    
+
 
     public GameEvent AggroEvent;
     public GameEvent DefaultAggroEvent;
     public GameEvent TakeDamageEvent;
+    public GameEvent TakeDamageAnyType;
     public GameEvent DeathEvent;
     public GameEvent EnemyDied;
 
@@ -108,8 +112,8 @@ public abstract class Enemy : GameLoop
         //Debug.Log(name + " spawned");
 
 
-        if(EnemyList != null)
-        EnemyList.Add(this);
+        if (EnemyList != null)
+            EnemyList.Add(this);
 
         if (RenderGraphics == null)
         {
@@ -120,7 +124,7 @@ public abstract class Enemy : GameLoop
             Renderer = RenderGraphics.GetComponent<Renderer>();
         }
 
-                
+
         NavMeshAgent = GetComponent<NavMeshAgent>();
 
         if (NavMeshAgent != null)
@@ -172,7 +176,7 @@ public abstract class Enemy : GameLoop
         }
         else
         {
-          //  Renderer.material.color = SetColor(Color.blue);
+            //  Renderer.material.color = SetColor(Color.blue);
         }
     }
 
@@ -197,6 +201,7 @@ public abstract class Enemy : GameLoop
         _currentHealth -= damage;
         UpdateHealthBar(_currentHealth);
         TakeDamageEvent.Raise(this.gameObject);
+        TakeDamageAnyType.Raise(this.gameObject);
         TakeDamageBehaviour(damage);
 
 
@@ -209,9 +214,9 @@ public abstract class Enemy : GameLoop
                 {
                     GameObject part = Instantiate(bodyPart);
 
-                    part.transform.position = transform.position +(( Vector3.up*i)*0.5f);
+                    part.transform.position = transform.position + ((Vector3.up * i) * 0.5f);
                 }
-                
+
             }
             else
             {
@@ -219,11 +224,11 @@ public abstract class Enemy : GameLoop
                 DeadCutout.transform.SetParent(null);
                 DeadCutout.SetActive(true);
             }
-             
+
             DeathEvent.Raise(this.gameObject);
 
             EnemyDied?.Raise(gameObject);
-            
+
 
             Destroy(Cone);
             Destroy(Outline);
@@ -323,13 +328,13 @@ public abstract class Enemy : GameLoop
 
     private void OnDisable()
     {
-        if(EnemyList != null)
+        if (EnemyList != null)
             EnemyList.Remove(this);
 
         // This is to fix the bug where the Enemy Graphics would stay even after they have died
 
-        if(CurrentEnemyGraphic != null && CurrentEnemyGraphic.Value != null)
-        CurrentEnemyGraphic.Value.SetActive(false);
+        if (CurrentEnemyGraphic != null && CurrentEnemyGraphic.Value != null)
+            CurrentEnemyGraphic.Value.SetActive(false);
 
         CurrentEnemySO.Value = null;
     }
@@ -362,7 +367,8 @@ public abstract class Enemy : GameLoop
 
             _showHealthBar = true;
 
-        } else
+        }
+        else
         {
             _showHealthBar = false;
         }
@@ -467,7 +473,7 @@ public abstract class Enemy : GameLoop
     Vector2[] _uvs = { };
 
 
-    public void DrawCone(int points, Mesh mesh, bool constant,float attackCharge)
+    public void DrawCone(int points, Mesh mesh, bool constant, float attackCharge)
     {
         if (_triangles.Length != points)
         {
@@ -521,7 +527,7 @@ public abstract class Enemy : GameLoop
 
         float stepSize = 1f / ((float)points - 1);
         int step = 0;
-        
+
 
         for (int i = 1; i < points; i++)
         {
@@ -641,7 +647,7 @@ public abstract class Enemy : GameLoop
 
         adjustedPlayerPos.y = transform.position.y;
 
-        return Vector3.Distance(transform.position, adjustedPlayerPos) < stats.AttackRange*1.1f ;
+        return Vector3.Distance(transform.position, adjustedPlayerPos) < stats.AttackRange * 1.1f;
     }
 
 
@@ -652,6 +658,20 @@ public abstract class Enemy : GameLoop
         adjustedPlayerPos.y = transform.position.y;
 
         return Vector3.Distance(transform.position, adjustedPlayerPos) < stats.AttackRange * length;
+    }
+
+    public void HighlightThisBitch()
+    {
+        _enemyMat = this.gameObject.GetComponentInChildren<Renderer>().material;
+        this.gameObject.GetComponentInChildren<Renderer>().material = WhiteMaterial;
+        StartCoroutine(ResetColor(_enemyHighlightTime));
+    }
+
+    IEnumerator ResetColor(float lerptime)
+    {
+        yield return new WaitForSeconds(lerptime);
+        this.gameObject.GetComponentInChildren<Renderer>().material = _enemyMat;
+
     }
 
 }
