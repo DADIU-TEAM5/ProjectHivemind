@@ -17,7 +17,8 @@ namespace AK
         static const AkUniqueID AMB_ARENA_01_STOP = 3018226098U;
         static const AkUniqueID AMB_HUB_MAINEVENT = 1797197367U;
         static const AkUniqueID AMB_SHOP_MAINEVENT = 3126464902U;
-        static const AkUniqueID CHEER_WIIN = 4294382858U;
+        static const AkUniqueID CHEER_INIT = 2830818153U;
+        static const AkUniqueID CHEER_UP = 3469520088U;
         static const AkUniqueID DOOR_ARENAGATE_HINGE = 4263565388U;
         static const AkUniqueID DOOR_ARENAGATE_SLAM = 3389469668U;
         static const AkUniqueID EGG = 680725036U;
@@ -137,6 +138,7 @@ namespace AK
 
     namespace GAME_PARAMETERS
     {
+        static const AkUniqueID CHEER_LEVEL = 4250097399U;
         static const AkUniqueID MANAGE_MUSICMAIN_LEVEL = 724781984U;
         static const AkUniqueID MANAGE_SFXMAIN_LEVEL = 429852744U;
         static const AkUniqueID PLAYERSPEED = 1493153371U;
