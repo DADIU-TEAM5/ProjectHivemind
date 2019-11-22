@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 281424009520800647}
   - component: {fileID: -9043957834641754660}
   - component: {fileID: 6525964551368193438}
+  - component: {fileID: 3661488470255270979}
   m_Layer: 0
   m_Name: ItemInvoker
   m_TagString: Untagged
@@ -403,6 +404,47 @@ MonoBehaviour:
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 11400000, guid: 711d0931c5b2f8f43a697b95de2896ae,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: EffectType, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6578993736079212787}
+        m_MethodName: TriggerEffects
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &3661488470255270979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6578993736079212784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: a7269a05022ef469c883eb9a01dab7af, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6578993736079212787}
+        m_MethodName: SetCurrentEffectType
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: b8f3cac965be6ee4a9bf8fd96e90cb73,
             type: 2}
           m_ObjectArgumentAssemblyTypeName: EffectType, Assembly-CSharp
           m_IntArgument: 0
