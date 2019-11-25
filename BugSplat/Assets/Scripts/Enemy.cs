@@ -82,6 +82,12 @@ public abstract class Enemy : GameLoop
     [HideInInspector]
     public MeshRenderer EdgeRendere1, EdgeRendere2;
 
+    [HideInInspector]
+    public GameObject OuterEdge;
+    [HideInInspector]
+    public Mesh OuterEdgeMesh;
+    [HideInInspector]
+    public MeshRenderer OuterEdgeRenderer;
 
     [HideInInspector]
     public MeshRenderer ConeRenderer;
@@ -159,10 +165,12 @@ public abstract class Enemy : GameLoop
             CreateCone();
             CreateOutline();
             CreateEdges();
+            CreateOuterEdge();
 
             EdgeRendere1.material = EdgeMaterial;
             EdgeRendere2.material = EdgeMaterial;
-            ConeRenderer.material = ConeMaterial;
+            OuterEdgeRenderer.material = ConeMaterial;
+            ConeRenderer.material = LowerConeMaterial;
             OutlineRenderer.material = LowerConeMaterial;
 
             OutlineRenderer.material.color = ConeEmptyColor;
@@ -286,6 +294,9 @@ public abstract class Enemy : GameLoop
             Destroy(Cone);
             Destroy(Outline);
             Destroy(gameObject);
+            Destroy(Edge1);
+            Destroy(Edge2);
+            Destroy(OuterEdge);
         }
     }
 
@@ -314,6 +325,30 @@ public abstract class Enemy : GameLoop
 
 
     }
+
+    void CreateOuterEdge()
+    {
+        OuterEdge = new GameObject();
+        OuterEdge.name = "OuterEdge";
+        OuterEdgeMesh = OuterEdge.AddComponent<MeshFilter>().mesh;
+        OuterEdgeRenderer = OuterEdge.AddComponent<MeshRenderer>();
+
+        Vector3 offset = transform.position;
+
+        offset.y = 0.010f;
+        OuterEdge.transform.position = offset;
+
+        OuterEdge.transform.rotation = transform.rotation;
+
+
+        OuterEdge.transform.parent = transform;
+        OuterEdge.SetActive(false);
+
+
+
+    }
+
+
     void CreateEdges()
     {
         Edge1 = new GameObject();
