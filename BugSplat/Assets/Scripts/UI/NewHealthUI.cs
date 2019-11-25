@@ -14,25 +14,30 @@ public class NewHealthUI : GameLoop
     public GameObject Bar;
     public GameObject MaxBar;
 
-    List<Image> HealthIcons;
-    List<Image> MaxHealthIcons;
+    public List<Image> HealthIcons;
+    public List<Image> MaxHealthIcons;
+
+    public List<GameObject> MaxHealthBars;
+    public List<GameObject> AnimControllers;
+
 
 
     public void Awake()
     {
         //int hearts =
-        HealthIcons = new List<Image>();
+        /*HealthIcons = new List<Image>();
         foreach (Image img in Bar.GetComponentsInChildren<Image>())
             HealthIcons.Add(img);
 
         MaxHealthIcons = new List<Image>();
         foreach (Image img in MaxBar.GetComponentsInChildren<Image>())
-            MaxHealthIcons.Add(img);
+            MaxHealthIcons.Add(img);*/
 
         if (HealthIcons.Count == 0)
             Debug.LogError("No Health Icons Found");
         else
         {
+            
             //ChangeMaxHealth();
             UpdateHealthBar();
 
@@ -85,9 +90,62 @@ public class NewHealthUI : GameLoop
             HealthIcons[i].enabled = false;
         }
 
-        for (int i = maxHearts; i < HealthIcons.Count; i++)
+        if (maxHearts != HealthIcons.Count)
         {
-            MaxHealthIcons[i].enabled = false;
+            for (int i = maxHearts; i < HealthIcons.Count; i++)
+            {
+                MaxHealthIcons[i].enabled = false;
+            }
+
+            if (maxHearts < 9)
+            {
+                MaxHealthBars[2].SetActive(false);
+                MaxHealthBars[3].SetActive(false);
+                MaxHealthBars[4].SetActive(false);
+                MaxHealthBars[5].SetActive(false);
+
+                AnimControllers[2].SetActive(false);
+                AnimControllers[3].SetActive(false);
+                AnimControllers[4].SetActive(false);
+                AnimControllers[5].SetActive(false);
+            }
+
+            if (maxHearts > 8 && maxHearts < 17)
+            {
+                MaxHealthBars[2].SetActive(true);
+                MaxHealthBars[3].SetActive(true);
+                MaxHealthBars[4].SetActive(false);
+                MaxHealthBars[5].SetActive(false);
+
+                AnimControllers[2].SetActive(true);
+                AnimControllers[3].SetActive(true);
+                AnimControllers[4].SetActive(false);
+                AnimControllers[5].SetActive(false);
+            }
+
+            if (maxHearts > 16)
+            {
+                MaxHealthBars[2].SetActive(true);
+                MaxHealthBars[3].SetActive(true);
+                MaxHealthBars[4].SetActive(true);
+                MaxHealthBars[5].SetActive(true);
+
+                AnimControllers[2].SetActive(true);
+                AnimControllers[3].SetActive(true);
+                AnimControllers[4].SetActive(true);
+                AnimControllers[5].SetActive(true);
+            }
+        } else
+        {
+            MaxHealthBars[2].SetActive(true);
+            MaxHealthBars[3].SetActive(true);
+            MaxHealthBars[4].SetActive(true);
+            MaxHealthBars[5].SetActive(true);
+
+            AnimControllers[2].SetActive(true);
+            AnimControllers[3].SetActive(true);
+            AnimControllers[4].SetActive(true);
+            AnimControllers[5].SetActive(true);
         }
 
         if (currentHP <= 0)
