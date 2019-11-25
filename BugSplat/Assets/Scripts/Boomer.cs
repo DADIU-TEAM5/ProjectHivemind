@@ -6,31 +6,31 @@ using UnityEngine.AI;
 public class Boomer : Enemy
 {
 
-    
-    
 
-    
+
+
+
 
     BoomerStats _boomerStats;
 
-    
+
     private bool _attacking;
     private float _attackCharge;
     private float _attackCooldown = 0;
 
     float _SackCD;
 
-    
 
-    
 
-    
+
+
+
 
     [Header("Events")]
-    
-    
+
+
     public GameEvent AttackEvent;
-    
+
     public GameEvent AttackChargingEvent;
 
 
@@ -47,9 +47,9 @@ public class Boomer : Enemy
         _boomerStats = (BoomerStats)stats;
 
 
-        
-        
-        
+
+
+
 
 
         OutlineRenderer.material.color = new Color(.2f, .2f, .2f, .1f);
@@ -71,7 +71,7 @@ public class Boomer : Enemy
 
 
 
-    
+
 
 
     public override void LoopBehaviour(float deltaTime)
@@ -90,9 +90,9 @@ public class Boomer : Enemy
         }
         else if (playerInCustomAttackRange(_boomerStats.AttackRangeTrigger) || _attacking)
         {
-            if (_attackCooldown <= 0 )
+            if (_attackCooldown <= 0)
             {
-                
+
 
                 //Renderer.material.color = SetColor(Color.red);
                 Attack();
@@ -135,7 +135,7 @@ public class Boomer : Enemy
 
             Cone.SetActive(true);
             Outline.SetActive(true);
-            DrawCone(20, OutlineMesh, true,_attackCharge);
+            DrawCone(20, OutlineMesh, true, _attackCharge);
 
             BoomerAnimator.SetTrigger("Attack");
 
@@ -147,7 +147,7 @@ public class Boomer : Enemy
 
         ConeRenderer.material.color = Color.Lerp(Color.green, Color.red, _attackCharge / _boomerStats.AttackChargeUpTime);
 
-        DrawCone(20,ConeMesh,false, _attackCharge);
+        DrawCone(20, ConeMesh, false, _attackCharge);
         _attacking = true;
         _attackCharge += Time.deltaTime;
 
@@ -157,9 +157,9 @@ public class Boomer : Enemy
             Collider[] potentialTargets = Physics.OverlapSphere(transform.position, _boomerStats.AttackRange, LayerMask.GetMask("Player"));
 
             RaycastHit hit;
-            if (potentialTargets.Length > 0 && Physics.Raycast(transform.position, potentialTargets[0].transform.position - transform.position, out hit,10, LayerMask.GetMask("Player")))
+            if (potentialTargets.Length > 0 && Physics.Raycast(transform.position, potentialTargets[0].transform.position - transform.position, out hit, 10, LayerMask.GetMask("Player")))
             {
-                
+
                 if (hit.collider.gameObject.layer == 9)
                 {
 
@@ -169,20 +169,20 @@ public class Boomer : Enemy
                     temp.y = transform.position.y;
 
 
-                    
-                        PlayerHealth playerHealth = potentialTargets[0].GetComponent<PlayerHealth>();
-                        //apply damage to the player
-                        if (playerHealth != null)
-                        {
-                            
 
-                            playerHealth.TakeDamage(_boomerStats.AttackDamage);
-                        }
-                        else
-                        {
-                            Debug.LogError("target of " + gameObject.name + " attack got no health");
-                        }
-                    
+                    PlayerHealth playerHealth = potentialTargets[0].GetComponent<PlayerHealth>();
+                    //apply damage to the player
+                    if (playerHealth != null)
+                    {
+
+
+                        playerHealth.TakeDamage(_boomerStats.AttackDamage);
+                    }
+                    else
+                    {
+                        Debug.LogError("target of " + gameObject.name + " attack got no health");
+                    }
+
                 }
                 else
                     print("attack blocked by terrain or something");
@@ -198,9 +198,9 @@ public class Boomer : Enemy
             Outline.SetActive(false);
             NavMeshAgent.speed = _boomerStats.MoveSpeed;
 
-            
 
-            BoomerAnimator.speed = 1 ;
+
+            BoomerAnimator.speed = 1;
 
 
             if (_boomerStats.DiesWhenItExplode)
@@ -213,13 +213,14 @@ public class Boomer : Enemy
     void SpawnSack(float deltaTime)
     {
 
-        if (_SackCD > 0) {
+        if (_SackCD > 0)
+        {
             _SackCD -= deltaTime;
         }
         else
         {
             _SackCD = _boomerStats.SackSpawnCooldown;
-           GameObject Sack =  Instantiate(_boomerStats.SackToSpawn, transform);
+            GameObject Sack = Instantiate(_boomerStats.SackToSpawn, transform);
 
             Destroy(Sack, _boomerStats.SackLifeTime);
 
@@ -233,7 +234,7 @@ public class Boomer : Enemy
 
     public override void TakeDamageBehaviour(float damage)
     {
-        
+
     }
 
 
@@ -243,7 +244,7 @@ public class Boomer : Enemy
     void MoveTowardsThePlayer(float deltaTime)
     {
 
-        
+
 
         if (_attackCooldown <= 0)
         {
@@ -300,12 +301,12 @@ public class Boomer : Enemy
             }
 
         }
-        
+
     }
 
-    
 
-    
+
+
 
 
 }

@@ -139,6 +139,6 @@ public class PlayerDodgeScript : MonoBehaviour
 
     void OnDrawGizmos() {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(transform.position, PlayerCollideRadius);
+       // Gizmos.DrawSphere(transform.position, PlayerCollideRadius);
     }
 }

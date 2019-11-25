@@ -59,11 +59,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8956a3797f60e7847be8b637044a3ab8, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   IsPaticipant: 0
   SpawnedEnemy: 0
   EnemySpawnedEvent: {fileID: 0}
+  SpawnCamInit: {fileID: 0}
+  SpawnFirstTime: {fileID: 0}
+  ZoomCamInit: {fileID: 0}
+  ZoomCamFrequency: {fileID: 0}
+  PlayerCurrentSpeedSO: {fileID: 0}
   IsUnderground: 0
   hex: {fileID: 0}
   difficultyValue: 1
@@ -91,7 +96,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  ConeMaterial: {fileID: 2100000, guid: 334b626f7df17c24098755a1717def0b, type: 2}
+  ConeMaterial: {fileID: 2100000, guid: 44ad2d5118b6126489b1776ec64125f8, type: 2}
+  EdgeMaterial: {fileID: 2100000, guid: 1b67e36b201d3e449b3031e7737774fe, type: 2}
+  LowerConeMaterial: {fileID: 2100000, guid: 334b626f7df17c24098755a1717def0b, type: 2}
   stats: {fileID: 11400000, guid: 938a1c16fd0669d419bbb10ee50f5cc1, type: 2}
   bodyPart: {fileID: 7324468612011702487, guid: 862620230bd5167459723c1fe51d3192,
     type: 3}
@@ -149,8 +156,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae8cd77b9a3fb574486a4a4a4ef4a938, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   IsPaticipant: 1
   GameLoopHandler: {fileID: 11400000, guid: b20923f160198a245bcdd80c8342f9ac, type: 2}
   GameLoops:
@@ -338,7 +345,7 @@ PrefabInstance:
     - target: {fileID: 1285320057312482332, guid: ef6a80b28bc6bc74399f76d964ebd552,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
-      value:
+      value: 
       objectReference: {fileID: 2100000, guid: b95c7cf4cf26f28418434161d8dccd13, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef6a80b28bc6bc74399f76d964ebd552, type: 3}

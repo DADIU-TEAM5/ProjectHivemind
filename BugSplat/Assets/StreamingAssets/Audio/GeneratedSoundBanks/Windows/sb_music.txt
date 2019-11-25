@@ -5,6 +5,18 @@ Event	ID	Name			Wwise Object Path	Notes
 	3229152761	music_shop			\MusicEvents\music_shop	
 	3782024871	music_battle			\MusicEvents\music_battle	
 
+Switch Group	ID	Name			Wwise Object Path	Notes
+	3127575970	battlemusic_aggroIntensity			\Default Work Unit\battlemusic_aggroIntensity	
+	3506839690	battlemusic_enemiesLeftSwitch			\Default Work Unit\battlemusic_enemiesLeftSwitch	
+
+Switch	ID	Name	Switch Group			Notes
+	972571746	aggroIntensity_2medium	battlemusic_aggroIntensity			
+	1669603518	aggroIntensity_3high	battlemusic_aggroIntensity			
+	2367486699	aggroIntensity_0none	battlemusic_aggroIntensity			
+	3411955898	aggroIntensity_1low	battlemusic_aggroIntensity			
+	1038380630	enemiesLeftSwitch_1Few	battlemusic_enemiesLeftSwitch			
+	3429280042	enemiesLeftSwitch_0neutral	battlemusic_enemiesLeftSwitch			
+
 State Group	ID	Name			Wwise Object Path	Notes
 	2337794614	state_battlemusic			\Default Work Unit\state_battlemusic	
 
@@ -15,23 +27,37 @@ State	ID	Name	State Group			Notes
 	2766947299	state_battlemusic_won	state_battlemusic			
 	3349524931	state_battlemusic_unengaged	state_battlemusic			
 
+Game Parameter	ID	Name			Wwise Object Path	Notes
+	2120047921	EnemiesAggroedRTPC			\battlemusic\EnemiesAggroedRTPC	
+	2775208701	EnemiesLeftRTPC			\battlemusic\EnemiesLeftRTPC	
+
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	20843763	battlemusic_shaky_basic	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Windows\SFX\battlemusic_shaky_basic_EBC987A4.wem		\Interactive Music Hierarchy\Default Work Unit\BattleMusic\battlemusic_shaky\battlemusic_shaky_basic\battlemusic_shaky_basic\battlemusic_shaky_basic		167612
+	114728407	battlemusic_taiko_intensityHigh_03	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Windows\SFX\battlemusic_taiko_intensityHigh_03_ADF7B7FB.wem		\Interactive Music Hierarchy\Default Work Unit\BattleMusic\battlemusic_taiko_mainSwitch\battlemusic_taiko_intensitySwitch\battlemusic_taiko_engaged_high\battlemusic_taiko_intensityHigh_03\battlemusic_taiko_intensityHigh_03		235541
 	123497996	toadmusic_koto_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Windows\SFX\toadmusic_koto_02_ADF7B7FB.wem		\Interactive Music Hierarchy\Default Work Unit\ToadMusika\KotoTwo\toadmusic_koto_02\toadmusic_koto_02		2148601
-	252322867	battlemusic_unengaged_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Windows\SFX\battlemusic_unengaged_01_ADF7B7FB.wem		\Interactive Music Hierarchy\Default Work Unit\BattleMusic\battlemusic_taiko\battlemusic_taiko_unengaged\battlemusic_unengaged_01\battlemusic_unengaged_01		200553
-	298318329	battlemusic_taiko_endTest	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Windows\SFX\battlemusic_taiko_endTest_ADF7B7FB.wem		\Interactive Music Hierarchy\Default Work Unit\BattleMusic\battlemusic_taiko\battlemusic_taiko_won(looperikke!)\battlemusic_taiko_endTest		47091
+	171934475	battlemusic_shaky_basicAfr	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Windows\SFX\battlemusic_shaky_basicAfr_EBC987A4.wem		\Interactive Music Hierarchy\Default Work Unit\BattleMusic\battlemusic_shaky\battlemusic_shaky_basic\battlemusic_shaky_basic\battlemusic_shaky_basicAfr		319058
+	252322867	battlemusic_unengaged_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Windows\SFX\battlemusic_unengaged_01_ADF7B7FB.wem		\Interactive Music Hierarchy\Default Work Unit\BattleMusic\battlemusic_taiko_mainSwitch\battlemusic_taiko_unengaged\battlemusic_unengaged_01\battlemusic_unengaged_01		200553
+	298318329	battlemusic_taiko_endTest	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Windows\SFX\battlemusic_taiko_endTest_ADF7B7FB.wem		\Interactive Music Hierarchy\Default Work Unit\BattleMusic\battlemusic_taiko_mainSwitch\battlemusic_taiko_won(looperikke!)\battlemusic_taiko_endTest		47091
 	317987949	toadmusic_tabla_03	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Windows\SFX\toadmusic_tabla_03_ADF7B7FB.wem		\Interactive Music Hierarchy\Default Work Unit\ToadMusika\toadmusic_tabla\toadmusic_tabla_03\toadmusic_tabla_03		293696
 	421490600	toadmusic_shaker_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Windows\SFX\toadmusic_shaker_01_ADF7B7FB.wem		\Interactive Music Hierarchy\Default Work Unit\ToadMusika\toadmusic_shaker\toadmusic_shaker_01\toadmusic_shaker_01		2227508
 	502406035	bugbeatsTest2	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Windows\SFX\bugbeatsTest2_EBC987A4.wem		\Interactive Music Hierarchy\Default Work Unit\Intro\bugbeatsTest2\bugbeatsTest2		4977523
+	533435184	battlemusic_taiko_intensityHigh_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Windows\SFX\battlemusic_taiko_intensityHigh_01_ADF7B7FB.wem		\Interactive Music Hierarchy\Default Work Unit\BattleMusic\battlemusic_taiko_mainSwitch\battlemusic_taiko_intensitySwitch\battlemusic_taiko_engaged_high\battlemusic_taiko_intensityHigh_01\battlemusic_taiko_intensityHigh_01		244981
+	553769417	battlemusic_2barSilence	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Windows\SFX\battlemusic_2barSilence_EBC987A4.wem		\Interactive Music Hierarchy\Default Work Unit\BattleMusic\battlemusic_shaky\battlemusic_shaky_basic\battlemusic_2barSilence\battlemusic_2barSilence		1385
 	581058648	toadmusic_koto_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Windows\SFX\toadmusic_koto_01_ADF7B7FB.wem		\Interactive Music Hierarchy\Default Work Unit\ToadMusika\KotoOne\toadmusic_koto_01\toadmusic_koto_01		2306679
 	585541463	toadmusic_kntkGtr_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Windows\SFX\toadmusic_kntkGtr_01_EBC987A4.wem		\Interactive Music Hierarchy\Default Work Unit\ToadMusika\toadmusic_gtr\toadmusic_kntkGtr_01\toadmusic_kntkGtr_01		121526
+	636870390	battlemusic_taiko_intensityHigh_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Windows\SFX\battlemusic_taiko_intensityHigh_02_ADF7B7FB.wem		\Interactive Music Hierarchy\Default Work Unit\BattleMusic\battlemusic_taiko_mainSwitch\battlemusic_taiko_intensitySwitch\battlemusic_taiko_engaged_high\battlemusic_taiko_intensityHigh_02\battlemusic_taiko_intensityHigh_02		239224
 	745185129	toadmusic_tabla_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Windows\SFX\toadmusic_tabla_02_ADF7B7FB.wem		\Interactive Music Hierarchy\Default Work Unit\ToadMusika\toadmusic_tabla\toadmusic_tabla_02\toadmusic_tabla_02		326145
+	761869294	battlemusic_unengaged_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Windows\SFX\battlemusic_unengaged_02_ADF7B7FB.wem		\Interactive Music Hierarchy\Default Work Unit\BattleMusic\battlemusic_taiko_mainSwitch\battlemusic_taiko_unengaged\battlemusic_unengaged_02\battlemusic_unengaged_02		215905
 	781739501	toadmusic_tabla_04	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Windows\SFX\toadmusic_tabla_04_ADF7B7FB.wem		\Interactive Music Hierarchy\Default Work Unit\ToadMusika\toadmusic_tabla\toadmusic_tabla_04\toadmusic_tabla_04		635442
 	814768109	toadmusic_bongo_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Windows\SFX\toadmusic_bongo_01_ADF7B7FB.wem		\Interactive Music Hierarchy\Default Work Unit\ToadMusika\toadmusic_bongo\toadmusic_bongo_01\toadmusic_bongo_01		349362
+	819483706	battlemusic_shakey_idle	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Windows\SFX\battlemusic_shakey_idle_EBC987A4.wem		\Interactive Music Hierarchy\Default Work Unit\BattleMusic\battlemusic_shaky\battlemusicShakyShifter\batllemusic_shaky_idlefromengaged\battlemusic_shakey_idle\battlemusic_shakey_idle		347113
 	923759512	toadmusic_sitar_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Windows\SFX\toadmusic_sitar_02_EBC987A4.wem		\Interactive Music Hierarchy\Default Work Unit\ToadMusika\toadmusiic_sitar\toadmusic_sitar_02\toadmusic_sitar_02		151029
+	943766782	battlemusic_throat_start	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Windows\SFX\battlemusic_throat_start_EBC987A4.wem		\Interactive Music Hierarchy\Default Work Unit\BattleMusic\battlemusic_throatSwitch\battlemusic_throat\battlemusic_throat_start\battlemusic_throat_start		356820
 	945432591	toadmusic_sitar_04	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Windows\SFX\toadmusic_sitar_04_EBC987A4.wem		\Interactive Music Hierarchy\Default Work Unit\ToadMusika\toadmusiic_sitar\toadmusic_sitar_04\toadmusic_sitar_04		168378
 	961919514	toadmusic_tabla_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Windows\SFX\toadmusic_tabla_01_ADF7B7FB.wem		\Interactive Music Hierarchy\Default Work Unit\ToadMusika\toadmusic_tabla\toadmusic_tabla_01\toadmusic_tabla_01		333510
 	963099816	toadmusic_kntkGtr_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Windows\SFX\toadmusic_kntkGtr_02_EBC987A4.wem		\Interactive Music Hierarchy\Default Work Unit\ToadMusika\toadmusic_gtr\toadmusic_kntkGtr_02\toadmusic_kntkGtr_02		154617
 	999345760	toadmusic_sitar_03	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Windows\SFX\toadmusic_sitar_03_EBC987A4.wem		\Interactive Music Hierarchy\Default Work Unit\ToadMusika\toadmusiic_sitar\toadmusic_sitar_03\toadmusic_sitar_03		145080
 	1003944722	toadmusic_antlerbow_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Windows\SFX\toadmusic_antlerbow_01_EBC987A4.wem		\Interactive Music Hierarchy\Default Work Unit\ToadMusika\toadmusic_antlerbow\toadmusic_antlerbow_01\toadmusic_antlerbow_01		585363
 	1030702101	toadmusic_sitar_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Windows\SFX\toadmusic_sitar_01_EBC987A4.wem		\Interactive Music Hierarchy\Default Work Unit\ToadMusika\toadmusiic_sitar\toadmusic_sitar_01\toadmusic_sitar_01		148263
+	1035285248	battlemusic_shakey_end	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Windows\SFX\battlemusic_shakey_end_EBC987A4.wem		\Interactive Music Hierarchy\Default Work Unit\BattleMusic\battlemusic_shaky\battlemusic_shaky_end\battlemusic_shakey_end\battlemusic_shakey_end		61281
 
