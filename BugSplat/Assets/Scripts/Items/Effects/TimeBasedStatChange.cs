@@ -9,16 +9,10 @@ public class TimeBasedStatChange : Effect
 
     public float Timer;
 
-    private StatChangeEffect InverseStatChange;
-
     private EmptyMono CoroutineBoy;
 
     public override void Init()
     {
-        InverseStatChange = (StatChangeEffect) CreateInstance(typeof(StatChangeEffect));
-        InverseStatChange.Stat = StatChange.Stat;
-        InverseStatChange.Change = -StatChange.Change;
-
         CoroutineBoy = MakeCoroutineObject();
         CoroutineBoy.gameObject.name = "TimeBasedStatChange_CoroutineBoy";
     }
@@ -29,10 +23,19 @@ public class TimeBasedStatChange : Effect
     }
 
     private IEnumerator EffectCountdown() {
-        StatChange.Trigger();
+        float actualChange = 0f;
+        if (StatChange.Change > 0) {
+            var change = StatChange.GetMax() - StatChange.Stat.Value;
+            actualChange = Mathf.Min(change, StatChange.Change);
+        } else {
+            var change = 0 - StatChange.Stat.Value;
+            actualChange = Mathf.Max(change, StatChange.Change);
+        }
+
+        StatChange.Stat.SetValue(StatChange.Stat.Value + actualChange);
 
         yield return new WaitForSeconds(Timer);
 
-        InverseStatChange.Trigger();
+        StatChange.Stat.SetValue(StatChange.Stat.Value - actualChange);
     }
 }
