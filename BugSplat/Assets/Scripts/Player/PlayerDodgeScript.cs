@@ -15,6 +15,9 @@ public class PlayerDodgeScript : MonoBehaviour
     public FloatVariable DashCooldownSO;
     public AnimationCurve DashAnimationCurve;
 
+    public float PlayerCollideRadius = 1f;
+    public float PlayerCollideEndRadius = 1f;
+
     // Stamina stuff ------------
     public bool StaminaIsActive;
     // Used to change Dash legnth Depending on Stamina
@@ -82,12 +85,15 @@ public class PlayerDodgeScript : MonoBehaviour
                 if (StaminaIsActive)
                     _navMeshAgent.transform.position = _initialPos + PlayerVelocitySO.Value * DashPower.Value;
                 else _navMeshAgent.transform.position = _initialPos + PlayerVelocitySO.Value;
+
+                DashCollideEnemies(PlayerCollideRadius);
             }
 
             yield return null;
         }
 
         PlayerVelocitySO.Value = _dashDirection * DashLengthSO.Value;
+        DashCollideEnemies(PlayerCollideEndRadius);
 
         if (_navMeshAgent.isOnNavMesh)
         {
@@ -106,6 +112,17 @@ public class PlayerDodgeScript : MonoBehaviour
 
     }
 
+    private void DashCollideEnemies(float radius) {
+        var collides = Physics.OverlapSphere(_navMeshAgent.transform.position, radius, (1 << 8), QueryTriggerInteraction.Collide);
+        foreach (var potentialEnemy in collides) {
+            var enemy = potentialEnemy.GetComponent<Enemy>();
+            if (enemy == null) continue;
+
+            DashCollideEvent.Raise(enemy.gameObject);
+            enemy.TakeDamage(DashDamage.Value);
+        }
+    }
+
     // Called from PlayerController
     public void PlayerDash()
     {
@@ -116,13 +133,8 @@ public class PlayerDodgeScript : MonoBehaviour
         }
     }
 
-    public void OnCollisionEnter(Collision collision) {
-        if (IsDodgingSO.Value) {
-            var enemy = collision.gameObject.GetComponent<Enemy>();
-            if (enemy == null) return;
-
-            DashCollideEvent.Raise(enemy.gameObject);
-            enemy.TakeDamage(DashDamage.Value);
-        }
+    void OnDrawGizmos() {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position, PlayerCollideRadius);
     }
 }
