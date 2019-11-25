@@ -39,8 +39,7 @@ public class ProjectileEffect : Effect
         projectileCollidedEffect.ParticleController = _particleController;
 
         var projectileRigidbody = projectile.GetComponent<Rigidbody>();
-        var projectileVelocity = effectTarget.transform.forward * ProjectileSpeed;
-        Debug.Log($"{ProjectileSpeed} - {projectileVelocity}");
+        var projectileVelocity = projectileCollidedEffect.transform.forward * ProjectileSpeed;
 
         projectileRigidbody.velocity = projectileVelocity;
         //_particles.transform.rotation = Quaternion.LookRotation(effectTarget.transform.forward, effectTarget.transform.up) * Quaternion.Euler(0, AngleOffset, 0);
@@ -55,7 +54,6 @@ public class ProjectileEffect : Effect
 
         void OnCollisionEnter(Collision collision)
         {
-            Debug.Log("Hello");
             ParticleController.MoveTo(gameObject);
             ParticleController.Play();
             ParticleController.InstantiateAfterParts();
