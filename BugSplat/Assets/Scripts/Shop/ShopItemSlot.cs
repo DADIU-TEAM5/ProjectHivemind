@@ -82,9 +82,9 @@ public class ShopItemSlot : ShopSlot
         Item = null;
     }
 
-    public override string GetTitle() => Item.name;
+    public override string GetTitle() => Item?.Info?.Title?.GetText();
 
-    public override string GetDescription() => Item?.Info?.Description;
+    public override string GetDescription() => Item?.Info?.Description?.GetText();
 
     public override void Reroll()
     {

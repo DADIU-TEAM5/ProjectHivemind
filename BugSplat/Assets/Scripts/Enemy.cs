@@ -174,7 +174,7 @@ public abstract class Enemy : GameLoop
             NavMeshAgent.destination = transform.position + (new Vector3(Random.Range(-2, 2), 0, Random.Range(-2, 2)));
         }
 
-
+        _enemyMat = this.gameObject.GetComponentInChildren<Renderer>().material;
 
     }
 
@@ -887,7 +887,7 @@ public abstract class Enemy : GameLoop
 
     public void HighlightThisBitch()
     {
-        _enemyMat = this.gameObject.GetComponentInChildren<Renderer>().material;
+        
         this.gameObject.GetComponentInChildren<Renderer>().material = WhiteMaterial;
         StartCoroutine(ResetColor(_enemyHighlightTime));
     }

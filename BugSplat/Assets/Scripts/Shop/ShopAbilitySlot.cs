@@ -33,9 +33,9 @@ public class ShopAbilitySlot : ShopSlot
     {
     }
 
-    public override string GetTitle() => Ability?.name;
+    public override string GetTitle() => Info?.Title?.GetText();
 
-    public override string GetDescription() => Info?.Description;
+    public override string GetDescription() => Info?.Description?.GetText();
 
     public override void Reroll()
     {

@@ -7,7 +7,7 @@ public class StaminaUI : MonoBehaviour
 {
     public RectTransform staminaTransform;
     private float initTransformWidth;
-    private Image staminaImage;
+    public Image staminaImage;
     public FloatVariable CurrentStaminaSO;
     public FloatVariable DashCostSO;
     public Color ActiveStaminaColor;
@@ -18,7 +18,6 @@ public class StaminaUI : MonoBehaviour
     {
         //staminaTransform = this.GetComponent<RectTransform>();
         initTransformWidth = staminaTransform.sizeDelta.x;
-        staminaImage = staminaTransform.gameObject.GetComponent<Image>();
     }
 
     // Update is called once per frame

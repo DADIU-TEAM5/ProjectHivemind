@@ -11,6 +11,8 @@ public class EnemySpawner : GameLoop
     public FloatVariable InitalAggroDelay;
     public IntVariable EnemiesLeftBeforeNewWave;
 
+    public IntVariable TotalEnemyCount;
+    
     public static int LevelBudget;
 
     public static int[] WaveLevelBudget;
@@ -22,6 +24,7 @@ public class EnemySpawner : GameLoop
 
     public static List<IEnumerator> QueuedSpawns;
 
+    
 
     public float SpawnCD = 2;
 
@@ -129,7 +132,7 @@ public class EnemySpawner : GameLoop
                 SmallestValue = _values[i];
         }
 
-
+        
     }
 
 
@@ -383,6 +386,7 @@ public class EnemySpawner : GameLoop
 
 
                 EnemiesToSpawn.Add(ChosenGuy);
+                TotalEnemyCount.Value++;
 
             }
                 
@@ -449,7 +453,6 @@ public class EnemySpawner : GameLoop
         }
         // Debug.Log(name + " is done");
 
-        
     }
 
 
@@ -472,7 +475,7 @@ public class EnemySpawner : GameLoop
             {
                 WaveLevelBudget[_currentWave] -= FirsTValueToget;
 
-
+                TotalEnemyCount.Value++;
                 EnemiesToSpawn.Add(ChosenGuy);
 
             }
@@ -568,7 +571,7 @@ public class EnemySpawner : GameLoop
 
 
 
-
+        
     }
 
 
