@@ -7,7 +7,9 @@ public class ItemInfo
 {
     public Tier Tier;
     public int Price;
-    public string Description;
+
+    public GameText Title;
+    public GameText Description;
     public GameObject ItemPrefab;
 
 }

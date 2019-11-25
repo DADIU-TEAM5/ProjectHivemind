@@ -40,6 +40,7 @@ public class PlayerDodgeScript : MonoBehaviour
     private Vector3 _initialPos;
     private bool _dashCooldownActive;
 
+    private List<Enemy> CollidedEnemies = new List<Enemy>();
 
 
     private void Start()
@@ -74,6 +75,8 @@ public class PlayerDodgeScript : MonoBehaviour
 
         _initialPos = transform.position;
         _dashDirection = PlayerDirectionSO.Value;
+
+        CollidedEnemies.Clear();
 
         for (var time = 0f; time <= DashSpeedSO.Value; time += Time.deltaTime) {
             var curveTime = DashAnimationCurve?.Evaluate(time / DashSpeedSO.Value) ?? time / DashSpeedSO.Value; 
@@ -116,8 +119,9 @@ public class PlayerDodgeScript : MonoBehaviour
         var collides = Physics.OverlapSphere(_navMeshAgent.transform.position, radius, (1 << 8), QueryTriggerInteraction.Collide);
         foreach (var potentialEnemy in collides) {
             var enemy = potentialEnemy.GetComponent<Enemy>();
-            if (enemy == null) continue;
+            if (enemy == null || CollidedEnemies.Contains(enemy)) continue;
 
+            CollidedEnemies.Add(enemy);
             DashCollideEvent.Raise(enemy.gameObject);
             enemy.TakeDamage(DashDamage.Value);
         }
@@ -135,6 +139,6 @@ public class PlayerDodgeScript : MonoBehaviour
 
     void OnDrawGizmos() {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(transform.position, PlayerCollideRadius);
+       // Gizmos.DrawSphere(transform.position, PlayerCollideRadius);
     }
 }
