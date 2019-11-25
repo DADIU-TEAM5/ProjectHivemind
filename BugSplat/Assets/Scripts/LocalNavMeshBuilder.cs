@@ -23,6 +23,7 @@ public class LocalNavMeshBuilder : MonoBehaviour
     {
         while (true)
         {
+            yield return new WaitForSeconds(0.5f);
             UpdateNavMesh(true);
 
             yield return m_Operation;
@@ -48,7 +49,7 @@ public class LocalNavMeshBuilder : MonoBehaviour
         m_Instance.Remove();
     }
 
-    void UpdateNavMesh(bool asyncUpdate = false)
+    public void UpdateNavMesh(bool asyncUpdate = false)
     {
         NavMeshSourceTag.Collect(ref m_Sources);
         var defaultBuildSettings = NavMesh.GetSettingsByID(0);
