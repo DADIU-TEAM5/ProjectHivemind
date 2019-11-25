@@ -115,6 +115,30 @@ namespace AK
 
     namespace SWITCHES
     {
+        namespace BATTLEMUSIC_AGGROINTENSITY
+        {
+            static const AkUniqueID GROUP = 3127575970U;
+
+            namespace SWITCH
+            {
+                static const AkUniqueID AGGROINTENSITY_0NONE = 2367486699U;
+                static const AkUniqueID AGGROINTENSITY_1LOW = 3411955898U;
+                static const AkUniqueID AGGROINTENSITY_2MEDIUM = 972571746U;
+                static const AkUniqueID AGGROINTENSITY_3HIGH = 1669603518U;
+            } // namespace SWITCH
+        } // namespace BATTLEMUSIC_AGGROINTENSITY
+
+        namespace BATTLEMUSIC_ENEMIESLEFTSWITCH
+        {
+            static const AkUniqueID GROUP = 3506839690U;
+
+            namespace SWITCH
+            {
+                static const AkUniqueID ENEMIESLEFTSWITCH_0NEUTRAL = 3429280042U;
+                static const AkUniqueID ENEMIESLEFTSWITCH_1FEW = 1038380630U;
+            } // namespace SWITCH
+        } // namespace BATTLEMUSIC_ENEMIESLEFTSWITCH
+
         namespace SWITCH_AMB
         {
             static const AkUniqueID GROUP = 4218164408U;
@@ -144,6 +168,8 @@ namespace AK
     namespace GAME_PARAMETERS
     {
         static const AkUniqueID CHEER_LEVEL = 4250097399U;
+        static const AkUniqueID ENEMIESAGGROEDRTPC = 2120047921U;
+        static const AkUniqueID ENEMIESLEFTRTPC = 2775208701U;
         static const AkUniqueID MANAGE_MUSICMAIN_LEVEL = 724781984U;
         static const AkUniqueID MANAGE_SFXMAIN_LEVEL = 429852744U;
         static const AkUniqueID PLAYERSPEED = 1493153371U;

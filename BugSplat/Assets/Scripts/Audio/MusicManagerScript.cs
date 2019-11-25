@@ -46,7 +46,15 @@ public class MusicManagerScript : MonoBehaviour
 
     void Update()
     {
-        IntenseOMeter = (EnemiesAgroed.Value - CurrentHealth.Value)+IntensityOffset;
+        IntenseOMeter = EnemiesAgroed.Value;
+        EnemiesAgroedRTPC.SetGlobalValue(EnemiesAgroed.Value);
+        EnemiesLeftRTPC.SetGlobalValue(EnemiesLeft.Value);
+        HealthRTPC.SetGlobalValue(CurrentHealth.Value);
+    }
+
+    public void EnemyAggroedEvent()
+    {
+        
     }
 
     public void ArenaLoad()
@@ -74,8 +82,11 @@ public class MusicManagerScript : MonoBehaviour
     {
        // StopBattleMusic.Post(this.gameObject);
         BattleMusicWon.SetValue();
+    }
 
-
+    public void CloseWallEvent()
+    {
+        BattleMusicEngaged.SetValue();
     }
 
 }
