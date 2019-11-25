@@ -17,7 +17,7 @@ public class StaminaController : GameLoop
     // Used to determine DashPower depending on current stamina
     public AnimationCurve DashEffectivenessCurve;
 
-    public Text StaminaText;
+    //public Text StaminaText;
 
 
     public override void LoopLateUpdate(float deltaTime)
@@ -33,8 +33,8 @@ public class StaminaController : GameLoop
 
         //Debug.Log("Dash Update: Current Stamina: " + Stamina.Value + ", Dash Power: " + DashPower.Value);
 
-        int val = (int)Stamina.Value;
-        StaminaText.text = val.ToString();
+        //int val = (int)Stamina.Value;
+        //StaminaText.text = val.ToString();
 
     }
 
