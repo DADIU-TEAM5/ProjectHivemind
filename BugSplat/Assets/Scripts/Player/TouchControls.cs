@@ -96,8 +96,9 @@ public class TouchControls : GameLoop
         if (UIMenuButton != null)
         {
           
-            _uiOffset = new Vector2(UIMenuButton.position.x, UIMenuButton.position.y);
+            _uiOffset = new Vector2(UIMenuButton.position.x - (UIMenuButton.sizeDelta.x/2), UIMenuButton.position.y + (UIMenuButton.sizeDelta.y / 2));
             Debug.Log("UI Position: " + _uiOffset);
+            Debug.Log("sizeDelta: " + UIMenuButton.sizeDelta.x / 2);
         } 
     }
 
@@ -147,8 +148,10 @@ public class TouchControls : GameLoop
                     if (Input.GetMouseButton(0))
                     {
                         
-                            if (inputPosition.x > _uiOffset.x || inputPosition.y > _uiOffset.y)
+                            if (inputPosition.x < _uiOffset.x || inputPosition.y > _uiOffset.y)
                             {
+                            Debug.Log(inputPosition.x);
+
                                 BeginMove(inputPosition,0);
                             }
                        
@@ -157,7 +160,7 @@ public class TouchControls : GameLoop
                     if (Input.GetMouseButtonUp(0))
                     {
                         
-                            if (inputPosition.x > _uiOffset.x || inputPosition.y > _uiOffset.y)
+                            if (inputPosition.x < _uiOffset.x || inputPosition.y > _uiOffset.y)
                             {
                                 EndMove(Input.mousePosition,0);
                             }

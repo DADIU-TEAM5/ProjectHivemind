@@ -101,7 +101,6 @@ public class AttackScript : GameLoop
 
 
         if (!_canAttack) return;
-        AttackInitiated.Raise(PlayerGraphics.gameObject);
 
         Attacking.Value = true;
         _attackingTimer = AttackTime.Value;
@@ -230,6 +229,8 @@ public class AttackScript : GameLoop
     {
         //print(PlayerDirectionSO.Value);
 
+        PlayerGraphics.rotation = Quaternion.LookRotation(PlayerDirectionSO.Value, PlayerGraphics.up);
+        AttackInitiated.Raise(PlayerGraphics.gameObject);
         Anim.SetTrigger("Attack");
 
         DrawCone(10);

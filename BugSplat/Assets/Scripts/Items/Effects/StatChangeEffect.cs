@@ -19,10 +19,12 @@ public class StatChangeEffect : Effect
         Stat.SetValue(Stat.Value + Change);
     }
 
-    public override int CanBeApplied() {
-        if (Change < 0 || ApplicableIgnore) return 0;
+    public virtual float GetMax() => Stat.Max;
 
-        if (Stat.Value == Stat.Max) {
+    public override int CanBeApplied() {
+        if (Change <= 0 || ApplicableIgnore) return 0;
+
+        if (Stat.Value >= GetMax()) {
             return 0;
         }
 
