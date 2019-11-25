@@ -119,7 +119,7 @@ public class PlayerHealth : GameLoop
         if (CurrentHealth.Value <= 0)
         {
             PlayerDiedEvent.Raise(PlayerGraphics);
-            Destroy(HexMapParent.Value);
+           // Destroy(HexMapParent.Value);
 
             EnemyList.Items = new List<Enemy>();
             Invoke("LoadDeadScene", 2f);
