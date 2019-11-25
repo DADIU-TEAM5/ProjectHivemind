@@ -6,17 +6,21 @@ using TMPro;
 
 public class EnemiesTrackUI : GameLoop
 {
+    public IntVariable TotalEnemyCount;
     public EnemyObjectList EnemiesListSO;
     public IntVariable EnemiesKilledSO;
     public TextMeshProUGUI EKills;
     public TextMeshProUGUI EnemiesAtStart;
 
+    private int eventRaisedCount;
 
     private void Start()
     {
+        eventRaisedCount = 0;
         EnemiesKilledSO.Value = 0;
 
-        EnemiesAtStart.text = EnemiesListSO.Items.Count.ToString();
+        int enemytotal = EnemiesListSO.Items.Count + TotalEnemyCount.Value;
+        EnemiesAtStart.text = enemytotal.ToString();
     }
 
     public override void LoopUpdate(float deltaTime)
@@ -33,7 +37,16 @@ public class EnemiesTrackUI : GameLoop
 
     public void UpdateEnemyCount()
     {
-        EnemiesAtStart.text = EnemiesListSO.Items.Count.ToString();
-            
+        eventRaisedCount++;
+        if(eventRaisedCount <= EnemiesListSO.Items.Count)
+        {
+            Debug.Log("Enemy Spawned call");
+            int enemytotal = EnemiesListSO.Items.Count + TotalEnemyCount.Value + EnemiesKilledSO.Value;
+
+
+            EnemiesAtStart.text = enemytotal.ToString();
+
+        }
+
     }
 }
