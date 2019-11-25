@@ -23,7 +23,8 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: 
+    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
+      human bone 'LeftUpperLeg' not found\n"
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -109,7 +110,57 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: BoomerEgg_Animation(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: BoomerEgg:Boomer_egg
+      parentName: BoomerEgg_Animation(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Skeleton_grp
+      parentName: BoomerEgg_Animation(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: joint3
+      parentName: Skeleton_grp
+      position: {x: 0.016532054, y: 0.007898374, z: 0}
+      rotation: {x: 0, y: -0, z: -0.044248257, w: 0.9990206}
+      scale: {x: 1, y: 1, z: 1}
+    - name: joint4
+      parentName: joint3
+      position: {x: -0.1460703, y: 0.053104885, z: 0.09971348}
+      rotation: {x: 0, y: 0, z: 0.04424826, w: 0.9990206}
+      scale: {x: 1, y: 1, z: 1}
+    - name: joint2
+      parentName: joint3
+      position: {x: 0.057902392, y: -0.14497302, z: 0.1529567}
+      rotation: {x: 0, y: 0, z: 0.04424826, w: 0.9990206}
+      scale: {x: 1, y: 1, z: 1}
+    - name: joint5
+      parentName: joint3
+      position: {x: 0.109806605, y: 0.05012695, z: -0.12881224}
+      rotation: {x: 0, y: 0, z: 0.04424826, w: 0.9990206}
+      scale: {x: 1, y: 1, z: 1}
+    - name: joint6
+      parentName: joint3
+      position: {x: 0.18158738, y: -0.16923611, z: 0.0028330865}
+      rotation: {x: 0, y: 0, z: 0.04424826, w: 0.9990206}
+      scale: {x: 1, y: 1, z: 1}
+    - name: joint8
+      parentName: joint3
+      position: {x: -0.020251788, y: 0.18644698, z: 0.01210522}
+      rotation: {x: 0, y: 0, z: 0.04424826, w: 0.9990206}
+      scale: {x: 1, y: 1, z: 1}
+    - name: joint7
+      parentName: joint3
+      position: {x: -0.11992787, y: -0.18156749, z: -0.111843824}
+      rotation: {x: 0, y: 0, z: 0.04424826, w: 0.9990206}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -123,7 +174,7 @@ ModelImporter:
     hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
