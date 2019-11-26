@@ -89,6 +89,10 @@ public class EnemySpawner : GameLoop
             }
 
         }
+        else
+        {
+            IsWaveSO.Value = false;
+        }
 
 
         SingleEnemySpawned = false;
