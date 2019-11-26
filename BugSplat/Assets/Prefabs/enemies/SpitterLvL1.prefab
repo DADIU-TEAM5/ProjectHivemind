@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 82153998085943091}
   m_LocalRotation: {x: -0.03239448, y: 0.0004138648, z: -0.012690869, w: -0.99939454}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: -0.046, z: 0.705}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6935001282969472289}
@@ -108,7 +108,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  ConeMaterial: {fileID: 2100000, guid: 334b626f7df17c24098755a1717def0b, type: 2}
+  ConeMaterial: {fileID: 2100000, guid: 44ad2d5118b6126489b1776ec64125f8, type: 2}
+  EdgeMaterial: {fileID: 2100000, guid: 1b67e36b201d3e449b3031e7737774fe, type: 2}
+  LowerConeMaterial: {fileID: 2100000, guid: 334b626f7df17c24098755a1717def0b, type: 2}
   stats: {fileID: 11400000, guid: cbaf78494567dd143a052ea9fd43de50, type: 2}
   bodyPart: {fileID: 7324468612011702487, guid: 862620230bd5167459723c1fe51d3192,
     type: 3}
@@ -131,6 +133,15 @@ MonoBehaviour:
   StartColor: {r: 0, g: 0, b: 0, a: 0}
   Renderer: {fileID: 0}
   Cone: {fileID: 0}
+  Edge1: {fileID: 0}
+  Edge2: {fileID: 0}
+  EdgeMesh1: {fileID: 0}
+  EdgeMesh2: {fileID: 0}
+  EdgeRendere1: {fileID: 0}
+  EdgeRendere2: {fileID: 0}
+  OuterEdge: {fileID: 0}
+  OuterEdgeMesh: {fileID: 0}
+  OuterEdgeRenderer: {fileID: 0}
   ConeRenderer: {fileID: 0}
   ConeMesh: {fileID: 0}
   Outline: {fileID: 0}
@@ -367,6 +378,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 259376843090518274}
     m_Modifications:
+    - target: {fileID: 6370996069230056297, guid: 600ae753c98b4144b85476c02b8a1f86,
+        type: 3}
+      propertyPath: m_Name
+      value: Projectile_worm (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6370996069230056297, guid: 600ae753c98b4144b85476c02b8a1f86,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7815132597803828192, guid: 600ae753c98b4144b85476c02b8a1f86,
         type: 3}
       propertyPath: m_Layer
@@ -426,16 +447,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6370996069230056297, guid: 600ae753c98b4144b85476c02b8a1f86,
-        type: 3}
-      propertyPath: m_Name
-      value: Projectile_worm (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6370996069230056297, guid: 600ae753c98b4144b85476c02b8a1f86,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4441251014375067862, guid: 600ae753c98b4144b85476c02b8a1f86,
         type: 3}
