@@ -17,6 +17,9 @@ namespace AK
         static const AkUniqueID AMB_ARENA_01_STOP = 3018226098U;
         static const AkUniqueID AMB_HUB_MAINEVENT = 1797197367U;
         static const AkUniqueID AMB_SHOP_MAINEVENT = 3126464902U;
+        static const AkUniqueID CHAIN_LOOP = 615336901U;
+        static const AkUniqueID CHAIN_START = 2421078001U;
+        static const AkUniqueID CHAIN_STOP = 2826204523U;
         static const AkUniqueID CHEER_INIT = 2830818153U;
         static const AkUniqueID CHEER_UP = 3469520088U;
         static const AkUniqueID DOOR_ARENAGATE_HINGE = 4263565388U;

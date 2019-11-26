@@ -455,6 +455,9 @@
 			<IncludedEvents>
 				<Event Id="1797197367" Name="amb_hub_mainEvent" ObjectPath="\Events\HubEvents\HubAmbience\amb_hub_mainEvent" DurationType="Infinite"/>
 				<Event Id="3126464902" Name="amb_shop_mainEvent" ObjectPath="\Events\ShopEvents\ShopAmbience\amb_shop_mainEvent" MaxAttenuation="100.000000" DurationType="Infinite"/>
+				<Event Id="615336901" Name="chain_loop" ObjectPath="\Events\HubEvents\HubAmbience\chain_loop" DurationType="Infinite"/>
+				<Event Id="2421078001" Name="chain_start" ObjectPath="\Events\HubEvents\HubAmbience\chain_start" DurationType="OneShot" DurationMin="4.250000" DurationMax="4.250000"/>
+				<Event Id="2826204523" Name="chain_stop" ObjectPath="\Events\HubEvents\HubAmbience\chain_stop" DurationType="OneShot" DurationMin="2.000000" DurationMax="2.000000"/>
 				<Event Id="1339011789" Name="shop_inspectItem" ObjectPath="\Events\ShopEvents\ShopInteraction\shop_inspectItem" DurationType="OneShot" DurationMin="0.170678" DurationMax="0.285026"/>
 				<Event Id="154430615" Name="shop_insufficientFunds" ObjectPath="\Events\ShopEvents\ShopInteraction\shop_insufficientFunds" DurationType="OneShot" DurationMin="0.506438" DurationMax="0.723361"/>
 				<Event Id="3988221669" Name="shop_purchase" ObjectPath="\Events\ShopEvents\ShopInteraction\shop_purchase" DurationType="OneShot" DurationMin="4.232290" DurationMax="4.337211"/>
@@ -464,9 +467,17 @@
 				<Event Id="1388225139" Name="toad_dialogueBlip" ObjectPath="\Events\ShopEvents\Toad\toad_dialogueBlip" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
+				<File Id="44783847" Language="SFX">
+					<ShortName>props_chain_loop_01.wav</ShortName>
+					<Path>SFX/props_chain_loop_01_ADF7B7FB.wem</Path>
+				</File>
 				<File Id="44842512" Language="SFX">
 					<ShortName>toad_deny_02.wav</ShortName>
 					<Path>SFX/toad_deny_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="59584601" Language="SFX">
+					<ShortName>props_chain_stop.wav</ShortName>
+					<Path>SFX/props_chain_stop_8EDF57DD.wem</Path>
 				</File>
 				<File Id="92687332" Language="SFX">
 					<ShortName>shop_putDownPlate_01.wav</ShortName>
@@ -507,6 +518,10 @@
 				<File Id="338717862" Language="SFX">
 					<ShortName>toad_deny_03.wav</ShortName>
 					<Path>SFX/toad_deny_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="347714705" Language="SFX">
+					<ShortName>props_chain_start.wav</ShortName>
+					<Path>SFX/props_chain_start_8EDF57DD.wem</Path>
 				</File>
 				<File Id="388926070" Language="SFX">
 					<ShortName>shop_purchase_02.wav</ShortName>
@@ -587,6 +602,10 @@
 				<File Id="950621225" Language="SFX">
 					<ShortName>shop_tooBad_pouch_03.wav</ShortName>
 					<Path>SFX/shop_tooBad_pouch_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="988166701" Language="SFX">
+					<ShortName>props_chain_loop_02.wav</ShortName>
+					<Path>SFX/props_chain_loop_02_ADF7B7FB.wem</Path>
 				</File>
 				<File Id="1005798303" Language="SFX">
 					<ShortName>toad_accept_04.wav</ShortName>
