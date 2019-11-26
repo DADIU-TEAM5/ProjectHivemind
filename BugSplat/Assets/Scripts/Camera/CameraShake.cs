@@ -44,6 +44,7 @@ public class CameraShake : MonoBehaviour
         {
             yield return new WaitForSeconds(shakeDuration);
             StopCamNoise();
+            yield break;
         }
     }
 }

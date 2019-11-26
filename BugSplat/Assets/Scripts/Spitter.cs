@@ -344,6 +344,7 @@ public class Spitter : Enemy
         if (OutlineMesh.normals != _normalsfotraj)
             OutlineMesh.normals = _normalsfotraj;
 
+        OuterEdgeMesh.RecalculateBounds();
     }
 
 
@@ -396,6 +397,8 @@ public class Spitter : Enemy
 
         if (ConeMesh.normals != _normalsfotraj)
             ConeMesh.normals = _normalsfotraj;
+
+        ConeMesh.RecalculateBounds();
     }
 
     private ParticleController MakeSpit() {
