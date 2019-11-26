@@ -20,7 +20,6 @@ public class EnemySpawner : GameLoop
     public static int[] WaveLevelBudget;
     public IntVariable NumberOfWavesSO;
     public static bool IsWave;
-    public BoolVariable IsWaveSO;
 
     public static bool SingleEnemySpawned;
 
@@ -79,7 +78,7 @@ public class EnemySpawner : GameLoop
 
         if (IsWave && EnemiesInWaves  == null)
         {
-            IsWaveSO.Value = true;
+         
             NumberOfWavesSO.Value = WaveLevelBudget.Length;
             EnemiesInWaves = new List<GameObject>[WaveLevelBudget.Length];
 
@@ -91,7 +90,7 @@ public class EnemySpawner : GameLoop
         }
         else
         {
-            IsWaveSO.Value = false;
+   
         }
 
 
