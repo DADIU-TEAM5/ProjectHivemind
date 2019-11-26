@@ -170,6 +170,7 @@ namespace AK
         static const AkUniqueID CHEER_LEVEL = 4250097399U;
         static const AkUniqueID ENEMIESAGGROEDRTPC = 2120047921U;
         static const AkUniqueID ENEMIESLEFTRTPC = 2775208701U;
+        static const AkUniqueID HDR_METERROUT = 2514708333U;
         static const AkUniqueID MANAGE_MUSICMAIN_LEVEL = 724781984U;
         static const AkUniqueID MANAGE_SFXMAIN_LEVEL = 429852744U;
         static const AkUniqueID PLAYERSPEED = 1493153371U;
