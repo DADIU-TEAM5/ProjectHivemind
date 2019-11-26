@@ -133,7 +133,7 @@ public class InGameHUDController : MonoBehaviour
     public void QuitButton()
     {
         Unpause();
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("_PreloadScene");
     }
 
     // TrashCode
