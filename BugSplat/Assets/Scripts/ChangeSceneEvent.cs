@@ -54,5 +54,12 @@ public class ChangeSceneEvent : MonoBehaviour
 
         }
 
+        if (sceneName.Equals("CreditsScene"))
+        {
+            ChangeSceneEvents[2].Raise();
+            Debug.Log("RaiseEvent() - Shop Raised");
+
+        }
+
     }
 }
