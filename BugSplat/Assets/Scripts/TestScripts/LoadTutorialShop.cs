@@ -13,6 +13,7 @@ public class LoadTutorialShop : MonoBehaviour
     public BoolVariable ShopIsOpenSO;
     public IntVariable CurrentLevelSO;
     public StringVariable LastSceneSO;
+    public Animator CharacterCutSceneAnimController;
 
     void Start()
     {
@@ -21,6 +22,7 @@ public class LoadTutorialShop : MonoBehaviour
             ShopIsOpenSO.Value = false;
             TutorialIsActiveSO.Value = true;
             LastSceneSO.Value = "";
+            CharacterCutSceneAnimController.enabled = true;
         } else
         {
             ShopIsOpenSO.Value = true;
