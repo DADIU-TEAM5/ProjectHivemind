@@ -14,6 +14,7 @@ public class LoadTutorialShop : MonoBehaviour
     public IntVariable CurrentLevelSO;
     public StringVariable LastSceneSO;
     public Animator CharacterCutSceneAnimController;
+    public GameObject TutorialEggs;
 
     void Start()
     {
@@ -23,10 +24,12 @@ public class LoadTutorialShop : MonoBehaviour
             TutorialIsActiveSO.Value = true;
             LastSceneSO.Value = "";
             CharacterCutSceneAnimController.enabled = true;
+            TutorialEggs.SetActive(true);
         } else
         {
             ShopIsOpenSO.Value = true;
             TutorialIsActiveSO.Value = false;
+            TutorialEggs.SetActive(false);
         }
 
         if (TutorialIsActiveSO.Value == false)
