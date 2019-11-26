@@ -383,19 +383,22 @@ public class EnemySpawner : GameLoop
         if (LevelBudget+budget >=SmallestValue)
         {
 
-            
-            GameObject ChosenGuy = enemies[Random.Range(0, enemies.Count)];
-            int FirsTValueToget = ChosenGuy.GetComponent<Enemy>().difficultyValue;
-
-            if (LevelBudget >= FirsTValueToget)
+            if(Random.Range(0,100)<40)
             {
-                LevelBudget -= FirsTValueToget;
+                GameObject ChosenGuy = enemies[Random.Range(0, enemies.Count)];
+                int FirsTValueToget = ChosenGuy.GetComponent<Enemy>().difficultyValue;
+
+                if (LevelBudget >= FirsTValueToget)
+                {
+                    LevelBudget -= FirsTValueToget;
 
 
-                EnemiesToSpawn.Add(ChosenGuy);
-                TotalEnemyCount.Value++;
+                    EnemiesToSpawn.Add(ChosenGuy);
+                    TotalEnemyCount.Value++;
 
+                }
             }
+            
                 
            
 
@@ -476,18 +479,21 @@ public class EnemySpawner : GameLoop
         if (WaveLevelBudget[_currentWave] + budget >= SmallestValue)
         {
 
-
-            GameObject ChosenGuy = enemies[Random.Range(0, enemies.Count)];
-            int FirsTValueToget = ChosenGuy.GetComponent<Enemy>().difficultyValue;
-
-            if (WaveLevelBudget[_currentWave] >= FirsTValueToget)
+            if (Random.Range(0, 100) < 40)
             {
-                WaveLevelBudget[_currentWave] -= FirsTValueToget;
+                GameObject ChosenGuy = enemies[Random.Range(0, enemies.Count)];
+                int FirsTValueToget = ChosenGuy.GetComponent<Enemy>().difficultyValue;
 
-                TotalEnemyCount.Value++;
-                EnemiesToSpawn.Add(ChosenGuy);
+                if (WaveLevelBudget[_currentWave] >= FirsTValueToget)
+                {
+                    WaveLevelBudget[_currentWave] -= FirsTValueToget;
 
+                    TotalEnemyCount.Value++;
+                    EnemiesToSpawn.Add(ChosenGuy);
+
+                }
             }
+             
 
 
 
