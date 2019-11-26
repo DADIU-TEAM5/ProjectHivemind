@@ -13,13 +13,20 @@ public class EnemiesTrackUI : GameLoop
     public TextMeshProUGUI EKills;
     public TextMeshProUGUI EnemiesAtStart;
     public GameEvent HasWonEvent;
-    public BoolVariable IsWaveSO;
-
+    public MapGenerator MapGen;
+    public IntVariable CurrentLevel;
+    private ShopLevels _levels;
     private int WaveCount = 0;
     private int eventRaisedCount;
+    bool isWave;
 
     private void Start()
     {
+        // Yes... it looks retarded
+        MapGen = FindObjectOfType<MapGenerator>();
+        _levels = MapGen.Levels;
+        isWave = !_levels.LevelTierPicker[CurrentLevel.Value].IsGauntlet;
+
         eventRaisedCount = 0;
         EnemiesKilledSO.Value = 0;
         TotalEnemyCount.Value = 0;
@@ -37,8 +44,9 @@ public class EnemiesTrackUI : GameLoop
 
     public void UpdateKills()
     {
+        Debug.Log("WaveCount: " + WaveCount + ", WaveSO: " + NumberOfWavesSO.Value);
         EnemiesKilledSO.Value++;
-        if(EnemiesKilledSO.Value>=TotalEnemyCount.Value && (!IsWaveSO.Value || WaveCount > NumberOfWavesSO.Value))
+        if (EnemiesKilledSO.Value >= TotalEnemyCount.Value && (!isWave || WaveCount+1 >= NumberOfWavesSO.Value))
         {
             HasWonEvent.Raise();
         }
@@ -56,8 +64,14 @@ public class EnemiesTrackUI : GameLoop
 
     public void NewWave()
     {
-        TotalEnemyCount.Value-= EnemiesKilledSO.Value;
-        EnemiesKilledSO.Value = 0;
-        WaveCount++;
+        if (WaveCount+1 < NumberOfWavesSO.Value)
+        {
+            Debug.Log("New Wave " + WaveCount);
+            if (EnemiesKilledSO.Value > 0)
+                WaveCount++;
+            TotalEnemyCount.Value -= EnemiesKilledSO.Value;
+            EnemiesKilledSO.Value = 0;
+        }
+
     }
 }
