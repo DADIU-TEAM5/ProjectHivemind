@@ -34,7 +34,7 @@ public class MusicManagerScript : MonoBehaviour
 
     [Header("Parameters")]
     public float IntenseOMeter;
-    public float IntensityOffset;
+    public float EnemiesLeftMeter;
 
     [Header("Gameobjects")]
     public GameObject FrogShop;
@@ -47,6 +47,7 @@ public class MusicManagerScript : MonoBehaviour
     void Update()
     {
         IntenseOMeter = EnemiesAgroed.Value;
+        EnemiesLeftMeter = EnemiesLeft.Value;
         EnemiesAgroedRTPC.SetGlobalValue(EnemiesAgroed.Value);
         EnemiesLeftRTPC.SetGlobalValue(EnemiesLeft.Value);
         HealthRTPC.SetGlobalValue(CurrentHealth.Value);
@@ -66,6 +67,8 @@ public class MusicManagerScript : MonoBehaviour
     public void HubLoad()
     {
         HubMusic.Post(this.gameObject);
+        BattleMusic.Stop(this.gameObject);
+        StopBattleMusic.Post(this.gameObject);
 
     }
 
@@ -80,7 +83,7 @@ public class MusicManagerScript : MonoBehaviour
 
     public void PlayerWonEvent()
     {
-       // StopBattleMusic.Post(this.gameObject);
+        //StopBattleMusic.Post(this.gameObject);
         BattleMusicWon.SetValue();
     }
 

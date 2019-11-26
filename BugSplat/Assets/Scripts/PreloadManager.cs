@@ -16,7 +16,7 @@ public class PreloadManager : MonoBehaviour
 
     private void Start()
     {
-        SceneManager.LoadScene(1);
+        //SceneManager.LoadScene(1);
     }
 
 }
