@@ -190,6 +190,7 @@ namespace AK
 
     namespace BUSSES
     {
+        static const AkUniqueID CHOIRSECTION = 49587131U;
         static const AkUniqueID DIALOGUE_BUS = 573466488U;
         static const AkUniqueID HDR_MAGIC_BUS = 2239254138U;
         static const AkUniqueID MASTER_BUS = 1399649189U;
@@ -197,6 +198,7 @@ namespace AK
         static const AkUniqueID MUSIC_BUS = 2680856269U;
         static const AkUniqueID MUSIC_SHOP_BUS = 1145691870U;
         static const AkUniqueID REVERB_RETURN = 358140370U;
+        static const AkUniqueID RYTHMSECTION = 2598026720U;
         static const AkUniqueID SUMMER_BUS = 1348578857U;
         static const AkUniqueID UI_NONDIEGETIC_BUS = 1826390690U;
     } // namespace BUSSES
