@@ -312,6 +312,10 @@ public abstract class Enemy : GameLoop
         ConeMesh = Cone.AddComponent<MeshFilter>().mesh;
         ConeRenderer = Cone.AddComponent<MeshRenderer>();
 
+         
+        
+        
+
         Vector3 offset = transform.position;
 
         offset.y = 0.005f;
@@ -833,6 +837,7 @@ public abstract class Enemy : GameLoop
         if (mesh.uv != _uvs)
             mesh.uv = _uvs;
 
+        mesh.RecalculateBounds();
     }
 
 
