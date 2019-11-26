@@ -238,6 +238,7 @@ public abstract class Enemy : GameLoop
         
         Edge1.SetActive(Cone.activeSelf);
         Edge2.SetActive(Cone.activeSelf);
+       // OuterEdge.SetActive(Cone.activeSelf);
 
     }
 
@@ -311,6 +312,10 @@ public abstract class Enemy : GameLoop
         ConeMesh = Cone.AddComponent<MeshFilter>().mesh;
         ConeRenderer = Cone.AddComponent<MeshRenderer>();
 
+         
+        
+        
+
         Vector3 offset = transform.position;
 
         offset.y = 0.005f;
@@ -321,7 +326,7 @@ public abstract class Enemy : GameLoop
 
         Cone.transform.parent = transform;
         Cone.SetActive(false);
-
+        
 
 
     }
@@ -770,7 +775,7 @@ public abstract class Enemy : GameLoop
         int step = 0;
         for (int i = 0; i < zeroes; i++)
         {
-            print(i + " step " + (stepSize2 *  i));
+            //print(i + " step " + (stepSize2 *  i));
             vertices[i] = Vector3.zero;
             _uvs[i] = new Vector2(stepSize2 * (i), 0);
         }
@@ -832,6 +837,7 @@ public abstract class Enemy : GameLoop
         if (mesh.uv != _uvs)
             mesh.uv = _uvs;
 
+        mesh.RecalculateBounds();
     }
 
 

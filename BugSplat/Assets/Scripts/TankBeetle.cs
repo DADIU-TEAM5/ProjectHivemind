@@ -228,6 +228,7 @@ public class TankBeetle : Enemy
             {
                 
                 Anim.SetBool("Attacking", true);
+                OuterEdge.SetActive(true);
 
             }
 
@@ -301,6 +302,9 @@ public class TankBeetle : Enemy
     void AttackInCone()
     {
         DrawCone(10, ConeMesh, true, 0);
+
+        
+        DrawCone(10, OuterEdgeMesh, true, _attackCharge);
         ConeRenderer.material.color = new Color(1, 0, 0, .4f);
         Collider[] potentialTargets = Physics.OverlapSphere(transform.position, TankStats.AttackRange, LayerMask.GetMask("Player"));
 
@@ -407,10 +411,11 @@ public class TankBeetle : Enemy
         {
 
             Anim.SetBool("Attacking", true);
-
+            OuterEdge.SetActive(true);
         }
 
         Cone.SetActive(true);
+
         AttackInCone();
 
 
@@ -421,7 +426,7 @@ public class TankBeetle : Enemy
         if (_wayPoints[_currentWayPath] == Vector3.zero)
         {
 
-            print("fuck you all");
+            //print("fuck you all");
 
             Vector3 temPlayerPos = PlayerTransform.position;
             temPlayerPos.y = transform.position.y;
@@ -465,7 +470,7 @@ public class TankBeetle : Enemy
         if(_lerpPoint != _currentPath.corners[_currentCorner])
         {
 
-            print("new lerp point");
+           // print("new lerp point");
             _lerpPoint = _currentPath.corners[_currentCorner];
             _lerpStart = transform.position;
             _lerp = 0;
@@ -531,6 +536,9 @@ public class TankBeetle : Enemy
     void EndWayPointing()
     {
         Cone.SetActive(false);
+
+        OuterEdge.SetActive(false);
+
         Anim.SetBool("Attacking", false);
         _coolDown = TankStats.CooldownBetweenBehaviour;
         _currentWayPath = 0;
@@ -564,6 +572,7 @@ public class TankBeetle : Enemy
 
         _Chargeing = false;
         Outline.SetActive(false);
+        OuterEdge.SetActive(false);
         Cone.SetActive(false);
 
         _chargeDuration = 0;
@@ -637,6 +646,7 @@ public class TankBeetle : Enemy
         if (OutlineMesh.normals != _normalsfotraj)
             OutlineMesh.normals = _normalsfotraj;
 
+        OutlineMesh.RecalculateBounds();
 
 
 
@@ -707,7 +717,7 @@ public class TankBeetle : Enemy
 
 
 
-
+        ConeMesh.RecalculateBounds();
 
     }
 
