@@ -646,6 +646,7 @@ public class TankBeetle : Enemy
         if (OutlineMesh.normals != _normalsfotraj)
             OutlineMesh.normals = _normalsfotraj;
 
+        OutlineMesh.RecalculateBounds();
 
 
 
@@ -716,7 +717,7 @@ public class TankBeetle : Enemy
 
 
 
-
+        ConeMesh.RecalculateBounds();
 
     }
 
