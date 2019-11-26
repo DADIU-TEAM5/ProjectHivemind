@@ -193,6 +193,7 @@ namespace AK
 
     namespace BUSSES
     {
+        static const AkUniqueID AMBIENTSECTION = 1189252680U;
         static const AkUniqueID CHOIRSECTION = 49587131U;
         static const AkUniqueID DIALOGUE_BUS = 573466488U;
         static const AkUniqueID HDR_MAGIC_BUS = 2239254138U;
