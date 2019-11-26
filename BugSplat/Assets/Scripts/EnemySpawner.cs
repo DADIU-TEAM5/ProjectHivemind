@@ -6,6 +6,8 @@ using UnityEngine.AI;
 public class EnemySpawner : GameLoop
 {
     public GameEvent SpawnAllEnemies;
+    public GameEvent NextWaveEvent;
+    public GameEvent InitialSpawnEvent;
     public GameObjectVariable ThePlayer;
 
     public FloatVariable InitalAggroDelay;
@@ -16,7 +18,9 @@ public class EnemySpawner : GameLoop
     public static int LevelBudget;
 
     public static int[] WaveLevelBudget;
+    public IntVariable NumberOfWavesSO;
     public static bool IsWave;
+    public BoolVariable IsWaveSO;
 
     public static bool SingleEnemySpawned;
 
@@ -35,6 +39,7 @@ public class EnemySpawner : GameLoop
 
 
     bool startedSpawning = false;
+    bool firstSpawn = false;
 
     public static bool SpawningDone;
 
@@ -66,12 +71,16 @@ public class EnemySpawner : GameLoop
 
     private void OnEnable()
     {
+      
+
         _waveTimeDelay = 0;
         _currentWave = 0;
         _waveBegun = false;
 
         if (IsWave && EnemiesInWaves  == null)
         {
+            IsWaveSO.Value = true;
+            NumberOfWavesSO.Value = WaveLevelBudget.Length;
             EnemiesInWaves = new List<GameObject>[WaveLevelBudget.Length];
 
             for (int i = 0; i < EnemiesInWaves.Length; i++)
@@ -79,6 +88,10 @@ public class EnemySpawner : GameLoop
                 EnemiesInWaves[i] = new List<GameObject>();
             }
 
+        }
+        else
+        {
+            IsWaveSO.Value = false;
         }
 
 
@@ -166,7 +179,7 @@ public class EnemySpawner : GameLoop
 
         if (startedSpawning)
         {
-
+            
 
 
             if (IsWave)
@@ -196,7 +209,7 @@ public class EnemySpawner : GameLoop
 
                     if(EnemiesInWaves[_currentWave].Count < EnemiesLeftBeforeNewWave.Value)
                     {
-
+                        NextWaveEvent.Raise();
                         _currentWave++;
                         _waveBegun = false;
 
@@ -344,6 +357,7 @@ public class EnemySpawner : GameLoop
                     print("we are waveing");
                     spawnedEnemy.name += " " + _currentWave;
                     EnemiesInWaves[_currentWave].Add(spawnedEnemy);
+
                 }
 
                 EnemiesToSpawn.Remove(EnemiesToSpawn[0]);
@@ -376,19 +390,22 @@ public class EnemySpawner : GameLoop
         if (LevelBudget+budget >=SmallestValue)
         {
 
-            
-            GameObject ChosenGuy = enemies[Random.Range(0, enemies.Count)];
-            int FirsTValueToget = ChosenGuy.GetComponent<Enemy>().difficultyValue;
-
-            if (LevelBudget >= FirsTValueToget)
+            if(Random.Range(0,100)<40)
             {
-                LevelBudget -= FirsTValueToget;
+                GameObject ChosenGuy = enemies[Random.Range(0, enemies.Count)];
+                int FirsTValueToget = ChosenGuy.GetComponent<Enemy>().difficultyValue;
+
+                if (LevelBudget >= FirsTValueToget)
+                {
+                    LevelBudget -= FirsTValueToget;
 
 
-                EnemiesToSpawn.Add(ChosenGuy);
-                TotalEnemyCount.Value++;
-
+                    EnemiesToSpawn.Add(ChosenGuy);
+                    TotalEnemyCount.Value++;
+                    InitialSpawnEvent.Raise();
+                }
             }
+            
                 
            
 
@@ -427,6 +444,8 @@ public class EnemySpawner : GameLoop
 
                 spawnedEnemy.GetComponent<Enemy>().hex = hex;
                 spawnedEnemy.name = "Initial Fucker";
+                TotalEnemyCount.Value++;
+                InitialSpawnEvent.Raise(spawnedEnemy);
                 spawnedEnemy.transform.parent = null;
 
                 Vector3 spawnPoint = transform.position;
@@ -467,18 +486,23 @@ public class EnemySpawner : GameLoop
         if (WaveLevelBudget[_currentWave] + budget >= SmallestValue)
         {
 
-
-            GameObject ChosenGuy = enemies[Random.Range(0, enemies.Count)];
-            int FirsTValueToget = ChosenGuy.GetComponent<Enemy>().difficultyValue;
-
-            if (WaveLevelBudget[_currentWave] >= FirsTValueToget)
+            if (Random.Range(0, 100) < 40)
             {
-                WaveLevelBudget[_currentWave] -= FirsTValueToget;
+                GameObject ChosenGuy = enemies[Random.Range(0, enemies.Count)];
+                int FirsTValueToget = ChosenGuy.GetComponent<Enemy>().difficultyValue;
 
-                TotalEnemyCount.Value++;
-                EnemiesToSpawn.Add(ChosenGuy);
+                if (WaveLevelBudget[_currentWave] >= FirsTValueToget)
+                {
+                    WaveLevelBudget[_currentWave] -= FirsTValueToget;
 
+                    TotalEnemyCount.Value++;
+                    InitialSpawnEvent.Raise();
+                    Debug.Log("Add tha ChosenGuy to wave");
+                    EnemiesToSpawn.Add(ChosenGuy);
+                    
+                }
             }
+             
 
 
 
@@ -535,6 +559,8 @@ public class EnemySpawner : GameLoop
 
 
                 spawnedEnemy.name = "Initial Fucker";
+                TotalEnemyCount.Value++;
+                InitialSpawnEvent.Raise(spawnedEnemy);
                 spawnedEnemy.transform.parent = null;
 
                 Vector3 spawnPoint = transform.position;

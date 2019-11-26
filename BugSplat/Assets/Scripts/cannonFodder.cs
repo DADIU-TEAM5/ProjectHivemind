@@ -91,14 +91,16 @@ public class cannonFodder : Enemy
 
             Cone.SetActive(true);
             Outline.SetActive(true);
+            OuterEdge.SetActive(true);
 
             FodderAnimator.SetTrigger("Attack");
             FodderAnimator.speed = 1 + _percentIncrease;
 
-            DrawCone(10, OutlineMesh, true,_attackCharge);
+            DrawCone(4, OutlineMesh, true,_attackCharge);
+            DrawCone(4, OuterEdgeMesh, true, _attackCharge);
 
         }
-        DrawCone(10,ConeMesh,false,_attackCharge);
+        DrawCone(5,ConeMesh,false,_attackCharge);
 
         ConeRenderer.material.color = Color.Lerp(ConeInitColor, ConeEndColor, _attackCharge / stats.AttackChargeUpTime);
         //Color.Lerp(new Color(0,1,0,0.5f), new Color(1, 0, 0, 0.5f), _attackCharge / stats.AttackChargeUpTime);
@@ -154,6 +156,7 @@ public class cannonFodder : Enemy
             _attackCharge = 0;
             Cone.SetActive(false);
             Outline.SetActive(false);
+            OuterEdge.SetActive(false);
             FodderAnimator.speed = 1 ;
 
         }

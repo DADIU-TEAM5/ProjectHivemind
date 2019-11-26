@@ -23,7 +23,7 @@ public class EnemyObjectList : RuntimeSet<Enemy>
             Items.Remove(t);
             if (Items.Count == 0)
             {
-                HasWon.Raise();
+               // HasWon.Raise();
             }
         }
 

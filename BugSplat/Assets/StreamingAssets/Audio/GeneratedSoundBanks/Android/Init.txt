@@ -1,3 +1,15 @@
+Switch Group	ID	Name			Wwise Object Path	Notes
+	3127575970	battlemusic_aggroIntensity			\Default Work Unit\battlemusic_aggroIntensity	
+	3506839690	battlemusic_enemiesLeftSwitch			\Default Work Unit\battlemusic_enemiesLeftSwitch	
+
+Switch	ID	Name	Switch Group			Notes
+	972571746	aggroIntensity_2medium	battlemusic_aggroIntensity			
+	1669603518	aggroIntensity_3high	battlemusic_aggroIntensity			
+	2367486699	aggroIntensity_0none	battlemusic_aggroIntensity			
+	3411955898	aggroIntensity_1low	battlemusic_aggroIntensity			
+	1038380630	enemiesLeftSwitch_1Few	battlemusic_enemiesLeftSwitch			
+	3429280042	enemiesLeftSwitch_0neutral	battlemusic_enemiesLeftSwitch			
+
 State Group	ID	Name			Wwise Object Path	Notes
 	2072924777	state_scene			\Default Work Unit\state_scene	
 	2337794614	state_battlemusic			\Default Work Unit\state_battlemusic	
@@ -8,6 +20,10 @@ State	ID	Name	State Group			Notes
 	324041644	state_hub	state_scene			
 	1124786752	state_arena	state_scene			
 	0	None	state_battlemusic			
+	1749272816	state_battlemusic_engaged	state_battlemusic			
+	1959379903	state_battlemusic_lost	state_battlemusic			
+	2766947299	state_battlemusic_won	state_battlemusic			
+	3349524931	state_battlemusic_unengaged	state_battlemusic			
 
 Custom State	ID	Name	State Group	Owner		Notes
 	200054442	state_arena	state_scene	\Master-Mixer Hierarchy\Default Work Unit\Master Out\Master Bus\Summer_Bus\reverb_return\reverb_hub		
@@ -20,8 +36,10 @@ Custom State	ID	Name	State Group	Owner		Notes
 Game Parameter	ID	Name			Wwise Object Path	Notes
 	429852744	manage_SFXmain_level			\Default Work Unit\manage_SFXmain_level	
 	724781984	manage_MusicMain_Level			\Default Work Unit\manage_MusicMain_Level	
+	2514708333	HDR_MeterrOut			\Default Work Unit\HDR_MeterrOut	
 
 Audio Bus	ID	Name			Wwise Object Path	Notes
+	49587131	ChoirSection			\Default Work Unit\Master Out\Master Bus\Summer_Bus\Music_Bus\ChoirSection	
 	358140370	reverb_return			\Default Work Unit\Master Out\Master Bus\Summer_Bus\reverb_return	
 	573466488	Dialogue_Bus			\Default Work Unit\Master Out\Master Bus\Summer_Bus\Dialogue_Bus	
 	1145691870	Music_shop_Bus			\Default Work Unit\Master Out\Master Bus\Summer_Bus\Music_shop_Bus	
@@ -30,6 +48,7 @@ Audio Bus	ID	Name			Wwise Object Path	Notes
 	1399649189	Master Bus			\Default Work Unit\Master Out\Master Bus	
 	1826390690	UI+nondiegetic_bus			\Default Work Unit\Master Out\Master Bus\Summer_Bus\UI+nondiegetic_bus	
 	2239254138	HDR_Magic_Bus			\Default Work Unit\Master Out\Master Bus\Summer_Bus\HDR_Magic_Bus	
+	2598026720	RythmSection			\Default Work Unit\Master Out\Master Bus\Summer_Bus\Music_Bus\RythmSection	
 	2680856269	Music_Bus			\Default Work Unit\Master Out\Master Bus\Summer_Bus\Music_Bus	
 
 Auxiliary Bus	ID	Name			Wwise Object Path	Notes
@@ -38,7 +57,9 @@ Auxiliary Bus	ID	Name			Wwise Object Path	Notes
 	3119546469	reverb_hub			\Default Work Unit\Master Out\Master Bus\Summer_Bus\reverb_return\reverb_hub	
 
 Effect plug-ins	ID	Name	Type				Notes
+	381988944	Wwise_Meter_(Custom)	Wwise Meter			
 	419431830	Wwise_Parametric_EQ_(Custom)	Wwise Parametric EQ			
+	423870216	Wwise_Compressor_(Custom)	Wwise Compressor			
 	541021879	New_Wwise_Convolution_Reverb	Wwise Convolution Reverb			
 	636294234	Wwise_RoomVerb_(Custom)	Wwise RoomVerb			
 	769238448	Wwise RoomVerb (Custom)	Wwise RoomVerb			

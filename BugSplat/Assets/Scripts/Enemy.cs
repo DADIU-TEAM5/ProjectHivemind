@@ -23,6 +23,7 @@ public abstract class Enemy : GameLoop
     public AnimationCurve AttackCurve;
 
     public Material ConeMaterial;
+    public Material EdgeMaterial, LowerConeMaterial;
 
     public EnemyStats stats;
 
@@ -71,6 +72,23 @@ public abstract class Enemy : GameLoop
     public Renderer Renderer;
     [HideInInspector]
     public GameObject Cone;
+
+    [HideInInspector]
+    public GameObject Edge1;
+    [HideInInspector]
+    public GameObject Edge2;
+    [HideInInspector]
+    public Mesh EdgeMesh1, EdgeMesh2;
+    [HideInInspector]
+    public MeshRenderer EdgeRendere1, EdgeRendere2;
+
+    [HideInInspector]
+    public GameObject OuterEdge;
+    [HideInInspector]
+    public Mesh OuterEdgeMesh;
+    [HideInInspector]
+    public MeshRenderer OuterEdgeRenderer;
+
     [HideInInspector]
     public MeshRenderer ConeRenderer;
     [HideInInspector]
@@ -146,8 +164,14 @@ public abstract class Enemy : GameLoop
         {
             CreateCone();
             CreateOutline();
-            ConeRenderer.material = ConeMaterial;
-            OutlineRenderer.material = ConeMaterial;
+            CreateEdges();
+            CreateOuterEdge();
+
+            EdgeRendere1.material = EdgeMaterial;
+            EdgeRendere2.material = EdgeMaterial;
+            OuterEdgeRenderer.material = ConeMaterial;
+            ConeRenderer.material = LowerConeMaterial;
+            OutlineRenderer.material = LowerConeMaterial;
 
             OutlineRenderer.material.color = ConeEmptyColor;
 
@@ -208,6 +232,14 @@ public abstract class Enemy : GameLoop
             } 
             //  Renderer.material.color = SetColor(Color.blue);
         }
+
+
+        
+        
+        Edge1.SetActive(Cone.activeSelf);
+        Edge2.SetActive(Cone.activeSelf);
+       // OuterEdge.SetActive(Cone.activeSelf);
+
     }
 
     public abstract void LoopBehaviour(float deltaTime);
@@ -263,6 +295,9 @@ public abstract class Enemy : GameLoop
             Destroy(Cone);
             Destroy(Outline);
             Destroy(gameObject);
+            Destroy(Edge1);
+            Destroy(Edge2);
+            Destroy(OuterEdge);
         }
     }
 
@@ -277,6 +312,10 @@ public abstract class Enemy : GameLoop
         ConeMesh = Cone.AddComponent<MeshFilter>().mesh;
         ConeRenderer = Cone.AddComponent<MeshRenderer>();
 
+         
+        
+        
+
         Vector3 offset = transform.position;
 
         offset.y = 0.005f;
@@ -287,10 +326,74 @@ public abstract class Enemy : GameLoop
 
         Cone.transform.parent = transform;
         Cone.SetActive(false);
+        
+
+
+    }
+
+    void CreateOuterEdge()
+    {
+        OuterEdge = new GameObject();
+        OuterEdge.name = "OuterEdge";
+        OuterEdgeMesh = OuterEdge.AddComponent<MeshFilter>().mesh;
+        OuterEdgeRenderer = OuterEdge.AddComponent<MeshRenderer>();
+
+        Vector3 offset = transform.position;
+
+        offset.y = 0.010f;
+        OuterEdge.transform.position = offset;
+
+        OuterEdge.transform.rotation = transform.rotation;
+
+
+        OuterEdge.transform.parent = transform;
+        OuterEdge.SetActive(false);
 
 
 
     }
+
+
+    void CreateEdges()
+    {
+        Edge1 = new GameObject();
+        Edge1.name = "edge1";
+        EdgeMesh1 = Edge1.AddComponent<MeshFilter>().mesh;
+        EdgeRendere1 = Edge1.AddComponent<MeshRenderer>();
+
+        Vector3 offset = transform.position;
+
+        offset.y = 0.005f;
+        Edge1.transform.position = offset;
+
+        Edge1.transform.rotation = transform.rotation;
+
+
+        Edge1.transform.parent = transform;
+        Edge1.SetActive(false);
+
+
+
+
+        Edge2 = new GameObject();
+        Edge2.name = "edge2";
+        EdgeMesh2 = Edge2.AddComponent<MeshFilter>().mesh;
+        EdgeRendere2 = Edge2.AddComponent<MeshRenderer>();
+
+        
+        Edge2.transform.position = offset;
+
+        Edge2.transform.rotation = transform.rotation;
+
+
+        Edge2.transform.parent = transform;
+        Edge2.SetActive(false);
+
+
+
+    }
+
+
     void CreateOutline()
     {
         Outline = new GameObject();
@@ -503,28 +606,132 @@ public abstract class Enemy : GameLoop
     Vector2[] _uvs = { };
 
 
+    public void DrawEdges(Vector3 edgePoint, Mesh mesh,bool flip)
+    {
+        int[] triangles = new int[6];
+        Vector3[] normals = new Vector3[4];
+        Vector2[] uvs = new Vector2[4];
+        Vector3[] verticies = new Vector3[4];
+
+
+       
+        if (flip)
+        {
+            triangles[0] = 0;
+            triangles[1] = 1;
+            triangles[2] = 3;
+
+
+
+            triangles[3] = 0;
+            triangles[4] = 3;
+            triangles[5] = 2;
+        }
+        else
+        {
+            triangles[0] = 0;
+            triangles[1] = 3;
+            triangles[2] = 1;
+
+
+
+            triangles[3] = 0;
+            triangles[4] = 2;
+            triangles[5] = 3;
+
+        }
+
+
+
+        for (int i = 0; i < normals.Length; i++)
+        {
+            normals[i] = Vector3.up;
+        }
+
+        verticies[0] = Vector3.zero;
+        verticies[1] = edgePoint;
+        //verticies[1] = Vector3.forward;
+        //verticies[2] = Vector3.right;
+        //verticies[3] = Vector3.right + Vector3.forward;
+
+        Vector3 rotatedVector = Vector3.zero;
+
+        float angle = 90;
+        if (flip)
+            angle = 270;
+
+
+        angle = angle * Mathf.Deg2Rad;
+
+        float s = Mathf.Sin(angle);
+        float c = Mathf.Cos(angle);
+
+        rotatedVector.x = edgePoint.x * c - edgePoint.z * s;
+        rotatedVector.z = edgePoint.x * s + edgePoint.z * c;
+
+        
+
+        verticies[2] = rotatedVector;
+       
+
+        //edgePoint = -edgePoint;
+         
+
+        verticies[3] = verticies[2]+edgePoint;
+       
+
+        uvs[0] = new Vector2(1, 1);
+        uvs[1] = new Vector2(1, 0); 
+        uvs[2] = new Vector2(0, 1);
+        uvs[3] = new Vector2(0, 0);
+        
+
+        
+
+
+        mesh.vertices = verticies;
+        
+
+        
+            mesh.triangles = triangles;
+
+        
+            mesh.normals = normals;
+
+        
+            mesh.uv = uvs;
+
+
+    }
+
     public void DrawCone(int points, Mesh mesh, bool constant, float attackCharge)
     {
-        if (_triangles.Length != points)
+        int zeroes = points ;
+
+        points = points + zeroes;
+
+       // zeroes -= 1;
+
+        if (_triangles.Length != points * 3 + 3)
         {
             _triangles = new int[points * 3 + 3];
 
             int triangleIndex = 0;
 
-            for (int i = 0; i < points; i++)
+            for (int i = 0; i < points-zeroes; i++)
             {
-                if (i != points - 1)
+                if (i != points-zeroes - 1)
                 {
-                    _triangles[triangleIndex] = 0;
+                    _triangles[triangleIndex] = i;
 
-                    _triangles[triangleIndex + 2] = i;
-                    _triangles[triangleIndex + 1] = i + 1;
+                    _triangles[triangleIndex + 2] = i+ zeroes;
+                    _triangles[triangleIndex + 1] = i + 1+ zeroes;
                 }
 
                 triangleIndex += 3;
             }
 
-            _triangles[triangleIndex] = 0;
+            _triangles[triangleIndex] = zeroes;
 
             _triangles[triangleIndex + 2] = points - 1;
             _triangles[triangleIndex + 1] = 1;
@@ -544,8 +751,14 @@ public abstract class Enemy : GameLoop
 
 
         Vector3[] vertices = new Vector3[points];
+         _uvs = new Vector2[points];
 
-        vertices[0] = Vector3.zero;
+
+        //vertices[0] = Vector3.zero;
+        //_uvs[0] = new Vector2(0, 0);
+        
+
+        
 
         Vector3 vectorToRotate;
         if (constant)
@@ -555,11 +768,20 @@ public abstract class Enemy : GameLoop
 
         Vector3 rotatedVector = Vector3.zero;
 
-        float stepSize = 1f / ((float)points - 1);
+        float stepSize = 1f / ((float)points-2 -zeroes);
+
+        float stepSize2 = 1f / ((float)points - 1 - zeroes);
+
         int step = 0;
+        for (int i = 0; i < zeroes; i++)
+        {
+            //print(i + " step " + (stepSize2 *  i));
+            vertices[i] = Vector3.zero;
+            _uvs[i] = new Vector2(stepSize2 * (i), 0);
+        }
 
 
-        for (int i = 1; i < points; i++)
+        for (int i = 1+zeroes; i < points; i++)
         {
             float angle = Mathf.Lerp(-stats.AttackAngle, stats.AttackAngle, step * stepSize);
 
@@ -571,12 +793,25 @@ public abstract class Enemy : GameLoop
             rotatedVector.x = vectorToRotate.x * c - vectorToRotate.z * s;
             rotatedVector.z = vectorToRotate.x * s + vectorToRotate.z * c;
 
+            
+
             vertices[i] = rotatedVector;
+            _uvs[i] = new Vector2(stepSize*step, 1);
             step++;
         }
 
-        mesh.vertices = vertices;
+        if (constant && stats.AttackAngle<180)
+        {
+            DrawEdges(vertices[vertices.Length - 1], EdgeMesh1,false);
+            //Edge1.SetActive(true);
 
+            DrawEdges(vertices[1+zeroes], EdgeMesh2, true);
+            //Edge2.SetActive(true);
+        }
+        
+
+        mesh.vertices = vertices;
+/*
         if (_uvs.Length != vertices.Length)
         {
             _uvs = new Vector2[vertices.Length];
@@ -591,7 +826,7 @@ public abstract class Enemy : GameLoop
                 i++;
             }
 
-        }
+        }*/
 
         if (mesh.triangles != _triangles)
             mesh.triangles = _triangles;
@@ -602,6 +837,7 @@ public abstract class Enemy : GameLoop
         if (mesh.uv != _uvs)
             mesh.uv = _uvs;
 
+        mesh.RecalculateBounds();
     }
 
 

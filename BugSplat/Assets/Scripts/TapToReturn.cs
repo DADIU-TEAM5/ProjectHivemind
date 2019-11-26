@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class TapToReturn : MonoBehaviour
 {
+    public BoolVariable PlayerControlOverrideSO;
+    public IntVariable CurrentLevelSO;
+    public StringVariable LastScene;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +21,11 @@ public class TapToReturn : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             Debug.Log("Loading tap");
-            OverallSceneWorker.LoadScene("ArenaGeneration");
+            PlayerControlOverrideSO.Value = false;
+            CurrentLevelSO.InitialValue = 0;
+            LastScene.Value = "";
+            OverallSceneWorker.LoadScene("_PreloadScene");
+
            
         }
     }

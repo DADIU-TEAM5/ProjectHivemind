@@ -17,6 +17,9 @@ namespace AK
         static const AkUniqueID AMB_ARENA_01_STOP = 3018226098U;
         static const AkUniqueID AMB_HUB_MAINEVENT = 1797197367U;
         static const AkUniqueID AMB_SHOP_MAINEVENT = 3126464902U;
+        static const AkUniqueID CHAIN_LOOP = 615336901U;
+        static const AkUniqueID CHAIN_START = 2421078001U;
+        static const AkUniqueID CHAIN_STOP = 2826204523U;
         static const AkUniqueID CHEER_INIT = 2830818153U;
         static const AkUniqueID CHEER_UP = 3469520088U;
         static const AkUniqueID DOOR_ARENAGATE_HINGE = 4263565388U;
@@ -115,6 +118,30 @@ namespace AK
 
     namespace SWITCHES
     {
+        namespace BATTLEMUSIC_AGGROINTENSITY
+        {
+            static const AkUniqueID GROUP = 3127575970U;
+
+            namespace SWITCH
+            {
+                static const AkUniqueID AGGROINTENSITY_0NONE = 2367486699U;
+                static const AkUniqueID AGGROINTENSITY_1LOW = 3411955898U;
+                static const AkUniqueID AGGROINTENSITY_2MEDIUM = 972571746U;
+                static const AkUniqueID AGGROINTENSITY_3HIGH = 1669603518U;
+            } // namespace SWITCH
+        } // namespace BATTLEMUSIC_AGGROINTENSITY
+
+        namespace BATTLEMUSIC_ENEMIESLEFTSWITCH
+        {
+            static const AkUniqueID GROUP = 3506839690U;
+
+            namespace SWITCH
+            {
+                static const AkUniqueID ENEMIESLEFTSWITCH_0NEUTRAL = 3429280042U;
+                static const AkUniqueID ENEMIESLEFTSWITCH_1FEW = 1038380630U;
+            } // namespace SWITCH
+        } // namespace BATTLEMUSIC_ENEMIESLEFTSWITCH
+
         namespace SWITCH_AMB
         {
             static const AkUniqueID GROUP = 4218164408U;
@@ -144,6 +171,9 @@ namespace AK
     namespace GAME_PARAMETERS
     {
         static const AkUniqueID CHEER_LEVEL = 4250097399U;
+        static const AkUniqueID ENEMIESAGGROEDRTPC = 2120047921U;
+        static const AkUniqueID ENEMIESLEFTRTPC = 2775208701U;
+        static const AkUniqueID HDR_METERROUT = 2514708333U;
         static const AkUniqueID MANAGE_MUSICMAIN_LEVEL = 724781984U;
         static const AkUniqueID MANAGE_SFXMAIN_LEVEL = 429852744U;
         static const AkUniqueID PLAYERSPEED = 1493153371U;
@@ -163,6 +193,7 @@ namespace AK
 
     namespace BUSSES
     {
+        static const AkUniqueID CHOIRSECTION = 49587131U;
         static const AkUniqueID DIALOGUE_BUS = 573466488U;
         static const AkUniqueID HDR_MAGIC_BUS = 2239254138U;
         static const AkUniqueID MASTER_BUS = 1399649189U;
@@ -170,6 +201,7 @@ namespace AK
         static const AkUniqueID MUSIC_BUS = 2680856269U;
         static const AkUniqueID MUSIC_SHOP_BUS = 1145691870U;
         static const AkUniqueID REVERB_RETURN = 358140370U;
+        static const AkUniqueID RYTHMSECTION = 2598026720U;
         static const AkUniqueID SUMMER_BUS = 1348578857U;
         static const AkUniqueID UI_NONDIEGETIC_BUS = 1826390690U;
     } // namespace BUSSES

@@ -131,7 +131,12 @@ public class PlayerControlOverride : MonoBehaviour
         Player.GetComponent<NavMeshAgent>().updateRotation = false;
     }
 
-    public void ResetPlayerControl()
+    public void ControlOverride()
+    {
+        PlayerControlOverrideSO.Value = true;
+    }
+
+        public void ResetPlayerControl()
     {
         PlayerControlOverrideSO.Value = false;
 
