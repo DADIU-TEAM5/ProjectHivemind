@@ -1,10 +1,11 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class AttackScript : GameLoop
 {
-
+    
     public Animator Anim;
 
     public FloatVariable AttackLength;
@@ -225,6 +226,7 @@ public class AttackScript : GameLoop
         _canAttack = true;
     }
 
+    
     private void Attack()
     {
         //print(PlayerDirectionSO.Value);
@@ -241,39 +243,67 @@ public class AttackScript : GameLoop
 
         // print(potentialTargets.Length);
         int layer = 1 << 9;
-        layer = ~layer; 
+        layer = ~layer;
+
+        List<GameObject> Targets = new List<GameObject>();
+
         for (int i = 0; i < potentialTargets.Length; i++)
         {
-            RaycastHit hit;
-            if (Physics.Raycast(PlayerGraphics.position, potentialTargets[i].transform.position - transform.position, out hit, AttackLength.Value, layer))
+            
+
+            RaycastHit[] Hits = Physics.RaycastAll(PlayerGraphics.position, potentialTargets[i].transform.position - transform.position, AttackLength.Value, layer);
+
+            float Distance = float.MaxValue;
+
+            for (int k = 0; k < Hits.Length; k++)
             {
-                Debug.DrawRay(PlayerGraphics.position,( potentialTargets[i].transform.position - transform.position ) * AttackLength.Value, Color.red,5);
-                if (hit.collider.gameObject.layer == 8)
+                if(Hits[k].collider.gameObject.layer != 8)
                 {
-                    //print(Vector3.Angle(PlayerGraphics.position + transform.forward, potentialTargets[i].transform.position - PlayerGraphics.position));
-                    //if()
-                    Vector3 temp = potentialTargets[i].transform.position;
+                    if(Hits[k].distance < Distance)
+                    {
+                        Distance = Hits[k].distance;
+                    }
+                }
+            }
+            for (int k = 0; k < Hits.Length; k++)
+            {
+                if (Hits[k].collider.gameObject.layer == 8)
+                {
+                    if (Hits[k].distance < Distance)
+                    {
+                        if(!Targets.Contains(Hits[k].collider.gameObject))
+                        Targets.Add(Hits[k].collider.gameObject);
+                    }
+                }
+            }
+
+
+
+            
+            
+        }
+        for (int i = 0; i < Targets.Count; i++)
+        {
+            
+                
+                    Vector3 temp = Targets[i].transform.position;
                     temp.y = PlayerGraphics.position.y;
 
-                    //print(Vector3.Angle(transform.position - (transform.position + PlayerSpeedDirectionSO.Value), transform.position - temp));
-                    // print("angle is "+ Vector3.Angle(PlayerGraphics.position - (PlayerGraphics.position + PlayerSpeedDirectionSO.Value), PlayerGraphics.position - temp) + " " + AttackAngle.Value);
-
-                    //print(PlayerSpeedDirectionSO.Value);
+                    
 
                     if (Vector3.Angle(PlayerGraphics.position - (PlayerGraphics.position + PlayerDirectionSO.Value), PlayerGraphics.position - temp) < AttackAngle.Value)
                     {
-                        var potentialEnemy = potentialTargets[i].GetComponent<Enemy>();
+                        var potentialEnemy = Targets[i].GetComponent<Enemy>();
 
                         AttackOnHit.Raise(potentialEnemy.gameObject);
                         potentialEnemy.TakeDamage(AttackDamage.Value);
                     }
-                }
-                else
-                    print("Attack blocked");
+                
 
-            }
             
         }
+        
+
 
     }
 
@@ -316,4 +346,7 @@ public class AttackScript : GameLoop
         _coneRenderer.loop = true;
     }
 
+
+
 }
+
