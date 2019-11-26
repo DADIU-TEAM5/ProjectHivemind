@@ -134,8 +134,10 @@ public class Boomer : Enemy
             transform.LookAt(adjustedPlayerPos);
 
             Cone.SetActive(true);
+            OuterEdge.SetActive(true);
             Outline.SetActive(true);
             DrawCone(20, OutlineMesh, true, _attackCharge);
+            DrawCone(20, OuterEdgeMesh, true, _attackCharge);
 
             BoomerAnimator.SetTrigger("Attack");
 
@@ -196,6 +198,7 @@ public class Boomer : Enemy
             _attackCharge = 0;
             Cone.SetActive(false);
             Outline.SetActive(false);
+            OuterEdge.SetActive(false);
             NavMeshAgent.speed = _boomerStats.MoveSpeed;
 
 

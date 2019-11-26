@@ -2316,6 +2316,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   ConeMaterial: {fileID: 2100000, guid: 44ad2d5118b6126489b1776ec64125f8, type: 2}
+  EdgeMaterial: {fileID: 2100000, guid: 1b67e36b201d3e449b3031e7737774fe, type: 2}
+  LowerConeMaterial: {fileID: 2100000, guid: 334b626f7df17c24098755a1717def0b, type: 2}
   stats: {fileID: 11400000, guid: 06abc0358653ba84ab33fb264c215c1d, type: 2}
   bodyPart: {fileID: 7324468612011702487, guid: 862620230bd5167459723c1fe51d3192,
     type: 3}
@@ -2338,6 +2340,15 @@ MonoBehaviour:
   StartColor: {r: 0, g: 0, b: 0, a: 0}
   Renderer: {fileID: 0}
   Cone: {fileID: 0}
+  Edge1: {fileID: 0}
+  Edge2: {fileID: 0}
+  EdgeMesh1: {fileID: 0}
+  EdgeMesh2: {fileID: 0}
+  EdgeRendere1: {fileID: 0}
+  EdgeRendere2: {fileID: 0}
+  OuterEdge: {fileID: 0}
+  OuterEdgeMesh: {fileID: 0}
+  OuterEdgeRenderer: {fileID: 0}
   ConeRenderer: {fileID: 0}
   ConeMesh: {fileID: 0}
   Outline: {fileID: 0}
@@ -4310,21 +4321,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5709175598121098645, guid: 17871ea85fd1cab439cbfff0b068fada,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8138630681281674672, guid: 17871ea85fd1cab439cbfff0b068fada,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7901283948122470754, guid: 17871ea85fd1cab439cbfff0b068fada,
-        type: 3}
-      propertyPath: m_Name
-      value: Splat
-      objectReference: {fileID: 0}
     - target: {fileID: 3514019391566163302, guid: 17871ea85fd1cab439cbfff0b068fada,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4395,7 +4391,22 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.6590173
       objectReference: {fileID: 0}
+    - target: {fileID: 7901283948122470754, guid: 17871ea85fd1cab439cbfff0b068fada,
+        type: 3}
+      propertyPath: m_Name
+      value: Splat
+      objectReference: {fileID: 0}
     - target: {fileID: 3514019390833725717, guid: 17871ea85fd1cab439cbfff0b068fada,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5709175598121098645, guid: 17871ea85fd1cab439cbfff0b068fada,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8138630681281674672, guid: 17871ea85fd1cab439cbfff0b068fada,
         type: 3}
       propertyPath: playOnAwake
       value: 1

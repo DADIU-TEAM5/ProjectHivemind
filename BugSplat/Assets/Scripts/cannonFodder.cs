@@ -100,7 +100,7 @@ public class cannonFodder : Enemy
             DrawCone(4, OuterEdgeMesh, true, _attackCharge);
 
         }
-        DrawCone(4,ConeMesh,false,_attackCharge);
+        DrawCone(5,ConeMesh,false,_attackCharge);
 
         ConeRenderer.material.color = Color.Lerp(ConeInitColor, ConeEndColor, _attackCharge / stats.AttackChargeUpTime);
         //Color.Lerp(new Color(0,1,0,0.5f), new Color(1, 0, 0, 0.5f), _attackCharge / stats.AttackChargeUpTime);
