@@ -6,6 +6,8 @@ using UnityEngine.AI;
 public class EnemySpawner : GameLoop
 {
     public GameEvent SpawnAllEnemies;
+    public GameEvent NextWaveEvent;
+    public GameEvent InitialSpawnEvent;
     public GameObjectVariable ThePlayer;
 
     public FloatVariable InitalAggroDelay;
@@ -35,6 +37,7 @@ public class EnemySpawner : GameLoop
 
 
     bool startedSpawning = false;
+    bool firstSpawn = false;
 
     public static bool SpawningDone;
 
@@ -166,7 +169,11 @@ public class EnemySpawner : GameLoop
 
         if (startedSpawning)
         {
-
+            if (!firstSpawn)
+            {
+                Debug.Log("Started Spawning");
+                firstSpawn = true;
+            }
 
 
             if (IsWave)
@@ -196,7 +203,7 @@ public class EnemySpawner : GameLoop
 
                     if(EnemiesInWaves[_currentWave].Count < EnemiesLeftBeforeNewWave.Value)
                     {
-
+                        NextWaveEvent.Raise();
                         _currentWave++;
                         _waveBegun = false;
 
@@ -430,6 +437,8 @@ public class EnemySpawner : GameLoop
 
                 spawnedEnemy.GetComponent<Enemy>().hex = hex;
                 spawnedEnemy.name = "Initial Fucker";
+                TotalEnemyCount.Value++;
+                InitialSpawnEvent.Raise();
                 spawnedEnemy.transform.parent = null;
 
                 Vector3 spawnPoint = transform.position;
@@ -541,6 +550,8 @@ public class EnemySpawner : GameLoop
 
 
                 spawnedEnemy.name = "Initial Fucker";
+                TotalEnemyCount.Value++;
+                InitialSpawnEvent.Raise();
                 spawnedEnemy.transform.parent = null;
 
                 Vector3 spawnPoint = transform.position;
