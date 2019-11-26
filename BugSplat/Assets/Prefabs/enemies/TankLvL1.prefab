@@ -1468,7 +1468,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  ConeMaterial: {fileID: 2100000, guid: 334b626f7df17c24098755a1717def0b, type: 2}
+  ConeMaterial: {fileID: 2100000, guid: 44ad2d5118b6126489b1776ec64125f8, type: 2}
+  EdgeMaterial: {fileID: 2100000, guid: 1b67e36b201d3e449b3031e7737774fe, type: 2}
+  LowerConeMaterial: {fileID: 2100000, guid: 334b626f7df17c24098755a1717def0b, type: 2}
   stats: {fileID: 11400000, guid: 23cc4f488cfe3d74497cadffc6e59c9d, type: 2}
   bodyPart: {fileID: 7324468612011702487, guid: 862620230bd5167459723c1fe51d3192,
     type: 3}
@@ -1491,6 +1493,15 @@ MonoBehaviour:
   StartColor: {r: 0, g: 0, b: 0, a: 0}
   Renderer: {fileID: 0}
   Cone: {fileID: 0}
+  Edge1: {fileID: 0}
+  Edge2: {fileID: 0}
+  EdgeMesh1: {fileID: 0}
+  EdgeMesh2: {fileID: 0}
+  EdgeRendere1: {fileID: 0}
+  EdgeRendere2: {fileID: 0}
+  OuterEdge: {fileID: 0}
+  OuterEdgeMesh: {fileID: 0}
+  OuterEdgeRenderer: {fileID: 0}
   ConeRenderer: {fileID: 0}
   ConeMesh: {fileID: 0}
   Outline: {fileID: 0}
@@ -3525,21 +3536,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5709175598121098645, guid: 17871ea85fd1cab439cbfff0b068fada,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8138630681281674672, guid: 17871ea85fd1cab439cbfff0b068fada,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7901283948122470754, guid: 17871ea85fd1cab439cbfff0b068fada,
-        type: 3}
-      propertyPath: m_Name
-      value: Splat
-      objectReference: {fileID: 0}
     - target: {fileID: 3514019391566163302, guid: 17871ea85fd1cab439cbfff0b068fada,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3594,6 +3590,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7901283948122470754, guid: 17871ea85fd1cab439cbfff0b068fada,
+        type: 3}
+      propertyPath: m_Name
+      value: Splat
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514019390833725717, guid: 17871ea85fd1cab439cbfff0b068fada,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5709175598121098645, guid: 17871ea85fd1cab439cbfff0b068fada,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8138630681281674672, guid: 17871ea85fd1cab439cbfff0b068fada,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2283547618632556895, guid: 17871ea85fd1cab439cbfff0b068fada,
         type: 3}
@@ -3656,11 +3672,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: a2e99c3f021955b45ac332eaa799fb79,
         type: 2}
-    - target: {fileID: 3514019390833725717, guid: 17871ea85fd1cab439cbfff0b068fada,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2283547618632556895, guid: 17871ea85fd1cab439cbfff0b068fada, type: 3}
     - {fileID: 2283547618632556888, guid: 17871ea85fd1cab439cbfff0b068fada, type: 3}
