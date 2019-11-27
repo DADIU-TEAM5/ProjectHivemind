@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CountAllResults : MonoBehaviour
 {
-    public FloatVariable LevelTimeConsume;
-    public FloatVariable TotalTimeConsume;
+
+    public IntVariable LevelEnemyKilled;
     public IntVariable TotalEarned;
     public IntVariable LevelEarned;
 
@@ -15,12 +15,14 @@ public class CountAllResults : MonoBehaviour
 
     public void CountEnemiesKilled()
     {
-        LevelEnemiesKilled.Value += 1; 
-    }
+		LevelEnemiesKilled.Value = LevelEnemyKilled.Value;
+
+	}
 
     public void SumAll()
     {
-        TotalEarned.Value += LevelEarned.Value;
+		LevelEnemiesKilled.Value = LevelEnemyKilled.Value;
+		TotalEarned.Value += LevelEarned.Value;
         TotalEnemiesKilled.Value += LevelEnemiesKilled.Value;
     }
 
