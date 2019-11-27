@@ -15,6 +15,7 @@ public class LoadTutorialShop : MonoBehaviour
     public StringVariable LastSceneSO;
     public Animator CharacterCutSceneAnimController;
     public GameObject TutorialEggs;
+    public GameObject[] LevelLights;
 
     void Start()
     {
@@ -39,6 +40,11 @@ public class LoadTutorialShop : MonoBehaviour
         } else
         {
             Cage.SetActive(true);
+        }
+
+        for (int i = LevelLights.Length; i >= CurrentLevelSO.Value; i--)
+        {
+            LevelLights[i].SetActive(false);
         }
     }
 
