@@ -73,7 +73,22 @@ public class cannonFodder : Enemy
     public override void LoopLateUpdate(float deltaTime) {}
 
 
-    
+
+    public override void SpawnFromUnderground()
+    {
+        EnemySpawnedEvent.Raise(this.gameObject);
+
+        FodderAnimator.SetTrigger("Spawn");
+
+        if (SpawnFirstTime.Value == true)
+        {
+            PlayerCurrentSpeedSO.Value = 0;
+            SpawnCamInit.Raise(RenderGraphics);
+            SpawnFirstTime.Value = false;
+        }
+    }
+
+
     void Attack()
     {
        

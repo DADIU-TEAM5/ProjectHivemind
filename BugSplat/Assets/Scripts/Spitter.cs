@@ -454,4 +454,9 @@ public class Spitter : Enemy
             Destroy(gameObject);
         }
     }
+
+    public override void SpawnFromUnderground()
+    {
+
+    }
 }

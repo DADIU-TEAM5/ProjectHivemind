@@ -824,6 +824,22 @@ public class TankBeetle : Enemy
             return false;
     }
 
+    public override void SpawnFromUnderground()
+    {
+        EnemySpawnedEvent.Raise(this.gameObject);
+
+        Anim.SetBool("Spawn", true);
+
+        if (SpawnFirstTime.Value == true)
+        {
+            PlayerCurrentSpeedSO.Value = 0;
+            SpawnCamInit.Raise(RenderGraphics);
+            SpawnFirstTime.Value = false;
+        }
+
+    }
+
+
 
     private void OnDrawGizmos()
     {

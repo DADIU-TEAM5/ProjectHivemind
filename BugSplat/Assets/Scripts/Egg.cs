@@ -51,4 +51,9 @@ public class Egg : Enemy
         }
 
     }
+
+    public override void SpawnFromUnderground()
+    {
+
+    }
 }

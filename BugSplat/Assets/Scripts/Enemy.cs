@@ -214,22 +214,12 @@ public abstract class Enemy : GameLoop
             }
         } else
         {
-            DetectThePlayer();
-
+            DetectThePlayer(); 
+            
             if (PlayerDetected)
             {
-                if (EnemySpawnedEvent != null)
-                {
-                    EnemySpawnedEvent.Raise();
-
-                    if (SpawnFirstTime.Value == true)
-                    {
-                        PlayerCurrentSpeedSO.Value = 0;
-                        SpawnCamInit.Raise(RenderGraphics);
-                        SpawnFirstTime.Value = false;
-                    }
-                }
-            } 
+                SpawnFromUnderground();
+            }
             //  Renderer.material.color = SetColor(Color.blue);
         }
 
@@ -243,6 +233,8 @@ public abstract class Enemy : GameLoop
     }
 
     public abstract void LoopBehaviour(float deltaTime);
+
+    public abstract void SpawnFromUnderground();
 
 
     public bool IsVisible()
