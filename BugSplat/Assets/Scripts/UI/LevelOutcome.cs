@@ -36,4 +36,7 @@ public class LevelOutcome : MonoBehaviour
         MoneyEarned.text = $"{moneyEarned.Value}";
     }
 
+    public void DetectClik()
+    {
+    }
 }
