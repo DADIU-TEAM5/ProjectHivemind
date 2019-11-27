@@ -12,6 +12,12 @@ public class FodderAudioScript : MonoBehaviour
     public AK.Wwise.Event DeathSplat;
     public AK.Wwise.Event PlayerDetected;
     public AK.Wwise.Event AttackCharging;
+    public AK.Wwise.Event Emerge;
+
+    public void EmergeEvent(GameObject source)
+    {
+        Emerge.Post(source);
+    }
 
 
     public void FootStepEvent(GameObject source)

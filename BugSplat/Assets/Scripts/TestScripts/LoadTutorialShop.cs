@@ -11,17 +11,55 @@ public class LoadTutorialShop : MonoBehaviour
     public Transform Player;
     public GameObject Cage;
     public BoolVariable ShopIsOpenSO;
+    public GameObject ShopCollider;
+    public BoolVariable ArenaOpenSO;
+    public GameObject ArenaCollider;
     public IntVariable CurrentLevelSO;
     public StringVariable LastSceneSO;
     public Animator CharacterCutSceneAnimController;
     public GameObject TutorialEggs;
+    public GameObject[] LevelLights;
 
-    void Start()
+
+
+
+    private void Start()
     {
-        if (CurrentLevelSO.Value == 0)
+        ShopIsOpenSO.Value = true;
+        TutorialEggs.SetActive(false);
+
+        if (CurrentLevelSO.Value == CurrentLevelSO.Max)
+        {
+            ArenaCollider.SetActive(false);
+            ShopCollider.SetActive(false);
+        }
+
+        for (int i = 0; i <= CurrentLevelSO.Max; i++)
+        {
+            if (i > 0)
+            {
+                if (CurrentLevelSO.Value >= i)
+                {
+                    LevelLights[i - 1].SetActive(true);
+                }
+                else
+                {
+                    LevelLights[i - 1].SetActive(false);
+                }
+            }
+        }
+    }
+    
+    public void  StartGame()
+    {
+        
+        
+
+        if (TutorialIsActiveSO.Value == true)
         {
             ShopIsOpenSO.Value = false;
-            TutorialIsActiveSO.Value = true;
+            Cage.SetActive(true);
+            //
             LastSceneSO.Value = "";
             CharacterCutSceneAnimController.enabled = true;
             TutorialEggs.SetActive(true);
@@ -30,16 +68,12 @@ public class LoadTutorialShop : MonoBehaviour
             ShopIsOpenSO.Value = true;
             TutorialIsActiveSO.Value = false;
             TutorialEggs.SetActive(false);
-        }
-
-        if (TutorialIsActiveSO.Value == false)
-        {
             PlayerControlOverrideSO.Value = false;
             Player.GetComponent<NavMeshAgent>().enabled = true;
-        } else
-        {
-            Cage.SetActive(true);
         }
-    }
 
+    
+
+        
+    }
 }
