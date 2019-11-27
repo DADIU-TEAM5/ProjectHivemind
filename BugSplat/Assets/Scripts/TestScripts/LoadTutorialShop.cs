@@ -21,35 +21,17 @@ public class LoadTutorialShop : MonoBehaviour
     public GameObject[] LevelLights;
 
 
-    void Start()
+
+
+    private void Start()
     {
+        ShopIsOpenSO.Value = true;
+        TutorialEggs.SetActive(false);
+
         if (CurrentLevelSO.Value == CurrentLevelSO.Max)
         {
             ArenaCollider.SetActive(false);
             ShopCollider.SetActive(false);
-        }
-
-        if (CurrentLevelSO.Value == 0)
-        {
-            ShopIsOpenSO.Value = false;
-            TutorialIsActiveSO.Value = true;
-            LastSceneSO.Value = "";
-            CharacterCutSceneAnimController.enabled = true;
-            TutorialEggs.SetActive(true);
-        } else
-        {
-            ShopIsOpenSO.Value = true;
-            TutorialIsActiveSO.Value = false;
-            TutorialEggs.SetActive(false);
-        }
-
-        if (TutorialIsActiveSO.Value == false)
-        {
-            PlayerControlOverrideSO.Value = false;
-            Player.GetComponent<NavMeshAgent>().enabled = true;
-        } else
-        {
-            Cage.SetActive(true);
         }
 
         for (int i = 0; i <= CurrentLevelSO.Max; i++)
@@ -66,5 +48,32 @@ public class LoadTutorialShop : MonoBehaviour
                 }
             }
         }
+    }
+    
+    public void  StartGame()
+    {
+        
+        
+
+        if (TutorialIsActiveSO.Value == true)
+        {
+            ShopIsOpenSO.Value = false;
+            Cage.SetActive(true);
+            //
+            LastSceneSO.Value = "";
+            CharacterCutSceneAnimController.enabled = true;
+            TutorialEggs.SetActive(true);
+        } else
+        {
+            ShopIsOpenSO.Value = true;
+            TutorialIsActiveSO.Value = false;
+            TutorialEggs.SetActive(false);
+            PlayerControlOverrideSO.Value = false;
+            Player.GetComponent<NavMeshAgent>().enabled = true;
+        }
+
+    
+
+        
     }
 }

@@ -116,6 +116,7 @@ Transform:
   - {fileID: 9073131247873742171}
   - {fileID: 3801180240571433365}
   - {fileID: 7479930617227118401}
+  - {fileID: 5858584530382171415}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -267,6 +268,90 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &6346706229970315021
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5858584530382171415}
+  - component: {fileID: 7230107680278010088}
+  - component: {fileID: 6720938830952625003}
+  m_Layer: 0
+  m_Name: EndGameDoorAudio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5858584530382171415
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6346706229970315021}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3399853914553861648}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7230107680278010088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6346706229970315021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef5ffb8ac44aa4618a40a23f576da004, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
+--- !u!114 &6720938830952625003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6346706229970315021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98978c24d8ccb4d99a7b2d8ad4e774aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: f7e1664c
+  useOtherObject: 0
+  actionOnEventType: 0
+  curveInterpolation: 4
+  enableActionOnEvent: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 7e56c17ecf4734eda8f0ea175a880c07,
+      type: 2}
+  useCallbacks: 0
+  Callbacks: []
+  playingId: 0
+  soundEmitterObject: {fileID: 0}
+  transitionDuration: 0
+  eventIdInternal: 0
+  valueGuidInternal: 
+  m_callbackDataInternal: {fileID: 0}
 --- !u!1 &6489248250983788189
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,11 +542,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7249988018006242563}
     m_Modifications:
-    - target: {fileID: 897249822676909064, guid: f6cc3d96274ae0f41b577d13fc3d2c93,
-        type: 3}
-      propertyPath: m_Name
-      value: EndgameDoor_LevelCompleted_Particle_Level05
-      objectReference: {fileID: 0}
     - target: {fileID: 897249822676909065, guid: f6cc3d96274ae0f41b577d13fc3d2c93,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -516,6 +596,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 897249822676909064, guid: f6cc3d96274ae0f41b577d13fc3d2c93,
+        type: 3}
+      propertyPath: m_Name
+      value: EndgameDoor_LevelCompleted_Particle_Level05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6cc3d96274ae0f41b577d13fc3d2c93, type: 3}
@@ -532,11 +617,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9073131247873742171}
     m_Modifications:
-    - target: {fileID: 897249822676909064, guid: f6cc3d96274ae0f41b577d13fc3d2c93,
-        type: 3}
-      propertyPath: m_Name
-      value: EndgameDoor_LevelCompleted_Particle_Level09
-      objectReference: {fileID: 0}
     - target: {fileID: 897249822676909065, guid: f6cc3d96274ae0f41b577d13fc3d2c93,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -592,6 +672,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 897249822676909064, guid: f6cc3d96274ae0f41b577d13fc3d2c93,
+        type: 3}
+      propertyPath: m_Name
+      value: EndgameDoor_LevelCompleted_Particle_Level09
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6cc3d96274ae0f41b577d13fc3d2c93, type: 3}
 --- !u!4 &1568211595852727736 stripped
@@ -607,11 +692,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7249988018006242563}
     m_Modifications:
-    - target: {fileID: 897249822676909064, guid: f6cc3d96274ae0f41b577d13fc3d2c93,
-        type: 3}
-      propertyPath: m_Name
-      value: EndgameDoor_LevelCompleted_Particle_Level03
-      objectReference: {fileID: 0}
     - target: {fileID: 897249822676909065, guid: f6cc3d96274ae0f41b577d13fc3d2c93,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -667,6 +747,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 897249822676909064, guid: f6cc3d96274ae0f41b577d13fc3d2c93,
+        type: 3}
+      propertyPath: m_Name
+      value: EndgameDoor_LevelCompleted_Particle_Level03
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6cc3d96274ae0f41b577d13fc3d2c93, type: 3}
 --- !u!4 &1330101404714594285 stripped
@@ -682,11 +767,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9073131247873742171}
     m_Modifications:
-    - target: {fileID: 897249822676909064, guid: f6cc3d96274ae0f41b577d13fc3d2c93,
-        type: 3}
-      propertyPath: m_Name
-      value: EndgameDoor_LevelCompleted_Particle_Level07
-      objectReference: {fileID: 0}
     - target: {fileID: 897249822676909065, guid: f6cc3d96274ae0f41b577d13fc3d2c93,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -742,6 +822,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 897249822676909064, guid: f6cc3d96274ae0f41b577d13fc3d2c93,
+        type: 3}
+      propertyPath: m_Name
+      value: EndgameDoor_LevelCompleted_Particle_Level07
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6cc3d96274ae0f41b577d13fc3d2c93, type: 3}
 --- !u!4 &4607432955342642512 stripped
@@ -757,11 +842,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9073131247873742171}
     m_Modifications:
-    - target: {fileID: 897249822676909064, guid: f6cc3d96274ae0f41b577d13fc3d2c93,
-        type: 3}
-      propertyPath: m_Name
-      value: EndgameDoor_LevelCompleted_Particle_Level08
-      objectReference: {fileID: 0}
     - target: {fileID: 897249822676909065, guid: f6cc3d96274ae0f41b577d13fc3d2c93,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -817,6 +897,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 897249822676909064, guid: f6cc3d96274ae0f41b577d13fc3d2c93,
+        type: 3}
+      propertyPath: m_Name
+      value: EndgameDoor_LevelCompleted_Particle_Level08
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6cc3d96274ae0f41b577d13fc3d2c93, type: 3}
 --- !u!4 &4578188411390848019 stripped
@@ -832,11 +917,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9073131247873742171}
     m_Modifications:
-    - target: {fileID: 897249822676909064, guid: f6cc3d96274ae0f41b577d13fc3d2c93,
-        type: 3}
-      propertyPath: m_Name
-      value: EndgameDoor_LevelCompleted_Particle_Level10
-      objectReference: {fileID: 0}
     - target: {fileID: 897249822676909065, guid: f6cc3d96274ae0f41b577d13fc3d2c93,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -892,6 +972,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 897249822676909064, guid: f6cc3d96274ae0f41b577d13fc3d2c93,
+        type: 3}
+      propertyPath: m_Name
+      value: EndgameDoor_LevelCompleted_Particle_Level10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6cc3d96274ae0f41b577d13fc3d2c93, type: 3}
 --- !u!4 &4171441667209826582 stripped
@@ -907,11 +992,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9073131247873742171}
     m_Modifications:
-    - target: {fileID: 897249822676909064, guid: f6cc3d96274ae0f41b577d13fc3d2c93,
-        type: 3}
-      propertyPath: m_Name
-      value: EndgameDoor_LevelCompleted_Particle_Level06
-      objectReference: {fileID: 0}
     - target: {fileID: 897249822676909065, guid: f6cc3d96274ae0f41b577d13fc3d2c93,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -967,6 +1047,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 897249822676909064, guid: f6cc3d96274ae0f41b577d13fc3d2c93,
+        type: 3}
+      propertyPath: m_Name
+      value: EndgameDoor_LevelCompleted_Particle_Level06
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6cc3d96274ae0f41b577d13fc3d2c93, type: 3}
 --- !u!4 &5413035058398710783 stripped
@@ -982,11 +1067,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7249988018006242563}
     m_Modifications:
-    - target: {fileID: 897249822676909064, guid: f6cc3d96274ae0f41b577d13fc3d2c93,
-        type: 3}
-      propertyPath: m_Name
-      value: EndgameDoor_LevelCompleted_Particle_Level01
-      objectReference: {fileID: 0}
     - target: {fileID: 897249822676909065, guid: f6cc3d96274ae0f41b577d13fc3d2c93,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1042,6 +1122,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 897249822676909064, guid: f6cc3d96274ae0f41b577d13fc3d2c93,
+        type: 3}
+      propertyPath: m_Name
+      value: EndgameDoor_LevelCompleted_Particle_Level01
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6cc3d96274ae0f41b577d13fc3d2c93, type: 3}
 --- !u!4 &6121120092532041878 stripped
@@ -1057,11 +1142,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7249988018006242563}
     m_Modifications:
-    - target: {fileID: 897249822676909064, guid: f6cc3d96274ae0f41b577d13fc3d2c93,
-        type: 3}
-      propertyPath: m_Name
-      value: EndgameDoor_LevelCompleted_Particle_Level04
-      objectReference: {fileID: 0}
     - target: {fileID: 897249822676909065, guid: f6cc3d96274ae0f41b577d13fc3d2c93,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1117,6 +1197,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 897249822676909064, guid: f6cc3d96274ae0f41b577d13fc3d2c93,
+        type: 3}
+      propertyPath: m_Name
+      value: EndgameDoor_LevelCompleted_Particle_Level04
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6cc3d96274ae0f41b577d13fc3d2c93, type: 3}
 --- !u!4 &5877166573210239758 stripped
@@ -1132,11 +1217,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7249988018006242563}
     m_Modifications:
-    - target: {fileID: 897249822676909064, guid: f6cc3d96274ae0f41b577d13fc3d2c93,
-        type: 3}
-      propertyPath: m_Name
-      value: EndgameDoor_LevelCompleted_Particle_Level02
-      objectReference: {fileID: 0}
     - target: {fileID: 897249822676909065, guid: f6cc3d96274ae0f41b577d13fc3d2c93,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1191,6 +1271,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 897249822676909064, guid: f6cc3d96274ae0f41b577d13fc3d2c93,
+        type: 3}
+      propertyPath: m_Name
+      value: EndgameDoor_LevelCompleted_Particle_Level02
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6cc3d96274ae0f41b577d13fc3d2c93, type: 3}

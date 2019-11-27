@@ -14,6 +14,16 @@ public class SaveLoadEnforcer : MonoBehaviour
     public BoolVariable tutorialDone;
 
 
+    private void Start()
+    {
+        if(currentlevel.Value != 0)
+        {
+            save();
+        }
+    }
+
+
+
     /*
     private IEnumerator Start()
     {
@@ -27,35 +37,47 @@ public class SaveLoadEnforcer : MonoBehaviour
     */
     public void load()
     {
+
+        int hasSavedBefore =0;
+
+        hasSavedBefore = PlayerPrefs.GetInt("hasSaved");
         
-        JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("pool"), Pool);
-
-        for (int i = 0; i < playerStats.Value.Count; i++)
+        if(hasSavedBefore == 64)
         {
-            
+            JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("pool"), Pool);
 
-            JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("stats"+i), playerStats.Value[i]);
+            for (int i = 0; i < playerStats.Value.Count; i++)
+            {
+
+
+                JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("stats" + i), playerStats.Value[i]);
+            }
+
+
+            JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("Bodyparts"), bodyparts);
+            JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("level"), currentlevel);
+            for (int i = 0; i < itemsslots.Length; i++)
+            {
+                JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("slot" + i), itemsslots[i]);
+            }
+            JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("inventory"), inventory);
+
+            JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("tutorial"), tutorialDone);
+
+
+
+            print("game loaded");
         }
 
         
-        JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("Bodyparts"), bodyparts);
-        JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("level"), currentlevel);
-        for (int i = 0; i < itemsslots.Length; i++)
-        {
-            JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("slot" + i), itemsslots[i]);
-        }
-        JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("inventory"), inventory);
-
-        JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("tutorial"), tutorialDone);
-
-
-
-        print("game loaded");
     }
 
     public void save()
     {
         
+        PlayerPrefs.SetInt("hasSaved", 64);
+
+
         PlayerPrefs.SetString("pool", JsonUtility.ToJson(Pool));
 
         //print(JsonUtility.ToJson(Pool.Bought));

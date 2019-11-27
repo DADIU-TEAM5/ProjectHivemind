@@ -105,6 +105,13 @@ public class Spitter : Enemy
 
     public override void LoopBehaviour(float deltaTime)
     {
+
+        if(IsUnderground || FullyUnderground)
+        {
+            EndAttack();
+        }
+
+
         if (_waitForPathCalc > 0)
             _waitForPathCalc -= deltaTime;
 

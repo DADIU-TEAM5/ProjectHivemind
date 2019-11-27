@@ -8,6 +8,7 @@ public class BodyPart : GameLoop
     public Vector3Variable PlayerPosition;
     public float PickUpRange;
     public IntVariable BodyParts;
+    public IntVariable LevelEarnedMoney;
 
     public GameEvent PickedUpEvent;
 
@@ -66,7 +67,11 @@ public class BodyPart : GameLoop
 
             if (distanceToPlayer < 0.2f)
             {
-                BodyParts.Value += Random.Range(minValue,MaxValue);
+                var increase = Random.Range(minValue, MaxValue);
+                BodyParts.Value += increase;
+                LevelEarnedMoney.Value += increase;
+
+
                 PickedUpEvent?.Raise(gameObject);
                 Destroy(gameObject);
             }

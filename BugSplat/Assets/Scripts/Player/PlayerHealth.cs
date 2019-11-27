@@ -62,11 +62,11 @@ public class PlayerHealth : GameLoop
     public void TakeDamage(float damage)
     {
 
-        if (InvulnerabilityTimerSO.Value < 0 && IsInvulnerableSO.Value != true)
+        if (InvulnerabilityTimerSO.Value <= 0 && IsInvulnerableSO.Value != true)
         {
             InvulnerabilityTimerSO.Value = InvulnerabilityTimerSO.InitialValue;
             IsInvulnerableSO.Value = true;
-            //print("The player took " + damage);
+            print("The player took " + damage);
             CurrentHealth.Value -= damage;
 
             print("player took " + damage + " current health: " + CurrentHealth.Value);
