@@ -11,6 +11,7 @@ public class PrimarySceneLoader : ScriptableObject
     public void AddScene(string name, string path) {
         if (!ScenePathDictionary.ContainsKey(name)) {
             ScenePathDictionary.Add(name, path);
+            Debug.Log("Scene added: " + name);
         }
     }
 
