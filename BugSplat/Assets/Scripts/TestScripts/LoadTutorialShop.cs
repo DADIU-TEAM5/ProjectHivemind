@@ -16,12 +16,21 @@ public class LoadTutorialShop : MonoBehaviour
     public Animator CharacterCutSceneAnimController;
     public GameObject TutorialEggs;
 
-    void Start()
+
+
+    private void Start()
     {
-        if (CurrentLevelSO.Value == 0)
+        ShopIsOpenSO.Value = true;
+        TutorialEggs.SetActive(false);
+    }
+    
+    public void  StartGame()
+    {
+        if (TutorialIsActiveSO.Value == true)
         {
             ShopIsOpenSO.Value = false;
-            TutorialIsActiveSO.Value = true;
+            Cage.SetActive(true);
+            //
             LastSceneSO.Value = "";
             CharacterCutSceneAnimController.enabled = true;
             TutorialEggs.SetActive(true);
@@ -30,16 +39,10 @@ public class LoadTutorialShop : MonoBehaviour
             ShopIsOpenSO.Value = true;
             TutorialIsActiveSO.Value = false;
             TutorialEggs.SetActive(false);
-        }
-
-        if (TutorialIsActiveSO.Value == false)
-        {
             PlayerControlOverrideSO.Value = false;
             Player.GetComponent<NavMeshAgent>().enabled = true;
-        } else
-        {
-            Cage.SetActive(true);
         }
+
     }
 
 }
