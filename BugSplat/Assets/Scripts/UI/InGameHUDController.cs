@@ -26,6 +26,10 @@ public class InGameHUDController : MonoBehaviour
     public BoolVariable InMainMenu;
     public SceneHandler SH;
 
+    public GameEvent UIEnterMenuEvent;
+    public GameEvent UIExitMenuEvent;
+    public GameEvent UIClickButtonEvent;
+    public GameEvent UIClickBackEvent;
 
     //public GameObject OptionsPanel;
     public BoolVariable GameIsPaused;
@@ -60,7 +64,7 @@ public class InGameHUDController : MonoBehaviour
         if (InMainMenu.Value)
         {
             //Debug.Log("Im Not null.....");
-            EnterMainMenu();
+            EnterMainMenu(false);
         }
         else
             EnterInGameHUD();
@@ -132,8 +136,11 @@ public class InGameHUDController : MonoBehaviour
 
     public void QuitButton()
     {
+        UIExitMenuEvent.Raise();
         Unpause();
-        SceneManager.LoadScene("_PreloadScene");
+        SceneManager.LoadScene("Hub Scene");
+        InMainMenu.Value = true;
+        
     }
 
     // TrashCode
@@ -146,15 +153,29 @@ public class InGameHUDController : MonoBehaviour
 
     public void BackButton()
     {
+        UIClickBackEvent.Raise();
         if (InMainMenu.Value)
-            EnterMainMenu();
+            EnterMainMenu(false);
         else
-            EnterPauseMenu();
+            EnterPauseMenu(false);
     }
 
     // Change Menu
     public void EnterMainMenu()
     {
+        UIEnterMenuEvent.Raise();
+        Debug.Log("Enter Main Menu");
+        MainMenu.SetActive(true);
+        OptionsMenu.SetActive(false);
+        ModifiersMenu.SetActive(false);
+        PauseMenu.SetActive(false);
+        InGameHUD.SetActive(false);
+    }
+
+    // Used for not raising additional events
+    public void EnterMainMenu(bool b)
+    {
+
         Debug.Log("Enter Main Menu");
         MainMenu.SetActive(true);
         OptionsMenu.SetActive(false);
@@ -164,6 +185,7 @@ public class InGameHUDController : MonoBehaviour
     }
     public void EnterOptionsMenu()
     {
+        UIClickButtonEvent.Raise();
         MainMenu.SetActive(false);
         OptionsMenu.SetActive(true);
         ModifiersMenu.SetActive(false);
@@ -172,6 +194,7 @@ public class InGameHUDController : MonoBehaviour
     }
     public void EnterModifiersMenu()
     {
+        UIClickButtonEvent.Raise();
         MainMenu.SetActive(false);
         OptionsMenu.SetActive(false);
         ModifiersMenu.SetActive(true);
@@ -180,6 +203,20 @@ public class InGameHUDController : MonoBehaviour
     }
     public void EnterPauseMenu()
     {
+        UIEnterMenuEvent.Raise();
+        Debug.Log("Enter Pause Menu");
+        Pause();
+        MainMenu.SetActive(false);
+        OptionsMenu.SetActive(false);
+        ModifiersMenu.SetActive(false);
+        PauseMenu.SetActive(true);
+        InGameHUD.SetActive(false);
+    }
+
+    // Used for not raising additional events
+    public void EnterPauseMenu(bool b)
+    {
+
         Debug.Log("Enter Pause Menu");
         Pause();
         MainMenu.SetActive(false);
@@ -191,6 +228,7 @@ public class InGameHUDController : MonoBehaviour
 
     public void EnterInGameHUD()
     {
+        UIExitMenuEvent.Raise();
         Unpause();
         MainMenu.SetActive(false);
         OptionsMenu.SetActive(false);
@@ -209,4 +247,7 @@ public class InGameHUDController : MonoBehaviour
         HealthBar.SetActive(false);
         HealthBar.SetActive(true);
     }
+
+
+    
 }
