@@ -391,7 +391,7 @@ public class EnemySpawner : GameLoop
         if (LevelBudget+budget >=SmallestValue)
         {
 
-            if(Random.Range(0,100)<40)
+            if(Random.Range(0,100)<5)
             {
                 GameObject ChosenGuy = enemies[Random.Range(0, enemies.Count)];
                 int FirsTValueToget = ChosenGuy.GetComponent<Enemy>().difficultyValue;
@@ -487,7 +487,7 @@ public class EnemySpawner : GameLoop
         if (WaveLevelBudget[_currentWave] + budget >= SmallestValue)
         {
 
-            if (Random.Range(0, 100) < 40)
+            if (Random.Range(0, 100) < 5)
             {
                 GameObject ChosenGuy = enemies[Random.Range(0, enemies.Count)];
                 int FirsTValueToget = ChosenGuy.GetComponent<Enemy>().difficultyValue;
