@@ -15,6 +15,7 @@ namespace AK
     {
         static const AkUniqueID AMB_ARENA_01_START = 4090897946U;
         static const AkUniqueID AMB_ARENA_01_STOP = 3018226098U;
+        static const AkUniqueID AMB_HUB_HOWL = 4023739020U;
         static const AkUniqueID AMB_HUB_MAINEVENT = 1797197367U;
         static const AkUniqueID AMB_SHOP_MAINEVENT = 3126464902U;
         static const AkUniqueID CAGE_OPEN = 711098640U;
