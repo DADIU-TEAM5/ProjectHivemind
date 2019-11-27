@@ -1,6 +1,7 @@
 Event	ID	Name			Wwise Object Path	Notes
 	154430615	shop_insufficientFunds			\ShopEvents\ShopInteraction\shop_insufficientFunds	
 	615336901	chain_loop			\HubEvents\HubAmbience\chain_loop	
+	711098640	cage_open			\HubEvents\HubAmbience\cage_open	
 	771050566	toad_deny			\ShopEvents\Toad\toad_deny	
 	1339011789	shop_inspectItem			\ShopEvents\ShopInteraction\shop_inspectItem	
 	1388225139	toad_dialogueBlip			\ShopEvents\Toad\toad_dialogueBlip	
@@ -9,8 +10,11 @@ Event	ID	Name			Wwise Object Path	Notes
 	2486007151	shop_putDown			\ShopEvents\ShopInteraction\shop_putDown	
 	2496063080	toad_accept			\ShopEvents\Toad\toad_accept	
 	2826204523	chain_stop			\HubEvents\HubAmbience\chain_stop	
+	2951951990	shop_enter			\ShopEvents\ShopInteraction\shop_enter	
 	3126464902	amb_shop_mainEvent			\ShopEvents\ShopAmbience\amb_shop_mainEvent	
+	3515360802	chain_dangle			\HubEvents\HubAmbience\chain_dangle	
 	3988221669	shop_purchase			\ShopEvents\ShopInteraction\shop_purchase	
+	4024286332	shop_exit			\ShopEvents\ShopInteraction\shop_exit	
 
 Source plug-ins	ID	Name	Type		Wwise Object Path	Notes
 	57560052	Wwise Silence	Wwise Silence		\Actor-Mixer Hierarchy\Ambience\amb_shop_mastermix\amb_shop_source_drip\silence_03\Wwise Silence	
@@ -21,38 +25,57 @@ Source plug-ins	ID	Name	Type		Wwise Object Path	Notes
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	44783847	props_chain_loop_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\props_chain_loop_01_ADF7B7FB.wem		\Actor-Mixer Hierarchy\Traps+Props\chaincage_mastermix\chainloop\props_chain_loop_01		303331
 	44842512	toad_deny_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\toad_deny_02_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_frog_dialogue\toad_deny\toad_deny_02		13410
+	56673836	amb_hub_deipLoop_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\amb_hub_deipLoop_01_ADF7B7FB.wem		\Actor-Mixer Hierarchy\Ambience\amb_hub_mastermix\amb_hub_deipLoop_01		372288
 	59584601	props_chain_stop	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\props_chain_stop_8EDF57DD.wem		\Actor-Mixer Hierarchy\Traps+Props\chaincage_mastermix\chainStop\props_chain_stop		42464
 	92687332	shop_putDownPlate_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\shop_putDownPlate_01_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_interactions_mastermix\shop_putDownPlate\shop_putDownPlate\shop_putDownPlate_01		4955
 	99765881	ambsource_drip_05	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\ambsource_drip_05_8EDF57DD.wem		\Actor-Mixer Hierarchy\Ambience\amb_shop_mastermix\amb_shop_source_drip\ambsource_drip_05		10184
+	130889463	props_cage_unlock	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\props_cage_unlock_8EDF57DD.wem		\Actor-Mixer Hierarchy\Traps+Props\chaincage_mastermix\chaingate\props_cage_unlock		25356
 	146395160	toad_accept_03	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\toad_accept_03_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_frog_dialogue\toad_accept\toad_accept_03		16064
 	203083876	toad_accept_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\toad_accept_01_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_frog_dialogue\toad_accept\toad_accept_01		10859
 	207081043	toad_accept_05	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\toad_accept_05_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_frog_dialogue\toad_accept\toad_accept_05		11869
 	211526328	shop_purchase_03	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\shop_purchase_03_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_interactions_mastermix\shop_purchase_sting\shop_purchase_sting\shop_purchase_03		59383
+	241526189	toadmusic_entre_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\toadmusic_entre_01_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_interactions_mastermix\shop_enter\shop_enter_music\toadmusic_entre_01		53009
 	261162090	shop_inspect_plate_03	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\shop_inspect_plate_03_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_interactions_mastermix\shop_inspectPlate\shop_inspectPlate\shop_inspect_plate_03		6232
 	270570416	shop_putDownPlate_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\shop_putDownPlate_02_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_interactions_mastermix\shop_putDownPlate\shop_putDownPlate\shop_putDownPlate_02		5160
 	323491498	shop_purchase_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\shop_purchase_01_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_interactions_mastermix\shop_purchase_sting\shop_purchase_sting\shop_purchase_01		54525
 	338717862	toad_deny_03	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\toad_deny_03_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_frog_dialogue\toad_deny\toad_deny_03		12968
 	347714705	props_chain_start	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\props_chain_start_8EDF57DD.wem		\Actor-Mixer Hierarchy\Traps+Props\chaincage_mastermix\chainStart\props_chain_start		103301
 	388926070	shop_purchase_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\shop_purchase_02_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_interactions_mastermix\shop_purchase_sting\shop_purchase_sting\shop_purchase_02		54761
+	406616848	toad_blip_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\toad_blip_01_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_frog_dialogue\toad_dialogueBlip\toad_blip_01		27684
 	420773879	ambsource_drip_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\ambsource_drip_02_8EDF57DD.wem		\Actor-Mixer Hierarchy\Ambience\amb_shop_mastermix\amb_shop_source_drip\ambsource_drip_02		10057
+	465076507	toadmusic_exit_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\toadmusic_exit_01_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_interactions_mastermix\shop_exit\shop_exit_music\toadmusic_exit_01		65936
 	477738590	shop_inspect_plate_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\shop_inspect_plate_01_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_interactions_mastermix\shop_inspectPlate\shop_inspectPlate\shop_inspect_plate_01		5705
 	479007248	toad_accept_07	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\toad_accept_07_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_frog_dialogue\toad_accept\toad_accept_07		17341
+	492379288	shop_bell_exit_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\shop_bell_exit_01_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_interactions_mastermix\shop_exit\shop_exit_bell\shop_bell_exit_01		20506
 	506912683	shop_inspect_plate_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\shop_inspect_plate_02_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_interactions_mastermix\shop_inspectPlate\shop_inspectPlate\shop_inspect_plate_02		7801
+	507813853	shop_bell_exit_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\shop_bell_exit_02_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_interactions_mastermix\shop_exit\shop_exit_bell\shop_bell_exit_02		25543
+	515444882	toadmusic_entre_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\toadmusic_entre_02_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_interactions_mastermix\shop_enter\shop_enter_music\toadmusic_entre_02		53629
 	520312807	toad_deny_04	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\toad_deny_04_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_frog_dialogue\toad_deny\toad_deny_04		18906
 	569537801	shop_putDownPlate_04	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\shop_putDownPlate_04_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_interactions_mastermix\shop_putDownPlate\shop_putDownPlate\shop_putDownPlate_04		4588
+	575441283	props_cage_open	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\props_cage_open_8EDF57DD.wem		\Actor-Mixer Hierarchy\Traps+Props\chaincage_mastermix\chaingate\props_cage_open		64386
 	600179770	ambsource_drip_06	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\ambsource_drip_06_8EDF57DD.wem		\Actor-Mixer Hierarchy\Ambience\amb_shop_mastermix\amb_shop_source_drip\ambsource_drip_06		11151
+	642239964	toad_blip_04	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\toad_blip_04_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_frog_dialogue\toad_dialogueBlip\toad_blip_04		39625
+	646848818	toadmusic_entre_04	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\toadmusic_entre_04_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_interactions_mastermix\shop_enter\shop_enter_music\toadmusic_entre_04		49347
 	654805538	ambsource_drip_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\ambsource_drip_01_8EDF57DD.wem		\Actor-Mixer Hierarchy\Ambience\amb_shop_mastermix\amb_shop_source_drip\ambsource_drip_01		10510
 	672876930	ambsource_drip_07	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\ambsource_drip_07_8EDF57DD.wem		\Actor-Mixer Hierarchy\Ambience\amb_shop_mastermix\amb_shop_source_drip\ambsource_drip_07		10516
 	682958209	toad_accept_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\toad_accept_02_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_frog_dialogue\toad_accept\toad_accept_02		11665
+	704547000	shop_bell_enter_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\shop_bell_enter_01_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_interactions_mastermix\shop_enter\shop_enter_bell\shop_bell_enter_01		17198
+	710056789	cage_dangle	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\cage_dangle_EBC987A4.wem		\Actor-Mixer Hierarchy\Traps+Props\chainProp_mix\cage_dangle		541120
 	710111305	toad_accept_06	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\toad_accept_06_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_frog_dialogue\toad_accept\toad_accept_06		17022
 	728931627	ambsource_drip_03	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\ambsource_drip_03_8EDF57DD.wem		\Actor-Mixer Hierarchy\Ambience\amb_shop_mastermix\amb_shop_source_drip\ambsource_drip_03		10687
 	742953182	ambsource_drip_04	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\ambsource_drip_04_8EDF57DD.wem		\Actor-Mixer Hierarchy\Ambience\amb_shop_mastermix\amb_shop_source_drip\ambsource_drip_04		10523
 	752146179	ambsource_drip_08	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\ambsource_drip_08_8EDF57DD.wem		\Actor-Mixer Hierarchy\Ambience\amb_shop_mastermix\amb_shop_source_drip\ambsource_drip_08		9910
 	759281619	toad_deny_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\toad_deny_01_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_frog_dialogue\toad_deny\toad_deny_01		25010
+	771890443	toadmusic_entre_03	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\toadmusic_entre_03_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_interactions_mastermix\shop_enter\shop_enter_music\toadmusic_entre_03		55825
 	790088374	shop_tooBad_pouch_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\shop_tooBad_pouch_02_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_interactions_mastermix\shop_insufficient_pouch\shop_insufficient_pouch\shop_tooBad_pouch_02		16659
 	869392472	shop_tooBad_pouch_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\shop_tooBad_pouch_01_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_interactions_mastermix\shop_insufficient_pouch\shop_insufficient_pouch\shop_tooBad_pouch_01		16626
 	887260266	amb_hub_01	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\amb_hub_01_ADF7B7FB.wem		\Actor-Mixer Hierarchy\Ambience\amb_hub_mastermix\amb_hub_01		548751
+	904021538	toad_blip_03	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\toad_blip_03_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_frog_dialogue\toad_dialogueBlip\toad_blip_03		38690
+	904413637	toad_blip_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\toad_blip_02_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_frog_dialogue\toad_dialogueBlip\toad_blip_02		38492
 	950621225	shop_tooBad_pouch_03	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\shop_tooBad_pouch_03_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_interactions_mastermix\shop_insufficient_pouch\shop_insufficient_pouch\shop_tooBad_pouch_03		19306
+	953126752	toadmusic_exit_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\toadmusic_exit_02_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_interactions_mastermix\shop_exit\shop_exit_music\toadmusic_exit_02		66669
+	955841012	shop_bell_enter_03	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\shop_bell_enter_03_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_interactions_mastermix\shop_enter\shop_enter_bell\shop_bell_enter_03		18580
 	988166701	props_chain_loop_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\props_chain_loop_02_ADF7B7FB.wem		\Actor-Mixer Hierarchy\Traps+Props\chaincage_mastermix\chainloop\props_chain_loop_02		139997
 	1005798303	toad_accept_04	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\toad_accept_04_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_frog_dialogue\toad_accept\toad_accept_04		13545
+	1060873121	shop_bell_enter_02	Y:\Dropbox\DADIU\Bugsplat\BugSplat_WwiseProject\.cache\Mac\SFX\shop_bell_enter_02_8EDF57DD.wem		\Actor-Mixer Hierarchy\Shop\shop_interactions_mastermix\shop_enter\shop_enter_bell\shop_bell_enter_02		18056
 

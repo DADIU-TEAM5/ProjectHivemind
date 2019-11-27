@@ -17,6 +17,8 @@ namespace AK
         static const AkUniqueID AMB_ARENA_01_STOP = 3018226098U;
         static const AkUniqueID AMB_HUB_MAINEVENT = 1797197367U;
         static const AkUniqueID AMB_SHOP_MAINEVENT = 3126464902U;
+        static const AkUniqueID CAGE_OPEN = 711098640U;
+        static const AkUniqueID CHAIN_DANGLE = 3515360802U;
         static const AkUniqueID CHAIN_LOOP = 615336901U;
         static const AkUniqueID CHAIN_START = 2421078001U;
         static const AkUniqueID CHAIN_STOP = 2826204523U;
@@ -34,6 +36,7 @@ namespace AK
         static const AkUniqueID NPC_BOOMER_CHARGE = 1929315744U;
         static const AkUniqueID NPC_BOOMER_DEAD = 1879848174U;
         static const AkUniqueID NPC_BOOMER_DETECT = 852176873U;
+        static const AkUniqueID NPC_BOOMER_EMERGE = 4149960363U;
         static const AkUniqueID NPC_BOOMER_FOOTSTEPS = 199898249U;
         static const AkUniqueID NPC_BOOMER_HIT = 3079577491U;
         static const AkUniqueID NPC_BOOMER_IDLE = 145632074U;
@@ -43,6 +46,7 @@ namespace AK
         static const AkUniqueID NPC_FODDER_CHARGE = 3201101332U;
         static const AkUniqueID NPC_FODDER_DEAD = 2985061994U;
         static const AkUniqueID NPC_FODDER_DETECT = 1205968901U;
+        static const AkUniqueID NPC_FODDER_EMERGE = 2200285447U;
         static const AkUniqueID NPC_FODDER_FOOTSTEPS = 3043968597U;
         static const AkUniqueID NPC_FODDER_HIT = 1374986823U;
         static const AkUniqueID NPC_FODDER_IDLE = 2887557750U;
@@ -51,6 +55,7 @@ namespace AK
         static const AkUniqueID NPC_HEAVY_ATTACK = 3679048617U;
         static const AkUniqueID NPC_HEAVY_DEAD = 2658157895U;
         static const AkUniqueID NPC_HEAVY_DETECT = 4074057964U;
+        static const AkUniqueID NPC_HEAVY_EMERGE = 505012654U;
         static const AkUniqueID NPC_HEAVY_FOOTSTEP_LIGHT = 620102210U;
         static const AkUniqueID NPC_HEAVY_FOOTSTEPS = 198238650U;
         static const AkUniqueID NPC_HEAVY_HIT = 78903020U;
@@ -74,6 +79,8 @@ namespace AK
         static const AkUniqueID PLAYER_FOLEY_HIT = 830213708U;
         static const AkUniqueID PLAYER_FOLEY_KILLED = 3187150534U;
         static const AkUniqueID PLAYER_PICKUP = 1627434233U;
+        static const AkUniqueID SHOP_ENTER = 2951951990U;
+        static const AkUniqueID SHOP_EXIT = 4024286332U;
         static const AkUniqueID SHOP_INSPECTITEM = 1339011789U;
         static const AkUniqueID SHOP_INSUFFICIENTFUNDS = 154430615U;
         static const AkUniqueID SHOP_PURCHASE = 3988221669U;
