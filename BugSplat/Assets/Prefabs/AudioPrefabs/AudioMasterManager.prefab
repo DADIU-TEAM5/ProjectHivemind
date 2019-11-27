@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 2919988749379521876}
   - component: {fileID: 9077716119679342378}
   - component: {fileID: 5085604619903012391}
+  - component: {fileID: 4150715814659683272}
+  - component: {fileID: 7650057183759434566}
   m_Layer: 0
   m_Name: ShopAudioManager
   m_TagString: Untagged
@@ -80,6 +82,16 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: cf31d3cab97334d6989f1d338054d6e7,
+      type: 2}
+  enterShop:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a340c4934b82c4e5683e2c7f18b3acef,
+      type: 2}
+  exitShop:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 5eaae99db0f864d60b18ab459dccc0dd,
       type: 2}
   shoplocation: {fileID: 3405690160217765971}
 --- !u!114 &1401582755443858811
@@ -152,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 28858f3f143896a48867dd7b51ec2095, type: 2}
+  Event: {fileID: 11400000, guid: ca12b375ef124eb4dbc92a16a8f345e0, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
@@ -256,6 +268,64 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &4150715814659683272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275682528968942918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 4227aa12c723323409e6ef67dc63473f, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1965015718377449177}
+        m_MethodName: ExitShopEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &7650057183759434566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275682528968942918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 15c4e79e11b274321b36eaff4559183c, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1965015718377449177}
+        m_MethodName: ToadTalkEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &423242476136994105
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,6 +343,7 @@ GameObject:
   - component: {fileID: 7598397230566833110}
   - component: {fileID: 2796858453478244126}
   - component: {fileID: 8463483331403740133}
+  - component: {fileID: 6543924969384122455}
   m_Layer: 0
   m_Name: FodderAudio
   m_TagString: Untagged
@@ -340,6 +411,11 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: e5e57ba3e0cc7454280277d53cf963d0,
+      type: 2}
+  Emerge:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 47f30fbb912e6474f93432a99d720571,
       type: 2}
 --- !u!114 &5272705415988718470
 MonoBehaviour:
@@ -533,6 +609,35 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7210876547091908325}
         m_MethodName: FootStepEvent
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &6543924969384122455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 423242476136994105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 0}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7210876547091908325}
+        m_MethodName: EmergeEvent
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1914,6 +2019,7 @@ GameObject:
   - component: {fileID: 2260470376637157176}
   - component: {fileID: 4239992968331929727}
   - component: {fileID: 4380713084137410471}
+  - component: {fileID: 3156685688124353914}
   m_Layer: 0
   m_Name: BoomerAudio
   m_TagString: Untagged
@@ -1979,6 +2085,11 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: c45c02640708a4664bceee7fbca0b59d,
+      type: 2}
+  Emerge:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 21100377c929f455687b67955fd94576,
       type: 2}
 --- !u!114 &9171255139393157755
 MonoBehaviour:
@@ -2114,6 +2225,35 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2065512477816436485}
         m_MethodName: FootstepEvent
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &3156685688124353914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4546422351566072139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: a9b04c24a9dd16e41931735ec4d0bc55, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2065512477816436485}
+        m_MethodName: EmergeEvent
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2872,6 +3012,7 @@ GameObject:
   - component: {fileID: 7800986767393888800}
   - component: {fileID: 6739134428487652935}
   - component: {fileID: 8710263321301275699}
+  - component: {fileID: 6170545234570559256}
   m_Layer: 0
   m_Name: HeavyAuido
   m_TagString: Untagged
@@ -2943,6 +3084,11 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 0}
+  Emerge:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 359e3bda4e3f2481e8f8c7e90a89f8e4,
+      type: 2}
 --- !u!114 &1821352100382249548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3077,6 +3223,35 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5959220859600176160}
         m_MethodName: FootStepLightEvent
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &6170545234570559256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9174410380775275465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: a2e99c3f021955b45ac332eaa799fb79, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5959220859600176160}
+        m_MethodName: EmergeEvent
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

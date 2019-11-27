@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class LevelOutcome : MonoBehaviour
 {
     public TMPro.TextMeshProUGUI Title, TimeRusult, EnemiesKilled, MoneyEarned;
-    Image ShowImage;
+    public Image ShowImage;
 
     public void SetImage(Sprite sprite)
     {
