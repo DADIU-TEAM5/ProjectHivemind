@@ -8,6 +8,7 @@ public class EnemySpawner : GameLoop
     public GameEvent SpawnAllEnemies;
     public GameEvent NextWaveEvent;
     public GameEvent InitialSpawnEvent;
+    public GameEvent EnemyAggroedEvent;
     public GameObjectVariable ThePlayer;
 
     public FloatVariable InitalAggroDelay;
@@ -204,7 +205,7 @@ public class EnemySpawner : GameLoop
 
                 if(_waveBegun && _waveTimeDelay <= 0)
                 {
-                    print("nexy wave is Able TO begin");
+                    //print("nexy wave is Able TO begin");
 
                     if(EnemiesInWaves[_currentWave].Count < EnemiesLeftBeforeNewWave.Value)
                     {
@@ -334,6 +335,7 @@ public class EnemySpawner : GameLoop
                 {
                     enemyScript.PlayerTransform = ThePlayer.Value.transform;
                     enemyScript.PlayerDetected = true;
+                    EnemyAggroedEvent.Raise();
                 }
 
 
@@ -375,7 +377,7 @@ public class EnemySpawner : GameLoop
         print("we waited");
         enemyScript.PlayerTransform = ThePlayer.Value.transform;
         enemyScript.PlayerDetected = true;
-
+       
         yield return null;
     }
 
@@ -551,6 +553,7 @@ public class EnemySpawner : GameLoop
                 {
                     enemyScript.PlayerTransform = ThePlayer.Value.transform;
                     enemyScript.PlayerDetected = true;
+                    EnemyAggroedEvent.Raise();
 
                 }
 
