@@ -8,7 +8,12 @@ public class TapToReturn : MonoBehaviour
     public BoolVariable PlayerControlOverrideSO;
     public IntVariable CurrentLevelSO;
     public StringVariable LastScene;
-    
+
+
+    public FloatVariable TotalTime;
+    public IntVariable TotalEarned;
+    public IntVariable TotalEnemiesKilled;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +31,15 @@ public class TapToReturn : MonoBehaviour
             LastScene.Value = "";
             OverallSceneWorker.LoadScene("_PreloadScene");
 
-           
+            ClearAllResults();
         }
+    }
+
+
+    void ClearAllResults()
+    {
+        TotalTime.Value = 0;
+        TotalEarned.Value = 0;
+        TotalEnemiesKilled.Value = 0;
     }
 }
