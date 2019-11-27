@@ -26,10 +26,7 @@ public class IntVariable : ScriptableObject
         Value = InitialValue;
     }
 
-    public void OnEnable()
-    {
-        Value = InitialValue;
-    }
+    
 
 
     public void Increase(int delta) {

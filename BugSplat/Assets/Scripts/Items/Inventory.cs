@@ -24,7 +24,10 @@ public class Inventory : ScriptableObject
         }
     }
 
-    void OnEnable() {
+
+    public void Reset()
+    {
         if (Items == null) Items = new List<Item>();
     }
+
 }

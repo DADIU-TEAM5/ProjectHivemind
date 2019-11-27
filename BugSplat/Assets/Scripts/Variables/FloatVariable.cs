@@ -26,8 +26,5 @@ public class FloatVariable : ScriptableObject
         Value = InitialValue;
     }
 
-    public void OnEnable()
-    {
-        Value = InitialValue;
-    }
+    
 }
