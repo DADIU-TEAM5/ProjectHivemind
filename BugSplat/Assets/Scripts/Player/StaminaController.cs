@@ -17,8 +17,19 @@ public class StaminaController : GameLoop
     // Used to determine DashPower depending on current stamina
     public AnimationCurve DashEffectivenessCurve;
 
-    //public Text StaminaText;
+    // Used to get size
+    public RectTransform StaminaPrefab;
+    public RectTransform StaminaMask;
+    public List<GameObject> StaminaIcons;
+    public FloatVariable StaminaMaxSize;
+    private float _staminaIconOffset = 77;
 
+    private void OnEnable()
+    {
+
+        StaminaMaxSize.Value = (DashCost.Value/ MaxStamina.Value) * StaminaMaxSize.Value;
+        Debug.Log("StaminaSiza: " + StaminaMaxSize.Value);
+    }
 
     public override void LoopLateUpdate(float deltaTime)
     {
@@ -26,6 +37,10 @@ public class StaminaController : GameLoop
         {
             Stamina.Value = Mathf.Min(MaxStamina.Value, Stamina.Value + StaminaRegen.Value * deltaTime);
         }
+
+        float staminaPercent = Stamina.Value / MaxStamina.Value;
+        // UI
+        StaminaMask.sizeDelta = new Vector2(staminaPercent*StaminaMaxSize.Value, StaminaMask.rect.height);
 
         float dashPower = Stamina.Value / MaxStamina.Value;
 
@@ -45,6 +60,7 @@ public class StaminaController : GameLoop
 
     public void OnDash()
     {
+        //StaminaMask.sizeDelta = new Vector2(StaminaMask.rect.width - _staminaIconOffset, StaminaMask.rect.height);
         if (Stamina.Value >= DashCost.Value)
             Stamina.Value = Mathf.Max(Stamina.Value - DashCost.Value, 0);
     }
