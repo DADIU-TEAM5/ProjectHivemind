@@ -42,12 +42,13 @@ public class LoadTutorialShop : MonoBehaviour
             Cage.SetActive(true);
         }
 
-        for (int i = 1; i <= LevelLights.Length; i++)
+        for (int i = CurrentLevelSO.Max; i > 0; i--)
         {
-            if (i > CurrentLevelSO.Value)
+            if (CurrentLevelSO.Value < i)
             {
                 LevelLights[i-1].SetActive(false);
-            } else
+            }
+            else
             {
                 LevelLights[i-1].SetActive(true);
             }
