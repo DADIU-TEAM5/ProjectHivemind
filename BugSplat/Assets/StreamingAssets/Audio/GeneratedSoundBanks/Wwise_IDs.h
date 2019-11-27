@@ -15,6 +15,7 @@ namespace AK
     {
         static const AkUniqueID AMB_ARENA_01_START = 4090897946U;
         static const AkUniqueID AMB_ARENA_01_STOP = 3018226098U;
+        static const AkUniqueID AMB_HUB_HOWL = 4023739020U;
         static const AkUniqueID AMB_HUB_MAINEVENT = 1797197367U;
         static const AkUniqueID AMB_SHOP_MAINEVENT = 3126464902U;
         static const AkUniqueID CAGE_OPEN = 711098640U;
@@ -27,6 +28,8 @@ namespace AK
         static const AkUniqueID DOOR_ARENAGATE_HINGE = 4263565388U;
         static const AkUniqueID DOOR_ARENAGATE_SLAM = 3389469668U;
         static const AkUniqueID EGG = 680725036U;
+        static const AkUniqueID MENU_BACK = 3063554414U;
+        static const AkUniqueID MENU_SELECT = 4203375351U;
         static const AkUniqueID MUSIC_BATTLE = 3782024871U;
         static const AkUniqueID MUSIC_BATTLE_END = 2993131753U;
         static const AkUniqueID MUSIC_HUB = 2615423034U;

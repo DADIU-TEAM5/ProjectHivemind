@@ -973,6 +973,7 @@ MonoBehaviour:
     WwiseObjectReference: {fileID: 0}
   IntenseOMeter: 0
   EnemiesLeftMeter: 0
+  isShopOpen: {fileID: 11400000, guid: c09e3d7f04a88d94da99e89ff963fea8, type: 2}
   FrogShop: {fileID: 3405690160217765971}
 --- !u!114 &7544980740689446506
 MonoBehaviour:
@@ -1055,7 +1056,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 23c31f1f7de3a40ef9210ef1fc57121c, type: 2}
+  Event: {fileID: 11400000, guid: c4ce3a3220defeb48aa82db2783310a7, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
@@ -2307,6 +2308,8 @@ GameObject:
   - component: {fileID: 7265208892233610491}
   - component: {fileID: 1989902555411510268}
   - component: {fileID: 3852929365551562912}
+  - component: {fileID: 3024308413772329985}
+  - component: {fileID: 2473651529268672647}
   m_Layer: 0
   m_Name: UIAudioManager
   m_TagString: Untagged
@@ -2409,6 +2412,64 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7265208892233610491}
         m_MethodName: onMusicLevelChange
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &3024308413772329985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5118077106112889694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: dcbad41dbe37721469ac299126d37b32, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7265208892233610491}
+        m_MethodName: SelectEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &2473651529268672647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5118077106112889694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: c69bdcd54817cb2428baf0aa1b39a363, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7265208892233610491}
+        m_MethodName: BackEvent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2595,6 +2656,7 @@ GameObject:
   - component: {fileID: 5276746650054375186}
   - component: {fileID: 2659218994325812087}
   - component: {fileID: 8949617546486346643}
+  - component: {fileID: 8514585497266006144}
   m_Layer: 0
   m_Name: cage
   m_TagString: Untagged
@@ -2641,7 +2703,8 @@ MonoBehaviour:
   cageOpen:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: a16cd771b25374773b462cae3a5b31bf,
+      type: 2}
 --- !u!114 &2659218994325812087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2689,6 +2752,35 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5276746650054375186}
         m_MethodName: CageStopEvent
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &8514585497266006144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6281346228288487284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: f9fb32532baa445ec987d6a2baabd6d1, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5276746650054375186}
+        m_MethodName: CageOpenEvent
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
