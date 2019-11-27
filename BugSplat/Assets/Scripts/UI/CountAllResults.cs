@@ -18,16 +18,10 @@ public class CountAllResults : MonoBehaviour
         LevelEnemiesKilled.Value += 1; 
     }
 
-    public void LevelClearLoadAfterShowing()
+    public void SumAll()
     {
         TotalEarned.Value += LevelEarned.Value;
-        LevelEarned.Value = 0;
-        
-       
         TotalEnemiesKilled.Value += LevelEnemiesKilled.Value;
-        LevelEnemiesKilled.Value = 0;
-
-        LevelTimeConsume.Value = 0;
     }
 
 }
