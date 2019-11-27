@@ -204,7 +204,7 @@ public class EnemySpawner : GameLoop
 
                 if(_waveBegun && _waveTimeDelay <= 0)
                 {
-                    print("nexy wave is Able TO begin");
+                    //print("nexy wave is Able TO begin");
 
                     if(EnemiesInWaves[_currentWave].Count < EnemiesLeftBeforeNewWave.Value)
                     {
