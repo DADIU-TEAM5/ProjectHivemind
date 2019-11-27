@@ -12,7 +12,7 @@ public class UpdateLevelUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LevelUI.text = CurrentLevelSO.Value.ToString();
+        LevelUI.text = (CurrentLevelSO.Value+1).ToString();
     }
 
     // Update is called once per frame
