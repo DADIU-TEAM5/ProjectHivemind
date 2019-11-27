@@ -150,7 +150,7 @@ public class TouchControls : GameLoop
                         
                             if (inputPosition.x < _uiOffset.x || inputPosition.y > _uiOffset.y)
                             {
-                            Debug.Log(inputPosition.x);
+                           // Debug.Log(inputPosition.x);
 
                                 BeginMove(inputPosition,0);
                             }
