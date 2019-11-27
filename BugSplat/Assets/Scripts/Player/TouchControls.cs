@@ -64,7 +64,7 @@ public class TouchControls : GameLoop
         // Disable Multitouch for the phone touch to fix problems with multiple touches. However, multiple touches should be implemented at a later stage.
         Input.multiTouchEnabled = true;
 
-        
+
 
         _currentInputPosition = new Vector3[4][];
         for (int i = 0; i < 4; i++)
@@ -79,8 +79,8 @@ public class TouchControls : GameLoop
         }
 
 
-        
-        
+
+
 
         _inputSwipeThreshold = Mathf.RoundToInt(Screen.width * (InputSwipeThresholdSO.Value / 100));
 
@@ -88,18 +88,18 @@ public class TouchControls : GameLoop
 
         _runtimeInputMax = Screen.width * (InputMoveMaxThresholdSO.Value / 100);
         _runtimeInputMin = Screen.width * (InputMoveMinThresholdSO.Value / 100);
-        
+
         if (PlayerControlOverrideSO.Value == false)
         {
         }
 
         if (UIMenuButton != null)
         {
-          
+
             _uiOffset = new Vector2(UIMenuButton.position.x - (UIMenuButton.sizeDelta.x/2), UIMenuButton.position.y + (UIMenuButton.sizeDelta.y / 2));
-            Debug.Log("UI Position: " + _uiOffset);
-            Debug.Log("sizeDelta: " + UIMenuButton.sizeDelta.x / 2);
-        } 
+            //Debug.Log("UI Position: " + _uiOffset);
+            //Debug.Log("sizeDelta: " + UIMenuButton.sizeDelta.x / 2);
+        }
     }
 
 
@@ -119,7 +119,7 @@ public class TouchControls : GameLoop
 
                         Vector3 touchPosition = touch.position;
 
-                      
+
                             if (touchPosition.x > _uiOffset.x || touchPosition.y > _uiOffset.y)
                             {
                                 switch (touch.phase)
@@ -132,12 +132,12 @@ public class TouchControls : GameLoop
                                         break;
                                 }
                             }
-                       
+
 
                     }
                 }
 
-               
+
 
 
                 // Simulate touch with mouse, if mouse present
@@ -147,38 +147,43 @@ public class TouchControls : GameLoop
 
                     if (Input.GetMouseButton(0))
                     {
-                        
+
                             if (inputPosition.x < _uiOffset.x || inputPosition.y > _uiOffset.y)
                             {
-                           // Debug.Log(inputPosition.x);
-
                                 BeginMove(inputPosition,0);
                             }
-                       
+
 
                     }
                     if (Input.GetMouseButtonUp(0))
                     {
-                        
+
                             if (inputPosition.x < _uiOffset.x || inputPosition.y > _uiOffset.y)
                             {
                                 EndMove(Input.mousePosition,0);
                             }
-                        
+
                     }
                 }
             }
         }
         else
         {
-            ClearInputUI(0);
+            for (int i = 0; i < _uiCurrent.Length; i++)
+            {
+                if (_uiCurrent[i] != null)
+                {
+                    MoveDirectionSO.Value = Vector3.zero;
+                    ClearInputUI(i);
+                }
+            }
         }
     }
 
 
     public override void LoopLateUpdate(float deltaTime)
     {
- 
+
     }
 
     private void PopulatePositionIndex(Vector3[] inputArray,int index)
@@ -200,7 +205,7 @@ public class TouchControls : GameLoop
 
             ReturnInputPosition(inputPosition, index); // Recording Current Pos
         }
-       
+
 
         //DebugText.text = "MOVING!";
 

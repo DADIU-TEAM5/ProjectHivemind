@@ -511,16 +511,20 @@
 			<IncludedEvents>
 				<Event Id="1797197367" Name="amb_hub_mainEvent" ObjectPath="\Events\HubEvents\HubAmbience\amb_hub_mainEvent" DurationType="Infinite"/>
 				<Event Id="3126464902" Name="amb_shop_mainEvent" ObjectPath="\Events\ShopEvents\ShopAmbience\amb_shop_mainEvent" MaxAttenuation="100.000000" DurationType="Infinite"/>
+				<Event Id="711098640" Name="cage_open" ObjectPath="\Events\HubEvents\HubAmbience\cage_open" DurationType="OneShot" DurationMin="1.426009" DurationMax="1.426009"/>
+				<Event Id="3515360802" Name="chain_dangle" ObjectPath="\Events\HubEvents\HubAmbience\chain_dangle" MaxAttenuation="100.000000" DurationType="Infinite"/>
 				<Event Id="615336901" Name="chain_loop" ObjectPath="\Events\HubEvents\HubAmbience\chain_loop" DurationType="Infinite"/>
 				<Event Id="2421078001" Name="chain_start" ObjectPath="\Events\HubEvents\HubAmbience\chain_start" DurationType="OneShot" DurationMin="4.250000" DurationMax="4.250000"/>
 				<Event Id="2826204523" Name="chain_stop" ObjectPath="\Events\HubEvents\HubAmbience\chain_stop" DurationType="OneShot" DurationMin="2.000000" DurationMax="2.000000"/>
+				<Event Id="2951951990" Name="shop_enter" ObjectPath="\Events\ShopEvents\ShopInteraction\shop_enter" DurationType="OneShot" DurationMin="3.647732" DurationMax="4.111088"/>
+				<Event Id="4024286332" Name="shop_exit" ObjectPath="\Events\ShopEvents\ShopInteraction\shop_exit" DurationType="OneShot" DurationMin="5.139524" DurationMax="5.148889"/>
 				<Event Id="1339011789" Name="shop_inspectItem" ObjectPath="\Events\ShopEvents\ShopInteraction\shop_inspectItem" DurationType="OneShot" DurationMin="0.170678" DurationMax="0.285026"/>
 				<Event Id="154430615" Name="shop_insufficientFunds" ObjectPath="\Events\ShopEvents\ShopInteraction\shop_insufficientFunds" DurationType="OneShot" DurationMin="0.506438" DurationMax="0.723361"/>
 				<Event Id="3988221669" Name="shop_purchase" ObjectPath="\Events\ShopEvents\ShopInteraction\shop_purchase" DurationType="OneShot" DurationMin="4.232290" DurationMax="4.337211"/>
 				<Event Id="2486007151" Name="shop_putDown" ObjectPath="\Events\ShopEvents\ShopInteraction\shop_putDown" DurationType="OneShot" DurationMin="0.862872" DurationMax="0.988548"/>
 				<Event Id="2496063080" Name="toad_accept" ObjectPath="\Events\ShopEvents\Toad\toad_accept" DurationType="OneShot" DurationMin="0.778526" DurationMax="1.311451"/>
 				<Event Id="771050566" Name="toad_deny" ObjectPath="\Events\ShopEvents\Toad\toad_deny" DurationType="OneShot" DurationMin="0.789456" DurationMax="1.458912"/>
-				<Event Id="1388225139" Name="toad_dialogueBlip" ObjectPath="\Events\ShopEvents\Toad\toad_dialogueBlip" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="1388225139" Name="toad_dialogueBlip" ObjectPath="\Events\ShopEvents\Toad\toad_dialogueBlip" DurationType="OneShot" DurationMin="1.501973" DurationMax="2.426848"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
 				<File Id="44783847" Language="SFX">
@@ -530,6 +534,10 @@
 				<File Id="44842512" Language="SFX">
 					<ShortName>toad_deny_02.wav</ShortName>
 					<Path>SFX/toad_deny_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="56673836" Language="SFX">
+					<ShortName>amb_hub_deipLoop_01.wav</ShortName>
+					<Path>SFX/amb_hub_deipLoop_01_ADF7B7FB.wem</Path>
 				</File>
 				<File Id="59584601" Language="SFX">
 					<ShortName>props_chain_stop.wav</ShortName>
@@ -542,6 +550,10 @@
 				<File Id="99765881" Language="SFX">
 					<ShortName>ambsource_drip_05.wav</ShortName>
 					<Path>SFX/ambsource_drip_05_8EDF57DD.wem</Path>
+				</File>
+				<File Id="130889463" Language="SFX">
+					<ShortName>props_cage_unlock.wav</ShortName>
+					<Path>SFX/props_cage_unlock_8EDF57DD.wem</Path>
 				</File>
 				<File Id="146395160" Language="SFX">
 					<ShortName>toad_accept_03.wav</ShortName>
@@ -558,6 +570,10 @@
 				<File Id="211526328" Language="SFX">
 					<ShortName>shop_purchase_03.wav</ShortName>
 					<Path>SFX/shop_purchase_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="241526189" Language="SFX">
+					<ShortName>toadmusic_entre_01.wav</ShortName>
+					<Path>SFX/toadmusic_entre_01_8EDF57DD.wem</Path>
 				</File>
 				<File Id="261162090" Language="SFX">
 					<ShortName>shop_inspect_plate_03.wav</ShortName>
@@ -583,9 +599,17 @@
 					<ShortName>shop_purchase_02.wav</ShortName>
 					<Path>SFX/shop_purchase_02_8EDF57DD.wem</Path>
 				</File>
+				<File Id="406616848" Language="SFX">
+					<ShortName>toad_blip_01.wav</ShortName>
+					<Path>SFX/toad_blip_01_8EDF57DD.wem</Path>
+				</File>
 				<File Id="420773879" Language="SFX">
 					<ShortName>ambsource_drip_02.wav</ShortName>
 					<Path>SFX/ambsource_drip_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="465076507" Language="SFX">
+					<ShortName>toadmusic_exit_01.wav</ShortName>
+					<Path>SFX/toadmusic_exit_01_8EDF57DD.wem</Path>
 				</File>
 				<File Id="477738590" Language="SFX">
 					<ShortName>shop_inspect_plate_01.wav</ShortName>
@@ -595,9 +619,21 @@
 					<ShortName>toad_accept_07.wav</ShortName>
 					<Path>SFX/toad_accept_07_8EDF57DD.wem</Path>
 				</File>
+				<File Id="492379288" Language="SFX">
+					<ShortName>shop_bell_exit_01.wav</ShortName>
+					<Path>SFX/shop_bell_exit_01_8EDF57DD.wem</Path>
+				</File>
 				<File Id="506912683" Language="SFX">
 					<ShortName>shop_inspect_plate_02.wav</ShortName>
 					<Path>SFX/shop_inspect_plate_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="507813853" Language="SFX">
+					<ShortName>shop_bell_exit_02.wav</ShortName>
+					<Path>SFX/shop_bell_exit_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="515444882" Language="SFX">
+					<ShortName>toadmusic_entre_02.wav</ShortName>
+					<Path>SFX/toadmusic_entre_02_8EDF57DD.wem</Path>
 				</File>
 				<File Id="520312807" Language="SFX">
 					<ShortName>toad_deny_04.wav</ShortName>
@@ -607,9 +643,21 @@
 					<ShortName>shop_putDownPlate_04.wav</ShortName>
 					<Path>SFX/shop_putDownPlate_04_8EDF57DD.wem</Path>
 				</File>
+				<File Id="575441283" Language="SFX">
+					<ShortName>props_cage_open.wav</ShortName>
+					<Path>SFX/props_cage_open_8EDF57DD.wem</Path>
+				</File>
 				<File Id="600179770" Language="SFX">
 					<ShortName>ambsource_drip_06.wav</ShortName>
 					<Path>SFX/ambsource_drip_06_8EDF57DD.wem</Path>
+				</File>
+				<File Id="642239964" Language="SFX">
+					<ShortName>toad_blip_04.wav</ShortName>
+					<Path>SFX/toad_blip_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="646848818" Language="SFX">
+					<ShortName>toadmusic_entre_04.wav</ShortName>
+					<Path>SFX/toadmusic_entre_04_8EDF57DD.wem</Path>
 				</File>
 				<File Id="654805538" Language="SFX">
 					<ShortName>ambsource_drip_01.wav</ShortName>
@@ -622,6 +670,14 @@
 				<File Id="682958209" Language="SFX">
 					<ShortName>toad_accept_02.wav</ShortName>
 					<Path>SFX/toad_accept_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="704547000" Language="SFX">
+					<ShortName>shop_bell_enter_01.wav</ShortName>
+					<Path>SFX/shop_bell_enter_01_8EDF57DD.wem</Path>
+				</File>
+				<File Id="710056789" Language="SFX">
+					<ShortName>cage_dangle.wav</ShortName>
+					<Path>SFX/cage_dangle_EBC987A4.wem</Path>
 				</File>
 				<File Id="710111305" Language="SFX">
 					<ShortName>toad_accept_06.wav</ShortName>
@@ -643,6 +699,10 @@
 					<ShortName>toad_deny_01.wav</ShortName>
 					<Path>SFX/toad_deny_01_8EDF57DD.wem</Path>
 				</File>
+				<File Id="771890443" Language="SFX">
+					<ShortName>toadmusic_entre_03.wav</ShortName>
+					<Path>SFX/toadmusic_entre_03_8EDF57DD.wem</Path>
+				</File>
 				<File Id="790088374" Language="SFX">
 					<ShortName>shop_tooBad_pouch_02.wav</ShortName>
 					<Path>SFX/shop_tooBad_pouch_02_8EDF57DD.wem</Path>
@@ -655,9 +715,25 @@
 					<ShortName>amb_hub_01.wav</ShortName>
 					<Path>SFX/amb_hub_01_ADF7B7FB.wem</Path>
 				</File>
+				<File Id="904021538" Language="SFX">
+					<ShortName>toad_blip_03.wav</ShortName>
+					<Path>SFX/toad_blip_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="904413637" Language="SFX">
+					<ShortName>toad_blip_02.wav</ShortName>
+					<Path>SFX/toad_blip_02_8EDF57DD.wem</Path>
+				</File>
 				<File Id="950621225" Language="SFX">
 					<ShortName>shop_tooBad_pouch_03.wav</ShortName>
 					<Path>SFX/shop_tooBad_pouch_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="953126752" Language="SFX">
+					<ShortName>toadmusic_exit_02.wav</ShortName>
+					<Path>SFX/toadmusic_exit_02_8EDF57DD.wem</Path>
+				</File>
+				<File Id="955841012" Language="SFX">
+					<ShortName>shop_bell_enter_03.wav</ShortName>
+					<Path>SFX/shop_bell_enter_03_8EDF57DD.wem</Path>
 				</File>
 				<File Id="988166701" Language="SFX">
 					<ShortName>props_chain_loop_02.wav</ShortName>
@@ -666,6 +742,10 @@
 				<File Id="1005798303" Language="SFX">
 					<ShortName>toad_accept_04.wav</ShortName>
 					<Path>SFX/toad_accept_04_8EDF57DD.wem</Path>
+				</File>
+				<File Id="1060873121" Language="SFX">
+					<ShortName>shop_bell_enter_02.wav</ShortName>
+					<Path>SFX/shop_bell_enter_02_8EDF57DD.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
@@ -689,6 +769,7 @@
 				<Event Id="1929315744" Name="npc_boomer_charge" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_charge" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="2.754785" DurationMax="2.754785"/>
 				<Event Id="1879848174" Name="npc_boomer_dead" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_dead" DurationType="OneShot" DurationMin="1.250000" DurationMax="2.130431"/>
 				<Event Id="852176873" Name="npc_boomer_detect" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_detect" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.710403" DurationMax="1.784024"/>
+				<Event Id="4149960363" Name="npc_boomer_emerge" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_emerge" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="1.154897" DurationMax="1.812896"/>
 				<Event Id="199898249" Name="npc_boomer_footsteps" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_footsteps" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.377227" DurationMax="0.604751"/>
 				<Event Id="3079577491" Name="npc_boomer_hit" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_hit" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="1.450000" DurationMax="2.330431"/>
 				<Event Id="145632074" Name="npc_boomer_idle" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_idle" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
@@ -698,6 +779,7 @@
 				<Event Id="3201101332" Name="npc_fodder_charge" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_charge" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 				<Event Id="2985061994" Name="npc_fodder_dead" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_dead" DurationType="OneShot" DurationMin="0.532272" DurationMax="0.992047"/>
 				<Event Id="1205968901" Name="npc_fodder_detect" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_detect" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.609705" DurationMax="1.124989"/>
+				<Event Id="2200285447" Name="npc_fodder_emerge" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_emerge" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="1.154897" DurationMax="1.812896"/>
 				<Event Id="3043968597" Name="npc_fodder_footsteps" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_footsteps" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.314967" DurationMax="0.583161"/>
 				<Event Id="1374986823" Name="npc_fodder_hit" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_hit" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.800000" DurationMax="1.092047"/>
 				<Event Id="2887557750" Name="npc_fodder_idle" ObjectPath="\Events\EnemyInsectEvents\Fodder\npc_fodder_idle" MaxAttenuation="100.000000" DurationType="Infinite"/>
@@ -706,6 +788,7 @@
 				<Event Id="3679048617" Name="npc_heavy_attack" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_attack" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.648028" DurationMax="2.314713"/>
 				<Event Id="2658157895" Name="npc_heavy_dead" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_dead" DurationType="OneShot" DurationMin="0.513886" DurationMax="1.446696"/>
 				<Event Id="4074057964" Name="npc_heavy_detect" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_detect" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.801885" DurationMax="2.314713"/>
+				<Event Id="505012654" Name="npc_heavy_emerge" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_emerge" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="1.154897" DurationMax="1.812896"/>
 				<Event Id="620102210" Name="npc_heavy_footstep_light" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_footstep_light" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.685391" DurationMax="1.046689"/>
 				<Event Id="198238650" Name="npc_heavy_footsteps" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_footsteps" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.685391" DurationMax="1.046689"/>
 				<Event Id="78903020" Name="npc_heavy_hit" ObjectPath="\Events\EnemyInsectEvents\Heavy\npc_heavy_hit" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="1.022119" DurationMax="2.825671"/>

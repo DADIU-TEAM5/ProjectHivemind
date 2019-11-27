@@ -11,6 +11,8 @@ public class shopAudio : MonoBehaviour
     public AK.Wwise.Event insufficientFunds;
     public AK.Wwise.Event toadSpeak;
     public AK.Wwise.Event shopAmbience;
+    public AK.Wwise.Event enterShop;
+    public AK.Wwise.Event exitShop;
 
     [Header("Location")]
     public GameObject shoplocation;
@@ -18,6 +20,11 @@ public class shopAudio : MonoBehaviour
     public void InspectItemEvent()
     {
         inspectItem.Post(this.gameObject);
+    }
+
+    public void ToadTalkEvent()
+    {
+        toadSpeak.Post(this.gameObject);
     }
 
     public void PutBackItemEvent()
@@ -37,7 +44,12 @@ public class shopAudio : MonoBehaviour
 
     public void EnterShopEvent()
     {
-        toadSpeak.Post(this.gameObject);
+        enterShop.Post(this.gameObject);
+    }
+
+    public void ExitShopEvent()
+    {
+        exitShop.Post(this.gameObject);
     }
 
     public void shopAmbienceTrigger()

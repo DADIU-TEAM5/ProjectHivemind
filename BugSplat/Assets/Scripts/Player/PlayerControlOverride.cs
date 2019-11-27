@@ -91,11 +91,10 @@ public class PlayerControlOverride : MonoBehaviour
     {
         if (Player != null)
         {
-            Debug.Log("TEST");
             PlayerControlOverrideSO.Value = true;
             Vector3 heading = ExitTargets[ExitTargets.Length - 1].position - ExitTargets[0].position;
             PlayerDirectionSO.Value = new Vector3(heading.normalized.x, 0, heading.normalized.z);
-            Debug.Log("Target: " + ExitTargets[0].position);
+            //Debug.Log("Target: " + ExitTargets[0].position);
             Player.GetComponent<NavMeshAgent>().enabled = false;
             Player.position = ExitTargets[0].position;
             Player.GetComponent<NavMeshAgent>().enabled = true;
@@ -136,21 +135,23 @@ public class PlayerControlOverride : MonoBehaviour
         PlayerControlOverrideSO.Value = true;
     }
 
-        public void ResetPlayerControl()
+    public void PlayerStop()
+    {
+        PlayerCurrentSpeedSO.Value = 0;
+        ControlOverride();
+    }
+
+    public void ResetPlayerControl(bool collidersTargets)
     {
         PlayerControlOverrideSO.Value = false;
 
         Time.timeScale = 1f;
 
-        for (int i = EnterColliders.Length-1; i >= 0; i--)
+        if (collidersTargets)
         {
-            EnterColliders[i].SetActive(true);
+            ResetCollidersTargets();
         }
 
-        for (int k = ExitTargets.Length-1; k >= 0; k--)
-        {
-            ExitTargets[k].gameObject.SetActive(false);
-        }
         Player.GetComponent<NavMeshAgent>().enabled = false;
         Player.GetComponent<NavMeshAgent>().enabled = true;
         Player.GetComponent<NavMeshAgent>().ResetPath();
@@ -158,6 +159,19 @@ public class PlayerControlOverride : MonoBehaviour
         PlayerCurrentSpeedSO.Value = 0f;
 
         ExitArea();
+    }
+
+    public void ResetCollidersTargets()
+    {
+        for (int i = EnterColliders.Length - 1; i >= 0; i--)
+        {
+            EnterColliders[i].SetActive(true);
+        }
+
+        for (int k = ExitTargets.Length - 1; k >= 0; k--)
+        {
+            ExitTargets[k].gameObject.SetActive(false);
+        }
     }
 
 }
