@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 
 public class AssetBundleManager : MonoBehaviour
 {
+    public static AssetBundleManager Instance;
+
     public string AssetBundleURL;
 
     public GameEvent BundledLoaded;
@@ -16,11 +18,13 @@ public class AssetBundleManager : MonoBehaviour
 
 
     virtual protected IEnumerator Start() {
-        yield return LoadBundle();
+        if (Instance == null) {
+            DontDestroyOnLoad(transform.root.gameObject);
 
-        LoadAllAssets();
+            yield return LoadBundle();
 
-        DontDestroyOnLoad(transform.root.gameObject);
+            LoadAllAssets();
+        }
     }
 
     public IEnumerator LoadBundle() {

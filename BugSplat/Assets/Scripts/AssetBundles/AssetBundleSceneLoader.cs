@@ -17,12 +17,13 @@ public class AssetBundleSceneLoader : MonoBehaviour
 
     protected AssetBundle _loadedBundle;
 
-    virtual protected IEnumerator Start() {
+    IEnumerator Start() {
+        DontDestroyOnLoad(transform.root.gameObject);
+
         yield return LoadBundle();
 
         var sceneNames = _loadedBundle.GetAllScenePaths();
 
-        DontDestroyOnLoad(transform.root.gameObject);
 
         PrimarySceneLoader.AddScene(SceneName, sceneNames[0]);
 
