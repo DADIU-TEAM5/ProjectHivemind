@@ -97,8 +97,8 @@ public class TouchControls : GameLoop
         {
           
             _uiOffset = new Vector2(UIMenuButton.position.x - (UIMenuButton.sizeDelta.x/2), UIMenuButton.position.y + (UIMenuButton.sizeDelta.y / 2));
-            Debug.Log("UI Position: " + _uiOffset);
-            Debug.Log("sizeDelta: " + UIMenuButton.sizeDelta.x / 2);
+            //Debug.Log("UI Position: " + _uiOffset);
+            //Debug.Log("sizeDelta: " + UIMenuButton.sizeDelta.x / 2);
         } 
     }
 
@@ -150,8 +150,6 @@ public class TouchControls : GameLoop
                         
                             if (inputPosition.x < _uiOffset.x || inputPosition.y > _uiOffset.y)
                             {
-                            Debug.Log(inputPosition.x);
-
                                 BeginMove(inputPosition,0);
                             }
                        
@@ -171,7 +169,14 @@ public class TouchControls : GameLoop
         }
         else
         {
-            ClearInputUI(0);
+            for (int i = 0; i < _uiCurrent.Length; i++)
+            {
+                if (_uiCurrent[i] != null)
+                {
+                    MoveDirectionSO.Value = Vector3.zero;
+                    ClearInputUI(i);
+                }
+            }
         }
     }
 
