@@ -1,5 +1,54 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6378537655844471555
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2934603993135255840}
+  - component: {fileID: 1816250081795263179}
+  m_Layer: 0
+  m_Name: CountResults
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2934603993135255840
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6378537655844471555}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7716702298372225565}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1816250081795263179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6378537655844471555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 363031d97ece0db44817b479ff3e32dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelTimeConsume: {fileID: 11400000, guid: 56649b3cb96196a42945f1b21df7f59e, type: 2}
+  TotalTimeConsume: {fileID: 11400000, guid: aac3beec480f70c4aa912cd382ca85b7, type: 2}
+  TotalEarned: {fileID: 11400000, guid: 4a8ae76e749b5b44ea3a1a717d1da1cd, type: 2}
+  LevelEarned: {fileID: 11400000, guid: 8545adf08f113354ca7834cdef531171, type: 2}
+  TotalEnemiesKilled: {fileID: 11400000, guid: b266c5e200502d94eb9a89da284fd2c9, type: 2}
+  LevelEnemiesKilled: {fileID: 11400000, guid: cf52d6304355d40459369bceb258ca98, type: 2}
 --- !u!1 &7716702298372225566
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,6 +60,7 @@ GameObject:
   - component: {fileID: 7716702298372225565}
   - component: {fileID: 7716702298372225564}
   - component: {fileID: 7716702298372225567}
+  - component: {fileID: 5777856213970263365}
   m_Layer: 0
   m_Name: TextFeedbackInvoker
   m_TagString: Untagged
@@ -30,6 +80,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6573031455848342692}
+  - {fileID: 2934603993135255840}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -133,6 +184,35 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &5777856213970263365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7716702298372225566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 7c00cca73073f0f4ba7412b0918a5c1b, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1816250081795263179}
+        m_MethodName: CountEnemiesKilled
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
@@ -253,52 +333,52 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8004352865963233527, guid: 0ae926b498f70b24dbe61fe016dd13fd,
+    - target: {fileID: 6135103911388967899, guid: 0ae926b498f70b24dbe61fe016dd13fd,
         type: 3}
       propertyPath: m_textInfo.characterCount
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8004352865963233527, guid: 0ae926b498f70b24dbe61fe016dd13fd,
+    - target: {fileID: 6135103911388967899, guid: 0ae926b498f70b24dbe61fe016dd13fd,
         type: 3}
       propertyPath: m_textInfo.spaceCount
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8004352865963233527, guid: 0ae926b498f70b24dbe61fe016dd13fd,
+    - target: {fileID: 6135103911388967899, guid: 0ae926b498f70b24dbe61fe016dd13fd,
         type: 3}
       propertyPath: m_textInfo.wordCount
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8004352865963233527, guid: 0ae926b498f70b24dbe61fe016dd13fd,
+    - target: {fileID: 6135103911388967899, guid: 0ae926b498f70b24dbe61fe016dd13fd,
         type: 3}
       propertyPath: m_textInfo.lineCount
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8004352865963233527, guid: 0ae926b498f70b24dbe61fe016dd13fd,
+    - target: {fileID: 6135103911388967899, guid: 0ae926b498f70b24dbe61fe016dd13fd,
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6135103911388967899, guid: 0ae926b498f70b24dbe61fe016dd13fd,
+    - target: {fileID: 8004352865963233527, guid: 0ae926b498f70b24dbe61fe016dd13fd,
         type: 3}
       propertyPath: m_textInfo.characterCount
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6135103911388967899, guid: 0ae926b498f70b24dbe61fe016dd13fd,
+    - target: {fileID: 8004352865963233527, guid: 0ae926b498f70b24dbe61fe016dd13fd,
         type: 3}
       propertyPath: m_textInfo.spaceCount
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6135103911388967899, guid: 0ae926b498f70b24dbe61fe016dd13fd,
+    - target: {fileID: 8004352865963233527, guid: 0ae926b498f70b24dbe61fe016dd13fd,
         type: 3}
       propertyPath: m_textInfo.wordCount
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6135103911388967899, guid: 0ae926b498f70b24dbe61fe016dd13fd,
+    - target: {fileID: 8004352865963233527, guid: 0ae926b498f70b24dbe61fe016dd13fd,
         type: 3}
       propertyPath: m_textInfo.lineCount
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6135103911388967899, guid: 0ae926b498f70b24dbe61fe016dd13fd,
+    - target: {fileID: 8004352865963233527, guid: 0ae926b498f70b24dbe61fe016dd13fd,
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0
