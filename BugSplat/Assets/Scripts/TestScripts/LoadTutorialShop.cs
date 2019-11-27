@@ -11,14 +11,24 @@ public class LoadTutorialShop : MonoBehaviour
     public Transform Player;
     public GameObject Cage;
     public BoolVariable ShopIsOpenSO;
+    public GameObject ShopCollider;
+    public BoolVariable ArenaOpenSO;
+    public GameObject ArenaCollider;
     public IntVariable CurrentLevelSO;
     public StringVariable LastSceneSO;
     public Animator CharacterCutSceneAnimController;
     public GameObject TutorialEggs;
     public GameObject[] LevelLights;
 
+
     void Start()
     {
+        if (CurrentLevelSO.Value == CurrentLevelSO.Max)
+        {
+            ArenaCollider.SetActive(false);
+            ShopCollider.SetActive(false);
+        }
+
         if (CurrentLevelSO.Value == 0)
         {
             ShopIsOpenSO.Value = false;
@@ -42,17 +52,19 @@ public class LoadTutorialShop : MonoBehaviour
             Cage.SetActive(true);
         }
 
-        for (int i = CurrentLevelSO.Max; i > 0; i--)
+        for (int i = 0; i <= CurrentLevelSO.Max; i++)
         {
-            if (CurrentLevelSO.Value < i)
+            if (i > 0)
             {
-                LevelLights[i-1].SetActive(false);
-            }
-            else
-            {
-                LevelLights[i-1].SetActive(true);
+                if (CurrentLevelSO.Value >= i)
+                {
+                    LevelLights[i - 1].SetActive(true);
+                }
+                else
+                {
+                    LevelLights[i - 1].SetActive(false);
+                }
             }
         }
     }
-
 }

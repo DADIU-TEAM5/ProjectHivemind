@@ -561,22 +561,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b83feb8908e4989439564ec1924488b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!208 &166304438
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 166304433}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 1.25, y: 2.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: -1.25, y: 2.5, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &168573893
 GameObject:
   m_ObjectHideFlags: 3
@@ -740,6 +724,12 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 911909046}
+--- !u!1 &175671084 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6287021624942318253, guid: 10901adb66c07e547896434d7ced0fe6,
+    type: 3}
+  m_PrefabInstance: {fileID: 6287021625574688938}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &179550977 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7796887123137255857, guid: dd19708ac672f9f4686f741e262461c5,
@@ -1650,6 +1640,9 @@ MonoBehaviour:
   Player: {fileID: 1799847259}
   Cage: {fileID: 1744688222}
   ShopIsOpenSO: {fileID: 11400000, guid: c09e3d7f04a88d94da99e89ff963fea8, type: 2}
+  ShopCollider: {fileID: 1383441880}
+  ArenaOpenSO: {fileID: 11400000, guid: 89958634fd149b04c87154009cc36231, type: 2}
+  ArenaCollider: {fileID: 175671084}
   CurrentLevelSO: {fileID: 11400000, guid: 7ccab12c744825340b00517feda72de3, type: 2}
   LastSceneSO: {fileID: 11400000, guid: 5009c1709f3cffb49a0c239d47e4d46b, type: 2}
   CharacterCutSceneAnimController: {fileID: 840415875}
@@ -1677,7 +1670,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &342810199
 GameObject:
@@ -3021,7 +3014,7 @@ Transform:
   - {fileID: 1376812442}
   - {fileID: 893583371}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &815402130
 GameObject:
@@ -6540,7 +6533,7 @@ Transform:
   - {fileID: 1452224389}
   - {fileID: 536299750}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &954965337 stripped
 Transform:
@@ -7203,7 +7196,7 @@ PrefabInstance:
     - target: {fileID: 5593277248082768324, guid: c4eef647f6f45634695bc899e5b41532,
         type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5593277248082768324, guid: c4eef647f6f45634695bc899e5b41532,
         type: 3}
@@ -7947,7 +7940,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1292201802
 GameObject:
@@ -8290,7 +8283,7 @@ Transform:
   - {fileID: 1877445724}
   - {fileID: 1322726479}
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 38.033, z: 0}
 --- !u!114 &1341961658
 MonoBehaviour:
@@ -8321,6 +8314,7 @@ MonoBehaviour:
   EnterColliders:
   - {fileID: 411950561}
   - {fileID: 1753292456}
+  - {fileID: 1676537699}
   - {fileID: 1877445723}
   ExitTargets:
   - {fileID: 2046953664}
@@ -9698,22 +9692,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b83feb8908e4989439564ec1924488b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!208 &1587383094
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1587383089}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 1.25, y: 2.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 1.25, y: 2.5, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &1621206523
 GameObject:
   m_ObjectHideFlags: 3
@@ -10308,7 +10286,7 @@ Transform:
   - {fileID: 537001874}
   - {fileID: 1245403615}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1744688226
 MonoBehaviour:
@@ -10675,6 +10653,24 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: -0.53}
   m_TimeToStationary: 0.5
+--- !u!1 &1862006433 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6631930945062369248, guid: dd19708ac672f9f4686f741e262461c5,
+    type: 3}
+  m_PrefabInstance: {fileID: 4294597274677462541}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1862006434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1862006433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b83feb8908e4989439564ec1924488b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1863767091
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11547,7 +11543,7 @@ Transform:
   m_LocalScale: {x: 1, y: 0.54642797, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2142849519
 MonoBehaviour:
@@ -11700,7 +11696,7 @@ PrefabInstance:
     - target: {fileID: 499180667430939093, guid: 297e036692bd9534e9dc9aa79e893fa0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 499180667430939093, guid: 297e036692bd9534e9dc9aa79e893fa0,
         type: 3}
@@ -12181,6 +12177,12 @@ PrefabInstance:
       propertyPath: WhiteFadeIn
       value: 
       objectReference: {fileID: 188095173}
+    - target: {fileID: 6287021624942318243, guid: 10901adb66c07e547896434d7ced0fe6,
+        type: 3}
+      propertyPath: IsAreaOpenSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 89958634fd149b04c87154009cc36231,
+        type: 2}
     - target: {fileID: 6287021626627036904, guid: 10901adb66c07e547896434d7ced0fe6,
         type: 3}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_Target
