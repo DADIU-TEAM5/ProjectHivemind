@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class VibratePhone : MonoBehaviour
 {
-
+#if UNITY_ANDROID
 
     bool _soShaltTheeVibrate;
 
@@ -40,5 +40,5 @@ public class VibratePhone : MonoBehaviour
         yield return null;
     }
 
-
+#endif
 }
