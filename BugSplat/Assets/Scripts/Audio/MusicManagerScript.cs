@@ -35,6 +35,7 @@ public class MusicManagerScript : MonoBehaviour
     [Header("Parameters")]
     public float IntenseOMeter;
     public float EnemiesLeftMeter;
+    public BoolVariable isShopOpen;
 
     [Header("Gameobjects")]
     public GameObject FrogShop;
@@ -77,8 +78,11 @@ public class MusicManagerScript : MonoBehaviour
         //Make sure no duplicates
         ShopMusic.Stop(FrogShop);
 
-        //post event
-        ShopMusic.Post(FrogShop);
+        if (isShopOpen.Value == true)
+        {
+            //post event
+            ShopMusic.Post(FrogShop);
+        }
     }
 
     public void PlayerWonEvent()

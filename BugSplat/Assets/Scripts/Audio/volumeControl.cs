@@ -27,4 +27,14 @@ public class volumeControl : MonoBehaviour
         MusicVolume.SetValue(this.gameObject, MusicVolumeVAR.Value);
     }
 
+    public void SelectEvent()
+    {
+        select.Post(this.gameObject);
+    }
+
+    public void BackEvent()
+    {
+        back.Post(this.gameObject);
+    }
+
 }
