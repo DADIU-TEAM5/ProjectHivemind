@@ -27,16 +27,33 @@ public class LoadTutorialShop : MonoBehaviour
     {
         ShopIsOpenSO.Value = true;
         TutorialEggs.SetActive(false);
-    }
-    
-    public void  StartGame()
-    {
-        
+
         if (CurrentLevelSO.Value == CurrentLevelSO.Max)
         {
             ArenaCollider.SetActive(false);
             ShopCollider.SetActive(false);
         }
+
+        for (int i = 0; i <= CurrentLevelSO.Max; i++)
+        {
+            if (i > 0)
+            {
+                if (CurrentLevelSO.Value >= i)
+                {
+                    LevelLights[i - 1].SetActive(true);
+                }
+                else
+                {
+                    LevelLights[i - 1].SetActive(false);
+                }
+            }
+        }
+    }
+    
+    public void  StartGame()
+    {
+        
+        
 
         if (TutorialIsActiveSO.Value == true)
         {
@@ -57,19 +74,6 @@ public class LoadTutorialShop : MonoBehaviour
 
     
 
-        for (int i = 0; i <= CurrentLevelSO.Max; i++)
-        {
-            if (i > 0)
-            {
-                if (CurrentLevelSO.Value >= i)
-                {
-                    LevelLights[i - 1].SetActive(true);
-                }
-                else
-                {
-                    LevelLights[i - 1].SetActive(false);
-                }
-            }
-        }
+        
     }
 }
