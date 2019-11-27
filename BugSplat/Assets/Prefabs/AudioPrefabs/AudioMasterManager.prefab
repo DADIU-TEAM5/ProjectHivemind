@@ -2656,6 +2656,7 @@ GameObject:
   - component: {fileID: 5276746650054375186}
   - component: {fileID: 2659218994325812087}
   - component: {fileID: 8949617546486346643}
+  - component: {fileID: 8514585497266006144}
   m_Layer: 0
   m_Name: cage
   m_TagString: Untagged
@@ -2702,7 +2703,8 @@ MonoBehaviour:
   cageOpen:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: a16cd771b25374773b462cae3a5b31bf,
+      type: 2}
 --- !u!114 &2659218994325812087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2750,6 +2752,35 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5276746650054375186}
         m_MethodName: CageStopEvent
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &8514585497266006144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6281346228288487284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: f9fb32532baa445ec987d6a2baabd6d1, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5276746650054375186}
+        m_MethodName: CageOpenEvent
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
