@@ -6,6 +6,7 @@ using TMPro;
 
 public class EnemiesTrackUI : GameLoop
 {
+
     public IntVariable TotalEnemyCount;
     public EnemyObjectList EnemiesListSO;
     public IntVariable EnemiesKilledSO;
@@ -19,6 +20,10 @@ public class EnemiesTrackUI : GameLoop
     private int WaveCount = 0;
     private int eventRaisedCount;
     bool isWave;
+    private TextFeedback _textFeedback;
+
+
+
 
     private void Start()
     {
@@ -26,6 +31,10 @@ public class EnemiesTrackUI : GameLoop
         MapGen = FindObjectOfType<MapGenerator>();
         _levels = MapGen.Levels;
         isWave = !_levels.LevelTierPicker[CurrentLevel.Value].IsGauntlet;
+
+        _textFeedback = FindObjectOfType<TextFeedback>();
+        if (_textFeedback == null)
+            Debug.LogError("No textfeedback founds");
 
         eventRaisedCount = 0;
         EnemiesKilledSO.Value = 0;
@@ -46,7 +55,7 @@ public class EnemiesTrackUI : GameLoop
     {
         Debug.Log("WaveCount: " + WaveCount + ", WaveSO: " + NumberOfWavesSO.Value);
         EnemiesKilledSO.Value++;
-        if (EnemiesKilledSO.Value >= TotalEnemyCount.Value && (!isWave || WaveCount+1 >= NumberOfWavesSO.Value))
+        if (EnemiesKilledSO.Value >= TotalEnemyCount.Value && (!isWave || WaveCount + 1 >= NumberOfWavesSO.Value))
         {
             HasWonEvent.Raise();
         }
@@ -64,14 +73,50 @@ public class EnemiesTrackUI : GameLoop
 
     public void NewWave()
     {
-        if (WaveCount+1 < NumberOfWavesSO.Value)
+        if (WaveCount + 1 < NumberOfWavesSO.Value)
         {
             Debug.Log("New Wave " + WaveCount);
             if (EnemiesKilledSO.Value > 0)
                 WaveCount++;
             TotalEnemyCount.Value -= EnemiesKilledSO.Value;
             EnemiesKilledSO.Value = 0;
+            WaveTextFeedback();
         }
+
+    }
+
+    public void WaveTextFeedback()
+    {
+
+        if (NumberOfWavesSO.Value - WaveCount >= 0)
+        {
+            int wavesLeft = NumberOfWavesSO.Value - WaveCount;
+            string waveText = "Wave " + WaveCount + " Cleared!";
+            string subText = "";
+            if (wavesLeft == 1)
+                subText = "Final Wave!";
+            else
+                subText = wavesLeft + " Waves Left";
+            _textFeedback.SetTitle(waveText);
+            _textFeedback.SetSubtitle(subText);
+            _textFeedback.SetFeedbackActive(true);
+        }
+
+
+    }
+
+    public void EnterArenaTextFeedback()
+    {
+
+        string subText = "Kill all enemies";
+        if (isWave)
+        {
+            subText = "Defeat all Waves";
+        }
+
+        _textFeedback.SetLevelTitle(CurrentLevel);
+        _textFeedback.SetSubtitle(subText);
+        _textFeedback.SetFeedbackActive(true);
 
     }
 }

@@ -8,7 +8,8 @@ public class ItemPool : ScriptableObject
 {
     public List<Item> Items;
 
-    private List<bool> Bought;
+    [SerializeField]
+    public List<bool> Bought;
 
 
     // Takes an item out of the pool
@@ -70,8 +71,15 @@ public class ItemPool : ScriptableObject
         Bought.Add(false);
     }
 
-    public void OnEnable() {
+    private void OnEnable()
+    {
+        Reset();
+    }
+
+    public void Reset()
+    {
         if (Items == null) Items = new List<Item>();
         Bought = new List<bool>(new bool[Items.Count]);
     }
+
 }
