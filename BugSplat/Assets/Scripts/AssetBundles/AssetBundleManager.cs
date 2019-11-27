@@ -19,6 +19,8 @@ public class AssetBundleManager : MonoBehaviour
 
     virtual protected IEnumerator Start() {
         if (Instance == null) {
+            Instance = this;
+
             DontDestroyOnLoad(transform.root.gameObject);
 
             yield return LoadBundle();
