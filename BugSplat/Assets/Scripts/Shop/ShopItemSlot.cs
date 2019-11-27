@@ -11,6 +11,9 @@ public class ShopItemSlot : ShopSlot
     public IntVariable CurrentLevel;
     public Inventory PlayerInventory;
 
+
+
+
     [SerializeField]
     private Item Item;
 
