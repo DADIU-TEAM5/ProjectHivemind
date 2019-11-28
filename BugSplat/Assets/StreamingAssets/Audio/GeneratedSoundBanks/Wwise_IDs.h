@@ -16,8 +16,10 @@ namespace AK
         static const AkUniqueID AMB_ARENA_01_START = 4090897946U;
         static const AkUniqueID AMB_ARENA_01_STOP = 3018226098U;
         static const AkUniqueID AMB_HUB_HOWL = 4023739020U;
+        static const AkUniqueID AMB_HUB_HOWL_STOP = 3647681851U;
         static const AkUniqueID AMB_HUB_MAINEVENT = 1797197367U;
         static const AkUniqueID AMB_SHOP_MAINEVENT = 3126464902U;
+        static const AkUniqueID CAGE_DANGLE_STOP = 977694152U;
         static const AkUniqueID CAGE_OPEN = 711098640U;
         static const AkUniqueID CHAIN_DANGLE = 3515360802U;
         static const AkUniqueID CHAIN_LOOP = 615336901U;
@@ -25,6 +27,7 @@ namespace AK
         static const AkUniqueID CHAIN_STOP = 2826204523U;
         static const AkUniqueID CHEER_INIT = 2830818153U;
         static const AkUniqueID CHEER_UP = 3469520088U;
+        static const AkUniqueID DABIGWALL = 728926122U;
         static const AkUniqueID DOOR_ARENAGATE_HINGE = 4263565388U;
         static const AkUniqueID DOOR_ARENAGATE_SLAM = 3389469668U;
         static const AkUniqueID EGG = 680725036U;

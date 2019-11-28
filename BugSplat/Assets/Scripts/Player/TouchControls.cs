@@ -43,8 +43,15 @@ public class TouchControls : GameLoop
     public GameObject TouchUIDotRecorded;
     public Transform TouchCanvas;
 
-    private GameObject[] _uiRecord;
-    private GameObject[] _uiCurrent;
+
+    public GameObject UIPrefab;
+    public GameObject UIupperpart;
+    bool showPrefab =false;
+
+
+    Vector3 targetPos;
+    Vector3 startPos;
+    
 
 
     // Start is called before the first frame update
@@ -52,8 +59,11 @@ public class TouchControls : GameLoop
     {
         _recordedInputPositions = new Vector3[4];
         _inputTime = new float[4];
-        _uiRecord = new GameObject[4];
-        _uiCurrent = new GameObject[4];
+        //_uiRecord = new GameObject[4];
+        //_uiCurrent = new GameObject[4];
+        showPrefab = false;
+
+
         _inputMoved = new bool[4];
 
         _inputFrames = new int[4];
@@ -105,6 +115,13 @@ public class TouchControls : GameLoop
 
     public override void LoopUpdate(float deltaTime)
     {
+        UIPrefab.SetActive(showPrefab);
+        UIPrefab.transform.position = startPos;
+        UIupperpart.transform.localScale = new Vector3(1, Mathf.Clamp( targetPos.magnitude*0.03f,1,4), 1);
+       
+        UIPrefab.transform.up = targetPos;
+
+
         if (PlayerControlOverrideSO.Value == false)
         {
             if (IsStunned.Value == false)
@@ -120,7 +137,7 @@ public class TouchControls : GameLoop
                         Vector3 touchPosition = touch.position;
 
 
-                            if (touchPosition.x > _uiOffset.x || touchPosition.y > _uiOffset.y)
+                            if (touchPosition.x < _uiOffset.x || touchPosition.y > _uiOffset.y)
                             {
                                 switch (touch.phase)
                                 {
@@ -169,14 +186,9 @@ public class TouchControls : GameLoop
         }
         else
         {
-            for (int i = 0; i < _uiCurrent.Length; i++)
-            {
-                if (_uiCurrent[i] != null)
-                {
-                    MoveDirectionSO.Value = Vector3.zero;
-                    ClearInputUI(i);
-                }
-            }
+             MoveDirectionSO.Value = Vector3.zero;
+             ClearInputUI();
+             
         }
     }
 
@@ -246,7 +258,7 @@ public class TouchControls : GameLoop
             direction = heading.normalized;
 
             // UI debug stuff
-            _uiCurrent[index].transform.localPosition = new Vector3(x, y);
+            targetPos = new Vector3(x, y);
 
             // Export direction and speed vector to the PlayerSpeedDirectionSO
             MoveDirectionSO.Value.x = direction.x;
@@ -264,14 +276,17 @@ public class TouchControls : GameLoop
             _recordPositions[index] = false;
 
             // UI Debug Stuff
-            _uiRecord[index] = Instantiate(TouchUIDotRecorded, TouchCanvas);
-            _uiRecord[index].transform.position = touchPos;
+            //_uiRecord[index] = Instantiate(TouchUIDotRecorded, TouchCanvas);
+            showPrefab = true;
+            startPos = touchPos;
+            targetPos = Vector3.zero;
         }
         else
         {
             _currentInputPosition[index][_inputFrames[index]] = touchPos;
         }
 
+        /*
         // UI Debug Stuffv
         if (_uiCurrent[index] == null)
         {
@@ -281,12 +296,13 @@ public class TouchControls : GameLoop
         {
             _uiCurrent[index].transform.position = _uiRecord[index].transform.position;
         }
+        */
     }
 
 
     private void EndMove(Vector3 touchPosition, int index)
     {
-        ClearInputUI(index);
+        ClearInputUI();
 
         // Check if TAP has happened
         if (Vector3.Distance(_currentInputPosition[index][_inputFrames[index]], _recordedInputPositions[index]) < _runtimeInputMin)
@@ -295,7 +311,7 @@ public class TouchControls : GameLoop
 
             if (endTime < InputSwipeTapTimeSO.Value)
             {
-                //DebugText.text = "ATTACKED!";
+                //Debug.Log("ATTACKED!");
                 AttackTapSO.Raise(PlayerGraphics);
             }
         }
@@ -319,17 +335,13 @@ public class TouchControls : GameLoop
         _currentInputPosition[index] = new Vector3[_inputFrames[index] + 1];
     }
 
-    private void ClearInputUI(int index)
+    private void ClearInputUI()
     {
         // UI Debug Stuff
-        if (_uiRecord[index] != null)
+        if (Input.touchCount<=1)
         {
-            Destroy(_uiRecord[index]);
-        }
 
-        if (_uiCurrent[index] != null)
-        {
-            Destroy(_uiCurrent[index]);
+            showPrefab = false;
         }
     }
 
