@@ -9,6 +9,8 @@ public class DashMeshEffect : Effect
     public DashEffect DashInit;
     public Effect OnMeshEffect;
 
+    public GameEvent MeshActive;
+
 
 
     [Header("Mesh parameters")]
@@ -39,6 +41,9 @@ public class DashMeshEffect : Effect
         // TODO: Maybe add this to another layer that only collides with Enemies 
         var monitorer = mesh.AddComponent<MeshMonitorer>();
         monitorer.ZoneEffect = OnMeshEffect;
+
+        MeshActive.Raise(mesh);
+
 
         var pcs = CreateParticleControllers(target);
 
@@ -125,6 +130,10 @@ public class DashMeshEffect : Effect
                     ZoneEffect.Trigger(enemy.gameObject);
                 }
             }
+        }
+
+        void OnDisable() {
+
         }
     }
 }
