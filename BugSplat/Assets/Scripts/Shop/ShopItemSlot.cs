@@ -11,9 +11,6 @@ public class ShopItemSlot : ShopSlot
     public IntVariable CurrentLevel;
     public Inventory PlayerInventory;
 
-
-
-
     [SerializeField]
     private Item Item;
 
@@ -83,6 +80,7 @@ public class ShopItemSlot : ShopSlot
     {
         Pool.ReplenishOnce(Item);
         Item = null;
+        _previousLevel = -1;
     }
 
     public override string GetTitle() => Item?.Info?.Title?.GetText();
