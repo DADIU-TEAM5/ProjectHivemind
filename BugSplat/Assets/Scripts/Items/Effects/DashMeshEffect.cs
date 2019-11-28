@@ -42,7 +42,7 @@ public class DashMeshEffect : Effect
         var monitorer = mesh.AddComponent<MeshMonitorer>();
         monitorer.ZoneEffect = OnMeshEffect;
 
-        MeshActive.Raise(mesh);
+        MeshActive?.Raise(mesh);
 
 
         var pcs = CreateParticleControllers(target);
