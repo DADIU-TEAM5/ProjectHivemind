@@ -77,10 +77,10 @@ public class LoadTutorialShop : MonoBehaviour
 
         if (ShopIsOpenSO.Value == true)
         {
-            ShopSign.SetActive(true);
+            ShopSign.SetActive(false);
         } else
         {
-            ShopSign.SetActive(false);
+            ShopSign.SetActive(true);
         }
 
     
