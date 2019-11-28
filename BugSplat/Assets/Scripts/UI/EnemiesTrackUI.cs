@@ -16,7 +16,7 @@ public class EnemiesTrackUI : GameLoop
     public GameEvent HasWonEvent;
     public MapGenerator MapGen;
     public IntVariable CurrentLevel;
-    public GameText WavesCleared, WavesLeft, FinalWave, DefeatAllWaves;
+    public GameText WavesCleared, WavesLeft, FinalWave, DefeatAllWaves, KillAllEnemies;
     private ShopLevels _levels;
     private int WaveCount = 0;
     private int eventRaisedCount;
@@ -94,9 +94,11 @@ public class EnemiesTrackUI : GameLoop
         {
             var wavesClearedGT = ScriptableObject.CreateInstance<GameText>();
             wavesClearedGT.TextVariations = WavesCleared.TextVariations;
+            wavesClearedGT.CurrentLocale = WavesCleared.CurrentLocale;
+
 
             foreach (var variation in wavesClearedGT.TextVariations) {
-                variation.Text = $"{variation.Text} {WaveCount}/{NumberOfWavesSO.Value}";
+                variation.Text += " " + WaveCount.ToString() + "/" + NumberOfWavesSO.Value.ToString();
             }
 
             _textFeedback.SetTitle(wavesClearedGT);
@@ -108,10 +110,11 @@ public class EnemiesTrackUI : GameLoop
             else {
                 var wavesLeftGT = ScriptableObject.CreateInstance<GameText>(); 
                 wavesLeftGT.TextVariations = WavesLeft.TextVariations;
+                wavesLeftGT.CurrentLocale = WavesLeft.CurrentLocale;
 
                 foreach (var variation in wavesLeftGT.TextVariations)
                 {
-                    variation.Text = $"{wavesLeft} Waves Left";
+                    variation.Text = wavesLeft.ToString() + " " + variation.Text;
                 }
 
                 _textFeedback.SetSubtitle(wavesLeftGT);
@@ -126,7 +129,7 @@ public class EnemiesTrackUI : GameLoop
     public void EnterArenaTextFeedback()
     {
         _textFeedback.SetLevelTitle(CurrentLevel);
-        _textFeedback.SetSubtitle(DefeatAllWaves);
+        _textFeedback.SetSubtitle((isWave) ? DefeatAllWaves : KillAllEnemies);
         _textFeedback.SetFeedbackActive(true);
     }
 }
