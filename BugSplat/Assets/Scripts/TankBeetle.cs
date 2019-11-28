@@ -62,7 +62,6 @@ public class TankBeetle : Enemy
     public void Start()
     {
         TankStats = (TankStats)stats;
-        ConeRenderer.material.color = Color.red;
 
         
         _wayPoints = new Vector3[TankStats.Repeat];
@@ -290,7 +289,7 @@ public class TankBeetle : Enemy
         {
             DrawChargeTrajectory();
             ChargeFillup();
-            ConeRenderer.material.color = Color.Lerp(new Color(0, 1, 0, 0.5f), new Color(1, 0, 0, 0.5f), _attackCharge / stats.AttackChargeUpTime);
+            ConeRenderer.material.color = Color.Lerp(ConeInitColor, ConeEndColor, _attackCharge / stats.AttackChargeUpTime);
             _chargeDistance = DistanceToChargeEndPos()-TankStats.AttackRange;
         }
 
@@ -305,7 +304,7 @@ public class TankBeetle : Enemy
 
         
         DrawCone(10, OuterEdgeMesh, true, _attackCharge);
-        ConeRenderer.material.color = new Color(1, 0, 0, .4f);
+        ConeRenderer.material.color = ConeEmptyColor;
         Collider[] potentialTargets = Physics.OverlapSphere(transform.position, TankStats.AttackRange, LayerMask.GetMask("Player"));
 
 
