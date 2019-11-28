@@ -44,7 +44,7 @@ public class ProjectileEffect : Effect
         projectileRigidbody.velocity = projectileVelocity;
         //_particles.transform.rotation = Quaternion.LookRotation(effectTarget.transform.forward, effectTarget.transform.up) * Quaternion.Euler(0, AngleOffset, 0);
 
-        ProjectileActivated.Raise(projectileCollidedEffect.gameObject);
+        ProjectileActivated?.Raise(projectileCollidedEffect.gameObject);
     }
 
     internal class ProjectileCollideEffect : MonoBehaviour {
