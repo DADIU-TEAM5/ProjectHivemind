@@ -59,6 +59,8 @@ public class ProjectileEffect : Effect
             ParticleController.Play();
             ParticleController.InstantiateAfterParts();
 
+            CollideEvent.Raise(gameObject);
+
             var enemy = collision.gameObject.GetComponent<Enemy>();
             if (enemy != null) {
                 CollideEffect.Trigger(enemy.gameObject);
