@@ -3106,6 +3106,7 @@ GameObject:
   - component: {fileID: 6739134428487652935}
   - component: {fileID: 8710263321301275699}
   - component: {fileID: 6170545234570559256}
+  - component: {fileID: 4919314067584496509}
   m_Layer: 0
   m_Name: HeavyAuido
   m_TagString: Untagged
@@ -3172,11 +3173,13 @@ MonoBehaviour:
   DeathSplat:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 67cacf82a05cc4aea8edaa8059b28036,
+      type: 2}
   Charge:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: fc94d7d319adf42799136342e9c783e6,
+      type: 2}
   Emerge:
     idInternal: 0
     valueGuidInternal: 
@@ -3345,6 +3348,35 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5959220859600176160}
         m_MethodName: EmergeEvent
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &4919314067584496509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9174410380775275465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: e1eece7e0f8b74ba48bd4b1a583fd49a, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5959220859600176160}
+        m_MethodName: DeathEvent
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
