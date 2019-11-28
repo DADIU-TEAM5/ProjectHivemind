@@ -309,7 +309,20 @@ public class Boomer : Enemy
 
 
 
+    public override void SpawnFromUnderground()
+    {
+        EnemySpawnedEvent.Raise(this.gameObject);
 
+        BoomerAnimator.SetTrigger("Spawn");
+
+        if (SpawnFirstTime.Value == true)
+        {
+            PlayerCurrentSpeedSO.Value = 0;
+            SpawnCamInit.Raise(RenderGraphics);
+            SpawnFirstTime.Value = false;
+        }
+
+    }
 
 
 }

@@ -10,6 +10,11 @@ public class SetUnderground : MonoBehaviour
 
     public void SetUndergroundBool(int chosenValue)
     {
+        if (TargetEnemy == null)
+        {
+            TargetEnemy = this.gameObject.GetComponentInParent<Enemy>();
+        }
+
         if (chosenValue == 0)
         {
             TargetEnemy.IsUnderground = false;

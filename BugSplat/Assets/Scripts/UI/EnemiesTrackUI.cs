@@ -22,11 +22,12 @@ public class EnemiesTrackUI : GameLoop
     bool isWave;
     private TextFeedback _textFeedback;
 
-
+    bool isWon = false;
 
 
     private void Start()
     {
+        isWon = false;
         // Yes... it looks retarded
         MapGen = FindObjectOfType<MapGenerator>();
         _levels = MapGen.Levels;
@@ -55,9 +56,10 @@ public class EnemiesTrackUI : GameLoop
     {
         Debug.Log("WaveCount: " + WaveCount + ", WaveSO: " + NumberOfWavesSO.Value);
         EnemiesKilledSO.Value++;
-        if (EnemiesKilledSO.Value >= TotalEnemyCount.Value && (!isWave || WaveCount + 1 >= NumberOfWavesSO.Value))
+        if (EnemiesKilledSO.Value >= TotalEnemyCount.Value && (!isWave || WaveCount + 1 >= NumberOfWavesSO.Value) && !isWon)
         {
             HasWonEvent.Raise();
+            isWon = true;
         }
     }
 
