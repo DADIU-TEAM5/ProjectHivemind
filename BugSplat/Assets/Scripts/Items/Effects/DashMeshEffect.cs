@@ -15,6 +15,7 @@ public class DashMeshEffect : Effect
     public float MeshWidth;
     public float MeshDepth;
     public float MeshTimer;
+    public float TickTimer;
 
     public ParticleController TrailParticles;
 
@@ -103,19 +104,26 @@ public class DashMeshEffect : Effect
 
     internal class MeshMonitorer : MonoBehaviour {
         internal Effect ZoneEffect;
+        internal float TickTimer = 1f;
 
         private Mesh MeshObj;
+
+        private float _timer;
 
         void Start() {
             MeshObj = GetComponent<MeshFilter>().mesh;
         }
 
-        void FixedUpdate() {
-            var enemies = Physics.OverlapBox(transform.position, transform.localScale * 0.5f, transform.rotation, (1 << 8));
-           
+        void Update() {
+            _timer += Time.deltaTime;
 
-            foreach (var enemy in enemies) {
-                ZoneEffect.Trigger(enemy.gameObject);
+            if (_timer > TickTimer) {
+                _timer = 0f;
+                var enemies = Physics.OverlapBox(transform.position, transform.localScale * 0.5f, transform.rotation, (1 << 8));
+
+                foreach (var enemy in enemies) {
+                    ZoneEffect.Trigger(enemy.gameObject);
+                }
             }
         }
     }
