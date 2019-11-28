@@ -186,6 +186,7 @@ namespace AK
         static const AkUniqueID HDR_METERROUT = 2514708333U;
         static const AkUniqueID MANAGE_MUSICMAIN_LEVEL = 724781984U;
         static const AkUniqueID MANAGE_SFXMAIN_LEVEL = 429852744U;
+        static const AkUniqueID PLAYER_RANGEDBOOL_RTCP = 3652467876U;
         static const AkUniqueID PLAYERSPEED = 1493153371U;
     } // namespace GAME_PARAMETERS
 
