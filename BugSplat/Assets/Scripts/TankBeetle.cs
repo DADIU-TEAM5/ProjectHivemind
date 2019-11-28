@@ -828,14 +828,17 @@ public class TankBeetle : Enemy
     {
         EnemySpawnedEvent.Raise(this.gameObject);
 
-        Anim.SetBool("Spawn", true);
+        Debug.Log("SPAWN");
 
         if (SpawnFirstTime.Value == true)
         {
+            Debug.Log("SPAWNED FIRST TIME");
             PlayerCurrentSpeedSO.Value = 0;
             SpawnCamInit.Raise(RenderGraphics);
             SpawnFirstTime.Value = false;
         }
+
+        Anim.SetBool("Spawn", true);
 
     }
 
