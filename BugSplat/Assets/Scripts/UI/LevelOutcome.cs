@@ -21,13 +21,17 @@ public class LevelOutcome : MonoBehaviour
     }
     public void SetTimeUsed(FloatVariable timeUsed)
     {
-        //Debug.Log("wat");
-        TimeRusult.text = $"{timeUsed.Value}";
+		//Debug.Log("wat");
+
+		var second = (int)(timeUsed.Value % 60);
+		var min = (int)(timeUsed.Value / 60);
+		TimeRusult.text = $"{min}" + ":" + $"{second}";
     }
 
     public void SetKilledEnemies(IntVariable enemiesKilled)
     {
-        EnemiesKilled.text = $"{enemiesKilled.Value}";
+		//Debug.Log("enemiesKilled" + enemiesKilled.Value);
+		EnemiesKilled.text = $"{enemiesKilled.Value}";
     }
 
     public void SetMoneyEarned(IntVariable moneyEarned)
@@ -36,7 +40,5 @@ public class LevelOutcome : MonoBehaviour
         MoneyEarned.text = $"{moneyEarned.Value}";
     }
 
-    public void DetectClik()
-    {
-    }
+    
 }
