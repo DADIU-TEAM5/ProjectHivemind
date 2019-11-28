@@ -34,7 +34,7 @@ public class TapToReturn : MonoBehaviour
             PlayerControlOverrideSO.Value = false;
             CurrentLevelSO.InitialValue = 0;
             LastScene.Value = "";
-            OverallSceneWorker.LoadScene("_PreloadScene");
+            OverallSceneWorker.LoadScene("Hub Scene");
 
             ClearAllResults();
         }

@@ -19,6 +19,8 @@ public class LoadTutorialShop : MonoBehaviour
     public Animator CharacterCutSceneAnimController;
     public GameObject TutorialEggs;
     public GameObject[] LevelLights;
+    public GameObject ShopSign;
+
 
 
 
@@ -57,6 +59,7 @@ public class LoadTutorialShop : MonoBehaviour
 
         if (TutorialIsActiveSO.Value == true)
         {
+            
             ShopIsOpenSO.Value = false;
             Cage.SetActive(true);
             //
@@ -70,6 +73,14 @@ public class LoadTutorialShop : MonoBehaviour
             TutorialEggs.SetActive(false);
             PlayerControlOverrideSO.Value = false;
             Player.GetComponent<NavMeshAgent>().enabled = true;
+        }
+
+        if (ShopIsOpenSO.Value == true)
+        {
+            ShopSign.SetActive(true);
+        } else
+        {
+            ShopSign.SetActive(false);
         }
 
     
