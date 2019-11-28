@@ -436,6 +436,10 @@ public class Spitter : Enemy
         private ParticleController _particleController;
 
         private Vector3 _startPos;
+
+        void Start() {
+            _startPos = transform.position;
+        }
         
 
         void Update() {
