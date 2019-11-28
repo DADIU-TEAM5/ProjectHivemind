@@ -59,6 +59,7 @@ namespace AK
         static const AkUniqueID NPC_FODDER_SCREAM = 6383691U;
         static const AkUniqueID NPC_FODDER_SPECIALATTACK = 2078456833U;
         static const AkUniqueID NPC_HEAVY_ATTACK = 3679048617U;
+        static const AkUniqueID NPC_HEAVY_CHARGE = 3635874769U;
         static const AkUniqueID NPC_HEAVY_DEAD = 2658157895U;
         static const AkUniqueID NPC_HEAVY_DETECT = 4074057964U;
         static const AkUniqueID NPC_HEAVY_EMERGE = 505012654U;
