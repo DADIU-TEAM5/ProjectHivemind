@@ -92,9 +92,9 @@ public class cannonFodder : Enemy
     void Attack()
     {
        
+        
 
-
-        if (_attacking == false)
+        if (_attacking == false && !IsUnderground)
         {
             AttackChargingEvent.Raise(this.gameObject);
 
