@@ -5,8 +5,5 @@ using UnityEngine;
 [CreateAssetMenu]
 public class EnemyList : ScriptableObject
 {
-
-
-
     public GameObject[] SpawnableEnemies;
 }
