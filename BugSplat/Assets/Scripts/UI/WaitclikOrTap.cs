@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaitclikOrTap : MonoBehaviour
+public class WaitclikOrTap : GameLoop
 {
     public GameObject Scenehandle;
-	void Update()
-	{
+    public override void LoopUpdate(float deltaTime)
+    {
 		if (Input.GetMouseButtonUp(0) || Input.touchCount > 0)
 		{
 			Scenehandle.SetActive(true);
@@ -16,4 +16,8 @@ public class WaitclikOrTap : MonoBehaviour
     {
 		Scenehandle.SetActive(false);
 	}
+    public override void LoopLateUpdate(float deltaTime)
+    {
+
+    }
 }

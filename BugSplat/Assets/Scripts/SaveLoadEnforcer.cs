@@ -14,13 +14,7 @@ public class SaveLoadEnforcer : MonoBehaviour
     public BoolVariable tutorialDone;
 
 
-    private void Start()
-    {
-        if(currentlevel.Value != 0)
-        {
-            save();
-        }
-    }
+    
 
 
 
