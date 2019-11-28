@@ -16,6 +16,7 @@ public class EnemiesTrackUI : GameLoop
     public GameEvent HasWonEvent;
     public MapGenerator MapGen;
     public IntVariable CurrentLevel;
+    public GameText WavesCleared, WavesLeft, FinalWave, DefeatAllWaves;
     private ShopLevels _levels;
     private int WaveCount = 0;
     private int eventRaisedCount;
@@ -89,18 +90,33 @@ public class EnemiesTrackUI : GameLoop
 
     public void WaveTextFeedback()
     {
-
         if (NumberOfWavesSO.Value - WaveCount >= 0)
         {
+            var wavesClearedGT = ScriptableObject.CreateInstance<GameText>();
+            wavesClearedGT.TextVariations = WavesCleared.TextVariations;
+
+            foreach (var variation in wavesClearedGT.TextVariations) {
+                variation.Text = $"{variation.Text} {WaveCount}/{NumberOfWavesSO.Value}";
+            }
+
+            _textFeedback.SetTitle(wavesClearedGT);
+
+
             int wavesLeft = NumberOfWavesSO.Value - WaveCount;
-            string waveText = "Wave " + WaveCount + " Cleared!";
-            string subText = "";
             if (wavesLeft == 1)
-                subText = "Final Wave!";
-            else
-                subText = wavesLeft + " Waves Left";
-            _textFeedback.SetTitle(waveText);
-            _textFeedback.SetSubtitle(subText);
+                _textFeedback.SetSubtitle(FinalWave);
+            else {
+                var wavesLeftGT = ScriptableObject.CreateInstance<GameText>(); 
+                wavesLeftGT.TextVariations = WavesLeft.TextVariations;
+
+                foreach (var variation in wavesLeftGT.TextVariations)
+                {
+                    variation.Text = $"{wavesLeft} Waves Left";
+                }
+
+                _textFeedback.SetSubtitle(wavesLeftGT);
+            }
+
             _textFeedback.SetFeedbackActive(true);
         }
 
@@ -109,16 +125,8 @@ public class EnemiesTrackUI : GameLoop
 
     public void EnterArenaTextFeedback()
     {
-
-        string subText = "Kill all enemies";
-        if (isWave)
-        {
-            subText = "Defeat all Waves";
-        }
-
         _textFeedback.SetLevelTitle(CurrentLevel);
-        _textFeedback.SetSubtitle(subText);
+        _textFeedback.SetSubtitle(DefeatAllWaves);
         _textFeedback.SetFeedbackActive(true);
-
     }
 }

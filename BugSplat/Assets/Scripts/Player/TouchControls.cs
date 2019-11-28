@@ -137,7 +137,7 @@ public class TouchControls : GameLoop
                         Vector3 touchPosition = touch.position;
 
 
-                            if (touchPosition.x > _uiOffset.x || touchPosition.y > _uiOffset.y)
+                            if (touchPosition.x < _uiOffset.x || touchPosition.y > _uiOffset.y)
                             {
                                 switch (touch.phase)
                                 {
@@ -311,7 +311,7 @@ public class TouchControls : GameLoop
 
             if (endTime < InputSwipeTapTimeSO.Value)
             {
-                //DebugText.text = "ATTACKED!";
+                //Debug.Log("ATTACKED!");
                 AttackTapSO.Raise(PlayerGraphics);
             }
         }
