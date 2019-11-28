@@ -127,6 +127,8 @@ public abstract class Enemy : GameLoop
     [HideInInspector]
     public float _stunTime;
 
+    private bool _spawned = false;
+
 
     public void Stun(float time)
     {
@@ -219,9 +221,10 @@ public abstract class Enemy : GameLoop
                 DetectThePlayer();
                 //  Renderer.material.color = SetColor(Color.blue);
             }
-            else if (PlayerDetected)
+            else if (PlayerDetected && _spawned == false)
             {
                 SpawnFromUnderground();
+                _spawned = true;
             }
 
         }
