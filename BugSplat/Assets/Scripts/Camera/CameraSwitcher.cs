@@ -16,6 +16,7 @@ namespace Cinemachine.Examples
         public GameObject PlayerGameObject;
         public GameObject PlayerGraphics;
         public Vector3Variable PlayerDirectionSO;
+        public FloatVariable PlayerCurrentSpeedSO;
         public BoolVariable PlayerControlOverrideSO;
         public float WaitInitTime = 1f;
         public float SlowDownTimer = 1f;
@@ -42,6 +43,8 @@ namespace Cinemachine.Examples
         private IEnumerator SlowDownTime(CinemachineVirtualCamera camera, float slowDownSec, float slowDown, GameObject target)
         {
             PlayerControlOverrideSO.Value = true;
+
+            PlayerCurrentSpeedSO.Value = 0f;
 
             Vector3 newHeading = target.transform.position - PlayerGraphics.transform.position;
 
