@@ -147,7 +147,7 @@ public class Boomer : Enemy
 
         }
 
-        ConeRenderer.material.color = Color.Lerp(Color.green, Color.red, _attackCharge / _boomerStats.AttackChargeUpTime);
+        ConeRenderer.material.color = Color.Lerp(ConeInitColor, ConeEndColor, _attackCharge / _boomerStats.AttackChargeUpTime);
 
         DrawCone(20, ConeMesh, false, _attackCharge);
         _attacking = true;

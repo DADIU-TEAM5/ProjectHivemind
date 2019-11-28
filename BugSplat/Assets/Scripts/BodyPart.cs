@@ -10,12 +10,17 @@ public class BodyPart : GameLoop
     public IntVariable BodyParts;
     public IntVariable LevelEarnedMoney;
 
+
+    public GameObject Flare;
+
     public GameEvent PickedUpEvent;
 
     public float enableTime = 1;
     public float PickUpSpeed;
     public float ExplosionDistance;
     public float ExplosionHeight;
+
+    bool flare = false;
 
     public int minValue, MaxValue;
 
@@ -55,6 +60,16 @@ public class BodyPart : GameLoop
 
 
 
+            }
+            else
+            {
+                if (!flare)
+                {
+                    flare = true;
+                    GameObject light = Instantiate(Flare,transform);
+                    light.transform.position = transform.position;
+                    light.transform.rotation = new Quaternion();
+                }
             }
         }
 

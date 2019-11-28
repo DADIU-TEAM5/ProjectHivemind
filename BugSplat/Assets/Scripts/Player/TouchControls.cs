@@ -295,7 +295,7 @@ public class TouchControls : GameLoop
 
             if (endTime < InputSwipeTapTimeSO.Value)
             {
-                //DebugText.text = "ATTACKED!";
+                //Debug.Log("ATTACKED!");
                 AttackTapSO.Raise(PlayerGraphics);
             }
         }

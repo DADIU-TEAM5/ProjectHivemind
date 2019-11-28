@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PlayerAudioScript : MonoBehaviour
 {
@@ -13,8 +14,6 @@ public class PlayerAudioScript : MonoBehaviour
     public AK.Wwise.Event ScaredScream;
     public AK.Wwise.Event Killed;
     public AK.Wwise.Event pickup;
-
-
 
     public void FootStepEvent(GameObject source)
     {

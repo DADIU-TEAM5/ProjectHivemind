@@ -26,7 +26,7 @@ public class UnAggroManager : GameLoop
     public override void LoopUpdate(float deltaTime)
     {
         int i = 0;
-       foreach (var enemy in EnemyList.Items)
+        foreach (var enemy in EnemyList.Items)
         {
             if (countdownTimers.Count <= i)
             {

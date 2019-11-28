@@ -214,13 +214,16 @@ public abstract class Enemy : GameLoop
             }
         } else
         {
-            DetectThePlayer(); 
-            
-            if (PlayerDetected)
+            if (!PlayerDetected)
+            {
+                DetectThePlayer();
+                //  Renderer.material.color = SetColor(Color.blue);
+            }
+            else if (PlayerDetected)
             {
                 SpawnFromUnderground();
             }
-            //  Renderer.material.color = SetColor(Color.blue);
+
         }
 
 
