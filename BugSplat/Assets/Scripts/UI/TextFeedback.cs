@@ -13,16 +13,16 @@ public class TextFeedback : MonoBehaviour
 
     public float TimeoutTime = 5;
 
-    public void SetTitle(string title) {
-        Title.text = title;
+    public void SetTitle(GameText title) {
+        Title.text = title.GetText();
     }
 
     public void SetLevelTitle(IntVariable level) {
         Title.text = $"Level {level.Value + 1}";
     }
 
-    public void SetSubtitle(string subtitle) {
-        Subtitle.text = subtitle;
+    public void SetSubtitle(GameText subtitle) {
+        Subtitle.text = subtitle.GetText();
     }
 
     public void SetFeedbackActive(bool active) {
