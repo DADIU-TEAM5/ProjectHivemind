@@ -57,6 +57,7 @@ public class LoadTutorialShop : MonoBehaviour
 
         if (TutorialIsActiveSO.Value == true)
         {
+            
             ShopIsOpenSO.Value = false;
             Cage.SetActive(true);
             //

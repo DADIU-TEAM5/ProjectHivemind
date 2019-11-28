@@ -27,7 +27,10 @@ public class Inventory : ScriptableObject
 
     public void Reset()
     {
-        if (Items == null) Items = new List<Item>();
+        Items = new List<Item>();
+
+        
+
     }
 
 }
