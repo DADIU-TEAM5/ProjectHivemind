@@ -584,6 +584,7 @@ public class TankBeetle : Enemy
 
     int[] _trianglesfortraj = { };
     Vector3[] _normalsfotraj = { };
+    Vector2[] _uvs = { };
 
     public void DrawChargeTrajectory()
     {
@@ -602,6 +603,16 @@ public class TankBeetle : Enemy
             _trianglesfortraj[5] = 3;
 
 
+
+        }
+
+        if (_uvs.Length != 4)
+        {
+            _uvs = new Vector2[4];
+            _uvs[0] = new Vector2(0, 0);
+            _uvs[1] = new Vector2(1, 0);
+            _uvs[2] = new Vector2(0, 1);
+            _uvs[3] = new Vector2(1, 1);
 
         }
 
