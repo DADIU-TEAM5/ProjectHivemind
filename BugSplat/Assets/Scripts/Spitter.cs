@@ -5,6 +5,15 @@ using UnityEngine.AI;
 
 public class Spitter : Enemy
 {
+    public Material OverlayMat;
+    [HideInInspector]
+    public GameObject Overlay;
+    [HideInInspector]
+    public Mesh OverlayMesh;
+    [HideInInspector]
+    public MeshRenderer OverlayRenderer;
+
+
     public GameObject EggProjectile;
     
     public ParticleController SpitParticles;
@@ -59,8 +68,33 @@ public class Spitter : Enemy
 
         float percenIncrease = Increase / stats.AttackChargeUpTime;
         _percentIncrease = percenIncrease;
+
+        CreateOverlay();
     }
 
+    void CreateOverlay()
+    {
+        Overlay = new GameObject();
+        Overlay.name = "Overlay";
+        OverlayMesh = Overlay.AddComponent<MeshFilter>().mesh;
+        OverlayRenderer = Overlay.AddComponent<MeshRenderer>();
+
+        OverlayRenderer.material = OverlayMat;
+
+
+
+        Vector3 offset = transform.position;
+
+        offset.y = 0.01f;
+        Overlay.transform.position = offset;
+
+        Overlay.transform.rotation = transform.rotation;
+
+
+        Overlay.transform.parent = transform;
+        Overlay.SetActive(false);
+
+    }
 
 
 
@@ -200,8 +234,11 @@ public class Spitter : Enemy
             WormAnimator.SetTrigger("ChargeAttack");
 
             Outline.SetActive(true);
+            Overlay.SetActive(true);
             Cone.SetActive(true);
+            DrawOverlay();
             DrawSpitTrajectory();
+            
 
 
         }
@@ -259,6 +296,7 @@ public class Spitter : Enemy
 
             Outline.SetActive(false);
             Cone.SetActive(false);
+            Overlay.SetActive(false);
 
         }
 
@@ -274,6 +312,7 @@ public class Spitter : Enemy
 
         Outline.SetActive(false);
         Cone.SetActive(false);
+        Overlay.SetActive(false);
     }
     
 
@@ -302,6 +341,91 @@ public class Spitter : Enemy
     int[] _trianglesfortraj = { };
     Vector3[] _normalsfotraj = { };
     Vector2[] _uvs = { };
+
+
+    
+
+
+    public void DrawOverlay()
+    {
+        if (_trianglesfortraj.Length != 6)
+        {
+            _trianglesfortraj = new int[6];
+
+
+
+            _trianglesfortraj[0] = 0;
+            _trianglesfortraj[1] = 1;
+            _trianglesfortraj[2] = 2;
+
+            _trianglesfortraj[3] = 2;
+            _trianglesfortraj[4] = 1;
+            _trianglesfortraj[5] = 3;
+
+
+
+        }
+
+        if (_uvs.Length != 4)
+        {
+            _uvs = new Vector2[4];
+            _uvs[2] = new Vector2(1, 1);
+            _uvs[0] = new Vector2(1, 0);
+            _uvs[3] = new Vector2(0, 1);
+            _uvs[1] = new Vector2(0, 0);
+
+        }
+
+        if (_normalsfotraj.Length != 4)
+        {
+
+            _normalsfotraj = new Vector3[4];
+
+            for (int i = 0; i < 4; i++)
+            {
+                _normalsfotraj[i] = Vector3.up;
+            }
+        }
+
+
+
+
+        Vector3[] vertices = new Vector3[4];
+
+
+
+
+        float trajectoryWidt = 0.5f;
+
+        vertices[0] = Vector3.right * trajectoryWidt;
+        vertices[1] = Vector3.left * trajectoryWidt;
+
+        vertices[2] = (Vector3.right * trajectoryWidt) + (Vector3.forward * stats.AttackRange);
+        vertices[3] = (Vector3.left * trajectoryWidt) + (Vector3.forward * stats.AttackRange);
+
+
+
+
+
+        OverlayMesh.vertices = vertices;
+
+        if (OverlayMesh.triangles != _trianglesfortraj)
+            OverlayMesh.triangles = _trianglesfortraj;
+
+        if (OverlayMesh.normals != _normalsfotraj)
+            OverlayMesh.normals = _normalsfotraj;
+
+        if (OverlayMesh.uv != _uvs)
+            OverlayMesh.uv = _uvs;
+
+
+        OverlayMesh.RecalculateBounds();
+
+
+
+
+    }
+
 
     public void DrawSpitTrajectory()
     {
