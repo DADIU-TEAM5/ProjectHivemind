@@ -7,6 +7,8 @@ public class TimeBasedStatChange : Effect
 {
     public StatChangeEffect StatChange;
 
+    public GameEvent BoostInit, BoostOver;
+
     public float Timer;
 
     private EmptyMono CoroutineBoy;
@@ -32,9 +34,13 @@ public class TimeBasedStatChange : Effect
             actualChange = Mathf.Max(change, StatChange.Change);
         }
 
+        BoostInit?.Raise();
+
         StatChange.Stat.SetValue(StatChange.Stat.Value + actualChange);
 
         yield return new WaitForSeconds(Timer);
+
+        BoostOver?.Raise();
 
         StatChange.Stat.SetValue(StatChange.Stat.Value - actualChange);
     }
