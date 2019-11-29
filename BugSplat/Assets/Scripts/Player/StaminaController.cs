@@ -39,6 +39,8 @@ public class StaminaController : GameLoop
         if (Stamina.Value < MaxStamina.Value)
         {
             Stamina.Value = Mathf.Min(MaxStamina.Value, Stamina.Value + StaminaRegen.Value * deltaTime);
+            if (Stamina.Value < 0)
+                Stamina.Value = 0;
         }
        
         float staminaPercent = Stamina.Value / MaxStamina.Value;

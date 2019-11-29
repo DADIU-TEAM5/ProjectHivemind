@@ -7,7 +7,9 @@ public class AmbienceManagerScript : MonoBehaviour
 
     [Header("Wwise ambience events")]
     public AK.Wwise.Event arenaAmbience;
+    public AK.Wwise.Event arenaAmbStop;
     public AK.Wwise.Event hubAmbience;
+    public AK.Wwise.Event hubAmbStop;
 
 
     [Header("Wwise reverb states")]
@@ -29,13 +31,15 @@ public class AmbienceManagerScript : MonoBehaviour
         Hubverb.SetValue();
     }
 
- 
 
-    public void SceneChange()
+    public void ArenaAmbStopEvent()
     {
-        arenaAmbience.Stop(this.gameObject);
-        hubAmbience.Stop(this.gameObject);
-        hubAmbience.Stop(this.gameObject);
+        arenaAmbStop.Post(this.gameObject);
+    }
+
+    public void HubAmbStopEvent()
+    {
+        hubAmbStop.Post(this.gameObject);
     }
 
 
