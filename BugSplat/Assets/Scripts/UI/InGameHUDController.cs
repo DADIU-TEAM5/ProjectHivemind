@@ -119,13 +119,8 @@ public class InGameHUDController : MonoBehaviour
         }
     }
 
-    public void SetupFonts(GameObject go)
-    {
-        for (int i = 0; i < go.transform.childCount; i++)
-        {
-            SetupFonts(go.transform.GetChild(i).gameObject);
-        }
-
+    public void SetupFonts(GameObject go) {
+            
         foreach (TMPro.TextMeshPro text in go.GetComponentsInChildren<TMPro.TextMeshPro>())
         {
 
