@@ -21,9 +21,10 @@ public class StaminaController : GameLoop
     public RectTransform StaminaPrefab;
     public RectTransform StaminaMask;
     public List<GameObject> StaminaIcons;
+    public List<GameObject> MaxStaminaIcons;
     public FloatVariable StaminaMaxSize;
-    private float _staminaIconOffset = 77;
-    private float _staminaDistFromWall = 30;
+    private float _staminaIconOffset = 10;
+    private float _staminaDistFromWall = 40;
 
     private void OnEnable()
     {
@@ -32,6 +33,14 @@ public class StaminaController : GameLoop
         StaminaMaxSize.Value = staminaCharges/StaminaIcons.Count * StaminaMaxSize.Value;
         
         Debug.Log("StaminaSiza: " + StaminaMaxSize.Value);
+
+        for (int i = 0; i < MaxStaminaIcons.Count; i++)
+        {
+            if (i < staminaCharges)
+                MaxStaminaIcons[i].SetActive(true);
+            else
+                MaxStaminaIcons[i].SetActive(false);
+        }
     }
 
     public override void LoopLateUpdate(float deltaTime)
@@ -46,7 +55,7 @@ public class StaminaController : GameLoop
         float staminaPercent = Stamina.Value / MaxStamina.Value;
         Debug.Log("Stamina % : " + staminaPercent);
         // UI
-        StaminaMask.sizeDelta = new Vector2(staminaPercent*StaminaMaxSize.Value, StaminaMask.rect.height);
+        StaminaMask.sizeDelta = new Vector2(staminaPercent*StaminaMaxSize.Value - _staminaIconOffset, StaminaMask.rect.height);
 
         float dashPower = Stamina.Value / MaxStamina.Value;
 
