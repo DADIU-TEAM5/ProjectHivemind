@@ -32,7 +32,7 @@ public class DebugManager : GameLoop
     void OnGUI()
     {
         //GUILayout.Label($"FPS: ");
-        GUI.Label(new Rect(40, 280, 200, 80), $"FPS: {_averageFPS}", _overlayStyle);
+        GUI.Label(new Rect(40, 180, 200, 80), $"FPS: {_averageFPS}", _overlayStyle);
     }
 
     public override void LoopUpdate(float deltaTime)
