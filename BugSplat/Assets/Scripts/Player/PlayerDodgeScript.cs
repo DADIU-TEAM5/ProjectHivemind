@@ -32,6 +32,7 @@ public class PlayerDodgeScript : MonoBehaviour
 
     public GameEvent DashInitiated;
     public GameEvent DashDoneEvent;
+    public GameEvent NotEnoughStamina;
 
     public GameEvent DashCollideEvent;
 
@@ -133,6 +134,14 @@ public class PlayerDodgeScript : MonoBehaviour
         if (!_dashCooldownActive && !IsDodgingSO.Value) {
             if (!StaminaIsActive || DashCost.Value <= Stamina.Value) {
                 StartCoroutine(Dash());
+            }
+            else
+            {
+                Debug.Log("Not Enough Stamina");
+                if (NotEnoughStamina == null)
+                    Debug.LogError("Not Enough Stamina Event not connected");
+                else
+                    NotEnoughStamina.Raise();
             }
         }
     }
