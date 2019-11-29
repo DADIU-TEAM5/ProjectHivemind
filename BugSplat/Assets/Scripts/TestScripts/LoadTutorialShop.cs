@@ -22,6 +22,7 @@ public class LoadTutorialShop : MonoBehaviour
     public GameObject ShopSign;
     public GameObject SpawnParticle;
     public Vector3Variable PlayerDirectionSO;
+    public Vector3Variable PlayerPositionSO;
 
 
 
@@ -29,6 +30,9 @@ public class LoadTutorialShop : MonoBehaviour
 
     private void Start()
     {
+        PlayerDirectionSO.Value = new Vector3(-0.3162278f, 0f, -0.9486834f);
+        PlayerPositionSO.Value = new Vector3(32.3f, 0.08986212f, -21.3f);
+
         ShopIsOpenSO.Value = true;
         TutorialEggs.SetActive(false);
 
@@ -38,7 +42,7 @@ public class LoadTutorialShop : MonoBehaviour
             ShopCollider.SetActive(false);
         }
 
-        if (LastSceneSO.Value == "Death Scene")
+        if (LastSceneSO.Value != "_PreloadScene")
         {
             StartGame();
         }
@@ -62,7 +66,6 @@ public class LoadTutorialShop : MonoBehaviour
     public void  StartGame()
     {
 
-        
 
         if (TutorialIsActiveSO.Value == true)
         {
@@ -71,18 +74,24 @@ public class LoadTutorialShop : MonoBehaviour
             ShopIsOpenSO.Value = false;
             Cage.SetActive(true);
             //
-            LastSceneSO.Value = "";
+            //LastSceneSO.Value = "";
             CharacterCutSceneAnimController.enabled = true;
             TutorialEggs.SetActive(true);
-        } else
+        }
+        else
         {
             if (LastSceneSO.Value == "_PreloadScene")
             {
                 SpawnParticle.SetActive(true);
                 SpawnParticle.GetComponent<WaitXSeconds>().enabled = true;
-            } else
+            }
+            else if (LastSceneSO.Value == "Death Scene") 
             {
                 SpawnParticle.SetActive(true);
+                Player.gameObject.SetActive(true);
+            }
+            else
+            {
                 Player.gameObject.SetActive(true);
             }
 

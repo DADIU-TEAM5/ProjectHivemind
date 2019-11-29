@@ -20,6 +20,7 @@ public class FreezePlayerPositionToPoint : MonoBehaviour
             PlayerControlOverrideSO.Value = true;
             PlayerCurrentSpeedSO.Value = 0;
             //PlayerDirectionSO.Value = Vector3.zero;
+            PlayerGameObject.gameObject.SetActive(true);
             PlayerGameObject.position = TargetPosition.position;
             PlayerGameObject.parent = TargetPosition;
             PlayerGameObject.GetComponentInChildren<PlayerTrajectory>().MoMaUpdateTime = 100;
