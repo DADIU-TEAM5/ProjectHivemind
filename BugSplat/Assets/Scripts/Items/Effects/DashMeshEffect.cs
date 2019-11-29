@@ -41,6 +41,7 @@ public class DashMeshEffect : Effect
         // TODO: Maybe add this to another layer that only collides with Enemies 
         var monitorer = mesh.AddComponent<MeshMonitorer>();
         monitorer.ZoneEffect = OnMeshEffect;
+        monitorer.TickTimer = TickTimer;
 
         MeshActive?.Raise(mesh);
 
@@ -109,7 +110,7 @@ public class DashMeshEffect : Effect
 
     internal class MeshMonitorer : MonoBehaviour {
         internal Effect ZoneEffect;
-        internal float TickTimer = 1f;
+        internal float TickTimer;
 
         private Mesh MeshObj;
 
@@ -121,7 +122,6 @@ public class DashMeshEffect : Effect
 
         void Update() {
             _timer += Time.deltaTime;
-
             if (_timer > TickTimer) {
                 _timer = 0f;
                 var enemies = Physics.OverlapBox(transform.position, transform.localScale * 0.5f, transform.rotation, (1 << 8));
