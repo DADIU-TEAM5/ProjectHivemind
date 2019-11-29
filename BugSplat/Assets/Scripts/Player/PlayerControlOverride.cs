@@ -122,8 +122,8 @@ public class PlayerControlOverride : MonoBehaviour
     {
 
         PlayerControlOverrideSO.Value = true;
-        //PlayerGraphics.localRotation = Quaternion.LookRotation(Player.transform.position - target.position, Vector3.up);
-        PlayerGraphics.LookAt(target);
+        PlayerDirectionSO.Value = new Vector3(target.position.x - Player.transform.position.x, 0, target.position.z - Player.transform.position.z);
+        PlayerGraphics.localRotation = Quaternion.LookRotation(PlayerDirectionSO.Value, Vector3.up);
 
         PlayerCurrentSpeedSO.Value = PlayerCurrentSpeedSO.InitialValue;
 

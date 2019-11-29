@@ -72,6 +72,7 @@ public class LoadTutorialShop : MonoBehaviour
             Player.gameObject.SetActive(true);
             Player.GetComponent<NavMeshAgent>().enabled = false;
             ShopIsOpenSO.Value = false;
+            ShopCollider.SetActive(false);
             Cage.SetActive(true);
             //
             //LastSceneSO.Value = "";
