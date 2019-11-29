@@ -88,18 +88,8 @@ public class StaminaController : GameLoop
         //StaminaMask.sizeDelta = new Vector2(StaminaMask.rect.width - _staminaIconOffset, StaminaMask.rect.height);
         if (Stamina.Value >= DashCost.Value)
             Stamina.Value = Mathf.Max(Stamina.Value - DashCost.Value, 0);
-        else
-        {
-            Debug.Log("No Stamina");
-            NotEnoughStaminaForDash.Raise();
-            float staminaCharges = MaxStamina.Value / DashCost.Value;
-            for (int i = 0; i < staminaCharges; i++)
-            {
-                
-                MaxStaminaIcons[i].SetActive(false);
-                MaxStaminaIcons[i].SetActive(true);
-            }
-        }
+        
+        
            
 
         for (int i = 0; i < StaminaIcons.Count; i++)
@@ -111,5 +101,18 @@ public class StaminaController : GameLoop
         _staminaCharges--;
     }
 
+    public void NotEnoughStaminaAnimation()
+    {
+        {
+            Debug.Log("No Stamina");
+            
+            float staminaCharges = MaxStamina.Value / DashCost.Value;
+            for (int i = 0; i < staminaCharges; i++)
+            {
 
+                MaxStaminaIcons[i].SetActive(false);
+                MaxStaminaIcons[i].SetActive(true);
+            }
+        }
+    }
 }
