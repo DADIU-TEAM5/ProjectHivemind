@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Effects/Stun Enemy")]
-public class StunEnemy : Effect
+public class StunEnemyEffect : Effect
 {   
     public float Duration = 3;
 
