@@ -513,7 +513,7 @@ public class TankBeetle : Enemy
 
        Quaternion targetRotation = Quaternion.LookRotation(_currentPath.corners[_currentCorner] - transform.position);
 
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, TankStats.TurnSpeed * deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, TankStats.WayPointTurnSpeed * deltaTime);
 
 
         /*
