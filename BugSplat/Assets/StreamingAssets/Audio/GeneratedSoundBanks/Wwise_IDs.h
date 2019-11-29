@@ -25,6 +25,7 @@ namespace AK
         static const AkUniqueID CHAIN_LOOP = 615336901U;
         static const AkUniqueID CHAIN_START = 2421078001U;
         static const AkUniqueID CHAIN_STOP = 2826204523U;
+        static const AkUniqueID CHEER_FADE = 2988443545U;
         static const AkUniqueID CHEER_INIT = 2830818153U;
         static const AkUniqueID CHEER_UP = 3469520088U;
         static const AkUniqueID DABIGWALL = 728926122U;
