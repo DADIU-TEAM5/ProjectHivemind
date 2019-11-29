@@ -18,6 +18,7 @@ namespace AK
         static const AkUniqueID AMB_HUB_HOWL = 4023739020U;
         static const AkUniqueID AMB_HUB_HOWL_STOP = 3647681851U;
         static const AkUniqueID AMB_HUB_MAINEVENT = 1797197367U;
+        static const AkUniqueID AMB_HUB_MAINEVENT_STOP = 1051637010U;
         static const AkUniqueID AMB_SHOP_MAINEVENT = 3126464902U;
         static const AkUniqueID CAGE_DANGLE_STOP = 977694152U;
         static const AkUniqueID CAGE_OPEN = 711098640U;

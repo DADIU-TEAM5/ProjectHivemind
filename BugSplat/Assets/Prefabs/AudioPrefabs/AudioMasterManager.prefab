@@ -1689,7 +1689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: bccb1ce44bfacae4db5c5ace29262218, type: 2}
+  Event: {fileID: 11400000, guid: cf7c26f6da02bb1479a32a519adbbd3b, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
@@ -2057,6 +2057,7 @@ GameObject:
   - component: {fileID: 4239992968331929727}
   - component: {fileID: 4380713084137410471}
   - component: {fileID: 3156685688124353914}
+  - component: {fileID: 5114511875261700773}
   m_Layer: 0
   m_Name: BoomerAudio
   m_TagString: Untagged
@@ -2112,7 +2113,8 @@ MonoBehaviour:
   DeathSplat:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 6192335631535482c89cc27b5f00f29b,
+      type: 2}
   Charge:
     idInternal: 0
     valueGuidInternal: 
@@ -2291,6 +2293,35 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2065512477816436485}
         m_MethodName: EmergeEvent
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &5114511875261700773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4546422351566072139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 7096ff615eb02b7429ef21bfb2b5a162, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2065512477816436485}
+        m_MethodName: Death
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2530,6 +2561,8 @@ GameObject:
   - component: {fileID: 4466324516886727042}
   - component: {fileID: 419331822851459515}
   - component: {fileID: 8233037482780601946}
+  - component: {fileID: 3680972088971753150}
+  - component: {fileID: 5574325679954491364}
   m_Layer: 0
   m_Name: AmbienceManager
   m_TagString: Untagged
@@ -2568,10 +2601,20 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: d69417d0b360e448195ab971d40c7336,
       type: 2}
+  arenaAmbStop:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 722f25ad502dc44f3aca1dd96201e878,
+      type: 2}
   hubAmbience:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 7df8bbd6e8ae8405cb5978ce760928a7,
+      type: 2}
+  hubAmbStop:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: fec5cd8cc8afd461baf0a874a2faa7e2,
       type: 2}
   Arenaverb:
     idInternal: 0
@@ -2600,7 +2643,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5767124523087305666}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
   m_Name: 
@@ -2669,6 +2712,64 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4335405448226846213}
         m_MethodName: HubSceneLoad
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &3680972088971753150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5767124523087305666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 23c31f1f7de3a40ef9210ef1fc57121c, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4335405448226846213}
+        m_MethodName: HubAmbStopEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &5574325679954491364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5767124523087305666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: cf7c26f6da02bb1479a32a519adbbd3b, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4335405448226846213}
+        m_MethodName: ArenaAmbStopEvent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
