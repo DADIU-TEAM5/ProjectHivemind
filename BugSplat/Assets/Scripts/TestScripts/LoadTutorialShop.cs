@@ -36,6 +36,11 @@ public class LoadTutorialShop : MonoBehaviour
             ShopCollider.SetActive(false);
         }
 
+        if (LastSceneSO.Value == "Death Scene")
+        {
+            StartGame();
+        }
+
         for (int i = 0; i <= CurrentLevelSO.Max; i++)
         {
             if (i > 0)

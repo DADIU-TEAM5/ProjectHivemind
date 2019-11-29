@@ -33,7 +33,7 @@ public class TapToReturn : MonoBehaviour
             Debug.Log("Loading tap");
             PlayerControlOverrideSO.Value = false;
             CurrentLevelSO.InitialValue = 0;
-            LastScene.Value = "";
+            LastScene.Value = SceneManager.GetActiveScene().name;
             OverallSceneWorker.LoadScene("Hub Scene");
 
             ClearAllResults();
