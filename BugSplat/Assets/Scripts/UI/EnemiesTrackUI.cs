@@ -97,10 +97,7 @@ public class EnemiesTrackUI : GameLoop
     {
         if (NumberOfWavesSO.Value - WaveCount >= 0)
         {
-            var wavesClearedGT = ScriptableObject.CreateInstance<GameText>();
-            wavesClearedGT.TextVariations = WavesCleared.TextVariations;
-            wavesClearedGT.CurrentLocale = WavesCleared.CurrentLocale;
-
+            var wavesClearedGT = Instantiate(WavesCleared);
 
             foreach (var variation in wavesClearedGT.TextVariations) {
                 variation.Text += " " + WaveCount.ToString() + "/" + NumberOfWavesSO.Value.ToString();
@@ -113,9 +110,7 @@ public class EnemiesTrackUI : GameLoop
             if (wavesLeft == 1)
                 _textFeedback.SetSubtitle(FinalWave);
             else {
-                var wavesLeftGT = ScriptableObject.CreateInstance<GameText>(); 
-                wavesLeftGT.TextVariations = WavesLeft.TextVariations;
-                wavesLeftGT.CurrentLocale = WavesLeft.CurrentLocale;
+                var wavesLeftGT = Instantiate(WavesLeft); 
 
                 foreach (var variation in wavesLeftGT.TextVariations)
                 {

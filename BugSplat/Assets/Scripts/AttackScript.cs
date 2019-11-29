@@ -53,7 +53,7 @@ public class AttackScript : GameLoop
     public Material AttackMaterial;
     [Range(0,5)]
     public float ConeShowTime = 0.5f;
-    [Range(0, 1)]
+    [Range(0, 10)]
     public float fadeTime = 0.5f;
     [Range(0, 1)]
     public float MaxAlpha = 0.35f;
@@ -485,6 +485,10 @@ public class AttackScript : GameLoop
         _cone.name = "cone";
         ConeMesh = _cone.AddComponent<MeshFilter>().mesh;
         _coneRenderer = _cone.AddComponent<MeshRenderer>();
+
+
+        _coneRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+        _coneRenderer.receiveShadows = false;
 
 
 
