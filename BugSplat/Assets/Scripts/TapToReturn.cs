@@ -8,6 +8,7 @@ public class TapToReturn : MonoBehaviour
     public BoolVariable PlayerControlOverrideSO;
     public IntVariable CurrentLevelSO;
     public StringVariable LastScene;
+    public Vector3Variable PlayerDirectionSO;
 
 
     public FloatVariable TotalTime;
@@ -32,8 +33,9 @@ public class TapToReturn : MonoBehaviour
         {
             Debug.Log("Loading tap");
             PlayerControlOverrideSO.Value = false;
+            PlayerDirectionSO.Value = new Vector3(-0.3162278f, 0f, -0.9486834f);
             CurrentLevelSO.InitialValue = 0;
-            LastScene.Value = "";
+            LastScene.Value = SceneManager.GetActiveScene().name;
             OverallSceneWorker.LoadScene("Hub Scene");
 
             ClearAllResults();
