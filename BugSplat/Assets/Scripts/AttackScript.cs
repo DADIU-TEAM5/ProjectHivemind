@@ -51,8 +51,16 @@ public class AttackScript : GameLoop
 
 
     public Material AttackMaterial;
-    [Range(0,1)]
-    public float ConeShowTime;
+    [Range(0,5)]
+    public float ConeShowTime = 0.5f;
+    [Range(0, 1)]
+    public float fadeTime = 0.5f;
+    [Range(0, 1)]
+    public float MaxAlpha = 0.35f;
+
+    float alpha = 0;
+    bool increaseAplha = false;
+    Color col;
 
     Mesh ConeMesh;
     MeshRenderer _coneRenderer;
@@ -72,14 +80,25 @@ public class AttackScript : GameLoop
         _navMeshAgent = GetComponent<NavMeshAgent>();
 
         CreateCone();
+        col = _coneRenderer.material.color;
 
-        
 
     }
 
     public override void LoopUpdate(float deltaTime)
     {
+        col.a = alpha;
+        _coneRenderer.material.color = col;
 
+        if(increaseAplha && alpha < MaxAlpha)
+        {
+            alpha += (deltaTime * fadeTime);
+        }
+        else if (alpha >0)
+        {
+
+            alpha -= (deltaTime * fadeTime);
+        }
 
         if (_attackingTimer <= 0)
         {
@@ -95,7 +114,9 @@ public class AttackScript : GameLoop
         _coneHideTimer += deltaTime;
         if (_coneHideTimer > ConeShowTime)
         {
-            _cone.SetActive(false);
+
+            increaseAplha = false;
+            
         }
 
         LockOnToNearestTarget();
@@ -170,8 +191,13 @@ public class AttackScript : GameLoop
 
     private void LockOnToNearestTarget()
     {
+
+
         
-            Collider[] potentialTargets = Physics.OverlapSphere(PlayerGraphics.position, AutoAttackRange.Value, LayerMask.GetMask("Enemy"));
+        
+        
+
+        Collider[] potentialTargets = Physics.OverlapSphere(PlayerGraphics.position, AutoAttackRange.Value, LayerMask.GetMask("Enemy"));
 
             int targetIndex = -1;
             float distance = float.MaxValue;
@@ -246,7 +272,10 @@ public class AttackScript : GameLoop
         Anim.SetTrigger("Attack");
 
         DrawCone(10);
-        _cone.SetActive(true);
+       
+        increaseAplha = true;
+
+
         _coneHideTimer = 0;
 
         Collider[] potentialTargets = Physics.OverlapSphere(PlayerGraphics.position, AttackLength.Value, LayerMask.GetMask("Enemy"));
@@ -470,7 +499,9 @@ public class AttackScript : GameLoop
 
 
         _cone.transform.parent = PlayerGraphics;
-        _cone.SetActive(false);
+
+        increaseAplha = false;
+        
 
 
 
