@@ -9,6 +9,7 @@ public class TankStats : EnemyStats
     public float ChargeSpeed;
 
     public float TurnSpeed;
+    public float WayPointTurnSpeed;
     
     public float PushLength;
 
