@@ -229,6 +229,7 @@ namespace AK
     namespace AUX_BUSSES
     {
         static const AkUniqueID REVERB_ARENA = 1569207989U;
+        static const AkUniqueID REVERB_FIGHTMUSIC = 3865930343U;
         static const AkUniqueID REVERB_HUB = 3119546469U;
         static const AkUniqueID REVERB_SHOP = 788805620U;
     } // namespace AUX_BUSSES
