@@ -845,6 +845,82 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &6783984969605979481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8241419702585049210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b82ba18a7a3f9ba47b684cbf0af44211, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Meshes:
+  - {fileID: 1882685081716150668}
+  - {fileID: 6039954951285816783}
+  - {fileID: 5914908369071674409}
+  - {fileID: 5742501601968005684}
+--- !u!114 &7788294330330539673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8241419702585049210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 506880ad309f5a3428b88a1632cf9ec3, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6783984969605979481}
+        m_MethodName: SetMaterial
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2100000, guid: 141538892f3adcd4bb4bd050c8718cf6,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &117895470864519874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8241419702585049210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 60dd21dfff75b9441817c7d8698b9c10, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6783984969605979481}
+        m_MethodName: SetDefault
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1001 &570152287483342289
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1384,6 +1460,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77de2b65d9fb2194fb38198dd1daaae2, type: 3}
+--- !u!1 &6368478820627383874 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 77de2b65d9fb2194fb38198dd1daaae2,
+    type: 3}
+  m_PrefabInstance: {fileID: 3116645597622787915}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7942722903702697041 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 77de2b65d9fb2194fb38198dd1daaae2,
@@ -1396,9 +1478,33 @@ Animator:
     type: 3}
   m_PrefabInstance: {fileID: 3116645597622787915}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6368478820627383874 stripped
+--- !u!137 &1882685081716150668 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -5665483578368520505, guid: 77de2b65d9fb2194fb38198dd1daaae2,
+    type: 3}
+  m_PrefabInstance: {fileID: 3116645597622787915}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &6039954951285816783 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8688208591181046404, guid: 77de2b65d9fb2194fb38198dd1daaae2,
+    type: 3}
+  m_PrefabInstance: {fileID: 3116645597622787915}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &5914908369071674409 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8743023419271400290, guid: 77de2b65d9fb2194fb38198dd1daaae2,
+    type: 3}
+  m_PrefabInstance: {fileID: 3116645597622787915}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &5742501601968005684 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7273870166129999231, guid: 77de2b65d9fb2194fb38198dd1daaae2,
+    type: 3}
+  m_PrefabInstance: {fileID: 3116645597622787915}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8241419702585049210 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 77de2b65d9fb2194fb38198dd1daaae2,
+  m_CorrespondingSourceObject: {fileID: -2801261897168740559, guid: 77de2b65d9fb2194fb38198dd1daaae2,
     type: 3}
   m_PrefabInstance: {fileID: 3116645597622787915}
   m_PrefabAsset: {fileID: 0}
@@ -1409,11 +1515,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5788987755461925660}
     m_Modifications:
-    - target: {fileID: 4798785032631788364, guid: fa959d80d84405d44a3a2be8cff130c2,
-        type: 3}
-      propertyPath: m_Name
-      value: RunSmokeParticle
-      objectReference: {fileID: 0}
     - target: {fileID: 7532454032801570627, guid: fa959d80d84405d44a3a2be8cff130c2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1468,6 +1569,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4798785032631788364, guid: fa959d80d84405d44a3a2be8cff130c2,
+        type: 3}
+      propertyPath: m_Name
+      value: RunSmokeParticle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa959d80d84405d44a3a2be8cff130c2, type: 3}
