@@ -11,6 +11,7 @@ public class StaminaController : GameLoop
     public FloatVariable DashCost;
     public FloatVariable StaminaRegen;
 
+    public GameEvent NotEnoughStaminaForDash;
     // Used to change effectiveness of dash by .Value %
     public FloatVariable DashPower;
 
@@ -87,6 +88,8 @@ public class StaminaController : GameLoop
         //StaminaMask.sizeDelta = new Vector2(StaminaMask.rect.width - _staminaIconOffset, StaminaMask.rect.height);
         if (Stamina.Value >= DashCost.Value)
             Stamina.Value = Mathf.Max(Stamina.Value - DashCost.Value, 0);
+        else
+
 
         for (int i = 0; i < StaminaIcons.Count; i++)
         {
