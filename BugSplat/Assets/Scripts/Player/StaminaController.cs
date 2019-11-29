@@ -23,16 +23,18 @@ public class StaminaController : GameLoop
     public List<GameObject> StaminaIcons;
     public List<GameObject> MaxStaminaIcons;
     public FloatVariable StaminaMaxSize;
-    private float _staminaIconOffset = 10;
+    private float _staminaIconOffset = 27;
     private float _staminaDistFromWall = 40;
+    private int _staminaCharges;
 
     private void OnEnable()
     {
         StaminaMaxSize.ResetValue();
         float staminaCharges = MaxStamina.Value / DashCost.Value;
+        _staminaCharges = (int) (Stamina.Value / DashCost.Value);
         StaminaMaxSize.Value = staminaCharges/StaminaIcons.Count * StaminaMaxSize.Value;
         
-        Debug.Log("StaminaSiza: " + StaminaMaxSize.Value);
+        Debug.Log("StaminaSize: " + StaminaMaxSize.Value);
 
         for (int i = 0; i < MaxStaminaIcons.Count; i++)
         {
@@ -45,6 +47,13 @@ public class StaminaController : GameLoop
 
     public override void LoopLateUpdate(float deltaTime)
     {
+        int newStaminaChagrges = (int)(Stamina.Value / DashCost.Value);
+        if (newStaminaChagrges > _staminaCharges)
+        {
+            StaminaIcons[_staminaCharges].SetActive(false);
+            StaminaIcons[_staminaCharges].SetActive(true);
+            _staminaCharges = newStaminaChagrges;
+        }
         if (Stamina.Value < MaxStamina.Value)
         {
             Stamina.Value = Mathf.Min(MaxStamina.Value, Stamina.Value + StaminaRegen.Value * deltaTime);
@@ -55,7 +64,7 @@ public class StaminaController : GameLoop
         float staminaPercent = Stamina.Value / MaxStamina.Value;
         Debug.Log("Stamina % : " + staminaPercent);
         // UI
-        StaminaMask.sizeDelta = new Vector2(staminaPercent*StaminaMaxSize.Value - _staminaIconOffset, StaminaMask.rect.height);
+        StaminaMask.sizeDelta = new Vector2(staminaPercent*StaminaMaxSize.Value, StaminaMask.rect.height);
 
         float dashPower = Stamina.Value / MaxStamina.Value;
 
@@ -78,6 +87,14 @@ public class StaminaController : GameLoop
         //StaminaMask.sizeDelta = new Vector2(StaminaMask.rect.width - _staminaIconOffset, StaminaMask.rect.height);
         if (Stamina.Value >= DashCost.Value)
             Stamina.Value = Mathf.Max(Stamina.Value - DashCost.Value, 0);
+
+        for (int i = 0; i < StaminaIcons.Count; i++)
+        {
+            StaminaIcons[i].SetActive(false);
+            StaminaIcons[i].SetActive(true);
+        }
+
+        _staminaCharges--;
     }
 
 
