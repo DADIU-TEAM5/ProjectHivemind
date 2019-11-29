@@ -19,12 +19,12 @@ public class volumeControl : MonoBehaviour
 
     public void onSFXLevelChange()
     {
-        SFXVolume.SetValue(this.gameObject, SFXVolumeVAR.Value);
+        SFXVolume.SetValue(null, SFXVolumeVAR.Value);
     }
 
     public void onMusicLevelChange()
     {
-        MusicVolume.SetValue(this.gameObject, MusicVolumeVAR.Value);
+        MusicVolume.SetValue(null, MusicVolumeVAR.Value);
     }
 
     public void SelectEvent()
