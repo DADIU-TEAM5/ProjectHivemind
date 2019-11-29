@@ -19,6 +19,7 @@ public class BankLoaderScript : MonoBehaviour
         Music.Load(false, false);
         UI.Load(false, false);
         Player.Load(false, false);
+        AreaHub.Load(false, false);
         //AreaArena.Load(false, false);
         //EnemyInsects.Load(false, false);
     }
