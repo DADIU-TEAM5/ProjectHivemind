@@ -58,7 +58,6 @@ public class CameraMixerInit : MonoBehaviour
             {
                 for (_currentTime = 0; _currentTime < 1f; _currentTime += Time.deltaTime)
                 {
-                    Debug.Log("TIME: " + _currentTime);
                     MixerCam.m_Weight0 = Mathf.Lerp(_finalDist, 0, _currentTime);
                     MixerCam.m_Weight1 = Mathf.Lerp(1-_finalDist, 1, _currentTime);
                 }
