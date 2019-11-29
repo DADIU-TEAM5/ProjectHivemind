@@ -13,7 +13,7 @@ public class PreloadVariableManager : MonoBehaviour
     {
         InMainMenu.Value = true;
         //TutorialEnabled.Value = true;
-        LastScene.Value = "";
+        //LastScene.Value = "";
     }
 
 
