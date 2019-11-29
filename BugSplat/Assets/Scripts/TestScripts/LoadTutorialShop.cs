@@ -20,6 +20,8 @@ public class LoadTutorialShop : MonoBehaviour
     public GameObject TutorialEggs;
     public GameObject[] LevelLights;
     public GameObject ShopSign;
+    public GameObject SpawnParticle;
+    public Vector3Variable PlayerDirectionSO;
 
 
 
@@ -59,12 +61,13 @@ public class LoadTutorialShop : MonoBehaviour
     
     public void  StartGame()
     {
-        
+
         
 
         if (TutorialIsActiveSO.Value == true)
         {
-            
+            Player.gameObject.SetActive(true);
+            Player.GetComponent<NavMeshAgent>().enabled = false;
             ShopIsOpenSO.Value = false;
             Cage.SetActive(true);
             //
@@ -73,11 +76,20 @@ public class LoadTutorialShop : MonoBehaviour
             TutorialEggs.SetActive(true);
         } else
         {
+            if (LastSceneSO.Value == "_PreloadScene")
+            {
+                SpawnParticle.SetActive(true);
+                SpawnParticle.GetComponent<WaitXSeconds>().enabled = true;
+            } else
+            {
+                SpawnParticle.SetActive(true);
+                Player.gameObject.SetActive(true);
+            }
+
             ShopIsOpenSO.Value = true;
             TutorialIsActiveSO.Value = false;
             TutorialEggs.SetActive(false);
             PlayerControlOverrideSO.Value = false;
-            Player.GetComponent<NavMeshAgent>().enabled = true;
         }
 
         if (ShopIsOpenSO.Value == true)
@@ -87,9 +99,6 @@ public class LoadTutorialShop : MonoBehaviour
         {
             ShopSign.SetActive(true);
         }
-
-    
-
-        
+       
     }
 }
