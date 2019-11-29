@@ -8,6 +8,8 @@ public class volumeControl : MonoBehaviour
     [Header("Wwise events")]
     public AK.Wwise.Event select;
     public AK.Wwise.Event back;
+    public AK.Wwise.Event menuOpen;
+    public AK.Wwise.Event menuClose;
 
     [Header("Wwise parameters")]
     public AK.Wwise.RTPC SFXVolume;
@@ -35,6 +37,16 @@ public class volumeControl : MonoBehaviour
     public void BackEvent()
     {
         back.Post(this.gameObject);
+    }
+
+    public void OpenMenuEvent()
+    {
+        menuOpen.Post(this.gameObject);
+    }
+
+    public void CloseMenuEvent()
+    {
+        menuClose.Post(this.gameObject);
     }
 
 }

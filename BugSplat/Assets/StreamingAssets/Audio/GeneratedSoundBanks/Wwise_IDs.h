@@ -88,6 +88,8 @@ namespace AK
         static const AkUniqueID PLAYER_FOLEY_HIT = 830213708U;
         static const AkUniqueID PLAYER_FOLEY_KILLED = 3187150534U;
         static const AkUniqueID PLAYER_PICKUP = 1627434233U;
+        static const AkUniqueID PLAYER_RADICAL_RANGED = 1157062745U;
+        static const AkUniqueID PLAYER_RADICAL_TRAILS = 3143993207U;
         static const AkUniqueID SHOP_ENTER = 2951951990U;
         static const AkUniqueID SHOP_EXIT = 4024286332U;
         static const AkUniqueID SHOP_INSPECTITEM = 1339011789U;
@@ -227,6 +229,7 @@ namespace AK
     namespace AUX_BUSSES
     {
         static const AkUniqueID REVERB_ARENA = 1569207989U;
+        static const AkUniqueID REVERB_FIGHTMUSIC = 3865930343U;
         static const AkUniqueID REVERB_HUB = 3119546469U;
         static const AkUniqueID REVERB_SHOP = 788805620U;
     } // namespace AUX_BUSSES
