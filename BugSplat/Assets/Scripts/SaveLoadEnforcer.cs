@@ -14,7 +14,7 @@ public class SaveLoadEnforcer : MonoBehaviour
     public BoolVariable tutorialDone;
 
 
-    
+
 
 
 
@@ -35,7 +35,7 @@ public class SaveLoadEnforcer : MonoBehaviour
         int hasSavedBefore =0;
 
         hasSavedBefore = PlayerPrefs.GetInt("hasSaved");
-        
+
         if(hasSavedBefore == 64)
         {
             JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("pool"), Pool);
@@ -63,12 +63,12 @@ public class SaveLoadEnforcer : MonoBehaviour
             print("game loaded");
         }
 
-        
+
     }
 
     public void save()
     {
-        
+
         PlayerPrefs.SetInt("hasSaved", 64);
 
 
@@ -102,9 +102,6 @@ public class SaveLoadEnforcer : MonoBehaviour
 
     public void NewGame()
     {
-
-        Pool.Reset();
-
         for (int i = 0; i < playerStats.Value.Count; i++)
         {
 
@@ -120,9 +117,8 @@ public class SaveLoadEnforcer : MonoBehaviour
         }
 
         inventory.Reset();
-
+        Pool.Reset();
         save();
-
     }
 
 
