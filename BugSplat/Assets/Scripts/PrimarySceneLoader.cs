@@ -8,6 +8,8 @@ public class PrimarySceneLoader : ScriptableObject
 {
     public Dictionary<string, string> ScenePathDictionary;
 
+    public StringVariable LastScene;
+
     public void AddScene(string name, string path) {
         if (!ScenePathDictionary.ContainsKey(name)) {
             ScenePathDictionary.Add(name, path);
@@ -18,8 +20,8 @@ public class PrimarySceneLoader : ScriptableObject
     public void LoadScene(string name) {
         if (ScenePathDictionary.ContainsKey(name)) {
 
-            var scenePath = ScenePathDictionary[name]; 
-
+            var scenePath = ScenePathDictionary[name];
+            LastScene.Value = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene(scenePath);
         }
 
