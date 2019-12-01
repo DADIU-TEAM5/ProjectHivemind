@@ -7,6 +7,15 @@ public class TankBeetle : Enemy
 
 {
 
+    public Material OverlayMat;
+    [HideInInspector]
+    public GameObject Overlay;
+    [HideInInspector]
+    public Mesh OverlayMesh;
+    [HideInInspector]
+    public MeshRenderer OverlayRenderer;
+
+
     float _wayPointCD;
 
 
@@ -62,14 +71,39 @@ public class TankBeetle : Enemy
     public void Start()
     {
         TankStats = (TankStats)stats;
-        ConeRenderer.material.color = Color.red;
 
         
         _wayPoints = new Vector3[TankStats.Repeat];
 
+
+        CreateOverlay();
+
+
     }
 
-    
+    void CreateOverlay()
+    {
+        Overlay = new GameObject();
+        Overlay.name = "Overlay";
+        OverlayMesh = Overlay.AddComponent<MeshFilter>().mesh;
+        OverlayRenderer = Overlay.AddComponent<MeshRenderer>();
+
+        OverlayRenderer.material = OverlayMat;
+
+
+
+        Vector3 offset = transform.position;
+
+        offset.y = 0.01f;
+        Overlay.transform.position = offset;
+
+        Overlay.transform.rotation = transform.rotation;
+
+
+        Overlay.transform.parent = transform;
+        Overlay.SetActive(false);
+
+    }
 
     
 
@@ -234,6 +268,7 @@ public class TankBeetle : Enemy
 
 
             Outline.transform.parent = null;
+            Overlay.transform.parent = null;
             
 
             _chargeDuration += deltaTime;
@@ -289,8 +324,10 @@ public class TankBeetle : Enemy
         else
         {
             DrawChargeTrajectory();
+            Overlay.SetActive(true);
+            DrawOverlay();
             ChargeFillup();
-            ConeRenderer.material.color = Color.Lerp(new Color(0, 1, 0, 0.5f), new Color(1, 0, 0, 0.5f), _attackCharge / stats.AttackChargeUpTime);
+            ConeRenderer.material.color = Color.Lerp(ConeInitColor, ConeEndColor, _attackCharge / stats.AttackChargeUpTime);
             _chargeDistance = DistanceToChargeEndPos()-TankStats.AttackRange;
         }
 
@@ -305,7 +342,7 @@ public class TankBeetle : Enemy
 
         
         DrawCone(10, OuterEdgeMesh, true, _attackCharge);
-        ConeRenderer.material.color = new Color(1, 0, 0, .4f);
+        ConeRenderer.material.color = ConeEmptyColor;
         Collider[] potentialTargets = Physics.OverlapSphere(transform.position, TankStats.AttackRange, LayerMask.GetMask("Player"));
 
 
@@ -514,7 +551,7 @@ public class TankBeetle : Enemy
 
        Quaternion targetRotation = Quaternion.LookRotation(_currentPath.corners[_currentCorner] - transform.position);
 
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, TankStats.TurnSpeed * deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, TankStats.WayPointTurnSpeed * deltaTime);
 
 
         /*
@@ -559,6 +596,8 @@ public class TankBeetle : Enemy
     void EndCharge()
     {
 
+        Overlay.SetActive(false);
+
         if (Anim.GetBool("Attacking") == true)
         {
             Anim.SetBool("Attacking", false);
@@ -579,12 +618,99 @@ public class TankBeetle : Enemy
         Outline.transform.parent = transform;
         Outline.transform.position = transform.position;
 
+        Overlay.transform.parent = transform;
+        Overlay.transform.position = transform.position;
+
 
     }
 
 
     int[] _trianglesfortraj = { };
     Vector3[] _normalsfotraj = { };
+    Vector2[] _uvs = { };
+
+
+    public void DrawOverlay()
+    {
+        if (_trianglesfortraj.Length != 6)
+        {
+            _trianglesfortraj = new int[6];
+
+
+
+            _trianglesfortraj[0] = 0;
+            _trianglesfortraj[1] = 1;
+            _trianglesfortraj[2] = 2;
+
+            _trianglesfortraj[3] = 2;
+            _trianglesfortraj[4] = 1;
+            _trianglesfortraj[5] = 3;
+
+
+
+        }
+
+        if (_uvs.Length != 4)
+        {
+            _uvs = new Vector2[4];
+            _uvs[2] = new Vector2(1, 1);
+            _uvs[0] = new Vector2(1, 0);
+            _uvs[3] = new Vector2(0, 1);
+            _uvs[1] = new Vector2(0, 0);
+
+        }
+
+        if (_normalsfotraj.Length != 4)
+        {
+
+            _normalsfotraj = new Vector3[4];
+
+            for (int i = 0; i < 4; i++)
+            {
+                _normalsfotraj[i] = Vector3.up;
+            }
+        }
+
+
+
+
+        Vector3[] vertices = new Vector3[4];
+
+
+
+
+        float trajectoryWidt = TankStats.AttackRange;
+
+        vertices[0] = Vector3.right * trajectoryWidt;
+        vertices[1] = Vector3.left * trajectoryWidt;
+
+
+        vertices[2] = (Vector3.right * trajectoryWidt) + (Vector3.forward * DistanceToChargeEndPos());
+        vertices[3] = (Vector3.left * trajectoryWidt) + (Vector3.forward * DistanceToChargeEndPos());
+
+
+
+
+
+        OverlayMesh.vertices = vertices;
+
+        if (OverlayMesh.triangles != _trianglesfortraj)
+            OverlayMesh.triangles = _trianglesfortraj;
+
+        if (OverlayMesh.normals != _normalsfotraj)
+            OverlayMesh.normals = _normalsfotraj;
+
+        if (OverlayMesh.uv != _uvs)
+            OverlayMesh.uv = _uvs;
+
+
+        OverlayMesh.RecalculateBounds();
+
+
+
+
+    }
+
 
     public void DrawChargeTrajectory()
     {
@@ -605,6 +731,8 @@ public class TankBeetle : Enemy
 
 
         }
+
+        
 
         if (_normalsfotraj.Length != 4)
         {
@@ -646,6 +774,9 @@ public class TankBeetle : Enemy
         if (OutlineMesh.normals != _normalsfotraj)
             OutlineMesh.normals = _normalsfotraj;
 
+        
+
+
         OutlineMesh.RecalculateBounds();
 
 
@@ -672,6 +803,8 @@ public class TankBeetle : Enemy
 
 
         }
+
+        
 
         if (_normalsfotraj.Length != 4)
         {
@@ -715,6 +848,7 @@ public class TankBeetle : Enemy
         if (ConeMesh.normals != _normalsfotraj)
             ConeMesh.normals = _normalsfotraj;
 
+       
 
 
         ConeMesh.RecalculateBounds();
@@ -823,6 +957,25 @@ public class TankBeetle : Enemy
 
             return false;
     }
+
+    public override void SpawnFromUnderground()
+    {
+        EnemySpawnedEvent.Raise(this.gameObject);
+
+        Debug.Log("SPAWN");
+
+        if (SpawnFirstTime.Value == true)
+        {
+            Debug.Log("SPAWNED FIRST TIME");
+            PlayerCurrentSpeedSO.Value = 0;
+            SpawnCamInit.Raise(RenderGraphics);
+            SpawnFirstTime.Value = false;
+        }
+
+        Anim.SetBool("Spawn", true);
+
+    }
+
 
 
     private void OnDrawGizmos()

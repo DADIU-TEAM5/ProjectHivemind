@@ -34,6 +34,7 @@ public class Egg : Enemy
             if (roll < _eggStats.ChanceForEnemySpawn)
             {
                 GameObject enemy = Instantiate(_eggStats.EnemyToSpawn, transform);
+                enemy.GetComponent<Enemy>().SpawnedEnemy = true;
                 enemy.transform.parent = null;
             }
             else if(roll < _eggStats.ChanceForCurrency)
@@ -49,6 +50,11 @@ public class Egg : Enemy
            
 
         }
+
+    }
+
+    public override void SpawnFromUnderground()
+    {
 
     }
 }

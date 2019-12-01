@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PlayerAudioScript : MonoBehaviour
 {
@@ -13,8 +14,9 @@ public class PlayerAudioScript : MonoBehaviour
     public AK.Wwise.Event ScaredScream;
     public AK.Wwise.Event Killed;
     public AK.Wwise.Event pickup;
-
-
+    public AK.Wwise.Event noDash;
+    public AK.Wwise.Event rangedAttack;
+    public AK.Wwise.Event dashAcid;
 
     public void FootStepEvent(GameObject source)
     {
@@ -49,5 +51,20 @@ public class PlayerAudioScript : MonoBehaviour
     public void Death(GameObject source)
     {
         Killed.Post(source);
+    }
+
+    public void NoDashEvent()
+    {
+        noDash.Post(this.gameObject);
+    }
+
+    public void dashAcidEvent(GameObject source)
+    {
+        dashAcid.Post(source);
+    }
+
+    public void rangedAttackEvent(GameObject source)
+    {
+        rangedAttack.Post(source);
     }
 }

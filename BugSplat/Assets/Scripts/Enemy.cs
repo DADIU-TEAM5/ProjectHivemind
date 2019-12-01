@@ -127,6 +127,8 @@ public abstract class Enemy : GameLoop
     [HideInInspector]
     public float _stunTime;
 
+    private bool _spawned = false;
+
 
     public void Stun(float time)
     {
@@ -214,23 +216,17 @@ public abstract class Enemy : GameLoop
             }
         } else
         {
-            DetectThePlayer();
-
-            if (PlayerDetected)
+            if (!PlayerDetected)
             {
-                if (EnemySpawnedEvent != null)
-                {
-                    EnemySpawnedEvent.Raise();
+                DetectThePlayer();
+                //  Renderer.material.color = SetColor(Color.blue);
+            }
+            else if (PlayerDetected && _spawned == false)
+            {
+                SpawnFromUnderground();
+                _spawned = true;
+            }
 
-                    if (SpawnFirstTime.Value == true)
-                    {
-                        PlayerCurrentSpeedSO.Value = 0;
-                        SpawnCamInit.Raise(RenderGraphics);
-                        SpawnFirstTime.Value = false;
-                    }
-                }
-            } 
-            //  Renderer.material.color = SetColor(Color.blue);
         }
 
 
@@ -243,6 +239,8 @@ public abstract class Enemy : GameLoop
     }
 
     public abstract void LoopBehaviour(float deltaTime);
+
+    public abstract void SpawnFromUnderground();
 
 
     public bool IsVisible()

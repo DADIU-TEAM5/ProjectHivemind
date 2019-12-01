@@ -11,9 +11,18 @@ public class GameText : ScriptableObject
     public LocaleVariable CurrentLocale;
 
     public string GetText() {
-        var variation = TextVariations.FirstOrDefault(x => x.Locale == CurrentLocale.Value);
-        Debug.Log(variation);
-        return variation.Text ?? "";
+
+        TextVariation variation ;
+        if (CurrentLocale != null) {
+            variation = TextVariations.FirstOrDefault(x => x.Locale == CurrentLocale.Value);
+
+            return variation.Text ?? "";
+        }
+
+        return "";
+
+        //Debug.Log(variation);
+        
     }
 
     [System.Serializable]

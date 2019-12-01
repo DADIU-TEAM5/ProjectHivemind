@@ -16,7 +16,7 @@ public class WaitXSeconds : MonoBehaviour
     // Update is called once per frame
     IEnumerator WaitXSec(float seconds, GameObject scriptObject)
     {
-        yield return new WaitForSeconds(seconds);
+        yield return new WaitForSecondsRealtime(seconds);
 
         ScriptObjectToActivate.SetActive(true);
     }

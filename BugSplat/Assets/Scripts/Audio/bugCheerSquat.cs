@@ -6,6 +6,7 @@ public class bugCheerSquat : MonoBehaviour
 {
     [Header("Wwise events")]
     public AK.Wwise.Event CheerInit;
+    public AK.Wwise.Event CheerFade;
     public AK.Wwise.Event WinningCheer;
     public AK.Wwise.Event LosingCheer;
     public AK.Wwise.Event ComboCheer;
@@ -29,5 +30,10 @@ public class bugCheerSquat : MonoBehaviour
     public void Combo()
     {
         ComboCheer.Post(this.gameObject);
+    }
+
+    public void ArenaExitEvent()
+    {
+        CheerFade.Post(this.gameObject);
     }
 }

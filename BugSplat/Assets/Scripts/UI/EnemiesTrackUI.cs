@@ -16,17 +16,21 @@ public class EnemiesTrackUI : GameLoop
     public GameEvent HasWonEvent;
     public MapGenerator MapGen;
     public IntVariable CurrentLevel;
+    public GameText WavesCleared, WavesLeft, FinalWave, DefeatAllWaves, KillAllEnemies;
     private ShopLevels _levels;
     private int WaveCount = 0;
+    public IntVariable EnemiesLeft;
+
     private int eventRaisedCount;
     bool isWave;
     private TextFeedback _textFeedback;
 
-
+    bool isWon = false;
 
 
     private void Start()
     {
+        isWon = false;
         // Yes... it looks retarded
         MapGen = FindObjectOfType<MapGenerator>();
         _levels = MapGen.Levels;
@@ -39,9 +43,11 @@ public class EnemiesTrackUI : GameLoop
         eventRaisedCount = 0;
         EnemiesKilledSO.Value = 0;
         TotalEnemyCount.Value = 0;
+        EnemiesLeft.Value = 0;
 
         int enemytotal = EnemiesListSO.Items.Count + TotalEnemyCount.Value;
         EnemiesAtStart.text = enemytotal.ToString();
+        
     }
 
     public override void LoopUpdate(float deltaTime)
@@ -55,9 +61,11 @@ public class EnemiesTrackUI : GameLoop
     {
         Debug.Log("WaveCount: " + WaveCount + ", WaveSO: " + NumberOfWavesSO.Value);
         EnemiesKilledSO.Value++;
-        if (EnemiesKilledSO.Value >= TotalEnemyCount.Value && (!isWave || WaveCount + 1 >= NumberOfWavesSO.Value))
+        EnemiesLeft.Value--;
+        if (EnemiesKilledSO.Value >= TotalEnemyCount.Value && (!isWave || WaveCount + 1 >= NumberOfWavesSO.Value) && !isWon)
         {
             HasWonEvent.Raise();
+            isWon = true;
         }
     }
 
@@ -68,7 +76,7 @@ public class EnemiesTrackUI : GameLoop
 
 
         EnemiesAtStart.text = enemytotal.ToString();
-
+        EnemiesLeft.Value = enemytotal;
     }
 
     public void NewWave()
@@ -87,18 +95,31 @@ public class EnemiesTrackUI : GameLoop
 
     public void WaveTextFeedback()
     {
-
         if (NumberOfWavesSO.Value - WaveCount >= 0)
         {
+            var wavesClearedGT = Instantiate(WavesCleared);
+
+            foreach (var variation in wavesClearedGT.TextVariations) {
+                variation.Text += " " + WaveCount.ToString() + "/" + NumberOfWavesSO.Value.ToString();
+            }
+
+            _textFeedback.SetTitle(wavesClearedGT);
+
+
             int wavesLeft = NumberOfWavesSO.Value - WaveCount;
-            string waveText = "Wave " + WaveCount + " Cleared!";
-            string subText = "";
             if (wavesLeft == 1)
-                subText = "Final Wave!";
-            else
-                subText = wavesLeft + " Waves Left";
-            _textFeedback.SetTitle(waveText);
-            _textFeedback.SetSubtitle(subText);
+                _textFeedback.SetSubtitle(FinalWave);
+            else {
+                var wavesLeftGT = Instantiate(WavesLeft); 
+
+                foreach (var variation in wavesLeftGT.TextVariations)
+                {
+                    variation.Text = wavesLeft.ToString() + " " + variation.Text;
+                }
+
+                _textFeedback.SetSubtitle(wavesLeftGT);
+            }
+
             _textFeedback.SetFeedbackActive(true);
         }
 
@@ -107,16 +128,8 @@ public class EnemiesTrackUI : GameLoop
 
     public void EnterArenaTextFeedback()
     {
-
-        string subText = "Kill all enemies";
-        if (isWave)
-        {
-            subText = "Defeat all Waves";
-        }
-
         _textFeedback.SetLevelTitle(CurrentLevel);
-        _textFeedback.SetSubtitle(subText);
+        _textFeedback.SetSubtitle((isWave) ? DefeatAllWaves : KillAllEnemies);
         _textFeedback.SetFeedbackActive(true);
-
     }
 }

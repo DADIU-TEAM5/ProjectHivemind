@@ -8,6 +8,8 @@ public class AttackScript : GameLoop
     
     public Animator Anim;
 
+    
+
     public FloatVariable AttackLength;
     public FloatVariable AttackAngle;
     public FloatVariable AttackMoveDistance;
@@ -35,7 +37,7 @@ public class AttackScript : GameLoop
     float _coneHideTimer;
 
     GameObject _cone;
-    LineRenderer _coneRenderer;
+    
     Rigidbody _rigidbody;
 
     private bool _canAttack = true;
@@ -48,28 +50,55 @@ public class AttackScript : GameLoop
     public BoolVariable Attacking;
 
 
+    public Material AttackMaterial;
+    [Range(0,5)]
+    public float ConeShowTime = 0.5f;
+    [Range(0, 10)]
+    public float fadeTime = 0.5f;
+    [Range(0, 1)]
+    public float MaxAlpha = 0.35f;
+
+    float alpha = 0;
+    bool increaseAplha = false;
+    Color col;
+
+    Mesh ConeMesh;
+    MeshRenderer _coneRenderer;
+
     // Start is called before the first frame update
     void Start()
     {
 
+
+
+
+
         
 
-
-
-        _cone = new GameObject();
-
         _rigidbody= GetComponent<Rigidbody>();
-        _cone.AddComponent<LineRenderer>();
-        _coneRenderer = _cone.GetComponent<LineRenderer>();
+        
         _navMeshAgent = GetComponent<NavMeshAgent>();
 
-        _cone.SetActive(false);
+        CreateCone();
+        col = _coneRenderer.material.color;
+
 
     }
 
     public override void LoopUpdate(float deltaTime)
     {
+        col.a = alpha;
+        _coneRenderer.material.color = col;
 
+        if(increaseAplha && alpha < MaxAlpha)
+        {
+            alpha += (deltaTime * fadeTime);
+        }
+        else if (alpha >0)
+        {
+
+            alpha -= (deltaTime * fadeTime);
+        }
 
         if (_attackingTimer <= 0)
         {
@@ -83,9 +112,11 @@ public class AttackScript : GameLoop
 
         //Debug.DrawLine(PlayerGraphics.position, (_nearstTarget - PlayerGraphics.position), Color.red);
         _coneHideTimer += deltaTime;
-        if (_coneHideTimer > 0.5f)
+        if (_coneHideTimer > ConeShowTime)
         {
-            _cone.SetActive(false);
+
+            increaseAplha = false;
+            
         }
 
         LockOnToNearestTarget();
@@ -160,8 +191,13 @@ public class AttackScript : GameLoop
 
     private void LockOnToNearestTarget()
     {
+
+
         
-            Collider[] potentialTargets = Physics.OverlapSphere(PlayerGraphics.position, AutoAttackRange.Value, LayerMask.GetMask("Enemy"));
+        
+        
+
+        Collider[] potentialTargets = Physics.OverlapSphere(PlayerGraphics.position, AutoAttackRange.Value, LayerMask.GetMask("Enemy"));
 
             int targetIndex = -1;
             float distance = float.MaxValue;
@@ -236,7 +272,10 @@ public class AttackScript : GameLoop
         Anim.SetTrigger("Attack");
 
         DrawCone(10);
-        _cone.SetActive(true);
+       
+        increaseAplha = true;
+
+
         _coneHideTimer = 0;
 
         Collider[] potentialTargets = Physics.OverlapSphere(PlayerGraphics.position, AttackLength.Value, LayerMask.GetMask("Enemy"));
@@ -307,20 +346,87 @@ public class AttackScript : GameLoop
 
     }
 
-    void DrawCone(int points)
+    int[] _triangles = { };
+    Vector3[] _normals = { };
+    Vector2[] _uvs = { };
+
+    public void DrawCone(int points)
     {
-        Vector3[] pointsForTheCone = new Vector3[points];
-        _coneRenderer.positionCount = points;
+        int zeroes = points;
 
-        pointsForTheCone[0] = PlayerGraphics.position;
+        points = points + zeroes;
 
-        Vector3 vectorToRotate = PlayerDirectionSO.Value * AttackLength.Value;
+        // zeroes -= 1;
+
+        if (_triangles.Length != points * 3 + 3)
+        {
+            _triangles = new int[points * 3 + 3];
+
+            int triangleIndex = 0;
+
+            for (int i = 0; i < points - zeroes; i++)
+            {
+                if (i != points - zeroes - 1)
+                {
+                    _triangles[triangleIndex] = i;
+
+                    _triangles[triangleIndex + 2] = i + zeroes;
+                    _triangles[triangleIndex + 1] = i + 1 + zeroes;
+                }
+
+                triangleIndex += 3;
+            }
+
+            _triangles[triangleIndex] = zeroes;
+
+            _triangles[triangleIndex + 2] = points - 1;
+            _triangles[triangleIndex + 1] = 1;
+
+        }
+
+        if (_normals.Length != points)
+        {
+
+            _normals = new Vector3[points];
+
+            for (int i = 0; i < points; i++)
+            {
+                _normals[i] = Vector3.up;
+            }
+        }
+
+
+        Vector3[] vertices = new Vector3[points];
+        _uvs = new Vector2[points];
+
+
+        //vertices[0] = Vector3.zero;
+        //_uvs[0] = new Vector2(0, 0);
+
+
+
+
+        Vector3 vectorToRotate;
+        
+            vectorToRotate = Vector3.forward * AttackLength.Value;
+       
+
         Vector3 rotatedVector = Vector3.zero;
 
-        float stepSize = 1f / ((float)points - 1);
-        int step = 0;
+        float stepSize = 1f / ((float)points - 2 - zeroes);
 
-        for (int i = 1; i < points; i++)
+        float stepSize2 = 1f / ((float)points - 1 - zeroes);
+
+        int step = 0;
+        for (int i = 0; i < zeroes; i++)
+        {
+            //print(i + " step " + (stepSize2 *  i));
+            vertices[i] = Vector3.zero;
+            _uvs[i] = new Vector2(stepSize2 * (i), 0);
+        }
+
+
+        for (int i = 1 + zeroes; i < points; i++)
         {
             float angle = Mathf.Lerp(-AttackAngle.Value, AttackAngle.Value, step * stepSize);
 
@@ -332,21 +438,77 @@ public class AttackScript : GameLoop
             rotatedVector.x = vectorToRotate.x * c - vectorToRotate.z * s;
             rotatedVector.z = vectorToRotate.x * s + vectorToRotate.z * c;
 
-            pointsForTheCone[i] = PlayerGraphics.position + rotatedVector;
+
+
+            vertices[i] = rotatedVector;
+            _uvs[i] = new Vector2(stepSize * step, 1);
             step++;
         }
 
+        
 
 
+        ConeMesh.vertices = vertices;
+        /*
+                if (_uvs.Length != vertices.Length)
+                {
+                    _uvs = new Vector2[vertices.Length];
 
 
-        _coneRenderer.SetPositions(pointsForTheCone);
-        _coneRenderer.widthMultiplier = 0.1f;
+                    Bounds bounds = mesh.bounds;
 
-        _coneRenderer.loop = true;
+                    int i = 0;
+                    while (i < _uvs.Length)
+                    {
+                        _uvs[i] = new Vector2(vertices[i].x / bounds.size.x, vertices[i].z / bounds.size.z);
+                        i++;
+                    }
+
+                }*/
+
+        if (ConeMesh.triangles != _triangles)
+            ConeMesh.triangles = _triangles;
+
+        if (ConeMesh.normals != _normals)
+            ConeMesh.normals = _normals;
+
+        if (ConeMesh.uv != _uvs)
+            ConeMesh.uv = _uvs;
+
+        ConeMesh.RecalculateBounds();
     }
 
 
+    void CreateCone()
+    {
+        _cone = new GameObject();
+        _cone.name = "cone";
+        ConeMesh = _cone.AddComponent<MeshFilter>().mesh;
+        _coneRenderer = _cone.AddComponent<MeshRenderer>();
 
+
+        _coneRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+        _coneRenderer.receiveShadows = false;
+
+
+
+        _coneRenderer.material = AttackMaterial;
+
+        Vector3 offset = PlayerGraphics.position;
+
+        //offset.y = 0.005f;
+        _cone.transform.position = offset;
+
+        _cone.transform.rotation = transform.rotation;
+
+
+        _cone.transform.parent = PlayerGraphics;
+
+        increaseAplha = false;
+        
+
+
+
+    }
 }
 

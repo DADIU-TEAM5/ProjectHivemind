@@ -147,7 +147,7 @@ public class Boomer : Enemy
 
         }
 
-        ConeRenderer.material.color = Color.Lerp(Color.green, Color.red, _attackCharge / _boomerStats.AttackChargeUpTime);
+        ConeRenderer.material.color = Color.Lerp(ConeInitColor, ConeEndColor, _attackCharge / _boomerStats.AttackChargeUpTime);
 
         DrawCone(20, ConeMesh, false, _attackCharge);
         _attacking = true;
@@ -309,7 +309,22 @@ public class Boomer : Enemy
 
 
 
+    public override void SpawnFromUnderground()
+    {
+        if(EnemySpawnedEvent!=null)
+        EnemySpawnedEvent.Raise(this.gameObject);
 
+        BoomerAnimator.SetTrigger("Spawn");
+
+
+        if (SpawnFirstTime != null && SpawnFirstTime.Value == true)
+        {
+            PlayerCurrentSpeedSO.Value = 0;
+            SpawnCamInit.Raise(RenderGraphics);
+            SpawnFirstTime.Value = false;
+        }
+
+    }
 
 
 }
