@@ -18,19 +18,21 @@ public class PrimarySceneLoader : ScriptableObject
     }
 
     public void LoadScene(string name) {
-        if (ScenePathDictionary.ContainsKey(name)) {
+        LastScene.Value = SceneManager.GetActiveScene().name;
 
+        if (ScenePathDictionary.ContainsKey(name)) {
             var scenePath = ScenePathDictionary[name];
-            LastScene.Value = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene(scenePath);
+            return;
         }
 
-        Debug.LogError("Scene name was not in dictionary");
+        SceneManager.LoadScene(name);
+        Debug.Log("Scene name was not in dictionary");
     }
 
     public void RedoDictionary() {
         ScenePathDictionary = new Dictionary<string, string>();
-
+        Debug.Log(SceneManager.sceneCountInBuildSettings);
         for (var i = 0; i < SceneManager.sceneCount; i++) {
             var scene = SceneManager.GetSceneAt(i);
 
