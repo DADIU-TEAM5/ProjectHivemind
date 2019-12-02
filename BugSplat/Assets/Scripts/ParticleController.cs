@@ -42,4 +42,10 @@ public class ParticleController : MonoBehaviour
         var gameO = Instantiate(AfterParts, this.transform.position, this.transform.rotation * Quaternion.Euler(0, 180, 0));
         gameO.SetActive(true);
     }
+
+
+    public void ChangeSplate(Transform GroundDecal)
+    {
+        GroundDecal.localScale = new Vector3(0.5f,0.5f,0.5f);
+    }
 }
