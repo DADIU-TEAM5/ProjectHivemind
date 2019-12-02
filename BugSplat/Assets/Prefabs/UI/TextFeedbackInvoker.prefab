@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2934603993135255840}
   - component: {fileID: 1816250081795263179}
+  - component: {fileID: 7393869439593887756}
+  - component: {fileID: 7850787434977973679}
   m_Layer: 0
   m_Name: CountResults
   m_TagString: Untagged
@@ -48,6 +50,37 @@ MonoBehaviour:
   LevelEarned: {fileID: 11400000, guid: 8545adf08f113354ca7834cdef531171, type: 2}
   TotalEnemiesKilled: {fileID: 11400000, guid: b266c5e200502d94eb9a89da284fd2c9, type: 2}
   LevelEnemiesKilled: {fileID: 11400000, guid: cf52d6304355d40459369bceb258ca98, type: 2}
+--- !u!114 &7393869439593887756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6378537655844471555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8cd77b9a3fb574486a4a4a4ef4a938, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsPaticipant: 0
+  GameLoopHandler: {fileID: 11400000, guid: b20923f160198a245bcdd80c8342f9ac, type: 2}
+  GameLoops:
+  - {fileID: 7850787434977973679}
+--- !u!114 &7850787434977973679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6378537655844471555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c8bd93cc3ab2c9428150ab602ed449e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsPaticipant: 0
+  LevelTimeConsume: {fileID: 11400000, guid: 56649b3cb96196a42945f1b21df7f59e, type: 2}
+  TotalTimeConsume: {fileID: 11400000, guid: aac3beec480f70c4aa912cd382ca85b7, type: 2}
 --- !u!1 &7716702298372225566
 GameObject:
   m_ObjectHideFlags: 0
