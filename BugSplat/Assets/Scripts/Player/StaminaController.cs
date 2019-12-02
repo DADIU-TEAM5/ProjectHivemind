@@ -46,7 +46,7 @@ public class StaminaController : GameLoop
         }
     }
 
-    public override void LoopLateUpdate(float deltaTime)
+    public override void LoopUpdate(float deltaTime)
     {
         int newStaminaChagrges = (int)(Stamina.Value / DashCost.Value);
         if (newStaminaChagrges > _staminaCharges)
@@ -77,7 +77,7 @@ public class StaminaController : GameLoop
 
     }
 
-    public override void LoopUpdate(float deltaTime)
+    public override void LoopLateUpdate(float deltaTime)
     {
 
     }

@@ -79,8 +79,9 @@ public class EnemySpawner : GameLoop
 
         if (IsWave && EnemiesInWaves  == null)
         {
-         
+            
             NumberOfWavesSO.Value = WaveLevelBudget.Length;
+            Debug.Log("Num of Waves Updated - New Value: " + NumberOfWavesSO.Value);
             EnemiesInWaves = new List<GameObject>[WaveLevelBudget.Length];
 
             for (int i = 0; i < EnemiesInWaves.Length; i++)
