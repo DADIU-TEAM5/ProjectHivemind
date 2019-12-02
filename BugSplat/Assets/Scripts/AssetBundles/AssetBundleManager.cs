@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.SceneManagement;
 
 public class AssetBundleManager : MonoBehaviour
@@ -11,6 +11,8 @@ public class AssetBundleManager : MonoBehaviour
     public static AssetBundleManager Instance;
 
     public string AssetBundleURL;
+
+    public uint Version;
 
     public GameEvent BundledLoaded;
 
@@ -30,11 +32,23 @@ public class AssetBundleManager : MonoBehaviour
     }
 
     public IEnumerator LoadBundle() {
-        var request = UnityWebRequestAssetBundle.GetAssetBundle(AssetBundleURL);
-        yield return request.SendWebRequest();
+        var path = Path.Combine(Application.persistentDataPath, "base.unity3d");
+        if (File.Exists(path)) {
+            var bundle = AssetBundle.LoadFromFileAsync(path);
+            yield return bundle;
 
-        _loadedBundle = DownloadHandlerAssetBundle.GetContent(request);
-    }
+            _loadedBundle = bundle.assetBundle;
+        } else {
+            var request = UnityWebRequest.Get(AssetBundleURL);
+            var handler = request.downloadHandler;
+
+            yield return request.SendWebRequest();
+            
+            File.WriteAllBytes(path, handler.data);
+
+            yield return LoadBundle();
+       }
+   }
 
     public void UnloadBundle() {
         _loadedBundle.Unload(true);
