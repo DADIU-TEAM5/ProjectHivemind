@@ -20,7 +20,7 @@ public class NewHealthUI : GameLoop
     public List<GameObject> MaxHealthBars;
     public List<GameObject> AnimControllers;
 
-
+    private bool playerIsDead = false;
 
     public void Awake()
     {
@@ -62,6 +62,7 @@ public class NewHealthUI : GameLoop
 
     private void UpdateHealthBar()
     {
+        
         for (int i = 0; i < HealthIcons.Count; i++)
         {
             MaxHealthIcons[i].enabled = true;
@@ -148,11 +149,20 @@ public class NewHealthUI : GameLoop
             AnimControllers[5].SetActive(true);
         }
 
-        if (currentHP <= 0)
+        if (currentHP <= 0 || playerIsDead)
         {
-            HealthIcons[0].enabled = false;
+            for (int i = 0; i < HealthIcons.Count; i++)
+            {
+                HealthIcons[i].enabled = false;
+            }
+            
         }
         
+    }
+
+    public void PlayerDied()
+    {
+        playerIsDead = true;
     }
 
 }
