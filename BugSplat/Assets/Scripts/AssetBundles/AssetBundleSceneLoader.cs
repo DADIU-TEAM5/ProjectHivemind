@@ -19,7 +19,7 @@ public class AssetBundleSceneLoader : MonoBehaviour
 
     public RectTransform ProgressBar;
 
-    private float _barWidth;
+    private float _barWidth= 890;
 
     private float progress;
 
@@ -29,7 +29,6 @@ public class AssetBundleSceneLoader : MonoBehaviour
 
         if (ProgressBar != null)
         {
-            _barWidth = ProgressBar.rect.width;
             ProgressBar.sizeDelta = new Vector2(0, ProgressBar.rect.height);
         }
            

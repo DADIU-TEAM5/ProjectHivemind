@@ -16,18 +16,21 @@ public class AssetBundleManager : MonoBehaviour
     public GameEvent BundledLoaded;
 
     public RectTransform ProgressBar;
-    private float _barWidth;
+    private float _barWidth = 890;
 
     protected AssetBundle _loadedBundle;
 
-    
+
 
     private float progress = 0;
 
-    virtual protected IEnumerator Start() {
-        if (Instance == null) {
+    virtual protected IEnumerator Start()
+    {
+        if (Instance == null)
+        {
             Instance = this;
-            _barWidth = ProgressBar.rect.width;
+
+
             DontDestroyOnLoad(transform.root.gameObject);
 
             yield return LoadBundle();
@@ -36,18 +39,19 @@ public class AssetBundleManager : MonoBehaviour
         }
     }
 
-    public IEnumerator LoadBundle() {
+    public IEnumerator LoadBundle()
+    {
         var request = UnityWebRequestAssetBundle.GetAssetBundle(AssetBundleURL);
-            
-     
-        
+
+
+
         request.SendWebRequest();
 
         while (!request.isDone)
         {
 
             progress = request.downloadProgress;
-            
+
             UpdateLoadProgress();
             yield return null;
 
@@ -55,28 +59,33 @@ public class AssetBundleManager : MonoBehaviour
         _loadedBundle = DownloadHandlerAssetBundle.GetContent(request);
     }
 
-    public void UnloadBundle() {
+    public void UnloadBundle()
+    {
         _loadedBundle.Unload(true);
     }
 
-    public void LoadAllAssets() {
+    public void LoadAllAssets()
+    {
         //bundleSize = _loadedBundle.LoadAllAssets().Length;
         var objects = _loadedBundle.LoadAllAssets();
 
         BundledLoaded?.Raise(gameObject);
     }
 
-    public T GetAsset<T>(string assetName) where T : UnityEngine.Object {
+    public T GetAsset<T>(string assetName) where T : UnityEngine.Object
+    {
         return _loadedBundle.LoadAsset<T>(assetName);
     }
 
-    void OnDestroy() {
+    void OnDestroy()
+    {
         _loadedBundle.Unload(true);
     }
 
     private void UpdateLoadProgress()
     {
         Debug.Log("Asset bundle progress: " + progress);
-        ProgressBar.sizeDelta = new Vector2(progress * _barWidth, ProgressBar.rect.height);
+        if (ProgressBar != null)
+            ProgressBar.sizeDelta = new Vector2(progress * _barWidth, ProgressBar.rect.height);
     }
 }
