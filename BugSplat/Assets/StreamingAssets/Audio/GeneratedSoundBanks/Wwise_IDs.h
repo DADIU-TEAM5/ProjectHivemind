@@ -98,6 +98,7 @@ namespace AK
         static const AkUniqueID SHOP_PURCHASE = 3988221669U;
         static const AkUniqueID SHOP_PUTDOWN = 2486007151U;
         static const AkUniqueID SLIDINGDOOR = 27167321U;
+        static const AkUniqueID SPAWN = 71202558U;
         static const AkUniqueID SPIKETRAP_CHARGE = 4263442935U;
         static const AkUniqueID SPIKETRAP_IMPACT = 2179537273U;
         static const AkUniqueID SPIKETRAP_STAB = 2700540079U;
