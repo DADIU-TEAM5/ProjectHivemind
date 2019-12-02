@@ -26,6 +26,7 @@ namespace Cinemachine.Examples
         public void switchCamera(GameObject target)
         {
 
+            Debug.Log("Target: " + target.name);
             StartCoroutine(WaitInit(WaitInitTime, target));
 
         }
@@ -52,7 +53,7 @@ namespace Cinemachine.Examples
 
             PlayerGraphics.transform.rotation = Quaternion.LookRotation(PlayerDirectionSO.Value, Vector3.up);
 
-            //ZoomCamera.m_Follow = target.transform;
+            ZoomCamera.m_Follow = target.transform;
             ZoomCamera.m_LookAt = target.transform;
 
             Time.timeScale = slowDown;
