@@ -1893,6 +1893,7 @@ GameObject:
   - component: {fileID: 2443120318524990277}
   - component: {fileID: 8476388880520240647}
   - component: {fileID: 4312134196712401550}
+  - component: {fileID: 3299411846597896179}
   m_Layer: 0
   m_Name: PlayerAudioManager
   m_TagString: Untagged
@@ -1974,6 +1975,11 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 79d9bda5b284d4100ae9c81b7f52f060,
+      type: 2}
+  playerSpawn:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 44f74a68f18644e54ba72516e5e9d3bc,
       type: 2}
 --- !u!114 &8591678849754197013
 MonoBehaviour:
@@ -2226,6 +2232,35 @@ MonoBehaviour:
       - m_Target: {fileID: 7152729167784068075}
         m_MethodName: dashAcidEvent
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &3299411846597896179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4412941264856523361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 58cc17ef78d2f8c438922b2201a67a8d, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7152729167784068075}
+        m_MethodName: PlayerSpawnEvent
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
