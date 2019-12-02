@@ -33,18 +33,23 @@ public class BankLoaderScript : MonoBehaviour
     public void SceneChange()
     {
         AreaArena.Unload();
-        AreaHub.Unload();
+        //AreaHub.Unload();
         AreaShop.Unload();
         EnemyInsects.Unload();
+    }
+
+    public void ExitHub()
+    {
+        AreaHub.Unload();
     }
 
 
     public void EnterArena()
     {
-        Debug.Log("Loading Arena soundbanks");
+        
         AreaArena.Load(false, false);
         EnemyInsects.Load(false, false);
-        Debug.Log("Arena soundbanks loaded");
+        
     }
 
     public void EnterHub()
