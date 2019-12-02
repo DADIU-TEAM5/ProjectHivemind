@@ -407,7 +407,7 @@ public class AttackScript : GameLoop
 
 
         Vector3 vectorToRotate;
-        
+
             vectorToRotate = Vector3.forward * AttackLength.Value;
        
 
@@ -499,7 +499,7 @@ public class AttackScript : GameLoop
         //offset.y = 0.005f;
         _cone.transform.position = offset;
 
-        _cone.transform.rotation = transform.rotation;
+        _cone.transform.rotation = PlayerGraphics.rotation;
 
 
         _cone.transform.parent = PlayerGraphics;
