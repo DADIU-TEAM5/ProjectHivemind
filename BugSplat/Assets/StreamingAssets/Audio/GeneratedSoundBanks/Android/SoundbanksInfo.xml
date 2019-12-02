@@ -45,7 +45,7 @@
 				<Event Id="2830818153" Name="cheer_init" ObjectPath="\Events\ArenaEvents\Cheer\cheer_init" DurationType="Infinite"/>
 				<Event Id="3469520088" Name="cheer_up" ObjectPath="\Events\ArenaEvents\Cheer\cheer_up" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 				<Event Id="728926122" Name="DaBigWall" ObjectPath="\Events\ArenaEvents\DaBigWall" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="3.500000" DurationMax="4.000000"/>
-				<Event Id="4263565388" Name="door_arenaGate_hinge" ObjectPath="\Events\ArenaEvents\arenaProps\door_arenaGate_hinge" DurationType="OneShot" DurationMin="1.009547" DurationMax="1.931383"/>
+				<Event Id="4263565388" Name="door_arenaGate_hinge" ObjectPath="\Events\ArenaEvents\arenaProps\door_arenaGate_hinge" DurationType="OneShot" DurationMin="1.509547" DurationMax="2.431383"/>
 				<Event Id="3389469668" Name="door_arenaGate_slam" ObjectPath="\Events\ArenaEvents\arenaProps\door_arenaGate_slam" DurationType="OneShot" DurationMin="1.195306" DurationMax="1.304717"/>
 				<Event Id="4263442935" Name="spiketrap_charge" ObjectPath="\Events\ArenaEvents\Traps\spiketrap\spiketrap_charge" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.721927" DurationMax="1.000000"/>
 				<Event Id="2179537273" Name="spiketrap_impact" ObjectPath="\Events\ArenaEvents\Traps\spiketrap\spiketrap_impact" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.595011" DurationMax="0.676009"/>
@@ -397,6 +397,10 @@
 				<File Id="704819299" Language="SFX">
 					<ShortName>battlemusict_stick_high_03_02.wav</ShortName>
 					<Path>SFX/battlemusict_stick_high_03_02_ADF7B7FB.wem</Path>
+				</File>
+				<File Id="713790036" Language="SFX">
+					<ShortName>battlemusic_harmonium_start.wav</ShortName>
+					<Path>SFX/battlemusic_harmonium_start_ADF7B7FB.wem</Path>
 				</File>
 				<File Id="732801081" Language="SFX">
 					<ShortName>battlemusict_bongo_high_02_02.wav</ShortName>
@@ -825,8 +829,8 @@
 			<ShortName>sb_enemies</ShortName>
 			<Path>sb_enemies.bnk</Path>
 			<IncludedEvents>
-				<Event Id="592638112" Name="npc_boomer_attack" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_attack" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="4.122245" DurationMax="4.122245"/>
-				<Event Id="1929315744" Name="npc_boomer_charge" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_charge" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="2.754785" DurationMax="2.754785"/>
+				<Event Id="592638112" Name="npc_boomer_attack" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_attack" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="3.615671" DurationMax="4.770907"/>
+				<Event Id="1929315744" Name="npc_boomer_charge" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_charge" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="2.598669" DurationMax="3.188268"/>
 				<Event Id="1879848174" Name="npc_boomer_dead" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_dead" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="1.660655" DurationMax="3.575678"/>
 				<Event Id="852176873" Name="npc_boomer_detect" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_detect" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="0.710403" DurationMax="1.784024"/>
 				<Event Id="4149960363" Name="npc_boomer_emerge" ObjectPath="\Events\EnemyInsectEvents\Boomer\npc_boomer_emerge" MaxAttenuation="100.000000" DurationType="OneShot" DurationMin="1.154897" DurationMax="1.812896"/>
@@ -1517,13 +1521,15 @@
 			<ShortName>sb_playerCharacter</ShortName>
 			<Path>sb_playerCharacter.bnk</Path>
 			<IncludedEvents>
-				<Event Id="680725036" Name="egg" ObjectPath="\Events\PlayerCharacterEvents\misc\egg" DurationType="OneShot" DurationMin="0.532272" DurationMax="0.992047"/>
+				<Event Id="680725036" Name="egg" ObjectPath="\Events\PlayerCharacterEvents\misc\egg" DurationType="OneShot" DurationMin="0.494909" DurationMax="0.992047"/>
 				<Event Id="2390168611" Name="player_foley_attackEvent" ObjectPath="\Events\PlayerCharacterEvents\Foley\player_foley_attackEvent" DurationType="OneShot" DurationMin="0.546666" DurationMax="1.020996"/>
 				<Event Id="1643920063" Name="player_foley_dashEvent" ObjectPath="\Events\PlayerCharacterEvents\Foley\player_foley_dashEvent" DurationType="OneShot" DurationMin="0.357424" DurationMax="0.408479"/>
 				<Event Id="954324369" Name="player_foley_footstepEvent" ObjectPath="\Events\PlayerCharacterEvents\Foley\player_foley_footstepEvent" DurationType="OneShot" DurationMin="0.271842" DurationMax="0.405335"/>
 				<Event Id="830213708" Name="player_foley_hit" ObjectPath="\Events\PlayerCharacterEvents\Foley\player_foley_hit" DurationType="OneShot" DurationMin="0.433510" DurationMax="0.433510"/>
 				<Event Id="3187150534" Name="player_foley_killed" ObjectPath="\Events\PlayerCharacterEvents\Foley\player_foley_killed" DurationType="OneShot" DurationMin="2.122885" DurationMax="2.122885"/>
 				<Event Id="1627434233" Name="player_pickup" ObjectPath="\Events\PlayerCharacterEvents\player_pickup" DurationType="OneShot" DurationMin="0.500000" DurationMax="0.500000"/>
+				<Event Id="1157062745" Name="player_radical_ranged" ObjectPath="\Events\PlayerCharacterEvents\Foley\player_radical_ranged" DurationType="OneShot" DurationMin="0.997599" DurationMax="1.278866"/>
+				<Event Id="3143993207" Name="player_radical_trails" ObjectPath="\Events\PlayerCharacterEvents\Foley\player_radical_trails" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 				<Event Id="27167321" Name="slidingDoor" ObjectPath="\Events\PlayerCharacterEvents\misc\slidingDoor" DurationType="OneShot" DurationMin="3.191010" DurationMax="3.929667"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
@@ -1622,6 +1628,10 @@
 				<File Id="403721275" Language="SFX">
 					<ShortName>pickup_sheperdclaves_03.wav</ShortName>
 					<Path>SFX/pickup_sheperdclaves_03_8EDF57DD.wem</Path>
+				</File>
+				<File Id="403804341" Language="SFX">
+					<ShortName>player_attack_fire_01.wav</ShortName>
+					<Path>SFX/player_attack_fire_01_8EDF57DD.wem</Path>
 				</File>
 				<File Id="414592383" Language="SFX">
 					<ShortName>pickup_gore_05.wav</ShortName>

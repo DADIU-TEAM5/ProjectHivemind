@@ -11,6 +11,7 @@ public class StaminaController : GameLoop
     public FloatVariable DashCost;
     public FloatVariable StaminaRegen;
 
+    public GameEvent NotEnoughStaminaForDash;
     // Used to change effectiveness of dash by .Value %
     public FloatVariable DashPower;
 
@@ -34,7 +35,7 @@ public class StaminaController : GameLoop
         _staminaCharges = (int) (Stamina.Value / DashCost.Value);
         StaminaMaxSize.Value = staminaCharges/StaminaIcons.Count * StaminaMaxSize.Value;
         
-        Debug.Log("StaminaSize: " + StaminaMaxSize.Value);
+       // Debug.Log("StaminaSize: " + StaminaMaxSize.Value);
 
         for (int i = 0; i < MaxStaminaIcons.Count; i++)
         {
@@ -62,7 +63,6 @@ public class StaminaController : GameLoop
         }
        
         float staminaPercent = Stamina.Value / MaxStamina.Value;
-        Debug.Log("Stamina % : " + staminaPercent);
         // UI
         StaminaMask.sizeDelta = new Vector2(staminaPercent*StaminaMaxSize.Value, StaminaMask.rect.height);
 
@@ -87,6 +87,9 @@ public class StaminaController : GameLoop
         //StaminaMask.sizeDelta = new Vector2(StaminaMask.rect.width - _staminaIconOffset, StaminaMask.rect.height);
         if (Stamina.Value >= DashCost.Value)
             Stamina.Value = Mathf.Max(Stamina.Value - DashCost.Value, 0);
+        
+        
+           
 
         for (int i = 0; i < StaminaIcons.Count; i++)
         {
@@ -97,5 +100,18 @@ public class StaminaController : GameLoop
         _staminaCharges--;
     }
 
+    public void NotEnoughStaminaAnimation()
+    {
+        {
+            //Debug.Log("No Stamina");
+            
+            float staminaCharges = MaxStamina.Value / DashCost.Value;
+            for (int i = 0; i < staminaCharges; i++)
+            {
 
+                MaxStaminaIcons[i].SetActive(false);
+                MaxStaminaIcons[i].SetActive(true);
+            }
+        }
+    }
 }

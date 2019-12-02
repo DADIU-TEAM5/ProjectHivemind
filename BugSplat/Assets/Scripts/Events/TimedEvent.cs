@@ -12,6 +12,6 @@ public class TimedEvent : MonoBehaviour
     {
         yield return new WaitForSeconds(Time);
 
-        Event.Raise();
+        Event.Raise(gameObject);
     }
 }

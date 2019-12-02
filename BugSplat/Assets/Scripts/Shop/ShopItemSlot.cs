@@ -78,7 +78,7 @@ public class ShopItemSlot : ShopSlot
 
     public override void Reset()
     {
-        Pool.ReplenishOnce(Item);
+        if (Item != null) Pool.ReplenishOnce(Item);
         Item = null;
         _previousLevel = -1;
     }

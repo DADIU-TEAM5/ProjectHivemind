@@ -19,6 +19,8 @@ public class EnemiesTrackUI : GameLoop
     public GameText WavesCleared, WavesLeft, FinalWave, DefeatAllWaves, KillAllEnemies;
     private ShopLevels _levels;
     private int WaveCount = 0;
+    public IntVariable EnemiesLeft;
+
     private int eventRaisedCount;
     bool isWave;
     private TextFeedback _textFeedback;
@@ -41,9 +43,11 @@ public class EnemiesTrackUI : GameLoop
         eventRaisedCount = 0;
         EnemiesKilledSO.Value = 0;
         TotalEnemyCount.Value = 0;
+        EnemiesLeft.Value = 0;
 
         int enemytotal = EnemiesListSO.Items.Count + TotalEnemyCount.Value;
         EnemiesAtStart.text = enemytotal.ToString();
+        
     }
 
     public override void LoopUpdate(float deltaTime)
@@ -57,6 +61,7 @@ public class EnemiesTrackUI : GameLoop
     {
         Debug.Log("WaveCount: " + WaveCount + ", WaveSO: " + NumberOfWavesSO.Value);
         EnemiesKilledSO.Value++;
+        EnemiesLeft.Value--;
         if (EnemiesKilledSO.Value >= TotalEnemyCount.Value && (!isWave || WaveCount + 1 >= NumberOfWavesSO.Value) && !isWon)
         {
             HasWonEvent.Raise();
@@ -71,7 +76,7 @@ public class EnemiesTrackUI : GameLoop
 
 
         EnemiesAtStart.text = enemytotal.ToString();
-
+        EnemiesLeft.Value = enemytotal;
     }
 
     public void NewWave()
@@ -92,10 +97,7 @@ public class EnemiesTrackUI : GameLoop
     {
         if (NumberOfWavesSO.Value - WaveCount >= 0)
         {
-            var wavesClearedGT = ScriptableObject.CreateInstance<GameText>();
-            wavesClearedGT.TextVariations = WavesCleared.TextVariations;
-            wavesClearedGT.CurrentLocale = WavesCleared.CurrentLocale;
-
+            var wavesClearedGT = Instantiate(WavesCleared);
 
             foreach (var variation in wavesClearedGT.TextVariations) {
                 variation.Text += " " + WaveCount.ToString() + "/" + NumberOfWavesSO.Value.ToString();
@@ -108,9 +110,7 @@ public class EnemiesTrackUI : GameLoop
             if (wavesLeft == 1)
                 _textFeedback.SetSubtitle(FinalWave);
             else {
-                var wavesLeftGT = ScriptableObject.CreateInstance<GameText>(); 
-                wavesLeftGT.TextVariations = WavesLeft.TextVariations;
-                wavesLeftGT.CurrentLocale = WavesLeft.CurrentLocale;
+                var wavesLeftGT = Instantiate(WavesLeft); 
 
                 foreach (var variation in wavesLeftGT.TextVariations)
                 {

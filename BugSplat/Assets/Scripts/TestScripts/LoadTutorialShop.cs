@@ -20,6 +20,10 @@ public class LoadTutorialShop : MonoBehaviour
     public GameObject TutorialEggs;
     public GameObject[] LevelLights;
     public GameObject ShopSign;
+    public GameObject ShopClosedCollider;
+    public GameObject SpawnParticle;
+    public Vector3Variable PlayerDirectionSO;
+    public Vector3Variable PlayerPositionSO;
 
 
 
@@ -27,6 +31,9 @@ public class LoadTutorialShop : MonoBehaviour
 
     private void Start()
     {
+        PlayerDirectionSO.Value = new Vector3(-0.3162278f, 0f, -0.9486834f);
+        PlayerPositionSO.Value = new Vector3(32.3f, 0.08986212f, -21.3f);
+
         ShopIsOpenSO.Value = true;
         TutorialEggs.SetActive(false);
 
@@ -34,6 +41,11 @@ public class LoadTutorialShop : MonoBehaviour
         {
             ArenaCollider.SetActive(false);
             ShopCollider.SetActive(false);
+        }
+
+        if (LastSceneSO.Value != "_PreloadScene")
+        {
+            StartGame();
         }
 
         for (int i = 0; i <= CurrentLevelSO.Max; i++)
@@ -54,37 +66,52 @@ public class LoadTutorialShop : MonoBehaviour
     
     public void  StartGame()
     {
-        
-        
+
 
         if (TutorialIsActiveSO.Value == true)
         {
-            
+            Player.gameObject.SetActive(true);
+            Player.GetComponent<NavMeshAgent>().enabled = false;
             ShopIsOpenSO.Value = false;
+            ShopCollider.SetActive(false);
             Cage.SetActive(true);
             //
-            LastSceneSO.Value = "";
+            //LastSceneSO.Value = "";
             CharacterCutSceneAnimController.enabled = true;
             TutorialEggs.SetActive(true);
-        } else
+        }
+        else
         {
+            if (LastSceneSO.Value == "_PreloadScene")
+            {
+                SpawnParticle.SetActive(true);
+                SpawnParticle.GetComponent<WaitXSeconds>().enabled = true;
+            }
+            else if (LastSceneSO.Value == "Death Scene") 
+            {
+                SpawnParticle.SetActive(true);
+                Player.gameObject.SetActive(true);
+            }
+            else
+            {
+                Player.gameObject.SetActive(true);
+            }
+
             ShopIsOpenSO.Value = true;
             TutorialIsActiveSO.Value = false;
             TutorialEggs.SetActive(false);
             PlayerControlOverrideSO.Value = false;
-            Player.GetComponent<NavMeshAgent>().enabled = true;
         }
 
         if (ShopIsOpenSO.Value == true)
         {
             ShopSign.SetActive(false);
+            ShopClosedCollider.SetActive(false);
         } else
         {
             ShopSign.SetActive(true);
+            ShopClosedCollider.SetActive(true);
         }
-
-    
-
-        
+       
     }
 }
