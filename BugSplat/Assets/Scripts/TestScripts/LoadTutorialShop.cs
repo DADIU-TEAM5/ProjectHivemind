@@ -37,12 +37,6 @@ public class LoadTutorialShop : MonoBehaviour
         ShopIsOpenSO.Value = true;
         TutorialEggs.SetActive(false);
 
-        if (CurrentLevelSO.Value == CurrentLevelSO.Max)
-        {
-            ArenaCollider.SetActive(false);
-            ShopCollider.SetActive(false);
-        }
-
         if (LastSceneSO.Value != "_PreloadScene")
         {
             StartGame();
@@ -113,5 +107,14 @@ public class LoadTutorialShop : MonoBehaviour
             ShopClosedCollider.SetActive(true);
         }
        
+    }
+
+    public void CloseOffArena()
+    {
+        if (CurrentLevelSO.Value == CurrentLevelSO.Max)
+        {
+            ArenaCollider.SetActive(false);
+            ShopCollider.SetActive(false);
+        }
     }
 }
