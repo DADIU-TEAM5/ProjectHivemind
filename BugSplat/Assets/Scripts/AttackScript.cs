@@ -38,7 +38,7 @@ public class AttackScript : GameLoop
 
     GameObject _cone;
     
-    Rigidbody _rigidbody;
+    
 
     private bool _canAttack = true;
 
@@ -73,9 +73,6 @@ public class AttackScript : GameLoop
 
 
 
-        
-
-        _rigidbody= GetComponent<Rigidbody>();
         
         _navMeshAgent = GetComponent<NavMeshAgent>();
 
