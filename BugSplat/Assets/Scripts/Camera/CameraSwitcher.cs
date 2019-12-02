@@ -27,7 +27,7 @@ namespace Cinemachine.Examples
         public void switchCamera(GameObject target)
         {
             
-            if (Targeter == null)
+               if (Targeter == null)
             {
                 if (CurrentEnemySO == null)
                 {
