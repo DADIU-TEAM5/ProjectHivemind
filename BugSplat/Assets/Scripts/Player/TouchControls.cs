@@ -46,7 +46,9 @@ public class TouchControls : GameLoop
 
     public GameObject UIPrefab;
     public GameObject UIupperpart;
-    bool showPrefab =false;
+    bool showPrefab = false;
+
+    public Image testing;
 
 
     Vector3 targetPos;
@@ -107,6 +109,10 @@ public class TouchControls : GameLoop
         {
 
             _uiOffset = new Vector2(UIMenuButton.position.x - (UIMenuButton.sizeDelta.x/2), UIMenuButton.position.y + (UIMenuButton.sizeDelta.y / 2));
+
+            testing.rectTransform.sizeDelta = _uiOffset;
+
+
             //Debug.Log("UI Position: " + _uiOffset);
             //Debug.Log("sizeDelta: " + UIMenuButton.sizeDelta.x / 2);
         }
@@ -137,20 +143,21 @@ public class TouchControls : GameLoop
                         Vector3 touchPosition = touch.position;
 
 
-                            if (touchPosition.x < _uiOffset.x || touchPosition.y > _uiOffset.y)
-                            {
-                                switch (touch.phase)
+                        switch (touch.phase)
+                        {
+                            case TouchPhase.Moved:
+                                if (touchPosition.x < _uiOffset.x || touchPosition.y > _uiOffset.y)
                                 {
-                                    case TouchPhase.Moved:
-                                        BeginMove(touchPosition, i);
-                                        break;
-                                    case TouchPhase.Ended:
-                                        EndMove(touchPosition, i);
-                                        break;
+                                    BeginMove(touchPosition, i);
                                 }
-                            }
 
-
+                                break;
+                                    
+                            case TouchPhase.Ended:
+                                EndMove(touchPosition, i);
+                                break;
+                        }
+                            
                     }
                 }
 
@@ -174,12 +181,7 @@ public class TouchControls : GameLoop
                     }
                     if (Input.GetMouseButtonUp(0))
                     {
-
-                            if (inputPosition.x < _uiOffset.x || inputPosition.y > _uiOffset.y)
-                            {
                                 EndMove(Input.mousePosition,0);
-                            }
-
                     }
                 }
             }
@@ -302,6 +304,7 @@ public class TouchControls : GameLoop
 
     private void EndMove(Vector3 touchPosition, int index)
     {
+
         ClearInputUI();
 
         // Check if TAP has happened
