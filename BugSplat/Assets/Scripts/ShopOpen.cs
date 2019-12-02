@@ -12,7 +12,7 @@ public class ShopOpen : MonoBehaviour
 
     private IEnumerator Start()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(3);
 
         if(LastScene.Value == "ArenaGeneration")
         shopOpen.Raise();
