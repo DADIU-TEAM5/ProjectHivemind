@@ -53,9 +53,9 @@ public class PlayerAudioScript : MonoBehaviour
         Killed.Post(source);
     }
 
-    public void NoDashEvent()
+    public void NoDashEvent(GameObject source)
     {
-        noDash.Post(this.gameObject);
+        noDash.Post(source);
     }
 
     public void dashAcidEvent(GameObject source)
