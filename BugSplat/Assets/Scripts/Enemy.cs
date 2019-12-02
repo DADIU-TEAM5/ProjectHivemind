@@ -267,6 +267,22 @@ public abstract class Enemy : GameLoop
 
         if (_currentHealth <= 0)
         {
+
+            /*if (Graphics.name.ToLower().Contains("fodder") == false)
+            {
+                if (Graphics.name.ToLower().Contains("egg") == false)
+                {
+                    if (ZoomCamFrequency.Value == ZoomCamFrequency.Max)
+                    {
+                        ZoomCamInit.Raise(DeadCutout);
+
+                        ZoomCamFrequency.Value = 0;
+                    }
+
+                    ZoomCamFrequency.Value++;
+                }
+            }*/
+
             if (DeadCutout == null)
             {
                 int partsToDrop = Random.Range(stats.minPartsToDrop, stats.maxPartsToDrop);
@@ -284,6 +300,7 @@ public abstract class Enemy : GameLoop
                 DeadCutout.transform.SetParent(null);
                 DeadCutout.SetActive(true);
             }
+
 
             DeathEvent.Raise(this.gameObject);
 

@@ -110,8 +110,6 @@ public class TouchControls : GameLoop
 
             _uiOffset = new Vector2(UIMenuButton.position.x - (UIMenuButton.sizeDelta.x/2), UIMenuButton.position.y + (UIMenuButton.sizeDelta.y / 2));
 
-            testing.rectTransform.sizeDelta = _uiOffset;
-
 
             //Debug.Log("UI Position: " + _uiOffset);
             //Debug.Log("sizeDelta: " + UIMenuButton.sizeDelta.x / 2);

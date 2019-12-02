@@ -56,7 +56,7 @@ public class MusicManagerScript : MonoBehaviour
 
     public void EnemyAggroedEvent()
     {
-        
+
     }
 
     public void ArenaLoad()
@@ -89,6 +89,11 @@ public class MusicManagerScript : MonoBehaviour
     {
         //StopBattleMusic.Post(this.gameObject);
         BattleMusicWon.SetValue();
+    }
+
+    public void PlayerLostEvent()
+    {
+        BattleMusicLost.SetValue();
     }
 
     public void CloseWallEvent()
