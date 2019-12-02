@@ -27,6 +27,7 @@ public class PlayerControlOverride : MonoBehaviour
     public Vector3Variable PlayerDirectionSO;
     public Transform PlayerGraphics;
     public GameObject WhiteFadeIn;
+    public float PlayerSpeed;
 
 
     // Start is called before the first frame update
@@ -122,10 +123,17 @@ public class PlayerControlOverride : MonoBehaviour
     {
 
         PlayerControlOverrideSO.Value = true;
-        PlayerDirectionSO.Value = new Vector3(target.position.x - Player.transform.position.x, 0, target.position.z - Player.transform.position.z);
-        PlayerGraphics.localRotation = Quaternion.LookRotation(PlayerDirectionSO.Value, Vector3.up);
 
-        PlayerCurrentSpeedSO.Value = PlayerCurrentSpeedSO.InitialValue;
+        PlayerDirectionSO.Value = new Vector3(target.position.x - Player.transform.position.x, 0, target.position.z - Player.transform.position.z).normalized;
+
+        if (PlayerSpeed != 0)
+        {
+            PlayerCurrentSpeedSO.Value = PlayerSpeed;
+        }
+        else
+        {
+            PlayerCurrentSpeedSO.Value = PlayerCurrentSpeedSO.InitialValue;
+        }
 
         Player.GetComponent<NavMeshAgent>().SetDestination(target.position);
         Player.GetComponent<NavMeshAgent>().updateRotation = false;
