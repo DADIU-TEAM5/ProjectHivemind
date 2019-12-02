@@ -17,6 +17,12 @@ public class PlayerAudioScript : MonoBehaviour
     public AK.Wwise.Event noDash;
     public AK.Wwise.Event rangedAttack;
     public AK.Wwise.Event dashAcid;
+    public AK.Wwise.Event playerSpawn;
+
+    public void PlayerSpawnEvent()
+    {
+        playerSpawn.Post(this.gameObject);
+    }
 
     public void FootStepEvent(GameObject source)
     {
