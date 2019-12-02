@@ -5,6 +5,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class AssetBundleManager : MonoBehaviour
 {
@@ -14,13 +15,19 @@ public class AssetBundleManager : MonoBehaviour
 
     public GameEvent BundledLoaded;
 
+    public RectTransform ProgressBar;
+    private float _barWidth;
+
     protected AssetBundle _loadedBundle;
 
+    
+
+    private float progress = 0;
 
     virtual protected IEnumerator Start() {
         if (Instance == null) {
             Instance = this;
-
+            _barWidth = ProgressBar.rect.width;
             DontDestroyOnLoad(transform.root.gameObject);
 
             yield return LoadBundle();
@@ -31,8 +38,20 @@ public class AssetBundleManager : MonoBehaviour
 
     public IEnumerator LoadBundle() {
         var request = UnityWebRequestAssetBundle.GetAssetBundle(AssetBundleURL);
-        yield return request.SendWebRequest();
+            
+     
+        
+        request.SendWebRequest();
 
+        while (!request.isDone)
+        {
+
+            progress = request.downloadProgress;
+            
+            UpdateLoadProgress();
+            yield return null;
+
+        }
         _loadedBundle = DownloadHandlerAssetBundle.GetContent(request);
     }
 
@@ -41,6 +60,7 @@ public class AssetBundleManager : MonoBehaviour
     }
 
     public void LoadAllAssets() {
+        //bundleSize = _loadedBundle.LoadAllAssets().Length;
         var objects = _loadedBundle.LoadAllAssets();
 
         BundledLoaded?.Raise(gameObject);
@@ -52,5 +72,11 @@ public class AssetBundleManager : MonoBehaviour
 
     void OnDestroy() {
         _loadedBundle.Unload(true);
+    }
+
+    private void UpdateLoadProgress()
+    {
+        Debug.Log("Asset bundle progress: " + progress);
+        ProgressBar.sizeDelta = new Vector2(progress * _barWidth, ProgressBar.rect.height);
     }
 }
