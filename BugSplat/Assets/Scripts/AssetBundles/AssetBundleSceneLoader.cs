@@ -20,11 +20,26 @@ public class AssetBundleSceneLoader : MonoBehaviour
 
     protected AssetBundle _loadedBundle;
 
-    IEnumerator Start() {
-        DontDestroyOnLoad(transform.root.gameObject);
+    public RectTransform ProgressBar;
 
+    private float _barWidth= 890;
+
+    private float progress;
+
+    
+
+    IEnumerator Start() {
+
+        if (ProgressBar != null)
+        {
+            ProgressBar.sizeDelta = new Vector2(0, ProgressBar.rect.height);
+        }
+           
+        DontDestroyOnLoad(transform.root.gameObject);
+        
         yield return LoadBundle();
 
+       
         var sceneNames = _loadedBundle.GetAllScenePaths();
 
 
@@ -44,15 +59,23 @@ public class AssetBundleSceneLoader : MonoBehaviour
         } else {
             var request = UnityWebRequest.Get(AssetBundleURL);
             var handler = request.downloadHandler;
+            request.SendWebRequest();
 
-            yield return request.SendWebRequest();
+            while (!request.isDone)
+            {
+
+                progress = request.downloadProgress;
+                UpdateLoadProgress();
+                yield return null;
+
+            }
             
             File.WriteAllBytes(path, handler.data);
 
-            LoadBundle();
+            yield return LoadBundle();
         }
    }
-
+        
     public void UnloadBundle() {
         _loadedBundle.Unload(true);
     }
@@ -67,5 +90,12 @@ public class AssetBundleSceneLoader : MonoBehaviour
 
     void OnDestroy() {
         _loadedBundle.Unload(true);
+    }
+
+    private void UpdateLoadProgress()
+    {
+        Debug.Log("Asset bundle progress: " + progress);
+        if (ProgressBar != null)
+            ProgressBar.sizeDelta = new Vector2(progress * _barWidth, ProgressBar.rect.height);
     }
 }
