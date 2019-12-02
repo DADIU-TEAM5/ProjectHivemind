@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyMover : GameLoop
 {
@@ -15,7 +16,7 @@ public class EnemyMover : GameLoop
             {
                 GameObject EnemyToMove = colls[i].gameObject;
 
-                EnemyToMove.SetActive(false);
+                EnemyToMove.GetComponent<NavMeshAgent>().enabled = false;
 
                 Vector3 enemypos = EnemyToMove.transform.position;
 
@@ -25,7 +26,8 @@ public class EnemyMover : GameLoop
                 direction = direction.normalized;
 
                 EnemyToMove.transform.position = direction * 20;
-                EnemyToMove.SetActive(true);
+                EnemyToMove.GetComponent<NavMeshAgent>().enabled = true;
+
             }
 
         }
