@@ -113,6 +113,7 @@ public class Boomer : Enemy
 
         if (PlayerDetected && _boomerStats.SpawnsSacks)
         {
+            
             SpawnSack(deltaTime);
         }
 
@@ -139,11 +140,16 @@ public class Boomer : Enemy
             DrawCone(20, OutlineMesh, true, _attackCharge);
             DrawCone(20, OuterEdgeMesh, true, _attackCharge);
 
-            BoomerAnimator.SetTrigger("Attack");
+            
 
-            BoomerAnimator.SetBool("Walking", false);
-
-            BoomerAnimator.speed = 1 + _percentIncrease;
+            
+            if(_boomerStats.ChargeMoveSpeed <= 0)
+            {
+                BoomerAnimator.SetTrigger("Attack");
+                BoomerAnimator.speed = 1 + _percentIncrease;
+                BoomerAnimator.SetBool("Walking", false);
+            }
+            
 
         }
 
