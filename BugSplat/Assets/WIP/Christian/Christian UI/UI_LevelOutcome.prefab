@@ -85,6 +85,8 @@ GameObject:
   - component: {fileID: 4868987896257100238}
   - component: {fileID: 5172198391787480159}
   - component: {fileID: 8746553643350166553}
+  - component: {fileID: 2070058846054931798}
+  - component: {fileID: 1221074502128769397}
   m_Layer: 5
   m_Name: Time
   m_TagString: Untagged
@@ -235,6 +237,49 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2070058846054931798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036870734254938104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 164c594fca8e9264b9ab44322244d6f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameText: {fileID: 11400000, guid: 9987e16a1f28e514584ddd423f9a6a0c, type: 2}
+  TextObject: {fileID: 8746553643350166553}
+--- !u!114 &1221074502128769397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036870734254938104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: faae063c5ab50f34b934619cc821c770, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2070058846054931798}
+        m_MethodName: UpdateText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &1083342120371096434
 GameObject:
   m_ObjectHideFlags: 0
@@ -594,6 +639,8 @@ GameObject:
   - component: {fileID: 8930295025007832455}
   - component: {fileID: 8787658615100505381}
   - component: {fileID: 2149371445328999513}
+  - component: {fileID: 635479644863384630}
+  - component: {fileID: 205535722112267868}
   m_Layer: 5
   m_Name: OutcomeText
   m_TagString: Untagged
@@ -744,6 +791,49 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &635479644863384630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2557315459798913272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 164c594fca8e9264b9ab44322244d6f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameText: {fileID: 11400000, guid: d73157c29ace65a4eb92fea4cbf68c45, type: 2}
+  TextObject: {fileID: 2149371445328999513}
+--- !u!114 &205535722112267868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2557315459798913272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: faae063c5ab50f34b934619cc821c770, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 635479644863384630}
+        m_MethodName: UpdateText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &3010599801211702013
 GameObject:
   m_ObjectHideFlags: 0
@@ -1033,6 +1123,8 @@ GameObject:
   - component: {fileID: 4435865812696959256}
   - component: {fileID: 1641424597839962288}
   - component: {fileID: 6376362336020263708}
+  - component: {fileID: 2581981698256098573}
+  - component: {fileID: 8012787055389735003}
   m_Layer: 5
   m_Name: MoneyEarned
   m_TagString: Untagged
@@ -1181,6 +1273,49 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2581981698256098573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4656853809868284153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 164c594fca8e9264b9ab44322244d6f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameText: {fileID: 11400000, guid: b22665875e8e90540b10e9cd717bd079, type: 2}
+  TextObject: {fileID: 6376362336020263708}
+--- !u!114 &8012787055389735003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4656853809868284153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: faae063c5ab50f34b934619cc821c770, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2581981698256098573}
+        m_MethodName: UpdateText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &4889698567963268043
 GameObject:
   m_ObjectHideFlags: 0
@@ -1266,6 +1401,8 @@ GameObject:
   - component: {fileID: 5525033038016484313}
   - component: {fileID: 2265406833242424262}
   - component: {fileID: 3876722461295572018}
+  - component: {fileID: 3895560600737327060}
+  - component: {fileID: 4874054800857682827}
   m_Layer: 5
   m_Name: TapToContinue
   m_TagString: Untagged
@@ -1414,6 +1551,49 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3895560600737327060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5189443789032488820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 164c594fca8e9264b9ab44322244d6f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameText: {fileID: 11400000, guid: 619c19600253701458341a2b10d116bc, type: 2}
+  TextObject: {fileID: 3876722461295572018}
+--- !u!114 &4874054800857682827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5189443789032488820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: faae063c5ab50f34b934619cc821c770, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3895560600737327060}
+        m_MethodName: UpdateText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &5213432363717756775
 GameObject:
   m_ObjectHideFlags: 0
@@ -1573,6 +1753,8 @@ GameObject:
   - component: {fileID: 7032047197863877480}
   - component: {fileID: 7032047197863877482}
   - component: {fileID: 7032047197863877481}
+  - component: {fileID: 3853073095150220329}
+  - component: {fileID: 3331002007928899928}
   m_Layer: 5
   m_Name: EnemiesKilled
   m_TagString: Untagged
@@ -1721,6 +1903,49 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3853073095150220329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7032047197863877487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 164c594fca8e9264b9ab44322244d6f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameText: {fileID: 11400000, guid: 3e071856653901149bc95f09c14b3ee7, type: 2}
+  TextObject: {fileID: 7032047197863877481}
+--- !u!114 &3331002007928899928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7032047197863877487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: faae063c5ab50f34b934619cc821c770, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3853073095150220329}
+        m_MethodName: UpdateText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &7032047198109948919
 GameObject:
   m_ObjectHideFlags: 0
