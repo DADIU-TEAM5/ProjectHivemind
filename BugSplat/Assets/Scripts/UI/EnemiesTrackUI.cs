@@ -147,4 +147,12 @@ public class EnemiesTrackUI : GameLoop
 
         }
     }
+
+    public void HasWonTriggered()
+    {
+        isWon = true;
+    }
+
+
+    
 }
