@@ -17,8 +17,8 @@ public class TextFeedback : MonoBehaviour
         Title.text = title.GetText();
     }
 
-    public void SetLevelTitle(IntVariable level) {
-        Title.text = $"Level {level.Value + 1}";
+    public void SetLevelTitle(LevelText levelText) {
+        Title.text = levelText.Text.GetText()+""+  (levelText.Level.Value + 1);
     }
 
     public void SetSubtitle(GameText subtitle) {

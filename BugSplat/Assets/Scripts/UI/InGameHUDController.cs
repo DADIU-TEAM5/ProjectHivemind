@@ -30,6 +30,7 @@ public class InGameHUDController : MonoBehaviour
     public GameEvent UIExitMenuEvent;
     public GameEvent UIClickButtonEvent;
     public GameEvent UIClickBackEvent;
+    public GameEvent UIQuitEvent;
 
     //public GameObject OptionsPanel;
     public BoolVariable GameIsPaused;
@@ -132,6 +133,7 @@ public class InGameHUDController : MonoBehaviour
     public void QuitButton()
     {
         UIExitMenuEvent.Raise();
+        UIQuitEvent.Raise();
         Unpause();
         SceneManager.LoadScene("Hub Scene");
         InMainMenu.Value = true;

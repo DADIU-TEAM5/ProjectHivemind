@@ -20,6 +20,8 @@ public class EnemiesTrackUI : GameLoop
     private ShopLevels _levels;
     private int WaveCount = 0;
     public IntVariable EnemiesLeft;
+    public LevelText LevelText;
+
 
     private int eventRaisedCount;
     bool isWave;
@@ -128,7 +130,7 @@ public class EnemiesTrackUI : GameLoop
 
     public void EnterArenaTextFeedback()
     {
-        _textFeedback.SetLevelTitle(CurrentLevel);
+        _textFeedback.SetLevelTitle( LevelText);
         _textFeedback.SetSubtitle((isWave) ? DefeatAllWaves : KillAllEnemies);
         _textFeedback.SetFeedbackActive(true);
     }

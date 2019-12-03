@@ -7,7 +7,8 @@ namespace Cinemachine.Examples
     public class CameraSwitcher : MonoBehaviour
     {
         //public List<CinemachineVirtualCamera> VirtualCameras;
-        //public GameObjectVariable CurrentEnemySO;
+        public GameObjectVariable CurrentEnemySO;
+        public GameObject Targeter;
         //public FloatVariable PlayerCurrentSpeedSO;
         //public Vector3Variable PlayerDirectionSO;
         //private bool _activate = true;
@@ -25,9 +26,35 @@ namespace Cinemachine.Examples
 
         public void switchCamera(GameObject target)
         {
+            
+               if (Targeter == null)
+            {
+                if (CurrentEnemySO == null)
+                {
+                    StartCoroutine(WaitInit(WaitInitTime, target));
+                }
+                else
+                {
+                    StartCoroutine(WaitInit(WaitInitTime, CurrentEnemySO.Value));
+                }
 
-            Debug.Log("Target: " + target.name);
-            StartCoroutine(WaitInit(WaitInitTime, target));
+
+            }
+            else
+            {
+                if (CurrentEnemySO == null)
+                {
+                    Targeter.transform.position = target.transform.position;
+                }
+                else
+                {
+                    Targeter.transform.position = CurrentEnemySO.Value.transform.position;
+                }
+
+                StartCoroutine(WaitInit(WaitInitTime, Targeter));
+            }
+
+
 
         }
 
@@ -49,12 +76,20 @@ namespace Cinemachine.Examples
 
             Vector3 newHeading = target.transform.position - PlayerGraphics.transform.position;
 
-            PlayerDirectionSO.Value = newHeading;
+            PlayerDirectionSO.Value = new Vector3(newHeading.x, 0, newHeading.z);
 
             PlayerGraphics.transform.rotation = Quaternion.LookRotation(PlayerDirectionSO.Value, Vector3.up);
 
-            ZoomCamera.m_Follow = target.transform;
-            ZoomCamera.m_LookAt = target.transform;
+            if(CurrentEnemySO == null)
+            {
+                ZoomCamera.m_Follow = target.transform;
+                ZoomCamera.m_LookAt = target.transform;
+            }
+            else
+            {
+                ZoomCamera.m_LookAt = target.transform;
+            }
+
 
             Time.timeScale = slowDown;
 

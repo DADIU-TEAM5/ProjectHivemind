@@ -35,7 +35,7 @@ public class CameraMixerInit : MonoBehaviour
     {
         if (activeEnterCam)
         {
-            _currentDist = Vector3.Distance(PlayerGameObject.position, DestTarget.position) / _initDist;
+            _currentDist = (Vector3.Distance(PlayerGameObject.position, DestTarget.position) * 0.9f) / _initDist;
         }
         else
         {

@@ -38,7 +38,7 @@ public abstract class Enemy : GameLoop
     public EnemyObjectList EnemyList;
     public GameObjectVariable LockedTarget;
     public GameObjectVariable CurrentEnemySO;
-    public GameObjectVariable CurrentEnemyGraphic;
+
     public GameObjectVariable TargetGraphic;
 
     public BoolVariable NoVisibleEnemies;
@@ -267,6 +267,22 @@ public abstract class Enemy : GameLoop
 
         if (_currentHealth <= 0)
         {
+
+            /*if (Graphics.name.ToLower().Contains("fodder") == false)
+            {
+                if (Graphics.name.ToLower().Contains("egg") == false)
+                {
+                    if (ZoomCamFrequency.Value == ZoomCamFrequency.Max)
+                    {
+                        ZoomCamInit.Raise(DeadCutout);
+
+                        ZoomCamFrequency.Value = 0;
+                    }
+
+                    ZoomCamFrequency.Value++;
+                }
+            }*/
+
             if (DeadCutout == null)
             {
                 int partsToDrop = Random.Range(stats.minPartsToDrop, stats.maxPartsToDrop);
@@ -284,6 +300,7 @@ public abstract class Enemy : GameLoop
                 DeadCutout.transform.SetParent(null);
                 DeadCutout.SetActive(true);
             }
+
 
             DeathEvent.Raise(this.gameObject);
 
@@ -464,8 +481,7 @@ public abstract class Enemy : GameLoop
 
         // This is to fix the bug where the Enemy Graphics would stay even after they have died
 
-        if (CurrentEnemyGraphic != null && CurrentEnemyGraphic.Value != null)
-            CurrentEnemyGraphic.Value.SetActive(false);
+        
 
         CurrentEnemySO.Value = null;
     }
@@ -474,25 +490,13 @@ public abstract class Enemy : GameLoop
     {
         if (CurrentEnemySO.Value == gameObject)
         {
-            if (CurrentEnemyGraphic.Value == null)
-            {
-                CurrentEnemyGraphic.Value = GameObject.CreatePrimitive(PrimitiveType.Quad);
-                CurrentEnemyGraphic.Value.name = "CurrentEnemy Graphic";
-                Destroy(CurrentEnemyGraphic.Value.GetComponent<MeshCollider>());
-                CurrentEnemyGraphic.Value.transform.rotation = Quaternion.Euler(90, 0, 0);
-                CurrentEnemyGraphic.Value.GetComponent<Renderer>().material.color = Color.green;
-            }
-            else
-            {
-                if (CurrentEnemyGraphic.Value.activeSelf == false)
-                    CurrentEnemyGraphic.Value.SetActive(true);
-
-                CurrentEnemyGraphic.Value.transform.position = transform.position;
-            }
+            
+                
+            
 
             if (IsVisible() == false)
             {
-                CurrentEnemyGraphic.Value.SetActive(false);
+                
                 CurrentEnemySO.Value = null;
             }
 
@@ -506,8 +510,7 @@ public abstract class Enemy : GameLoop
 
         if (CurrentEnemySO.Value == null)
         {
-            if (CurrentEnemyGraphic.Value != null)
-                CurrentEnemyGraphic.Value.SetActive(false);
+            
         }
 
         /*if (LockedTarget.Value == gameObject)
