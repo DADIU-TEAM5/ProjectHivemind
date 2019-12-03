@@ -129,6 +129,8 @@ public abstract class Enemy : GameLoop
 
     private bool _spawned = false;
 
+    private bool _dead = false;
+
 
     public void Stun(float time)
     {
@@ -266,9 +268,9 @@ public abstract class Enemy : GameLoop
         TakeDamageBehaviour(damage);
 
 
-        if (_currentHealth <= 0)
+        if (!_dead && _currentHealth <= 0)
         {
-
+            _dead = true;
             /*if (Graphics.name.ToLower().Contains("fodder") == false)
             {
                 if (Graphics.name.ToLower().Contains("egg") == false)
@@ -301,7 +303,6 @@ public abstract class Enemy : GameLoop
                 DeadCutout.transform.SetParent(null);
                 DeadCutout.SetActive(true);
             }
-
 
             DeathEvent.Raise(this.gameObject);
 
