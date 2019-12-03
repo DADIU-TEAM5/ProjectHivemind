@@ -133,8 +133,10 @@ public class PlayerHealth : GameLoop
 
     public void KnockBackDamage(Vector3 direction, float length, float damage)
     {
+
+        print("kocked tyo hell");
         //Debug.Log("KnockBackDamage " + direction + ", " + length);
-        if (InvulnerabilityTimerSO.Value < 0 && IsInvulnerableSO.Value != true)
+        if (InvulnerabilityTimerSO.Value <= 0 && IsInvulnerableSO.Value != true)
         {
             InvulnerabilityTimerSO.Value = InvulnerabilityTimerSO.InitialValue;
             IsInvulnerableSO.Value = true;

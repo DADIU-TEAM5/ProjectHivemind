@@ -628,7 +628,7 @@ public class TankBeetle : Enemy
 
     int[] _trianglesfortraj = { };
     Vector3[] _normalsfotraj = { };
-    Vector2[] _uvs = { };
+    Vector2[] _uvsforTraj = { };
 
 
     public void DrawOverlay()
@@ -651,13 +651,13 @@ public class TankBeetle : Enemy
 
         }
 
-        if (_uvs.Length != 4)
+        if (_uvsforTraj.Length != 4)
         {
-            _uvs = new Vector2[4];
-            _uvs[2] = new Vector2(1, 1);
-            _uvs[0] = new Vector2(1, 0);
-            _uvs[3] = new Vector2(0, 1);
-            _uvs[1] = new Vector2(0, 0);
+            _uvsforTraj = new Vector2[4];
+            _uvsforTraj[2] = new Vector2(1, 1);
+            _uvsforTraj[0] = new Vector2(1, 0);
+            _uvsforTraj[3] = new Vector2(0, 1);
+            _uvsforTraj[1] = new Vector2(0, 0);
 
         }
 
@@ -701,8 +701,8 @@ public class TankBeetle : Enemy
         if (OverlayMesh.normals != _normalsfotraj)
             OverlayMesh.normals = _normalsfotraj;
 
-        if (OverlayMesh.uv != _uvs)
-            OverlayMesh.uv = _uvs;
+        if (OverlayMesh.uv != _uvsforTraj)
+            OverlayMesh.uv = _uvsforTraj;
 
 
         OverlayMesh.RecalculateBounds();
