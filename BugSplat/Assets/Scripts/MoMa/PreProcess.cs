@@ -52,10 +52,10 @@ public class PreProcess : MonoBehaviour
         }
         GetMagicMotion();
         KeyJointsToInPlace(AnimationsPreProcess.FrameCapsules, AnimationsPlay);
-        //EditorUtility.SetDirty(AnimationsPreProcess);
-        //EditorUtility.SetDirty(AnimationsPlay);
-        //EditorUtility.SetDirty(MagicMotions);
-        //EditorUtility.SetDirty(MagicMotion);
+        EditorUtility.SetDirty(AnimationsPreProcess);
+        EditorUtility.SetDirty(AnimationsPlay);
+        EditorUtility.SetDirty(MagicMotions);
+        EditorUtility.SetDirty(MagicMotion);
         //EditorUtility.SetDirty(AnimationsPreProcess);
         //EditorUtility.SetDirty(AnimationsPlay);
         //EditorUtility.SetDirty(MagicMotions);
