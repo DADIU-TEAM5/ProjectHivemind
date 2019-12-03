@@ -149,7 +149,8 @@ public abstract class Enemy : GameLoop
         }
         else
         {
-            Renderer = RenderGraphics.GetComponent<Renderer>();
+            //Renderer = RenderGraphics.GetComponent<Renderer>();
+            Renderer = RenderGraphics.GetComponentsInChildren<Renderer>()[0];
         }
 
 
@@ -929,15 +930,24 @@ public abstract class Enemy : GameLoop
 
     public void HighlightThisBitch()
     {
-        
-        this.gameObject.GetComponentInChildren<Renderer>().material = WhiteMaterial;
+        var allRender = RenderGraphics.GetComponentsInChildren<Renderer>();
+        foreach (Renderer render in allRender)
+        {
+            render.material = WhiteMaterial;
+        }
         StartCoroutine(ResetColor(_enemyHighlightTime));
     }
 
     IEnumerator ResetColor(float lerptime)
     {
         yield return new WaitForSeconds(lerptime);
-        this.gameObject.GetComponentInChildren<Renderer>().material = _enemyMat;
+        //this.gameObject.GetComponentInChildren<Renderer>().material = _enemyMat;
+        var allRender = RenderGraphics.GetComponentsInChildren<Renderer>();
+        foreach (Renderer render in allRender)
+        {
+            render.material = _enemyMat;
+        }
+
 
     }
 
