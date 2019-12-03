@@ -325,6 +325,8 @@ public class Boomer : Enemy
 
         if (SpawnFirstTime != null && SpawnFirstTime.Value == true)
         {
+            
+
             PlayerCurrentSpeedSO.Value = 0;
             SpawnCamInit.Raise(RenderGraphics);
             SpawnFirstTime.Value = false;
