@@ -142,7 +142,7 @@ public class EnemiesTrackUI : GameLoop
     {
         if (isWon)
         {
-
+            Debug.Log("Cleared Raise");
             LevelClearedEvent.Raise();
 
         }
