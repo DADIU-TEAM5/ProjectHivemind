@@ -20,12 +20,12 @@ public class ItemPool : ScriptableObject
 
         // Get all items that fit the tier, and hasn't been bought
         var filteredItems = GetItemsFromTier(tier);
+        if (filteredItems.Count == 0) return null;
 
         // Pick a random
         var rngResult = Random.Range(0f, 1f);
         var rngInt = (int) (rngResult * (filteredItems.Count() - 1));
-        Debug.Log(rngInt);
-        Debug.Log("count: " + filteredItems.Count);
+
         var index = filteredItems.ElementAt(rngInt);
 
         Bought[index] = true;
