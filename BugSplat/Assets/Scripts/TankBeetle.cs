@@ -57,6 +57,7 @@ public class TankBeetle : Enemy
 
     public Animator Anim;
 
+    public Color AttackConeColor;
 
 
     [Header("Events")]
@@ -342,7 +343,7 @@ public class TankBeetle : Enemy
 
         
         DrawCone(10, OuterEdgeMesh, true, _attackCharge);
-        ConeRenderer.material.color = ConeEmptyColor;
+        ConeRenderer.material.color = AttackConeColor;
         Collider[] potentialTargets = Physics.OverlapSphere(transform.position, TankStats.AttackRange, LayerMask.GetMask("Player"));
 
 
@@ -836,17 +837,19 @@ public class TankBeetle : Enemy
 
 
 
-
-
-
+        ConeMesh.Clear();
 
         ConeMesh.vertices = vertices;
 
-        if (ConeMesh.triangles != _trianglesfortraj)
-            ConeMesh.triangles = _trianglesfortraj;
+        ConeMesh.triangles = _trianglesfortraj;
 
-        if (ConeMesh.normals != _normalsfotraj)
-            ConeMesh.normals = _normalsfotraj;
+        
+
+        
+        
+
+        
+        ConeMesh.normals = _normalsfotraj;
 
        
 
