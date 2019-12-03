@@ -15,6 +15,8 @@ public class PreProcess : MonoBehaviour
     public List<string> MagicMotionNames;
     public MagicMotions MagicMotions;
     public MagicMotion MagicMotion;
+    public List<string> KeyJoints;
+
 
     public float Second = 1f;
     public int SaveInSecond = 10;
@@ -49,6 +51,11 @@ public class PreProcess : MonoBehaviour
             // }
         }
         GetMagicMotion();
+        KeyJointsToInPlace(AnimationsPreProcess.FrameCapsules, AnimationsPlay);
+        EditorUtility.SetDirty(AnimationsPreProcess);
+        EditorUtility.SetDirty(AnimationsPlay);
+        EditorUtility.SetDirty(MagicMotions);
+        EditorUtility.SetDirty(MagicMotion);
         //EditorUtility.SetDirty(AnimationsPreProcess);
         //EditorUtility.SetDirty(AnimationsPlay);
         //EditorUtility.SetDirty(MagicMotions);
@@ -56,6 +63,27 @@ public class PreProcess : MonoBehaviour
 
     }
 
+
+    private void KeyJointsToInPlace(List<Capsule> frameCapsules, AnimationClips inPlaceAnimationClips)
+    {
+        for (int i = 0; i < frameCapsules.Count; i++)
+        {
+            var animIndex = frameCapsules[i].AnimClipIndex;
+            var InPlaceAnimFrame = inPlaceAnimationClips.AnimClips[animIndex].Frames[frameCapsules[i].FrameNum];
+            for (int j = 0; j < frameCapsules[i].KeyJoints.Count; j++)
+            {
+                //update later
+                for (int k = 0; k < InPlaceAnimFrame.JointPoints.Count; k++)
+                {
+                    if (InPlaceAnimFrame.JointPoints[k].Name.Contains(frameCapsules[i].KeyJoints[j].Name))
+                    {
+                        frameCapsules[i].KeyJoints[j] = InPlaceAnimFrame.JointPoints[k];
+                        break;
+                    }
+                }
+            }
+        }
+    }
     // public bool IsMagicMotion(string animName)
     // {
     //     for(int i = 0; i < MagicMotionNames.Count; i++)
@@ -93,6 +121,7 @@ public class PreProcess : MonoBehaviour
         {
             if (AllAnimations.AnimClips[i].Name == name)
             {
+                GetKeyJoints.RootJointsToKeyJoints(AllAnimations.AnimClips[i], KeyJoints);
                 GetAnimaitionTrajectory(AllAnimations.AnimClips[i], animIndex, isMagic);
                 break;
             }
