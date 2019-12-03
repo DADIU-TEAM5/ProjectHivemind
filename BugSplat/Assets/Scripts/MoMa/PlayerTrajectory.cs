@@ -112,7 +112,7 @@ public class PlayerTrajectory : GameLoop
             else
                 UpdateWithoutBlend(thisClip, thisClipNum, rotationPlayer);
 
-        if (Results.AnimClipIndex == 0 &&
+        if (Results.AnimClipIndex == 1 &&
             (Results.FrameNum == 0 || Results.FrameNum == 13
             || Results.FrameNum == 28))
             IsFootStep();
