@@ -108,6 +108,8 @@ public class Arrow : GameLoop
 
 
         NavMeshPath path = new NavMeshPath();
+
+        if(NavAgent.isOnNavMesh)
         NavAgent.CalculatePath(enemy.transform.position, path);
 
         if (path.corners.Length > 1)
