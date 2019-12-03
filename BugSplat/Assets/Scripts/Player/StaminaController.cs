@@ -49,12 +49,18 @@ public class StaminaController : GameLoop
     public override void LoopUpdate(float deltaTime)
     {
         int newStaminaChagrges = (int)(Stamina.Value / DashCost.Value);
+        if (_staminaCharges < 0)
+        {
+            _staminaCharges = 0;
+        }
+
         if (newStaminaChagrges > _staminaCharges)
         {
             StaminaIcons[_staminaCharges].SetActive(false);
             StaminaIcons[_staminaCharges].SetActive(true);
             _staminaCharges = newStaminaChagrges;
         }
+
         if (Stamina.Value < MaxStamina.Value)
         {
             Stamina.Value = Mathf.Min(MaxStamina.Value, Stamina.Value + StaminaRegen.Value * deltaTime);
