@@ -28,7 +28,9 @@ public class PopEffect : Effect
             _poppingOff = true;
 
             foreach (var enemy in Mark.MarkedEnemies) {
-                if (enemy?.gameObject != null && enemy.gameObject.activeSelf && enemy.enabled) {
+                if (enemy == null) continue;
+
+                if (enemy.isActiveAndEnabled) {
                     Pop.Trigger(enemy.gameObject);
                 }
             }

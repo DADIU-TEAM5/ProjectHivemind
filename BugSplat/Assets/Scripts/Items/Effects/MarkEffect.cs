@@ -18,7 +18,9 @@ public class MarkEffect : Effect
         if (MarkedParticles?.Count > 0) {
             for (var i = 0; i < MarkedParticles.Count; i++) {
                 var mp = MarkedParticles[i];
-                if (mp?.isActiveAndEnabled ?? false) {
+                if (mp == null) continue;
+
+                if (mp.isActiveAndEnabled) {
                     Destroy(mp.gameObject);
                 }
             }
