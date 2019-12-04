@@ -14,6 +14,19 @@ public class PosProcessingToggleScript : GameLoop
 
     public BoolVariable Toggle;
 
+
+    private void OnEnable()
+    {
+
+        int intvalue = PlayerPrefs.GetInt("PostProcessingToggle");
+
+        if (intvalue == 1)
+            Toggle.Value = true;
+        else
+            Toggle.Value = false;
+
+    }
+
     public override void LoopLateUpdate(float deltaTime)
     {
         
