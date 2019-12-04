@@ -306,8 +306,6 @@ public abstract class Enemy : GameLoop
                 DeadCutout.SetActive(true);
             }
 
-            
-
             EnemyDied?.Raise(gameObject);
 
 

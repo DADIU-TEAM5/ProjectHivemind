@@ -24,6 +24,7 @@ public class LoadTutorialShop : MonoBehaviour
     public GameObject SpawnParticle;
     public Vector3Variable PlayerDirectionSO;
     public Vector3Variable PlayerPositionSO;
+    public GameEvent AllLevelsCompletedSO;
 
 
 
@@ -115,6 +116,16 @@ public class LoadTutorialShop : MonoBehaviour
         {
             ArenaCollider.SetActive(false);
             ShopCollider.SetActive(false);
+            ShopSign.SetActive(true);
+            ShopClosedCollider.SetActive(true);
+        }
+    }
+
+    public void CompletedAllLevels()
+    {
+        if (CurrentLevelSO.Value == CurrentLevelSO.Max)
+        {
+            AllLevelsCompletedSO.Raise();
         }
     }
 }
