@@ -47,22 +47,8 @@ public class CameraMixerInit : MonoBehaviour
 
         if (_currentDist < 1f)
         {
-            if (_currentDist > 0.1f)
-            {
                 MixerCam.m_Weight0 = _currentDist;
                 MixerCam.m_Weight1 = 1 - _currentDist;
-
-                _finalDist = _currentDist;
-            }
-            else
-            {
-                for (_currentTime = 0; _currentTime < 1f; _currentTime += Time.deltaTime)
-                {
-                    MixerCam.m_Weight0 = Mathf.Lerp(_finalDist, 0, _currentTime);
-                    MixerCam.m_Weight1 = Mathf.Lerp(1-_finalDist, 1, _currentTime);
-                }
-            }
-
         }
     }
 }
