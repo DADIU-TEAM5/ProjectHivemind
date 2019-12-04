@@ -17,7 +17,7 @@ public class PreloadManager : MonoBehaviour
             DontDestroyOnLoad(this.transform.root.gameObject);
             Instance = this;
         } else {
-            Destroy(this.gameObject);
+            DestroyImmediate(this.gameObject);
         }
     }
 
