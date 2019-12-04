@@ -20,7 +20,7 @@ public class PosProcessingToggleScript : GameLoop
 
         int intvalue = PlayerPrefs.GetInt("PostProcessingToggle");
 
-        if (intvalue == 0)
+        if (intvalue == 1)
             Toggle.Value = true;
         else
             Toggle.Value = false;
