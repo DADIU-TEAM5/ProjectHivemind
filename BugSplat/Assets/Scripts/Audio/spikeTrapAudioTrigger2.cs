@@ -9,20 +9,37 @@ public class spikeTrapAudioTrigger2 : MonoBehaviour
     public GameEvent spikeTrapStabEvent;
     public GameEvent spikeTrapImpactEvent;
 
+
+    Renderer _renderer;
+
+    private void OnEnable()
+    {
+        _renderer = GetComponent<Renderer>();
+    }
+
     public void spiketrapRetractTrigger()
     {
-        Debug.Log("animation event was played");
-        spikeTrapRetractEvent.Raise(this.gameObject);
+
+        if (_renderer.isVisible)
+        {
+            //Debug.Log("animation event was played");
+            spikeTrapRetractEvent.Raise(this.gameObject);
+        }
+
+        
     }
 
     public void spiketrapStabTrigger()
     {
-        spikeTrapStabEvent.Raise(this.gameObject);
+
+        if (_renderer.isVisible)
+            spikeTrapStabEvent.Raise(this.gameObject);
     }
 
     public void spiketrapImpactTrigger()
     {
-        spikeTrapImpactEvent.Raise(this.gameObject);
+        if (_renderer.isVisible)
+            spikeTrapImpactEvent.Raise(this.gameObject);
     }
 
 }

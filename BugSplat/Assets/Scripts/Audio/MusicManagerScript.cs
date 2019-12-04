@@ -9,6 +9,7 @@ public class MusicManagerScript : MonoBehaviour
     public AK.Wwise.Event IntroMusic;
     public AK.Wwise.Event BattleMusic;
     public AK.Wwise.Event HubMusic;
+    public AK.Wwise.Event HubMusicStop;
     public AK.Wwise.Event ShopMusic;
     public AK.Wwise.Event StopBattleMusic;
 
@@ -42,7 +43,13 @@ public class MusicManagerScript : MonoBehaviour
 
     void Start()
     {
-        IntroMusic.Post(this.gameObject);
+        //IntroMusic.Post(this.gameObject);
+       // HubMusic.Post(this.gameObject);
+    }
+
+    public void StartGame()
+    {
+        HubMusic.Post(this.gameObject);
     }
 
     void Update()
@@ -63,6 +70,7 @@ public class MusicManagerScript : MonoBehaviour
     {
         BattleMusic.Post(this.gameObject);
         ShopMusic.Stop(FrogShop);
+        HubMusicStop.Post(this.gameObject);
     }
 
     public void HubLoad()
