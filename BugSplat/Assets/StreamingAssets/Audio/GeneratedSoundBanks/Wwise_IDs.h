@@ -38,6 +38,7 @@ namespace AK
         static const AkUniqueID MUSIC_BATTLE = 3782024871U;
         static const AkUniqueID MUSIC_BATTLE_END = 2993131753U;
         static const AkUniqueID MUSIC_HUB = 2615423034U;
+        static const AkUniqueID MUSIC_HUB_END = 2327625744U;
         static const AkUniqueID MUSIC_INTRO = 984952705U;
         static const AkUniqueID MUSIC_SHOP = 3229152761U;
         static const AkUniqueID NPC_BOOMER_ATTACK = 592638112U;

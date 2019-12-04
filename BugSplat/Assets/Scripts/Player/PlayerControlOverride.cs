@@ -136,7 +136,12 @@ public class PlayerControlOverride : MonoBehaviour
         }
 
         if (Player.GetComponent<NavMeshAgent>().isOnNavMesh)
+        {
             Player.GetComponent<NavMeshAgent>().SetDestination(target.position);
+            Player.GetComponent<NavMeshAgent>().speed = PlayerCurrentSpeedSO.Value;
+        }
+            
+
         Player.GetComponent<NavMeshAgent>().updateRotation = false;
     }
 
