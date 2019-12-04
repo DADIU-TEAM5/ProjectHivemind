@@ -270,6 +270,8 @@ public abstract class Enemy : GameLoop
 
         if (!_dead && _currentHealth <= 0)
         {
+            DeathEvent?.Raise(this.gameObject);
+            DeathEvent = null;
             _dead = true;
             /*if (Graphics.name.ToLower().Contains("fodder") == false)
             {
@@ -303,8 +305,6 @@ public abstract class Enemy : GameLoop
                 DeadCutout.transform.SetParent(null);
                 DeadCutout.SetActive(true);
             }
-
-            DeathEvent.Raise(this.gameObject);
 
             EnemyDied?.Raise(gameObject);
 

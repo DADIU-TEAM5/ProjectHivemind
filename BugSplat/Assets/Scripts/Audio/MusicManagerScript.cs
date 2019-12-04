@@ -44,6 +44,11 @@ public class MusicManagerScript : MonoBehaviour
     void Start()
     {
         //IntroMusic.Post(this.gameObject);
+       // HubMusic.Post(this.gameObject);
+    }
+
+    public void StartGame()
+    {
         HubMusic.Post(this.gameObject);
     }
 
