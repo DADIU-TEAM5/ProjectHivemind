@@ -8,15 +8,17 @@ public class DeathValues : MonoBehaviour
     public FloatVariable TimeUsed;
     public IntVariable Money;
     public IntVariable Enemy;
-    public string Title;
+    public GameText Title;
     public Sprite DeathImg;
+    public GameTextMeshProUpdater GameTextUp;
 
-    void Start()
+    void Awake()
     {
         LevelOutcome.SetImage(DeathImg);
         LevelOutcome.SetKilledEnemies(Enemy);
         LevelOutcome.SetMoneyEarned(Money);
         LevelOutcome.SetTimeUsed(TimeUsed);
-        LevelOutcome.SetTitle(Title);
+        //LevelOutcome;
+        GameTextUp.GameText = Title;
     }
 }
