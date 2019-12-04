@@ -116,7 +116,8 @@ public class LoadTutorialShop : MonoBehaviour
         {
             ArenaCollider.SetActive(false);
             ShopCollider.SetActive(false);
-            AllLevelsCompletedSO.Raise();
+            ShopSign.SetActive(true);
+            ShopClosedCollider.SetActive(true);
         }
     }
 
