@@ -13,6 +13,7 @@ public class shopAudio : MonoBehaviour
     public AK.Wwise.Event shopAmbience;
     public AK.Wwise.Event enterShop;
     public AK.Wwise.Event exitShop;
+    public AK.Wwise.Event ToadEatEvent;
 
     [Header("Location")]
     public GameObject shoplocation;
@@ -25,6 +26,11 @@ public class shopAudio : MonoBehaviour
     public void ToadTalkEvent()
     {
         toadSpeak.Post(this.gameObject);
+    }
+
+    public void ToadEatYes()
+    {
+        ToadEatEvent.Post(this.gameObject);
     }
 
     public void PutBackItemEvent()
