@@ -134,6 +134,7 @@ public class InGameHUDController : MonoBehaviour
     {
         UIExitMenuEvent.Raise();
         UIQuitEvent.Raise();
+        LastSceneSO.Value = "_PreloadScene";
         Unpause();
         SceneManager.LoadScene("Hub Scene");
         InMainMenu.Value = true;
