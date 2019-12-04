@@ -13,6 +13,9 @@ public class SaveLoadEnforcer : MonoBehaviour
     public Inventory inventory;
     public BoolVariable tutorialDone;
 
+    public FloatVariable TotalTime;
+    public IntVariable TotalKilled;
+    public IntVariable TotalMoney;
 
 
 
@@ -50,6 +53,12 @@ public class SaveLoadEnforcer : MonoBehaviour
 
             JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("Bodyparts"), bodyparts);
             JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("level"), currentlevel);
+
+            //add Total counter for outcome
+            JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("TotalTime"), TotalTime);
+            JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("TotalMoney"), TotalMoney);
+            JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("TotalKilled"), TotalKilled);
+
             for (int i = 0; i < itemsslots.Length; i++)
             {
                 JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("slot" + i), itemsslots[i]);
@@ -87,6 +96,13 @@ public class SaveLoadEnforcer : MonoBehaviour
 
         PlayerPrefs.SetString("Bodyparts", JsonUtility.ToJson(bodyparts));
         PlayerPrefs.SetString("level", JsonUtility.ToJson(currentlevel));
+
+
+        //add Total counter for outcome
+        PlayerPrefs.SetString("TotalTime", JsonUtility.ToJson(TotalTime));
+        PlayerPrefs.SetString("TotalMoney", JsonUtility.ToJson(TotalMoney));
+        PlayerPrefs.SetString("TotalKilled", JsonUtility.ToJson(TotalKilled));
+
         for (int i = 0; i < itemsslots.Length; i++)
         {
             PlayerPrefs.SetString("slot"+i, JsonUtility.ToJson(itemsslots[i]));
@@ -110,6 +126,11 @@ public class SaveLoadEnforcer : MonoBehaviour
         }
         bodyparts.Value = 0;
         currentlevel.Value = 0;
+
+        //add Total counter for outcome
+        TotalKilled.Value = 0;
+        TotalMoney.Value = 0;
+        TotalTime.Value = 0f;
 
         for (int i = 0; i < itemsslots.Length; i++)
         {
