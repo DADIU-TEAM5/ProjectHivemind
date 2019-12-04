@@ -189,6 +189,8 @@ public class InGameHUDController : MonoBehaviour
         PauseMenu.SetActive(false);
         InGameHUD.SetActive(false);
     }
+
+
     public void EnterModifiersMenu()
     {
         UIClickButtonEvent.Raise();
