@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 5085604619903012391}
   - component: {fileID: 4150715814659683272}
   - component: {fileID: 7650057183759434566}
+  - component: {fileID: 127375153218151831}
   m_Layer: 0
   m_Name: ShopAudioManager
   m_TagString: Untagged
@@ -92,6 +93,11 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 5eaae99db0f864d60b18ab459dccc0dd,
+      type: 2}
+  ToadEatEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 7ddec8225dae0411fbe4131649a72a31,
       type: 2}
   shoplocation: {fileID: 3405690160217765971}
 --- !u!114 &1401582755443858811
@@ -315,6 +321,35 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1965015718377449177}
         m_MethodName: ToadTalkEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &127375153218151831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275682528968942918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 582c859e33b9a49d495e71669dd9c7c1, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1965015718377449177}
+        m_MethodName: ToadEatYes
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
