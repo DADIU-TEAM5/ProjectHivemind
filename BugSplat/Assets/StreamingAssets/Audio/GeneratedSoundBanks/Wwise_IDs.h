@@ -107,6 +107,7 @@ namespace AK
         static const AkUniqueID TOAD_DENY = 771050566U;
         static const AkUniqueID TOAD_DIALOGUEBLIP = 1388225139U;
         static const AkUniqueID TOAD_EAT = 2771149742U;
+        static const AkUniqueID WINSCREEN = 2935949049U;
     } // namespace EVENTS
 
     namespace STATES
@@ -217,7 +218,7 @@ namespace AK
     namespace BUSSES
     {
         static const AkUniqueID AMBIENTSECTION = 1189252680U;
-        static const AkUniqueID CHOIRSECTION = 49587131U;
+        static const AkUniqueID CHOIRSECTION_01 = 768808367U;
         static const AkUniqueID DIALOGUE_BUS = 573466488U;
         static const AkUniqueID HDR_MAGIC_BUS = 2239254138U;
         static const AkUniqueID MASTER_BUS = 1399649189U;
@@ -226,6 +227,7 @@ namespace AK
         static const AkUniqueID MUSIC_SHOP_BUS = 1145691870U;
         static const AkUniqueID REVERB_RETURN = 358140370U;
         static const AkUniqueID RYTHMSECTION = 2598026720U;
+        static const AkUniqueID STRINGSECTION = 3654574343U;
         static const AkUniqueID SUMMER_BUS = 1348578857U;
         static const AkUniqueID UI_NONDIEGETIC_BUS = 1826390690U;
     } // namespace BUSSES

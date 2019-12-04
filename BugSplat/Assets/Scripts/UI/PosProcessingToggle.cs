@@ -14,12 +14,26 @@ public class PosProcessingToggle : MonoBehaviour
     public BoolVariable PosprocessingToggle;
 
 
+    void SaveToggeBool()
+    {
+        if(PosprocessingToggle.Value)
+            PlayerPrefs.SetInt("PostProcessingToggle", 1);
+        else
+            PlayerPrefs.SetInt("PostProcessingToggle", 0);
+
+
+
+    }
+
+
     private void Start()
     {
         if (PosprocessingToggle.Value)
             TextToChange.text = PostProcessingOn.GetText();
         else
             TextToChange.text = PostProcessingOff.GetText();
+
+        SaveToggeBool();
     }
 
     private void OnEnable()
@@ -28,6 +42,8 @@ public class PosProcessingToggle : MonoBehaviour
             TextToChange.text = PostProcessingOn.GetText();
         else
             TextToChange.text = PostProcessingOff.GetText();
+
+        SaveToggeBool();
     }
 
 
@@ -49,6 +65,9 @@ public class PosProcessingToggle : MonoBehaviour
             TextToChange.text = PostProcessingOn.GetText();
         else
             TextToChange.text = PostProcessingOff.GetText();
+
+
+        SaveToggeBool();
 
     }
 
