@@ -107,6 +107,7 @@ namespace AK
         static const AkUniqueID TOAD_DENY = 771050566U;
         static const AkUniqueID TOAD_DIALOGUEBLIP = 1388225139U;
         static const AkUniqueID TOAD_EAT = 2771149742U;
+        static const AkUniqueID WINSCREEN = 2935949049U;
     } // namespace EVENTS
 
     namespace STATES
