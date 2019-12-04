@@ -20,6 +20,7 @@ public class PopEffect : Effect
     public override void DoEffect(GameObject target = null)
     {
         if (!_poppingOff) {
+            if (target == null || target.gameObject == null || target.gameObject.activeSelf) return;
             var deadEnemy = target?.GetComponent<Enemy>();
 
             // Only pop the enemies, if the enemy that died was marked
@@ -28,7 +29,7 @@ public class PopEffect : Effect
             _poppingOff = true;
 
             foreach (var enemy in Mark.MarkedEnemies) {
-                if (enemy.gameObject != null && enemy.enabled) {
+                if (enemy.gameObject != null && enemy.gameObject.activeSelf && enemy.enabled) {
                     Pop.Trigger(enemy.gameObject);
                 }
             }
