@@ -7,6 +7,7 @@ using TMPro;
 public class EnemiesTrackUI : GameLoop
 {
 
+    public IntVariable LevelKilled;
     public IntVariable TotalEnemyCount;
     public EnemyObjectList EnemiesListSO;
     public IntVariable EnemiesKilledSO;
@@ -63,6 +64,7 @@ public class EnemiesTrackUI : GameLoop
     public void UpdateKills()
     {
         Debug.Log("WaveCount: " + WaveCount + ", WaveSO: " + NumberOfWavesSO.Value);
+        LevelKilled.Value++;
         EnemiesKilledSO.Value++;
         EnemiesLeft.Value--;
         if (EnemiesKilledSO.Value >= TotalEnemyCount.Value && (!isWave || WaveCount + 1 >= NumberOfWavesSO.Value) && !isWon)

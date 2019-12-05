@@ -25,7 +25,7 @@ public class LevelOutcome : MonoBehaviour
 
 		var second = (int)(timeUsed.Value % 60);
 		var min = (int)(timeUsed.Value / 60);
-		TimeRusult.text = $"{min}" + ":" + $"{second}";
+		TimeRusult.text = $"{min}:{second.ToString().Insert(0, second < 10 ? "0" : "")}";
     }
 
     public void SetKilledEnemies(IntVariable enemiesKilled)
