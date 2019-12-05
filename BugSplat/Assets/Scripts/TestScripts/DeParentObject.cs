@@ -10,8 +10,8 @@ public class DeParentObject : MonoBehaviour
     {
         Vector3 currentWorldPos = ObjectChilds[index].transform.position;
 
-        Debug.Log("PArent: " + ObjectChilds[index].transform.parent.position);
-        Debug.Log("Child: " + ObjectChilds[index].transform.position);
+        //Debug.Log("PArent: " + ObjectChilds[index].transform.parent.position);
+        //Debug.Log("Child: " + ObjectChilds[index].transform.position);
 
         ObjectChilds[index].transform.position = currentWorldPos;
 

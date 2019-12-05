@@ -20,7 +20,6 @@ public class EventCollider : MonoBehaviour
 
     void OnTriggerEnter(Collider other) {
 
-        print(gameObject.name + " was entered");
         if (!enteredTriggered)
         {
             EnterEvent?.Raise(this.gameObject);
@@ -34,11 +33,8 @@ public class EventCollider : MonoBehaviour
 
     void OnTriggerExit(Collider other) {
 
-        print(gameObject.name + " was exited");
         if (!exitTriggered)
         {
-            print("for the first time");
-
             ExitEvent?.Raise(this.gameObject);
             exitTriggered = true;
         }
