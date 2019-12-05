@@ -37,15 +37,15 @@ public class LoadTutorialShop : MonoBehaviour
 
         Debug.Log("LASTSCENE ANYSCENE: " + LastSceneSO.Value);
 
+        if (LastSceneSO.Value == "CreditsScene")
+        {
+            LastSceneSO.Value = "_PreloadScene";
+        }
+
         if (LastSceneSO.Value != "_PreloadScene")
         {
             Debug.Log("LASTSCENE NOT PRELOAD: " + LastSceneSO.Value);
-
-            if (LastSceneSO.Value != "CreditsScene")
-            {
-                Debug.Log("LASTSCENE NOT CREDITS: " + LastSceneSO.Value);
-                StartGame();
-            }
+            StartGame();
         }
 
         for (int i = 0; i <= CurrentLevelSO.Max; i++)
