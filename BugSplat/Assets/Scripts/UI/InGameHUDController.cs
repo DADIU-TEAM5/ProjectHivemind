@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class InGameHUDController : MonoBehaviour
 {
@@ -34,6 +35,10 @@ public class InGameHUDController : MonoBehaviour
 
     //public GameObject OptionsPanel;
     public BoolVariable GameIsPaused;
+
+    public IntVariable CurrentLevelSO;
+    public GameObject ContinueBt;
+    public TextMeshProUGUI ContinueText;
 
     GameObject uM;
 
@@ -168,6 +173,19 @@ public class InGameHUDController : MonoBehaviour
         ModifiersMenu.SetActive(false);
         PauseMenu.SetActive(false);
         InGameHUD.SetActive(false);
+
+        if (CurrentLevelSO != null)
+        {
+            if (CurrentLevelSO.Value == 0)
+            {
+                ContinueBt.GetComponent<Button>().enabled = false;
+                ContinueText.color = new Color(0.3490f, 0.3373f, 0.2784f);
+            } else
+            {
+                ContinueBt.GetComponent<Button>().enabled = true;
+                ContinueText.color = new Color(1f, 0.9333f, 0.5333f);
+            }
+        }
     }
 
     // Used for not raising additional events
@@ -180,6 +198,20 @@ public class InGameHUDController : MonoBehaviour
         ModifiersMenu.SetActive(false);
         PauseMenu.SetActive(false);
         InGameHUD.SetActive(false);
+
+        if (CurrentLevelSO != null)
+        {
+            if (CurrentLevelSO.Value == 0)
+            {
+                ContinueBt.GetComponent<Button>().enabled = false;
+                ContinueText.color = new Color(0.3490f, 0.3373f, 0.2784f);
+            }
+            else
+            {
+                ContinueBt.GetComponent<Button>().enabled = true;
+                ContinueText.color = new Color(1f, 0.9333f, 0.5333f);
+            }
+        }
     }
     public void EnterOptionsMenu()
     {
