@@ -19,21 +19,31 @@ public class EventCollider : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider other) {
+
+        print(gameObject.name + " was entered");
         if (!enteredTriggered)
         {
             EnterEvent?.Raise(this.gameObject);
             enteredTriggered = true;
         }
 
+        EnterEvent?.Raise(this.gameObject);
+
 
     }
 
     void OnTriggerExit(Collider other) {
+
+        print(gameObject.name + " was exited");
         if (!exitTriggered)
         {
-            EnterEvent?.Raise(this.gameObject);
+            print("for the first time");
+
+            ExitEvent?.Raise(this.gameObject);
             exitTriggered = true;
         }
+
+        
     }
 
     void OnTriggerStay(Collider other) {
