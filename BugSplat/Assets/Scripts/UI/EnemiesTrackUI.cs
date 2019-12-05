@@ -22,7 +22,7 @@ public class EnemiesTrackUI : GameLoop
     private int WaveCount = 0;
     public IntVariable EnemiesLeft;
     public LevelText LevelText;
-
+    public IntVariable EnemiesKilled;
 
     private int eventRaisedCount;
     bool isWave;
@@ -64,6 +64,7 @@ public class EnemiesTrackUI : GameLoop
     {
         Debug.Log("WaveCount: " + WaveCount + ", WaveSO: " + NumberOfWavesSO.Value);
         EnemiesKilledSO.Value++;
+        EnemiesKilled.Value++;
         EnemiesLeft.Value--;
         if (EnemiesKilledSO.Value >= TotalEnemyCount.Value && (!isWave || WaveCount + 1 >= NumberOfWavesSO.Value) && !isWon)
         {
