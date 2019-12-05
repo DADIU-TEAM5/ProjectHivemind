@@ -21,7 +21,7 @@ public class CountAllResults : MonoBehaviour
 
     public void SumAll()
     {
-		LevelEnemiesKilled.Value = LevelEnemyKilled.Value;
+		//LevelEnemiesKilled.Value = LevelEnemyKilled.Value;
 		TotalEarned.Value += LevelEarned.Value;
         TotalEnemiesKilled.Value += LevelEnemiesKilled.Value;
     }
