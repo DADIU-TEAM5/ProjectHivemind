@@ -37,6 +37,11 @@ public class LoadTutorialShop : MonoBehaviour
 
         Debug.Log("LASTSCENE ANYSCENE: " + LastSceneSO.Value);
 
+        if (LastSceneSO.Value == "Hub Scene")
+        {
+            LastSceneSO.Value = "_PreloadScene";
+        }
+
         if (LastSceneSO.Value == "CreditsScene")
         {
             LastSceneSO.Value = "_PreloadScene";
