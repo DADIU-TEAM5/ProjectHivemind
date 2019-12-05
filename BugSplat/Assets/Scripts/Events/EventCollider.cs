@@ -25,10 +25,6 @@ public class EventCollider : MonoBehaviour
             EnterEvent?.Raise(this.gameObject);
             enteredTriggered = true;
         }
-
-        EnterEvent?.Raise(this.gameObject);
-
-
     }
 
     void OnTriggerExit(Collider other) {
