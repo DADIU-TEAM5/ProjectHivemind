@@ -9,6 +9,8 @@ namespace Cinemachine.Examples
         //public List<CinemachineVirtualCamera> VirtualCameras;
         public GameObjectVariable CurrentEnemySO;
         public GameObject Targeter;
+        public GameObject SplatFX;
+        public Arrow Arrow;
         //public FloatVariable PlayerCurrentSpeedSO;
         //public Vector3Variable PlayerDirectionSO;
         //private bool _activate = true;
@@ -21,12 +23,13 @@ namespace Cinemachine.Examples
         public BoolVariable PlayerControlOverrideSO;
         public float WaitInitTime = 1f;
         public float SlowDownTimer = 1f;
-        public float SlowDownRate = 0.2f;
+        public float SlowDownRate;
+
 
 
         public void switchCamera(GameObject target)
         {
-            
+
             if (Targeter == null)
             {
                 if (CurrentEnemySO == null)
@@ -80,9 +83,9 @@ namespace Cinemachine.Examples
 
             PlayerGraphics.transform.rotation = Quaternion.LookRotation(PlayerDirectionSO.Value, Vector3.up);
 
-            if(CurrentEnemySO == null)
+            if (CurrentEnemySO == null)
             {
-                ZoomCamera.m_Follow = target.transform;
+                //ZoomCamera.m_Follow = target.transform;
                 ZoomCamera.m_LookAt = target.transform;
             }
             else
@@ -93,6 +96,16 @@ namespace Cinemachine.Examples
 
             Time.timeScale = slowDown;
 
+            if (SplatFX != null)
+            {
+                SplatFX.SetActive(true);
+            }
+
+            if (Arrow != null)
+            {
+                Arrow.enabled = false;
+            }
+
             camera.gameObject.SetActive(true);
 
             yield return new WaitForSecondsRealtime(slowDownSec);
@@ -100,6 +113,11 @@ namespace Cinemachine.Examples
             camera.gameObject.SetActive(false);
 
             Time.timeScale = 1f;
+
+            if (Arrow != null)
+            {
+                Arrow.enabled = false;
+            }
 
             PlayerControlOverrideSO.Value = false;
 

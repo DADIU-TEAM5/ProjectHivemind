@@ -259,7 +259,23 @@ public abstract class Enemy : GameLoop
     public void TakeDamage(float damage)
     {
         // print(name + " took damage "+ damage);
+        /*if (_currentHealth - damage <= 0)
+        {
+            if (Graphics.name.ToLower().Contains("fodder") == false)
+            {
+                if (Graphics.name.ToLower().Contains("egg") == false)
+                {
+                    if (ZoomCamFrequency.Value == ZoomCamFrequency.Max)
+                    {
+                        ZoomCamInit.Raise(DeadCutout);
 
+                        ZoomCamFrequency.Value = 0;
+                    }
+
+                    ZoomCamFrequency.Value++;
+                }
+            }
+        }*/
 
         _currentHealth -= damage;
         UpdateHealthBar(_currentHealth);
@@ -273,20 +289,6 @@ public abstract class Enemy : GameLoop
             DeathEvent?.Raise(this.gameObject);
             DeathEvent = null;
             _dead = true;
-            /*if (Graphics.name.ToLower().Contains("fodder") == false)
-            {
-                if (Graphics.name.ToLower().Contains("egg") == false)
-                {
-                    if (ZoomCamFrequency.Value == ZoomCamFrequency.Max)
-                    {
-                        ZoomCamInit.Raise(DeadCutout);
-
-                        ZoomCamFrequency.Value = 0;
-                    }
-
-                    ZoomCamFrequency.Value++;
-                }
-            }*/
 
             if (DeadCutout == null)
             {
