@@ -12,7 +12,7 @@ public class CreditsMakeNewGamePls : MonoBehaviour
 
     void Start()
     {
-        if(CurrentLevel.Value == CurrentLevel.Max)
+        if(CurrentLevel.Value >= CurrentLevel.Max)
         {
             saveLoadEnf.NewGame();
             saveLoadEnf.save();
