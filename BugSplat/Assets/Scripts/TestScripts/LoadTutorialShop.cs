@@ -27,9 +27,6 @@ public class LoadTutorialShop : MonoBehaviour
     public GameEvent AllLevelsCompletedSO;
 
 
-
-
-
     private void Start()
     {
         PlayerDirectionSO.Value = new Vector3(-0.3162278f, 0f, -0.9486834f);
@@ -38,9 +35,17 @@ public class LoadTutorialShop : MonoBehaviour
         ShopIsOpenSO.Value = true;
         TutorialEggs.SetActive(false);
 
+        Debug.Log("LASTSCENE ANYSCENE: " + LastSceneSO.Value);
+
         if (LastSceneSO.Value != "_PreloadScene")
         {
-            StartGame();
+            Debug.Log("LASTSCENE NOT PRELOAD: " + LastSceneSO.Value);
+
+            if (LastSceneSO.Value != "CreditsScene")
+            {
+                Debug.Log("LASTSCENE NOT CREDITS: " + LastSceneSO.Value);
+                StartGame();
+            }
         }
 
         for (int i = 0; i <= CurrentLevelSO.Max; i++)
@@ -58,8 +63,8 @@ public class LoadTutorialShop : MonoBehaviour
             }
         }
     }
-    
-    public void  StartGame()
+
+    public void StartGame()
     {
 
 
@@ -82,7 +87,12 @@ public class LoadTutorialShop : MonoBehaviour
                 SpawnParticle.SetActive(true);
                 SpawnParticle.GetComponent<WaitXSeconds>().enabled = true;
             }
-            else if (LastSceneSO.Value == "Death Scene") 
+            else if (LastSceneSO.Value == "CreditsScene")
+            {
+                SpawnParticle.SetActive(true);
+                SpawnParticle.GetComponent<WaitXSeconds>().enabled = true;
+            }
+            else if (LastSceneSO.Value == "Death Scene")
             {
                 SpawnParticle.SetActive(true);
                 Player.gameObject.SetActive(true);
