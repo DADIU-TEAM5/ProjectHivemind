@@ -9,28 +9,30 @@ public class EventCollider : MonoBehaviour
     public GameEvent ExitEvent;
     public GameEvent StayEvent;
 
-    bool hasTriggered;
+    bool exitTriggered;
+    bool enteredTriggered;
 
     private void OnEnable()
     {
-        hasTriggered = false;
+        exitTriggered = false;
+        enteredTriggered = false;
     }
 
     void OnTriggerEnter(Collider other) {
-        if (!hasTriggered)
+        if (!enteredTriggered)
         {
             EnterEvent?.Raise(this.gameObject);
-            hasTriggered = true;
+            enteredTriggered = true;
         }
 
 
     }
 
     void OnTriggerExit(Collider other) {
-        if (!hasTriggered)
+        if (!exitTriggered)
         {
             EnterEvent?.Raise(this.gameObject);
-            hasTriggered = true;
+            exitTriggered = true;
         }
     }
 
