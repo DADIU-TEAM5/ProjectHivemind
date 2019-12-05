@@ -69,7 +69,7 @@ public class PlayerMovement : GameLoop
             PlayerVelocity.Value = PlayerDirectionSO.Value * PlayerCurrentSpeedSO.Value;
             PlayerGraphics.localRotation = Quaternion.LookRotation(PlayerDirectionSO.Value, Vector3.up);
 
-            if (_navMeshAgent.isOnNavMesh)
+            if (_navMeshAgent?.isOnNavMesh ?? false)
             {
                 if (!_navMeshAgent.hasPath)
                 {
