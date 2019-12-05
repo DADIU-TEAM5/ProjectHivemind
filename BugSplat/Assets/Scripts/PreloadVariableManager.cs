@@ -11,7 +11,7 @@ public class PreloadVariableManager : MonoBehaviour
     // Lets Hardcode some variables... 
     void OnEnable()
     {
-        InMainMenu.Value = true;
+        //InMainMenu.Value = true;
         //TutorialEnabled.Value = true;
         //LastScene.Value = "";
     }
