@@ -1002,6 +1002,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentEnemySO: {fileID: 0}
   Targeter: {fileID: 0}
+  SplatFX: {fileID: 0}
+  Arrow: {fileID: 0}
   ZoomCamera: {fileID: 1182960168}
   PlayerGameObject: {fileID: 0}
   PlayerGraphics: {fileID: 0}
@@ -1288,6 +1290,8 @@ GameObject:
   - component: {fileID: 292226598}
   - component: {fileID: 292226602}
   - component: {fileID: 292226601}
+  - component: {fileID: 292226604}
+  - component: {fileID: 292226603}
   m_Layer: 0
   m_Name: TargetEnter0
   m_TagString: Untagged
@@ -1420,6 +1424,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Time: 5
   Event: {fileID: 11400000, guid: a659fef642c30b4469abeee8ec90bedb, type: 2}
+--- !u!114 &292226603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292226596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 88a22031c8da25d47ae5f06afe276623, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: cd104f22562a7ab43882be2191f0eac2, type: 2}
+        m_MethodName: LoadScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: CreditsScene
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &292226604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292226596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a56d64d6bbee10d4bbade8c5ae87290a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Time: 10
+  Event: {fileID: 11400000, guid: 88a22031c8da25d47ae5f06afe276623, type: 2}
 --- !u!1 &298149159
 GameObject:
   m_ObjectHideFlags: 0
@@ -3068,6 +3115,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentEnemySO: {fileID: 0}
   Targeter: {fileID: 0}
+  SplatFX: {fileID: 0}
+  Arrow: {fileID: 0}
   ZoomCamera: {fileID: 1182960168}
   PlayerGameObject: {fileID: 0}
   PlayerGraphics: {fileID: 0}
@@ -19281,6 +19330,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cameras
       objectReference: {fileID: 0}
+    - target: {fileID: 3034182457766875108, guid: 297e036692bd9534e9dc9aa79e893fa0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3073335834627570852, guid: 297e036692bd9534e9dc9aa79e893fa0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 499180667430939093, guid: 297e036692bd9534e9dc9aa79e893fa0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -19371,6 +19430,21 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -20.77
       objectReference: {fileID: 0}
+    - target: {fileID: 4733550666493719875, guid: 297e036692bd9534e9dc9aa79e893fa0,
+        type: 3}
+      propertyPath: m_LookAt
+      value: 
+      objectReference: {fileID: 1119028682}
+    - target: {fileID: 4733550666493719902, guid: 297e036692bd9534e9dc9aa79e893fa0,
+        type: 3}
+      propertyPath: m_DirectorUpdateMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1392190061439680577, guid: 297e036692bd9534e9dc9aa79e893fa0,
+        type: 3}
+      propertyPath: field of view
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 3034182457766875110, guid: 297e036692bd9534e9dc9aa79e893fa0,
         type: 3}
       propertyPath: m_LocalRotation.y
@@ -19456,16 +19530,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3034182457766875108, guid: 297e036692bd9534e9dc9aa79e893fa0,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1392190061439680577, guid: 297e036692bd9534e9dc9aa79e893fa0,
-        type: 3}
-      propertyPath: field of view
-      value: 40
-      objectReference: {fileID: 0}
     - target: {fileID: 7577131037040208275, guid: 297e036692bd9534e9dc9aa79e893fa0,
         type: 3}
       propertyPath: m_CameraCutEvent.m_PersistentCalls.m_Calls.Array.size
@@ -19506,6 +19570,11 @@ PrefabInstance:
       propertyPath: m_CameraCutEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: LowerCage
       objectReference: {fileID: 0}
+    - target: {fileID: 6607263982399507441, guid: 297e036692bd9534e9dc9aa79e893fa0,
+        type: 3}
+      propertyPath: volumeLayer.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 3034182457766875109, guid: 297e036692bd9534e9dc9aa79e893fa0,
         type: 3}
       propertyPath: m_Follow
@@ -19520,21 +19589,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SoftZoneWidth
       value: 0.772
-      objectReference: {fileID: 0}
-    - target: {fileID: 3073335834627570852, guid: 297e036692bd9534e9dc9aa79e893fa0,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4733550666493719875, guid: 297e036692bd9534e9dc9aa79e893fa0,
-        type: 3}
-      propertyPath: m_LookAt
-      value: 
-      objectReference: {fileID: 1119028682}
-    - target: {fileID: 4733550666493719902, guid: 297e036692bd9534e9dc9aa79e893fa0,
-        type: 3}
-      propertyPath: m_DirectorUpdateMode
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4485648962675342714, guid: 297e036692bd9534e9dc9aa79e893fa0,
         type: 3}
@@ -19605,11 +19659,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_PathOffset.x
       value: -0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 6607263982399507441, guid: 297e036692bd9534e9dc9aa79e893fa0,
-        type: 3}
-      propertyPath: volumeLayer.m_Bits
-      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 297e036692bd9534e9dc9aa79e893fa0, type: 3}
