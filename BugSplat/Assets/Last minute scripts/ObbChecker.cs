@@ -46,7 +46,7 @@ public class ObbChecker : MonoBehaviour
 
     public IEnumerator CheckSetUp()
     {
-        yield return StartCoroutine(PullStreamingAssetFromObb("https://lukasdamgaard.dk/Assetbundles/", "obbextra"));
+        yield return StartCoroutine(PullStreamingAssetFromObb("https://lukasdamgaard.dk/Assetbundles/", "obbextra.obb"));
 
         yield return new WaitForSeconds(1f);
         StartApp();
@@ -75,7 +75,7 @@ public class ObbChecker : MonoBehaviour
                 Debug.Log("Extracting " + name + " to Persistant Data");
 
 
-                File.WriteAllBytes(Application.persistentDataPath + "/" + name + ".obb", handler.data);
+                File.WriteAllBytes(Application.persistentDataPath + "/" + name, handler.data);
             }
         }
         yield return 0;
