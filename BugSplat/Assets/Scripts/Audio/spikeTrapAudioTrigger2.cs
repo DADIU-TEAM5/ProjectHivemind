@@ -9,6 +9,7 @@ public class spikeTrapAudioTrigger2 : MonoBehaviour
     public GameEvent spikeTrapStabEvent;
     public GameEvent spikeTrapImpactEvent;
 
+    public LayerMask mask;
 
     Renderer _renderer;
 
@@ -22,8 +23,14 @@ public class spikeTrapAudioTrigger2 : MonoBehaviour
 
         if (_renderer.isVisible)
         {
-            //Debug.Log("animation event was played");
-            spikeTrapRetractEvent.Raise(this.gameObject);
+            Collider[] hits = Physics.OverlapSphere(transform.position, 5, mask);
+
+            if(hits.Length > 0)
+            {
+                spikeTrapRetractEvent.Raise(this.gameObject);
+            }
+
+           
         }
 
         
@@ -33,13 +40,33 @@ public class spikeTrapAudioTrigger2 : MonoBehaviour
     {
 
         if (_renderer.isVisible)
-            spikeTrapStabEvent.Raise(this.gameObject);
+        {
+            Collider[] hits = Physics.OverlapSphere(transform.position, 5, mask);
+
+            if (hits.Length > 0)
+            {
+                spikeTrapStabEvent.Raise(this.gameObject);
+            }
+
+        }
+
+
+            
     }
 
     public void spiketrapImpactTrigger()
     {
         if (_renderer.isVisible)
-            spikeTrapImpactEvent.Raise(this.gameObject);
+        {
+            Collider[] hits = Physics.OverlapSphere(transform.position, 5, mask);
+
+            if (hits.Length > 0)
+            {
+                spikeTrapImpactEvent.Raise(this.gameObject);
+            }
+
+        }
+            
     }
 
 }

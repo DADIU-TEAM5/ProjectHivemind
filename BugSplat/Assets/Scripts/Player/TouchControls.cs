@@ -125,70 +125,76 @@ public class TouchControls : GameLoop
        
         UIPrefab.transform.up = targetPos;
 
-
-        if (PlayerControlOverrideSO.Value == false)
+        if (Time.timeScale < 1)
         {
-            if (IsStunned.Value == false)
-            {
-                // Detect Touch
-                if (Input.touchCount <= _recordPositions.Length)
-                {
-                    for (int i = 0; i < Input.touchCount; i++)
-                    {
-                        Touch touch = Input.GetTouch(i);
-
-
-                        Vector3 touchPosition = touch.position;
-
-
-                        switch (touch.phase)
-                        {
-                            case TouchPhase.Moved:
-                                if (touchPosition.x < _uiOffset.x || touchPosition.y > _uiOffset.y)
-                                {
-                                    BeginMove(touchPosition, i);
-                                }
-
-                                break;
-                                    
-                            case TouchPhase.Ended:
-                                EndMove(touchPosition, i);
-                                break;
-                        }
-                            
-                    }
-                }
-
-
-
-
-                // Simulate touch with mouse, if mouse present
-                if (Input.mousePresent)
-                {
-                    Vector3 inputPosition = Input.mousePosition;
-
-                    if (Input.GetMouseButton(0))
-                    {
-
-                            if (inputPosition.x < _uiOffset.x || inputPosition.y > _uiOffset.y)
-                            {
-                                BeginMove(inputPosition,0);
-                            }
-
-
-                    }
-                    if (Input.GetMouseButtonUp(0))
-                    {
-                                EndMove(Input.mousePosition,0);
-                    }
-                }
-            }
+            Debug.Log("TIMESCALE = " + Time.timeScale);
         }
         else
         {
-             MoveDirectionSO.Value = Vector3.zero;
-             ClearInputUI();
-             
+            if (PlayerControlOverrideSO.Value == false)
+            {
+                if (IsStunned.Value == false)
+                {
+                    // Detect Touch
+                    if (Input.touchCount <= _recordPositions.Length)
+                    {
+                        for (int i = 0; i < Input.touchCount; i++)
+                        {
+                            Touch touch = Input.GetTouch(i);
+
+
+                            Vector3 touchPosition = touch.position;
+
+
+                            switch (touch.phase)
+                            {
+                                case TouchPhase.Moved:
+                                    if (touchPosition.x < _uiOffset.x || touchPosition.y > _uiOffset.y)
+                                    {
+                                        BeginMove(touchPosition, i);
+                                    }
+
+                                    break;
+
+                                case TouchPhase.Ended:
+                                    EndMove(touchPosition, i);
+                                    break;
+                            }
+
+                        }
+                    }
+
+
+
+
+                    // Simulate touch with mouse, if mouse present
+                    if (Input.mousePresent)
+                    {
+                        Vector3 inputPosition = Input.mousePosition;
+
+                        if (Input.GetMouseButton(0))
+                        {
+
+                            if (inputPosition.x < _uiOffset.x || inputPosition.y > _uiOffset.y)
+                            {
+                                BeginMove(inputPosition, 0);
+                            }
+
+
+                        }
+                        if (Input.GetMouseButtonUp(0))
+                        {
+                            EndMove(Input.mousePosition, 0);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MoveDirectionSO.Value = Vector3.zero;
+                ClearInputUI();
+
+            }
         }
     }
 
