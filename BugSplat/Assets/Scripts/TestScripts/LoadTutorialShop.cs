@@ -20,7 +20,6 @@ public class LoadTutorialShop : MonoBehaviour
     public GameObject TutorialEggs;
     public GameObject[] LevelLights;
     public GameObject ShopSign;
-    public GameObject ShopClosedCollider;
     public GameObject SpawnParticle;
     public Vector3Variable PlayerDirectionSO;
     public Vector3Variable PlayerPositionSO;
@@ -116,11 +115,9 @@ public class LoadTutorialShop : MonoBehaviour
         if (ShopIsOpenSO.Value == true)
         {
             ShopSign.SetActive(false);
-            ShopClosedCollider.SetActive(false);
         } else
         {
             ShopSign.SetActive(true);
-            ShopClosedCollider.SetActive(true);
         }
        
     }
@@ -132,7 +129,6 @@ public class LoadTutorialShop : MonoBehaviour
             ArenaCollider.SetActive(false);
             ShopCollider.SetActive(false);
             ShopSign.SetActive(true);
-            ShopClosedCollider.SetActive(true);
         }
     }
 
