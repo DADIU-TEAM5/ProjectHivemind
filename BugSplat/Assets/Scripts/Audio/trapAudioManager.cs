@@ -12,7 +12,6 @@ public class trapAudioManager : MonoBehaviour
 
     public void spiketrapStabEvent(GameObject source)
     {
-        Debug.Log("trap sound reached audiomanager");
         spiketrapStab.Post(source);
     }
 
