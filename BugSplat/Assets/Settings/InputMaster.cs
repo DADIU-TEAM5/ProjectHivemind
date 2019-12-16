@@ -41,22 +41,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
-                },
-                {
-                    ""name"": ""PointerDelta"",
-                    ""type"": ""Value"",
-                    ""id"": ""7d1cebc3-97a2-47c8-85b0-f4d9438a2d2b"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""PointerPressRelease"",
-                    ""type"": ""Value"",
-                    ""id"": ""0669a5b4-9977-4250-a86d-301c65851a09"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -202,28 +186,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d13feaf0-03a3-46df-bca1-e3a24f7aa331"",
-                    ""path"": ""<Pointer>/delta"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Touch;KeyboardMouse"",
-                    ""action"": ""PointerDelta"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""dd12fda0-7cea-47d6-adae-98c58eb85b14"",
-                    ""path"": ""<Pointer>/position"",
-                    ""interactions"": ""Press(behavior=2)"",
-                    ""processors"": """",
-                    ""groups"": ""Touch;KeyboardMouse"",
-                    ""action"": ""PointerPressRelease"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -263,8 +225,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_PlayerMovement_Movement = m_PlayerMovement.FindAction("Movement", throwIfNotFound: true);
         m_PlayerMovement_Attack = m_PlayerMovement.FindAction("Attack", throwIfNotFound: true);
         m_PlayerMovement_Dash = m_PlayerMovement.FindAction("Dash", throwIfNotFound: true);
-        m_PlayerMovement_PointerDelta = m_PlayerMovement.FindAction("PointerDelta", throwIfNotFound: true);
-        m_PlayerMovement_PointerPressRelease = m_PlayerMovement.FindAction("PointerPressRelease", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -317,8 +277,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerMovement_Movement;
     private readonly InputAction m_PlayerMovement_Attack;
     private readonly InputAction m_PlayerMovement_Dash;
-    private readonly InputAction m_PlayerMovement_PointerDelta;
-    private readonly InputAction m_PlayerMovement_PointerPressRelease;
     public struct PlayerMovementActions
     {
         private @InputMaster m_Wrapper;
@@ -326,8 +284,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @Movement => m_Wrapper.m_PlayerMovement_Movement;
         public InputAction @Attack => m_Wrapper.m_PlayerMovement_Attack;
         public InputAction @Dash => m_Wrapper.m_PlayerMovement_Dash;
-        public InputAction @PointerDelta => m_Wrapper.m_PlayerMovement_PointerDelta;
-        public InputAction @PointerPressRelease => m_Wrapper.m_PlayerMovement_PointerPressRelease;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -346,12 +302,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Dash.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnDash;
-                @PointerDelta.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnPointerDelta;
-                @PointerDelta.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnPointerDelta;
-                @PointerDelta.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnPointerDelta;
-                @PointerPressRelease.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnPointerPressRelease;
-                @PointerPressRelease.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnPointerPressRelease;
-                @PointerPressRelease.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnPointerPressRelease;
             }
             m_Wrapper.m_PlayerMovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -365,12 +315,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
-                @PointerDelta.started += instance.OnPointerDelta;
-                @PointerDelta.performed += instance.OnPointerDelta;
-                @PointerDelta.canceled += instance.OnPointerDelta;
-                @PointerPressRelease.started += instance.OnPointerPressRelease;
-                @PointerPressRelease.performed += instance.OnPointerPressRelease;
-                @PointerPressRelease.canceled += instance.OnPointerPressRelease;
             }
         }
     }
@@ -398,7 +342,5 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
-        void OnPointerDelta(InputAction.CallbackContext context);
-        void OnPointerPressRelease(InputAction.CallbackContext context);
     }
 }

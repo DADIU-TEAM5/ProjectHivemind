@@ -43,39 +43,7 @@ public class PlayerInput : MonoBehaviour
             SetMove(new Vector3(delta.x, 0f, delta.y).normalized);
         };
 
-        UnityEngine.InputSystem.EnhancedTouch.Touch.onFingerDown += context => {
-            _pointerStartPos = context.screenPosition;
-            InputUI.SetActive(true);
-            InputUI.transform.position = _pointerStartPos;
-        };
-
-        UnityEngine.InputSystem.EnhancedTouch.Touch.onFingerMove += context => {
-            var heading = context.screenPosition - _pointerStartPos;
-            var distance = heading.magnitude;
-
-            if (distance > _pointerMinMove) {
-                // Calculates the outer rim position of the "joystick" if the player moves the finger beyond the borders of the designated joystick space
-                var a = Mathf.Atan2(heading.y, heading.x);
-                if (distance > _pointerMaxMove)
-                {
-                    heading.x = _pointerMaxMove * Mathf.Cos(a);
-                    heading.y = _pointerMaxMove * Mathf.Sin(a);
-                }
-
-                // UI stuff
-                InputUIUpper.transform.localScale = new Vector3(1, Mathf.Clamp(distance*0.03f,1,4), 1);
-                InputUI.transform.up = heading;
-            }
-
-            SetMove(new Vector3(heading.x, 0f, heading.y).normalized);
-        };
-
-        UnityEngine.InputSystem.EnhancedTouch.Touch.onFingerUp += context => {
-            _pointerStartPos = Vector2.zero;
-            SetMove(Vector3.zero);
-            InputUI?.SetActive(false);
-        };
-
+        
         InputActions.PlayerMovement.Movement.canceled += _ => SetMove(Vector3.zero);
 
         InputActions.PlayerMovement.Attack.performed += _ => {
@@ -103,11 +71,52 @@ public class PlayerInput : MonoBehaviour
         MoveDirection.Value = (PlayerControlOverride.Value || IsStunned.Value) ? Vector3.zero : direction;
     }
 
+    private void FingerDown(Finger finger) {
+        _pointerStartPos = finger.screenPosition;
+        //InputUI.SetActive(true);
+        InputUI.transform.position = _pointerStartPos;
+    }
+
+    private void FingerMove(Finger finger) {
+        var heading = finger.screenPosition - _pointerStartPos;
+        var distance = heading.magnitude;
+
+        if (distance > _pointerMinMove) {
+            // Calculates the outer rim position of the "joystick" if the player moves the finger beyond the borders of the designated joystick space
+            var a = Mathf.Atan2(heading.y, heading.x);
+            if (distance > _pointerMaxMove)
+            {
+                heading.x = _pointerMaxMove * Mathf.Cos(a);
+                heading.y = _pointerMaxMove * Mathf.Sin(a);
+            }
+
+            // UI stuff
+            InputUIUpper.transform.localScale = new Vector3(1, Mathf.Clamp(distance*0.03f,1,4), 1);
+            InputUI.transform.up = heading;
+        }
+
+        SetMove(new Vector3(heading.x, 0f, heading.y).normalized);
+    }
+
+    private void FingerUp(Finger finger) {
+        _pointerStartPos = Vector2.zero;
+        SetMove(Vector3.zero);
+        //InputUI?.SetActive(false);
+    }
+
     void OnEnable() {
         InputActions.Enable();
+
+        UnityEngine.InputSystem.EnhancedTouch.Touch.onFingerDown += FingerDown;
+        UnityEngine.InputSystem.EnhancedTouch.Touch.onFingerMove += FingerMove;
+        UnityEngine.InputSystem.EnhancedTouch.Touch.onFingerUp += FingerUp;
     }
 
     void OnDisable() {
         InputActions.Disable();
+
+        UnityEngine.InputSystem.EnhancedTouch.Touch.onFingerDown -= FingerDown;
+        UnityEngine.InputSystem.EnhancedTouch.Touch.onFingerMove -= FingerMove;
+        UnityEngine.InputSystem.EnhancedTouch.Touch.onFingerUp -= FingerUp;
     }
 }
