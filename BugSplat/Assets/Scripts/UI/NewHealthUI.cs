@@ -4,15 +4,11 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
 
-public class NewHealthUI : GameLoop
+public class NewHealthUI : MonoBehaviour
 {
     public FloatVariable MaxHealth;
     public FloatVariable CurrentHealth;
     public FloatVariable HealthPerIcon;
-
-    public Image HealthBar;
-    public GameObject Bar;
-    public GameObject MaxBar;
 
     public List<Image> HealthIcons;
     public List<Image> MaxHealthIcons;
@@ -24,43 +20,15 @@ public class NewHealthUI : GameLoop
 
     public void Awake()
     {
-        //int hearts =
-        /*HealthIcons = new List<Image>();
-        foreach (Image img in Bar.GetComponentsInChildren<Image>())
-            HealthIcons.Add(img);
-
-        MaxHealthIcons = new List<Image>();
-        foreach (Image img in MaxBar.GetComponentsInChildren<Image>())
-            MaxHealthIcons.Add(img);*/
-
         if (HealthIcons.Count == 0)
             Debug.LogError("No Health Icons Found");
         else
         {
-            
-            //ChangeMaxHealth();
             UpdateHealthBar();
-
-           
-           
         }
-            
-            
-
     }
 
-    public override void LoopLateUpdate(float deltaTime)
-    {
-    }
-
-    // Could Use Events instead of update to optimize performance
-    public override void LoopUpdate(float deltaTime)
-    {
-        //CalculateHealthRatio();
-        UpdateHealthBar();
-    }
-
-    private void UpdateHealthBar()
+    public void UpdateHealthBar()
     {
         
         for (int i = 0; i < HealthIcons.Count; i++)
