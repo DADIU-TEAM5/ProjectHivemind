@@ -118,7 +118,6 @@ GameObject:
   - component: {fileID: 1159753607707493426}
   - component: {fileID: 840415900}
   - component: {fileID: 840415876}
-  - component: {fileID: 930767015612275837}
   m_Layer: 9
   m_Name: PlayerGameObject
   m_TagString: Player
@@ -158,11 +157,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SwipeThreshold: 0.1
-  SwipeHistoryCheck: 60
+  PointerMinMove: 0.1
+  PointerMaxMove: 0.25
   PlayerControlOverride: {fileID: 11400000, guid: 6c60755199019534381ecc8c862bb419,
     type: 2}
   IsStunned: {fileID: 11400000, guid: e206e2a2d0299224e8e9cfcc6ab47f33, type: 2}
   MoveDirection: {fileID: 11400000, guid: c1f170982022e2e4f8f993a769166f2b, type: 2}
+  InputUI: {fileID: 0}
+  InputUIUpper: {fileID: 0}
   AttackEvent: {fileID: 11400000, guid: 054062f3758a0e34a81b32c3653d5151, type: 2}
   DashEvent: {fileID: 11400000, guid: 60970d5ec9567e2409fadb3f56b3fb10, type: 2}
 --- !u!114 &5788987755461925659
@@ -676,18 +678,6 @@ MonoBehaviour:
   WhiteFadeIn: {fileID: 6191203006305586321, guid: bc40e5a1b68d4c848aa0b7a12405b376,
     type: 3}
   PlayerSpeed: 0
---- !u!114 &930767015612275837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5788987755461925658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e31057ef324a04478bb4f7d469b3cdc0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!136 &8036398725286164362
 CapsuleCollider:
   m_ObjectHideFlags: 0

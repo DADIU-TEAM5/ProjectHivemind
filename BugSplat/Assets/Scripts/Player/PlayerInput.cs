@@ -8,13 +8,17 @@ public class PlayerInput : MonoBehaviour
     public InputMaster InputActions;
 
     public float SwipeThreshold;
-    public int SwipeHistoryCheck;
+
+    public float PointerMinMove, PointerMaxMove;
 
     [Header("Dependencies")]
     public BoolVariable PlayerControlOverride;
     public BoolVariable IsStunned;
 
     public Vector3Variable MoveDirection;
+
+    public GameObject InputUI;
+    public GameObject InputUIUpper;
 
 
     [Header("Events")]
@@ -24,12 +28,15 @@ public class PlayerInput : MonoBehaviour
     private Vector2 _pointerStartPos = Vector2.zero;
 
     private float _swipeThreshold;
+    private float _pointerMinMove, _pointerMaxMove;
 
     void Awake() {
         InputActions = new InputMaster();
         EnhancedTouchSupport.Enable();
 
         _swipeThreshold = Mathf.RoundToInt(Screen.width * SwipeThreshold);
+        _pointerMinMove = Screen.width * PointerMinMove;
+        _pointerMaxMove = Screen.width * PointerMaxMove;
 
         InputActions.PlayerMovement.Movement.performed += context => {
             var delta = context.ReadValue<Vector2>() - _pointerStartPos;
@@ -38,17 +45,35 @@ public class PlayerInput : MonoBehaviour
 
         UnityEngine.InputSystem.EnhancedTouch.Touch.onFingerDown += context => {
             _pointerStartPos = context.screenPosition;
+            InputUI.SetActive(true);
+            InputUI.transform.position = _pointerStartPos;
         };
 
         UnityEngine.InputSystem.EnhancedTouch.Touch.onFingerMove += context => {
-            var direction = context.screenPosition - _pointerStartPos;
+            var heading = context.screenPosition - _pointerStartPos;
+            var distance = heading.magnitude;
 
-            SetMove(new Vector3(direction.x, 0f, direction.y).normalized);
+            if (distance > _pointerMinMove) {
+                // Calculates the outer rim position of the "joystick" if the player moves the finger beyond the borders of the designated joystick space
+                var a = Mathf.Atan2(heading.y, heading.x);
+                if (distance > _pointerMaxMove)
+                {
+                    heading.x = _pointerMaxMove * Mathf.Cos(a);
+                    heading.y = _pointerMaxMove * Mathf.Sin(a);
+                }
+
+                // UI stuff
+                InputUIUpper.transform.localScale = new Vector3(1, Mathf.Clamp(distance*0.03f,1,4), 1);
+                InputUI.transform.up = heading;
+            }
+
+            SetMove(new Vector3(heading.x, 0f, heading.y).normalized);
         };
 
         UnityEngine.InputSystem.EnhancedTouch.Touch.onFingerUp += context => {
             _pointerStartPos = Vector2.zero;
             SetMove(Vector3.zero);
+            InputUI?.SetActive(false);
         };
 
         InputActions.PlayerMovement.Movement.canceled += _ => SetMove(Vector3.zero);
@@ -71,6 +96,7 @@ public class PlayerInput : MonoBehaviour
                 DashEvent.Raise();
             }
         };
+
     }
 
     private void SetMove(Vector3 direction) {
