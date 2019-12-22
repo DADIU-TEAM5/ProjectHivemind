@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName="Stats/Enemy")]
 public class EnemyStats : ScriptableObject
 {
     public float MoveSpeed;
@@ -19,5 +19,4 @@ public class EnemyStats : ScriptableObject
 
     public int minPartsToDrop;
     public int maxPartsToDrop;
-
 }

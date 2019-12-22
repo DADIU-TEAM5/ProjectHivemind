@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName="Stats/Spitter")]
 public class SpitterStats : EnemyStats
 {
-    
-
     public float ProjectileSpeed;
-
 
     public bool ShootEggs;
     public float ChanceToShootEgg;
@@ -17,7 +14,4 @@ public class SpitterStats : EnemyStats
     public float FleeThreshold;
 
     public float RetractionTime;
-
-    
-
 }

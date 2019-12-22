@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName="Stats/CannonFodder")]
 public class CannonfodderStats : EnemyStats
 {
-    
-
 }

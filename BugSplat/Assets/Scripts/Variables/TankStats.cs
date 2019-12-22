@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName="Stats/Tank")]
 public class TankStats : EnemyStats
 {
     

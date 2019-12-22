@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName="Stats/Boomer")]
 public class BoomerStats : EnemyStats
 {
     

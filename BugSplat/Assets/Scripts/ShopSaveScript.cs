@@ -8,6 +8,6 @@ public class ShopSaveScript : MonoBehaviour
 
     private void Start()
     {
-        saveLoad.save();
+        saveLoad.Save();
     }
 }
