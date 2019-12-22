@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build;
+using UnityEditor.Build.Reporting;
 using UnityEditor.Callbacks;
 using UnityEngine;
 
-public class HealthController : MonoBehaviour
+public class HealthController : MonoBehaviour, IPreprocessBuildWithReport
 {
     public HealthPointController[] HealthPoints;
 
@@ -12,12 +14,12 @@ public class HealthController : MonoBehaviour
 
     public FloatVariable HealthPerPoint;
 
-    [PostProcessScene]
-    private void BuildAwake() {
-        HealthPerPoint.Value = MaxHealth.Max / HealthPoints.Length;
-    }
+    public int callbackOrder => 2000;
 
     private void Awake() {
+        #if UNITY_EDITOR
+            OnPreprocessBuild(null);
+        #endif
         UpdateHealth();
     }
 
@@ -48,5 +50,10 @@ public class HealthController : MonoBehaviour
                 healthPoint.HidePoint();
             }
         }
+    }
+
+    public void OnPreprocessBuild(BuildReport report)
+    {
+        HealthPerPoint.Value = MaxHealth.Max / HealthPoints.Length;
     }
 }
