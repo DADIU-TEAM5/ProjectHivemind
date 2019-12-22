@@ -10,6 +10,8 @@ public class PrimarySceneLoader : ScriptableObject
 
     public StringVariable LastScene;
 
+    public string MainMenuScene;
+
     public void AddScene(string name, string path) {
         if (!ScenePathDictionary.ContainsKey(name)) {
             ScenePathDictionary.Add(name, path);
@@ -20,14 +22,13 @@ public class PrimarySceneLoader : ScriptableObject
     public void LoadScene(string name) {
         LastScene.Value = SceneManager.GetActiveScene().name;
 
-        if (ScenePathDictionary.ContainsKey(name)) {
-            var scenePath = ScenePathDictionary[name];
-            SceneManager.LoadScene(scenePath);
-            return;
-        }
-
         SceneManager.LoadScene(name);
-        Debug.Log("Scene name was not in dictionary");
+    }
+
+    public void LoadMainMenu() {
+        LastScene.Value = "_PreloadScene";
+
+        SceneManager.LoadScene(MainMenuScene);
     }
 
     public void RedoDictionary() {
