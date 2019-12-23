@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 4724558556531846324}
   - component: {fileID: 8831838245759697901}
   - component: {fileID: 5012523203288252738}
+  - component: {fileID: 664006233159647068}
   - component: {fileID: 1799847258}
   - component: {fileID: 5507652567450167358}
   - component: {fileID: 282145137683011156}
@@ -118,6 +119,7 @@ GameObject:
   - component: {fileID: 1159753607707493426}
   - component: {fileID: 840415900}
   - component: {fileID: 840415876}
+  - component: {fileID: 1526597848393841855}
   m_Layer: 9
   m_Name: PlayerGameObject
   m_TagString: Player
@@ -407,6 +409,50 @@ MonoBehaviour:
   ConeShowTime: 0.1
   fadeTime: 4
   MaxAlpha: 1
+--- !u!114 &664006233159647068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5788987755461925658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89970fcfff5ddd142bc21235d8aa24f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsPaticipant: 0
+  CurrentStamina: {fileID: 11400000, guid: ad4b6cdec9268694ea29b7595e707f61, type: 2}
+  MaxStamina: {fileID: 11400000, guid: 0185915baf730cc4c85ae0db632bfb16, type: 2}
+  DashCost: {fileID: 11400000, guid: 1bdadc0e69512694ba4aff20b1ce4cb0, type: 2}
+  StaminaRegen: {fileID: 11400000, guid: 21c91aad7f05d524489352ca5a9f1c68, type: 2}
+  DashPower: {fileID: 11400000, guid: 4deec6bed9728f54682a860cf51f027d, type: 2}
+  DashEffectivenessCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  NotEnoughStaminaForDash: {fileID: 11400000, guid: 8449dd0aaf2354c4b89e3f5058355965,
+    type: 2}
 --- !u!195 &1799847258
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -678,6 +724,33 @@ MonoBehaviour:
   WhiteFadeIn: {fileID: 6191203006305586321, guid: bc40e5a1b68d4c848aa0b7a12405b376,
     type: 3}
   PlayerSpeed: 0
+--- !u!114 &1526597848393841855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5788987755461925658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c5f908dbf6ec4c92300ee9cac7b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: a325fabc21f4650479d69a9c7bdd3d21, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 664006233159647068}
+        m_MethodName: OnDash
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!136 &8036398725286164362
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1539,9 +1612,9 @@ SkinnedMeshRenderer:
     type: 3}
   m_PrefabInstance: {fileID: 3116645597622787915}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6368478820627383874 stripped
+--- !u!1 &8241419702585049210 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 77de2b65d9fb2194fb38198dd1daaae2,
+  m_CorrespondingSourceObject: {fileID: -2801261897168740559, guid: 77de2b65d9fb2194fb38198dd1daaae2,
     type: 3}
   m_PrefabInstance: {fileID: 3116645597622787915}
   m_PrefabAsset: {fileID: 0}
@@ -1551,15 +1624,15 @@ Animator:
     type: 3}
   m_PrefabInstance: {fileID: 3116645597622787915}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8241419702585049210 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -2801261897168740559, guid: 77de2b65d9fb2194fb38198dd1daaae2,
-    type: 3}
-  m_PrefabInstance: {fileID: 3116645597622787915}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7942722903702697041 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 77de2b65d9fb2194fb38198dd1daaae2,
+    type: 3}
+  m_PrefabInstance: {fileID: 3116645597622787915}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6368478820627383874 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 77de2b65d9fb2194fb38198dd1daaae2,
     type: 3}
   m_PrefabInstance: {fileID: 3116645597622787915}
   m_PrefabAsset: {fileID: 0}

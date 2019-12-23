@@ -26,7 +26,7 @@ public class StaminaUIController : GameLoop, IPreprocessBuildWithReport
             OnPreprocessBuild(null);
         #endif
         _amountOfDashes = (int) (MaxStamina.Value / DashCost.Value);
-        for (var i = 0; i < _amountOfDashes; i++) {
+        for (var i = 0; i < _amountOfDashes - 1; i++) {
             StaminaPoints[i].gameObject.SetActive(true);
         }
     }
@@ -37,16 +37,15 @@ public class StaminaUIController : GameLoop, IPreprocessBuildWithReport
         RechargeBar.fillAmount = staminaRatio;
 
         var availableDashes = (int) (CurrentStamina.Value / DashCost.Value);
-        PointBar.fillAmount = availableDashes / _amountOfDashes;
+        PointBar.fillAmount = (float) availableDashes / _amountOfDashes;
     }
 
     public override void LoopLateUpdate(float deltaTime) {}
 
     public void OnPreprocessBuild(BuildReport report)
     {
-        print ("In preprocess build");
-        
-        var maxDashCharges = (int) (MaxStamina.Max / DashCost.Value);
+        // Subtract one to make room for the seperator object 
+        var maxDashCharges = -1 + (int) (MaxStamina.Max / DashCost.Value);
 
         StaminaPoints = new GameObject[maxDashCharges];
         for (var i = 0; i < maxDashCharges; i++) {
