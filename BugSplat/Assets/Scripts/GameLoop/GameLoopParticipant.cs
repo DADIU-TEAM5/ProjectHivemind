@@ -12,6 +12,7 @@ public class GameLoopParticipant : GameLoop
     private void Awake() {
         this.IsPaticipant = true;
 
+        // TODO: Move to PreProcessBuild
         var gameLoops = this.gameObject.GetComponents<GameLoop>();
         var filteredGameLoops = gameLoops.Where(x => x != null && x.enabled && !x.IsPaticipant).ToArray();
 
