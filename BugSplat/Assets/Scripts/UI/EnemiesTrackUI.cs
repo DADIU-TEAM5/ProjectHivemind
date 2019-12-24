@@ -127,34 +127,14 @@ public class EnemiesTrackUI : GameLoop
                 _textFeedback.SetSubtitle(wavesLeftGT);
             }
 
-            _textFeedback.SetFeedbackActive(true);
+            _textFeedback.SetFeedbackActive();
         }
-
-
     }
 
     public void EnterArenaTextFeedback()
     {
         _textFeedback.SetLevelTitle( LevelText);
         _textFeedback.SetSubtitle((isWave) ? DefeatAllWaves : KillAllEnemies);
-        _textFeedback.SetFeedbackActive(true);
+        _textFeedback.SetFeedbackActive();
     }
-
-    public void ShowLevelClearedText()
-    {
-        if (isWon)
-        {
-
-            LevelClearedEvent.Raise();
-
-        }
-    }
-
-    public void HasWonTriggered()
-    {
-        isWon = true;
-    }
-
-
-    
 }

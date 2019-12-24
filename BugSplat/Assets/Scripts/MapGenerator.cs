@@ -7,6 +7,8 @@ public class MapGenerator : MonoBehaviour
     public IntVariable EnemySpawnerCount;
 
     public GameEvent DoneGenerating;
+    public GameEvent GauntletEvent;
+    public GameEvent WaveEvent;
 
     public bool UseRandomSeed;
     public int Seed;
@@ -63,8 +65,6 @@ public class MapGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-
             var isGauntlet = Levels.LevelTierPicker[CurrentLevel.Value].IsGauntlet;
             if (isGauntlet)
             {

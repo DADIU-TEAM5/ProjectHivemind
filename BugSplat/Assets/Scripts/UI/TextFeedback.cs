@@ -1,9 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using BrunoMikoski.TextJuicer;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 public class TextFeedback : MonoBehaviour
 {
@@ -18,14 +15,14 @@ public class TextFeedback : MonoBehaviour
     }
 
     public void SetLevelTitle(LevelText levelText) {
-        Title.text = levelText.Text.GetText()+""+  (levelText.Level.Value + 1);
+        Title.text = levelText.Text.GetText() + (levelText.Level.Value + 1);
     }
 
     public void SetSubtitle(GameText subtitle) {
         Subtitle.text = subtitle.GetText();
     }
 
-    public void SetFeedbackActive(bool active) {
+    public void SetFeedbackActive() {
         Play.Invoke();
         StartCoroutine(Timeout());
     }
