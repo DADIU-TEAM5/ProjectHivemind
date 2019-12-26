@@ -102,16 +102,15 @@ public class MapController : MonoBehaviour, IPreprocessBuildWithReport
         }
     }
 
-    Hexagon GetHexagonBasedOnLevel()
+    private Hexagon GetHexagonBasedOnLevel()
     {
         var tier = Levels.LevelTierPicker[CurrentLevel.Value].ChooseTier();
-        Debug.Log(tier.name);
         var availableHexes = TierToHexDic[tier];
 
         return availableHexes[Random.Range(0, availableHexes.Count)];
     }
 
-    Hexagon GetRandomCenterHexagon()
+    private Hexagon GetRandomCenterHexagon()
     {
         return CenterTiles[Random.Range(0, CenterTiles.Length)];
     }
