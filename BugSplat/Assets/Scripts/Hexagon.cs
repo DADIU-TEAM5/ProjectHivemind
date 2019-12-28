@@ -4,13 +4,12 @@ using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 
-public class Hexagon : MonoBehaviour, IPreprocessBuildWithReport
+public class Hexagon : MonoBehaviour
 {
     public static MapGenerator mapGen;
 
     public bool[] OpenEdges;
 
-    public EnemySpawnerController[] EnemySpawners;
     public Hexagon[] Neighbours;
 
     public GameObject[] Walls;
@@ -30,10 +29,6 @@ public class Hexagon : MonoBehaviour, IPreprocessBuildWithReport
 
     private void OnEnable()
     {
-        #if UNITY_EDITOR
-            OnPreprocessBuild(null);
-        #endif
-
         if(Neighbours.Length != 6)
             Neighbours = new Hexagon[6];
 
@@ -298,21 +293,5 @@ public class Hexagon : MonoBehaviour, IPreprocessBuildWithReport
         }
 
         return bolean;
-    }
-   
-
-
-
-    public void SpawnEnemies()
-    {
-        for (int i = 0; i < EnemySpawners.Length; i++)
-        {
-            EnemySpawners[i].SpawnEnemies();
-        }
-    }
-
-    public void OnPreprocessBuild(BuildReport report)
-    {
-        EnemySpawners = transform.GetComponentsInChildren<EnemySpawnerController>();
     }
 }

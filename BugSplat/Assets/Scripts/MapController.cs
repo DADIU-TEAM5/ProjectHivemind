@@ -98,8 +98,6 @@ public class MapController : MonoBehaviour, IPreprocessBuildWithReport
             var hex = Instantiate(GetHexagonBasedOnLevel(), Vector3.zero, _hexRotations[i], _parentObject.transform);
 
             hex.transform.localPosition += hex.transform.forward * HexHeight; 
-            hex.DistributeBudget();
-
             MapHexagons[i] = hex;
         }
 
