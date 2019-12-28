@@ -49,7 +49,7 @@ public class MapController : MonoBehaviour, IPreprocessBuildWithReport
         for (int i = 0; i < OuterTiles.Length; i++)
         {
             var hexagon = OuterTiles[i];
-            var tier = hexagon.difficultyLevel;
+            var tier = hexagon.Tier;
             if (TierToHexDic.ContainsKey(tier)) {
                 var hexagonList = TierToHexDic[tier];
                 hexagonList.Add(hexagon);

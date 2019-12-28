@@ -11,22 +11,20 @@ public class Hexagon : MonoBehaviour, IPreprocessBuildWithReport
     public bool[] OpenEdges;
 
     public EnemySpawnerController[] EnemySpawners;
+    public Hexagon[] Neighbours;
 
     public GameObject[] Walls;
+    public GameObject[] Corners;
 
-    public Tier difficultyLevel;
+    public Tier Tier;
 
-    bool _allNeighBoursFound;
+    private bool _allNeighBoursFound;
 
     public bool IsaccesibleFromMiddle;
 
-    public GameObject[] Corners;
-    Vector3[] CornerPositions;
+    private Vector3[] _cornerPositions;
 
-
-    public Hexagon[] Neighbours;
-
-    public int callbackOrder => throw new System.NotImplementedException();
+    public int callbackOrder => 2000;
 
     // Start is called before the first frame update
 
@@ -43,13 +41,13 @@ public class Hexagon : MonoBehaviour, IPreprocessBuildWithReport
     }
     void InitilizeCornerPositions()
     {
-        CornerPositions = new Vector3[6];
-        CornerPositions[0] = mapGen.Vertices[3] * 35;
-        CornerPositions[1] = mapGen.Vertices[5] * 35;
-        CornerPositions[2] = mapGen.Vertices[1] * 35;
-        CornerPositions[3] = mapGen.Vertices[2] * 35;
-        CornerPositions[4] = mapGen.Vertices[0] * 35;
-        CornerPositions[5] = mapGen.Vertices[4] * 35;
+        _cornerPositions = new Vector3[6];
+        _cornerPositions[0] = mapGen.Vertices[3] * 35;
+        _cornerPositions[1] = mapGen.Vertices[5] * 35;
+        _cornerPositions[2] = mapGen.Vertices[1] * 35;
+        _cornerPositions[3] = mapGen.Vertices[2] * 35;
+        _cornerPositions[4] = mapGen.Vertices[0] * 35;
+        _cornerPositions[5] = mapGen.Vertices[4] * 35;
     }
 
     public void GetNeighbours()
@@ -238,7 +236,7 @@ public class Hexagon : MonoBehaviour, IPreprocessBuildWithReport
                     RotateAfter = true;
                 }
 
-                connector.transform.position = connector.transform.position + CornerPositions[i];
+                connector.transform.position = connector.transform.position + _cornerPositions[i];
                 connector.name = ""+i;
                 Corners[i] = connector;
 
@@ -247,11 +245,11 @@ public class Hexagon : MonoBehaviour, IPreprocessBuildWithReport
                     int closedNeightbour = GetClosedEdge(i, (i + 1) % 6);
                     if(closedNeightbour != i)
                     {
-                        connector.transform.LookAt(transform.position + CornerPositions[(i + 1) % 6]);
+                        connector.transform.LookAt(transform.position + _cornerPositions[(i + 1) % 6]);
                     }
                     else
                     {
-                        connector.transform.LookAt(transform.position + CornerPositions[(i + 5) % 6]);
+                        connector.transform.LookAt(transform.position + _cornerPositions[(i + 5) % 6]);
                     }
                     
                 }
