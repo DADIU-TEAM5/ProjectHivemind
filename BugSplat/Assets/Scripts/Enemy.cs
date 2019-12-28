@@ -7,12 +7,14 @@ public abstract class Enemy : GameLoop
 {
     [HideInInspector]
     public bool SpawnedEnemy;
+    public int InstanceId;
     public GameEvent EnemySpawnedEvent;
     public GameEvent SpawnCamInit;
     public BoolVariable SpawnFirstTime;
     public GameEvent ZoomCamInit;
     public IntVariable ZoomCamFrequency;
     public FloatVariable PlayerCurrentSpeedSO;
+    public EnemyType EnemyType;
 
     public bool IsUnderground = true;
     
@@ -140,7 +142,7 @@ public abstract class Enemy : GameLoop
     private void OnEnable()
     {
         //Debug.Log(name + " spawned");
-
+        InstanceId = GetInstanceID();
 
         if (EnemyList != null)
             EnemyList.Add(this);

@@ -1,19 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build;
+using UnityEditor.Build.Reporting;
 using UnityEngine;
 
-public class Hexagon : MonoBehaviour
+public class Hexagon : MonoBehaviour, IPreprocessBuildWithReport
 {
-
-   
-
     public static MapGenerator mapGen;
 
     public bool[] OpenEdges;
 
-    public EnemySpawner[] EnemySpawners;
-
-    public int MinBudget;
+    public EnemySpawnerController[] EnemySpawners;
 
     public GameObject[] Walls;
 
@@ -28,24 +25,21 @@ public class Hexagon : MonoBehaviour
 
 
     public Hexagon[] Neighbours;
+
+    public int callbackOrder => throw new System.NotImplementedException();
+
     // Start is called before the first frame update
+
     private void OnEnable()
     {
-        
-        
-        if(Neighbours.Length != 6)
-        Neighbours = new Hexagon[6];
+        #if UNITY_EDITOR
+            OnPreprocessBuild(null);
+        #endif
 
+        if(Neighbours.Length != 6)
+            Neighbours = new Hexagon[6];
 
         Corners = new GameObject[6];
-
-        for (int i = 0; i < EnemySpawners.Length; i++)
-        {
-            EnemySpawners[i].hex = this;
-        }
-        
-
-
     }
     void InitilizeCornerPositions()
     {
@@ -57,39 +51,10 @@ public class Hexagon : MonoBehaviour
         CornerPositions[4] = mapGen.Vertices[0] * 35;
         CornerPositions[5] = mapGen.Vertices[4] * 35;
     }
-    
-    public void DistributeBudget()
-    {
-        if (EnemySpawners.Length > 0)
-        {
-            for (int i = 0; i < EnemySpawners.Length; i++)
-            {
-                if (EnemySpawners[i].SmallestValue <= MinBudget)
-                {
-                    EnemySpawners[i].budget += MinBudget;
-
-                    MinBudget = 0;
-                }
-            }
-
-
-            
-
-
-
-           
-
-
-        }
-    }
-
 
     public void GetNeighbours()
     {
       //  print("I was called i think");
-
-
-
 
         if (!_allNeighBoursFound)
         {
@@ -348,4 +313,8 @@ public class Hexagon : MonoBehaviour
         }
     }
 
+    public void OnPreprocessBuild(BuildReport report)
+    {
+        EnemySpawners = transform.GetComponentsInChildren<EnemySpawnerController>();
+    }
 }
