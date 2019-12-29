@@ -106,7 +106,7 @@ public class MapGenerator : MonoBehaviour
 
             for (int i = 0; i < Hexagons.Length; i++)
             {
-                Tier tier = Hexagons[i].GetComponent<Hexagon>().difficultyLevel;
+                Tier tier = Hexagons[i].GetComponent<Hexagon>().Tier;
                 if (!availableTiers.Contains(tier))
                 {
                     availableTiers.Add(tier);
@@ -227,17 +227,6 @@ public class MapGenerator : MonoBehaviour
         _Parent.SetActive(false);
         _Parent.transform.Rotate(0, 90, 0);
         _Parent.SetActive(true);
-
-        for (int i = 0; i < _hexagonsTiles.Count; i++)
-        {
-            Hexagon hexScript = _hexagonsTiles[i].GetComponent<Hexagon>();
-
-           
-
-            hexScript.DistributeBudget();
-
-            
-        }
 
         if(DoneGenerating != null)
         DoneGenerating.Raise();

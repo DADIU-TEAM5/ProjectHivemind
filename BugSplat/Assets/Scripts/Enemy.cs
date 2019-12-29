@@ -867,8 +867,8 @@ public abstract class Enemy : GameLoop
 
                     IsAlly = true;
 
-                    if (hex != null)
-                        hex.SpawnEnemies();
+                    //if (hex != null)
+                    //    hex.SpawnEnemies();
 
 
                     DetectAllies();
