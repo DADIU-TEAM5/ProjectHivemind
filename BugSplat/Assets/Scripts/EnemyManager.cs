@@ -1,21 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class EnemyManager : MonoBehaviour
+public class EnemyManager : SerializedMonoBehaviour
 {
-    public int[][] LevelBudgets;
+    [TabGroup("Minimum")]
     public int[] MinimumBudget;
 
+    [TabGroup("Level")]
+    public int[][] LevelBudgets;
+
+    [BoxGroup("Per tile budget")]
     [Range(0f, 1f)]
     public float MaximumTileBudgetPercentile, MinimumTileBudgetPercentile;
 
+    [BoxGroup("Per tile budget")]
     public AnimationCurve RandomDistribution;
 
+    [BoxGroup("Variables")]
     public IntVariable LevelBudget;
 
+    [BoxGroup("Variables")]
     public IntVariable CurrentLevel;
+    [BoxGroup("Variables")]
     public IntVariable CurrentWave;
 
     private HexagonController[] Hexagons;
