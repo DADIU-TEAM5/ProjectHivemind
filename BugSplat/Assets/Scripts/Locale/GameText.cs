@@ -1,8 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Sirenix.OdinInspector;
 
+[InlineEditor]
 [CreateAssetMenu]
 public class GameText : ScriptableObject
 {

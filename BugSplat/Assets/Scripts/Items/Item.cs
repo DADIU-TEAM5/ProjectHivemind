@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Sirenix.OdinInspector;
 
 [CreateAssetMenu(menuName="Item/New Item")]
 public class Item : ScriptableObject
 {
+    [HideLabel]
+    [BoxGroup("Info")]
     public ItemInfo Info;
+
+    [InlineEditor]
     public Effect[] Effects;
 
     public bool Purchasable() {
