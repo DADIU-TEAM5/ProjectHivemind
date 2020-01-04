@@ -33,12 +33,11 @@ public class MapController : SerializedMonoBehaviour, IPreprocessBuildWithReport
     [BoxGroup("Other dependencies")]
     public ShopLevels Levels;
 
-
-    [HideInInspector]
+    [ReadOnly]
     public Dictionary<Tier, List<Hexagon>> TierToHexDic;
 
     [SerializeField]
-    [ReadOnly]
+    [HideInInspector]
     private Quaternion[] _hexRotations;
 
     [SerializeField]
