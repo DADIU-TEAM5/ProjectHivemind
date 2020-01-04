@@ -1,45 +1,63 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 
-public class MapController : MonoBehaviour, IPreprocessBuildWithReport
+public class MapController : SerializedMonoBehaviour, IPreprocessBuildWithReport
 {
     public int callbackOrder => 2000;
 
-    public Hexagon[] OuterTiles, WaveTiles;
-    public Hexagon[] CenterTiles, WaveCenterTiles;
+    [TabGroup("Wave")]
+    public Hexagon[] WaveOuterTiles, WaveCenterTiles;
 
-    public IntVariable CurrentLevel;
+    [TabGroup("Gauntlet")]
+    public Hexagon[] OuterTiles, CenterTiles;
 
-    public ShopLevels Levels;
-
+    
+    [BoxGroup("Randomness")]
     public bool UseRandomSeed;
+    [DisableIf("UseRandomSeed")]
+    [BoxGroup("Randomness")]
     public int Seed;
 
+    [BoxGroup("Wall System")]
     public GameObject EdgeWall;
+    [BoxGroup("Wall System")]
     public GameObject WallConnector, SideWallConnector;
-    
 
-    [SerializeField]
+    [BoxGroup("Other dependencies")]
+    public IntVariable CurrentLevel;
+
+    [BoxGroup("Other dependencies")]
+    public ShopLevels Levels;
+
+
+    [HideInInspector]
     public Dictionary<Tier, List<Hexagon>> TierToHexDic;
 
     [SerializeField]
+    [ReadOnly]
     private Quaternion[] _hexRotations;
 
     [SerializeField]
+    [HideInInspector]
     private GameObject _parentObject;
 
     [SerializeField]
+    [BoxGroup("Other dependencies")]
     private GameObject BaseHex;
 
+    [SerializeField]
+    [HideInInspector]
     private float HexHeight;
 
     private Hexagon[] MapHexagons;
 
-    [Header("Events")]
+    [BoxGroup("Events")]
     public GameEvent GauntletEvent;
+    [BoxGroup("Events")]
     public GameEvent WaveEvent;
 
 
@@ -84,7 +102,7 @@ public class MapController : MonoBehaviour, IPreprocessBuildWithReport
 
         var isGauntlet = Levels.LevelTierPicker[CurrentLevel.Value].IsGauntlet;
         if (!isGauntlet) {
-            OuterTiles = WaveTiles;
+            OuterTiles = WaveOuterTiles;
             CenterTiles = WaveCenterTiles;
             WaveEvent?.Raise();
         } else {
