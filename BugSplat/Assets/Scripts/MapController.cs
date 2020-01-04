@@ -68,6 +68,7 @@ public class MapController : SerializedMonoBehaviour, IPreprocessBuildWithReport
         {
             var hexagon = OuterTiles[i];
             var tier = hexagon.Tier;
+            if (tier == null) print(hexagon.name);
             if (TierToHexDic.ContainsKey(tier)) {
                 var hexagonList = TierToHexDic[tier];
                 hexagonList.Add(hexagon);

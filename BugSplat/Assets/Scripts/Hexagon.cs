@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
@@ -8,24 +9,35 @@ public class Hexagon : MonoBehaviour
 {
     public static MapGenerator mapGen;
 
-    public bool[] OpenEdges;
+    [Required]
+    public Tier Tier;
+    public bool IsaccesibleFromMiddle;
 
+    [TableMatrix]
+    public bool[] OpenEdges = new bool[6];
+
+    [ReadOnly]
+    [HideInEditorMode]
     public Hexagon[] Neighbours;
-
+    [ReadOnly]
+    [HideInEditorMode]
     public GameObject[] Walls;
+    [ReadOnly]
+    [HideInEditorMode]
     public GameObject[] Corners;
 
-    public Tier Tier;
 
     private bool _allNeighBoursFound;
 
-    public bool IsaccesibleFromMiddle;
 
     private Vector3[] _cornerPositions;
 
     public int callbackOrder => 2000;
 
-    // Start is called before the first frame update
+    [Button("Rotate Tile", ButtonSizes.Large), GUIColor(0.5f, 1f, 0.5f)]
+    public void RotateButton() {
+        RotateTile();
+    }
 
     private void OnEnable()
     {
@@ -79,7 +91,7 @@ public class Hexagon : MonoBehaviour
         }
     }
 
-    public void RotateTile( int times)
+    public void RotateTile(int times = 1)
     {
         for (int i = 0; i < times; i++)
         {
@@ -129,7 +141,7 @@ public class Hexagon : MonoBehaviour
                     while (!IsaccesibleFromMiddle)
                     {
 
-                        RotateTile(1);
+                        RotateTile();
                         Neighbours[i].LabelNeighbourAccesibility();
                         
                     }
