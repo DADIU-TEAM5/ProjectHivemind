@@ -73,7 +73,7 @@ public class PlayerInput : MonoBehaviour
 
     private void FingerDown(Finger finger) {
         _pointerStartPos = finger.screenPosition;
-        //InputUI.SetActive(true);
+        InputUI.SetActive(true);
         InputUI.transform.position = _pointerStartPos;
     }
 
@@ -101,7 +101,7 @@ public class PlayerInput : MonoBehaviour
     private void FingerUp(Finger finger) {
         _pointerStartPos = Vector2.zero;
         SetMove(Vector3.zero);
-        //InputUI?.SetActive(false);
+        InputUI?.SetActive(false);
     }
 
     void OnEnable() {
